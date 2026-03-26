@@ -33,6 +33,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# MCP
+.mcp.json
+
+# Backend build
+apps/backend/dist/
+
 # Misc
 .DS_Store
 *.pem
