@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: vita-backend
+    runtime: node
+    rootDir: apps/backend
+    buildCommand: cd ../.. && NODE_ENV=development pnpm install --frozen-lockfile && pnpm build --filter=backend
+    startCommand: node dist/main
+    healthCheckPath: /api/v1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: FRONTEND_URL
+        sync: false
+      - key: ADMIN_URL
+        sync: false
