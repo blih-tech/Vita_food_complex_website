@@ -1,159 +1,271 @@
-# Turborepo starter
+# Vita Food Complex Website
 
-This Turborepo starter is maintained by the Turborepo core team.
+**Official Website for Vita Hydro Agro-Processing PLC**
 
-## Using this example
+A modern, fully bilingual (English + Amharic) corporate website for a leading biscuit and flour manufacturer based in Debre Sina, Ethiopia.
 
-Run the following command:
+**Developed by:** [Blih Marketing & Communications](https://blihmarketing.com)
 
-```sh
-npx create-turbo@latest
+---
+
+## Project Overview
+
+The Vita Food Complex website is a **fully CMS-driven** digital platform. **Every page and all content** on the public website is dynamically managed through a powerful **Admin Dashboard**. This gives the Vita team complete control to update text, images, products, news, downloads, and more without any coding knowledge.
+
+### Key Highlights
+- **100% CMS Managed Website** — All pages are dynamic and editable via Admin Dashboard
+- **Full Dual Language Support** — English + Amharic (አማርኛ) with seamless switching
+- **Modern Full-Stack Architecture** — Next.js 16 + NestJS + MongoDB
+- **Monorepo Setup** powered by Turborepo
+- **Secure B2B Distributor Portal** with order management
+- **Strong Transparency Focus** — Factory, Quality, Lab Tests, and Certifications
+- **SEO Optimized** for both English and Amharic markets
+
+---
+
+## Tech Stack
+
+### Frontend (Public Website) & Admin Dashboard
+- **Next.js 16.2** (App Router, Turbopack, React Compiler)
+- **TypeScript 5.x**
+- **Tailwind CSS**
+- **next-intl** — Full i18n support (English + Amharic)
+- **next-seo** — Advanced SEO & structured data
+- **Socket.io-client** — Real-time updates
+
+### Backend
+- **NestJS** (Latest)
+- **MongoDB + Mongoose**
+- **Socket.io** — Real-time notifications and order tracking
+- **JWT + Passport.js** — Secure authentication
+- **Multer** — File uploads (images, PDFs, catalogs)
+
+### Development & Infrastructure
+- **Turborepo** — Monorepo management
+- **pnpm** workspaces
+- **Vercel** — Hosting for Frontend & Admin
+- **Render** — Backend API hosting
+- **MongoDB Atlas** — Cloud database
+- **GitHub** (`blih-tech` organization)
+
+---
+
+## Monorepo Structure
+
+```bash
+Vita_food_complex_website/
+├── apps/
+│   ├── frontend/          # Public-facing website (fully dynamic)
+│   ├── backend/           # REST API + WebSocket server
+│   └── admin/             # Full CMS Admin Dashboard
+├── packages/
+│   ├── ui/                # Shared UI components (@repo/ui)
+│   ├── types/             # Shared TypeScript types (@repo/types)
+│   └── config/            # Shared configurations
+├── CLAUDE.md
+├── turbo.json
+├── pnpm-workspace.yaml
+└── README.md
 ```
 
-## What's inside?
+---
 
-This Turborepo includes the following packages/apps:
+## Live URLs
 
-### Apps and Packages
+| Application          | URL                                                      |
+|----------------------|----------------------------------------------------------|
+| **Public Website**   | `https://vita-food-frontend.vercel.app`                  |
+| **Admin Dashboard**  | `https://vita-food-admin.vercel.app`                     |
+| **Backend API**      | `https://vita-food-complex-website.onrender.com`         |
+| **API Base Path**    | `https://vita-food-complex-website.onrender.com/api/v1`  |
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+---
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+## Core Philosophy: Full CMS Management
 
-### Utilities
+> **All pages and content on the public website are managed exclusively through the Admin Dashboard.**
 
-This Turborepo has some additional tools already setup for you:
+This means:
+- No static/hard-coded pages on the frontend
+- Every section, text block, image, and component can be updated in real-time from the admin
+- Content is stored in MongoDB and served dynamically to the frontend
+- Bilingual content (English + Amharic) is managed side-by-side in the CMS
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+### Pages Fully Managed via CMS
 
-### Build
+The following pages are completely dynamic and editable from the Admin Dashboard:
 
-To build all apps and packages, run the following command:
+- **Home Page** (Hero, Stats, Product Highlights, News Preview, Social Wall, CTAs)
+- **About Us**
+- **Products** (List + Individual Product Detail pages)
+- **Factory & Production**
+- **Quality & Certifications**
+- **Lab Test Results**
+- **Recipes**
+- **Distributors & Dealers**
+- **CSR / Charity Corner**
+- **News & Media**
+- **Learning Hub**
+- **Download Center**
+- **Contact Us**
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+---
 
-```sh
-cd my-turborepo
-turbo build
+## Key Features
+
+### 1. Dual Language Support
+- Full English + Amharic support
+- Language switcher (flag/dropdown)
+- SEO-friendly URLs (`/en/...` and `/am/...`)
+- All content, forms, buttons, and PDFs available in both languages
+
+### 2. Product Management
+- Full product catalog (Biscuits + Flour)
+- Detailed information: ingredients, nutritional facts, shelf life, allergens, storage
+- Per-product catalog PDF download
+- Recipe recommendations
+
+### 3. B2B Distributor Portal
+- Public “Become a Distributor” form
+- Secure login area for approved dealers
+- Bulk purchase order system
+- Order tracking and history
+- Marketing materials access
+
+### 4. Transparency & Trust
+- Quality Certificates page with downloadable PDFs
+- Lab Test transparency page with recent reports
+- Factory & Production page with capacity stats, virtual tour, and sustainability info
+
+### 5. Engagement Features
+- Dynamic News / Blog section
+- Appointment & Sponsorship request forms
+- Social wall (Instagram, TikTok, etc.)
+- CSR initiatives showcase
+
+### 6. Download Center
+- Centralized hub for catalogs, brochures, company profile, high-res images, press kits
+
+### 7. Technical Features
+- Full on-page + technical SEO (including Amharic keywords)
+- Google Analytics 4 with conversion tracking
+- Fast loading, mobile-first, accessible design
+- Real-time updates via WebSockets
+
+---
+
+## Admin Dashboard Capabilities
+
+The Admin Dashboard is the **central control hub** where the Vita team manages the entire website.
+
+### Main Sections:
+- **Dashboard** – Overview and analytics
+- **Pages CMS** – Manage all website pages and sections
+- **Products** – Add/edit/delete products and variants
+- **News & Media** – Create and publish articles
+- **Recipes** – Manage recipe content
+- **Distributors** – Review applications and manage dealer accounts
+- **Orders** – Handle purchase orders
+- **Quality & Lab** – Upload certificates and lab reports
+- **Media & Downloads** – Manage all downloadable files
+- **Appointments** – Manage factory visits and sponsorship requests
+- **Users & Roles** – Admin and dealer user management
+- **Settings** – Global site settings, SEO, language content
+- **Analytics** – Integrated performance data
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js **v20+**
+- pnpm **v9+**
+- Git
+- MongoDB Atlas connection string
+
+### Installation
+
+```bash
+git clone git@github.com:blih-tech/Vita_food_complex_website.git
+cd Vita_food_complex_website
+pnpm install
 ```
 
-Without global `turbo`, use your package manager:
+### Environment Variables
 
-```sh
-cd my-turborepo
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+**`apps/frontend/.env.local`**
+```env
+NEXT_PUBLIC_API_URL=http://localhost:4000/api/v1
+NEXT_PUBLIC_WS_URL=http://localhost:4000
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo build --filter=docs
+**`apps/admin/.env.local`**
+```env
+NEXT_PUBLIC_API_URL=http://localhost:4000/api/v1
+NEXT_PUBLIC_WS_URL=http://localhost:4000
 ```
 
-Without global `turbo`:
-
-```sh
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+**`apps/backend/.env`**
+```env
+MONGODB_URI=mongodb+srv://...
+JWT_SECRET=your_strong_secret
+JWT_EXPIRES_IN=7d
+FRONTEND_URL=http://localhost:3000
+ADMIN_URL=http://localhost:3001
+PORT=4000
+NODE_ENV=development
 ```
 
-### Develop
+### Development Commands
 
-To develop all apps and packages, run the following command:
+```bash
+# Run all apps
+pnpm dev
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
+# Run individually
+pnpm dev:frontend     # → localhost:3000
+pnpm dev:backend      # → localhost:4000
+pnpm dev:admin        # → localhost:3001
 ```
 
-Without global `turbo`, use your package manager:
+### Build Commands
 
-```sh
-cd my-turborepo
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+```bash
+pnpm build                    # Build everything
+pnpm build --filter=frontend
+pnpm build --filter=admin
+pnpm build --filter=backend
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+---
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+## Deployment
 
-```sh
-turbo dev --filter=web
-```
+- **Frontend & Admin** → Deployed on **Vercel** (separate projects)
+- **Backend** → Hosted on **Render**
+- **Database** → **MongoDB Atlas**
+- **AI Agent** → Claude Code running 24/7 on Hostinger VPS for autonomous development
 
-Without global `turbo`:
+---
 
-```sh
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+## Branch Strategy
 
-### Remote Caching
+- `main` – Production (auto-deploys)
+- `dev` – Development branch
+- `feature/*` – Feature branches
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+---
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+## About the Client
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+**Vita Hydro Agro-Processing PLC** (Debre Sina, Ethiopia)
+- Biscuit and Wheat Flour production.
+- Investment: 210M ETB. Capacity: 42-60t flour/day, 1.5-2t biscuits/hr.
+- Design: Bold, modern, playful, food-forward.
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+**Agency:** Blih Marketing & Communications – Addis Ababa, Ethiopia
 
-```sh
-cd my-turborepo
-turbo login
-```
+---
 
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+**© 2025–2026 Blih Marketing & Communications. All rights reserved.**
