@@ -1,26 +1,517 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;600;700&family=Outfit:wght@400;600;900&display=swap");
 
+/* ========================================
+   BRAND COLOR PALETTE
+   ======================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary Brand Colors */
+  --color-primary: #23b349;
+  --color-primary-dark: #0f4b1f;
+  --color-background-page: #e9f7ed;
+  --color-body-text: #333733;
+
+  /* Whites & Blacks */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --cold-greywhite: #ffffff;
+  --cold-greyblack: #000000;
+
+  /* Card Accent Colors */
+  --color-card-purple: #a099b5;
+  --color-card-purple-glow: #ddd4f7;
+  --color-card-terracotta: #7e4627;
+  --color-card-terracotta-glow: #f28b52;
+  --color-card-tan: #9d8562;
+  --color-card-tan-glow: #eecc9c;
+
+  /* Recipe Card Blue */
+  --color-recipe-blue: #2976ca;
+
+  /* Progress Bar */
+  --color-progress-track: #cbc59d;
+  --color-progress-fill: #333733;
+
+  /* Font Families */
+  --font-display: "Funnel Display", Helvetica, sans-serif;
+  --font-body: "Outfit", Helvetica, sans-serif;
+
+  /* Border Radius */
+  --radius-lg: 0.5rem;
+  --radius-2xl: 1rem;
+
+  /* Shadows */
+  --shadow-drop: 0px 0px 70.05px 8.76px rgba(0, 0, 0, 0.1);
 }
 
+/* ========================================
+   TAILWIND @THEME CONFIGURATION
+   ======================================== */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Brand Colors */
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-background-page: var(--color-background-page);
+  --color-body-text: var(--color-body-text);
+
+  /* Whites & Blacks */
+  --color-white: var(--color-white);
+  --color-black: var(--color-black);
+
+  /* Card Accent Colors */
+  --color-card-purple: var(--color-card-purple);
+  --color-card-purple-glow: var(--color-card-purple-glow);
+  --color-card-terracotta: var(--color-card-terracotta);
+  --color-card-terracotta-glow: var(--color-card-terracotta-glow);
+  --color-card-tan: var(--color-card-tan);
+  --color-card-tan-glow: var(--color-card-tan-glow);
+
+  /* Recipe Card Blue */
+  --color-recipe-blue: var(--color-recipe-blue);
+
+  /* Progress Bar */
+  --color-progress-track: var(--color-progress-track);
+  --color-progress-fill: var(--color-progress-fill);
+
+  /* Font Families */
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+
+  /* Border Radius */
+  --radius-lg: var(--radius-lg);
+  --radius-2xl: var(--radius-2xl);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ========================================
+   GLOBAL BODY & TYPOGRAPHY DEFAULTS
+   ======================================== */
+body {
+  background-color: var(--color-background-page);
+  color: var(--color-body-text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* ========================================
+   UTILITY CLASSES FOR BRAND PATTERNS
+   ======================================== */
+
+/* Headings - Funnel Display */
+.heading-hero {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 180px;
+  letter-spacing: 0;
+  color: var(--color-primary);
+  line-height: 1.1;
+}
+
+@media (max-width: 1280px) {
+  .heading-hero {
+    font-size: 120px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (max-width: 768px) {
+  .heading-hero {
+    font-size: 80px;
+  }
+}
+
+.heading-section {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 64px;
+  color: var(--color-primary);
+  letter-spacing: 0;
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .heading-section {
+    font-size: 40px;
+  }
+}
+
+.heading-card {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 48px;
+  color: #bbe7c7;
+  letter-spacing: 0;
+}
+
+.heading-recipe-card {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 40px;
+  color: var(--color-white);
+  letter-spacing: 0;
+}
+
+.heading-footer-brand {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 40px;
+  color: var(--color-white);
+  letter-spacing: 0;
+}
+
+.heading-footer-section {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--color-white);
+  letter-spacing: 0;
+}
+
+/* Body Text Styles */
+.text-body-large {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: 0.96px;
+  line-height: 1.5;
+}
+
+.text-body-default {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 1.6;
+}
+
+.text-body-small {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+.text-subtitle {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 24px;
+  letter-spacing: 0;
+}
+
+.text-recipe-description {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--color-white);
+  letter-spacing: 0;
+}
+
+/* Decorative Numbers (Value Card "01", "02", "03") */
+.decorative-number {
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: 320px;
+  color: rgba(0, 0, 0, 0.15);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+@media (max-width: 1024px) {
+  .decorative-number {
+    font-size: 200px;
+  }
+}
+
+/* PRIMARY CTA BUTTON - Dark Green Solid */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary-dark);
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: 1.28px;
+  padding: 20px 20px;
+  border-radius: var(--radius-lg);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  background-color: var(--color-primary-dark);
+}
+
+.btn-primary:active {
+  opacity: 0.85;
+}
+
+/* INVERTED CTA BUTTON - Mint on Dark Background */
+.btn-inverted {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-background-page);
+  color: var(--color-primary-dark);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: 1.28px;
+  width: 500px;
+  height: 86px;
+  border-radius: var(--radius-lg);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-inverted:hover {
+  background-color: #d4eeda;
+}
+
+.btn-inverted:active {
+  background-color: #c4e0cc;
+}
+
+@media (max-width: 768px) {
+  .btn-inverted {
+    width: 100%;
+    max-width: 500px;
+  }
+}
+
+/* CARD BASE STYLES */
+.card-base {
+  border-radius: var(--radius-lg);
+  background-color: var(--color-white);
+  overflow: hidden;
+}
+
+.card-value {
+  padding: 0 89px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: var(--radius-lg);
+  min-height: 500px;
+}
+
+.card-image-inset {
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+}
+
+/* RADIAL GLOW BLUR EFFECT (Value Cards) */
+.glow-purple {
+  position: relative;
+}
+
+.glow-purple::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -200px;
+  width: 795px;
+  height: 610px;
+  background: radial-gradient(circle, var(--color-card-purple-glow), transparent);
+  border-radius: 50%;
+  filter: blur(250px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-terracotta {
+  position: relative;
+}
+
+.glow-terracotta::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -200px;
+  width: 795px;
+  height: 610px;
+  background: radial-gradient(circle, var(--color-card-terracotta-glow), transparent);
+  border-radius: 50%;
+  filter: blur(250px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow-tan {
+  position: relative;
+}
+
+.glow-tan::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -200px;
+  width: 795px;
+  height: 610px;
+  background: radial-gradient(circle, var(--color-card-tan-glow), transparent);
+  border-radius: 50%;
+  filter: blur(250px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* SHADOW DROP EFFECT (Product Images) */
+.shadow-drop {
+  position: relative;
+}
+
+.shadow-drop::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 40px;
+  background: #000500;
+  border-radius: 50%;
+  filter: blur(25.4px);
+  opacity: 0.3;
+}
+
+/* FADE OVERLAYS (Gallery Section) */
+.fade-overlay-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, var(--color-background-page), transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.fade-overlay-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to top, var(--color-background-page), transparent);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* SCROLL PROGRESS BAR */
+.progress-bar {
+  width: 1067px;
+  height: 8px;
+  border-radius: 100px;
+  background-color: var(--color-progress-track);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--color-progress-fill);
+  border-radius: 100px;
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+  .progress-bar {
+    width: 100%;
+  }
+}
+
+/* RECIPE CARD STYLES */
+.recipe-card {
+  position: relative;
+  width: 539px;
+  height: 539px;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-recipe-blue);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .recipe-card {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+}
+
+.recipe-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recipe-card-blur-overlay {
+  filter: blur(4px);
+  opacity: 0.4;
+}
+
+.recipe-card-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* DARK TEXT ON WHITE */
+.text-on-white {
+  color: var(--color-body-text);
+}
+
+/* WHITE TEXT ON DARK */
+.text-on-dark {
+  color: var(--color-white);
+}
+
+/* WHITE TEXT ON PRIMARY */
+.text-on-primary {
+  color: var(--color-white);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN UTILITIES
+   ======================================== */
+@media (max-width: 1920px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .heading-section {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heading-section {
+    font-size: 32px;
+  }
+
+  .text-body-large {
+    font-size: 18px;
+  }
+
+  .btn-primary,
+  .btn-inverted {
+    font-size: 24px;
+  }
 }
