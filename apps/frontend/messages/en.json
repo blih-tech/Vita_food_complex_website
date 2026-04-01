@@ -5,5 +5,82 @@
       "headline": "Bold, Modern, Playful, Food-Forward.",
       "subheadline": "Quality Biscuits and Wheat Flour from Debre Sina, Ethiopia."
     }
+  },
+  "Navbar": {
+    "links": {
+      "products": "Products",
+      "company": "Company",
+      "recipes": "Recipes",
+      "more": "More"
+    },
+    "cta": "Visit Us"
+  },
+  "Hero": {
+    "headline1": "Biscuits",
+    "headline2": "Flour You",
+    "badge": "100% Natural"
+  },
+  "Company": {
+    "label": "Learn More About Us",
+    "heading": "Our Company",
+    "body": "Vita Hydro Agro-Processing PLC is a leading food manufacturing company based in Debre Sina, Ethiopia. We specialize in producing high-quality biscuits and wheat flour using state-of-the-art technology and the finest local ingredients.",
+    "cta": "About"
+  },
+  "Products": {
+    "label": "Products",
+    "heading": "Our Products",
+    "counter": "1/11",
+    "cta": "View Product",
+    "items": {
+      "bora": {
+        "name": "Bora-Chocolate",
+        "description": "Dark biscuit product with rich chocolate flavor."
+      }
+    }
+  },
+  "SocialWall": {
+    "label": "Social Wall",
+    "heading": "Moments with Vita",
+    "subtext": "Tag and share what you love about Vita products"
+  },
+  "Recipes": {
+    "label": "Vita Blog",
+    "heading": "Recipes Made Simple"
+  },
+  "Merchandise": {
+    "heading": "More Than Products",
+    "subtext": "Explore our exclusive Vita merchandise collection.",
+    "cta": "More"
+  },
+  "WhyChoose": {
+    "heading": "Why Choose Our Products?",
+    "cards": {
+      "quality": {
+        "heading": "Quality You Can Trust",
+        "body": "We maintain the highest standards of quality in every product we manufacture."
+      },
+      "natural": {
+        "heading": "100% Natural Ingredients",
+        "body": "Our products are made from the finest natural ingredients sourced locally."
+      },
+      "innovation": {
+        "heading": "Innovative Processing",
+        "body": "We use modern technology to ensure the best taste and nutritional value."
+      }
+    }
+  },
+  "CTA": {
+    "heading": "Let's Work Together",
+    "subtext": "Become a distributor or contact us for partnership opportunities.",
+    "cta": "Contact With Us"
+  },
+  "Footer": {
+    "tagline": "Quality food for a better life.",
+    "columns": {
+      "products": "Products",
+      "company": "Company",
+      "recipes": "Recipes"
+    },
+    "copyright": "© 2026 Vita Hydro Agro-Processing PLC. All rights reserved."
   }
 }
