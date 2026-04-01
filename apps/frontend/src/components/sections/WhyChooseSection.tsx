@@ -8,21 +8,24 @@ export default function WhyChooseSection() {
   const cards = [
     {
         id: 'quality',
-        bgColor: 'bg-[#1a1a1a]',
+        bgColor: 'bg-[#a099b5]',
         textColor: 'text-white',
-        labelColor: 'text-zinc-500'
+        labelColor: 'text-purple-200',
+        image: '/assets/quality/quality-control.svg'
     },
     {
         id: 'natural',
         bgColor: 'bg-[#23b349]',
         textColor: 'text-white',
-        labelColor: 'text-green-900/60'
+        labelColor: 'text-green-200',
+        image: '/assets/quality/production-process.svg'
     },
     {
         id: 'innovation',
-        bgColor: 'bg-[#4d4d33]',
+        bgColor: 'bg-[#9d8562]',
         textColor: 'text-white',
-        labelColor: 'text-yellow-100/40'
+        labelColor: 'text-tan-200',
+        image: '/assets/quality/raw-materials.svg'
     }
   ];
 
@@ -48,10 +51,12 @@ export default function WhyChooseSection() {
                     {t(`cards.${card.id}.body`)}
                 </p>
             </div>
-            <div className="w-full lg:w-1/2 bg-white/10 flex items-center justify-center p-12">
-                 <div className="w-full h-full border-4 border-dashed border-white/20 rounded-[2rem] flex items-center justify-center text-white/40 font-bold uppercase tracking-widest">
-                    Card Image
-                 </div>
+            <div className="w-full lg:w-1/2 bg-white/10 flex items-center justify-center p-12 overflow-hidden">
+                <img 
+                    src={card.image} 
+                    alt={t(`cards.${card.id}.heading`)} 
+                    className="w-full h-full object-cover rounded-[2rem] hover:scale-105 transition-transform duration-300"
+                />
             </div>
           </div>
         ))}

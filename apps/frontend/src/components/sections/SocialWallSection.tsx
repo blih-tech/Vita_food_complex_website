@@ -20,21 +20,41 @@ export default function SocialWallSection() {
       </div>
 
       <div className="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 auto-rows-[200px]">
-        {/* Masonry-like Grid */}
-        <div className="bg-zinc-100 rounded-3xl col-span-2 row-span-2 flex items-center justify-center text-zinc-300 font-bold uppercase tracking-widest">
-            Lifestyle 1
+        {/* Masonry-like Grid with Real Images */}
+        <div className="col-span-2 row-span-2 overflow-hidden rounded-3xl hover:shadow-lg transition-shadow">
+            <img 
+                src="/assets/social/social-1.svg" 
+                alt="Social Moment 1" 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            />
         </div>
-        <div className="bg-zinc-200 rounded-3xl col-span-1 row-span-1 flex items-center justify-center text-zinc-400 font-bold uppercase tracking-widest text-xs">
-            Lifestyle 2
+        <div className="col-span-1 row-span-1 overflow-hidden rounded-3xl hover:shadow-lg transition-shadow">
+            <img 
+                src="/assets/social/social-2.svg" 
+                alt="Social Moment 2" 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            />
         </div>
-        <div className="bg-zinc-100 rounded-3xl col-span-1 row-span-2 flex items-center justify-center text-zinc-300 font-bold uppercase tracking-widest text-xs">
-            Lifestyle 3
+        <div className="col-span-1 row-span-2 overflow-hidden rounded-3xl hover:shadow-lg transition-shadow">
+            <img 
+                src="/assets/social/social-3.svg" 
+                alt="Social Moment 3" 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            />
         </div>
-        <div className="bg-zinc-300 rounded-3xl col-span-1 row-span-1 flex items-center justify-center text-zinc-400 font-bold uppercase tracking-widest text-xs">
-            Lifestyle 4
+        <div className="col-span-1 row-span-1 overflow-hidden rounded-3xl hover:shadow-lg transition-shadow">
+            <img 
+                src="/assets/social/social-4.svg" 
+                alt="Social Moment 4" 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            />
         </div>
-        <div className="bg-zinc-100 rounded-3xl col-span-2 row-span-1 flex items-center justify-center text-zinc-300 font-bold uppercase tracking-widest text-xs">
-            Lifestyle 5
+        <div className="col-span-2 row-span-1 overflow-hidden rounded-3xl hover:shadow-lg transition-shadow">
+            <img 
+                src="/assets/social/social-5.svg" 
+                alt="Social Moment 5" 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            />
         </div>
       </div>
     </section>

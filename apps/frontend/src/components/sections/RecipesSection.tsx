@@ -7,19 +7,22 @@ const recipes = [
         id: 1,
         tag: 'Kiyu - Cream With Milk',
         title: 'Creamy Milk Biscuit Cake',
-        description: 'A simple and delicious cake made with Kiyu biscuits and fresh milk.'
+        description: 'A simple and delicious cake made with Kiyu biscuits and fresh milk.',
+        image: '/assets/recipes/recipe-1.svg'
     },
     {
         id: 2,
         tag: 'Bora - Chocolate',
         title: 'Double Chocolate Brownies',
-        description: 'Rich chocolate brownies with crushed Bora biscuits for extra crunch.'
+        description: 'Rich chocolate brownies with crushed Bora biscuits for extra crunch.',
+        image: '/assets/recipes/recipe-2.svg'
     },
     {
         id: 3,
         tag: 'Super Flour',
         title: 'Traditional Wheat Bread',
-        description: 'Healthy and fluffy bread made from our premium Super Flour.'
+        description: 'Healthy and fluffy bread made from our premium Super Flour.',
+        image: '/assets/recipes/recipe-3.svg'
     }
 ];
 
@@ -40,8 +43,12 @@ export default function RecipesSection() {
       <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {recipes.map((recipe) => (
           <div key={recipe.id} className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-md transition-shadow group cursor-pointer">
-            <div className="aspect-[4/3] bg-zinc-100 relative flex items-center justify-center overflow-hidden">
-                <div className="text-zinc-300 font-bold uppercase tracking-widest group-hover:scale-110 transition-transform">Recipe Image</div>
+            <div className="aspect-[4/3] relative overflow-hidden">
+                <img 
+                    src={recipe.image} 
+                    alt={recipe.title} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
                 <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm px-4 py-1 rounded-full text-xs font-bold text-zinc-900 shadow-sm uppercase tracking-wider">
                     {recipe.tag}
                 </div>

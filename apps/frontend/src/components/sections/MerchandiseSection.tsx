@@ -23,15 +23,27 @@ export default function MerchandiseSection() {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-6">
-            {/* Merch Placeholders */}
-            <div className="w-full aspect-[3/4] bg-zinc-100 rounded-[2rem] flex items-center justify-center text-zinc-300 font-bold uppercase text-xs text-center p-4">
-                Black Polo Shirt
+            {/* Merchandise Products */}
+            <div className="w-full aspect-[3/4] overflow-hidden rounded-[2rem] hover:shadow-lg transition-shadow group">
+                <img 
+                    src="/assets/merchandise/polo-shirt.svg" 
+                    alt="Black Polo Shirt" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
             </div>
-            <div className="w-full aspect-[3/4] bg-zinc-900 rounded-[2rem] flex items-center justify-center text-white/20 font-bold uppercase text-xs text-center p-4 translate-y-8">
-                Black Cap
+            <div className="w-full aspect-[3/4] overflow-hidden rounded-[2rem] hover:shadow-lg transition-shadow group">
+                <img 
+                    src="/assets/merchandise/cap.svg" 
+                    alt="Black Cap" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
             </div>
-            <div className="w-full aspect-[3/4] bg-zinc-100 rounded-[2rem] flex items-center justify-center text-zinc-300 font-bold uppercase text-xs text-center p-4">
-                White Shirt
+            <div className="w-full aspect-[3/4] overflow-hidden rounded-[2rem] hover:shadow-lg transition-shadow group">
+                <img 
+                    src="/assets/merchandise/tshirt.svg" 
+                    alt="White Shirt" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
             </div>
         </div>
       </div>

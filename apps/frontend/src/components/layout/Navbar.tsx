@@ -2,81 +2,80 @@
 
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@frontend/navigation';
-import { useState, useEffect } from 'react';
 
 export default function Navbar() {
-  const t = useTranslations('Navbar');
   const pathname = usePathname();
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const navLinks = [
-    { name: t('links.products'), href: '/products' },
-    { name: t('links.company'), href: '/about' },
-    { name: t('links.recipes'), href: '/recipes' },
-    { name: t('links.more'), href: '/learn' },
+    { name: 'Products', href: '/products', id: 'products-main' },
+    { name: 'Community', href: '/community', id: 'community' },
+    { name: 'Company', href: '/about', id: 'company' },
+    { name: 'Products', href: '/products-categories', id: 'products-categories' },
   ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md py-4' : 'bg-transparent py-6'
-      }`}
-    >
-      <div className="container mx-auto px-6 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl font-black tracking-tighter uppercase" style={{ color: 'var(--color-primary)' }}>
-            Vita Food
-          </span>
-        </Link>
+    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 flex justify-center">
+      <div className="w-[1664px] h-24 px-5 py-3 bg-brand-brand rounded-xl inline-flex justify-start items-center gap-2.5 overflow-hidden">
+        <div className="flex-1 px-5 flex justify-between items-center">
+          {/* Logo */}
+          <Link href="/" className="w-20 h-20 relative overflow-hidden">
+            <img 
+              src="/assets/brand/vita-logo.svg" 
+              alt="Vita Food Complex" 
+              className="w-full h-full object-contain"
+            />
+          </Link>
 
-        {/* Nav Links */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="font-medium text-body-text hover:text-primary transition-colors"
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div>
+          {/* Navigation Links */}
+          <div className="hidden md:flex justify-center items-center gap-8">
+            {navLinks.map((link) => (
+              <div key={link.id} className="pb-px flex justify-center items-end gap-2 cursor-pointer group">
+                <Link
+                  href={link.href}
+                  className="justify-start text-Text-white text-2xl font-semibold font-['Outfit'] hover:opacity-90 transition-opacity"
+                >
+                  {link.name}
+                </Link>
+                {/* Dropdown Chevron */}
+                <div className="flex justify-end items-end gap-2.5">
+                  <div className="w-6 h-6 relative">
+                    <div className="w-3 h-1.5 left-[6px] top-[9px] absolute outline outline-[3px] outline-offset-[-1.50px] outline-Neutral-white-white-500" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
 
-        {/* CTA & Language Switcher */}
-        <div className="flex items-center gap-6">
-          <div className="flex items-center bg-zinc-100 rounded-full p-1">
-            <Link
-              href={pathname}
-              locale="en"
-              className={`px-3 py-1 rounded-full text-xs font-bold transition-colors ${
-                pathname.startsWith('/en') ? 'bg-white text-zinc-900 shadow-sm' : 'text-zinc-500'
-              }`}
+          {/* Order Now Button - Desktop */}
+          <div className="hidden md:flex justify-start items-center gap-4">
+            <Link 
+              href="/order"
+              className="px-6 py-2.5 bg-Neutral-white-white-500 rounded-lg flex justify-center items-center gap-2.5 overflow-hidden hover:opacity-90 transition-opacity"
             >
-              EN
-            </Link>
-            <Link
-              href={pathname}
-              locale="am"
-              className={`px-3 py-1 rounded-full text-xs font-bold transition-colors ${
-                pathname.startsWith('/am') ? 'bg-white text-zinc-900 shadow-sm' : 'text-zinc-500'
-              }`}
-            >
-              AM
+              <div className="justify-start text-Text-dark-subtle text-2xl font-bold font-['Funnel_Display']">
+                Order Now
+              </div>
             </Link>
           </div>
-          
-          <button className="hidden sm:block px-6 py-2 border-2 border-primary text-primary font-bold rounded-full hover:bg-primary hover:text-white transition-all" style={{ borderColor: 'var(--color-primary)', color: 'var(--color-primary)' }}>
-            {t('cta')}
-          </button>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center gap-4">
+            <Link 
+              href="/order"
+              className="px-4 py-2 bg-Neutral-white-white-500 rounded-lg flex justify-center items-center gap-2.5 overflow-hidden"
+            >
+              <div className="justify-start text-Text-dark-subtle text-lg font-bold font-['Funnel_Display']">
+                Order Now
+              </div>
+            </Link>
+            <button className="text-Text-white hover:opacity-90 transition-opacity">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </nav>

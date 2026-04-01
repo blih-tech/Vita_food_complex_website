@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;600;700&family=Outfit:wght@400;600;900&display=swap");
 
 /* ========================================
    BRAND COLOR PALETTE & VARIABLES
@@ -10,6 +9,12 @@
   --color-primary-dark: #0f4b1f;
   --color-background-page: #e9f7ed;
   --color-body-text: #333733;
+
+  /* Figma Design Colors */
+  --brand-brand: #23B349;
+  --text-white: #FFFFFF;
+  --text-dark-subtle: #333733;
+  --neutral-white-white-500: #FFFFFF;
 
   /* Whites & Blacks */
   --color-white: #ffffff;
@@ -33,8 +38,8 @@
   --color-progress-fill: #333733;
 
   /* Font Families */
-  --font-display: "Funnel Display", Helvetica, sans-serif;
-  --font-body: "Outfit", Helvetica, sans-serif;
+  --font-display: var(--font-funnel-display), "Funnel Display", Helvetica, sans-serif;
+  --font-body: var(--font-outfit), "Outfit", Helvetica, sans-serif;
 
   /* Border Radius */
   --radius-lg: 0.5rem;
@@ -467,6 +472,12 @@ body {
   .decorative-number {
     font-size: 120px;
   }
+
+  /* Responsive Header */
+  nav {
+    height: 70px !important;
+    padding: 8px 16px !important;
+  }
 }
 
 /* SM: Tablets Portrait (640px - 767px) */
@@ -494,6 +505,12 @@ body {
 
   .decorative-number {
     font-size: 160px;
+  }
+
+  /* Responsive Header */
+  nav {
+    height: 80px !important;
+    padding: 10px 20px !important;
   }
 }
 
@@ -528,6 +545,12 @@ body {
     width: 100%;
     max-width: 500px;
   }
+
+  /* Responsive Header */
+  nav {
+    height: 90px !important;
+    padding: 12px 20px !important;
+  }
 }
 
 /* LG: Desktop (1024px - 1279px) */
@@ -546,6 +569,12 @@ body {
 
   .decorative-number {
     font-size: 220px;
+  }
+
+  /* Responsive Header */
+  nav {
+    height: 95px !important;
+    padding: 12px 20px !important;
   }
 }
 
@@ -566,6 +595,12 @@ body {
   .decorative-number {
     font-size: 280px;
   }
+
+  /* Responsive Header */
+  nav {
+    height: 100px !important;
+    padding: 12px 20px !important;
+  }
 }
 
 /* 2XL: Large Desktop (1536px - 1919px) */
@@ -585,6 +620,12 @@ body {
   .decorative-number {
     font-size: 300px;
   }
+
+  /* Responsive Header */
+  nav {
+    height: 100px !important;
+    padding: 12px 20px !important;
+  }
 }
 
 /* Desktop: Full HD & Beyond (1920px+) */
@@ -603,5 +644,11 @@ body {
 
   .decorative-number {
     font-size: 320px;
+  }
+
+  /* Responsive Header */
+  nav {
+    height: 100px !important;
+    padding: 12px 20px !important;
   }
 }

@@ -1,0 +1,5 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="40" cy="40" r="38" fill="#FFD700"/>
+  <path d="M30 35L35 45L50 30" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="40" y="55" font-family="Arial, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#333">PREMIUM</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg width="539" height="539" viewBox="0 0 539 539" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="539" height="539" fill="#8b7355"/>
+  <rect x="0" y="0" width="539" height="539" fill="url(#recipe3Gradient)" opacity="0.4"/>
+  
+  <defs>
+    <linearGradient id="recipe3Gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3" />
+      <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+  
+  <circle cx="270" cy="220" r="85" fill="#ffffff" opacity="0.2"/>
+  <rect x="190" y="160" width="160" height="110" rx="12" fill="#ffffff" opacity="0.3"/>
+  
+  <text x="270" y="270" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="white">Wheat Cookies</text>
+  <text x="270" y="310" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#f4e4c1">Golden & Crisp</text>
+</svg>

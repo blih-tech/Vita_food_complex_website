@@ -1,0 +1,17 @@
+<svg width="539" height="539" viewBox="0 0 539 539" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="539" height="539" fill="#23b349"/>
+  <rect x="0" y="0" width="539" height="539" fill="url(#recipe2Gradient)" opacity="0.3"/>
+  
+  <defs>
+    <radialGradient id="recipe2Gradient">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <circle cx="270" cy="200" r="90" fill="#ffffff" opacity="0.15"/>
+  <rect x="180" y="140" width="180" height="120" rx="15" fill="#ffffff" opacity="0.25"/>
+  
+  <text x="270" y="250" font-family="Arial, sans-serif" font-size="40" font-weight="bold" text-anchor="middle" fill="white">Flour Pancakes</text>
+  <text x="270" y="290" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" fill="#bbe7c7">Fluffy & Light</text>
+</svg>

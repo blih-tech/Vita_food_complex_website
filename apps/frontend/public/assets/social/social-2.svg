@@ -1,0 +1,7 @@
+<svg width="400" height="350" viewBox="0 0 400 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="350" fill="#e8f5e8"/>
+  <rect x="30" y="30" width="340" height="290" fill="#23b349" opacity="0.15"/>
+  <circle cx="100" cy="100" r="30" fill="#23b349" opacity="0.4"/>
+  <circle cx="300" cy="250" r="25" fill="#23b349" opacity="0.4"/>
+  <text x="200" y="180" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#23b349">Social Moment 2</text>
+</svg>

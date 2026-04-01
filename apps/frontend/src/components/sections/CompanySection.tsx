@@ -26,13 +26,13 @@ export default function CompanySection() {
         </div>
 
         <div className="relative order-1 lg:order-2 flex justify-center">
-            {/* Product Image Placeholder (Snack Bag) */}
-            <div className="relative w-full max-w-md aspect-square bg-zinc-100 rounded-full flex items-center justify-center">
-                 <div className="w-56 h-80 bg-zinc-300 rounded-3xl rotate-6 shadow-xl relative overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center text-zinc-500 font-bold text-lg uppercase tracking-widest -rotate-6">
-                        Snack Bag
-                    </div>
-                 </div>
+            {/* Company Product Image (Snack Bag) */}
+            <div className="relative w-full max-w-md aspect-square">
+                <img 
+                    src="/assets/company/snack-bag.svg" 
+                    alt="Vita Food Snack Bag" 
+                    className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+                />
                  
                  {/* Decorative organic shapes */}
                  <div className="absolute -top-10 -right-10 w-24 h-24 bg-orange-200 rounded-full opacity-50 blur-2xl"></div>

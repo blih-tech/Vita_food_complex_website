@@ -1,0 +1,6 @@
+<svg width="400" height="280" viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="280" fill="#fff8dc"/>
+  <rect x="40" y="40" width="320" height="200" fill="#daa520" opacity="0.2"/>
+  <circle cx="200" cy="140" r="35" fill="#daa520" opacity="0.5"/>
+  <text x="200" y="150" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#daa520">Social Moment 3</text>
+</svg>

@@ -1,101 +1,83 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { Button } from "../ui/button";
 
-const products = [
-    { id: 1, name: 'Bora-Chocolate', type: 'Biscuit', color: 'bg-zinc-800' },
-    { id: 2, name: 'Vita-Vanilla', type: 'Biscuit', color: 'bg-zinc-200' },
-    { id: 3, name: 'Super-Flour', type: 'Wheat Flour', color: 'bg-yellow-100' },
+const FOOD_IMG = "/assets/hero/food-bg.jpg";
+const PRODUCT_IMG = "/assets/products/bora-chocolate.svg";
+const STACKED_IMG = "/assets/hero/biscuit-piece.svg";
+const WAVE_SVG = "/assets/decorations/wave.svg";
+
+const stackedImages = [
+  { zIndex: 'z-10' },
+  { zIndex: 'z-20' },
+  { zIndex: 'z-30' },
 ];
 
 export default function ProductsSection() {
-  const t = useTranslations('Products');
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const nextSlide = () => {
-    setActiveIndex((prev) => (prev + 1) % products.length);
-  };
-
-  const prevSlide = () => {
-    setActiveIndex((prev) => (prev - 1 + products.length) % products.length);
-  };
-
-  const currentProduct = products[activeIndex];
-
   return (
-    <section className="relative py-24 bg-white overflow-hidden">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-12 gap-4">
-          <div className="space-y-2">
-            <span className="text-sm font-bold uppercase tracking-widest text-zinc-500">
-                {t('label')}
-            </span>
-            <h2 className="heading-section">
-                {t('heading')}
-            </h2>
+    <section className="relative w-full bg-[#0f4b1f] py-16 sm:py-20 lg:py-24 overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+          
+          {/* ── LEFT: product info + CTA + decorative images ── */}
+          <div className="order-2 lg:order-1 flex flex-col items-start gap-6 lg:gap-8 w-full lg:w-auto">
+            <div className="flex flex-col items-start gap-2">
+              <p className="[font-family:'Outfit',Helvetica] font-normal text-white text-base sm:text-xl lg:text-2xl tracking-[0] leading-normal">
+                Cream
+              </p>
+              <h3 className="[font-family:'Funnel_Display',Helvetica] font-bold text-white text-3xl sm:text-4xl lg:text-5xl tracking-[0] leading-normal">
+                Bora-Chocolate
+              </h3>
+            </div>
+
+            <Button className="flex items-center justify-center gap-2.5 bg-[#0f4b1f] rounded-lg overflow-hidden h-auto px-8 sm:px-12 lg:px-20 py-4 lg:py-5 hover:bg-[#0f4b1f]/90 w-full sm:w-auto lg:w-[322px]">
+              <span className="[font-family:'Funnel_Display',Helvetica] font-bold text-white text-lg sm:text-2xl lg:text-[32px] tracking-[1.28px] leading-normal">
+                View Product
+              </span>
+            </Button>
+
+        {/* Bottom-left blurred image (hidden on mobile) */}
+        <div className="hidden lg:block w-[310px] h-[325px] overflow-hidden rounded-sm blur-[1.5px]">
+          <img className="w-full h-full object-cover" alt="Img" src="https://c.animaapp.com/mnen63f6ozOTkE/img/chatgptimageaug22025f01-07-28pm-3.png" />
+        </div>
           </div>
-          <div className="text-4xl font-bold text-zinc-300 tabular-nums">
-            {activeIndex + 1}/{products.length}
+
+          {/* ── CENTER: main product image ── */}
+          <div className="order-1 lg:order-2 flex-1 flex items-center justify-center min-h-[260px] sm:min-h-[400px] lg:min-h-0">
+            <img
+              className="w-full max-w-[400px] sm:max-w-[600px] lg:max-w-[869px] h-auto object-contain drop-shadow-2xl"
+              alt="Bora-Chocolate product"
+              src={PRODUCT_IMG}
+            />
+          </div>
+
+          {/* ── RIGHT: decorative blurred + stacked images (desktop only) ── */}
+          <div className="hidden lg:flex flex-col items-end justify-between order-3 lg:w-[320px] xl:w-[420px] shrink-0">
+            {/* Large blurred right image */}
+            <div className="w-full h-[783px] overflow-hidden rounded-sm blur-[7.25px]">
+              <img className="w-full h-full object-cover" alt="Img" src="https://c.animaapp.com/mnen63f6ozOTkE/img/chatgptimageaug22025f01-07-28pm-3.png" />
+            </div>
+
+            {/* Stacked images column */}
+            <div className="flex flex-col items-start w-[167px] blur-[2px] mt-4">
+              {stackedImages.map((img, index) => (
+                <img
+                  key={`stacked-${index}`}
+                  className={`relative w-full h-[153px] ${img.zIndex} object-cover`}
+                  alt=""
+                  src={STACKED_IMG}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="relative flex flex-col lg:flex-row items-center gap-16">
-            {/* Product Card */}
-            <div className="w-full lg:w-1/2 aspect-square flex items-center justify-center relative">
-                <div className={`w-80 h-[500px] ${currentProduct.color} rounded-[3rem] shadow-drop p-12 flex flex-col justify-between transition-all duration-500 transform`}>
-                    <div className="space-y-4">
-                        <span className="text-white/60 font-bold uppercase tracking-widest text-sm">
-                            {currentProduct.type}
-                        </span>
-                        <h3 className="text-5xl font-black text-white tracking-tighter leading-none">
-                            {currentProduct.name}
-                        </h3>
-                    </div>
-                    
-                    <button className="w-full py-4 bg-white text-zinc-900 rounded-full font-bold transition-transform hover:scale-105">
-                        {t('cta')}
-                    </button>
-                </div>
-
-                {/* Scattered biscuit pieces placeholders */}
-                <div className="absolute top-10 right-10 w-16 h-16 bg-zinc-400 rounded-xl rotate-12 opacity-40"></div>
-                <div className="absolute bottom-20 left-0 w-12 h-12 bg-zinc-300 rounded-lg -rotate-45 opacity-60"></div>
-            </div>
-
-            <div className="w-full lg:w-1/2 space-y-12">
-                <div className="space-y-6">
-                    <p className="text-2xl font-bold text-zinc-900">
-                        {t('items.bora.description')}
-                    </p>
-                    <p className="text-zinc-500 text-lg max-w-md">
-                        Experience the perfect crunch and rich flavor in every bite. Our products are made with passion and precision.
-                    </p>
-                </div>
-
-                <div className="flex gap-6">
-                    <button 
-                        onClick={prevSlide}
-                        className="w-16 h-16 rounded-full border-2 border-zinc-200 flex items-center justify-center text-2xl hover:bg-zinc-100 transition-colors"
-                    >
-                        ←
-                    </button>
-                    <button 
-                        onClick={nextSlide}
-                        className="w-16 h-16 rounded-full border-2 border-zinc-200 flex items-center justify-center text-2xl hover:bg-zinc-100 transition-colors"
-                    >
-                        →
-                    </button>
-                </div>
-            </div>
-        </div>
-      </div>
-
-      {/* Wavy Divider Bottom */}
-      <div className="absolute bottom-0 left-0 w-full h-24 text-background-page translate-y-px" style={{ color: 'var(--color-background-page)' }}>
-        <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" className="w-full h-full fill-current">
-          <path d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-        </svg>
+        {/* ── WAVE DECORATION ── */}
+        <img
+          className="w-full h-auto mt-8 sm:mt-12 lg:mt-16"
+          alt="Frame"
+          src={WAVE_SVG}
+        />
       </div>
     </section>
   );
