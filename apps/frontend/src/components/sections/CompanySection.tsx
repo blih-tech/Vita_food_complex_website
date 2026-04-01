@@ -6,38 +6,60 @@ export default function CompanySection() {
   const t = useTranslations('Company');
 
   return (
-    <section className="py-24 bg-[#fdfaf5]">
-      <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 items-center gap-16">
-        <div className="space-y-8 order-2 lg:order-1">
-          <div className="space-y-2">
-            <span className="text-sm font-bold uppercase tracking-widest text-zinc-500">
-                {t('label')}
+    <section id="company" className="relative bg-[#E9F7ED] py-20 lg:py-28 overflow-hidden">
+      {/* Subtle background circle */}
+      <div className="absolute -left-40 top-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#23B349] opacity-5 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="container mx-auto px-6 lg:px-16 grid grid-cols-1 lg:grid-cols-2 items-center gap-16">
+
+        {/* ── LEFT: text ── */}
+        <div className="order-2 lg:order-1 flex flex-col gap-8">
+
+          {/* Label */}
+          <p className="font-['Outfit'] font-normal text-[#333733]/60 text-2xl leading-snug tracking-[0.04em]">
+            {t('label')}
+          </p>
+
+          {/* Big heading */}
+          <div className="leading-none overflow-hidden -mt-2">
+            <span
+              className="block font-['Funnel_Display'] font-bold text-[#23B349]"
+              style={{ fontSize: 'clamp(60px, 10.5vw, 200px)', lineHeight: 1.05 }}
+            >
+              Our
             </span>
-            <h2 className="heading-section">
-                {t('heading')}
-            </h2>
+            <span
+              className="block font-['Funnel_Display'] font-bold text-[#23B349] -mt-2 lg:-mt-4"
+              style={{ fontSize: 'clamp(54px, 9.4vw, 180px)', lineHeight: 1.05 }}
+            >
+              {t('heading')}
+            </span>
           </div>
-          <p className="text-body-large text-zinc-700 max-w-xl">
+
+          {/* Body */}
+          <p className="font-['Outfit'] font-normal text-[#333733] text-xl lg:text-2xl leading-relaxed max-w-xl tracking-[0.04em]">
             {t('body')}
           </p>
-          <button className="px-10 py-4 bg-zinc-900 text-white rounded-full font-bold text-lg hover:bg-zinc-800 transition-colors">
-            {t('cta')}
-          </button>
+
+          {/* CTA */}
+          <div>
+            <button className="px-16 py-5 lg:py-6 bg-[#0F4B1F] text-white rounded-lg font-['Funnel_Display'] font-bold text-2xl lg:text-3xl tracking-[0.04em] hover:bg-[#1a6b2e] transition-colors">
+              {t('cta')}
+            </button>
+          </div>
         </div>
 
-        <div className="relative order-1 lg:order-2 flex justify-center">
-            {/* Company Product Image (Snack Bag) */}
-            <div className="relative w-full max-w-md aspect-square">
-                <img 
-                    src="/assets/company/snack-bag.svg" 
-                    alt="Vita Food Snack Bag" 
-                    className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
-                />
-                 
-                 {/* Decorative organic shapes */}
-                 <div className="absolute -top-10 -right-10 w-24 h-24 bg-orange-200 rounded-full opacity-50 blur-2xl"></div>
-                 <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-primary rounded-full opacity-20 blur-3xl" style={{ backgroundColor: 'var(--color-primary)' }}></div>
-            </div>
+        {/* ── RIGHT: image ── */}
+        <div className="order-1 lg:order-2 flex items-center justify-center relative">
+          <div className="relative w-full max-w-lg">
+            {/* Decorative circle behind image */}
+            <div className="absolute inset-0 scale-110 bg-[#23B349]/10 rounded-full blur-2xl" />
+            <img
+              src="/assets/company/snack-bag.svg"
+              alt="Vita Food Snack Bag"
+              className="relative w-full h-auto object-contain hover:scale-105 transition-transform duration-500"
+            />
+          </div>
         </div>
       </div>
     </section>

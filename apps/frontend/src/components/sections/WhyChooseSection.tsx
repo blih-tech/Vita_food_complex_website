@@ -2,64 +2,93 @@
 
 import { useTranslations } from 'next-intl';
 
+type Card = {
+  id: 'quality' | 'natural' | 'innovation';
+  number: string;
+  bgClass: string;
+  numClass: string;
+  image: string;
+};
+
+const CARDS: Card[] = [
+  {
+    id: 'quality',
+    number: '01',
+    bgClass: 'bg-[#A099B5]',
+    numClass: 'text-[#8E87A3]',
+    image: '/assets/quality/quality-control.svg',
+  },
+  {
+    id: 'natural',
+    number: '02',
+    bgClass: 'bg-[#23B349]',
+    numClass: 'text-[#1E9E41]',
+    image: '/assets/quality/production-process.svg',
+  },
+  {
+    id: 'innovation',
+    number: '03',
+    bgClass: 'bg-[#9D8562]',
+    numClass: 'text-[#8A7455]',
+    image: '/assets/quality/raw-materials.svg',
+  },
+];
+
 export default function WhyChooseSection() {
   const t = useTranslations('WhyChoose');
 
-  const cards = [
-    {
-        id: 'quality',
-        bgColor: 'bg-[#a099b5]',
-        textColor: 'text-white',
-        labelColor: 'text-purple-200',
-        image: '/assets/quality/quality-control.svg'
-    },
-    {
-        id: 'natural',
-        bgColor: 'bg-[#23b349]',
-        textColor: 'text-white',
-        labelColor: 'text-green-200',
-        image: '/assets/quality/production-process.svg'
-    },
-    {
-        id: 'innovation',
-        bgColor: 'bg-[#9d8562]',
-        textColor: 'text-white',
-        labelColor: 'text-tan-200',
-        image: '/assets/quality/raw-materials.svg'
-    }
-  ];
-
   return (
-    <section className="py-24 bg-[#f3f0ff]">
-      <div className="container mx-auto px-6 mb-16">
-        <h2 className="heading-section text-center">
-            {t('heading')}
-        </h2>
-      </div>
+    <section id="why-choose" className="py-20 lg:py-28 bg-[#F0EDF8]">
+      <div className="container mx-auto px-6 lg:px-16">
 
-      <div className="container mx-auto px-6 space-y-8">
-        {cards.map((card) => (
-          <div key={card.id} className={`${card.bgColor} ${card.textColor} rounded-[3rem] overflow-hidden flex flex-col lg:flex-row items-stretch min-h-[400px] shadow-lg`}>
-            <div className="p-12 lg:p-20 flex-1 flex flex-col justify-center space-y-6">
-                <span className={`text-sm font-bold uppercase tracking-widest ${card.labelColor}`}>
-                    {card.id}
-                </span>
-                <h3 className="text-4xl lg:text-5xl font-black tracking-tight leading-none">
-                    {t(`cards.${card.id}.heading`)}
+        {/* Section heading */}
+        <h2
+          className="font-['Funnel_Display'] font-bold text-[#333733] leading-none mb-12 lg:mb-16"
+          style={{ fontSize: 'clamp(36px, 3.3vw, 64px)' }}
+        >
+          {t('heading')}
+        </h2>
+
+        {/* Stacked cards */}
+        <div className="space-y-6 lg:space-y-8">
+          {CARDS.map((card) => (
+            <div
+              key={card.id}
+              className={`relative rounded-3xl lg:rounded-[3rem] overflow-hidden flex flex-col lg:flex-row items-stretch min-h-[280px] lg:min-h-[380px] shadow-lg ${card.bgClass}`}
+            >
+              {/* Decorative large number */}
+              <span
+                className={`absolute top-1/2 left-4 lg:left-8 -translate-y-1/2 font-['Outfit'] font-black leading-none pointer-events-none select-none opacity-35 ${card.numClass}`}
+                style={{ fontSize: 'clamp(120px, 16vw, 320px)' }}
+                aria-hidden="true"
+              >
+                {card.number}
+              </span>
+
+              {/* Left: text */}
+              <div className="relative z-10 flex-1 flex flex-col justify-center px-8 py-10 lg:px-16 lg:py-16 gap-4 lg:gap-6">
+                <h3
+                  className="font-['Funnel_Display'] font-bold text-white leading-snug"
+                  style={{ fontSize: 'clamp(28px, 2.5vw, 48px)' }}
+                >
+                  {t(`cards.${card.id}.heading`)}
                 </h3>
-                <p className="text-xl opacity-80 max-w-md">
-                    {t(`cards.${card.id}.body`)}
+                <p className="font-['Outfit'] font-normal text-white/80 text-lg lg:text-2xl leading-relaxed max-w-lg">
+                  {t(`cards.${card.id}.body`)}
                 </p>
-            </div>
-            <div className="w-full lg:w-1/2 bg-white/10 flex items-center justify-center p-12 overflow-hidden">
-                <img 
-                    src={card.image} 
-                    alt={t(`cards.${card.id}.heading`)} 
-                    className="w-full h-full object-cover rounded-[2rem] hover:scale-105 transition-transform duration-300"
+              </div>
+
+              {/* Right: image */}
+              <div className="relative w-full lg:w-[45%] flex-shrink-0 min-h-[200px] lg:min-h-0 overflow-hidden">
+                <img
+                  src={card.image}
+                  alt={t(`cards.${card.id}.heading`)}
+                  className="w-full h-full object-cover"
                 />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

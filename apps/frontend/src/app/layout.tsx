@@ -1,5 +1,3 @@
-import { routing } from '@/routing';
-import { notFound } from 'next/navigation';
 import { Geist, Geist_Mono, Outfit, Funnel_Display } from "next/font/google";
 
 const geistSans = Geist({
