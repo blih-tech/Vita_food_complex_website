@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;600;700&family=Outfit:wght@400;600;900&display=swap");
 
 /* ========================================
-   BRAND COLOR PALETTE
+   BRAND COLOR PALETTE & VARIABLES
    ======================================== */
 :root {
   /* Primary Brand Colors */
@@ -43,7 +43,7 @@
   /* Shadows */
   --shadow-drop: 0px 0px 70.05px 8.76px rgba(0, 0, 0, 0.1);
 
-  /* Mobile First Breakpoints */
+  /* Responsive Breakpoints */
   --breakpoint-xs: 320px;
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
@@ -65,10 +65,10 @@ body {
 }
 
 /* ========================================
-   UTILITY CLASSES FOR BRAND PATTERNS
+   TYPOGRAPHY UTILITY CLASSES
    ======================================== */
 
-/* Headings - Funnel Display */
+/* Hero Heading */
 .heading-hero {
   font-family: var(--font-display);
   font-weight: 700;
@@ -78,18 +78,7 @@ body {
   line-height: 1.1;
 }
 
-@media (max-width: 1280px) {
-  .heading-hero {
-    font-size: 120px;
-  }
-}
-
-@media (max-width: 768px) {
-  .heading-hero {
-    font-size: 80px;
-  }
-}
-
+/* Section Heading */
 .heading-section {
   font-family: var(--font-display);
   font-weight: 700;
@@ -99,12 +88,7 @@ body {
   line-height: 1.2;
 }
 
-@media (max-width: 768px) {
-  .heading-section {
-    font-size: 40px;
-  }
-}
-
+/* Card Heading */
 .heading-card {
   font-family: var(--font-display);
   font-weight: 700;
@@ -113,6 +97,7 @@ body {
   letter-spacing: 0;
 }
 
+/* Recipe Card Heading */
 .heading-recipe-card {
   font-family: var(--font-display);
   font-weight: 700;
@@ -121,6 +106,7 @@ body {
   letter-spacing: 0;
 }
 
+/* Footer Brand Heading */
 .heading-footer-brand {
   font-family: var(--font-display);
   font-weight: 300;
@@ -129,6 +115,7 @@ body {
   letter-spacing: 0;
 }
 
+/* Footer Section Heading */
 .heading-footer-section {
   font-family: var(--font-display);
   font-weight: 700;
@@ -137,7 +124,7 @@ body {
   letter-spacing: 0;
 }
 
-/* Body Text Styles */
+/* Large Body Text */
 .text-body-large {
   font-family: var(--font-body);
   font-weight: 400;
@@ -146,6 +133,7 @@ body {
   line-height: 1.5;
 }
 
+/* Default Body Text */
 .text-body-default {
   font-family: var(--font-body);
   font-weight: 400;
@@ -154,6 +142,7 @@ body {
   line-height: 1.6;
 }
 
+/* Small Body Text */
 .text-body-small {
   font-family: var(--font-body);
   font-weight: 400;
@@ -162,6 +151,7 @@ body {
   line-height: 1.5;
 }
 
+/* Subtitle */
 .text-subtitle {
   font-family: var(--font-body);
   font-weight: 400;
@@ -169,6 +159,7 @@ body {
   letter-spacing: 0;
 }
 
+/* Recipe Card Description */
 .text-recipe-description {
   font-family: var(--font-body);
   font-weight: 400;
@@ -177,7 +168,7 @@ body {
   letter-spacing: 0;
 }
 
-/* Decorative Numbers (Value Card "01", "02", "03") */
+/* Decorative Numbers */
 .decorative-number {
   font-family: var(--font-body);
   font-weight: 900;
@@ -187,13 +178,11 @@ body {
   letter-spacing: 0;
 }
 
-@media (max-width: 1024px) {
-  .decorative-number {
-    font-size: 200px;
-  }
-}
+/* ========================================
+   BUTTON STYLES
+   ======================================== */
 
-/* PRIMARY CTA BUTTON - Dark Green Solid */
+/* Primary CTA Button */
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -204,7 +193,7 @@ body {
   font-weight: 700;
   font-size: 32px;
   letter-spacing: 1.28px;
-  padding: 20px 20px;
+  padding: 20px;
   border-radius: var(--radius-lg);
   border: none;
   cursor: pointer;
@@ -213,14 +202,13 @@ body {
 
 .btn-primary:hover {
   opacity: 0.9;
-  background-color: var(--color-primary-dark);
 }
 
 .btn-primary:active {
   opacity: 0.85;
 }
 
-/* INVERTED CTA BUTTON - Mint on Dark Background */
+/* Inverted CTA Button */
 .btn-inverted {
   display: flex;
   align-items: center;
@@ -247,14 +235,10 @@ body {
   background-color: #c4e0cc;
 }
 
-@media (max-width: 768px) {
-  .btn-inverted {
-    width: 100%;
-    max-width: 500px;
-  }
-}
+/* ========================================
+   CARD STYLES
+   ======================================== */
 
-/* CARD BASE STYLES */
 .card-base {
   border-radius: var(--radius-lg);
   background-color: var(--color-white);
@@ -277,11 +261,11 @@ body {
   overflow: hidden;
 }
 
-/* RADIAL GLOW BLUR EFFECT (Value Cards) */
-.glow-purple {
-  position: relative;
-}
+/* ========================================
+   VISUAL EFFECTS
+   ======================================== */
 
+/* Radial Glow Effects */
 .glow-purple::after {
   content: "";
   position: absolute;
@@ -294,10 +278,6 @@ body {
   filter: blur(250px);
   pointer-events: none;
   z-index: 0;
-}
-
-.glow-terracotta {
-  position: relative;
 }
 
 .glow-terracotta::after {
@@ -314,10 +294,6 @@ body {
   z-index: 0;
 }
 
-.glow-tan {
-  position: relative;
-}
-
 .glow-tan::after {
   content: "";
   position: absolute;
@@ -332,11 +308,7 @@ body {
   z-index: 0;
 }
 
-/* SHADOW DROP EFFECT (Product Images) */
-.shadow-drop {
-  position: relative;
-}
-
+/* Shadow Drop Effect */
 .shadow-drop::after {
   content: "";
   position: absolute;
@@ -351,7 +323,7 @@ body {
   opacity: 0.3;
 }
 
-/* FADE OVERLAYS (Gallery Section) */
+/* Fade Overlays */
 .fade-overlay-top {
   position: absolute;
   top: 0;
@@ -374,7 +346,7 @@ body {
   z-index: 10;
 }
 
-/* SCROLL PROGRESS BAR */
+/* Progress Bar */
 .progress-bar {
   width: 1067px;
   height: 8px;
@@ -390,13 +362,7 @@ body {
   transition: width 0.3s ease;
 }
 
-@media (max-width: 1024px) {
-  .progress-bar {
-    width: 100%;
-  }
-}
-
-/* RECIPE CARD STYLES */
+/* Recipe Card */
 .recipe-card {
   position: relative;
   width: 539px;
@@ -409,14 +375,6 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
-}
-
-@media (max-width: 768px) {
-  .recipe-card {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1;
-  }
 }
 
 .recipe-card-image {
@@ -442,26 +400,27 @@ body {
   gap: 16px;
 }
 
-/* DARK TEXT ON WHITE */
+/* ========================================
+   TEXT COLOR UTILITIES
+   ======================================== */
+
 .text-on-white {
   color: var(--color-body-text);
 }
 
-/* WHITE TEXT ON DARK */
 .text-on-dark {
   color: var(--color-white);
 }
 
-/* WHITE TEXT ON PRIMARY */
 .text-on-primary {
   color: var(--color-white);
 }
 
 /* ========================================
-   RESPONSIVE DESIGN UTILITIES
+   RESPONSIVE DESIGN - MOBILE FIRST
    ======================================== */
 
-/* Extra Small Devices (Mobile) - 320px and up */
+/* XS: Small Phones (320px - 639px) */
 @media (max-width: 639px) {
   body {
     font-size: 14px;
@@ -504,9 +463,13 @@ body {
   .card-value {
     padding: 0 20px;
   }
+
+  .decorative-number {
+    font-size: 120px;
+  }
 }
 
-/* Small Devices (Tablets in Portrait) - 640px and up */
+/* SM: Tablets Portrait (640px - 767px) */
 @media (min-width: 640px) and (max-width: 767px) {
   body {
     font-size: 15px;
@@ -534,7 +497,7 @@ body {
   }
 }
 
-/* Medium Devices (Tablets in Landscape) - 768px and up */
+/* MD: Tablets Landscape (768px - 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
   body {
     font-size: 16px;
@@ -567,7 +530,7 @@ body {
   }
 }
 
-/* Large Devices (Desktop) - 1024px and up */
+/* LG: Desktop (1024px - 1279px) */
 @media (min-width: 1024px) and (max-width: 1279px) {
   body {
     font-size: 16px;
@@ -586,7 +549,7 @@ body {
   }
 }
 
-/* Extra Large Devices (Large Desktop) - 1280px and up */
+/* XL: Large Desktop (1280px - 1535px) */
 @media (min-width: 1280px) and (max-width: 1535px) {
   body {
     font-size: 16px;
@@ -605,7 +568,7 @@ body {
   }
 }
 
-/* 2XL Devices (Large Desktop) - 1536px and up */
+/* 2XL: Large Desktop (1536px - 1919px) */
 @media (min-width: 1536px) and (max-width: 1919px) {
   body {
     font-size: 16px;
@@ -624,7 +587,7 @@ body {
   }
 }
 
-/* Full HD & Beyond (1920px and up) */
+/* Desktop: Full HD & Beyond (1920px+) */
 @media (min-width: 1920px) {
   body {
     font-size: 16px;
