@@ -8,58 +8,85 @@ export default function HeroSection() {
   return (
     <section id="hero" className="relative w-full bg-[#E9F7ED] overflow-hidden">
 
-      {/* ── DESKTOP LAYOUT (lg+) — aspect-ratio 1920:1010 ── */}
+      {/* ── DESKTOP LAYOUT (lg+) — aspect-ratio 1920 : 1010 ── */}
       <div className="hidden lg:block relative w-full pt-[52.6%]">
 
-        {/* "Flour You" — bottom text, behind everything */}
+        {/* Layer 1 — Decorative background element (left side, green pattern, 15% opacity) */}
+        <img
+          src="/assets/hero/hero-bg-element.svg"
+          alt=""
+          aria-hidden="true"
+          className="absolute top-0 left-0 h-full w-auto pointer-events-none select-none z-[1]"
+          style={{ left: '0.47%' }}
+        />
+
+        {/* Layer 2 — "Flour You" — behind product image */}
         <h2
-          className="absolute w-full text-center font-['Funnel_Display'] font-bold text-[#333733] leading-none select-none pointer-events-none z-0"
+          className="absolute w-full text-center font-['Funnel_Display'] font-bold text-[#333733] leading-none select-none pointer-events-none z-[2]"
           style={{ top: '62.6%', fontSize: 'clamp(80px, 15.6vw, 300px)', lineHeight: 1.25 }}
         >
           {t('headline2')}
         </h2>
 
-        {/* Cookie decoration 1 — center-left, behind product image */}
-        <img
-          src="/assets/hero/cookie-decoration-1.png"
-          alt=""
-          aria-hidden="true"
-          className="absolute pointer-events-none z-10 blur-[4px]"
-          style={{ left: '29.5%', top: '27.1%', width: '17.4%', opacity: 0.9 }}
-        />
-
-        {/* Product image — centered, large */}
-        <img
-          src="/assets/hero/product-hero.png"
-          alt="Vita Products"
-          className="absolute z-20 pointer-events-none object-contain"
-          style={{ left: '50%', transform: 'translateX(-50%)', top: '1.7%', width: '69.4%' }}
-        />
-
-        {/* Cookie decoration 2 — bottom-center, in front of product */}
-        <img
-          src="/assets/hero/cookie-decoration-1.png"
-          alt=""
-          aria-hidden="true"
-          className="absolute pointer-events-none z-30 blur-[4px]"
-          style={{ left: '49.4%', top: '59%', width: '14.5%', opacity: 0.9 }}
-        />
-
-        {/* "Biscuits" — top text, in front of product */}
+        {/* Layer 3 — "Biscuits" — behind product image */}
         <h1
-          className="absolute w-full text-center font-['Funnel_Display'] font-bold text-[#23B349] leading-none select-none pointer-events-none z-40"
+          className="absolute w-full text-center font-['Funnel_Display'] font-bold text-[#23B349] leading-none select-none pointer-events-none z-[3]"
           style={{ top: '11.6%', fontSize: 'clamp(80px, 13vw, 250px)', lineHeight: 1.25 }}
         >
           {t('headline1')}
         </h1>
 
-        {/* Description text — right side */}
+        {/* Layer 4 — Product image (on top of both headings, transparent PNG) */}
+        <img
+          src="/assets/hero/product-hero.png"
+          alt="Vita Products"
+          className="absolute pointer-events-none object-contain z-[4]"
+          style={{
+            left: '13.9%',
+            top: '1.7%',
+            width: '69.4%',
+          }}
+        />
+
+        {/* Layer 5 — Cookie decoration 2 (center-left, in front of product) */}
+        <img
+          src="/assets/hero/cookie-decoration-1.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute pointer-events-none z-[5]"
+          style={{ left: '29.5%', top: '27.1%', width: '17.4%', filter: 'blur(4px)' }}
+        />
+
+        {/* Layer 5 — Cookie decoration 1 (bottom-center, in front of product) */}
+        <img
+          src="/assets/hero/cookie-decoration-1.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute pointer-events-none z-[5]"
+          style={{ left: '49.4%', top: '59%', width: '14.5%', filter: 'blur(4px)' }}
+        />
+
+        {/* Layer 6 — Description text (right side) */}
         <p
-          className="absolute font-['Outfit'] font-normal text-[#333733] z-40"
-          style={{ right: '2.1%', top: '46.8%', width: '13.5%', fontSize: '1.04vw', lineHeight: 1.26 }}
+          className="absolute font-['Outfit'] font-normal text-[#333733] z-[6]"
+          style={{
+            left: '79.9%',
+            top: '46.8%',
+            width: '13.5%',
+            fontSize: 'clamp(12px, 1.04vw, 20px)',
+            lineHeight: 1.26,
+          }}
         >
           {t('description')}
         </p>
+
+        {/* Layer 6 — Texted badge with avatars (right side, below description) */}
+        <img
+          src="/assets/hero/texted-badge.svg"
+          alt={t('badge')}
+          className="absolute z-[6] pointer-events-none"
+          style={{ left: '79.9%', top: '59.7%', width: '13.4%' }}
+        />
       </div>
 
       {/* ── MOBILE LAYOUT (< lg) ── */}
@@ -73,7 +100,7 @@ export default function HeroSection() {
         <img
           src="/assets/hero/product-hero.png"
           alt="Vita Products"
-          className="w-[85%] max-w-xs object-contain -mt-4 -mb-4 relative z-10"
+          className="w-[90%] max-w-sm object-contain -mt-4 -mb-2 relative z-10"
         />
         <h2
           className="font-['Funnel_Display'] font-bold text-[#333733] text-center leading-none select-none"
