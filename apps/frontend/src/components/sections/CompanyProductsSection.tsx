@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
@@ -57,7 +57,7 @@ export default function CompanyProductsSection() {
           </div>
         </div>
 
-        {/* ── BRIDGING SNACK BAG IMAGES (Desktop only) ── */}
+        {/* ── BRIDGING SNACK BAG IMAGES ── */}
         <div className="absolute hidden lg:flex z-[30] pointer-events-none right-0 bottom-[-20%] w-[48%] h-[800px] items-end justify-end">
           <div className="relative w-full h-full">
             <div className="absolute left-[0%] top-[15%] w-[55%] h-auto -rotate-6">
@@ -74,28 +74,30 @@ export default function CompanyProductsSection() {
       </section>
 
       {/* ══════════════════════════════════════════
-          OUR PRODUCTS (Full Background Layout)
+          OUR PRODUCTS (Unified Background)
           ══════════════════════════════════════════ */}
-      <section id="products" className="relative w-full min-h-[1200px] overflow-hidden bg-white -mt-1">
+      <section id="products" className="relative w-full min-h-[1000px] lg:min-h-[1400px] overflow-hidden -mt-1 bg-white">
         
-        {/* Figma Exact Background Layers */}
-        <div className="absolute inset-0 w-full h-full flex flex-col pointer-events-none">
-          {/* Top Wave (332:1295 Union containing 332:1296) */}
-          <div className="relative w-full h-[610px]">
-            <img src="/assets/sections/top-wave.svg" className="w-full h-full object-cover" alt="" />
-          </div>
-          {/* Middle Rectangle (332:1298) */}
-          <div className="relative w-full flex-1 bg-[#23B349]">
-            <img src="/assets/sections/middle-rect.svg" className="w-full h-full object-cover" alt="" />
-          </div>
-          {/* Bottom Wave (332:1297) */}
-          <div className="relative w-full h-[362px]">
-            <img src="/assets/sections/bottom-wave.svg" className="w-full h-full object-cover" alt="" />
-          </div>
+        {/* Pixel Perfect Background Layers (sharing same viewBox for perfect alignment) */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none">
+          {/* Layer 1: Light Green Base (node 332:1294) */}
+          <img 
+            src="/assets/sections/products-layer-light.svg" 
+            className="absolute inset-0 w-full h-full object-fill" 
+            style={{ objectPosition: 'center top' }}
+            alt="" 
+          />
+          {/* Layer 2: Dark Green Waves (node 332:1295) */}
+          <img 
+            src="/assets/sections/products-layer-dark.svg" 
+            className="absolute inset-0 w-full h-full object-fill" 
+            style={{ objectPosition: 'center top' }}
+            alt="" 
+          />
         </div>
 
         {/* Content Container */}
-        <div className="relative z-[10] max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%] py-24 lg:py-32">
+        <div className="relative z-[10] max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%] py-24 lg:py-48">
           
           {/* Header row: header (left) counter (right) */}
           <div className="flex items-end justify-between mb-24 lg:mb-32">
@@ -138,7 +140,7 @@ export default function CompanyProductsSection() {
               {/* Product Shadow */}
               <div className="absolute bottom-[5%] w-[80%] h-[100px] bg-[#000500] rounded-full blur-[60px] opacity-50 z-5" />
 
-              {/* Main product image (Figma nodes 1341, 1343, 2123) */}
+              {/* Main product image (High-res extracted PNGs) */}
               <div className="relative z-10 w-80 h-80 sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px]">
                 <Image
                   src={product.image}
