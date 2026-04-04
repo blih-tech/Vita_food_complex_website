@@ -6,6 +6,19 @@
       "subheadline": "Quality Biscuits and Wheat Flour from Debre Sina, Ethiopia."
     }
   },
+  "home": {
+    "company": {
+      "label": "Something About us",
+      "heading": "Our Company",
+      "body": "Vita Hydro Agro-Processing PLC is a modern food manufacturer based in Debre Sina, Ethiopia, specializing in biscuits and flour products. We partner with local farmers, create employment opportunities, and produce trusted, high-quality food essentials for families, bakers, and communities. Our mission is simple: to nourish everyday life while supporting sustainable growth and progress across Ethiopia.",
+      "cta": "About"
+    },
+    "products": {
+      "label": "About",
+      "heading": "Our Products",
+      "viewProduct": "View Product"
+    }
+  },
   "Navbar": {
     "links": {
       "products": "Products",
