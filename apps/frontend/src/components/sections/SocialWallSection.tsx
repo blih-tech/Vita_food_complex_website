@@ -1,78 +1,144 @@
 'use client';
 
+import { useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
-export default function SocialWallSection() {
-  const t = useTranslations('SocialWall');
+const COLUMN_1_IMAGES = [
+  '/assets/products/biscuit-bg.png',
+  '/assets/products/product-display.png',
+  '/assets/products/biscuit-scatter.png',
+];
+
+const COLUMN_2_IMAGES = [
+  '/assets/products/biscuit-large.png',
+  '/assets/products/product-display.png',
+  '/assets/products/biscuit-bg.png',
+];
+
+const COLUMN_3_IMAGES = [
+  '/assets/products/biscuit-scatter.png',
+  '/assets/products/biscuit-large.png',
+  '/assets/products/product-display.png',
+];
+
+interface ScrollingColumnProps {
+  images: string[];
+  direction: 'up' | 'down';
+  speed?: string;
+}
+
+function ScrollingColumn({ images, direction, speed = '25s' }: ScrollingColumnProps) {
+  const columnRef = useRef<HTMLDivElement>(null);
+  const displayImages = [...images, ...images]; // Duplicate for seamless loop
+
+  const handleMouseEnter = () => {
+    if (columnRef.current) {
+      columnRef.current.style.animationPlayState = 'paused';
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (columnRef.current) {
+      columnRef.current.style.animationPlayState = 'running';
+    }
+  };
 
   return (
-    <section id="social" className="py-20 lg:py-28 bg-white">
-      <div className="container mx-auto px-6 lg:px-16">
-
-        {/* Header */}
-        <div className="text-center mb-12 lg:mb-16 space-y-3">
-          <span className="font-['Outfit'] font-semibold text-[#23B349] text-2xl uppercase tracking-widest">
-            {t('label')}
-          </span>
-          <h2
-            className="font-['Funnel_Display'] font-bold text-[#333733] leading-none"
-            style={{ fontSize: 'clamp(36px, 3.3vw, 64px)' }}
+    <div 
+      className="flex-1 overflow-hidden h-full relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div
+        ref={columnRef}
+        className={`flex flex-col gap-8 md:gap-[128px] will-change-transform ${
+          direction === 'up' ? 'animate-scroll-up' : 'animate-scroll-down'
+        }`}
+        style={{ animationDuration: speed }}
+      >
+        {displayImages.map((src, idx) => (
+          <div 
+            key={idx} 
+            className="relative w-full aspect-[541/680] rounded-lg overflow-hidden flex-shrink-0"
           >
-            {t('heading')}
+            <Image
+              src={src}
+              alt={`Social moment ${idx + 1}`}
+              fill
+              className="object-cover"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function SocialWallSection() {
+  const t = useTranslations();
+
+  return (
+    <section className="bg-[#E9F7ED] py-20 lg:py-32 relative overflow-hidden">
+      <div className="max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%]">
+        
+        {/* Header Area */}
+        <div className="flex flex-col items-center text-center mb-16 lg:mb-24 gap-4">
+          <p className="text-[#333733] text-xl lg:text-2xl font-['Outfit'] uppercase tracking-widest">
+            Family time
+          </p>
+          <h2 className="text-[#23B349] text-5xl md:text-6xl lg:text-[64px] font-bold font-['Funnel_Display'] leading-[70px]">
+            Moments with Vita
           </h2>
-          <p className="font-['Outfit'] text-[#333733]/60 text-xl max-w-xl mx-auto">
-            {t('subtext')}
+          <p className="text-[#333733] text-xl lg:text-2xl font-['Outfit'] max-w-3xl opacity-80">
+            See how people enjoy and share their everyday moments with Vita biscuits
           </p>
         </div>
 
-        {/* Masonry grid – 5 images */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 auto-rows-[200px] md:auto-rows-[220px] gap-4">
-          {/* Large – col 1-2, row 1-2 */}
-          <div className="col-span-2 row-span-2 rounded-3xl overflow-hidden group">
-            <img
-              src="/assets/social/social-1.svg"
-              alt="Moments with Vita 1"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
+        {/* Scrolling Grid Container */}
+        <div className="relative h-[400px] md:h-[600px] w-full overflow-hidden">
+          
+          {/* Grid Columns */}
+          <div className="flex gap-4 md:gap-[21px] h-full">
+            <ScrollingColumn images={COLUMN_1_IMAGES} direction="up" />
+            <ScrollingColumn images={COLUMN_2_IMAGES} direction="down" />
+            <ScrollingColumn images={COLUMN_3_IMAGES} direction="up" />
           </div>
 
-          {/* Small – col 3, row 1 */}
-          <div className="col-span-1 row-span-1 rounded-3xl overflow-hidden group">
-            <img
-              src="/assets/social/social-2.svg"
-              alt="Moments with Vita 2"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-          </div>
-
-          {/* Tall – col 4, row 1-2 */}
-          <div className="col-span-1 row-span-2 rounded-3xl overflow-hidden group">
-            <img
-              src="/assets/social/social-3.svg"
-              alt="Moments with Vita 3"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-          </div>
-
-          {/* Small – col 5, row 1 */}
-          <div className="col-span-1 row-span-1 rounded-3xl overflow-hidden group hidden lg:block">
-            <img
-              src="/assets/social/social-4.svg"
-              alt="Moments with Vita 4"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-          </div>
-
-          {/* Wide – col 3-4 or 3-5, row 2 */}
-          <div className="col-span-1 md:col-span-2 row-span-1 rounded-3xl overflow-hidden group">
-            <img
-              src="/assets/social/social-5.svg"
-              alt="Moments with Vita 5"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-          </div>
+          {/* Gradient Overlays */}
+          {/* Top Overlay */}
+          <div 
+            className="absolute top-0 left-0 right-0 h-[140px] z-10 pointer-events-none"
+            style={{ 
+              background: 'linear-gradient(to bottom, #E9F7ED 0%, transparent 100%)' 
+            }}
+          />
+          {/* Bottom Overlay */}
+          <div 
+            className="absolute bottom-0 left-0 right-0 h-[140px] z-10 pointer-events-none"
+            style={{ 
+              background: 'linear-gradient(to top, #E9F7ED 0%, transparent 100%)' 
+            }}
+          />
         </div>
       </div>
+
+      <style jsx global>{`
+        @keyframes scroll-up {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-50%); }
+        }
+        @keyframes scroll-down {
+          0% { transform: translateY(-50%); }
+          100% { transform: translateY(0); }
+        }
+        .animate-scroll-up {
+          animation: scroll-up linear infinite;
+        }
+        .animate-scroll-down {
+          animation: scroll-down linear infinite;
+        }
+      `}</style>
     </section>
   );
 }
