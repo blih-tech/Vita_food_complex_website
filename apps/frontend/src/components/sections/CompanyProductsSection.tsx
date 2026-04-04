@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import WaveDivider from '@frontend/components/ui/WaveDivider';
 
 const PRODUCTS = [
   { name: 'Bora-Chocolate', category: 'Cream', image: '/assets/products/product-1.png' },
@@ -77,21 +76,29 @@ export default function CompanyProductsSection() {
       {/* ══════════════════════════════════════════
           OUR PRODUCTS (Bottom Half)
           ══════════════════════════════════════════ */}
-      <section id="products" className="relative w-full min-h-[900px] lg:min-h-[1400px] bg-[#23B349] overflow-hidden -mt-1">
+      <section id="products" className="relative w-full min-h-[900px] lg:min-h-[1400px] bg-[#0F4B1F] overflow-hidden -mt-1">
         
-        {/* Figma Layered Circles - Responsive Implementation */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          {/* Outer Circle (1200px) */}
-          <div className="w-[800px] h-[800px] md:w-[1000px] md:h-[1000px] lg:w-[1200px] lg:h-[1200px] opacity-30 rounded-full border-[10px] border-[#20A342] absolute" />
-          {/* Middle Circle (1000px) */}
-          <div className="w-[650px] h-[650px] md:w-[850px] md:h-[850px] lg:w-[1000px] lg:h-[1000px] opacity-30 rounded-full border-[10px] border-[#20A342] absolute" />
-          {/* Inner Circle (800px) */}
-          <div className="w-[500px] h-[500px] md:w-[700px] md:h-[700px] lg:w-[800px] lg:h-[800px] bg-[#BBE7C7] rounded-full border border-[#20A342] absolute" />
+        {/* Pixel Perfect Background SVG Layers (#23B349 Vector colors) */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none opacity-100">
+          <img 
+            src="/assets/sections/products-layer-light.svg" 
+            className="absolute inset-0 w-full h-full object-fill" 
+            style={{ objectPosition: 'center top' }}
+            alt="" 
+          />
+          <img 
+            src="/assets/sections/products-layer-dark.svg" 
+            className="absolute inset-0 w-full h-full object-fill" 
+            style={{ objectPosition: 'center top' }}
+            alt="" 
+          />
         </div>
 
-        {/* Waves - To keep the design consistent with Figma links */}
-        <div className="absolute inset-0 w-full h-full pointer-events-none">
-          <img src="/assets/sections/products-layer-dark.svg" className="absolute inset-0 w-full h-full object-fill opacity-20" alt="" />
+        {/* Figma Layered Circles - Responsive Implementation */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-[800px] h-[800px] md:w-[1000px] md:h-[1000px] lg:w-[1200px] lg:h-[1200px] opacity-30 rounded-full border-[10px] border-[#20A342] absolute" />
+          <div className="w-[650px] h-[650px] md:w-[850px] md:h-[850px] lg:w-[1000px] lg:h-[1000px] opacity-30 rounded-full border-[10px] border-[#20A342] absolute" />
+          <div className="w-[500px] h-[500px] md:w-[700px] md:h-[700px] lg:w-[800px] lg:h-[800px] bg-[#BBE7C7] rounded-full border border-[#20A342] absolute" />
         </div>
 
         <div className="relative z-[10] max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%] py-24 lg:py-32 flex flex-col h-full justify-between min-h-[inherit]">
@@ -99,7 +106,7 @@ export default function CompanyProductsSection() {
           {/* Header row: header (left) counter (right) */}
           <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-24 lg:mb-32 gap-8">
             <div className="flex flex-col gap-4">
-              <p className="text-[#0F4B1F] text-2xl font-semibold font-['Outfit']">
+              <p className="text-[#23B349] text-2xl font-semibold font-['Outfit']">
                 About
               </p>
               <h2 className="text-white text-6xl md:text-8xl lg:text-[96px] font-semibold font-['Funnel_Display'] leading-none">
@@ -117,15 +124,13 @@ export default function CompanyProductsSection() {
             {/* Left: product info */}
             <div className="z-10 relative lg:w-1/3 mb-20 lg:mb-0 text-center lg:text-left flex flex-col gap-10">
               <div className="flex flex-col gap-4">
-                <p className="text-white text-2xl font-normal font-['Outfit']">
-                  {product.category}
-                </p>
+                <p className="text-white text-2xl font-normal font-['Outfit'] opacity-90">{product.category}</p>
                 <h3 className="text-white text-4xl lg:text-[56px] font-bold font-['Funnel_Display'] leading-tight">
                   {product.name}
                 </h3>
               </div>
               <div className="flex justify-center lg:justify-start">
-                <button className="bg-[#0F4B1F] text-white px-16 lg:px-20 py-5 rounded-lg font-bold text-2xl lg:text-[32px] leading-none tracking-[1.28px] transition-all duration-300 font-['Funnel_Display'] uppercase shadow-xl hover:bg-[#1a6b2e] active:scale-95">
+                <button className="bg-[#0F4B1F] text-white px-16 lg:px-20 py-5 rounded-lg font-bold text-2xl lg:text-[32px] leading-none tracking-[1.28px] transition-all duration-300 font-['Funnel_Display'] uppercase shadow-xl hover:bg-[#1a6b2e] active:scale-95 border border-white/10">
                   {t('home.products.viewProduct')}
                 </button>
               </div>
