@@ -74,39 +74,36 @@ export default function CompanyProductsSection() {
       </section>
 
       {/* ══════════════════════════════════════════
-          OUR PRODUCTS (Bottom Half)
+          OUR PRODUCTS (Transparent BG with SVG)
           ══════════════════════════════════════════ */}
-      <section id="products" className="relative w-full min-h-[900px] lg:min-h-[1400px] bg-[#0F4B1F] overflow-hidden -mt-1">
+      <section id="products" className="relative w-full aspect-[1920/2083] lg:h-[2083px] overflow-visible bg-transparent -mt-1">
         
-        {/* Pixel Perfect Background SVG Layers (#23B349 Vector colors) */}
-        <div className="absolute inset-0 w-full h-full pointer-events-none opacity-100">
+        {/* Figma Exact Full Background SVG */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
           <img 
-            src="/assets/sections/products-layer-light.svg" 
-            className="absolute inset-0 w-full h-full object-fill" 
-            style={{ objectPosition: 'center top' }}
-            alt="" 
-          />
-          <img 
-            src="/assets/sections/products-layer-dark.svg" 
-            className="absolute inset-0 w-full h-full object-fill" 
-            style={{ objectPosition: 'center top' }}
+            src="/assets/sections/products-full-bg.svg" 
+            className="w-full h-full object-fill" 
             alt="" 
           />
         </div>
 
-        {/* Figma Layered Circles - Responsive Implementation */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[800px] h-[800px] md:w-[1000px] md:h-[1000px] lg:w-[1200px] lg:h-[1200px] opacity-30 rounded-full border-[10px] border-[#20A342] absolute" />
-          <div className="w-[650px] h-[650px] md:w-[850px] md:h-[850px] lg:w-[1000px] lg:h-[1000px] opacity-30 rounded-full border-[10px] border-[#20A342] absolute" />
-          <div className="w-[500px] h-[500px] md:w-[700px] md:h-[700px] lg:w-[800px] lg:h-[800px] bg-[#BBE7C7] rounded-full border border-[#20A342] absolute" />
-        </div>
-
-        <div className="relative z-[10] max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%] py-24 lg:py-32 flex flex-col h-full justify-between min-h-[inherit]">
+        {/* Responsive Content Area (Fitted inside SVG) */}
+        <div className="relative z-10 w-full h-full max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%]">
           
-          {/* Header row: header (left) counter (right) */}
-          <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-24 lg:mb-32 gap-8">
+          {/* Layered Circles (Responsive positions from snippet) */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            {/* Outer Circle (1200px) */}
+            <div className="w-[62.5%] aspect-square max-w-[1200px] opacity-30 rounded-full border-[10px] border-[#20A342] absolute top-[27.2%]" />
+            {/* Middle Circle (1000px) */}
+            <div className="w-[52%] aspect-square max-w-[1000px] opacity-30 rounded-full border-[10px] border-[#20A342] absolute top-[32%]" />
+            {/* Inner Circle (800px) */}
+            <div className="w-[41.6%] aspect-square max-w-[800px] bg-[#BBE7C7] rounded-full border border-[#20A342] absolute top-[36.8%]" />
+          </div>
+
+          {/* Header row: top: 638px (approx 30.6%) */}
+          <div className="absolute top-[30.6%] left-[6.7%] right-[6.7%] flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
             <div className="flex flex-col gap-4">
-              <p className="text-[#23B349] text-2xl font-semibold font-['Outfit']">
+              <p className="text-[#333733] text-2xl font-semibold font-['Outfit'] opacity-80">
                 About
               </p>
               <h2 className="text-white text-6xl md:text-8xl lg:text-[96px] font-semibold font-['Funnel_Display'] leading-none">
@@ -118,30 +115,30 @@ export default function CompanyProductsSection() {
             </span>
           </div>
 
-          {/* PRODUCT DISPLAY AREA */}
-          <div className="relative flex flex-col lg:flex-row items-center flex-1">
-
-            {/* Left: product info */}
-            <div className="z-10 relative lg:w-1/3 mb-20 lg:mb-0 text-center lg:text-left flex flex-col gap-10">
-              <div className="flex flex-col gap-4">
-                <p className="text-white text-2xl font-normal font-['Outfit'] opacity-90">{product.category}</p>
-                <h3 className="text-white text-4xl lg:text-[56px] font-bold font-['Funnel_Display'] leading-tight">
+          {/* PRODUCT DISPLAY AREA (Main image top: 759px approx 36.4%) */}
+          <div className="absolute inset-0 flex flex-col lg:flex-row items-center pointer-events-none">
+            
+            {/* Left: product info (top: 1136px approx 54.5%) */}
+            <div className="absolute top-[54.5%] left-[6.7%] z-20 w-full lg:w-1/3 text-center lg:text-left flex flex-col gap-10 pointer-events-auto">
+              <div className="flex flex-col gap-2">
+                <p className="text-white text-2xl font-normal font-['Outfit']">{product.category}</p>
+                <h3 className="text-white text-4xl lg:text-5xl font-bold font-['Funnel_Display'] leading-tight">
                   {product.name}
                 </h3>
               </div>
               <div className="flex justify-center lg:justify-start">
-                <button className="bg-[#0F4B1F] text-white px-16 lg:px-20 py-5 rounded-lg font-bold text-2xl lg:text-[32px] leading-none tracking-[1.28px] transition-all duration-300 font-['Funnel_Display'] uppercase shadow-xl hover:bg-[#1a6b2e] active:scale-95 border border-white/10">
+                <button className="bg-[#0F4B1F] text-white px-16 lg:px-20 py-5 rounded-lg font-bold text-2xl lg:text-[32px] leading-none tracking-[1.28px] transition-all hover:bg-[#1a6b2e] shadow-xl">
                   {t('home.products.viewProduct')}
                 </button>
               </div>
             </div>
 
             {/* Center: main product */}
-            <div className="relative flex-1 w-full flex items-center justify-center scale-110 lg:scale-125">
+            <div className="absolute top-[36.4%] left-1/2 -translate-x-1/2 w-[40%] aspect-square flex items-center justify-center">
               {/* Product Shadow */}
-              <div className="absolute bottom-[5%] w-[80%] h-[100px] bg-[#000500] rounded-full blur-[60px] opacity-40 z-5" />
-
-              <div className="relative z-10 w-80 h-80 sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px]">
+              <div className="absolute bottom-0 w-full h-[100px] bg-[#000500] rounded-full blur-[60px] opacity-40" />
+              
+              <div className="relative w-full h-full">
                 <Image
                   src={product.image}
                   alt={product.name}
@@ -151,26 +148,26 @@ export default function CompanyProductsSection() {
                 />
               </div>
 
-              {/* Scattered biscuit pieces */}
-              <div className="absolute right-[-10%] top-[-10%] hidden md:block z-20">
+              {/* Scattered biscuit pieces (Fixed positions from design) */}
+              <div className="absolute left-[130%] top-[-10%] w-[30%] h-auto hidden md:block">
                 <Image src="/assets/products/biscuit-piece.png" width={180} height={180}
                        className="object-contain animate-float blur-[2px]" alt="" />
               </div>
-              <div className="absolute left-[-15%] bottom-[10%] hidden md:block z-20">
+              <div className="absolute left-[-15%] bottom-[-10%] w-[25%] h-auto hidden md:block">
                 <Image src="/assets/products/biscuit-piece.png" width={140} height={140}
                        className="object-contain rotate-45 animate-float-delayed blur-[1px]" alt="" />
               </div>
             </div>
           </div>
 
-          {/* BOTTOM ROW — Navigation arrows */}
-          <div className="flex items-center justify-between mt-24 lg:mt-32 w-full">
+          {/* BOTTOM ROW — Navigation arrows (top: 1431px approx 68.7%) */}
+          <div className="absolute top-[68.7%] left-[6.7%] right-[6.7%] flex items-center justify-between pointer-events-none">
             <button
               onClick={prev}
               aria-label="Previous product"
               className="w-20 h-20 md:w-28 md:h-28 rounded-full border-2 border-white/40
                          flex items-center justify-center text-white text-5xl
-                         hover:bg-white hover:text-[#0F4B1F] transition-all duration-300"
+                         hover:bg-white hover:text-[#0F4B1F] transition-all duration-300 pointer-events-auto"
             >
               ←
             </button>
@@ -179,7 +176,7 @@ export default function CompanyProductsSection() {
               aria-label="Next product"
               className="w-20 h-20 md:w-28 md:h-28 rounded-full border-2 border-white/40
                          flex items-center justify-center text-white text-5xl
-                         hover:bg-white hover:text-[#0F4B1F] transition-all duration-300"
+                         hover:bg-white hover:text-[#0F4B1F] transition-all duration-300 pointer-events-auto"
             >
               →
             </button>
