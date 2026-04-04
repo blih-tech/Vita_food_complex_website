@@ -3,12 +3,11 @@
 import { useState, useRef } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import WaveDivider from '@frontend/components/ui/WaveDivider';
 
 const PRODUCTS = [
-  { name: 'Bora-Chocolate', category: 'Cream', image: '/assets/products/bora-chocolate.svg' },
-  { name: 'Kiyu Cream With Milk', category: 'Cream', image: '/assets/products/vita-vanilla.svg' },
-  { name: 'Vita Wheat Flour', category: 'Flour', image: '/assets/products/super-flour.svg' },
+  { name: 'Bora-Chocolate', category: 'Cream', image: '/assets/products/product-1.png' },
+  { name: 'Kiyu Cream With Milk', category: 'Cream', image: '/assets/products/product-2.png' },
+  { name: 'Vita Wheat Flour', category: 'Flour', image: '/assets/products/product-3.png' },
 ];
 
 const TOTAL_PRODUCTS = 11;
@@ -31,7 +30,6 @@ export default function CompanyProductsSection() {
         <div className="max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%] pt-24 lg:pt-32 pb-24 lg:pb-40">
           <div className="w-full lg:max-w-[50%] flex flex-col gap-12">
             
-            {/* Heading Group */}
             <div className="flex flex-col gap-6">
               <p className="text-2xl font-normal text-[#333733] font-['Outfit']">
                 {t('home.company.label')}
@@ -47,12 +45,10 @@ export default function CompanyProductsSection() {
               </div>
             </div>
 
-            {/* Body */}
             <p className="font-['Outfit'] font-normal text-[#333733] text-2xl leading-[1.26] tracking-[0.96px] max-w-3xl">
               {t('home.company.body')}
             </p>
 
-            {/* CTA */}
             <div className="flex">
               <button className="px-20 py-5 bg-[#0F4B1F] text-white rounded-lg font-['Funnel_Display'] font-bold text-[32px] leading-10 tracking-[1.28px] hover:bg-[#1a6b2e] transition-colors shadow-lg">
                 {t('home.company.cta')}
@@ -61,18 +57,15 @@ export default function CompanyProductsSection() {
           </div>
         </div>
 
-        {/* ── BRIDGING SNACK BAG IMAGES (Spans into products) ── */}
+        {/* ── BRIDGING SNACK BAG IMAGES (Desktop only) ── */}
         <div className="absolute hidden lg:flex z-[30] pointer-events-none right-0 bottom-[-20%] w-[48%] h-[800px] items-end justify-end">
           <div className="relative w-full h-full">
-            {/* 7b914c12-7f60-4b0e-a98c-19e9815df713 1 */}
             <div className="absolute left-[0%] top-[15%] w-[55%] h-auto -rotate-6">
               <img src="/assets/products/bridge-product-2.png" className="w-full h-auto object-contain drop-shadow-2xl" alt="" />
             </div>
-            {/* zoo straw 1 */}
             <div className="absolute left-[35%] top-[25%] w-[45%] h-auto z-10">
               <img src="/assets/products/bridge-product-3.png" className="w-full h-auto object-contain drop-shadow-2xl" alt="" />
             </div>
-            {/* Free Packaging Snack Bar Mockup 1 (The Snack Bag) */}
             <div className="absolute right-[-5%] top-[10%] w-[50%] h-auto rotate-[12deg] z-0">
               <img src="/assets/products/bridge-product-1.png" className="w-full h-auto object-contain drop-shadow-2xl" alt="" />
             </div>
@@ -80,18 +73,28 @@ export default function CompanyProductsSection() {
         </div>
       </section>
 
-      {/* Wavy Divider */}
-      <WaveDivider
-        fillColor="#0F4B1F"
-        bgColor="#E9F7ED"
-        direction="down"
-        className="h-[80px] sm:h-[100px] md:h-[120px] lg:h-[160px] relative z-[20]"
-      />
-
       {/* ══════════════════════════════════════════
-          OUR PRODUCTS (Bottom Half)
+          OUR PRODUCTS (Full Background Layout)
           ══════════════════════════════════════════ */}
-      <section id="products" className="relative bg-[#0F4B1F] overflow-hidden z-[10] -mt-[1px]">
+      <section id="products" className="relative w-full min-h-[1200px] overflow-hidden bg-white -mt-1">
+        
+        {/* Figma Exact Background Layers */}
+        <div className="absolute inset-0 w-full h-full flex flex-col pointer-events-none">
+          {/* Top Wave (332:1295 Union containing 332:1296) */}
+          <div className="relative w-full h-[610px]">
+            <img src="/assets/sections/top-wave.svg" className="w-full h-full object-cover" alt="" />
+          </div>
+          {/* Middle Rectangle (332:1298) */}
+          <div className="relative w-full flex-1 bg-[#23B349]">
+            <img src="/assets/sections/middle-rect.svg" className="w-full h-full object-cover" alt="" />
+          </div>
+          {/* Bottom Wave (332:1297) */}
+          <div className="relative w-full h-[362px]">
+            <img src="/assets/sections/bottom-wave.svg" className="w-full h-full object-cover" alt="" />
+          </div>
+        </div>
+
+        {/* Content Container */}
         <div className="relative z-[10] max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%] py-24 lg:py-32">
           
           {/* Header row: header (left) counter (right) */}
@@ -121,7 +124,7 @@ export default function CompanyProductsSection() {
                 </h3>
               </div>
               <div className="flex justify-center lg:justify-start">
-                <button className="bg-[#0F4B1F] border-2 border-white/20 hover:bg-white hover:text-[#0F4B1F] text-white px-20 py-5 rounded-lg font-bold text-[32px] leading-none tracking-[1.28px] transition-all duration-300 font-['Funnel_Display'] uppercase">
+                <button className="bg-transparent border-2 border-white/40 hover:bg-white hover:text-[#0F4B1F] text-white px-20 py-5 rounded-lg font-bold text-[32px] leading-none tracking-[1.28px] transition-all duration-300 font-['Funnel_Display'] uppercase">
                   {t('home.products.viewProduct')}
                 </button>
               </div>
@@ -132,10 +135,10 @@ export default function CompanyProductsSection() {
               {/* Figma Circles */}
               <div className="w-[450px] h-[450px] md:w-[600px] md:h-[600px] lg:w-[750px] lg:h-[750px] rounded-full bg-[#BBE7C7] absolute z-0" />
               
-              {/* Product Shadow (Ellipse 30) */}
+              {/* Product Shadow */}
               <div className="absolute bottom-[5%] w-[80%] h-[100px] bg-[#000500] rounded-full blur-[60px] opacity-50 z-5" />
 
-              {/* Main product image */}
+              {/* Main product image (Figma nodes 1341, 1343, 2123) */}
               <div className="relative z-10 w-80 h-80 sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px]">
                 <Image
                   src={product.image}
