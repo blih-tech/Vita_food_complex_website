@@ -1,90 +1,93 @@
 'use client';
 
+import { useRef } from 'react';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
-type Card = {
-  id: 'quality' | 'natural' | 'innovation';
-  number: string;
-  bgClass: string;
-  numClass: string;
-  image: string;
-};
-
-const CARDS: Card[] = [
+const QUALITY_CARDS = [
   {
-    id: 'quality',
-    number: '01',
-    bgClass: 'bg-[#A099B5]',
-    numClass: 'text-[#8E87A3]',
-    image: '/assets/quality/quality-control.svg',
+    id: '01',
+    title: 'Quality You Can Trust',
+    description: 'Carefully produced with high standards to ensure consistent taste and reliable results every time',
+    image: '/assets/quality/quality-1.png',
+    bgColor: '#A099B5',
+    circleColor: '#DDD4F8',
+    numberColor: 'text-[#686577]/50', // Extracted R:0.683 G:0.655 B:0.768
   },
   {
-    id: 'natural',
-    number: '02',
-    bgClass: 'bg-[#23B349]',
-    numClass: 'text-[#1E9E41]',
-    image: '/assets/quality/production-process.svg',
+    id: '02',
+    title: 'Natural Ingredients',
+    description: 'We use only the finest ingredients sourced from local farmers to provide the best quality for your family',
+    image: '/assets/quality/quality-2.png',
+    bgColor: '#7E4627',
+    circleColor: '#F28B52',
+    numberColor: 'text-[#61341F]/40', // Extracted R:0.614 G:0.342 B:0.186
   },
   {
-    id: 'innovation',
-    number: '03',
-    bgClass: 'bg-[#9D8562]',
-    numClass: 'text-[#8A7455]',
-    image: '/assets/quality/raw-materials.svg',
+    id: '03',
+    title: 'Modern Production',
+    description: 'Our state-of-the-art facilities in Debre Sina ensure that every product meets international safety standards',
+    image: '/assets/quality/quality-3.png',
+    bgColor: '#9D8562',
+    circleColor: '#EECD9C',
+    numberColor: 'text-[#615238]/50', // Extracted R:0.616 G:0.522 B:0.384
   },
 ];
 
 export default function WhyChooseSection() {
-  const t = useTranslations('WhyChoose');
+  const t = useTranslations();
 
   return (
-    <section id="why-choose" className="py-20 lg:py-28 bg-[#F0EDF8]">
-      <div className="container mx-auto px-6 lg:px-16">
-
-        {/* Section heading */}
-        <h2
-          className="font-['Funnel_Display'] font-bold text-[#333733] leading-none mb-12 lg:mb-16"
-          style={{ fontSize: 'clamp(36px, 3.3vw, 64px)' }}
-        >
-          {t('heading')}
+    <section className="bg-white py-24 lg:py-32 relative overflow-hidden">
+      <div className="max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%]">
+        
+        {/* Section Heading */}
+        <h2 className="text-[#23B349] text-5xl md:text-6xl lg:text-[64px] font-bold font-['Funnel_Display'] leading-tight mb-16 lg:mb-20">
+          Why Choose Our Products?
         </h2>
 
-        {/* Stacked cards */}
-        <div className="space-y-6 lg:space-y-8">
-          {CARDS.map((card) => (
-            <div
+        {/* Vertical Cards Container */}
+        <div className="flex flex-col gap-6 lg:gap-[24px]">
+          {QUALITY_CARDS.map((card) => (
+            <div 
               key={card.id}
-              className={`relative rounded-3xl lg:rounded-[3rem] overflow-hidden flex flex-col lg:flex-row items-stretch min-h-[280px] lg:min-h-[380px] shadow-lg ${card.bgClass}`}
+              className="relative w-full min-h-[600px] lg:h-[713px] rounded-lg overflow-hidden flex flex-col lg:flex-row items-center group"
+              style={{ backgroundColor: card.bgColor }}
             >
-              {/* Decorative large number */}
-              <span
-                className={`absolute top-1/2 left-4 lg:left-8 -translate-y-1/2 font-['Outfit'] font-black leading-none pointer-events-none select-none opacity-35 ${card.numClass}`}
-                style={{ fontSize: 'clamp(120px, 16vw, 320px)' }}
-                aria-hidden="true"
-              >
-                {card.number}
-              </span>
+              {/* Blurred Background Decoration */}
+              <div 
+                className="absolute right-[-10%] top-[-10%] w-[600px] h-[600px] lg:w-[795px] lg:h-[610px] rounded-full blur-[100px] lg:blur-[250px] opacity-60 z-0"
+                style={{ backgroundColor: card.circleColor }}
+              />
 
-              {/* Left: text */}
-              <div className="relative z-10 flex-1 flex flex-col justify-center px-8 py-10 lg:px-16 lg:py-16 gap-4 lg:gap-6">
-                <h3
-                  className="font-['Funnel_Display'] font-bold text-white leading-snug"
-                  style={{ fontSize: 'clamp(28px, 2.5vw, 48px)' }}
-                >
-                  {t(`cards.${card.id}.heading`)}
-                </h3>
-                <p className="font-['Outfit'] font-normal text-white/80 text-lg lg:text-2xl leading-relaxed max-w-lg">
-                  {t(`cards.${card.id}.body`)}
-                </p>
+              {/* Content Area */}
+              <div className="relative z-10 flex-1 p-8 lg:p-20 flex flex-col justify-between h-full">
+                {/* Large Background Number */}
+                <div className={`absolute top-10 left-10 lg:left-20 font-['Outfit'] font-black text-[180px] md:text-[250px] lg:text-[320px] leading-none select-none pointer-events-none transition-transform duration-700 group-hover:scale-110 ${card.numberColor}`}>
+                  {card.id}
+                </div>
+
+                {/* Text Group */}
+                <div className="mt-auto max-w-2xl flex flex-col gap-6">
+                  <h3 className="text-[#BBE7C7] text-3xl lg:text-[48px] font-bold font-['Funnel_Display'] leading-tight">
+                    {card.title}
+                  </h3>
+                  <p className="text-[#333733] text-xl lg:text-[32px] font-['Outfit'] font-normal leading-[1.125] lg:leading-[36px]">
+                    {card.description}
+                  </p>
+                </div>
               </div>
 
-              {/* Right: image */}
-              <div className="relative w-full lg:w-[45%] flex-shrink-0 min-h-[200px] lg:min-h-0 overflow-hidden">
-                <img
-                  src={card.image}
-                  alt={t(`cards.${card.id}.heading`)}
-                  className="w-full h-full object-cover"
-                />
+              {/* Image Area */}
+              <div className="relative z-10 flex-1 w-full h-[400px] lg:h-full p-8 lg:p-20 lg:pr-32">
+                <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl">
+                  <Image
+                    src={card.image}
+                    alt={card.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                </div>
               </div>
             </div>
           ))}
