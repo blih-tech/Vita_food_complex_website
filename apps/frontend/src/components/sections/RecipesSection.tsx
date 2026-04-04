@@ -1,100 +1,161 @@
 'use client';
 
+import { useRef, useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
-type Recipe = {
-  id: number;
-  tag: string;
-  title: string;
-  description: string;
-  image: string;
-};
-
-const RECIPES: Recipe[] = [
+const RECIPES = [
   {
     id: 1,
-    tag: 'Biscuit Recipe',
     title: 'Kiyu - Cream With Milk',
-    description: 'A delicious creamy biscuit dessert made with Kiyu biscuits, fresh milk, and a drizzle of caramel.',
-    image: '/assets/recipes/recipe-1.svg',
+    description: 'A delightful blend of kiyu biscuits and fresh milk cream.',
+    image: '/assets/recipes/recipe-1.png',
   },
   {
     id: 2,
-    tag: 'Baking',
-    title: 'Bora Chocolate Cake',
-    description: 'Indulge in a rich layered chocolate cake topped with crushed Bora biscuits for extra crunch.',
-    image: '/assets/recipes/recipe-2.svg',
+    title: 'Bora - Choco Fusion',
+    description: 'Rich chocolate fusion with crunchy bora biscuit layers.',
+    image: '/assets/recipes/recipe-2.png',
   },
   {
     id: 3,
-    tag: 'Baking',
-    title: 'Vita Flour Bread',
-    description: 'Classic soft homemade bread baked from premium Vita wheat flour — perfect for every table.',
-    image: '/assets/recipes/recipe-3.svg',
+    title: 'Vita - Morning Flour',
+    description: 'Perfect morning pancakes using our premium wheat flour.',
+    image: '/assets/recipes/recipe-3.png',
+  },
+  {
+    id: 4,
+    title: 'Creamy Delights',
+    description: 'Hand-crafted creamy delights for your tea time.',
+    image: '/assets/recipes/recipe-4.png',
+  },
+  {
+    id: 5,
+    title: 'Biscuit Crumble',
+    description: 'A modern twist on the classic fruit crumble.',
+    image: '/assets/recipes/recipe-5.png',
   },
 ];
 
 export default function RecipesSection() {
-  const t = useTranslations('Recipes');
+  const t = useTranslations();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      const progress = (scrollLeft / (scrollWidth - clientWidth)) * 100;
+      setScrollProgress(progress);
+    }
+  };
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el) {
+      el.addEventListener('scroll', handleScroll);
+      return () => el.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
 
   return (
-    <section id="recipes" className="py-20 lg:py-28 bg-[#E9F7ED]">
-      <div className="container mx-auto px-6 lg:px-16">
-
+    <section className="bg-[#E9F7ED] py-24 lg:py-32 relative overflow-hidden">
+      <div className="max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%]">
+        
         {/* Header */}
-        <div className="mb-12 lg:mb-16 space-y-2">
-          <span className="font-['Outfit'] font-semibold text-[#23B349] text-2xl uppercase tracking-widest block">
-            {t('label')}
-          </span>
-          <h2
-            className="font-['Funnel_Display'] font-bold text-[#333733] leading-none"
-            style={{ fontSize: 'clamp(36px, 3.3vw, 64px)' }}
-          >
-            {t('heading')}
+        <div className="flex flex-col gap-4 mb-16 lg:mb-[72px]">
+          <h2 className="text-[#23B349] text-5xl md:text-6xl lg:text-[64px] font-bold font-['Funnel_Display'] leading-tight">
+            Recipes Made Simple
           </h2>
-          <p className="font-['Funnel_Display'] font-normal text-[#333733]/60 text-2xl">
+          <p className="text-[#333733] text-xl lg:text-2xl font-['Funnel_Display'] font-normal opacity-80">
             Mix. Match. Enjoy
           </p>
         </div>
 
-        {/* Recipe cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Horizontal Scroll Container */}
+        <div 
+          ref={scrollRef}
+          className="flex gap-8 overflow-x-auto no-scrollbar cursor-grab active:cursor-grabbing pb-12"
+          style={{ scrollSnapType: 'x proximity' }}
+        >
           {RECIPES.map((recipe) => (
-            <article
+            <div 
               key={recipe.id}
-              className="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-lg transition-shadow group cursor-pointer"
+              className="flex-shrink-0 w-[300px] sm:w-[400px] lg:w-[539px] group relative select-none"
+              style={{ scrollSnapAlign: 'start' }}
             >
-              {/* Image */}
-              <div className="aspect-[4/3] relative overflow-hidden">
-                <img
+              {/* Card Container */}
+              <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-[#2976ca]">
+                {/* Main Image */}
+                <Image
                   src={recipe.image}
                   alt={recipe.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                {/* Tag pill */}
-                <div className="absolute top-5 left-5">
-                  <span className="bg-[#0F4B1F] text-white px-4 py-1.5 rounded-full font-['Funnel_Display'] font-bold text-sm uppercase tracking-wider">
-                    {recipe.tag}
-                  </span>
+
+                {/* Overlay Path (Vector 1) */}
+                <div className="absolute bottom-0 left-0 w-full z-10 pointer-events-none">
+                  <svg 
+                    viewBox="0 0 539 203" 
+                    fill="none" 
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-full h-auto"
+                  >
+                    <path 
+                      d="M539 202.429V0C539 0 392.068 26.0958 268 26.9906C143.932 27.8853 0 0.000221252 0 0.000221252V202.429H539Z" 
+                      fill="#23B349"
+                    />
+                  </svg>
+                </div>
+
+                {/* Text Content */}
+                <div className="absolute bottom-0 left-0 w-full p-6 lg:p-10 z-20 flex flex-col gap-4">
+                  <div className="flex flex-col gap-2 pr-12">
+                    <h3 className="text-white text-2xl lg:text-[40px] font-bold font-['Funnel_Display'] leading-tight">
+                      {recipe.title}
+                    </h3>
+                    <p className="text-white/90 text-sm lg:text-2xl font-['Outfit'] font-normal line-clamp-2">
+                      {recipe.description}
+                    </p>
+                  </div>
+
+                  {/* Arrow Icon */}
+                  <div className="absolute bottom-6 right-6 lg:bottom-10 lg:right-10 w-12 h-12 lg:w-16 lg:h-16 flex items-center justify-center cursor-pointer transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                      <rect width="64" height="64" rx="8" fill="white" />
+                      <path d="M24 40L40 24M40 24H28M40 24V36" stroke="#23B349" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
                 </div>
               </div>
-
-              {/* Content */}
-              <div className="p-8 space-y-3">
-                <h3
-                  className="font-['Funnel_Display'] font-bold text-[#333733] group-hover:text-[#23B349] transition-colors leading-snug"
-                  style={{ fontSize: 'clamp(22px, 1.6vw, 32px)' }}
-                >
-                  {recipe.title}
-                </h3>
-                <p className="font-['Outfit'] text-[#333733]/60 text-base leading-relaxed line-clamp-2">
-                  {recipe.description}
-                </p>
-              </div>
-            </article>
+            </div>
           ))}
         </div>
+
+        {/* Custom Scroll Bar */}
+        <div className="mt-12 flex justify-center">
+          <div className="relative w-full max-w-[1067px] h-2 bg-[#CBC59D] rounded-full overflow-hidden">
+            <div 
+              className="absolute top-0 left-0 h-full bg-[#333733] transition-all duration-100 rounded-full"
+              style={{ 
+                width: '30%', // Simulated thumb width
+                transform: `translateX(${scrollProgress * 2.33}%)` // 2.33 factor to map 0-100 progress to thumb travel
+              }}
+            />
+          </div>
+        </div>
       </div>
+
+      <style jsx global>{`
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </section>
   );
 }
