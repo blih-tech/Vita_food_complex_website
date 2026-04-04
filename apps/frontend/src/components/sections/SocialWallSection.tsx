@@ -5,21 +5,21 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 const COLUMN_1_IMAGES = [
-  '/assets/products/biscuit-bg.png',
-  '/assets/products/product-display.png',
-  '/assets/products/biscuit-scatter.png',
+  '/assets/social/social-1.png',
+  '/assets/social/social-2.png',
+  '/assets/social/social-3.png',
 ];
 
 const COLUMN_2_IMAGES = [
-  '/assets/products/biscuit-large.png',
-  '/assets/products/product-display.png',
-  '/assets/products/biscuit-bg.png',
+  '/assets/social/social-4.png',
+  '/assets/social/social-5.png',
+  '/assets/social/social-1.png',
 ];
 
 const COLUMN_3_IMAGES = [
-  '/assets/products/biscuit-scatter.png',
-  '/assets/products/biscuit-large.png',
-  '/assets/products/product-display.png',
+  '/assets/social/social-6.png',
+  '/assets/social/social-7.png',
+  '/assets/social/social-8.png',
 ];
 
 interface ScrollingColumnProps {

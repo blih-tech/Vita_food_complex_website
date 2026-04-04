@@ -64,16 +64,22 @@ export default function CompanyProductsSection() {
           </div>
         </div>
 
-        {/* ── Bridging product image (desktop only) ── */}
-        <div
-          className="absolute hidden lg:block z-[20] pointer-events-none"
-          style={{ right: 0, bottom: '-35%', width: '47.1%' }}
-        >
-          <img
-            src="/assets/products/product-display.png"
-            alt="Vita Products Showcase"
-            className="w-full h-auto object-contain"
-          />
+        {/* ── Bridging product images (desktop only) ── */}
+        <div className="absolute hidden lg:flex z-[20] pointer-events-none right-0 bottom-[-30%] w-[50%] items-end justify-end">
+          <div className="relative w-full h-[600px]">
+            {/* 7b914c12-7f60-4b0e-a98c-19e9815df713 1 */}
+            <div className="absolute left-[0%] bottom-[10%] w-[60%] h-auto">
+              <img src="/assets/products/bridge-product-2.png" className="w-full h-auto object-contain" alt="" />
+            </div>
+            {/* zoo straw 1 */}
+            <div className="absolute left-[30%] bottom-[15%] w-[45%] h-auto z-10">
+              <img src="/assets/products/bridge-product-3.png" className="w-full h-auto object-contain" alt="" />
+            </div>
+            {/* Free Packaging Snack Bar Mockup 1 */}
+            <div className="absolute right-0 bottom-[10%] w-[45%] h-auto rotate-[15deg]">
+              <img src="/assets/products/bridge-product-1.png" className="w-full h-auto object-contain" alt="" />
+            </div>
+          </div>
         </div>
       </div>
 
