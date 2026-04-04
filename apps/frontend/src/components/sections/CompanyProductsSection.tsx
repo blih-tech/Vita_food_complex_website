@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import WaveDivider from '@frontend/components/ui/WaveDivider';
 
 const PRODUCTS = [
   { name: 'Bora-Chocolate', category: 'Cream', image: '/assets/products/product-1.png' },
@@ -74,79 +75,73 @@ export default function CompanyProductsSection() {
       </section>
 
       {/* ══════════════════════════════════════════
-          OUR PRODUCTS (Unified Background)
+          OUR PRODUCTS (Bottom Half)
           ══════════════════════════════════════════ */}
-      <section id="products" className="relative w-full min-h-[1000px] lg:min-h-[1400px] overflow-hidden -mt-1 bg-white">
+      <section id="products" className="relative w-full min-h-[900px] lg:min-h-[1400px] bg-[#23B349] overflow-hidden -mt-1">
         
-        {/* Pixel Perfect Background Layers (sharing same viewBox for perfect alignment) */}
-        <div className="absolute inset-0 w-full h-full pointer-events-none">
-          {/* Layer 1: Light Green Base (node 332:1294) */}
-          <img 
-            src="/assets/sections/products-layer-light.svg" 
-            className="absolute inset-0 w-full h-full object-fill" 
-            style={{ objectPosition: 'center top' }}
-            alt="" 
-          />
-          {/* Layer 2: Dark Green Waves (node 332:1295) */}
-          <img 
-            src="/assets/sections/products-layer-dark.svg" 
-            className="absolute inset-0 w-full h-full object-fill" 
-            style={{ objectPosition: 'center top' }}
-            alt="" 
-          />
+        {/* Figma Layered Circles - Responsive Implementation */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          {/* Outer Circle (1200px) */}
+          <div className="w-[800px] h-[800px] md:w-[1000px] md:h-[1000px] lg:w-[1200px] lg:h-[1200px] opacity-30 rounded-full border-[10px] border-[#20A342] absolute" />
+          {/* Middle Circle (1000px) */}
+          <div className="w-[650px] h-[650px] md:w-[850px] md:h-[850px] lg:w-[1000px] lg:h-[1000px] opacity-30 rounded-full border-[10px] border-[#20A342] absolute" />
+          {/* Inner Circle (800px) */}
+          <div className="w-[500px] h-[500px] md:w-[700px] md:h-[700px] lg:w-[800px] lg:h-[800px] bg-[#BBE7C7] rounded-full border border-[#20A342] absolute" />
         </div>
 
-        {/* Content Container */}
-        <div className="relative z-[10] max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%] py-24 lg:py-48">
+        {/* Waves - To keep the design consistent with Figma links */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none">
+          <img src="/assets/sections/products-layer-dark.svg" className="absolute inset-0 w-full h-full object-fill opacity-20" alt="" />
+        </div>
+
+        <div className="relative z-[10] max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%] py-24 lg:py-32 flex flex-col h-full justify-between min-h-[inherit]">
           
           {/* Header row: header (left) counter (right) */}
-          <div className="flex items-end justify-between mb-24 lg:mb-32">
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-24 lg:mb-32 gap-8">
             <div className="flex flex-col gap-4">
-              <p className="text-white opacity-80 text-2xl font-semibold font-['Outfit']">
-                {t('home.products.label')}
+              <p className="text-[#0F4B1F] text-2xl font-semibold font-['Outfit']">
+                About
               </p>
               <h2 className="text-white text-6xl md:text-8xl lg:text-[96px] font-semibold font-['Funnel_Display'] leading-none">
-                {t('home.products.heading')}
+                Our Products
               </h2>
             </div>
-            <span className="font-['Outfit'] font-semibold text-white text-6xl md:text-[96px] leading-none tabular-nums opacity-90">
+            <span className="font-['Outfit'] font-semibold text-white text-6xl md:text-[96px] leading-none tabular-nums">
               {currentIndex + 1}/{TOTAL_PRODUCTS}
             </span>
           </div>
 
           {/* PRODUCT DISPLAY AREA */}
-          <div className="relative flex flex-col lg:flex-row items-center min-h-[600px] lg:min-h-[700px]">
+          <div className="relative flex flex-col lg:flex-row items-center flex-1">
 
             {/* Left: product info */}
             <div className="z-10 relative lg:w-1/3 mb-20 lg:mb-0 text-center lg:text-left flex flex-col gap-10">
               <div className="flex flex-col gap-4">
-                <p className="text-white text-2xl font-normal font-['Outfit'] opacity-90">{product.category}</p>
+                <p className="text-white text-2xl font-normal font-['Outfit']">
+                  {product.category}
+                </p>
                 <h3 className="text-white text-4xl lg:text-[56px] font-bold font-['Funnel_Display'] leading-tight">
                   {product.name}
                 </h3>
               </div>
               <div className="flex justify-center lg:justify-start">
-                <button className="bg-transparent border-2 border-white/40 hover:bg-white hover:text-[#0F4B1F] text-white px-20 py-5 rounded-lg font-bold text-[32px] leading-none tracking-[1.28px] transition-all duration-300 font-['Funnel_Display'] uppercase">
+                <button className="bg-[#0F4B1F] text-white px-16 lg:px-20 py-5 rounded-lg font-bold text-2xl lg:text-[32px] leading-none tracking-[1.28px] transition-all duration-300 font-['Funnel_Display'] uppercase shadow-xl hover:bg-[#1a6b2e] active:scale-95">
                   {t('home.products.viewProduct')}
                 </button>
               </div>
             </div>
 
-            {/* Center: circle + main product */}
+            {/* Center: main product */}
             <div className="relative flex-1 w-full flex items-center justify-center scale-110 lg:scale-125">
-              {/* Figma Circles */}
-              <div className="w-[450px] h-[450px] md:w-[600px] md:h-[600px] lg:w-[750px] lg:h-[750px] rounded-full bg-[#BBE7C7] absolute z-0" />
-              
               {/* Product Shadow */}
-              <div className="absolute bottom-[5%] w-[80%] h-[100px] bg-[#000500] rounded-full blur-[60px] opacity-50 z-5" />
+              <div className="absolute bottom-[5%] w-[80%] h-[100px] bg-[#000500] rounded-full blur-[60px] opacity-40 z-5" />
 
-              {/* Main product image (High-res extracted PNGs) */}
               <div className="relative z-10 w-80 h-80 sm:w-[500px] sm:h-[500px] lg:w-[600px] lg:h-[600px]">
                 <Image
                   src={product.image}
                   alt={product.name}
                   fill
-                  className="object-contain drop-shadow-[0_50px_50px_rgba(0,0,0,0.4)]"
+                  className="object-contain drop-shadow-[0_50px_50px_rgba(0,0,0,0.3)]"
                   priority
                 />
               </div>
@@ -160,15 +155,11 @@ export default function CompanyProductsSection() {
                 <Image src="/assets/products/biscuit-piece.png" width={140} height={140}
                        className="object-contain rotate-45 animate-float-delayed blur-[1px]" alt="" />
               </div>
-              <div className="absolute right-[5%] bottom-[-15%] hidden md:block z-20">
-                <Image src="/assets/products/biscuit-piece.png" width={120} height={120}
-                       className="object-contain -rotate-12 blur-[10px]" alt="" />
-              </div>
             </div>
           </div>
 
           {/* BOTTOM ROW — Navigation arrows */}
-          <div className="flex items-center justify-between mt-24 lg:mt-32">
+          <div className="flex items-center justify-between mt-24 lg:mt-32 w-full">
             <button
               onClick={prev}
               aria-label="Previous product"
