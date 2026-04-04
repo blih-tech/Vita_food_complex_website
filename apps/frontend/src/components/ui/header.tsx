@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
+import Image from "next/image";
 
 const navLinks = [
   { name: "Products", hasDropdown: true },
@@ -24,10 +25,12 @@ export const Header = ({ transparent = false }: HeaderProps) => {
     >
       {/* Logo */}
       <div className="flex items-center gap-2.5">
-        <img
+        <Image
           className="w-8 h-8 sm:w-10 sm:h-10"
           alt="Vita logo"
           src="/assets/brand/vita-logo.svg"
+          width={40}
+          height={40}
         />
         <div className="flex flex-col">
           <span className="[font-family:'Funnel_Display',Helvetica] font-light text-white text-lg sm:text-xl lg:text-[28px] tracking-[0] leading-[normal] whitespace-nowrap">
@@ -42,7 +45,10 @@ export const Header = ({ transparent = false }: HeaderProps) => {
       {/* Desktop nav */}
       <nav className="hidden lg:flex items-center gap-6 xl:gap-10">
         {navLinks.map((link) => (
-          <div key={link.name} className="flex items-center gap-1 group relative">
+          <div
+            key={link.name}
+            className="flex items-center gap-1 group relative"
+          >
             <a
               href="#"
               className="[font-family:'Outfit',Helvetica] font-normal text-white text-base lg:text-lg tracking-[0] leading-[normal] hover:text-[#23b349] transition-colors"
@@ -81,9 +87,15 @@ export const Header = ({ transparent = false }: HeaderProps) => {
         aria-label="Toggle menu"
         onClick={() => setMenuOpen((prev) => !prev)}
       >
-        <span className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-        <span className={`block w-6 h-0.5 bg-white transition-opacity duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-        <span className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+        <span
+          className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
+        />
+        <span
+          className={`block w-6 h-0.5 bg-white transition-opacity duration-300 ${menuOpen ? "opacity-0" : ""}`}
+        />
+        <span
+          className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
+        />
       </button>
 
       {/* Mobile dropdown */}

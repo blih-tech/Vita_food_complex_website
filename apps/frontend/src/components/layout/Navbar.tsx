@@ -1,20 +1,21 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { Link } from '@frontend/navigation';
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { Link } from "@frontend/navigation";
+import Image from "next/image";
 
-type NavKey = 'products' | 'company' | 'recipes' | 'more';
+type NavKey = "products" | "company" | "recipes" | "more";
 
 const navLinks: { key: NavKey; href: string }[] = [
-  { key: 'products', href: '/products' },
-  { key: 'company', href: '/about' },
-  { key: 'recipes', href: '/recipes' },
-  { key: 'more', href: '/more' },
+  { key: "products", href: "/products" },
+  { key: "company", href: "/about" },
+  { key: "recipes", href: "/recipes" },
+  { key: "more", href: "/more" },
 ];
 
 export default function Navbar() {
-  const t = useTranslations('Navbar');
+  const t = useTranslations("Navbar");
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -22,13 +23,13 @@ export default function Navbar() {
       {/* Main bar */}
       <div className="w-full max-w-[1664px] h-24 px-5 py-3 bg-[#23B349] rounded-xl flex items-center shadow-lg">
         <div className="flex-1 px-4 flex justify-between items-center">
-
           {/* Logo */}
           <Link href="/" className="w-[72px] h-[72px] flex-shrink-0">
-            <img
+            <Image
               src="/assets/brand/vita-logo.svg"
               alt="Vita Food Complex"
-              className="w-full h-full object-contain"
+              fill
+              className="object-contain"
             />
           </Link>
 
@@ -42,10 +43,12 @@ export default function Navbar() {
                 >
                   {t(`links.${link.key}`)}
                 </Link>
-                <img
+                <Image
                   src="/assets/brand/arrow-down-01.svg"
                   alt=""
-                  className="w-5 h-5 opacity-80 mb-0.5"
+                  width={20}
+                  height={20}
+                  className="opacity-80 mb-0.5"
                 />
               </div>
             ))}
@@ -58,7 +61,7 @@ export default function Navbar() {
               className="px-6 py-3 bg-[#E9F7ED] rounded-lg flex items-center gap-2 hover:bg-white transition-colors"
             >
               <span className="text-[#0F4B1F] text-xl font-bold font-['Funnel_Display'] leading-none">
-                {t('cta')}
+                {t("cta")}
               </span>
             </Link>
           </div>
@@ -67,7 +70,7 @@ export default function Navbar() {
           <div className="md:hidden flex items-center gap-3">
             <Link href="/contact" className="px-4 py-2 bg-[#E9F7ED] rounded-lg">
               <span className="text-[#0F4B1F] text-base font-bold font-['Funnel_Display']">
-                {t('cta')}
+                {t("cta")}
               </span>
             </Link>
             <button
@@ -76,12 +79,26 @@ export default function Navbar() {
               className="text-white p-1"
             >
               {mobileOpen ? (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
                   <line x1="18" y1="6" x2="6" y2="18" />
                   <line x1="6" y1="6" x2="18" y2="18" />
                 </svg>
               ) : (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
                   <line x1="3" y1="6" x2="21" y2="6" />
                   <line x1="3" y1="12" x2="21" y2="12" />
                   <line x1="3" y1="18" x2="21" y2="18" />

@@ -1,51 +1,54 @@
-'use client';
+"use client";
 
-import { useRef, useEffect } from 'react';
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
+import { useRef } from "react";
+import Image from "next/image";
 
 const COLUMN_1_IMAGES = [
-  '/assets/social/social-1.png',
-  '/assets/social/social-2.png',
-  '/assets/social/social-3.png',
+  "/assets/social/social-1.png",
+  "/assets/social/social-2.png",
+  "/assets/social/social-3.png",
 ];
 
 const COLUMN_2_IMAGES = [
-  '/assets/social/social-4.png',
-  '/assets/social/social-5.png',
-  '/assets/social/social-1.png',
+  "/assets/social/social-4.png",
+  "/assets/social/social-5.png",
+  "/assets/social/social-1.png",
 ];
 
 const COLUMN_3_IMAGES = [
-  '/assets/social/social-6.png',
-  '/assets/social/social-7.png',
-  '/assets/social/social-8.png',
+  "/assets/social/social-6.png",
+  "/assets/social/social-7.png",
+  "/assets/social/social-8.png",
 ];
 
 interface ScrollingColumnProps {
   images: string[];
-  direction: 'up' | 'down';
+  direction: "up" | "down";
   speed?: string;
 }
 
-function ScrollingColumn({ images, direction, speed = '25s' }: ScrollingColumnProps) {
+function ScrollingColumn({
+  images,
+  direction,
+  speed = "25s",
+}: ScrollingColumnProps) {
   const columnRef = useRef<HTMLDivElement>(null);
   const displayImages = [...images, ...images]; // Duplicate for seamless loop
 
   const handleMouseEnter = () => {
     if (columnRef.current) {
-      columnRef.current.style.animationPlayState = 'paused';
+      columnRef.current.style.animationPlayState = "paused";
     }
   };
 
   const handleMouseLeave = () => {
     if (columnRef.current) {
-      columnRef.current.style.animationPlayState = 'running';
+      columnRef.current.style.animationPlayState = "running";
     }
   };
 
   return (
-    <div 
+    <div
       className="flex-1 overflow-hidden h-full relative"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -53,13 +56,13 @@ function ScrollingColumn({ images, direction, speed = '25s' }: ScrollingColumnPr
       <div
         ref={columnRef}
         className={`flex flex-col gap-8 md:gap-[128px] will-change-transform ${
-          direction === 'up' ? 'animate-scroll-up' : 'animate-scroll-down'
+          direction === "up" ? "animate-scroll-up" : "animate-scroll-down"
         }`}
         style={{ animationDuration: speed }}
       >
         {displayImages.map((src, idx) => (
-          <div 
-            key={idx} 
+          <div
+            key={idx}
             className="relative w-full aspect-[541/680] rounded-lg overflow-hidden flex-shrink-0"
           >
             <Image
@@ -76,12 +79,9 @@ function ScrollingColumn({ images, direction, speed = '25s' }: ScrollingColumnPr
 }
 
 export default function SocialWallSection() {
-  const t = useTranslations();
-
   return (
     <section className="bg-[#E9F7ED] py-20 lg:py-32 relative overflow-hidden">
       <div className="max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%]">
-        
         {/* Header Area */}
         <div className="flex flex-col items-center text-center mb-16 lg:mb-24 gap-4">
           <p className="text-[#333733] text-xl lg:text-2xl font-['Outfit'] uppercase tracking-widest">
@@ -91,13 +91,13 @@ export default function SocialWallSection() {
             Moments with Vita
           </h2>
           <p className="text-[#333733] text-xl lg:text-2xl font-['Outfit'] max-w-3xl opacity-80">
-            See how people enjoy and share their everyday moments with Vita biscuits
+            See how people enjoy and share their everyday moments with Vita
+            biscuits
           </p>
         </div>
 
         {/* Scrolling Grid Container */}
         <div className="relative h-[400px] md:h-[600px] w-full overflow-hidden">
-          
           {/* Grid Columns */}
           <div className="flex gap-4 md:gap-[21px] h-full">
             <ScrollingColumn images={COLUMN_1_IMAGES} direction="up" />
@@ -107,17 +107,19 @@ export default function SocialWallSection() {
 
           {/* Gradient Overlays */}
           {/* Top Overlay */}
-          <div 
+          <div
             className="absolute top-0 left-0 right-0 h-[140px] z-10 pointer-events-none"
-            style={{ 
-              background: 'linear-gradient(to bottom, #E9F7ED 0%, transparent 100%)' 
+            style={{
+              background:
+                "linear-gradient(to bottom, #E9F7ED 0%, transparent 100%)",
             }}
           />
           {/* Bottom Overlay */}
-          <div 
+          <div
             className="absolute bottom-0 left-0 right-0 h-[140px] z-10 pointer-events-none"
-            style={{ 
-              background: 'linear-gradient(to top, #E9F7ED 0%, transparent 100%)' 
+            style={{
+              background:
+                "linear-gradient(to top, #E9F7ED 0%, transparent 100%)",
             }}
           />
         </div>
@@ -125,12 +127,20 @@ export default function SocialWallSection() {
 
       <style jsx global>{`
         @keyframes scroll-up {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(-50%); }
+          0% {
+            transform: translateY(0);
+          }
+          100% {
+            transform: translateY(-50%);
+          }
         }
         @keyframes scroll-down {
-          0% { transform: translateY(-50%); }
-          100% { transform: translateY(0); }
+          0% {
+            transform: translateY(-50%);
+          }
+          100% {
+            transform: translateY(0);
+          }
         }
         .animate-scroll-up {
           animation: scroll-up linear infinite;
