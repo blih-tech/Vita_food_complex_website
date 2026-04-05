@@ -5,13 +5,10 @@ import RecipesSection from "@frontend/components/sections/RecipesSection";
 import MerchandiseSection from "@frontend/components/sections/MerchandiseSection";
 import WhyChooseSection from "@frontend/components/sections/WhyChooseSection";
 import CTASection from "@frontend/components/sections/CTASection";
-import Footer from "@frontend/components/layout/Footer";
-import Navbar from "@frontend/components/layout/Navbar";
 
 export default function Home() {
   return (
     <main className="flex flex-col">
-      <Navbar />
       <HeroSection />
       <CompanyProductsSection />
       <SocialWallSection />
@@ -19,7 +16,6 @@ export default function Home() {
       <MerchandiseSection />
       <WhyChooseSection />
       <CTASection />
-      <Footer />
     </main>
   );
 }
