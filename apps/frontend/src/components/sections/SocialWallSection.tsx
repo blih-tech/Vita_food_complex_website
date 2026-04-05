@@ -33,7 +33,7 @@ function ScrollingColumn({
   speed = "25s",
 }: ScrollingColumnProps) {
   const columnRef = useRef<HTMLDivElement>(null);
-  const displayImages = [...images, ...images]; // Duplicate for seamless loop
+  const displayImages = [...images, ...images];
 
   const handleMouseEnter = () => {
     if (columnRef.current) {
@@ -80,33 +80,40 @@ function ScrollingColumn({
 
 export default function SocialWallSection() {
   return (
-    <section className="bg-[#E9F7ED] py-20 lg:py-32 relative overflow-hidden">
-      <div className="max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%]">
-        {/* Header Area */}
-        <div className="flex flex-col items-center text-center mb-16 lg:mb-24 gap-4">
-          <p className="text-[#333733] text-xl lg:text-2xl font-['Outfit'] uppercase tracking-widest">
+    <section className="bg-[#E9F7ED] py-16 lg:py-20 relative overflow-hidden">
+      {/* Top shadow - Figma: x=0, y=0 */}
+      <div
+        className="absolute top-0 left-0 right-0 h-[286px] pointer-events-none z-10"
+        style={{
+          boxShadow: "0px 0px 70px 8.75px rgba(233, 247, 237, 1)",
+        }}
+      />
+
+      <div className="max-w-[1842px] mx-auto px-6">
+        {/* Header Area - Figma: x=94, y=0, width=1748 */}
+        <div className="flex flex-col items-center text-center mb-12 lg:mb-16 gap-4 px-4">
+          <p className="text-[#333733] text-lg lg:text-xl font-['Outfit'] uppercase tracking-widest">
             Family time
           </p>
-          <h2 className="text-[#23B349] text-5xl md:text-6xl lg:text-[64px] font-bold font-['Funnel_Display'] leading-[70px]">
+          <h2 className="text-[#23B349] text-4xl md:text-5xl lg:text-[64px] font-bold font-['Funnel_Display'] leading-tight">
             Moments with Vita
           </h2>
-          <p className="text-[#333733] text-xl lg:text-2xl font-['Outfit'] max-w-3xl opacity-80">
+          <p className="text-[#333733] text-lg lg:text-xl font-['Outfit'] max-w-3xl opacity-80">
             See how people enjoy and share their everyday moments with Vita
             biscuits
           </p>
         </div>
 
-        {/* Scrolling Grid Container */}
-        <div className="relative h-[400px] md:h-[600px] w-full overflow-hidden">
+        {/* Scrolling Grid Container - Figma: x=0, y=211, 1842x2543 */}
+        <div className="relative h-[500px] md:h-[700px] lg:h-[2543px] w-full overflow-hidden">
           {/* Grid Columns */}
-          <div className="flex gap-4 md:gap-[21px] h-full">
+          <div className="flex gap-[21px] h-full px-4">
             <ScrollingColumn images={COLUMN_1_IMAGES} direction="up" />
             <ScrollingColumn images={COLUMN_2_IMAGES} direction="down" />
             <ScrollingColumn images={COLUMN_3_IMAGES} direction="up" />
           </div>
 
           {/* Gradient Overlays */}
-          {/* Top Overlay */}
           <div
             className="absolute top-0 left-0 right-0 h-[140px] z-10 pointer-events-none"
             style={{
@@ -114,7 +121,6 @@ export default function SocialWallSection() {
                 "linear-gradient(to bottom, #E9F7ED 0%, transparent 100%)",
             }}
           />
-          {/* Bottom Overlay */}
           <div
             className="absolute bottom-0 left-0 right-0 h-[140px] z-10 pointer-events-none"
             style={{
@@ -124,6 +130,14 @@ export default function SocialWallSection() {
           />
         </div>
       </div>
+
+      {/* Bottom shadow - Figma: x=9, y=1983 */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-[560px] pointer-events-none z-10"
+        style={{
+          boxShadow: "0px 0px 70px 8.75px rgba(233, 247, 237, 1)",
+        }}
+      />
 
       <style jsx global>{`
         @keyframes scroll-up {

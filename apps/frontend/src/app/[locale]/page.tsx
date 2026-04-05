@@ -1,10 +1,11 @@
-import HeroSection from '@frontend/components/sections/HeroSection';
-import CompanyProductsSection from '@frontend/components/sections/CompanyProductsSection';
-import SocialWallSection from '@frontend/components/sections/SocialWallSection';
-import RecipesSection from '@frontend/components/sections/RecipesSection';
-import MerchandiseSection from '@frontend/components/sections/MerchandiseSection';
-import WhyChooseSection from '@frontend/components/sections/WhyChooseSection';
-import CTASection from '@frontend/components/sections/CTASection';
+import HeroSection from "@frontend/components/sections/HeroSection";
+import CompanyProductsSection from "@frontend/components/sections/CompanyProductsSection";
+import SocialWallSection from "@frontend/components/sections/SocialWallSection";
+import RecipesSection from "@frontend/components/sections/RecipesSection";
+import MerchandiseSection from "@frontend/components/sections/MerchandiseSection";
+import WhyChooseSection from "@frontend/components/sections/WhyChooseSection";
+import CTASection from "@frontend/components/sections/CTASection";
+import Footer from "@frontend/components/layout/Footer";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <MerchandiseSection />
       <WhyChooseSection />
       <CTASection />
+      <Footer />
     </main>
   );
 }
