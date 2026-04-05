@@ -1,10 +1,14 @@
-"use client";
+'use client';
 
-import Image from "next/image";
+import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 export default function CTASection() {
+  const t = useTranslations();
+
   return (
     <section className="bg-[#0F4B1F] relative min-h-[714px] flex items-center overflow-hidden">
+      
       {/* Background Decorative Image (Low Opacity) */}
       <div className="absolute left-[20%] top-[-10%] w-[843px] h-[843px] opacity-[0.02] pointer-events-none -rotate-[13deg]">
         <Image
@@ -27,14 +31,14 @@ export default function CTASection() {
 
       <div className="max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%] w-full relative z-10 py-20">
         <div className="flex flex-col gap-24 lg:max-w-[50%]">
+          
           {/* Text Content */}
           <div className="flex flex-col gap-6">
             <h2 className="text-[#E9F7ED] text-5xl md:text-6xl lg:text-[72px] font-bold font-['Funnel_Display'] leading-[1.25]">
               Let’s Work Together
             </h2>
             <p className="text-[#E9F7ED] text-xl lg:text-[32px] font-['Outfit'] font-normal leading-[1.26] max-w-2xl opacity-90">
-              Have a question, business inquiry, or partnership idea? Our team
-              is ready to connect and support you
+              Have a question, business inquiry, or partnership idea? Our team is ready to connect and support you
             </p>
           </div>
 
@@ -44,6 +48,7 @@ export default function CTASection() {
               Connect With US
             </button>
           </div>
+
         </div>
       </div>
     </section>
