@@ -1,15 +1,17 @@
 "use client";
 
+import Image from "next/image";
+
 const OWNERS = [
-  { id: 1, name: "Owner 1" },
-  { id: 2, name: "Owner 2" },
-  { id: 3, name: "Owner 3" },
-  { id: 4, name: "Owner 4" },
-  { id: 5, name: "Owner 5" },
-  { id: 6, name: "Owner 6" },
-  { id: 7, name: "Owner 7" },
-  { id: 8, name: "Owner 8" },
-  { id: 9, name: "Owner 9" },
+  { id: 1, name: "Owner 1", image: "/assets/about/owner-1.png" },
+  { id: 2, name: "Owner 2", image: "/assets/about/owner-2.png" },
+  { id: 3, name: "Owner 3", image: "/assets/about/owner-3.png" },
+  { id: 4, name: "Owner 4", image: "/assets/about/owner-4.png" },
+  { id: 5, name: "Owner 5", image: "/assets/about/owner-5.png" },
+  { id: 6, name: "Owner 6", image: "/assets/about/owner-6.png" },
+  { id: 7, name: "Owner 7", image: "/assets/about/owner-7.png" },
+  { id: 8, name: "Owner 8", image: "/assets/about/owner-8.png" },
+  { id: 9, name: "Owner 9", image: "/assets/about/owner-9.png" },
 ];
 
 export default function AboutOwnersSection() {
@@ -31,9 +33,14 @@ export default function AboutOwnersSection() {
           {OWNERS.map((owner) => (
             <div
               key={owner.id}
-              className="w-[124px] lg:w-[124px] h-[612px] bg-gray-200 rounded-lg overflow-hidden"
+              className="relative w-[124px] lg:w-[124px] h-[612px] rounded-lg overflow-hidden"
             >
-              <div className="w-full h-full bg-gradient-to-b from-gray-300 to-gray-400" />
+              <Image
+                src={owner.image}
+                alt={owner.name}
+                fill
+                className="object-cover"
+              />
             </div>
           ))}
         </div>

@@ -23,7 +23,7 @@ export default function AboutStorySection() {
                 alt="Spark"
                 width={100}
                 height={100}
-                className="w-16 h-16 lg:w-20 lg:h-20"
+                className="w-12 lg:w-16 h-auto"
               />
               <h2 className="font-['Funnel_Display'] font-bold text-[#000500] text-3xl lg:text-[48px] leading-[1.25]">
                 Once upon a time
@@ -50,6 +50,7 @@ export default function AboutStorySection() {
                 alt="Vita Hydro Story"
                 fill
                 className="object-cover"
+                priority
               />
             </div>
           </div>

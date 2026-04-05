@@ -71,8 +71,8 @@ export default function AboutValuesSection() {
             </div>
           </div>
 
-          {/* Image Card 1 */}
-          <div className="relative rounded-[24px] overflow-hidden shadow-lg min-h-[400px] lg:min-h-[333px]">
+          {/* Image Card 1 - Baking Biscuits */}
+          <div className="relative rounded-[24px] overflow-hidden shadow-lg min-h-[300px] lg:min-h-[333px]">
             <Image
               src="/assets/about/baking-biscuits.png"
               alt="Baking Biscuits"
@@ -81,8 +81,8 @@ export default function AboutValuesSection() {
             />
           </div>
 
-          {/* Image Card 2 */}
-          <div className="relative rounded-[24px] overflow-hidden shadow-lg min-h-[400px] lg:min-h-[435px]">
+          {/* Image Card 2 - Wheat Farming */}
+          <div className="relative rounded-[24px] overflow-hidden shadow-lg min-h-[300px] lg:min-h-[435px]">
             <Image
               src="/assets/about/wheat-farming.png"
               alt="Wheat Farming"
