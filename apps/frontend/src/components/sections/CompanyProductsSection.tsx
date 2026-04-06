@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Link } from "@frontend/navigation";
 import Image from "next/image";
 
+/* ─── Mock products (3 items cycling over 11 Figma slots) ─── */
 const PRODUCTS = [
   {
     name: "Bora-Chocolate",
@@ -23,10 +23,10 @@ const PRODUCTS = [
   },
 ];
 
-const TOTAL_PRODUCTS = 11;
+const TOTAL_PRODUCTS = 11; // Figma shows 1/11
 
 export default function CompanyProductsSection() {
-  const t = useTranslations();
+  const t = useTranslations("home");
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const product = PRODUCTS[currentIndex % PRODUCTS.length];
@@ -35,83 +35,99 @@ export default function CompanyProductsSection() {
     setCurrentIndex((i) => (i === 0 ? TOTAL_PRODUCTS - 1 : i - 1));
   const next = () => setCurrentIndex((i) => (i + 1) % TOTAL_PRODUCTS);
 
+  /* Split heading into first word + rest for two-line Figma display */
+  const headingFull = t("company.heading"); // e.g. "Our Company"
+  const headingParts = headingFull.split(" ");
+  const headingLine1 = headingParts[0]; // "Our"
+  const headingLine2 = headingParts.slice(1).join(" "); // "Company"
+
   return (
     <div className="relative w-full">
-      {/* ══════════════════════════════════════════
-          OUR COMPANY (Top Half)
-          ══════════════════════════════════════════ */}
+      {/* ═══════════════════════════════════════════════════════════
+          OUR COMPANY  — cream background  (#E9F7ED)
+          Figma: frame 332-1282, frame width 875px at 1920 (45.6%)
+      ═══════════════════════════════════════════════════════════ */}
       <section
         id="company"
         className="relative bg-[#E9F7ED] overflow-visible z-[1]"
       >
-        <div className="max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%] pt-24 lg:pt-32 pb-24 lg:pb-40">
-          <div className="w-full lg:max-w-[50%] flex flex-col gap-12">
-            <div className="flex flex-col gap-6">
-              <p className="text-2xl font-normal text-[#333733] font-['Outfit']">
-                {t("home.company.label")}
-              </p>
+        <div className="max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%] pt-20 lg:pt-28 pb-24 lg:pb-40">
+          {/* Left column — max 50% on desktop (Figma: 875px / 1920px = 45.6%) */}
+          <div className="w-full lg:max-w-[50%] flex flex-col gap-8 lg:gap-10">
 
-              <div className="flex flex-col font-['Funnel_Display'] font-bold leading-[1.1]">
-                <h2 className="text-[120px] md:text-[180px] lg:text-[200px] text-[#23B349]">
-                  Our
-                </h2>
-                <h2 className="text-[100px] md:text-[150px] lg:text-[180px] text-[#23B349] -mt-4">
-                  Company
-                </h2>
-              </div>
-            </div>
-
-            <p className="font-['Outfit'] font-normal text-[#333733] text-2xl leading-[1.26] tracking-[0.96px] max-w-3xl">
-              {t("home.company.body")}
+            {/* Label — Figma: Outfit Regular 24px, #333733 */}
+            <p className="font-['Outfit'] font-normal text-[#333733] text-2xl leading-snug">
+              {t("company.label")}
             </p>
 
-            <div className="flex">
-              <Link
-                href="/about"
-                className="px-20 py-5 bg-[#0F4B1F] text-white rounded-lg font-['Funnel_Display'] font-bold text-[32px] leading-10 tracking-[1.28px] hover:bg-[#1a6b2e] transition-colors shadow-lg"
-              >
-                {t("home.company.cta")}
-              </Link>
+            {/*
+              Heading — Figma: two lines, Funnel Display Bold
+                Line 1 "Our"     : 200px at 1920 → clamp(48px, 10.4vw, 200px)
+                Line 2 "Company" : 180px at 1920 → clamp(44px,  9.4vw, 180px)
+              Both #23B349 (medium green).
+              At desktop the text naturally wraps: container 50% of viewport < text width.
+            */}
+            <div className="flex flex-col font-['Funnel_Display'] font-bold text-[#23B349] leading-[1.25]">
+              <span style={{ fontSize: "clamp(48px, 10.4vw, 200px)" }}>
+                {headingLine1}
+              </span>
+              {headingLine2 && (
+                <span
+                  style={{
+                    fontSize: "clamp(44px, 9.4vw, 180px)",
+                    marginTop: "-0.06em",
+                  }}
+                >
+                  {headingLine2}
+                </span>
+              )}
+            </div>
+
+            {/* Body — Figma: Outfit Regular 24px, #333733, tracking 4% */}
+            <p className="font-['Outfit'] font-normal text-[#333733] text-2xl leading-[1.26] tracking-[0.96px]">
+              {t("company.body")}
+            </p>
+
+            {/* CTA — Figma: #0F4B1F, px-20 py-5, Funnel Display Bold 32px, white, rounded-lg */}
+            <div>
+              <button className="px-20 py-5 bg-[#0F4B1F] text-white rounded-lg font-['Funnel_Display'] font-bold text-[32px] leading-10 tracking-[1.28px] hover:bg-[#1a6b2e] transition-colors shadow-lg">
+                {t("company.cta")}
+              </button>
             </div>
           </div>
         </div>
 
-        {/* ── BRIDGING SNACK BAG IMAGES ── */}
-        <div className="absolute hidden lg:flex z-[30] pointer-events-none right-0 bottom-[-20%] w-[48%] h-[800px] items-end justify-end">
-          <div className="relative w-full h-full">
-            <div className="absolute left-[0%] top-[15%] w-[55%] h-auto -rotate-6">
-              <img
-                src="/assets/products/bridge-product-2.png"
-                className="w-full h-auto object-contain drop-shadow-2xl"
-                alt=""
-              />
-            </div>
-            <div className="absolute left-[35%] top-[25%] w-[45%] h-auto z-10">
-              <img
-                src="/assets/products/bridge-product-3.png"
-                className="w-full h-auto object-contain drop-shadow-2xl"
-                alt=""
-              />
-            </div>
-            <div className="absolute right-[-5%] top-[10%] w-[50%] h-auto rotate-[12deg] z-0">
-              <img
-                src="/assets/products/bridge-product-1.png"
-                className="w-full h-auto object-contain drop-shadow-2xl"
-                alt=""
-              />
-            </div>
-          </div>
+        {/*
+          ── Bridging product image group ──
+          Figma node 332:1363 — composite of flour bag + Zoo + Mlez
+          Position derived from Figma coordinates:
+            x = 1044px → right-aligned (1044+904=1948 ≈ 1920)
+            y = -283px in Products frame → top is 283px above Products start
+            height = 596px → bottom is 313px into Products frame
+          At 1920px: bottom offset = 313px = 313/1920 = 16.3vw below Company bottom
+        */}
+        <div
+          className="absolute hidden lg:block right-0 z-[30] pointer-events-none"
+          style={{ bottom: "-16.3vw", width: "47.1%" }}
+        >
+          <img
+            src="/assets/products/product-display.png"
+            alt=""
+            className="w-full h-auto object-contain"
+          />
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════
-          OUR PRODUCTS (Transparent BG with SVG)
-          ══════════════════════════════════════════ */}
+      {/* ═══════════════════════════════════════════════════════════
+          OUR PRODUCTS  — aspect-ratio section with Figma SVG background
+          Figma: frame 332-1293, 1920×2083 px
+          Background: products-full-bg.svg (medium-green arch over dark-green base)
+      ═══════════════════════════════════════════════════════════ */}
       <section
         id="products"
-        className="relative w-full aspect-[1920/2083] lg:h-[2083px] overflow-visible bg-transparent -mt-1"
+        className="relative w-full aspect-[1920/2083] overflow-visible bg-transparent -mt-1"
       >
-        {/* Figma Exact Full Background SVG */}
+        {/* ── Figma exact full-background SVG (medium-green arch shape) ── */}
         <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
           <img
             src="/assets/sections/products-full-bg.svg"
@@ -120,106 +136,119 @@ export default function CompanyProductsSection() {
           />
         </div>
 
-        {/* Responsive Content Area (Fitted inside SVG) */}
-        <div className="relative z-10 w-full h-full max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%]">
-          {/* Layered Circles (Responsive positions from snippet) */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            {/* Outer Circle (1200px) */}
-            <div className="w-[62.5%] aspect-square max-w-[1200px] opacity-30 rounded-full border-[10px] border-[#20A342] absolute top-[27.2%]" />
-            {/* Middle Circle (1000px) */}
-            <div className="w-[52%] aspect-square max-w-[1000px] opacity-30 rounded-full border-[10px] border-[#20A342] absolute top-[32%]" />
-            {/* Inner Circle (800px) */}
-            <div className="w-[41.6%] aspect-square max-w-[800px] bg-[#BBE7C7] rounded-full border border-[#20A342] absolute top-[36.8%]" />
-          </div>
+        {/* ── Concentric circles — Figma: 1200 / 1000 / 800 px ── */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="w-[62.5%] aspect-square max-w-[1200px] opacity-30 rounded-full border-[10px] border-[#20A342] absolute top-[27.2%]" />
+          <div className="w-[52%] aspect-square max-w-[1000px] opacity-30 rounded-full border-[10px] border-[#20A342] absolute top-[32%]" />
+          <div className="w-[41.6%] aspect-square max-w-[800px] bg-[#BBE7C7] rounded-full border border-[#20A342] absolute top-[36.8%]" />
+        </div>
 
-          {/* Header row: top: 638px (approx 30.6%) */}
-          <div className="absolute top-[30.6%] left-[6.7%] right-[6.7%] flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
-            <div className="flex flex-col gap-4">
-              <p className="text-[#333733] text-2xl font-semibold font-['Outfit'] opacity-80">
-                About
-              </p>
-              <h2 className="text-white text-6xl md:text-8xl lg:text-[96px] font-semibold font-['Funnel_Display'] leading-none">
-                Our Products
+        {/* ── Biscuit decorations — Figma blur / opacity values ── */}
+        <img
+          src="/assets/products/biscuit-bg.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute pointer-events-none z-[2]"
+          style={{ right: 0, top: "3%", width: "38%", filter: "blur(14px)", opacity: 0.5 }}
+        />
+        <img
+          src="/assets/products/biscuit-large.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute pointer-events-none z-[2]"
+          style={{ left: "27%", top: "36%", width: "45%", filter: "blur(50px)", opacity: 0.6 }}
+        />
+        <img
+          src="/assets/products/biscuit-piece.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute pointer-events-none z-[3]"
+          style={{ left: "26.8%", top: "53%", width: "8%", filter: "blur(3px)" }}
+        />
+        <img
+          src="/assets/products/biscuit-scatter.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute pointer-events-none z-[3]"
+          style={{ right: "10%", top: "55%", width: "5%", filter: "blur(4px)" }}
+        />
+
+        {/* ── Responsive content area (percentage positions from 1920×2083 frame) ── */}
+        <div className="relative z-10 w-full h-full max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[6.7%]">
+
+          {/* Header row — Figma: y=638 → 30.6% */}
+          <div className="absolute top-[30.6%] left-[6.7%] right-[6.7%] flex flex-col md:flex-row items-start md:items-end justify-between gap-4 md:gap-8">
+            <div className="flex flex-col gap-2 lg:gap-4">
+              {/* Label — Figma: Outfit Semibold 24px, #333733 */}
+              <span className="font-['Outfit'] font-semibold text-[#333733] text-lg lg:text-2xl leading-snug opacity-80">
+                {t("products.label")}
+              </span>
+              {/* Heading — Figma: Funnel Display Semibold 96px, white */}
+              <h2
+                className="font-['Funnel_Display'] font-semibold text-white leading-none"
+                style={{ fontSize: "clamp(32px, 5vw, 96px)" }}
+              >
+                {t("products.heading")}
               </h2>
             </div>
-            <span className="font-['Outfit'] font-semibold text-white text-6xl md:text-[96px] leading-none tabular-nums">
+            {/* Counter — Figma: Outfit Semibold 96px, white */}
+            <span
+              className="font-['Outfit'] font-semibold text-white tabular-nums leading-none shrink-0"
+              style={{ fontSize: "clamp(28px, 5vw, 96px)" }}
+            >
               {currentIndex + 1}/{TOTAL_PRODUCTS}
             </span>
           </div>
 
-          {/* PRODUCT DISPLAY AREA (Main image top: 759px approx 36.4%) */}
-          <div className="absolute inset-0 flex flex-col lg:flex-row items-center pointer-events-none">
-            {/* Left: product info (top: 1136px approx 54.5%) */}
-            <div className="absolute top-[54.5%] left-[6.7%] z-20 w-full lg:w-1/3 text-center lg:text-left flex flex-col gap-10 pointer-events-auto">
-              <div className="flex flex-col gap-2">
-                <p className="text-white text-2xl font-normal font-['Outfit']">
-                  {product.category}
-                </p>
-                <h3 className="text-white text-4xl lg:text-5xl font-bold font-['Funnel_Display'] leading-tight">
-                  {product.name}
-                </h3>
-              </div>
-              <div className="flex justify-center lg:justify-start">
-                <button className="bg-[#0F4B1F] text-white px-16 lg:px-20 py-5 rounded-lg font-bold text-2xl lg:text-[32px] leading-none tracking-[1.28px] transition-all hover:bg-[#1a6b2e] shadow-xl">
-                  {t("home.products.viewProduct")}
-                </button>
-              </div>
+          {/* Product info — Figma: y=1136 → 54.5% */}
+          <div className="absolute top-[54.5%] left-[6.7%] z-20 flex flex-col gap-6 lg:gap-8 pointer-events-auto">
+            <div className="flex flex-col gap-2">
+              {/* Category — Figma: Outfit Regular 24px, white */}
+              <p className="font-['Outfit'] font-normal text-white text-lg lg:text-2xl leading-snug">
+                {product.category}
+              </p>
+              {/* Name — Figma: Funnel Display Bold 48px, white */}
+              <h3
+                className="font-['Funnel_Display'] font-bold text-white leading-tight"
+                style={{ fontSize: "clamp(24px, 2.5vw, 48px)" }}
+              >
+                {product.name}
+              </h3>
             </div>
+            {/* View Product — Figma: #0F4B1F bg, px-20 py-5, Funnel Display Bold 32px */}
+            <button className="self-start bg-[#0F4B1F] text-white px-10 lg:px-20 py-4 lg:py-5 rounded-lg font-['Funnel_Display'] font-bold text-lg lg:text-[32px] leading-none tracking-[1.28px] transition-all hover:bg-[#1a6b2e] shadow-xl border border-white/10">
+              {t("products.viewProduct")}
+            </button>
+          </div>
 
-            {/* Center: main product */}
-            <div className="absolute top-[36.4%] left-1/2 -translate-x-1/2 w-[40%] aspect-square flex items-center justify-center">
-              {/* Product Shadow */}
-              <div className="absolute bottom-0 w-full h-[100px] bg-[#000500] rounded-full blur-[60px] opacity-40" />
-
-              <div className="relative w-full h-full">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  className="object-contain drop-shadow-[0_50px_50px_rgba(0,0,0,0.3)]"
-                  priority
-                />
-              </div>
-
-              {/* Scattered biscuit pieces (Fixed positions from design) */}
-              <div className="absolute left-[130%] top-[-10%] w-[30%] h-auto hidden md:block">
-                <Image
-                  src="/assets/products/biscuit-piece.png"
-                  width={180}
-                  height={180}
-                  className="object-contain animate-float blur-[2px]"
-                  alt=""
-                />
-              </div>
-              <div className="absolute left-[-15%] bottom-[-10%] w-[25%] h-auto hidden md:block">
-                <Image
-                  src="/assets/products/biscuit-piece.png"
-                  width={140}
-                  height={140}
-                  className="object-contain rotate-45 animate-float-delayed blur-[1px]"
-                  alt=""
-                />
-              </div>
+          {/* Centre product image — Figma: y=759 → ~36.4%, centred horizontally */}
+          <div className="absolute top-[36.4%] left-1/2 -translate-x-1/2 w-[40%] aspect-square flex items-center justify-center">
+            {/* Drop shadow ellipse */}
+            <div className="absolute bottom-0 w-full h-[8%] bg-[#000500] rounded-full blur-[40px] opacity-40" />
+            <div className="relative w-full h-full">
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                className="object-contain drop-shadow-[0_50px_50px_rgba(0,0,0,0.3)]"
+                priority={currentIndex === 0}
+              />
             </div>
           </div>
 
-          {/* BOTTOM ROW — Navigation arrows (top: 1431px approx 68.7%) */}
+          {/* Navigation arrows — Figma: y=1431 → 68.7%, justify-between, 100px circles */}
           <div className="absolute top-[68.7%] left-[6.7%] right-[6.7%] flex items-center justify-between pointer-events-none">
             <button
               onClick={prev}
               aria-label="Previous product"
-              className="w-20 h-20 md:w-28 md:h-28 rounded-full border-2 border-white/40
-                         flex items-center justify-center text-white text-5xl
-                         hover:bg-white hover:text-[#0F4B1F] transition-all duration-300 pointer-events-auto"
+              className="w-16 h-16 md:w-24 md:h-24 lg:w-[100px] lg:h-[100px] rounded-full border-2 border-white/40 flex items-center justify-center text-white text-2xl lg:text-4xl hover:bg-white hover:text-[#0F4B1F] transition-all duration-300 pointer-events-auto"
             >
               ←
             </button>
             <button
               onClick={next}
               aria-label="Next product"
-              className="w-20 h-20 md:w-28 md:h-28 rounded-full border-2 border-white/40
-                         flex items-center justify-center text-white text-5xl
-                         hover:bg-white hover:text-[#0F4B1F] transition-all duration-300 pointer-events-auto"
+              className="w-16 h-16 md:w-24 md:h-24 lg:w-[100px] lg:h-[100px] rounded-full border-2 border-white/40 flex items-center justify-center text-white text-2xl lg:text-4xl hover:bg-white hover:text-[#0F4B1F] transition-all duration-300 pointer-events-auto"
             >
               →
             </button>

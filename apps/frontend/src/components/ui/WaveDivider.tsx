@@ -15,7 +15,7 @@ export default function WaveDivider({
 }: WaveDividerProps) {
   return (
     <div
-      className={`w-full overflow-hidden leading-none ${className}`}
+      className={`w-full overflow-hidden leading-none h-[60px] sm:h-[80px] md:h-[100px] lg:h-[260px] xl:h-[400px] 2xl:h-[520px] ${className}`}
       style={{ backgroundColor: bgColor }}
       aria-hidden="true"
     >
@@ -26,7 +26,16 @@ export default function WaveDivider({
         className={`w-full h-full block ${direction === 'up' ? 'rotate-180' : ''}`}
         style={{ display: 'block', marginBottom: '-1px' }}
       >
+        {/*
+          Exact Figma path — top arch of "our product" frame (node 332:1293).
+          Fills the dark-green zone below the wave curve.
+          bgColor (cream) is visible above the curve on the left side.
+          On the right (product-image side) the arch rises above the viewBox top,
+          so the fill starts from y=0 there — matching the Figma bridge overlap.
+        */}
         <path
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M1280 128.432C1387 28.1533 1493 -17.3216 1600 5.9989C1707 28.1534 1813 117.937 1867 162.246L1920 206.556V610H0V475.907L53 442.093C107 408.278 213 341.814 320 352.308C427 363.969 533 453.752 640 498.061C747 542.37 853 542.371 960 464.247C1067 386.123 1173 229.876 1280 128.432Z"
           fill={fillColor}
         />
