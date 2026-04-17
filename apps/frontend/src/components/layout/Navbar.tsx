@@ -27,16 +27,37 @@ export default function Navbar() {
     const currentLocale = pathSegments[0] || 'en';
     const newLocale = currentLocale === 'en' ? 'am' : 'en';
     
-    // Replace only the first segment (locale) and keep the rest of the path
-    pathSegments[0] = newLocale;
-    const newPath = '/' + pathSegments.join('/');
+    // Handle root path case
+    if (pathSegments.length === 1 && pathSegments[0] === currentLocale) {
+      router.push(`/${newLocale}`);
+      return;
+    }
     
-    router.push(newPath);
+    // Replace the locale and keep the rest of the path
+    if (pathSegments[0] === currentLocale) {
+      pathSegments[0] = newLocale;
+      const newPath = '/' + pathSegments.join('/');
+      router.push(newPath);
+    } else {
+      // Fallback: add locale prefix
+      router.push(`/${newLocale}${pathname}`);
+    }
   };
 
   // Get current locale for display
   const pathSegments = pathname.split('/').filter(Boolean);
   const currentLocale = pathSegments[0] || 'en';
+  
+  // Get the path without locale for navigation
+  const getPathWithoutLocale = () => {
+    const segments = pathname.split('/').filter(Boolean);
+    if (segments[0] === 'en' || segments[0] === 'am') {
+      return '/' + segments.slice(1).join('/');
+    }
+    return pathname;
+  };
+  
+  const pathWithoutLocale = getPathWithoutLocale();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 lg:px-8 py-4">
@@ -184,28 +205,46 @@ export default function Navbar() {
           
           {/* Language switcher in mobile menu */}
           <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-white/20">
-            <button
-              onClick={() => {
-                handleLanguageSwitch();
-                setMobileOpen(false);
-              }}
-              className="flex items-center gap-3 text-white text-[14px] sm:text-[16px] lg:text-lg font-['Funnel_Display'] font-medium hover:bg-white/10 transition-colors w-full text-left"
-            >
-              <span>Language</span>
-              <div className="flex items-center gap-2">
-                <span className="text-xs opacity-80">Current:</span>
-                <div className="bg-black border border-gray-600 px-2 py-1 rounded text-xs flex items-center gap-1">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" className="text-white">
+            <div className="space-y-2">
+              <div className="text-white text-[14px] sm:text-[16px] lg:text-lg font-['Funnel_Display'] font-medium">
+                Language
+              </div>
+              <div className="flex flex-col gap-2">
+                {/* English option */}
+                <Link
+                  href={`/en${pathWithoutLocale}`}
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex items-center gap-2 px-3 py-2 rounded transition-colors ${
+                    currentLocale === 'en' 
+                      ? 'bg-white text-[#23B349]' 
+                      : 'text-white hover:bg-white/10'
+                  }`}
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="flex-shrink-0">
                     <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
                     <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" strokeWidth="2"/>
                   </svg>
-                  <span className="text-white font-bold leading-none">
-                    {currentLocale === 'en' ? 'UK|EN' : 'ET|AM'}
-                  </span>
-                </div>
-                <span className="text-xs opacity-60">({currentLocale === 'en' ? 'English' : 'Amharic'})</span>
+                  <span className="text-sm font-medium">English (UK|EN)</span>
+                </Link>
+                
+                {/* Amharic option */}
+                <Link
+                  href={`/am${pathWithoutLocale}`}
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex items-center gap-2 px-3 py-2 rounded transition-colors ${
+                    currentLocale === 'am' 
+                      ? 'bg-white text-[#23B349]' 
+                      : 'text-white hover:bg-white/10'
+                  }`}
+                >
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" className="flex-shrink-0">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" strokeWidth="2"/>
+                  </svg>
+                  <span className="text-sm font-medium">አማርኛ (ET|AM)</span>
+                </Link>
               </div>
-            </button>
+            </div>
           </div>
           
           <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-white/20">
