@@ -23,14 +23,20 @@ export default function Navbar() {
 
   // Language switcher function
   const handleLanguageSwitch = () => {
-    const currentLocale = pathname.split('/')[1]; // Get current locale from URL
+    const pathSegments = pathname.split('/').filter(Boolean);
+    const currentLocale = pathSegments[0] || 'en';
     const newLocale = currentLocale === 'en' ? 'am' : 'en';
-    const newPath = pathname.replace(`/${currentLocale}`, `/${newLocale}`);
+    
+    // Replace only the first segment (locale) and keep the rest of the path
+    pathSegments[0] = newLocale;
+    const newPath = '/' + pathSegments.join('/');
+    
     router.push(newPath);
   };
 
   // Get current locale for display
-  const currentLocale = pathname.split('/')[1] || 'en';
+  const pathSegments = pathname.split('/').filter(Boolean);
+  const currentLocale = pathSegments[0] || 'en';
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 lg:px-8 py-4">
