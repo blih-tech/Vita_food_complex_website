@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Link } from "@frontend/navigation";
+import { Link, useRouter, usePathname } from "@frontend/navigation";
 import Image from "next/image";
 
 type NavKey = "products" | "company" | "people-planet" | "resources" | "whats-new";
@@ -18,6 +18,19 @@ const navLinks: { key: NavKey; href: string }[] = [
 export default function Navbar() {
   const t = useTranslations("Navbar");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // Language switcher function
+  const handleLanguageSwitch = () => {
+    const currentLocale = pathname.split('/')[1]; // Get current locale from URL
+    const newLocale = currentLocale === 'en' ? 'am' : 'en';
+    const newPath = pathname.replace(`/${currentLocale}`, `/${newLocale}`);
+    router.push(newPath);
+  };
+
+  // Get current locale for display
+  const currentLocale = pathname.split('/')[1] || 'en';
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center">
@@ -97,10 +110,16 @@ export default function Navbar() {
 
         {/* Right side - Language switcher and CTA */}
         <div className="flex gap-[12px] sm:gap-[16px] lg:gap-[24px] items-center">
-          {/* Language switcher - Exact Figma design */}
-          <div className="h-[16px] sm:h-[18px] lg:h-[20px] rounded-[12px] sm:rounded-[14px] lg:rounded-[15.55px] w-[46px] sm:w-[52px] lg:w-[57.458px] bg-white/20 border border-white/30 flex items-center justify-center cursor-pointer hover:bg-white/30 transition-colors">
-            <span className="text-white text-[10px] sm:text-[11px] lg:text-xs font-medium">EN</span>
-          </div>
+          {/* Language switcher - Functional with exact Figma design */}
+          <button
+            onClick={handleLanguageSwitch}
+            className="h-[16px] sm:h-[18px] lg:h-[20px] rounded-[12px] sm:rounded-[14px] lg:rounded-[15.55px] w-[46px] sm:w-[52px] lg:w-[57.458px] bg-white/20 border border-white/30 flex items-center justify-center cursor-pointer hover:bg-white/30 transition-colors"
+            aria-label={`Switch language. Current: ${currentLocale === 'en' ? 'English' : 'Amharic'}`}
+          >
+            <span className="text-white text-[10px] sm:text-[11px] lg:text-xs font-medium uppercase">
+              {currentLocale === 'en' ? 'EN' : 'AM'}
+            </span>
+          </button>
 
           {/* Desktop CTA - Hidden on smaller screens */}
           <div className="hidden lg:block">
@@ -163,6 +182,27 @@ export default function Navbar() {
               {t(`links.${link.key}`)}
             </Link>
           ))}
+          
+          {/* Language switcher in mobile menu */}
+          <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-white/20">
+            <button
+              onClick={() => {
+                handleLanguageSwitch();
+                setMobileOpen(false);
+              }}
+              className="flex items-center gap-3 text-white text-[14px] sm:text-[16px] lg:text-lg font-['Funnel_Display'] font-medium hover:bg-white/10 transition-colors w-full text-left"
+            >
+              <span>Language</span>
+              <div className="flex items-center gap-2">
+                <span className="text-xs opacity-80">Current:</span>
+                <span className="bg-white/20 px-2 py-1 rounded text-xs">
+                  {currentLocale === 'en' ? 'EN' : 'AM'}
+                </span>
+                <span className="text-xs opacity-60">({currentLocale === 'en' ? 'English' : 'Amharic'})</span>
+              </div>
+            </button>
+          </div>
+          
           <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-white/20">
             <Link
               href="/contact"
