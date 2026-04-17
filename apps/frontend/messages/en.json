@@ -21,12 +21,13 @@
   },
   "Navbar": {
     "links": {
-      "products": "Products",
+      "products": "Our Products",
       "company": "Company",
-      "recipes": "Recipes",
-      "more": "More"
+      "people-planet": "People & Planet",
+      "resources": "Resources",
+      "whats-new": "What's New"
     },
-    "cta": "Visit Us"
+    "cta": "Contact us"
   },
   "Hero": {
     "headline1": "Biscuits",

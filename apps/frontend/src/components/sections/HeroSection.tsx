@@ -8,7 +8,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full bg-[#E9F7ED] overflow-hidden pt-[96px] lg:pt-0"
+      className="relative w-full bg-[#E9F7ED] overflow-hidden pt-[128px] lg:pt-[96px]"
     >
       {/* ═══════════════════════════════════════════════
           LAYERED LAYOUT — md and up (768px+)

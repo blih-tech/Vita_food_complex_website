@@ -21,12 +21,13 @@
   },
   "Navbar": {
     "links": {
-      "products": "ምርቶች",
-      "company": "ድርጅት",
-      "recipes": "የምግብ አሰራር",
-      "more": "ተጨማሪ"
+      "products": "ምርቶቻችን",
+      "company": "ድርጅታችን",
+      "people-planet": "ሰዎች እና ፕላኔት",
+      "resources": "ሀብቶች",
+      "whats-new": "ምን አዲስ ነገር አለ"
     },
-    "cta": "ይጎብኙን"
+    "cta": "ለእኛ ይገናኙ"
   },
   "Hero": {
     "headline1": "ቢስኩቶች",
