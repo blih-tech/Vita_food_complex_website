@@ -58,6 +58,17 @@
     "heading": "Moments with Vita",
     "subtext": "Tag and share what you love about Vita products"
   },
+  "Partner": {
+    "heading": "Our Trusted Partners",
+    "subtext": "We collaborate with global and local organizations to deliver high-quality food products and support our communities.",
+    "list": {
+      "unicef": "UNICEF",
+      "wfp": "World Food Programme",
+      "esa": "Ethiopian Standards Agency",
+      "usaid": "USAID",
+      "moa": "Ministry of Agriculture"
+    }
+  },
   "Recipes": {
     "label": "Vita Blog",
     "heading": "Recipes Made Simple"
@@ -66,6 +77,28 @@
     "heading": "More Than Products",
     "subtext": "Explore our exclusive Vita merchandise collection.",
     "cta": "More"
+  },
+  "QuickFact": {
+    "label": "Quick Facts",
+    "heading": "Vita by the Numbers",
+    "stats": {
+      "investment": {
+        "value": "210M+",
+        "label": "Investment (ETB)"
+      },
+      "capacity": {
+        "value": "60T+",
+        "label": "Daily Production"
+      },
+      "jobs": {
+        "value": "350+",
+        "label": "Local Jobs Created"
+      },
+      "farmers": {
+        "value": "500+",
+        "label": "Farmers Supported"
+      }
+    }
   },
   "WhyChoose": {
     "heading": "Why Choose Our Products?",
@@ -91,10 +124,14 @@
   },
   "Footer": {
     "tagline": "Quality food for a better life.",
+    "address": "Debre Sina, Ethiopia",
+    "email": "info@vitahydro.com",
+    "phone": "+251 911 234 567",
     "columns": {
       "products": "Products",
       "company": "Company",
-      "recipes": "Recipes"
+      "recipes": "Recipes",
+      "connect": "Connect"
     },
     "copyright": "© 2026 Vita Hydro Agro-Processing PLC. All rights reserved."
   }

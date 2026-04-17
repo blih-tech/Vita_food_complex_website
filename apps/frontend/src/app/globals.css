@@ -474,10 +474,10 @@ body {
   }
 
   /* Responsive Header */
-  nav {
+  /* nav {
     height: 70px !important;
     padding: 8px 16px !important;
-  }
+  } */
 }
 
 /* SM: Tablets Portrait (640px - 767px) */
@@ -508,10 +508,10 @@ body {
   }
 
   /* Responsive Header */
-  nav {
+  /* nav {
     height: 80px !important;
     padding: 10px 20px !important;
-  }
+  } */
 }
 
 /* MD: Tablets Landscape (768px - 1023px) */
@@ -547,10 +547,10 @@ body {
   }
 
   /* Responsive Header */
-  nav {
+  /* nav {
     height: 90px !important;
     padding: 12px 20px !important;
-  }
+  } */
 }
 
 /* LG: Desktop (1024px - 1279px) */
@@ -572,10 +572,10 @@ body {
   }
 
   /* Responsive Header */
-  nav {
+  /* nav {
     height: 95px !important;
     padding: 12px 20px !important;
-  }
+  } */
 }
 
 /* XL: Large Desktop (1280px - 1535px) */
@@ -597,10 +597,10 @@ body {
   }
 
   /* Responsive Header */
-  nav {
+  /* nav {
     height: 100px !important;
     padding: 12px 20px !important;
-  }
+  } */
 }
 
 /* Specific 1280x800 Breakpoint */
@@ -622,10 +622,10 @@ body {
   }
 
   /* Responsive Header for 1280x800 */
-  nav {
+  /* nav {
     height: 90px !important;
     padding: 8px 16px !important;
-  }
+  } */
 
   /* Adjust navigation bar for 1280x800 - ensure proper containment */
   nav > div {
@@ -689,10 +689,10 @@ body {
   }
 
   /* Responsive Header */
-  nav {
+  /* nav {
     height: 100px !important;
     padding: 12px 20px !important;
-  }
+  } */
 }
 
 /* ========================================
@@ -735,8 +735,8 @@ body {
   }
 
   /* Responsive Header */
-  nav {
+  /* nav {
     height: 100px !important;
     padding: 12px 20px !important;
-  }
+  } */
 }
