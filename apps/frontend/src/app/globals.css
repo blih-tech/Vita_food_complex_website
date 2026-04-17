@@ -627,23 +627,46 @@ body {
     padding: 8px 16px !important;
   }
 
-  /* Adjust navigation bar for 1280x800 */
+  /* Adjust navigation bar for 1280x800 - ensure proper containment */
   nav > div {
-    max-width: 1200px !important;
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+    max-width: 1160px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   /* Adjust logo for 1280x800 */
   nav .relative > div:first-child {
-    width: 90px !important;
-    height: 42px !important;
+    width: 85px !important;
+    height: 40px !important;
   }
 
   /* Adjust language switcher for 1280x800 */
   nav button[aria-label*="language"] {
-    width: 70px !important;
-    height: 20px !important;
+    width: 65px !important;
+    height: 18px !important;
+  }
+
+  /* Adjust navigation links for 1280x800 */
+  nav div[class*="hidden"] {
+    gap: 24px !important;
+  }
+
+  nav div[class*="hidden"] a {
+    font-size: 16px !important;
+    padding: 0 4px !important;
+  }
+
+  /* Adjust Contact us button for 1280x800 */
+  nav a[href*="contact"] {
+    padding: 6px 12px !important;
+    font-size: 18px !important;
+  }
+
+  /* Ensure proper spacing in header */
+  nav div[class*="gap"] {
+    gap: 32px !important;
   }
 }
 
