@@ -603,6 +603,50 @@ body {
   }
 }
 
+/* Specific 1280x800 Breakpoint */
+@media (width: 1280px) and (height: 800px) {
+  body {
+    font-size: 16px;
+  }
+
+  .heading-hero {
+    font-size: 160px;
+  }
+
+  .heading-section {
+    font-size: 56px;
+  }
+
+  .decorative-number {
+    font-size: 280px;
+  }
+
+  /* Responsive Header for 1280x800 */
+  nav {
+    height: 90px !important;
+    padding: 8px 16px !important;
+  }
+
+  /* Adjust navigation bar for 1280x800 */
+  nav > div {
+    max-width: 1200px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  /* Adjust logo for 1280x800 */
+  nav .relative > div:first-child {
+    width: 90px !important;
+    height: 42px !important;
+  }
+
+  /* Adjust language switcher for 1280x800 */
+  nav button[aria-label*="language"] {
+    width: 70px !important;
+    height: 20px !important;
+  }
+}
+
 /* 2XL: Large Desktop (1536px - 1919px) */
 @media (min-width: 1536px) and (max-width: 1919px) {
   body {

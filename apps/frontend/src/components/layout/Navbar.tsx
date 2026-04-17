@@ -42,32 +42,14 @@ export default function Navbar() {
         }}
       >
         <div className="flex gap-[16px] sm:gap-[32px] lg:gap-[64px] items-center flex-1">
-          {/* Logo - Exact Figma design with proper positioning */}
+          {/* Logo - Clean single logo design */}
           <Link href="/" className="flex items-center shrink-0">
-            <div className="relative inline-grid leading-[0] place-items-start">
-              {/* Main logo vector - 102.56px × 48.406px */}
+            <div className="relative">
+              {/* Main logo only - no overlapping elements */}
               <div className="w-[60px] h-[28px] sm:w-[80px] h-[38px] lg:w-[102.56px] lg:h-[48.406px] relative">
                 <Image
                   src="/assets/brand/vita-logo.svg"
                   alt="Vita Food Complex"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              {/* Logo text - positioned exactly as in Figma */}
-              <div className="absolute top-[16px] left-[6px] sm:top-[20px] sm:left-[8px] lg:top-[27.23px] lg:left-[11.05px] w-[44px] h-[23px] sm:w-[55px] h-[29px] lg:w-[75.896px] lg:h-[39.724px]">
-                <Image
-                  src="/assets/brand/logo-text.svg"
-                  alt="Vita"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              {/* Logo badge - small circle element */}
-              <div className="absolute top-0 left-[24px] sm:left-[32px] lg:left-[39.88px] w-[13px] h-[13px] sm:w-[17px] sm:h-[17px] lg:w-[22.807px] lg:h-[22.467px]">
-                <Image
-                  src="/assets/brand/logo-badge.svg"
-                  alt=""
                   fill
                   className="object-contain"
                 />
@@ -110,13 +92,24 @@ export default function Navbar() {
 
         {/* Right side - Language switcher and CTA */}
         <div className="flex gap-[12px] sm:gap-[16px] lg:gap-[24px] items-center">
-          {/* Language switcher - Functional with lighter background */}
+          {/* Language switcher - Black background with world icon */}
           <button
             onClick={handleLanguageSwitch}
-            className="h-[16px] sm:h-[18px] lg:h-[20px] rounded-[12px] sm:rounded-[14px] lg:rounded-[15.55px] w-[46px] sm:w-[52px] lg:w-[57.458px] bg-white/40 border border-white/60 flex items-center justify-center cursor-pointer hover:bg-white/50 transition-colors"
+            className="h-[20px] sm:h-[22px] lg:h-[24px] rounded-[12px] sm:rounded-[14px] lg:rounded-[15.55px] w-[70px] sm:w-[75px] lg:w-[80px] bg-black border border-gray-600 flex items-center justify-center gap-1 cursor-pointer hover:bg-gray-800 transition-colors"
             aria-label={`Switch language. Current: ${currentLocale === 'en' ? 'English' : 'Amharic'}`}
           >
-            <span className="text-[#23B349] text-[10px] sm:text-[11px] lg:text-xs font-bold">
+            {/* World icon */}
+            <svg 
+              width="12" 
+              height="12" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              className="text-white flex-shrink-0"
+            >
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" strokeWidth="2"/>
+            </svg>
+            <span className="text-white text-[9px] sm:text-[10px] lg:text-[11px] font-bold leading-none">
               {currentLocale === 'en' ? 'UK|EN' : 'ET|AM'}
             </span>
           </button>
@@ -195,9 +188,15 @@ export default function Navbar() {
               <span>Language</span>
               <div className="flex items-center gap-2">
                 <span className="text-xs opacity-80">Current:</span>
-                <span className="bg-white/20 px-2 py-1 rounded text-xs">
-                  {currentLocale === 'en' ? 'UK|EN' : 'ET|AM'}
-                </span>
+                <div className="bg-black border border-gray-600 px-2 py-1 rounded text-xs flex items-center gap-1">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" className="text-white">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" strokeWidth="2"/>
+                  </svg>
+                  <span className="text-white font-bold leading-none">
+                    {currentLocale === 'en' ? 'UK|EN' : 'ET|AM'}
+                  </span>
+                </div>
                 <span className="text-xs opacity-60">({currentLocale === 'en' ? 'English' : 'Amharic'})</span>
               </div>
             </button>
