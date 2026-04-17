@@ -1,5 +1,5 @@
 import HeroSection from "@frontend/components/sections/HeroSection";
-import CompanyProductsSection from "@frontend/components/sections/CompanyProductsSection";
+import ProductsSection from "@frontend/components/sections/ProductsSection";
 import SocialWallSection from "@frontend/components/sections/SocialWallSection";
 import RecipesSection from "@frontend/components/sections/RecipesSection";
 import MerchandiseSection from "@frontend/components/sections/MerchandiseSection";
@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main className="flex flex-col">
       <HeroSection />
-      <CompanyProductsSection />
+      <ProductsSection />
       <SocialWallSection />
       <RecipesSection />
       <MerchandiseSection />
