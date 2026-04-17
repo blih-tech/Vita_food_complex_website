@@ -20,20 +20,20 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center px-[128px] py-[32px]">
-      {/* Main bar - Figma design specifications */}
+    <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center">
+      {/* Main bar - Exact Figma design specifications */}
       <div 
-        className="w-full max-w-[1664px] pl-[48px] pr-[32px] py-[8px] rounded-[32px] flex items-center shadow-lg"
+        className="w-full max-w-[1664px] mx-4 lg:mx-8 xl:mx-auto pl-[12px] sm:pl-[24px] lg:pl-[48px] pr-[12px] sm:pr-[16px] lg:pr-[32px] py-[8px] rounded-[16px] sm:rounded-[24px] lg:rounded-[32px] flex items-center shadow-lg"
         style={{
           background: "radial-gradient(ellipse at 25.041px 143.28px, rgba(31,214,80,1) 0%, rgba(35,179,73,1) 60%, rgba(75,217,64,1) 80%, rgba(116,255,56,1) 100%)"
         }}
       >
-        <div className="flex gap-[64px] items-center flex-1">
-          {/* Logo - Figma design */}
-          <Link href="/" className="flex items-center gap-0 shrink-0">
-            <div className="relative">
-              {/* Main logo vector */}
-              <div className="w-[102.56px] h-[48.406px] relative">
+        <div className="flex gap-[16px] sm:gap-[32px] lg:gap-[64px] items-center flex-1">
+          {/* Logo - Exact Figma design with proper positioning */}
+          <Link href="/" className="flex items-center shrink-0">
+            <div className="relative inline-grid leading-[0] place-items-start">
+              {/* Main logo vector - 102.56px × 48.406px */}
+              <div className="w-[60px] h-[28px] sm:w-[80px] h-[38px] lg:w-[102.56px] lg:h-[48.406px] relative">
                 <Image
                   src="/assets/brand/vita-logo.svg"
                   alt="Vita Food Complex"
@@ -41,11 +41,20 @@ export default function Navbar() {
                   className="object-contain"
                 />
               </div>
-              {/* Additional logo elements from Figma */}
-              <div className="absolute top-[27.23px] left-[11.05px] w-[75.896px] h-[39.724px]">
+              {/* Logo text - positioned exactly as in Figma */}
+              <div className="absolute top-[16px] left-[6px] sm:top-[20px] sm:left-[8px] lg:top-[27.23px] lg:left-[11.05px] w-[44px] h-[23px] sm:w-[55px] h-[29px] lg:w-[75.896px] lg:h-[39.724px]">
                 <Image
-                  src="/assets/brand/vita-logo-text.svg"
+                  src="/assets/brand/logo-text.svg"
                   alt="Vita"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              {/* Logo badge - small circle element */}
+              <div className="absolute top-0 left-[24px] sm:left-[32px] lg:left-[39.88px] w-[13px] h-[13px] sm:w-[17px] sm:h-[17px] lg:w-[22.807px] lg:h-[22.467px]">
+                <Image
+                  src="/assets/brand/logo-badge.svg"
+                  alt=""
                   fill
                   className="object-contain"
                 />
@@ -53,8 +62,8 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop nav links - Figma design */}
-          <div className="hidden lg:flex items-center gap-[48px]">
+          {/* Desktop nav links - Hidden on smaller screens */}
+          <div className="hidden xl:flex items-center gap-[48px]">
             {navLinks.map((link) => (
               <button
                 key={link.key}
@@ -62,7 +71,7 @@ export default function Navbar() {
               >
                 <Link
                   href={link.href}
-                  className="text-white text-[20px] font-['Funnel_Display'] font-medium leading-normal tracking-[-0.08px] hover:opacity-80 transition-opacity"
+                  className="text-white text-[16px] lg:text-[20px] font-['Funnel_Display'] font-medium leading-normal tracking-[-0.08px] hover:opacity-80 transition-opacity whitespace-nowrap"
                 >
                   {t(`links.${link.key}`)}
                 </Link>
@@ -87,34 +96,34 @@ export default function Navbar() {
         </div>
 
         {/* Right side - Language switcher and CTA */}
-        <div className="flex gap-[24px] items-center">
-          {/* Language switcher - Figma design */}
-          <div className="h-[20px] rounded-[15.55px] w-[57.458px] bg-white/20 border border-white/30 flex items-center justify-center cursor-pointer hover:bg-white/30 transition-colors">
-            <span className="text-white text-xs font-medium">EN</span>
+        <div className="flex gap-[12px] sm:gap-[16px] lg:gap-[24px] items-center">
+          {/* Language switcher - Exact Figma design */}
+          <div className="h-[16px] sm:h-[18px] lg:h-[20px] rounded-[12px] sm:rounded-[14px] lg:rounded-[15.55px] w-[46px] sm:w-[52px] lg:w-[57.458px] bg-white/20 border border-white/30 flex items-center justify-center cursor-pointer hover:bg-white/30 transition-colors">
+            <span className="text-white text-[10px] sm:text-[11px] lg:text-xs font-medium">EN</span>
           </div>
 
-          {/* Desktop CTA - Figma design */}
+          {/* Desktop CTA - Hidden on smaller screens */}
           <div className="hidden lg:block">
             <Link
               href="/contact"
-              className="border border-white px-[16px] py-[8px] rounded-[99px] flex items-center justify-center gap-[8px] hover:bg-white hover:text-[#23B349] transition-colors"
+              className="border border-white px-[12px] sm:px-[14px] lg:px-[16px] py-[6px] sm:py-[7px] lg:py-[8px] rounded-[99px] flex items-center justify-center gap-[8px] hover:bg-white hover:text-[#23B349] transition-colors"
             >
-              <span className="text-white text-[24px] font-['Funnel_Display'] font-medium leading-normal tracking-[-0.096px]">
+              <span className="text-white text-[18px] sm:text-[20px] lg:text-[24px] font-['Funnel_Display'] font-medium leading-normal tracking-[-0.096px] whitespace-nowrap">
                 {t("cta")}
               </span>
             </Link>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile menu button - Visible on smaller screens */}
           <button
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label="Toggle navigation"
-            className="lg:hidden text-white p-2"
+            className="xl:hidden text-white p-2"
           >
             {mobileOpen ? (
               <svg
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -125,8 +134,8 @@ export default function Navbar() {
               </svg>
             ) : (
               <svg
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -141,24 +150,24 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile dropdown - Updated for new navigation */}
+      {/* Mobile dropdown - Responsive design */}
       {mobileOpen && (
-        <div className="absolute top-[120px] left-4 right-4 bg-[#23B349] rounded-[32px] shadow-xl flex flex-col lg:hidden">
+        <div className="absolute top-[80px] sm:top-[90px] lg:top-[120px] left-4 right-4 bg-[#23B349] rounded-[16px] sm:rounded-[20px] lg:rounded-[32px] shadow-xl flex flex-col xl:hidden">
           {navLinks.map((link) => (
             <Link
               key={link.key}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="px-6 py-4 text-white text-lg font-['Funnel_Display'] font-medium border-b border-white/20 last:border-0 hover:bg-white/10 transition-colors"
+              className="px-4 sm:px-6 py-3 sm:py-4 text-white text-[14px] sm:text-[16px] lg:text-lg font-['Funnel_Display'] font-medium border-b border-white/20 last:border-0 hover:bg-white/10 transition-colors"
             >
               {t(`links.${link.key}`)}
             </Link>
           ))}
-          <div className="px-6 py-4 border-t border-white/20">
+          <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-white/20">
             <Link
               href="/contact"
               onClick={() => setMobileOpen(false)}
-              className="block w-full text-center text-white text-lg font-['Funnel_Display'] font-medium py-3 border border-white rounded-[99px] hover:bg-white hover:text-[#23B349] transition-colors"
+              className="block w-full text-center text-white text-[14px] sm:text-[16px] lg:text-lg font-['Funnel_Display'] font-medium py-2 sm:py-3 border border-white rounded-[99px] hover:bg-white hover:text-[#23B349] transition-colors"
             >
               {t("cta")}
             </Link>
