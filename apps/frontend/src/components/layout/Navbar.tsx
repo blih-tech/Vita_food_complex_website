@@ -33,10 +33,10 @@ export default function Navbar() {
   const currentLocale = pathname.split('/')[1] || 'en';
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center">
-      {/* Main bar - Exact Figma design specifications */}
+    <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 lg:px-8 py-4">
+      {/* Main bar - Exact Figma design specifications with proper containment */}
       <div 
-        className="w-full max-w-[1664px] mx-4 lg:mx-8 xl:mx-auto pl-[12px] sm:pl-[24px] lg:pl-[48px] pr-[12px] sm:pr-[16px] lg:pr-[32px] py-[8px] rounded-[16px] sm:rounded-[24px] lg:rounded-[32px] flex items-center shadow-lg"
+        className="w-full max-w-[1664px] pl-[12px] sm:pl-[24px] lg:pl-[48px] pr-[12px] sm:pr-[16px] lg:pr-[32px] py-[8px] rounded-[16px] sm:rounded-[24px] lg:rounded-[32px] flex items-center shadow-lg overflow-hidden"
         style={{
           background: "radial-gradient(ellipse at 25.041px 143.28px, rgba(31,214,80,1) 0%, rgba(35,179,73,1) 60%, rgba(75,217,64,1) 80%, rgba(116,255,56,1) 100%)"
         }}
@@ -110,14 +110,14 @@ export default function Navbar() {
 
         {/* Right side - Language switcher and CTA */}
         <div className="flex gap-[12px] sm:gap-[16px] lg:gap-[24px] items-center">
-          {/* Language switcher - Functional with exact Figma design */}
+          {/* Language switcher - Functional with lighter background */}
           <button
             onClick={handleLanguageSwitch}
-            className="h-[16px] sm:h-[18px] lg:h-[20px] rounded-[12px] sm:rounded-[14px] lg:rounded-[15.55px] w-[46px] sm:w-[52px] lg:w-[57.458px] bg-white/20 border border-white/30 flex items-center justify-center cursor-pointer hover:bg-white/30 transition-colors"
+            className="h-[16px] sm:h-[18px] lg:h-[20px] rounded-[12px] sm:rounded-[14px] lg:rounded-[15.55px] w-[46px] sm:w-[52px] lg:w-[57.458px] bg-white/40 border border-white/60 flex items-center justify-center cursor-pointer hover:bg-white/50 transition-colors"
             aria-label={`Switch language. Current: ${currentLocale === 'en' ? 'English' : 'Amharic'}`}
           >
-            <span className="text-white text-[10px] sm:text-[11px] lg:text-xs font-medium uppercase">
-              {currentLocale === 'en' ? 'EN' : 'AM'}
+            <span className="text-[#23B349] text-[10px] sm:text-[11px] lg:text-xs font-bold">
+              {currentLocale === 'en' ? 'UK|EN' : 'ET|AM'}
             </span>
           </button>
 
@@ -169,9 +169,9 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile dropdown - Responsive design */}
+      {/* Mobile dropdown - Responsive design with proper containment */}
       {mobileOpen && (
-        <div className="absolute top-[80px] sm:top-[90px] lg:top-[120px] left-4 right-4 bg-[#23B349] rounded-[16px] sm:rounded-[20px] lg:rounded-[32px] shadow-xl flex flex-col xl:hidden">
+        <div className="absolute top-[80px] sm:top-[90px] lg:top-[120px] left-4 right-4 max-w-[calc(100vw-2rem)] bg-[#23B349] rounded-[16px] sm:rounded-[20px] lg:rounded-[32px] shadow-xl flex flex-col xl:hidden overflow-hidden">
           {navLinks.map((link) => (
             <Link
               key={link.key}
@@ -196,7 +196,7 @@ export default function Navbar() {
               <div className="flex items-center gap-2">
                 <span className="text-xs opacity-80">Current:</span>
                 <span className="bg-white/20 px-2 py-1 rounded text-xs">
-                  {currentLocale === 'en' ? 'EN' : 'AM'}
+                  {currentLocale === 'en' ? 'UK|EN' : 'ET|AM'}
                 </span>
                 <span className="text-xs opacity-60">({currentLocale === 'en' ? 'English' : 'Amharic'})</span>
               </div>
