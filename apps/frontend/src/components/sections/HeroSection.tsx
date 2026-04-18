@@ -89,7 +89,7 @@ export default function HeroSection() {
       </div>
 
       {/* Massive Green Block Wrapper (Drops down dynamically matching CSS arc top) */}
-      <div className="relative w-full mt-[12vw] sm:mt-[15vw] z-10 flex-grow flex flex-col items-center bg-[#23B349] px-4 pt-12 sm:pt-24 pb-24 lg:pb-32">
+      <div className="relative w-full mt-[12vw] sm:mt-[15vw] z-10 flex-grow flex flex-col items-center bg-[#23B349] pb-24 lg:pb-32 overflow-hidden">
 
         {/* Native CSS Mountain Edge - Overflowing absolutely up out of this div */}
         <div className="absolute top-[-12vw] sm:top-[-15vw] left-[-25%] w-[150%] h-[15vw] sm:h-[15.5vw] bg-[#23B349] rounded-t-[100%] border-none outline-none pointer-events-none -z-10 shadow-[0_-5px_15px_rgba(35,179,73,0.1)]" />
@@ -108,11 +108,11 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Inner Wrapper for Left-Aligned Text Content */}
-        <div className="w-full max-w-[950px] mx-auto flex flex-col items-start relative z-20">
+        {/* Inner Wrapper for Left-Aligned Text Content - Placed strictly along the floating Duck's 10% vertical axis */}
+        <div className="w-full pl-[5%] sm:pl-[8%] md:pl-[10%] flex flex-col items-start relative z-20 mt-8 mb-8">
 
           {/* White Inspirational Quote */}
-          <h3 className="font-['Outfit'] font-extrabold text-[28px] sm:text-[40px] md:text-[56px] lg:text-[64px] text-white leading-[1.05] max-w-[850px] text-left mb-6 lg:mb-8 drop-shadow-md">
+          <h3 className="font-['Outfit'] font-extrabold text-[28px] sm:text-[40px] md:text-[56px] lg:text-[64px] xl:text-[76px] text-white leading-[1.0] max-w-[850px] lg:max-w-[1200px] text-left mb-6 lg:mb-8 drop-shadow-md">
             {t('secondaryQuote')}
           </h3>
 
@@ -138,11 +138,11 @@ export default function HeroSection() {
         </div>
 
         {/* Video Layout Center */}
-        <div className="relative w-full max-w-[950px] mx-auto z-30 mt-4">
+        <div className="relative w-[92%] sm:w-[85%] max-w-[1200px] mx-auto z-30 mt-4 sm:mt-12">
 
-          {/* Red Tape Underlayer (Rotated diagonally out the left side) */}
-          <div className="absolute top-[80%] left-[-15vw] sm:left-[-150px] w-[130vw] md:w-[130%] h-[50px] sm:h-[100px] -z-10 flex items-center justify-center mix-blend-normal -rotate-[6deg] origin-center -ml-12 drop-shadow-xl opacity-90">
-            <Image src="/assets/hero/text-tape.svg" alt="Tape Decor" fill className="object-contain object-left overflow-visible" />
+          {/* Red Tape Underlayer (Rotated diagonally stretching across the screen behind the video) */}
+          <div className="absolute top-[60%] sm:top-[70%] left-[-15%] w-[130%] h-[60px] sm:h-[120px] -z-10 flex items-center justify-center mix-blend-normal -rotate-[6deg] origin-center drop-shadow-xl opacity-90">
+            <Image src="/assets/hero/text-tape.svg" alt="Tape Decor" fill className="object-cover object-center overflow-visible" />
           </div>
 
           {/* Frame */}
