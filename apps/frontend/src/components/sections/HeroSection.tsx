@@ -45,15 +45,15 @@ export default function HeroSection() {
 
           {/* Line 1: "A new stylish" */}
           <h2
-            className="font-['Outfit'] font-extrabold text-[38px] sm:text-[64px] md:text-[88px] text-[#404040] leading-[0.88] tracking-[-0.01em]"
+            className="font-['Outfit'] font-extrabold text-[8.5vw] min-[375px]:text-[38px] sm:text-[64px] md:text-[88px] text-[#404040] leading-[0.88] tracking-[-0.01em]"
           >
             A new stylish
           </h2>
 
           {/* Line 2: 🍪 way of 🍓 */}
-          <div className="flex items-center justify-center gap-2 mt-0">
+          <div className="flex items-center justify-center gap-1 min-[375px]:gap-2 mt-0">
             {/* Fish Cookie emoji (Node 18:1577) */}
-            <div className="relative w-[32px] h-[32px] sm:w-[48px] sm:h-[48px] md:w-[60px] md:h-[60px] animate-float shrink-0 self-baseline -mb-2 sm:-mb-3">
+            <div className="relative w-[7vw] h-[7vw] min-[375px]:w-[32px] min-[375px]:h-[32px] sm:w-[48px] sm:h-[48px] md:w-[60px] md:h-[60px] animate-float shrink-0 self-baseline -mb-2 sm:-mb-3">
               <Image
                 src="/assets/hero/fish-cookie.png"
                 alt=""
@@ -64,13 +64,13 @@ export default function HeroSection() {
             </div>
 
             <h2
-              className="font-['Outfit'] font-extrabold text-[38px] sm:text-[64px] md:text-[88px] text-[#404040] leading-[0.88] tracking-[-0.01em]"
+              className="font-['Outfit'] font-extrabold text-[8.5vw] min-[375px]:text-[38px] sm:text-[64px] md:text-[88px] text-[#404040] leading-[0.88] tracking-[-0.01em]"
             >
               way of
             </h2>
 
             {/* Strawberry emoji (Node 16:1209) */}
-            <div className="relative w-[32px] h-[32px] sm:w-[48px] sm:h-[48px] md:w-[60px] md:h-[60px] animate-float-delayed shrink-0 self-end -mb-1 sm:-mb-2">
+            <div className="relative w-[7vw] h-[7vw] min-[375px]:w-[32px] min-[375px]:h-[32px] sm:w-[48px] sm:h-[48px] md:w-[60px] md:h-[60px] animate-float-delayed shrink-0 self-end -mb-1 sm:-mb-2">
               <Image
                 src="/assets/hero/strawberry.png"
                 alt=""
@@ -83,7 +83,7 @@ export default function HeroSection() {
 
           {/* Line 3: "Connecting!" — large green (Node 19:1903) */}
           <h1
-            className="font-['Outfit'] font-extrabold text-[60px] sm:text-[110px] md:text-[170px] lg:text-[192px] text-[#23B349] leading-[0.88] tracking-[-0.03em] mt-1"
+            className="font-['Outfit'] font-extrabold text-[12vw] min-[375px]:text-[60px] sm:text-[110px] md:text-[170px] lg:text-[192px] text-[#23B349] leading-[0.88] tracking-[-0.03em] mt-1"
           >
             {t("connecting")}
           </h1>
@@ -135,7 +135,7 @@ export default function HeroSection() {
 
         {/* Doctor Duck — left, floating above curve (Node 16:1211) */}
         <div className="absolute top-[-6vw] sm:top-[-8vw] md:top-[-9vw] left-[1%] sm:left-[3%] md:left-[5%] z-30 drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)]">
-          <div className="relative w-[130px] sm:w-[170px] md:w-[260px] aspect-square animate-float -translate-y-[85%]">
+          <div className="relative w-[28vw] min-[375px]:w-[130px] sm:w-[170px] md:w-[260px] aspect-square animate-float -translate-y-[85%]">
             <Image
               src="/assets/hero/doctor-duck.png"
               alt="Doctor Duck"
@@ -148,7 +148,7 @@ export default function HeroSection() {
 
         {/* Biscuit Stack — right, floating above curve (Node 15:1203) cut off on the right edge */}
         <div className="absolute top-[-4vw] sm:top-[-6vw] md:top-[-7vw] right-[-10%] sm:right-[-8%] md:right-[-6%] z-30 drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)]">
-          <div className="relative w-[120px] sm:w-[180px] md:w-[280px] aspect-square animate-float-delayed -translate-y-[85%]">
+          <div className="relative w-[26vw] min-[375px]:w-[120px] sm:w-[180px] md:w-[280px] aspect-square animate-float-delayed -translate-y-[85%]">
             <Image
               src="/assets/hero/biscuit-stack.png"
               alt="Biscuit Stack"
@@ -163,7 +163,7 @@ export default function HeroSection() {
         <div className="w-full max-w-[950px] mx-auto flex flex-col items-start relative z-20 gap-8 sm:gap-12 mt-4 sm:mt-8">
 
           {/* White Inspirational Quote (Node 20:2095) */}
-          <h3 className="font-['Outfit'] font-bold text-[20px] sm:text-[28px] md:text-[38px] lg:text-[46px] text-white leading-[1.0] tracking-[-0.01em] max-w-[800px] text-left drop-shadow-md">
+          <h3 className="font-['Outfit'] font-bold text-[16px] min-[375px]:text-[20px] sm:text-[28px] md:text-[38px] lg:text-[46px] text-white leading-[1.0] tracking-[-0.01em] max-w-[800px] text-left drop-shadow-md">
             “{t("secondaryQuote")}”
           </h3>
 
@@ -197,14 +197,14 @@ export default function HeroSection() {
             className="absolute top-[65%] sm:top-[70%] left-[-20vw] w-[140vw] -z-10 -rotate-[4deg] origin-center flex flex-col overflow-hidden drop-shadow-2xl"
           >
             {/* Gray base layer */}
-            <div className="w-full h-[18px] sm:h-[28px] md:h-[40px] bg-[#404040]" />
+            <div className="w-full h-[14px] min-[375px]:h-[18px] sm:h-[28px] md:h-[40px] bg-[#404040]" />
             {/* Yellow marquee layer */}
-            <div className="w-full h-[50px] sm:h-[90px] md:h-[130px] bg-[#FFEC19] flex items-center overflow-hidden">
+            <div className="w-full h-[38px] min-[375px]:h-[50px] sm:h-[90px] md:h-[130px] bg-[#FFEC19] flex items-center overflow-hidden">
               <div className="flex whitespace-nowrap animate-marquee">
                 {[...Array(8)].map((_, i) => (
                   <span
                     key={i}
-                    className="text-[#DB4426] text-[24px] sm:text-[44px] md:text-[68px] lg:text-[88px] font-['Funnel_Display'] font-extrabold uppercase tracking-tight px-6 sm:px-10"
+                    className="text-[#DB4426] text-[18px] min-[375px]:text-[24px] sm:text-[44px] md:text-[68px] lg:text-[88px] font-['Funnel_Display'] font-extrabold uppercase tracking-tight px-4 sm:px-10"
                   >
                     A new stylish way of Connecting!
                   </span>
@@ -235,7 +235,7 @@ export default function HeroSection() {
           </div>
 
           {/* Yellow Quality Badge — top-right (Node 19:2004) */}
-          <div className="absolute -top-5 -right-4 sm:-top-8 sm:-right-8 w-[80px] h-[80px] sm:w-[130px] sm:h-[130px] z-40 animate-float pointer-events-none drop-shadow-xl">
+          <div className="absolute -top-5 -right-4 sm:-top-8 sm:-right-8 w-[16vw] h-[16vw] min-[375px]:w-[80px] min-[375px]:h-[80px] sm:w-[130px] sm:h-[130px] z-40 animate-float pointer-events-none drop-shadow-xl">
             <Image src="/assets/hero/true-badge.svg" alt="Quality Badge" fill className="object-contain" />
           </div>
         </div>
