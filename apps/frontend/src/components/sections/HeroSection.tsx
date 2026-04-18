@@ -12,143 +12,126 @@ export default function HeroSection() {
       id="hero"
       className="relative w-full bg-[#E9F7ED] overflow-hidden pt-[100px] sm:pt-[110px] lg:pt-[120px] min-h-screen flex flex-col items-center"
     >
-      {/* Background Decorative Elements */}
+      {/* Background Decorative Elements using original images / svgs */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Left decorative glow */}
-        <div className="absolute left-0 top-0 w-[50%] h-full opacity-60">
-           <div className="absolute top-[-10%] left-[-10%] w-[80%] h-[80%] bg-[#23B349] blur-[150px] rounded-full mix-blend-screen opacity-20" />
+        <div className="absolute left-[-10%] top-[-5%] w-[60%] h-[120%] opacity-80">
+          <Image src="/assets/hero/hero-bg-2-555c57.png" alt="" fill className="object-contain object-left-top opacity-50 mix-blend-multiply" />
         </div>
-        
-        {/* Right blurred background element */}
-        <div className="absolute right-0 top-0 w-[40%] h-full opacity-40">
-           <div className="absolute top-[10%] right-[-10%] w-[100%] h-[60%] bg-[#23B349] blur-[120px] rounded-full mix-blend-screen opacity-30" />
+        <div className="absolute right-[-10%] top-0 w-[50%] h-[120%] opacity-80">
+          <Image src="/assets/hero/hero-bg-1-6b801d.png" alt="" fill className="object-contain object-right-top opacity-50 mix-blend-multiply" />
         </div>
+      </div>
+
+      {/* Background Wave */}
+      <div className="absolute top-[30%] left-0 w-full z-0 opacity-20 pointer-events-none">
+        <Image src="/assets/hero/hero-wave.svg" alt="" width={7210} height={2286} className="w-[150%] max-w-none opacity-40 text-[#23B349]" />
       </div>
 
       {/* Main Hero Content */}
       <div className="relative z-10 w-full max-w-[1440px] px-4 sm:px-6 lg:px-8 pt-12 sm:pt-20 lg:pt-32 flex flex-col items-center">
+
         {/* Main Heading Group */}
-        <div className="flex flex-col items-center text-center relative mb-8 sm:mb-12">
-          {/* Decorative small images around text */}
-          <div className="absolute -left-12 sm:-left-24 top-0 animate-float hidden md:block">
-            <div className="relative w-16 h-16 sm:w-24 sm:h-24 rotate-12">
-              <Image 
-                src="/assets/hero/biscuit-piece.svg" 
-                alt="" 
-                fill 
-                className="object-contain opacity-80"
-              />
-            </div>
-          </div>
-          
-          <div className="absolute -right-12 sm:-right-24 bottom-0 animate-float-delayed hidden md:block">
-            <div className="relative w-12 h-12 sm:w-20 sm:h-20 -rotate-12">
-               <Image 
-                src="/assets/hero/star-badge.svg" 
-                alt="" 
-                fill 
-                className="object-contain opacity-80"
+        <div className="flex flex-col items-center text-center relative mb-8 sm:mb-12 w-full">
+          {/* Decorative badges (Strawberry) */}
+          <div className="absolute left-[10%] sm:left-[20%] top-0 animate-float hidden md:block">
+            <div className="relative w-16 h-16 sm:w-[81px] sm:h-[81px]">
+              <Image
+                src="/assets/hero/strawberry.png"
+                alt=""
+                fill
+                className="object-cover rounded-[16px] shadow-sm transform -rotate-6"
               />
             </div>
           </div>
 
-          <h2 className="font-['Outfit'] font-extrabold text-[42px] sm:text-[64px] lg:text-[96px] text-[#404040] leading-[0.9] tracking-tight uppercase">
-            A new stylish
+          {/* Generated Abstract badge */}
+          <div className="absolute right-[10%] sm:right-[15%] top-10 animate-float-delayed hidden md:block z-20">
+            <div className="relative w-16 h-16 sm:w-[108px] sm:h-[108px]">
+              <Image
+                src="/assets/hero/avatar-c6d.png"
+                alt=""
+                fill
+                className="object-cover rounded-[24px] shadow-md transform rotate-12"
+              />
+            </div>
+          </div>
+
+          <h2 className="font-['Outfit'] font-extrabold text-[36px] sm:text-[48px] md:text-[64px] lg:text-[80px] xl:text-[96px] text-[#404040] leading-[0.88] tracking-tight text-center">
+            {t('stylishWay')}
           </h2>
-          <h2 className="font-['Outfit'] font-extrabold text-[42px] sm:text-[64px] lg:text-[96px] text-[#404040] leading-[0.9] tracking-tight uppercase mb-2">
-            way of
-          </h2>
-          <h1 className="font-['Outfit'] font-extrabold text-[84px] sm:text-[140px] lg:text-[192px] text-[#23B349] leading-[0.8] tracking-[-0.04em] uppercase">
-            Connecting!
+          <h1 className="heading-hero text-[#23B349] leading-[0.88] tracking-[-0.03em] mt-2 mb-4 text-center">
+            {t('connecting')}
           </h1>
         </div>
 
         {/* Subtitle / Description */}
-        <div className="max-w-[720px] text-center mb-10 sm:mb-14">
-          <p className="font-['Funnel_Display'] font-medium text-[18px] sm:text-[20px] lg:text-[24px] text-[#404040]/80 leading-relaxed tracking-tight">
-            From everyday baking to special treats, Vita brings<br className="hidden sm:block" />
-            joy, taste, and quality to your table.
+        <div className="max-w-[720px] text-center mb-10 sm:mb-14 px-4 w-full">
+          <p className="font-['Funnel_Display'] font-medium text-[16px] sm:text-[20px] text-[#404040] leading-relaxed tracking-tight break-words whitespace-normal">
+            {t('description')}
           </p>
         </div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center">
+        <div className="flex flex-row flex-wrap justify-center gap-4 sm:gap-6 items-center z-20">
           <Link
             href="/products"
-            className="group bg-[#23B349] text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full flex items-center gap-4 hover:bg-[#1f9d40] transition-all duration-300 shadow-xl shadow-green-500/20 active:scale-[0.98]"
+            className="group bg-black text-white px-8 sm:px-[32px] py-3 sm:py-[16px] rounded-full flex items-center justify-center gap-4 hover:bg-gray-800 transition-all duration-300 h-[56px]"
           >
-            <span className="font-['Funnel_Display'] font-bold text-[20px] sm:text-[24px]">Our Products</span>
-            <div className="bg-white/20 rounded-full p-1 group-hover:translate-x-1 transition-transform">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </div>
+            <span className="font-['Funnel_Display'] font-medium text-[20px] sm:text-[24px] tracking-tight">{t('ourProducts')}</span>
+            <span className="text-[20px] font-['Outfit'] group-hover:translate-x-1 transition-transform">→</span>
           </Link>
-          
+
           <Link
             href="/about"
-            className="group border-2 border-[#23B349]/30 text-black px-8 sm:px-10 py-4 sm:py-5 rounded-full flex items-center gap-4 hover:bg-[#23B349]/5 transition-all duration-300 active:scale-[0.98]"
+            className="group border-2 border-[#23B349] text-black px-8 sm:px-[32px] py-3 sm:py-[16px] rounded-full flex items-center justify-center hover:bg-[#23B349]/5 transition-all duration-300 h-[56px]"
           >
-            <span className="font-['Funnel_Display'] font-bold text-[20px] sm:text-[24px]">Why Vita</span>
-            <span className="text-[#23B349] font-bold text-[20px]">®</span>
+            <span className="font-['Funnel_Display'] font-medium text-[20px] sm:text-[24px] tracking-tight">{t('whyVita')}</span>
           </Link>
         </div>
       </div>
 
-      {/* Floating Product Elements - Large screen only */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Right side large package */}
-        <div className="absolute right-[-5%] bottom-[5%] w-[400px] sm:w-[500px] lg:w-[680px] h-[400px] sm:h-[500px] lg:h-[612px] opacity-90 animate-float">
-          <Image 
-            src="/assets/hero/product-hero.png" 
-            alt="Vita Products" 
-            fill 
-            className="object-contain"
-          />
-        </div>
-        
-        {/* Left side cookie decorations */}
-        <div className="absolute left-[5%] bottom-[15%] w-[200px] h-[200px] lg:w-[350px] lg:h-[350px] opacity-80 animate-float-delayed">
-          <Image 
-            src="/assets/hero/cookie-decoration-1.png" 
-            alt="" 
-            fill 
-            className="object-contain"
-          />
+      {/* 3 Main Images Group from Figma */}
+      <div className="relative z-10 w-full max-w-[1200px] mt-16 sm:mt-24 h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] flex justify-center items-center">
+        {/* Tiramisu Left */}
+        <div className="absolute left-[0%] md:left-[5%] bottom-[10%] w-[180px] sm:w-[250px] md:w-[350px] lg:w-[450px] aspect-square animate-float z-20">
+          <Image src="/assets/hero/tiramisu.png" alt="Tiramisu" fill className="object-cover rounded-full shadow-2xl" />
         </div>
 
-        {/* Circular Badge */}
-        <div className="absolute right-[15%] top-[15%] w-[120px] sm:w-[180px] lg:w-[249px] h-[120px] sm:h-[180px] lg:h-[249px] animate-spin-slow">
-           <Image 
-            src="/assets/hero/texted-badge.svg" 
-            alt="100% Quality Badge" 
-            fill 
-            className="object-contain"
-          />
+        {/* AI Generated Center Image */}
+        <div className="absolute top-[0%] w-[200px] sm:w-[300px] md:w-[450px] lg:w-[550px] aspect-square animate-float-delayed z-10">
+          <Image src="/assets/hero/chatgpt-image.png" alt="Main Dessert" fill className="object-cover rounded-[32px] shadow-2xl rotate-[-4deg]" />
+          <div className="absolute inset-0 bg-[#23B349] opacity-20 blur-[60px] -z-10 rounded-full" />
         </div>
-      </div>
-      
-      {/* Bottom Wave/Vector decoration */}
-      <div className="absolute bottom-0 left-0 w-full h-[15%] sm:h-[20%] z-20 pointer-events-none">
-        <div className="relative w-full h-full">
-           <Image 
-            src="/assets/hero/hero-bg-element.svg" 
-            alt="" 
-            fill 
-            className="object-cover object-top opacity-50"
-          />
+
+        {/* Duck Delight Right */}
+        <div className="absolute right-[0%] md:right-[5%] bottom-[20%] w-[150px] sm:w-[200px] md:w-[300px] lg:w-[350px] aspect-square animate-float z-30">
+          <Image src="/assets/hero/doctor-duck.png" alt="Delight" fill className="object-cover rounded-[40px] shadow-2xl rotate-12" />
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 20s linear infinite;
-        }
-      `}</style>
+      {/* Secondary Bottom Section */}
+      <div className="relative w-full bg-[#23B349] mt-24 py-16 sm:py-24 px-4 sm:px-8 flex flex-col items-center text-center z-20">
+        <div className="max-w-[1200px] flex flex-col items-center gap-12">
+          <h3 className="heading-section text-white max-w-[900px] leading-[1.2]">
+            {t('secondaryQuote')}
+          </h3>
+
+          {/* Avatar Badge Component */}
+          <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-full pr-6 pl-2 py-2">
+            <div className="flex items-center -space-x-4">
+              <div className="w-12 h-12 rounded-full border-2 border-[#23B349] bg-[#E9F7ED] flex items-center justify-center text-[#23B349] font-bold z-40 text-sm">
+                +3
+              </div>
+              <div className="w-12 h-12 rounded-full border-2 border-[#E9F7ED] bg-[#a099b5] z-30"></div>
+              <div className="w-12 h-12 rounded-full border-2 border-[#E9F7ED] bg-[#7e4627] z-20"></div>
+              <div className="w-12 h-12 rounded-full border-2 border-[#E9F7ED] bg-[#9d8562] z-10"></div>
+            </div>
+            <span className="text-white font-['Outfit'] font-medium text-[16px] ml-4 tracking-wider">
+              {t('ourClients')}
+            </span>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
