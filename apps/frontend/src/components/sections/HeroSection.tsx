@@ -94,14 +94,18 @@ export default function HeroSection() {
         {/* Native CSS Mountain Edge - Overflowing absolutely up out of this div */}
         <div className="absolute top-[-12vw] sm:top-[-15vw] left-[-25%] w-[150%] h-[15vw] sm:h-[15.5vw] bg-[#23B349] rounded-t-[100%] border-none outline-none pointer-events-none -z-10 shadow-[0_-5px_15px_rgba(35,179,73,0.1)]" />
 
-        {/* Floating Doctor Duck - Positioned accurately over the green mountain edge */}
-        <div className="absolute top-[-10vw] sm:top-[-15vw] md:top-[-10vw] left-[2%] sm:left-[8%] md:left-[10%] w-[150px] sm:w-[220px] md:w-[350px] aspect-square animate-float z-30 drop-shadow-2xl">
-          <Image src="/assets/hero/doctor-duck.png" alt="Duck Character" fill className="object-contain object-bottom" />
+        {/* Floating Doctor Duck - Calculated absolute bottom to rest on the CSS arc */}
+        <div className="absolute top-[-8vw] sm:top-[-10vw] md:top-[-10.5vw] left-[2%] sm:left-[8%] md:left-[10%] z-30 drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)]">
+          <div className="relative w-[150px] sm:w-[220px] md:w-[350px] aspect-square animate-float -translate-y-[85%]">
+            <Image src="/assets/hero/doctor-duck.png" alt="Duck Character" fill className="object-contain object-bottom" priority />
+          </div>
         </div>
 
-        {/* Floating Biscuit Stack - Positioned accurately over the green mountain edge */}
-        <div className="absolute top-[-6vw] sm:top-[-10vw] md:top-[-8vw] right-[0%] sm:right-[5%] md:right-[8%] w-[120px] sm:w-[180px] md:w-[300px] aspect-square animate-float-delayed z-30 drop-shadow-2xl">
-          <Image src="/assets/hero/biscuit-stack.png" alt="Biscuit Stack" fill className="object-contain object-bottom" />
+        {/* Floating Biscuit Stack - Translated upwards to rest specifically on the green margin */}
+        <div className="absolute top-[-8vw] sm:top-[-10vw] md:top-[-10.5vw] right-[0%] sm:right-[5%] md:right-[8%] z-30 drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)]">
+          <div className="relative w-[120px] sm:w-[180px] md:w-[300px] aspect-square animate-float-delayed -translate-y-[85%]">
+            <Image src="/assets/hero/biscuit-stack.png" alt="Biscuit Stack" fill className="object-contain object-bottom" priority />
+          </div>
         </div>
 
         {/* White Inspirational Quote */}
