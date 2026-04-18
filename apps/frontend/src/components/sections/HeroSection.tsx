@@ -112,27 +112,27 @@ export default function HeroSection() {
         <div className="w-full max-w-[950px] mx-auto flex flex-col items-start relative z-20">
 
           {/* White Inspirational Quote */}
-          <h3 className="font-['Outfit'] font-extrabold text-[28px] sm:text-[40px] md:text-[56px] lg:text-[64px] text-white leading-[1.05] max-w-[850px] text-left mb-6 lg:mb-8 drop-shadow-md">
+          <h3 className="font-['Outfit'] font-extrabold text-[24px] sm:text-[32px] md:text-[44px] lg:text-[52px] text-white leading-[1.05] max-w-[700px] text-left mb-6 lg:mb-8 drop-shadow-md">
             {t('secondaryQuote')}
           </h3>
 
           {/* Client Avatars Group */}
-          <div className="flex items-center justify-start gap-3 sm:gap-4 bg-transparent mb-12 sm:mb-20 w-fit hover:scale-105 transition-transform duration-300 cursor-default relative origin-left">
-            <div className="flex -space-x-3 sm:-space-x-4 drop-shadow-md">
-              <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full border-[3px] border-[#23B349] bg-white overflow-hidden z-30">
+          <div className="flex items-center justify-start gap-2 sm:gap-3 bg-transparent mb-12 sm:mb-20 w-fit hover:scale-105 transition-transform duration-300 cursor-default relative origin-left">
+            <div className="flex -space-x-2 sm:-space-x-3 drop-shadow-md">
+              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full border-[2.5px] border-[#23B349] bg-white overflow-hidden z-30">
                 <Image src="/assets/hero/client-1.png" alt="Client" fill className="object-cover" />
               </div>
-              <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full border-[3px] border-[#23B349] bg-white overflow-hidden z-20">
+              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full border-[2.5px] border-[#23B349] bg-white overflow-hidden z-20">
                 <Image src="/assets/hero/client-2.png" alt="Client" fill className="object-cover object-top" />
               </div>
-              <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full border-[3px] border-[#23B349] bg-white overflow-hidden z-10">
+              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full border-[2.5px] border-[#23B349] bg-white overflow-hidden z-10">
                 <Image src="/assets/hero/client-3.png" alt="Client" fill className="object-cover object-top" />
               </div>
-              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-[3px] border-[#23B349] bg-white flex items-center justify-center text-[#23B349] font-black text-[14px] sm:text-[18px] z-0">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-[2.5px] border-[#23B349] bg-white flex items-center justify-center text-[#23B349] font-black text-[12px] sm:text-[16px] z-0">
                 +3
               </div>
             </div>
-            <span className="font-['Outfit'] font-bold text-white text-[16px] sm:text-[20px] tracking-wide ml-2">{t('ourClients')}</span>
+            <span className="font-['Outfit'] font-bold text-white text-[14px] sm:text-[18px] tracking-wide ml-2">{t('ourClients')}</span>
           </div>
 
         </div>
@@ -140,9 +140,25 @@ export default function HeroSection() {
         {/* Video Layout Center */}
         <div className="relative w-full max-w-[950px] mx-auto z-30 mt-4">
 
-          {/* Red Tape Underlayer (Rotated diagonally out the left side) */}
-          <div className="absolute top-[80%] left-[-15vw] sm:left-[-150px] w-[130vw] md:w-[130%] h-[50px] sm:h-[100px] -z-10 flex items-center justify-center mix-blend-normal -rotate-[6deg] origin-center -ml-12 drop-shadow-xl opacity-90">
-            <Image src="/assets/hero/text-tape.svg" alt="Tape Decor" fill className="object-contain object-left overflow-visible" />
+          {/* Multi-layered Red Text Tape (Node 20:2099 / 20:2100) */}
+          <div className="absolute top-[82%] sm:top-[85%] left-[-15vw] w-[130vw] h-[60px] sm:h-[120px] md:h-[160px] -z-10 -rotate-[6deg] origin-center flex items-center justify-center drop-shadow-2xl overflow-hidden scale-x-110 sm:scale-x-100">
+            {/* Layer 1: Dark Gray Base (Figma Gray #404040) */}
+            <div className="absolute inset-0 bg-[#404040] opacity-100 shadow-inner" />
+
+            {/* Layer 2: Yellow Strip with Marquee (Figma Yellow #FFEC19) */}
+            <div className="relative w-full h-[75%] bg-[#FFEC19] flex items-center overflow-hidden">
+              <div className="flex whitespace-nowrap animate-marquee">
+                {/* Layer 3: Red Scrolling Text (Figma Red #DB4426) */}
+                {[...Array(6)].map((_, i) => (
+                  <span
+                    key={i}
+                    className="text-[#DB4426] text-[28px] sm:text-[52px] md:text-[76px] lg:text-[96px] font-['Funnel_Display'] font-black uppercase tracking-tighter px-6 sm:px-12"
+                  >
+                    A new stylish way of Connecting!
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Frame */}
