@@ -12,10 +12,17 @@ export default function HeroSection() {
       id="hero"
       className="relative w-full overflow-hidden flex flex-col items-center bg-white min-h-[100vh] pt-20"
     >
-      {/* Top Glowing Spots */}
-      <div className="absolute top-0 left-0 w-full h-[500px] pointer-events-none z-0 overflow-hidden">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[120%] bg-[#23B349] blur-[150px] opacity-10 rounded-full mix-blend-multiply" />
-        <div className="absolute top-[10%] right-[-10%] w-[40%] h-[120%] bg-[#23B349] blur-[150px] opacity-10 rounded-full mix-blend-multiply" />
+      {/* Top Background Images (the specific Figma blur sections for above the curve) */}
+      <div className="absolute top-0 left-0 w-full h-[800px] pointer-events-none z-0 overflow-hidden text-center">
+        <Image src="/assets/hero/hero-bg-2-555c57.png" alt="" fill className="object-contain object-left-top opacity-50 absolute left-[-10%] top-[-5%]" />
+        <Image src="/assets/hero/hero-bg-1-6b801d.png" alt="" fill className="object-contain object-right-top opacity-50 absolute right-[-10%] top-[-10%]" />
+      </div>
+
+      {/* Center Yellowish Blur right above the curve */}
+      <div className="absolute top-[20%] w-[100%] max-w-[1200px] h-[600px] pointer-events-none z-0 opacity-80 mix-blend-multiply flex justify-center">
+        <div className="relative w-full h-full">
+          <Image src="/assets/hero/bg-center-blur.png" alt="" fill className="object-contain" />
+        </div>
       </div>
 
       {/* Top Section - Text & Buttons */}
@@ -65,9 +72,9 @@ export default function HeroSection() {
       </div>
 
       {/* Massive Green Curve Background & Bottom Content */}
-      <div className="relative w-full mt-4 md:mt-12 flex-grow flex flex-col items-center">
+      <div className="relative w-full mt-4 md:mt-12 flex-grow flex flex-col items-center text-center pb-24 lg:pb-32">
         {/* Background Arc */}
-        <div className="absolute top-0 left-[-25%] w-[150%] h-[200%] bg-[#23B349] rounded-t-[100%] z-0" />
+        <div className="absolute top-0 left-[-25%] w-[150%] h-[150%] bg-[#23B349] rounded-t-[100%] z-0 shadow-[0_0_150px_rgba(35,179,73,0.3)]" />
 
         {/* Decorative Assets overlapping the curve */}
         {/* Left Side Duck */}
@@ -76,19 +83,19 @@ export default function HeroSection() {
         </div>
 
         {/* Right Side Biscuits */}
-        <div className="absolute top-[-60px] md:top-[-120px] right-[2%] sm:right-[5%] w-[150px] sm:w-[200px] md:w-[350px] aspect-square animate-float-delayed z-20">
+        <div className="absolute top-[-60px] md:top-[-120px] right-[2%] sm:right-[5%] w-[150px] sm:w-[200px] md:w-[350px] md:h-[350px] animate-float-delayed z-20">
           <Image src="/assets/hero/biscuit-stack.png" alt="Biscuit Stack" fill className="object-contain drop-shadow-2xl" />
         </div>
 
         {/* Content Inside Green Area */}
-        <div className="relative z-10 w-full max-w-[1000px] mx-auto px-4 flex flex-col items-center text-center pt-[15%] sm:pt-[10%] pb-24 lg:pb-32">
+        <div className="relative z-10 w-full max-w-[1000px] mx-auto px-4 flex flex-col items-center pt-[15%] sm:pt-[10%]">
 
-          <h3 className="font-['Outfit'] font-extrabold text-[24px] sm:text-[36px] md:text-[44px] lg:text-[48px] text-white leading-[1.2] tracking-normal max-w-[900px] mb-8 lg:mb-12">
+          <h3 className="font-['Outfit'] font-extrabold text-[24px] sm:text-[36px] md:text-[44px] lg:text-[48px] text-white leading-[1.2] tracking-normal max-w-[900px] mb-8 lg:mb-12 drop-shadow-sm">
             {t('secondaryQuote')}
           </h3>
 
           {/* Client Avatars */}
-          <div className="flex items-center gap-4 bg-transparent mb-16 sm:mb-24 mt-4">
+          <div className="flex items-center justify-center gap-4 bg-transparent mb-16 sm:mb-24 mt-4 w-full">
             <div className="flex -space-x-3">
               <Image src="/assets/hero/avatar-c6d.png" width={40} height={40} alt="User" className="w-10 h-10 rounded-full border-[3px] border-[#23B349] object-cover bg-white" />
               <Image src="/assets/hero/strawberry.png" width={40} height={40} alt="User" className="w-10 h-10 rounded-full border-[3px] border-[#23B349] object-cover bg-white p-1" />
@@ -99,58 +106,43 @@ export default function HeroSection() {
             <span className="font-['Outfit'] font-bold text-white text-[16px] tracking-wide">{t('ourClients')}</span>
           </div>
 
-          {/* Family Video/Image Placeholder */}
-          <div className="relative w-full max-w-[880px] mx-auto z-30">
-            <div className="relative w-full aspect-[16/9] lg:aspect-[2/1] rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-2xl border-[6px] sm:border-[8px] border-white z-10">
-              <Image src="/assets/hero/family-eating.png" alt="Family eating biscuits" fill className="object-cover object-center" />
+          {/* Family Video Area */}
+          <div className="relative w-full max-w-[880px] mx-auto z-30 mt-8 sm:mt-16">
+
+            {/* The Text Tape component fetched freshly from figma covering left side under the video */}
+            <div className="absolute top-[60%] sm:top-[70%] left-[-15vw] sm:left-[-250px] w-[130vw] md:w-[130%] h-[60px] sm:h-[120px] -z-10 bg-transparent flex items-center justify-center">
+              <Image src="/assets/hero/text-tape.svg" alt="Tape Decor" fill className="object-contain object-left overflow-visible" />
+            </div>
+
+            {/* Main Video Frame */}
+            <div className="relative w-full aspect-[16/9] lg:aspect-[2/1] rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-[6px] sm:border-[8px] border-white z-10 bg-[#FFD700]">
+              <Image src="/assets/hero/family-true.png" alt="Family eating biscuits" fill className="object-cover object-center" />
 
               {/* Video Play overlay */}
-              <div className="absolute top-4 sm:top-8 left-4 sm:left-8 w-10 h-10 sm:w-14 sm:h-14 bg-black/30 rounded-full flex items-center justify-center backdrop-blur-md cursor-pointer hover:bg-black/50 transition">
+              <div className="absolute top-4 sm:top-8 left-4 sm:left-8 w-10 h-10 sm:w-14 sm:h-14 bg-black/30 rounded-full flex items-center justify-center backdrop-blur-sm cursor-pointer hover:bg-black/50 transition">
                 <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-4 h-4 sm:w-6 sm:h-6 ml-1">
                   <polygon points="9 7 17 12 9 17 9 7" fill="white"></polygon>
                 </svg>
               </div>
             </div>
 
-            {/* Pop-out Yellow Badge */}
-            <div className="absolute -top-8 -right-8 sm:-top-16 sm:-right-12 w-[100px] h-[100px] sm:w-[160px] sm:h-[160px] z-20">
-              <Image src="/assets/hero/texted-badge.svg" alt="Badge" fill className="object-contain animate-spin-slow drop-shadow-xl" />
+            {/* Pop-out True Yellow Badge */}
+            <div className="absolute -top-8 -right-8 sm:-top-16 sm:-right-12 w-[100px] h-[100px] sm:w-[160px] sm:h-[160px] z-30 animate-float">
+              <Image src="/assets/hero/true-badge.svg" alt="Badge" fill className="object-contain drop-shadow-xl" />
             </div>
 
-            {/* Warning Tape extending left */}
-            <div className="absolute top-[60%] sm:top-[70%] left-[-10vw] sm:left-[-150px] w-[130vw] md:w-[120%] h-[40px] sm:h-[60px] bg-[#FFD700] rotate-[-3deg] sm:rotate-[-2deg] -z-10 flex items-center overflow-hidden drop-shadow-lg">
-              <div className="flex items-center gap-4 animate-marquee whitespace-nowrap min-w-full font-['Outfit'] font-black text-red-600 text-[20px] sm:text-[32px] leading-none tracking-widest pt-1">
-                <span>A NEW STYLISH WAY OF CONNECTING</span>
-                <span className="mx-2 sm:mx-4 text-black text-xs sm:text-lg">●</span>
-                <span>A NEW STYLISH WAY OF CONNECTING</span>
-                <span className="mx-2 sm:mx-4 text-black text-xs sm:text-lg">●</span>
-                <span>A NEW STYLISH WAY OF CONNECTING</span>
-                <span className="mx-2 sm:mx-4 text-black text-xs sm:text-lg">●</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
       <style jsx>{`
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
         @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-15px); }
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(2deg); }
         }
         @keyframes float-delayed {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-15px); }
-        }
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 20s linear infinite;
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(-2deg); }
         }
         .animate-float {
           animation: float 6s ease-in-out infinite;
@@ -158,10 +150,6 @@ export default function HeroSection() {
         .animate-float-delayed {
           animation: float-delayed 8s ease-in-out infinite;
           animation-delay: -3s;
-        }
-        .animate-marquee {
-          animation: marquee 30s linear infinite;
-          min-width: 200%;
         }
       `}</style>
     </section>
