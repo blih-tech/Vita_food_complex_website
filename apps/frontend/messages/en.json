@@ -59,15 +59,8 @@
     "subtext": "Tag and share what you love about Vita products"
   },
   "Partner": {
-    "heading": "Our Trusted Partners",
-    "subtext": "We collaborate with global and local organizations to deliver high-quality food products and support our communities.",
-    "list": {
-      "unicef": "UNICEF",
-      "wfp": "World Food Programme",
-      "esa": "Ethiopian Standards Agency",
-      "usaid": "USAID",
-      "moa": "Ministry of Agriculture"
-    }
+    "subtitle": "Uplifting Every Daily Food Moment.",
+    "heading": "Quality is Built Around Us!"
   },
   "Recipes": {
     "label": "Vita Blog",
