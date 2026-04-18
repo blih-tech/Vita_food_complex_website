@@ -10,7 +10,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full overflow-hidden flex flex-col items-center bg-[#EAF8ED] md:bg-white min-h-[100vh] pt-20"
+      className="relative w-full overflow-hidden flex flex-col items-center bg-white min-h-[100vh] pt-20"
     >
       {/* Background Glows Group - Strict Top Anchors */}
       <div className="absolute top-0 left-0 w-full h-[800px] pointer-events-none z-0 overflow-hidden">
@@ -27,7 +27,7 @@ export default function HeroSection() {
         <div className="absolute top-[-150px] right-[-150px] w-[600px] h-[600px] bg-[#23B349] blur-[150px] rounded-full opacity-50 mix-blend-multiply" />
 
         {/* Top Right Blurred Texture (Node 18:1575 / hero-bg-1) */}
-        <div className="absolute top-[-20px] right-0 w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] opacity-100 blur-[10px] z-10">
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] opacity-100 blur-[10px] z-10">
           <Image src="/assets/hero/hero-bg-1-6b801d.png" alt="" fill className="object-contain object-right-top" />
         </div>
 
@@ -70,7 +70,7 @@ export default function HeroSection() {
         </div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-row gap-4 items-center z-30">
+        <div className="flex flex-row gap-4 items-center z-30 pb-12 sm:pb-24">
           <Link
             href="/products"
             className="group bg-[#23B349] text-white px-8 sm:px-10 py-3 md:py-4 rounded-full flex items-center justify-center gap-3 hover:bg-[#1E9A3E] transition-all duration-300 shadow-xl shadow-green-600/20 active:scale-95"
@@ -88,73 +88,69 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Massive Green SVG Arc container */}
-      <div className="relative w-full z-10 flex flex-col items-center mt-[-30px] sm:mt-[-50px]">
+      {/* Massive Green Block Wrapper (Drops down dynamically matching CSS arc top) */}
+      <div className="relative w-full mt-[12vw] sm:mt-[15vw] z-10 flex-grow flex flex-col items-center bg-[#23B349] px-4 pt-12 sm:pt-24 pb-24 lg:pb-32">
 
-        {/* Native SVG Wave Roof - Rotate 180 degrees flipping it into a mountain (-scale-y-100) */}
-        <div className="relative w-[180%] sm:w-[120%] aspect-[3.15/1] -mb-[2px] pointer-events-none z-0">
-          <Image src="/assets/hero/true-hero-wave.svg" alt="" fill className="object-fill -scale-y-100" priority />
+        {/* Native CSS Mountain Edge - Overflowing absolutely up out of this div */}
+        <div className="absolute top-[-12vw] sm:top-[-15vw] left-[-25%] w-[150%] h-[15vw] sm:h-[15.5vw] bg-[#23B349] rounded-t-[100%] border-none outline-none pointer-events-none -z-10 shadow-[0_-5px_15px_rgba(35,179,73,0.1)]" />
 
-          {/* Floating Assets anchored precisely OVER the SVG curve slopes */}
-          <div className="absolute top-[30%] sm:top-[20%] left-[20%] sm:left-[15%] w-[120px] sm:w-[220px] md:w-[320px] aspect-square animate-float z-30 drop-shadow-2xl">
-            <Image src="/assets/hero/doctor-duck.png" alt="Duck Character" fill className="object-contain object-bottom" />
+        {/* Floating Doctor Duck - Positioned accurately over the green mountain edge */}
+        <div className="absolute top-[-10vw] sm:top-[-15vw] md:top-[-10vw] left-[2%] sm:left-[8%] md:left-[10%] w-[150px] sm:w-[220px] md:w-[350px] aspect-square animate-float z-30 drop-shadow-2xl">
+          <Image src="/assets/hero/doctor-duck.png" alt="Duck Character" fill className="object-contain object-bottom" />
+        </div>
+
+        {/* Floating Biscuit Stack - Positioned accurately over the green mountain edge */}
+        <div className="absolute top-[-6vw] sm:top-[-10vw] md:top-[-8vw] right-[0%] sm:right-[5%] md:right-[8%] w-[120px] sm:w-[180px] md:w-[300px] aspect-square animate-float-delayed z-30 drop-shadow-2xl">
+          <Image src="/assets/hero/biscuit-stack.png" alt="Biscuit Stack" fill className="object-contain object-bottom" />
+        </div>
+
+        {/* White Inspirational Quote */}
+        <h3 className="font-['Outfit'] font-extrabold text-[22px] sm:text-[36px] md:text-[44px] lg:text-[48px] text-white leading-[1.25] max-w-[900px] text-center mb-8 lg:mb-12 relative z-20">
+          {t('secondaryQuote')}
+        </h3>
+
+        {/* Client Avatars */}
+        <div className="flex items-center justify-center gap-4 bg-transparent mb-12 sm:mb-20 w-full hover:scale-105 transition-transform duration-300 cursor-default relative z-20">
+          <div className="flex -space-x-3 drop-shadow-md">
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full border-[3px] border-[#23B349] bg-white overflow-hidden">
+              <Image src="/assets/hero/avatar-c6d.png" alt="Client" fill className="object-cover" />
+            </div>
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full border-[3px] border-[#23B349] bg-white overflow-hidden p-0.5">
+              <Image src="/assets/hero/strawberry.png" alt="Client" fill className="object-contain" />
+            </div>
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-[3px] border-[#23B349] bg-gray-100 flex items-center justify-center text-[#23B349] font-black text-[14px] z-10">
+              +3
+            </div>
+          </div>
+          <span className="font-['Outfit'] font-bold text-white text-[15px] sm:text-[18px] tracking-wide">{t('ourClients')}</span>
+        </div>
+
+        {/* Video Layout Center */}
+        <div className="relative w-full max-w-[950px] mx-auto z-30">
+
+          {/* Red Tape Underlayer */}
+          <div className="absolute top-[60%] sm:top-[70%] left-[-10vw] sm:left-[-150px] w-[120vw] md:w-[130%] h-[50px] sm:h-[100px] -z-10 flex items-center justify-center mix-blend-normal">
+            <Image src="/assets/hero/text-tape.svg" alt="Tape Decor" fill className="object-contain object-left overflow-visible" />
           </div>
 
-          <div className="absolute top-[35%] sm:top-[25%] right-[20%] sm:right-[15%] w-[100px] sm:w-[180px] md:w-[280px] aspect-square animate-float-delayed z-30 drop-shadow-2xl">
-            <Image src="/assets/hero/biscuit-stack.png" alt="Biscuit Stack" fill className="object-contain object-bottom" />
+          {/* Frame */}
+          <div className="relative w-full aspect-[16/9] lg:aspect-[2.1/1] rounded-[20px] sm:rounded-[32px] overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.4)] border-[6px] sm:border-[10px] border-white group cursor-pointer bg-[#FFD700]">
+            <Image src="/assets/hero/family-true.png" alt="Family Video" fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out" />
+
+            {/* Play Button */}
+            <div className="absolute top-4 sm:top-6 left-4 sm:left-6 w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-[16px] sm:rounded-[20px] flex items-center justify-center backdrop-blur-md hover:bg-white/40 transition border border-white/50 shadow-lg group-hover:scale-110">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" className="w-5 h-5 sm:w-7 sm:h-7 ml-1">
+                <polygon points="9 6 18 12 9 18 9 6" fill="white"></polygon>
+              </svg>
+            </div>
+          </div>
+
+          {/* Yellow Badge */}
+          <div className="absolute -top-6 -right-6 sm:-top-10 sm:-right-8 w-[100px] h-[100px] sm:w-[180px] sm:h-[180px] z-40 animate-float pointer-events-none drop-shadow-xl hover:animate-spin-slow">
+            <Image src="/assets/hero/true-badge.svg" alt="Quality Badge" fill className="object-contain" />
           </div>
         </div>
 
-        {/* Solid Green Main Block descending to the next section */}
-        <div className="relative w-full bg-[#23B349] flex flex-col items-center px-4 pt-4 sm:pt-12 pb-24 lg:pb-32 z-10">
-
-          <h3 className="font-['Outfit'] font-extrabold text-[22px] sm:text-[36px] md:text-[44px] lg:text-[48px] text-white leading-[1.25] max-w-[900px] text-center mb-8 lg:mb-12">
-            {t('secondaryQuote')}
-          </h3>
-
-          {/* Client Avatars */}
-          <div className="flex items-center justify-center gap-4 bg-transparent mb-12 sm:mb-20 w-full hover:scale-105 transition-transform duration-300 cursor-default">
-            <div className="flex -space-x-3 drop-shadow-md">
-              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full border-[3px] border-[#23B349] bg-white overflow-hidden">
-                <Image src="/assets/hero/avatar-c6d.png" alt="Client" fill className="object-cover" />
-              </div>
-              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full border-[3px] border-[#23B349] bg-white overflow-hidden p-0.5">
-                <Image src="/assets/hero/strawberry.png" alt="Client" fill className="object-contain" />
-              </div>
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-[3px] border-[#23B349] bg-gray-100 flex items-center justify-center text-[#23B349] font-black text-[14px] z-10">
-                +3
-              </div>
-            </div>
-            <span className="font-['Outfit'] font-bold text-white text-[15px] sm:text-[18px] tracking-wide">{t('ourClients')}</span>
-          </div>
-
-          {/* Video Layout Center */}
-          <div className="relative w-full max-w-[950px] mx-auto z-30">
-
-            {/* Red Tape Underlayer */}
-            <div className="absolute top-[60%] sm:top-[70%] left-[-10vw] sm:left-[-150px] w-[120vw] md:w-[130%] h-[50px] sm:h-[100px] -z-10 flex items-center justify-center mix-blend-normal">
-              <Image src="/assets/hero/text-tape.svg" alt="Tape Decor" fill className="object-contain object-left overflow-visible" />
-            </div>
-
-            {/* Frame */}
-            <div className="relative w-full aspect-[16/9] lg:aspect-[2.1/1] rounded-[20px] sm:rounded-[32px] overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.4)] border-[6px] sm:border-[10px] border-white group cursor-pointer bg-[#FFD700]">
-              <Image src="/assets/hero/family-true.png" alt="Family Video" fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out" />
-
-              {/* Play Button */}
-              <div className="absolute top-4 sm:top-6 left-4 sm:left-6 w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-[16px] sm:rounded-[20px] flex items-center justify-center backdrop-blur-md hover:bg-white/40 transition border border-white/50 shadow-lg group-hover:scale-110">
-                <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" className="w-5 h-5 sm:w-7 sm:h-7 ml-1">
-                  <polygon points="9 6 18 12 9 18 9 6" fill="white"></polygon>
-                </svg>
-              </div>
-            </div>
-
-            {/* Yellow Badge */}
-            <div className="absolute -top-6 -right-6 sm:-top-10 sm:-right-8 w-[100px] h-[100px] sm:w-[180px] sm:h-[180px] z-40 animate-float pointer-events-none drop-shadow-xl hover:animate-spin-slow">
-              <Image src="/assets/hero/true-badge.svg" alt="Quality Badge" fill className="object-contain" />
-            </div>
-          </div>
-
-        </div>
       </div>
 
       <style jsx>{`
