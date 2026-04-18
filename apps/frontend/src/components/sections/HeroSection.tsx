@@ -10,128 +10,160 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full bg-[#E9F7ED] overflow-hidden pt-[100px] sm:pt-[110px] lg:pt-[120px] min-h-screen flex flex-col items-center"
+      className="relative w-full overflow-hidden flex flex-col items-center bg-white min-h-[100vh] pt-20"
     >
-      {/* Background Decorative Elements using original images / svgs */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute left-[-10%] top-[-5%] w-[60%] h-[120%] opacity-80">
-          <Image src="/assets/hero/hero-bg-2-555c57.png" alt="" fill className="object-contain object-left-top opacity-50 mix-blend-multiply" />
-        </div>
-        <div className="absolute right-[-10%] top-0 w-[50%] h-[120%] opacity-80">
-          <Image src="/assets/hero/hero-bg-1-6b801d.png" alt="" fill className="object-contain object-right-top opacity-50 mix-blend-multiply" />
-        </div>
+      {/* Top Glowing Spots */}
+      <div className="absolute top-0 left-0 w-full h-[500px] pointer-events-none z-0 overflow-hidden">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[120%] bg-[#23B349] blur-[150px] opacity-10 rounded-full mix-blend-multiply" />
+        <div className="absolute top-[10%] right-[-10%] w-[40%] h-[120%] bg-[#23B349] blur-[150px] opacity-10 rounded-full mix-blend-multiply" />
       </div>
 
-      {/* Background Wave */}
-      <div className="absolute top-[30%] left-0 w-full z-0 opacity-20 pointer-events-none">
-        <Image src="/assets/hero/hero-wave.svg" alt="" width={7210} height={2286} className="w-[150%] max-w-none opacity-40 text-[#23B349]" />
-      </div>
-
-      {/* Main Hero Content */}
-      <div className="relative z-10 w-full max-w-[1440px] px-4 sm:px-6 lg:px-8 pt-12 sm:pt-20 lg:pt-32 flex flex-col items-center">
-
+      {/* Top Section - Text & Buttons */}
+      <div className="relative z-10 w-full max-w-[1200px] px-4 flex flex-col items-center pt-12 md:pt-16 pb-12">
         {/* Main Heading Group */}
-        <div className="flex flex-col items-center text-center relative mb-8 sm:mb-12 w-full">
-          {/* Decorative badges (Strawberry) */}
-          <div className="absolute left-[10%] sm:left-[20%] top-0 animate-float hidden md:block">
-            <div className="relative w-16 h-16 sm:w-[81px] sm:h-[81px]">
-              <Image
-                src="/assets/hero/strawberry.png"
-                alt=""
-                fill
-                className="object-cover rounded-[16px] shadow-sm transform -rotate-6"
-              />
-            </div>
-          </div>
-
-          {/* Generated Abstract badge */}
-          <div className="absolute right-[10%] sm:right-[15%] top-10 animate-float-delayed hidden md:block z-20">
-            <div className="relative w-16 h-16 sm:w-[108px] sm:h-[108px]">
-              <Image
-                src="/assets/hero/avatar-c6d.png"
-                alt=""
-                fill
-                className="object-cover rounded-[24px] shadow-md transform rotate-12"
-              />
-            </div>
-          </div>
-
-          <h2 className="font-['Outfit'] font-extrabold text-[36px] sm:text-[48px] md:text-[64px] lg:text-[80px] xl:text-[96px] text-[#404040] leading-[0.88] tracking-tight text-center">
-            {t('stylishWay')}
+        <div className="flex flex-col items-center text-center relative z-20">
+          <h2 className="font-['Outfit'] font-extrabold text-[40px] sm:text-[64px] md:text-[80px] text-[#404040] leading-[1.1] tracking-tight">
+            A new stylish
           </h2>
-          <h1 className="heading-hero text-[#23B349] leading-[0.88] tracking-[-0.03em] mt-2 mb-4 text-center">
+          <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 sm:-mt-4">
+            <Image src="/assets/hero/cookie-decoration-1.png" alt="Biscuit" width={64} height={64} className="w-[40px] h-[40px] sm:w-[64px] sm:h-[64px] object-contain -rotate-12 animate-float" />
+            <h2 className="font-['Outfit'] font-extrabold text-[40px] sm:text-[64px] md:text-[80px] text-[#404040] leading-[1.1] tracking-tight">
+              way of
+            </h2>
+            <Image src="/assets/hero/strawberry.png" alt="Strawberry" width={64} height={64} className="w-[40px] h-[40px] sm:w-[64px] sm:h-[64px] object-contain rotate-12 animate-float-delayed" />
+          </div>
+
+          <h1 className="font-['Outfit'] font-extrabold text-[64px] sm:text-[100px] md:text-[140px] lg:text-[180px] text-[#23B349] leading-[0.9] tracking-tight mt-0 md:-mt-2">
             {t('connecting')}
           </h1>
         </div>
 
-        {/* Subtitle / Description */}
-        <div className="max-w-[720px] text-center mb-10 sm:mb-14 px-4 w-full">
-          <p className="font-['Funnel_Display'] font-medium text-[16px] sm:text-[20px] text-[#404040] leading-relaxed tracking-tight break-words whitespace-normal">
+        {/* Subtitle */}
+        <div className="max-w-[400px] sm:max-w-[500px] text-center mt-6 sm:mt-8 mb-8 sm:mb-12">
+          <p className="font-['Funnel_Display'] font-medium text-[14px] sm:text-[16px] md:text-[18px] text-[#404040] leading-snug">
             {t('description')}
           </p>
         </div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-row flex-wrap justify-center gap-4 sm:gap-6 items-center z-20">
+        <div className="flex flex-row gap-4 items-center mb-12 sm:mb-24 z-20">
           <Link
             href="/products"
-            className="group bg-black text-white px-8 sm:px-[32px] py-3 sm:py-[16px] rounded-full flex items-center justify-center gap-4 hover:bg-gray-800 transition-all duration-300 h-[56px]"
+            className="group bg-[#23B349] text-white px-6 sm:px-8 py-2 md:py-3 rounded-full flex items-center justify-center gap-2 hover:bg-[#1E9A3E] transition-all duration-300 shadow-md"
           >
-            <span className="font-['Funnel_Display'] font-medium text-[20px] sm:text-[24px] tracking-tight">{t('ourProducts')}</span>
-            <span className="text-[20px] font-['Outfit'] group-hover:translate-x-1 transition-transform">→</span>
+            <span className="font-['Funnel_Display'] font-bold text-[14px] sm:text-[16px]">{t('ourProducts')}</span>
+            <span className="text-[16px] group-hover:translate-x-1 transition-transform">→</span>
           </Link>
 
           <Link
             href="/about"
-            className="group border-2 border-[#23B349] text-black px-8 sm:px-[32px] py-3 sm:py-[16px] rounded-full flex items-center justify-center hover:bg-[#23B349]/5 transition-all duration-300 h-[56px]"
+            className="border-[1.5px] border-[#23B349] text-[#23B349] bg-white px-6 sm:px-8 py-2 md:py-3 rounded-full flex items-center justify-center hover:bg-green-50 transition-all"
           >
-            <span className="font-['Funnel_Display'] font-medium text-[20px] sm:text-[24px] tracking-tight">{t('whyVita')}</span>
+            <span className="font-['Funnel_Display'] font-bold text-[14px] sm:text-[16px]">{t('whyVita')}</span>
           </Link>
         </div>
       </div>
 
-      {/* 3 Main Images Group from Figma */}
-      <div className="relative z-10 w-full max-w-[1200px] mt-16 sm:mt-24 h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] flex justify-center items-center">
-        {/* Tiramisu Left */}
-        <div className="absolute left-[0%] md:left-[5%] bottom-[10%] w-[180px] sm:w-[250px] md:w-[350px] lg:w-[450px] aspect-square animate-float z-20">
-          <Image src="/assets/hero/tiramisu.png" alt="Tiramisu" fill className="object-cover rounded-full shadow-2xl" />
+      {/* Massive Green Curve Background & Bottom Content */}
+      <div className="relative w-full mt-4 md:mt-12 flex-grow flex flex-col items-center">
+        {/* Background Arc */}
+        <div className="absolute top-0 left-[-25%] w-[150%] h-[200%] bg-[#23B349] rounded-t-[100%] z-0" />
+
+        {/* Decorative Assets overlapping the curve */}
+        {/* Left Side Duck */}
+        <div className="absolute top-[-80px] md:top-[-200px] left-[2%] sm:left-[10%] w-[180px] sm:w-[250px] md:w-[400px] aspect-square animate-float z-20">
+          <Image src="/assets/hero/doctor-duck.png" alt="Duck Character" fill className="object-contain drop-shadow-2xl" />
         </div>
 
-        {/* AI Generated Center Image */}
-        <div className="absolute top-[0%] w-[200px] sm:w-[300px] md:w-[450px] lg:w-[550px] aspect-square animate-float-delayed z-10">
-          <Image src="/assets/hero/chatgpt-image.png" alt="Main Dessert" fill className="object-cover rounded-[32px] shadow-2xl rotate-[-4deg]" />
-          <div className="absolute inset-0 bg-[#23B349] opacity-20 blur-[60px] -z-10 rounded-full" />
+        {/* Right Side Biscuits */}
+        <div className="absolute top-[-60px] md:top-[-120px] right-[2%] sm:right-[5%] w-[150px] sm:w-[200px] md:w-[350px] aspect-square animate-float-delayed z-20">
+          <Image src="/assets/hero/biscuit-stack.png" alt="Biscuit Stack" fill className="object-contain drop-shadow-2xl" />
         </div>
 
-        {/* Duck Delight Right */}
-        <div className="absolute right-[0%] md:right-[5%] bottom-[20%] w-[150px] sm:w-[200px] md:w-[300px] lg:w-[350px] aspect-square animate-float z-30">
-          <Image src="/assets/hero/doctor-duck.png" alt="Delight" fill className="object-cover rounded-[40px] shadow-2xl rotate-12" />
-        </div>
-      </div>
+        {/* Content Inside Green Area */}
+        <div className="relative z-10 w-full max-w-[1000px] mx-auto px-4 flex flex-col items-center text-center pt-[15%] sm:pt-[10%] pb-24 lg:pb-32">
 
-      {/* Secondary Bottom Section */}
-      <div className="relative w-full bg-[#23B349] mt-24 py-16 sm:py-24 px-4 sm:px-8 flex flex-col items-center text-center z-20">
-        <div className="max-w-[1200px] flex flex-col items-center gap-12">
-          <h3 className="heading-section text-white max-w-[900px] leading-[1.2]">
+          <h3 className="font-['Outfit'] font-extrabold text-[24px] sm:text-[36px] md:text-[44px] lg:text-[48px] text-white leading-[1.2] tracking-normal max-w-[900px] mb-8 lg:mb-12">
             {t('secondaryQuote')}
           </h3>
 
-          {/* Avatar Badge Component */}
-          <div className="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-full pr-6 pl-2 py-2">
-            <div className="flex items-center -space-x-4">
-              <div className="w-12 h-12 rounded-full border-2 border-[#23B349] bg-[#E9F7ED] flex items-center justify-center text-[#23B349] font-bold z-40 text-sm">
+          {/* Client Avatars */}
+          <div className="flex items-center gap-4 bg-transparent mb-16 sm:mb-24 mt-4">
+            <div className="flex -space-x-3">
+              <Image src="/assets/hero/avatar-c6d.png" width={40} height={40} alt="User" className="w-10 h-10 rounded-full border-[3px] border-[#23B349] object-cover bg-white" />
+              <Image src="/assets/hero/strawberry.png" width={40} height={40} alt="User" className="w-10 h-10 rounded-full border-[3px] border-[#23B349] object-cover bg-white p-1" />
+              <div className="w-10 h-10 rounded-full border-[3px] border-[#23B349] bg-gray-200 flex items-center justify-center text-[#404040] font-bold text-xs z-10">
                 +3
               </div>
-              <div className="w-12 h-12 rounded-full border-2 border-[#E9F7ED] bg-[#a099b5] z-30"></div>
-              <div className="w-12 h-12 rounded-full border-2 border-[#E9F7ED] bg-[#7e4627] z-20"></div>
-              <div className="w-12 h-12 rounded-full border-2 border-[#E9F7ED] bg-[#9d8562] z-10"></div>
             </div>
-            <span className="text-white font-['Outfit'] font-medium text-[16px] ml-4 tracking-wider">
-              {t('ourClients')}
-            </span>
+            <span className="font-['Outfit'] font-bold text-white text-[16px] tracking-wide">{t('ourClients')}</span>
+          </div>
+
+          {/* Family Video/Image Placeholder */}
+          <div className="relative w-full max-w-[880px] mx-auto z-30">
+            <div className="relative w-full aspect-[16/9] lg:aspect-[2/1] rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-2xl border-[6px] sm:border-[8px] border-white z-10">
+              <Image src="/assets/hero/family-eating.png" alt="Family eating biscuits" fill className="object-cover object-center" />
+
+              {/* Video Play overlay */}
+              <div className="absolute top-4 sm:top-8 left-4 sm:left-8 w-10 h-10 sm:w-14 sm:h-14 bg-black/30 rounded-full flex items-center justify-center backdrop-blur-md cursor-pointer hover:bg-black/50 transition">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-4 h-4 sm:w-6 sm:h-6 ml-1">
+                  <polygon points="9 7 17 12 9 17 9 7" fill="white"></polygon>
+                </svg>
+              </div>
+            </div>
+
+            {/* Pop-out Yellow Badge */}
+            <div className="absolute -top-8 -right-8 sm:-top-16 sm:-right-12 w-[100px] h-[100px] sm:w-[160px] sm:h-[160px] z-20">
+              <Image src="/assets/hero/texted-badge.svg" alt="Badge" fill className="object-contain animate-spin-slow drop-shadow-xl" />
+            </div>
+
+            {/* Warning Tape extending left */}
+            <div className="absolute top-[60%] sm:top-[70%] left-[-10vw] sm:left-[-150px] w-[130vw] md:w-[120%] h-[40px] sm:h-[60px] bg-[#FFD700] rotate-[-3deg] sm:rotate-[-2deg] -z-10 flex items-center overflow-hidden drop-shadow-lg">
+              <div className="flex items-center gap-4 animate-marquee whitespace-nowrap min-w-full font-['Outfit'] font-black text-red-600 text-[20px] sm:text-[32px] leading-none tracking-widest pt-1">
+                <span>A NEW STYLISH WAY OF CONNECTING</span>
+                <span className="mx-2 sm:mx-4 text-black text-xs sm:text-lg">●</span>
+                <span>A NEW STYLISH WAY OF CONNECTING</span>
+                <span className="mx-2 sm:mx-4 text-black text-xs sm:text-lg">●</span>
+                <span>A NEW STYLISH WAY OF CONNECTING</span>
+                <span className="mx-2 sm:mx-4 text-black text-xs sm:text-lg">●</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+        @keyframes float-delayed {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-spin-slow {
+          animation: spin-slow 20s linear infinite;
+        }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+          animation: float-delayed 8s ease-in-out infinite;
+          animation-delay: -3s;
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+          min-width: 200%;
+        }
+      `}</style>
     </section>
   );
 }
