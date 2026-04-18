@@ -123,16 +123,33 @@
     "cta": "Contact With Us"
   },
   "Footer": {
-    "tagline": "Quality food for a better life.",
-    "address": "Debre Sina, Ethiopia",
-    "email": "info@vitahydro.com",
-    "phone": "+251 911 234 567",
-    "columns": {
-      "products": "Products",
-      "company": "Company",
-      "recipes": "Recipes",
-      "connect": "Connect"
+    "cta": {
+      "heading": "Let's Work Together",
+      "subtext": "Question, business inquiry, or partnership idea?\nOur team is ready to connect and support you",
+      "button": "Connect with us",
+      "newsletter": {
+        "heading": "Get the Latest News & Updates...",
+        "placeholder": "Email Address"
+      }
     },
-    "copyright": "© 2026 Vita Hydro Agro-Processing PLC. All rights reserved."
+    "contact": {
+      "phone": "+251 911 123 456",
+      "email": "info@vitafoodcomplex.com",
+      "address": "Lideta SC, Woreda 02\nAddis Ababa, AA, Ethiopia"
+    },
+    "columns": {
+      "biscuits": "Biscuits",
+      "flour": "Flour",
+      "peoplePlanet": "People & Planet",
+      "company": "Company",
+      "resources": "Resources",
+      "whatsNew": "What's New"
+    },
+    "legal": {
+      "terms": "Terms and Conditions",
+      "privacy": "Privacy Policy",
+      "legalNotice": "Legal Notice",
+      "copyright": "© 2026 Vita Food Complex.   All rights reserved."
+    }
   }
 }

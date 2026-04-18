@@ -123,16 +123,33 @@
     "cta": "ያግኙን"
   },
   "Footer": {
-    "tagline": "ጥራት ያለው ምግብ ለተሻለ ሕይወት።",
-    "address": "ደብረ ሲና፣ ኢትዮጵያ",
-    "email": "info@vitahydro.com",
-    "phone": "+251 911 234 567",
-    "columns": {
-      "products": "ምርቶች",
-      "company": "ድርጅት",
-      "recipes": "የምግብ አሰራር",
-      "connect": "ይገናኙ"
+    "cta": {
+      "heading": "አብረን እንስራ",
+      "subtext": "ጥያቄ፣ የንግድ ጥያቄ፣ ወይም የሽርክና ሀሳብ?\nቡድናችን ለማገናኘት እና ለመደገፍ ዝግጁ ነው",
+      "button": "ያግኙን",
+      "newsletter": {
+        "heading": "የቅርብ ዜናዎችን እና ዝማኔዎችን ያግኙ...",
+        "placeholder": "የኢሜይል አድራሻ"
+      }
     },
-    "copyright": "© 2026 ቪታ ሃይድሮ አግሮ ፕሮሰሲንግ ኃ.የተ.የግ.ማ. መብቱ በህግ የተጠበቀ ነው።"
+    "contact": {
+      "phone": "+251 911 123 456",
+      "email": "info@vitafoodcomplex.com",
+      "address": "ልደታ ክፍለ ከተማ፣ ወረዳ 02\nአዲስ አበባ፣ ኢትዮጵያ"
+    },
+    "columns": {
+      "biscuits": "ቢስኩቶች",
+      "flour": "ዱቄት",
+      "peoplePlanet": "ሰዎች እና ፕላኔት",
+      "company": "ድርጅት",
+      "resources": "ሀብቶች",
+      "whatsNew": "ምን አዲስ ነገር አለ"
+    },
+    "legal": {
+      "terms": "ውሎች እና ሁኔታዎች",
+      "privacy": "የግለነት ፖሊሲ",
+      "legalNotice": "ህጋዊ ማስታወቂያ",
+      "copyright": "© 2026 ቪታ ፎድ ኮምፕሌክስ። መብቱ በህግ የተጠበቀ ነው።"
+    }
   }
 }
