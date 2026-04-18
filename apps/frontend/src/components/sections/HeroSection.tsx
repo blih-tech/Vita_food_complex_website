@@ -13,7 +13,7 @@ export default function HeroSection() {
       className="relative w-full overflow-hidden flex flex-col items-center bg-white min-h-[100vh] pt-20"
       data-node-id="466:2721"
     >
-      {/* ── Background Elements (Exact from Figma) ── */}
+      {/* Background Elements (Exact from Figma) */}
       <div className="absolute top-0 left-0 w-full h-[800px] pointer-events-none z-0 overflow-hidden">
         {/* Hero background elements */}
         <div className="absolute left-[-33.02px] top-[-1px]" data-node-id="466:2719">
@@ -58,7 +58,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ── Hero Text Content (Exact Figma positioning) ── */}
+      {/* Hero Text Content (Exact Figma positioning) */}
       <div 
         className="-translate-x-1/2 absolute content-stretch flex flex-col gap-[48px] items-center left-1/2 top-[267.71px] w-[1024px] max-w-full px-4"
         data-node-id="19:1911"
@@ -130,7 +130,7 @@ export default function HeroSection() {
               {t("ourProducts")}
             </p>
             <div className="flex flex-col font-[family-name:var(--font-secondary,'Outfit',sans-serif)] font-normal justify-center leading-[0] relative shrink-0 text-[16px] sm:text-[20px] tracking-[-0.08px]">
-              <p className="leading-[normal]">→</p>
+              <p className="leading-[normal]">-></p>
             </div>
           </Link>
 
@@ -142,13 +142,13 @@ export default function HeroSection() {
           >
             <p className="font-[family-name:var(--font-primary,'Funnel_Display',sans-serif)] leading-[0] not-italic relative shrink-0 text-[0px] text-black tracking-[-0.096px] whitespace-nowrap">
               <span className="leading-[normal] text-[20px] sm:text-[24px]">{t("whyVita")}</span>
-              <span className="font-['Outfit',sans-serif] font-normal leading-[normal] text-[16px] sm:text-[20px] tracking-[-0.08px]">®</span>
+              <span className="font-['Outfit',sans-serif] font-normal leading-[normal] text-[16px] sm:text-[20px] tracking-[-0.08px]"></span>
             </p>
           </Link>
         </div>
       </div>
 
-      {/* ── Hero Images Section (Exact Figma positioning) ── */}
+      {/* Hero Images Section (Exact Figma positioning) */}
       <div className="absolute contents left-[-432.14px] top-[3.87px]" data-node-id="466:2720">
         {/* Right side - Tiramisu image */}
         <div className="absolute h-[612px] left-[1386px] top-[548px] w-[685px]" data-node-id="19:1819">
@@ -200,7 +200,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ── Green Block Section ── */}
+      {/* Green Block Section */}
       <div className="absolute left-0 top-[2327.46px] w-full h-[507.263px] bg-[#23B349]" data-node-id="20:2631" />
       
       {/* Hero Second Text Section */}
@@ -245,7 +245,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ── Video Section (Exact Figma positioning) ── */}
+      {/* Video Section (Exact Figma positioning) */}
       <div 
         className="absolute left-[-68.86px] top-[1879px] w-[2057.723px] h-[647px]"
         data-node-id="33:286"
@@ -311,6 +311,22 @@ export default function HeroSection() {
         </div>
       </div>
 
+      {/* Quality Badge (Exact Figma positioning) */}
+      <div 
+        className="absolute flex items-center justify-center left-[1489.22px] top-[1705.96px] w-[249.646px] h-[249.646px]"
+        data-node-id="19:2004"
+      >
+        <div className="flex-none rotate-[10.21deg]">
+          <div className="relative rounded-[999px] w-[214.946px] h-[214.946px] bg-yellow-400 shadow-2xl animate-float">
+            {/* Badge inner content */}
+            <div className="absolute inset-[21.93%_21.96%] bg-white rounded-full flex items-center justify-center">
+              <div className="text-center">
+                <div className="font-['Outfit'] font-bold text-[#23B349] text-[24px] sm:text-[28px]">TRUE</div>
+                <div className="font-['Outfit'] font-semibold text-[#404040] text-[12px] sm:text-[14px] mt-1">QUALITY</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <style jsx>{`
