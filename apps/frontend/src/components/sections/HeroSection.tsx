@@ -51,9 +51,9 @@ export default function HeroSection() {
           </h2>
 
           {/* Line 2: 🍪 way of 🍓 */}
-          <div className="flex items-center justify-center gap-2 sm:gap-4 mt-0">
+          <div className="flex items-center justify-center gap-2 mt-0">
             {/* Fish Cookie emoji (Node 18:1577) */}
-            <div className="relative w-[32px] h-[32px] sm:w-[56px] sm:h-[56px] md:w-[72px] md:h-[72px] animate-float shrink-0">
+            <div className="relative w-[32px] h-[32px] sm:w-[48px] sm:h-[48px] md:w-[60px] md:h-[60px] animate-float shrink-0 self-baseline -mb-2 sm:-mb-3">
               <Image
                 src="/assets/hero/fish-cookie.png"
                 alt=""
@@ -70,7 +70,7 @@ export default function HeroSection() {
             </h2>
 
             {/* Strawberry emoji (Node 16:1209) */}
-            <div className="relative w-[32px] h-[32px] sm:w-[56px] sm:h-[56px] md:w-[72px] md:h-[72px] animate-float-delayed shrink-0">
+            <div className="relative w-[32px] h-[32px] sm:w-[48px] sm:h-[48px] md:w-[60px] md:h-[60px] animate-float-delayed shrink-0 self-end -mb-1 sm:-mb-2">
               <Image
                 src="/assets/hero/strawberry.png"
                 alt=""
@@ -90,41 +90,39 @@ export default function HeroSection() {
         </div>
 
         {/* Subtitle (Node 19:1769) */}
-        <div className="max-w-[380px] sm:max-w-[520px] text-center mt-8 sm:mt-10">
-          <p className="font-['Funnel_Display'] font-medium text-[15px] sm:text-[18px] md:text-[20px] text-[#404040] leading-[1.25]">
+        <div className="max-w-[340px] sm:max-w-[420px] text-center mt-6 sm:mt-8">
+          <p className="font-['Funnel_Display'] font-medium text-[11px] sm:text-[14px] md:text-[15px] text-[#404040] leading-[1.35] tracking-tight">
             {t("description")}
           </p>
         </div>
 
         {/* CTA Buttons (Node 18:1742) */}
-        <div className="flex flex-row gap-4 sm:gap-6 items-center mt-8 sm:mt-10 pb-14 sm:pb-24">
+        <div className="flex flex-row gap-3 sm:gap-4 items-center mt-6 sm:mt-8 pb-10 sm:pb-16">
 
           {/* Primary — filled green (Node 18:1737) */}
           <Link
             href="/products"
-            className="group bg-[#23B349] text-white px-8 sm:px-10 py-3 md:py-4 rounded-full flex items-center justify-center gap-3 hover:bg-[#1e9a3e] transition-all duration-300 shadow-lg shadow-green-600/20 active:scale-95"
+            className="group bg-[#23B349] text-white px-5 sm:px-6 py-2 sm:py-2.5 rounded-full flex items-center justify-center gap-2 hover:bg-[#1e9a3e] transition-all duration-300 shadow-sm shadow-green-600/20 active:scale-95"
           >
-            <span className="font-['Funnel_Display'] font-medium text-[16px] sm:text-[20px] sm:text-[24px] whitespace-nowrap">
+            <span className="font-['Funnel_Display'] font-medium text-[13px] sm:text-[15px] whitespace-nowrap">
               {t("ourProducts")}
             </span>
-            <span className="text-[18px] group-hover:translate-x-1 transition-transform">→</span>
+            <span className="text-[13px] group-hover:translate-x-1 transition-transform">→</span>
           </Link>
 
-          {/* Secondary — black text w/ radial gradient border (Node 18:1740) */}
+          {/* Secondary — white with faint border (Node 18:1740) */}
           <Link
             href="/about"
-            className="relative px-8 sm:px-10 py-3 md:py-4 rounded-full flex items-center justify-center hover:bg-green-50 transition-all active:scale-95"
-            style={{
-              border: "1px solid transparent",
-              backgroundImage:
-                "linear-gradient(white, white), radial-gradient(circle at 2% 163%, #1FD650 0%, #23B349 52%, #74FF38 100%)",
-              backgroundOrigin: "border-box",
-              backgroundClip: "padding-box, border-box",
-            }}
+            className="relative px-5 sm:px-6 py-2 sm:py-2.5 bg-white border border-[#E8E8E8] rounded-full flex items-center justify-center hover:bg-green-50/50 transition-all active:scale-95 shadow-[0_2px_10px_rgba(0,0,0,0.02)] gap-2 group"
           >
-            <span className="font-['Funnel_Display'] font-medium text-[16px] sm:text-[20px] sm:text-[24px] text-black whitespace-nowrap">
+            <span className="font-['Funnel_Display'] font-medium text-[13px] sm:text-[15px] text-[#404040] whitespace-nowrap">
               {t("whyVita")}
             </span>
+            <div className="w-[18px] h-[18px] flex items-center justify-center rounded-full border-[1px] border-[#23B349]/30 text-[#23B349] transition-colors group-hover:bg-[#23B349] group-hover:text-white group-hover:border-[#23B349]">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-2.5 h-2.5 ml-[1px]">
+                <polygon points="9 6 18 12 9 18 9 6" />
+              </svg>
+            </div>
           </Link>
         </div>
       </div>
@@ -133,11 +131,11 @@ export default function HeroSection() {
       <div className="relative w-full z-10 flex-grow flex flex-col items-center bg-[#23B349] px-4 pt-10 sm:pt-20 pb-24 lg:pb-32">
 
         {/* CSS Mountain Curve Edge */}
-        <div className="absolute top-[-12vw] sm:top-[-14vw] left-[-25%] w-[150%] h-[14vw] bg-[#23B349] rounded-t-[100%] pointer-events-none -z-10" />
+        <div className="absolute top-[-10vw] sm:top-[-12vw] left-[-25%] w-[150%] h-[12vw] bg-[#23B349] rounded-t-[100%] pointer-events-none -z-10" />
 
         {/* Doctor Duck — left, floating above curve (Node 16:1211) */}
-        <div className="absolute top-[-8vw] sm:top-[-10vw] md:top-[-11vw] left-[2%] sm:left-[6%] md:left-[9%] z-30 drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)]">
-          <div className="relative w-[140px] sm:w-[200px] md:w-[320px] aspect-square animate-float -translate-y-[85%]">
+        <div className="absolute top-[-6vw] sm:top-[-8vw] md:top-[-9vw] left-[1%] sm:left-[3%] md:left-[5%] z-30 drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)]">
+          <div className="relative w-[130px] sm:w-[170px] md:w-[260px] aspect-square animate-float -translate-y-[85%]">
             <Image
               src="/assets/hero/doctor-duck.png"
               alt="Doctor Duck"
@@ -148,9 +146,9 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Biscuit Stack — right, floating above curve (Node 15:1203) */}
-        <div className="absolute top-[-8vw] sm:top-[-10vw] md:top-[-11vw] right-[0%] sm:right-[4%] md:right-[7%] z-30 drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)]">
-          <div className="relative w-[110px] sm:w-[160px] md:w-[260px] aspect-square animate-float-delayed -translate-y-[85%]">
+        {/* Biscuit Stack — right, floating above curve (Node 15:1203) cut off on the right edge */}
+        <div className="absolute top-[-4vw] sm:top-[-6vw] md:top-[-7vw] right-[-10%] sm:right-[-8%] md:right-[-6%] z-30 drop-shadow-[0_15px_30px_rgba(0,0,0,0.2)]">
+          <div className="relative w-[120px] sm:w-[180px] md:w-[280px] aspect-square animate-float-delayed -translate-y-[85%]">
             <Image
               src="/assets/hero/biscuit-stack.png"
               alt="Biscuit Stack"
@@ -162,41 +160,41 @@ export default function HeroSection() {
         </div>
 
         {/* ── HERO SECOND TEXT (Node 23:2788) ── */}
-        <div className="w-full max-w-[950px] mx-auto flex flex-col items-start relative z-20 gap-12 sm:gap-16">
+        <div className="w-full max-w-[950px] mx-auto flex flex-col items-start relative z-20 gap-8 sm:gap-12 mt-4 sm:mt-8">
 
           {/* White Inspirational Quote (Node 20:2095) */}
-          <h3 className="font-['Outfit'] font-bold text-[22px] sm:text-[30px] md:text-[42px] lg:text-[52px] text-white leading-[0.96] tracking-[-0.02em] max-w-[700px] text-left drop-shadow-md">
-            {t("secondaryQuote")}
+          <h3 className="font-['Outfit'] font-bold text-[20px] sm:text-[28px] md:text-[38px] lg:text-[46px] text-white leading-[1.0] tracking-[-0.01em] max-w-[800px] text-left drop-shadow-md">
+            “{t("secondaryQuote")}”
           </h3>
 
           {/* Client Avatars (Node 23:2734) */}
-          <div className="flex items-center gap-4 sm:gap-5 w-fit">
-            <div className="flex -space-x-2 sm:-space-x-3 drop-shadow-md">
-              <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full border-[2px] border-white bg-[#BDBDBD] overflow-hidden z-30">
+          <div className="flex items-center gap-3 sm:gap-4 w-fit">
+            <div className="flex -space-x-2 sm:-space-x-2 drop-shadow-md">
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-white bg-[#BDBDBD] overflow-hidden z-30">
                 <Image src="/assets/hero/client-1.png" alt="Client" fill className="object-cover" />
               </div>
-              <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full border-[2px] border-white overflow-hidden z-20" style={{ background: "#b0b0b0" }}>
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-white overflow-hidden z-20" style={{ background: "#b0b0b0" }}>
                 <Image src="/assets/hero/client-2.png" alt="Client" fill className="object-cover object-top" />
               </div>
-              <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full border-[2px] border-white overflow-hidden z-10" style={{ background: "#c0c0c0" }}>
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-white overflow-hidden z-10" style={{ background: "#c0c0c0" }}>
                 <Image src="/assets/hero/client-3.png" alt="Client" fill className="object-cover object-top" />
               </div>
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full border-[2px] border-white bg-[#BDBDBD] flex items-center justify-center text-white font-['Roboto'] font-normal text-[14px] sm:text-[16px] z-0">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-white bg-[#BDBDBD] flex items-center justify-center text-white font-['Roboto'] font-normal text-[11px] sm:text-[13px] z-0">
                 +3
               </div>
             </div>
-            <span className="font-['Outfit'] font-semibold text-white text-[14px] sm:text-[18px] tracking-[0.007em]">
+            <span className="font-['Outfit'] font-semibold text-white text-[12px] sm:text-[14px] tracking-wide">
               {t("ourClients")}
             </span>
           </div>
         </div>
 
         {/* ── Video Layout (Node 33:286) ── */}
-        <div className="relative w-full max-w-[950px] mx-auto z-30 mt-12 sm:mt-20">
+        <div className="relative w-full max-w-[850px] mx-auto z-30 mt-10 sm:mt-16 pb-8">
 
           {/* Multi-layered Yellow Text Tape (Node 20:2099 / 20:2100) */}
           <div
-            className="absolute top-[76%] sm:top-[80%] left-[-18vw] w-[136vw] -z-10 -rotate-[6deg] origin-center flex flex-col overflow-hidden drop-shadow-2xl"
+            className="absolute top-[65%] sm:top-[70%] left-[-20vw] w-[140vw] -z-10 -rotate-[4deg] origin-center flex flex-col overflow-hidden drop-shadow-2xl"
           >
             {/* Gray base layer */}
             <div className="w-full h-[18px] sm:h-[28px] md:h-[40px] bg-[#404040]" />
@@ -216,7 +214,7 @@ export default function HeroSection() {
           </div>
 
           {/* Video Frame (Node 38:736) */}
-          <div className="relative w-full aspect-[16/9] lg:aspect-[2.1/1] rounded-[20px] sm:rounded-[48px] overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.4)] border-[6px] sm:border-[10px] border-white bg-[#404040]">
+          <div className="relative w-full aspect-[16/9] lg:aspect-[2.1/1] rounded-[16px] sm:rounded-[36px] overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.4)] border-[4px] sm:border-[8px] border-white bg-[#404040]">
             <Image
               src="/assets/hero/family-true.png"
               alt="Family enjoying Vita products"
@@ -225,19 +223,19 @@ export default function HeroSection() {
             />
 
             {/* Sound Mute Icon — top-left (Node 161:926) */}
-            <div className="absolute top-4 sm:top-6 left-4 sm:left-6 w-12 h-12 sm:w-[63px] sm:h-[63px] rounded-full flex items-center justify-center bg-black/29 backdrop-blur-sm shadow-lg">
+            <div className="absolute top-4 sm:top-5 left-4 sm:left-5 w-10 h-10 sm:w-[50px] sm:h-[50px] rounded-full flex items-center justify-center bg-black/20 backdrop-blur-sm shadow-sm hover:bg-black/40 transition-colors cursor-pointer border border-white/10">
               <Image
                 src="/assets/hero/sound-mute.svg"
                 alt="Mute"
-                width={28}
-                height={28}
-                className="sm:w-9 sm:h-9"
+                width={20}
+                height={20}
+                className="w-5 h-5 sm:w-6 sm:h-6"
               />
             </div>
           </div>
 
           {/* Yellow Quality Badge — top-right (Node 19:2004) */}
-          <div className="absolute -top-6 -right-4 sm:-top-10 sm:-right-6 w-[90px] h-[90px] sm:w-[160px] sm:h-[160px] z-40 animate-float pointer-events-none drop-shadow-xl">
+          <div className="absolute -top-5 -right-4 sm:-top-8 sm:-right-8 w-[80px] h-[80px] sm:w-[130px] sm:h-[130px] z-40 animate-float pointer-events-none drop-shadow-xl">
             <Image src="/assets/hero/true-badge.svg" alt="Quality Badge" fill className="object-contain" />
           </div>
         </div>
