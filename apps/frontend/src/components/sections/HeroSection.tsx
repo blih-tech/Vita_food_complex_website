@@ -14,8 +14,12 @@ export default function HeroSection() {
     >
       {/* Top Background Images (the specific Figma blur sections for above the curve) */}
       <div className="absolute top-0 left-0 w-full h-[800px] pointer-events-none z-0 overflow-hidden text-center">
-        <Image src="/assets/hero/hero-bg-2-555c57.png" alt="" fill className="object-contain object-left-top opacity-50 absolute left-[-10%] top-[-5%]" />
-        <Image src="/assets/hero/hero-bg-1-6b801d.png" alt="" fill className="object-contain object-right-top opacity-50 absolute right-[-10%] top-[-10%]" />
+        <div className="absolute left-[-20%] sm:left-[-10%] top-[-10%] w-[80%] max-w-[1000px] aspect-square opacity-80 mix-blend-multiply">
+          <Image src="/assets/hero/hero-bg-2-555c57.png" alt="" fill className="object-contain object-left-top" />
+        </div>
+        <div className="absolute right-[-20%] sm:right-[-10%] top-[-5%] w-[80%] max-w-[1000px] aspect-square opacity-80 mix-blend-multiply">
+          <Image src="/assets/hero/hero-bg-1-6b801d.png" alt="" fill className="object-contain object-right-top" />
+        </div>
       </div>
 
       {/* Center Yellowish Blur right above the curve */}
@@ -33,7 +37,7 @@ export default function HeroSection() {
             A new stylish
           </h2>
           <div className="flex items-center justify-center gap-2 sm:gap-4 -mt-2 sm:-mt-4">
-            <Image src="/assets/hero/cookie-decoration-1.png" alt="Biscuit" width={64} height={64} className="w-[40px] h-[40px] sm:w-[64px] sm:h-[64px] object-contain -rotate-12 animate-float" />
+            <Image src="/assets/hero/fish-cookie.png" alt="Fish Cookie" width={64} height={64} className="w-[40px] h-[40px] sm:w-[64px] sm:h-[64px] object-contain -rotate-12 animate-float" />
             <h2 className="font-['Outfit'] font-extrabold text-[40px] sm:text-[64px] md:text-[80px] text-[#404040] leading-[1.1] tracking-tight">
               way of
             </h2>
@@ -72,9 +76,12 @@ export default function HeroSection() {
       </div>
 
       {/* Massive Green Curve Background & Bottom Content */}
-      <div className="relative w-full mt-4 md:mt-12 flex-grow flex flex-col items-center text-center pb-24 lg:pb-32">
-        {/* Background Arc */}
-        <div className="absolute top-0 left-[-25%] w-[150%] h-[150%] bg-[#23B349] rounded-t-[100%] z-0 shadow-[0_0_150px_rgba(35,179,73,0.3)]" />
+      <div className="relative w-full mt-4 md:mt-12 flex-grow flex flex-col items-center text-center pb-24 lg:pb-32 bg-[#23B349]">
+
+        {/* Background Arc SVG True Extracted Form */}
+        <div className="absolute top-[-10vw] sm:top-[-15vw] left-[-20%] w-[140%] aspect-[3.15/1] pointer-events-none z-0 overflow-visible">
+          <Image src="/assets/hero/true-hero-wave.svg" alt="" fill className="object-contain object-top" />
+        </div>
 
         {/* Decorative Assets overlapping the curve */}
         {/* Left Side Duck */}
@@ -88,7 +95,7 @@ export default function HeroSection() {
         </div>
 
         {/* Content Inside Green Area */}
-        <div className="relative z-10 w-full max-w-[1000px] mx-auto px-4 flex flex-col items-center pt-[15%] sm:pt-[10%]">
+        <div className="relative z-10 w-full max-w-[1000px] mx-auto px-4 flex flex-col items-center pt-[15%] sm:pt-[5%]">
 
           <h3 className="font-['Outfit'] font-extrabold text-[24px] sm:text-[36px] md:text-[44px] lg:text-[48px] text-white leading-[1.2] tracking-normal max-w-[900px] mb-8 lg:mb-12 drop-shadow-sm">
             {t('secondaryQuote')}
@@ -116,7 +123,7 @@ export default function HeroSection() {
 
             {/* Main Video Frame */}
             <div className="relative w-full aspect-[16/9] lg:aspect-[2/1] rounded-[24px] sm:rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-[6px] sm:border-[8px] border-white z-10 bg-[#FFD700]">
-              <Image src="/assets/hero/family-true.png" alt="Family eating biscuits" fill className="object-cover object-center" />
+              <Image src="/assets/hero/family-true.png" alt="Family video" fill className="object-cover object-center" />
 
               {/* Video Play overlay */}
               <div className="absolute top-4 sm:top-8 left-4 sm:left-8 w-10 h-10 sm:w-14 sm:h-14 bg-black/30 rounded-full flex items-center justify-center backdrop-blur-sm cursor-pointer hover:bg-black/50 transition">
