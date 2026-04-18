@@ -10,7 +10,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative w-full overflow-hidden flex flex-col items-center bg-white min-h-[100vh] pt-20"
+      className="relative w-full overflow-hidden flex flex-col items-center bg-[#EAF8ED] md:bg-white min-h-[100vh] pt-20"
     >
       {/* Background Glows Group - Strict Top Anchors */}
       <div className="absolute top-0 left-0 w-full h-[800px] pointer-events-none z-0 overflow-hidden">
@@ -108,32 +108,40 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* White Inspirational Quote */}
-        <h3 className="font-['Outfit'] font-extrabold text-[22px] sm:text-[36px] md:text-[44px] lg:text-[48px] text-white leading-[1.25] max-w-[900px] text-center mb-8 lg:mb-12 relative z-20">
-          {t('secondaryQuote')}
-        </h3>
+        {/* Inner Wrapper for Left-Aligned Text Content */}
+        <div className="w-full max-w-[950px] mx-auto flex flex-col items-start relative z-20">
 
-        {/* Client Avatars */}
-        <div className="flex items-center justify-center gap-4 bg-transparent mb-12 sm:mb-20 w-full hover:scale-105 transition-transform duration-300 cursor-default relative z-20">
-          <div className="flex -space-x-3 drop-shadow-md">
-            <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full border-[3px] border-[#23B349] bg-white overflow-hidden">
-              <Image src="/assets/hero/avatar-c6d.png" alt="Client" fill className="object-cover" />
+          {/* White Inspirational Quote */}
+          <h3 className="font-['Outfit'] font-extrabold text-[28px] sm:text-[40px] md:text-[56px] lg:text-[64px] text-white leading-[1.05] max-w-[850px] text-left mb-6 lg:mb-8 drop-shadow-md">
+            {t('secondaryQuote')}
+          </h3>
+
+          {/* Client Avatars Group */}
+          <div className="flex items-center justify-start gap-3 sm:gap-4 bg-transparent mb-12 sm:mb-20 w-fit hover:scale-105 transition-transform duration-300 cursor-default relative origin-left">
+            <div className="flex -space-x-3 sm:-space-x-4 drop-shadow-md">
+              <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full border-[3px] border-[#23B349] bg-white overflow-hidden z-30">
+                <Image src="/assets/hero/client-1.png" alt="Client" fill className="object-cover" />
+              </div>
+              <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full border-[3px] border-[#23B349] bg-white overflow-hidden z-20">
+                <Image src="/assets/hero/client-2.png" alt="Client" fill className="object-cover object-top" />
+              </div>
+              <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full border-[3px] border-[#23B349] bg-white overflow-hidden z-10">
+                <Image src="/assets/hero/client-3.png" alt="Client" fill className="object-cover object-top" />
+              </div>
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-[3px] border-[#23B349] bg-white flex items-center justify-center text-[#23B349] font-black text-[14px] sm:text-[18px] z-0">
+                +3
+              </div>
             </div>
-            <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full border-[3px] border-[#23B349] bg-white overflow-hidden p-0.5">
-              <Image src="/assets/hero/strawberry.png" alt="Client" fill className="object-contain" />
-            </div>
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border-[3px] border-[#23B349] bg-gray-100 flex items-center justify-center text-[#23B349] font-black text-[14px] z-10">
-              +3
-            </div>
+            <span className="font-['Outfit'] font-bold text-white text-[16px] sm:text-[20px] tracking-wide ml-2">{t('ourClients')}</span>
           </div>
-          <span className="font-['Outfit'] font-bold text-white text-[15px] sm:text-[18px] tracking-wide">{t('ourClients')}</span>
+
         </div>
 
         {/* Video Layout Center */}
-        <div className="relative w-full max-w-[950px] mx-auto z-30">
+        <div className="relative w-full max-w-[950px] mx-auto z-30 mt-4">
 
-          {/* Red Tape Underlayer */}
-          <div className="absolute top-[60%] sm:top-[70%] left-[-10vw] sm:left-[-150px] w-[120vw] md:w-[130%] h-[50px] sm:h-[100px] -z-10 flex items-center justify-center mix-blend-normal">
+          {/* Red Tape Underlayer (Rotated diagonally out the left side) */}
+          <div className="absolute top-[80%] left-[-15vw] sm:left-[-150px] w-[130vw] md:w-[130%] h-[50px] sm:h-[100px] -z-10 flex items-center justify-center mix-blend-normal -rotate-[6deg] origin-center -ml-12 drop-shadow-xl opacity-90">
             <Image src="/assets/hero/text-tape.svg" alt="Tape Decor" fill className="object-contain object-left overflow-visible" />
           </div>
 
