@@ -130,7 +130,7 @@ export default function HeroSection() {
               {t("ourProducts")}
             </p>
             <div className="flex flex-col font-[family-name:var(--font-secondary,'Outfit',sans-serif)] font-normal justify-center leading-[0] relative shrink-0 text-[16px] sm:text-[20px] tracking-[-0.08px]">
-              <p className="leading-[normal]">-></p>
+              <p className="leading-[normal]">→</p>
             </div>
           </Link>
 
