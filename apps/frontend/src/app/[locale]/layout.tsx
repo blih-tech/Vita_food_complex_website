@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Outfit, Funnel_Display } from "next/font/google";
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
-import { notFound } from 'next/navigation';
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { notFound } from "next/navigation";
 import Navbar from "@frontend/components/layout/Navbar";
 import Footer from "@frontend/components/layout/Footer";
 import "../globals.css";
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  params
+  params,
 }: {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
@@ -44,7 +44,7 @@ export default async function RootLayout({
   const { locale } = await params;
 
   // Ensure that the incoming `locale` is valid
-  if (!['en', 'am'].includes(locale)) {
+  if (!["en", "am"].includes(locale)) {
     notFound();
   }
 
@@ -60,9 +60,7 @@ export default async function RootLayout({
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider messages={messages}>
           <Navbar />
-          <div className="flex-1">
-            {children}
-          </div>
+          <div className="flex-1 pt-[100px] lg:pt-[140px]">{children}</div>
           <Footer />
         </NextIntlClientProvider>
       </body>
