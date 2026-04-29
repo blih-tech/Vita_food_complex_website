@@ -150,5 +150,15 @@
       "legalNotice": "Legal Notice",
       "copyright": "© 2026 Vita Food Complex.   All rights reserved."
     }
+  },
+  "ProductsPage": {
+    "heading": "Our Products",
+    "subtext": "Discover our delicious range of biscuits and flour products, crafted with care for every moment.",
+    "ctaHeading": "Let's Work Together",
+    "ctaSubtext": "Question, business inquiry, or partnership idea? Our team is ready to connect and support you",
+    "ctaButton": "Connect with us",
+    "newsletterHeading": "Get the Latest News & Updates",
+    "newsletterSubtext": "Subscribe to our newsletter for exclusive offers and updates",
+    "emailPlaceholder": "Email Address"
   }
 }
