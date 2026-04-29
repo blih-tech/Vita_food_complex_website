@@ -104,7 +104,7 @@ export default function ProductsPage() {
       {/* Products Grid */}
       <section className="w-full px-4 md:px-8 lg:px-24 pb-24 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-20 lg:gap-y-32 xl:gap-x-8 justify-items-center pt-8">
             {filteredProducts.map((product) => (
               <ProductCard
                 key={product.id}
@@ -113,6 +113,7 @@ export default function ProductsPage() {
                 image={product.image}
                 bgColor={product.bgColor}
                 nameColor={product.nameColor}
+                tagIcon={product.tagIcon}
               />
             ))}
           </div>

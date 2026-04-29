@@ -61,6 +61,9 @@
 /* ========================================
    GLOBAL BODY & TYPOGRAPHY DEFAULTS
    ======================================== */
+html {
+  font-size: 16px; /* 1rem = 16px mapping */
+}
 body {
   background-color: var(--color-background-page);
   color: var(--color-body-text);

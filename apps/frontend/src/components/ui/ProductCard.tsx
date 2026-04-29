@@ -7,6 +7,7 @@ export interface ProductCardProps {
   image: string;
   bgColor: string;
   nameColor?: string;
+  tagIcon?: string;
 }
 
 export function ProductCard({
@@ -14,40 +15,82 @@ export function ProductCard({
   name,
   image,
   bgColor,
-  nameColor = 'white',
+  nameColor = "#FFFFFF",
+  tagIcon,
 }: ProductCardProps) {
   return (
     <Link
       href={`/products/${id}`}
-      className="group relative rounded-[32px] overflow-hidden cursor-pointer h-[280px] md:h-[320px] transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border border-black/5 block w-full"
-      style={{ backgroundColor: bgColor }}
+      className="
+        group relative
+        w-full aspect-539/500
+        flex flex-col mt-8
+      "
     >
-      {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-white/20 blur-3xl rounded-full pointer-events-none z-0" />
-      
-      {/* Product Image */}
-      <div className="absolute inset-0 flex items-center justify-center p-8 pb-16 z-10">
-        <Image
-          src={image}
-          alt={name}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-contain p-6 group-hover:scale-110 transition-transform duration-500 drop-shadow-2xl"
-        />
+      {/* --- Background Container (Clipped) --- */}
+      <div
+        className="absolute inset-0 rounded-[16px] overflow-hidden transition-shadow duration-500"
+        style={{ background: bgColor }}
+      >
+        {/* Top Gradient Overlay */}
+        <div className="absolute inset-0 top-0 h-[50%] bg-gradient-to-b from-black to-transparent mix-blend-overlay opacity-50 pointer-events-none z-0" />
+
+        {/* Bottom Gradient Overlay */}
+        <div className="absolute inset-0 top-[25%] h-[75%] bg-gradient-to-t from-black to-transparent mix-blend-overlay opacity-80 pointer-events-none z-0" />
+
+        {/* Top Ellipse Highlight */}
+        <div className="absolute top-[-10%] left-[20%] w-[60%] h-[60%] bg-white mix-blend-soft-light opacity-70 blur-[100px] pointer-events-none z-0" />
+
+        {/* Bottom Ellipse Highlight */}
+        <div className="absolute bottom-[10%] left-[20%] w-[60%] h-[40%] bg-white mix-blend-soft-light opacity-70 blur-[50px] pointer-events-none z-0" />
       </div>
 
-      {/* Bottom Bar: Logo & Name */}
-      <div className="absolute bottom-0 left-0 w-full p-6 flex items-end justify-between z-20 bg-gradient-to-t from-black/20 to-transparent">
-        {/* Brand Logo Placeholder */}
-        <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md shadow-sm">
-           <span className="font-['Outfit'] font-black text-[10px] uppercase" style={{ color: nameColor }}>
-             VITA
-           </span>
+      {/* --- Product Image & Shadow (Allowed to Overflow) --- */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pb-[40px] pointer-events-none">
+        {/* Synthetic drop shadow under product */}
+        <div className="absolute top-[65%] w-[60%] h-[40px] bg-[#404040] mix-blend-multiply opacity-20 blur-[18px] rotate-[-5deg] scale-y-50 transition-all duration-500" />
+
+        <div className="relative w-[70%] h-[90%] -mt-[35%]">
+          <Image
+            src={image}
+            alt={name}
+            fill
+            className="
+              object-contain
+              scale-[1.0] group-hover:scale-[1.1] group-hover:-rotate-3
+              transition-transform duration-500 ease-out drop-shadow-2xl
+            "
+            sizes="(max-width: 768px) 100vw, 33vw"
+          />
         </div>
+      </div>
+
+      {/* --- Product Info Bar (Bottom) --- */}
+      <div className="absolute bottom-0 left-0 w-full p-6 flex flex-row items-center justify-between z-20 pointer-events-none">
+        {/* Brand Logo / Tag Icon */}
+        <div className="relative w-[80px] md:w-[120px] h-[40px] md:h-[60px]">
+          <Image
+            src={tagIcon || image}
+            alt={`${name} icon`}
+            fill
+            className="object-contain drop-shadow-[0_14px_24px_rgba(0,0,0,0.15)] origin-left transition-transform duration-300"
+            sizes="(max-width: 768px) 80px, 120px"
+          />
+        </div>
+
         {/* Product Name */}
-        <h3 
-          className="font-['Funnel_Display'] font-black text-2xl tracking-wide drop-shadow-sm" 
-          style={{ color: nameColor }}
+        <h3
+          className="
+            font-['Outfit']
+            font-bold
+            text-[2.5rem] xl:text-[1rem] 2xl:text-[2rem]
+            leading-[0.96]
+            tracking-[-0.08rem]
+          "
+          style={{
+            color: nameColor,
+            fontFeatureSettings: "'liga' off",
+          }}
         >
           {name}
         </h3>
