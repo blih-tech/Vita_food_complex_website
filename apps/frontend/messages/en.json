@@ -159,6 +159,34 @@
     "ctaButton": "Connect with us",
     "newsletterHeading": "Get the Latest News & Updates",
     "newsletterSubtext": "Subscribe to our newsletter for exclusive offers and updates",
-    "emailPlaceholder": "Email Address"
+    "emailPlaceholder": "Email Address",
+    "backToProducts": "Back to Products",
+    "orderNow": "Order Now",
+    "downloadBrochure": "Download Brochure",
+    "productFeatures": "Product Features",
+    "featureNatural": "100% Natural",
+    "featureNaturalDesc": "Made with finest natural ingredients",
+    "featureQuality": "Premium Quality",
+    "featureQualityDesc": "ISO 9001 certified production",
+    "featureHeart": "Heart Friendly",
+    "featureHeartDesc": "Carefully formulated for you",
+    "nutritionInfo": "Nutrition Information",
+    "servingSize": "Serving Size",
+    "calories": "Calories",
+    "protein": "Protein",
+    "fat": "Fat",
+    "carbs": "Carbs",
+    "sugar": "Sugar",
+    "sodium": "Sodium",
+    "fiber": "Fiber",
+    "relatedProducts": "You May Also Like",
+    "productDescription": {
+      "oreo": "Delicious chocolate cream sandwich cookie",
+      "zoo": "Crispy orange flavored biscuit",
+      "cream": "Smooth vanilla cream biscuit",
+      "chewata": "Soft and chewy biscuit",
+      "marie": "Classic Marie biscuit",
+      "bora": "Rich chocolate biscuit"
+    }
   }
 }

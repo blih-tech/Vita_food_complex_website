@@ -82,7 +82,7 @@ const mapLinks = (arr: string[], href: string): FooterLink[] =>
 
 export default function Footer() {
   return (
-    <footer className="relative w-full bg-white flex flex-col">
+    <footer className="relative w-full bg-white flex flex-col pt-16 lg:pt-24">
       {/* CTA + Newsletter */}
       <div className="relative px-4 sm:px-6 lg:px-12 pt-16 z-20 pointer-events-none">
         <div className="w-full max-w-[1500px] mx-auto flex flex-col rounded-[40px] shadow-[0px_20px_40px_rgba(0,0,0,0.06)] pointer-events-auto">
@@ -226,7 +226,7 @@ export default function Footer() {
                   <Link href="#" className="hover:text-[#23B349] transition-colors">Privacy Policy</Link>
                   <Link href="#" className="hover:text-[#23B349] transition-colors">Legal Notice</Link>
                 </div>
-                <p>© 2026 Vita Food Complex. All rights reserved.</p>
+                <p>© {new Date().getFullYear()} Vita Food Complex. All rights reserved.</p>
               </div>
             </div>
           </div>
