@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { Link } from "@frontend/navigation";
 import { products, Product } from "./data";
+import { ProductCard } from "@frontend/components/ui/ProductCard";
+import { FeedbackSection } from "@frontend/components/sections/FeedbackSection";
+import { QualitySection } from "@frontend/components/sections/QualitySection";
 
 const categories = ["All products", "Biscuit", "Flour"];
 
@@ -46,10 +48,10 @@ export default function ProductsPage() {
         {/* Floating background elements */}
         <div className="absolute inset-0 pointer-events-none z-0">
             <div className="absolute top-10 left-[40%] w-16 h-16 opacity-60">
-                <Image src="/assets/products/biscuit-piece.png" alt="Cookie" fill className="object-contain rotate-45" />
+                <Image src="/assets/products/biscuit-piece.png" alt="Cookie" fill sizes="(max-width: 768px) 30vw, 15vw" className="object-contain rotate-45" />
             </div>
             <div className="absolute bottom-40 left-10 w-24 h-24 opacity-80">
-                <Image src="/assets/products/biscuit-scatter.png" alt="Cookie" fill className="object-contain -rotate-12" />
+                <Image src="/assets/products/biscuit-scatter.png" alt="Cookie" fill sizes="(max-width: 768px) 30vw, 15vw" className="object-contain -rotate-12" />
             </div>
         </div>
 
@@ -73,7 +75,7 @@ export default function ProductsPage() {
       <div className="w-full max-w-5xl mx-auto flex justify-between items-center px-4 -mt-16 relative z-20 mb-10 h-24">
         {["/assets/products/figma/figma_prod_13.png", "/assets/products/figma/figma_prod_14.png", "/assets/products/figma/figma_prod_9.png"].map((src, i) => (
           <div key={i} className={`relative w-16 h-16 md:w-20 md:h-20 hover:scale-110 transition-transform duration-300 drop-shadow-lg ${i % 2 === 0 ? 'mt-8' : '-mt-8'}`}>
-            <Image src={src} alt="Cookie" fill className="object-contain rounded-full bg-white/10 backdrop-blur-sm p-1" />
+            <Image src={src} alt="Cookie" fill sizes="(max-width: 768px) 30vw, 15vw" className="object-contain rounded-full bg-white/10 backdrop-blur-sm p-1" />
           </div>
         ))}
       </div>
@@ -104,119 +106,21 @@ export default function ProductsPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
-              <Link
+              <ProductCard
                 key={product.id}
-                href={`/products/${product.id}`}
-                className="group relative rounded-[32px] overflow-hidden cursor-pointer h-[280px] md:h-[320px] transition-transform duration-300 hover:shadow-2xl hover:-translate-y-2 border border-black/5"
-                style={{ backgroundColor: product.bgColor }}
-              >
-                {/* Background Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-white/20 blur-3xl rounded-full pointer-events-none z-0" />
-                
-                {/* Product Image */}
-                <div className="absolute inset-0 flex items-center justify-center p-8 pb-16 z-10">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    fill
-                    className="object-contain p-6 group-hover:scale-110 transition-transform duration-500 drop-shadow-2xl"
-                  />
-                </div>
-
-                {/* Bottom Bar: Logo & Name */}
-                <div className="absolute bottom-0 left-0 w-full p-6 flex items-end justify-between z-20 bg-gradient-to-t from-black/20 to-transparent">
-                  {/* Brand Logo Placeholder */}
-                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md shadow-sm">
-                     <span className="font-['Outfit'] font-black text-[10px] uppercase" style={{ color: product.nameColor || 'white' }}>
-                       VITA
-                     </span>
-                  </div>
-                  {/* Product Name */}
-                  <h3 
-                    className="font-['Funnel_Display'] font-black text-2xl tracking-wide drop-shadow-sm" 
-                    style={{ color: product.nameColor || 'white' }}
-                  >
-                    {product.name}
-                  </h3>
-                </div>
-              </Link>
+                id={product.id}
+                name={product.name}
+                image={product.image}
+                bgColor={product.bgColor}
+                nameColor={product.nameColor}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Feedback Form Section */}
-      <section className="w-full bg-white px-6 lg:px-24 py-16 pb-24 flex justify-center relative z-10">
-        <div className="w-full max-w-4xl bg-[#23B349] rounded-[40px] p-8 md:p-16 flex flex-col items-center text-center shadow-xl relative overflow-hidden">
-          {/* Decorative Background */}
-          <div className="absolute -top-20 -right-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-          <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-
-          <h2 className="font-['Outfit'] font-black text-4xl md:text-5xl text-white mb-4 relative z-10">
-            Give US Your Feedback
-          </h2>
-          <p className="font-['Outfit'] text-white/90 mb-10 max-w-lg relative z-10">
-            Your opinion matters! Please share your thoughts and ideas to help us improve our service.
-          </p>
-
-          <form className="w-full max-w-2xl flex flex-col gap-4 relative z-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input 
-                type="text" 
-                placeholder="Name" 
-                className="w-full px-6 py-4 rounded-full font-['Outfit'] text-gray-800 bg-white focus:outline-none focus:ring-4 focus:ring-white/30 transition-all placeholder:text-gray-400"
-              />
-              <input 
-                type="email" 
-                placeholder="Email Address" 
-                className="w-full px-6 py-4 rounded-full font-['Outfit'] text-gray-800 bg-white focus:outline-none focus:ring-4 focus:ring-white/30 transition-all placeholder:text-gray-400"
-              />
-            </div>
-            <div className="relative">
-              <textarea 
-                placeholder="Write your comment or ideas that helps us to improve our service..." 
-                className="w-full px-6 py-4 rounded-[32px] font-['Outfit'] text-gray-800 bg-white focus:outline-none focus:ring-4 focus:ring-white/30 min-h-[140px] resize-none transition-all placeholder:text-gray-400 pb-16"
-              ></textarea>
-              <button 
-                type="button" 
-                className="absolute bottom-3 right-3 bg-black text-white px-8 py-3 rounded-full font-['Outfit'] font-bold text-sm hover:bg-gray-800 transition-colors shadow-md"
-              >
-                APPLY
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
-
-      {/* Quality Certifications Section */}
-      <section className="w-full bg-white px-6 lg:px-24 pt-8 pb-32">
-        <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
-          <p className="font-['Outfit'] font-medium text-sm text-gray-600 mb-2">
-            Uplifting Every Daily Food Moment.
-          </p>
-          <h2 className="font-['Funnel_Display'] font-black text-4xl md:text-5xl text-[#23B349] mb-16">
-            Quality is Built Around Us!
-          </h2>
-          
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16 w-full">
-            <div className="relative h-20 w-20 md:h-28 md:w-28 transition-transform duration-300 hover:scale-105 cursor-pointer">
-               <Image src="/assets/quality/figma/cert_1.png" alt="Certification" fill className="object-contain" />
-            </div>
-            <div className="relative h-20 w-40 md:h-28 md:w-48 transition-transform duration-300 hover:scale-105 cursor-pointer">
-               <Image src="/assets/quality/figma/cert_efda.png" alt="EFDA" fill className="object-contain" />
-            </div>
-            <div className="relative h-20 w-28 md:h-28 md:w-36 transition-transform duration-300 hover:scale-105 cursor-pointer">
-               <Image src="/assets/quality/figma/cert_lrqa.png" alt="LRQA" fill className="object-contain" />
-            </div>
-            <div className="relative h-24 w-24 md:h-32 md:w-32 transition-transform duration-300 hover:scale-105 cursor-pointer">
-               <Image src="/assets/quality/figma/cert_iso.png" alt="ISO 9001" fill className="object-contain" />
-            </div>
-            <div className="relative h-16 w-40 md:h-24 md:w-56 transition-transform duration-300 hover:scale-105 cursor-pointer">
-               <Image src="/assets/quality/figma/cert_eas.png" alt="EAS" fill className="object-contain" />
-            </div>
-          </div>
-        </div>
-      </section>
+      <FeedbackSection />
+      <QualitySection />
     </main>
   );
 }

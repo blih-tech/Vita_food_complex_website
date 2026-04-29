@@ -44,10 +44,10 @@ export default function ProductsSection() {
 
         {/* Decorative elements */}
         <div className="absolute left-[5%] top-[10%] w-32 h-32 lg:w-64 lg:h-64 opacity-40 animate-float-delayed pointer-events-none">
-           <Image src="/assets/products/biscuit-piece.png" alt="" fill className="object-contain" />
+           <Image src="/assets/products/biscuit-piece.png" alt="" fill sizes="(max-width: 768px) 30vw, 15vw" className="object-contain" />
         </div>
         <div className="absolute right-[10%] bottom-[10%] w-40 h-40 lg:w-80 lg:h-80 opacity-40 animate-float pointer-events-none">
-           <Image src="/assets/products/biscuit-scatter.png" alt="" fill className="object-contain" />
+           <Image src="/assets/products/biscuit-scatter.png" alt="" fill sizes="(max-width: 768px) 30vw, 15vw" className="object-contain" />
         </div>
       </div>
 
@@ -85,10 +85,10 @@ export default function ProductsSection() {
 
         {/* Decorative elements */}
         <div className="absolute left-[15%] bottom-[15%] w-32 h-32 lg:w-64 lg:h-64 opacity-30 animate-float pointer-events-none">
-           <Image src="/assets/products/biscuit-piece.png" alt="" fill className="object-contain brightness-0 invert" />
+           <Image src="/assets/products/biscuit-piece.png" alt="" fill sizes="(max-width: 768px) 30vw, 15vw" className="object-contain brightness-0 invert" />
         </div>
         <div className="absolute right-[5%] top-[15%] w-40 h-40 lg:w-80 lg:h-80 opacity-30 animate-float-delayed pointer-events-none">
-           <Image src="/assets/products/biscuit-scatter.png" alt="" fill className="object-contain brightness-0 invert" />
+           <Image src="/assets/products/biscuit-scatter.png" alt="" fill sizes="(max-width: 768px) 30vw, 15vw" className="object-contain brightness-0 invert" />
         </div>
       </div>
     </section>

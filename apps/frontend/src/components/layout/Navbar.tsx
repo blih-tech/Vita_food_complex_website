@@ -1,25 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Link, useRouter, usePathname } from "@frontend/navigation";
 import Image from "next/image";
+import { ChevronDown, Globe, X, Menu, ArrowRight } from "lucide-react";
 
 type NavKey = "products" | "company" | "people-planet" | "resources" | "whats-new";
 
-const navLinks: { key: NavKey; href: string }[] = [
-  { key: "products", href: "/products" },
-  { key: "company", href: "/about" },
-  { key: "people-planet", href: "/people-planet" },
-  { key: "resources", href: "/resources" },
-  { key: "whats-new", href: "/whats-new" },
+const navLinks: { key: NavKey; href: string; hasDropdown?: boolean }[] = [
+  { key: "products", href: "/products", hasDropdown: true },
+  { key: "company", href: "/about", hasDropdown: true },
+  { key: "people-planet", href: "/people-planet", hasDropdown: true },
+  { key: "resources", href: "/resources", hasDropdown: true },
+  { key: "whats-new", href: "/whats-new", hasDropdown: true },
 ];
 
 export default function Navbar() {
   const t = useTranslations("Navbar");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<NavKey | null>(null);
   const router = useRouter();
   const pathname = usePathname();
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const toggleDropdown = (key: NavKey) => {
+    setActiveDropdown((prev) => (prev === key ? null : key));
+  };
 
   // Language switcher function
   const handleLanguageSwitch = () => {
@@ -60,10 +77,10 @@ export default function Navbar() {
   const pathWithoutLocale = getPathWithoutLocale();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+    <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
       {/* Main bar - Exact Figma design specifications with proper containment */}
       <div 
-        className="w-full max-w-[1664px] pl-[12px] sm:pl-[24px] lg:pl-[48px] pr-[12px] sm:pr-[16px] lg:pr-[32px] py-[8px] sm:py-[12px] rounded-[16px] sm:rounded-[24px] lg:rounded-[32px] flex items-center shadow-lg overflow-hidden transition-all duration-300"
+        className="w-full max-w-[1664px] pl-[12px] sm:pl-[24px] lg:pl-[48px] pr-[12px] sm:pr-[16px] lg:pr-[32px] py-[8px] sm:py-[12px] rounded-[16px] sm:rounded-[24px] lg:rounded-[32px] flex items-center shadow-lg overflow-hidden transition-all duration-300 relative z-50"
         style={{
           background: "radial-gradient(ellipse at 25.041px 143.28px, rgba(31,214,80,1) 0%, rgba(35,179,73,1) 60%, rgba(75,217,64,1) 80%, rgba(116,255,56,1) 100%)"
         }}
@@ -87,32 +104,31 @@ export default function Navbar() {
           {/* Desktop nav links - Hidden on smaller screens */}
           <div className="hidden xl:flex items-center gap-[24px] 2xl:gap-[48px]">
             {navLinks.map((link) => (
-              <div
-                key={link.key}
-                className="flex gap-[4px] items-center justify-center group cursor-pointer"
-              >
-                <Link
-                  href={link.href}
-                  className="text-white text-[16px] lg:text-[18px] 2xl:text-[20px] font-['Funnel_Display'] font-medium leading-normal tracking-[-0.08px] hover:opacity-80 transition-opacity whitespace-nowrap"
+                <div
+                  key={link.key}
+                  className="flex gap-[4px] items-center justify-center group cursor-pointer"
+                  onClick={(e) => {
+                    if (link.hasDropdown) {
+                      e.preventDefault();
+                      toggleDropdown(link.key);
+                    }
+                  }}
                 >
-                  {t(`links.${link.key}`)}
-                </Link>
-                <div className="flex items-center justify-center">
-                  <svg 
-                    width="16" 
-                    height="16" 
-                    viewBox="0 0 20 20" 
-                    className="rotate-180 text-white opacity-80 group-hover:opacity-100 transition-opacity"
+                  <Link
+                    href={link.href}
+                    className="text-white text-[16px] lg:text-[18px] 2xl:text-[20px] font-['Funnel_Display'] font-medium leading-normal tracking-[-0.08px] hover:opacity-80 transition-opacity whitespace-nowrap"
+                    onClick={(e) => {
+                      if (link.hasDropdown) e.preventDefault();
+                    }}
                   >
-                    <path 
-                      d="M5 7.5L10 12.5L15 7.5" 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      fill="none"
-                    />
-                  </svg>
+                    {t(`links.${link.key}`)}
+                  </Link>
+                  {link.hasDropdown && (
+                    <div className="flex items-center justify-center">
+                      <ChevronDown className={`w-4 h-4 text-white opacity-80 group-hover:opacity-100 transition-transform duration-300 ${activeDropdown === link.key ? "rotate-180" : ""}`} />
+                    </div>
+                  )}
                 </div>
-              </div>
             ))}
           </div>
         </div>
@@ -126,16 +142,7 @@ export default function Navbar() {
             aria-label={`Switch language. Current: ${currentLocale === 'en' ? 'English' : 'Amharic'}`}
           >
             {/* World icon */}
-            <svg 
-              width="14" 
-              height="14" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              className="text-white flex-shrink-0"
-            >
-              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
-              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" strokeWidth="1.5"/>
-            </svg>
+            <Globe size={14} strokeWidth={1.5} className="text-white flex-shrink-0" />
             <span className="text-white text-[10px] sm:text-[11px] lg:text-[12px] font-bold leading-none uppercase">
               {currentLocale === 'en' ? 'UK|EN' : 'ET|AM'}
             </span>
@@ -160,32 +167,9 @@ export default function Navbar() {
             className="xl:hidden text-white p-2 hover:bg-white/10 rounded-full transition-colors"
           >
             {mobileOpen ? (
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
+              <X size={24} strokeWidth={2.5} />
             ) : (
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-              >
-                <line x1="3" y1="6" x2="21" y2="6" />
-                <line x1="3" y1="12" x2="21" y2="12" />
-                <line x1="3" y1="18" x2="21" y2="18" />
-              </svg>
+              <Menu size={24} strokeWidth={2.5} />
             )}
           </button>
         </div>
@@ -196,14 +180,31 @@ export default function Navbar() {
         <div className="absolute top-[80px] sm:top-[100px] left-4 right-4 max-w-[calc(100vw-2rem)] bg-[#23B349] rounded-[24px] sm:rounded-[32px] shadow-2xl flex flex-col xl:hidden overflow-hidden z-50 animate-in fade-in slide-in-from-top-4 duration-300">
           <div className="flex flex-col p-2">
             {navLinks.map((link) => (
-              <Link
-                key={link.key}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="px-6 py-4 text-white text-[18px] sm:text-[20px] font-['Funnel_Display'] font-medium rounded-[16px] hover:bg-white/10 transition-colors"
-              >
-                {t(`links.${link.key}`)}
-              </Link>
+              <div key={link.key}>
+                <Link
+                  href={link.href}
+                  onClick={(e) => {
+                    if (link.hasDropdown) {
+                      e.preventDefault();
+                      toggleDropdown(link.key);
+                    } else {
+                      setMobileOpen(false);
+                    }
+                  }}
+                  className="px-6 py-4 text-white text-[18px] sm:text-[20px] font-['Funnel_Display'] font-medium rounded-[16px] hover:bg-white/10 transition-colors flex justify-between items-center"
+                >
+                  {t(`links.${link.key}`)}
+                  {link.hasDropdown && (
+                    <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${activeDropdown === link.key ? "rotate-180" : ""}`} />
+                  )}
+                </Link>
+                {/* Simple mobile sub-menu implementation */}
+                {link.hasDropdown && activeDropdown === link.key && (
+                   <div className="px-6 py-2 flex flex-col gap-2 pl-10 bg-black/5 rounded-[12px] mb-2 mx-2">
+                     <Link href={link.href} onClick={() => setMobileOpen(false)} className="text-white/90 py-2 text-[16px]">Overview</Link>
+                   </div>
+                )}
+              </div>
             ))}
           </div>
           
@@ -254,6 +255,155 @@ export default function Navbar() {
           </div>
         </div>
       )}
+
+      {/* Mega Menu Dropdown */}
+      <div 
+        className={`w-full max-w-[1664px] bg-white rounded-[32px] shadow-[0_20px_40px_rgba(0,0,0,0.1)] transition-all duration-300 overflow-hidden absolute top-[calc(100%-1.5rem)] lg:top-[calc(100%-2rem)] z-40 ${
+          activeDropdown && !mobileOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+        }`}
+        style={{ paddingTop: "2rem" }}
+      >
+        <div className="p-8 lg:p-12 pt-12 lg:pt-16">
+          {activeDropdown === "products" && (
+            <div className="flex flex-col lg:flex-row justify-between gap-12 w-full">
+              {/* Left Column: Categories */}
+              <div className="flex flex-col gap-6 flex-1 max-w-[340px]">
+                <div className="flex flex-col gap-3">
+                  {/* Biscuit Card */}
+                  <Link href="/products?category=biscuits" onClick={() => setActiveDropdown(null)} className="flex items-center justify-between p-4 rounded-[16px] border border-gray-200 hover:border-[#23B349] hover:bg-[#23B349]/5 transition-colors group">
+                    <div>
+                      <h3 className="text-[#1A1A1A] font-['Funnel_Display'] text-[18px] font-bold group-hover:text-[#23B349] transition-colors">Biscuits</h3>
+                      <p className="text-gray-500 text-[14px]">Explore all our biscuit products</p>
+                    </div>
+                    <div className="w-12 h-12 bg-gray-100 rounded-lg overflow-hidden relative">
+                      <Image src="/assets/products/biscuit-scatter.png" alt="Biscuits" fill className="object-cover" sizes="48px" />
+                    </div>
+                  </Link>
+                  {/* Flour Card */}
+                  <Link href="/products?category=flour" onClick={() => setActiveDropdown(null)} className="flex items-center justify-between p-4 rounded-[16px] bg-gray-50 hover:bg-[#23B349]/5 transition-colors group">
+                    <div>
+                      <h3 className="text-[#1A1A1A] font-['Funnel_Display'] text-[18px] font-bold group-hover:text-[#23B349] transition-colors">Flour</h3>
+                      <p className="text-gray-500 text-[14px]">Different purpose flour products</p>
+                    </div>
+                    <div className="w-12 h-12 bg-[#FFF6E5] rounded-lg overflow-hidden relative flex items-center justify-center">
+                      <span className="text-2xl">🌾</span>
+                    </div>
+                  </Link>
+                  {/* Recipes Card */}
+                  <Link href="/recipes" onClick={() => setActiveDropdown(null)} className="flex items-center justify-between p-4 rounded-[16px] bg-gray-50 hover:bg-[#23B349]/5 transition-colors group">
+                    <div>
+                      <h3 className="text-[#1A1A1A] font-['Funnel_Display'] text-[18px] font-bold group-hover:text-[#23B349] transition-colors">Recipes</h3>
+                      <p className="text-gray-500 text-[14px]">Our products can always be better enjoyed</p>
+                    </div>
+                    <div className="w-12 h-12 bg-[#FFF0F0] rounded-lg overflow-hidden relative flex items-center justify-center">
+                      <span className="text-2xl">👨‍🍳</span>
+                    </div>
+                  </Link>
+                </div>
+                <Link href="/products" onClick={() => setActiveDropdown(null)} className="inline-flex items-center justify-center gap-2 bg-[#1A1A1A] hover:bg-[#23B349] text-white px-6 py-4 rounded-[999px] font-['Funnel_Display'] text-[16px] font-medium transition-colors w-full group">
+                  View All Products <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+
+              {/* Middle Column: Product Lists */}
+              <div className="flex gap-16 flex-1 border-l border-gray-100 pl-12">
+                <ul className="flex flex-col gap-4">
+                  {["Zoo", "Chewata", "Oreo", "Sina", "Tafach", "Marie", "Marie Cream"].map(item => (
+                    <li key={item}>
+                      <Link href={`/products`} onClick={() => setActiveDropdown(null)} className="text-gray-600 hover:text-[#23B349] text-[16px] font-medium transition-colors">
+                        {item}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <ul className="flex flex-col gap-4">
+                  {["Bora", "Cream", "Glucose", "Digestive", "Tea Biscuit", "High Energy"].map(item => (
+                    <li key={item}>
+                      <Link href={`/products`} onClick={() => setActiveDropdown(null)} className="text-gray-600 hover:text-[#23B349] text-[16px] font-medium transition-colors">
+                        {item}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Right Column: Featured */}
+              <div className="flex-1 max-w-[280px]">
+                <Link href="/products" onClick={() => setActiveDropdown(null)} className="block bg-gray-50 rounded-[24px] p-4 flex flex-col gap-4 hover:shadow-lg transition-shadow group">
+                  <div className="w-full aspect-[4/3] bg-gray-200 rounded-xl relative overflow-hidden">
+                    <Image src="/assets/products/figma/figma_prod_12.png" alt="Sina Biscuit" fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="280px" />
+                  </div>
+                  <div>
+                    <p className="text-[#23B349] text-[14px] font-bold uppercase tracking-wider mb-1">Special Edition—</p>
+                    <h4 className="text-[#1A1A1A] font-['Funnel_Display'] text-[20px] font-bold group-hover:text-[#23B349] transition-colors">Sina Biscuit</h4>
+                    <p className="text-gray-500 text-[14px] mt-2">Latest product updates.</p>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          )}
+
+          {activeDropdown === "company" && (
+            <div className="flex flex-col lg:flex-row gap-6 w-full max-w-4xl mx-auto">
+              {[
+                { title: "About Us", desc: "Discover our story and mission" },
+                { title: "Why Choose Vita®", desc: "What makes our products special" },
+                { title: "Sustainability", desc: "Our commitment to the planet" }
+              ].map((item, idx) => (
+                <Link key={idx} href="/about" onClick={() => setActiveDropdown(null)} className="flex-1 p-6 rounded-[24px] border border-gray-100 hover:border-[#23B349] hover:bg-[#23B349]/5 transition-all group">
+                  <h3 className="text-[#1A1A1A] font-['Funnel_Display'] text-[20px] font-bold group-hover:text-[#23B349] transition-colors mb-2">{item.title}</h3>
+                  <p className="text-gray-500 text-[14px]">{item.desc}</p>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {activeDropdown === "people-planet" && (
+            <div className="flex flex-col lg:flex-row gap-6 w-full max-w-2xl mx-auto">
+              {[
+                { title: "People", desc: "Our community and workforce" },
+                { title: "Our Planet", desc: "Environmental initiatives" }
+              ].map((item, idx) => (
+                <Link key={idx} href="/people-planet" onClick={() => setActiveDropdown(null)} className="flex-1 p-6 rounded-[24px] border border-gray-100 hover:border-[#23B349] hover:bg-[#23B349]/5 transition-all group">
+                  <h3 className="text-[#1A1A1A] font-['Funnel_Display'] text-[20px] font-bold group-hover:text-[#23B349] transition-colors mb-2">{item.title}</h3>
+                  <p className="text-gray-500 text-[14px]">{item.desc}</p>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {activeDropdown === "resources" && (
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+              {[
+                { title: "Resources Center", desc: "Helpful guides and docs" },
+                { title: "Blogs", desc: "Read our latest articles" },
+                { title: "Gallery", desc: "Visuals from our factory" },
+                { title: "Certifications", desc: "Quality standards" }
+              ].map((item, idx) => (
+                <Link key={idx} href="/resources" onClick={() => setActiveDropdown(null)} className="flex-1 p-6 rounded-[24px] border border-gray-100 hover:border-[#23B349] hover:bg-[#23B349]/5 transition-all group">
+                  <h3 className="text-[#1A1A1A] font-['Funnel_Display'] text-[20px] font-bold group-hover:text-[#23B349] transition-colors mb-2">{item.title}</h3>
+                  <p className="text-gray-500 text-[14px]">{item.desc}</p>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {activeDropdown === "whats-new" && (
+            <div className="flex flex-col lg:flex-row gap-6 w-full max-w-4xl mx-auto">
+              {[
+                { title: "Latest News", desc: "Company announcements" },
+                { title: "Events", desc: "Upcoming and past events" },
+                { title: "Careers", desc: "Join our growing team" }
+              ].map((item, idx) => (
+                <Link key={idx} href="/whats-new" onClick={() => setActiveDropdown(null)} className="flex-1 p-6 rounded-[24px] border border-gray-100 hover:border-[#23B349] hover:bg-[#23B349]/5 transition-all group">
+                  <h3 className="text-[#1A1A1A] font-['Funnel_Display'] text-[20px] font-bold group-hover:text-[#23B349] transition-colors mb-2">{item.title}</h3>
+                  <p className="text-gray-500 text-[14px]">{item.desc}</p>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
     </nav>
   );
 }
