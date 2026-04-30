@@ -197,13 +197,13 @@ export default function Footer() {
         </div>
 
         {/* Giant Vita Background Logo */}
-        <div className="w-full flex justify-center mt-10 lg:mt-4 relative z-0 pointer-events-none px-4">
+        <div className="w-full flex justify-center mt-10 lg:mt-4 relative z-0 pointer-events-none ">
           <Image
-            src="/assets/footer/vita-logo.png"
+            src="/assets/footer/vita-footer.png"
             alt="Vita Background Logo"
             width={1200}
             height={500}
-            className="w-full max-w-[1100px] h-auto object-contain"
+            className="w-full  h-auto object-contain"
             priority
           />
         </div>
@@ -211,25 +211,45 @@ export default function Footer() {
         {/* Bottom */}
         <div className="relative w-full flex flex-col items-center -mt-16 lg:-mt-32 overflow-x-clip z-10">
           {/* Wave Graphic */}
-          <div 
+          <div
             className="w-[2270.59px] h-[171.02px] shrink-0 bg-[url('/assets/footer/footer-wave-bg.png')] bg-[length:100%_100%] bg-center bg-no-repeat translate-x-[15.4px]"
-            style={{ filter: "drop-shadow(0px -14px 47px rgba(0, 71, 21, 0.2))" }}
+            style={{
+              filter: "drop-shadow(0px -14px 47px rgba(0, 71, 21, 0.2))",
+            }}
           ></div>
-          
+
           {/* White Bottom Strip */}
           <div className="w-full bg-white relative z-10 -mt-1">
             <div className="max-w-[1400px] mx-auto px-4 lg:px-20 pb-10 pt-2">
               {/* Divider */}
               <div className="w-full h-[1px] bg-[#23B349] opacity-40 mb-6"></div>
-              
+
               {/* Links & Copy */}
               <div className="flex flex-col md:flex-row justify-between items-center text-[13px] font-['Outfit'] text-[#404040]">
                 <div className="flex flex-wrap justify-center md:justify-start gap-8 mb-4 md:mb-0">
-                  <Link href="#" className="hover:text-[#23B349] transition-colors">Terms and Conditions</Link>
-                  <Link href="#" className="hover:text-[#23B349] transition-colors">Privacy Policy</Link>
-                  <Link href="#" className="hover:text-[#23B349] transition-colors">Legal Notice</Link>
+                  <Link
+                    href="#"
+                    className="hover:text-[#23B349] transition-colors"
+                  >
+                    Terms and Conditions
+                  </Link>
+                  <Link
+                    href="#"
+                    className="hover:text-[#23B349] transition-colors"
+                  >
+                    Privacy Policy
+                  </Link>
+                  <Link
+                    href="#"
+                    className="hover:text-[#23B349] transition-colors"
+                  >
+                    Legal Notice
+                  </Link>
                 </div>
-                <p>© {new Date().getFullYear()} Vita Food Complex. All rights reserved.</p>
+                <p>
+                  © {new Date().getFullYear()} Vita Food Complex. All rights
+                  reserved.
+                </p>
               </div>
             </div>
           </div>
