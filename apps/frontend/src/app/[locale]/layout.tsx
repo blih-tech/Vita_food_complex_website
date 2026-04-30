@@ -60,7 +60,7 @@ export default async function RootLayout({
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider messages={messages}>
           <Navbar />
-          <div className="flex-1 pt-[100px] lg:pt-[140px]">{children}</div>
+          <div className="flex-1">{children}</div>
           <Footer />
         </NextIntlClientProvider>
       </body>

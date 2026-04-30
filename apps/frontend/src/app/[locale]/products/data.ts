@@ -19,6 +19,7 @@ export interface Product {
 
 export interface ProductContent {
   description?: string;
+  netWeight?: string;
   nutrition?: Nutrition;
   ingredients?: Ingredients;
   certifications?: Certification[];
@@ -56,6 +57,7 @@ export interface Ingredient {
 const getDefaultContent = (): ProductContent => ({
   description:
     "Delicious chocolate biscuits filled with smooth, creamy goodness made for everyday enjoyment.",
+  netWeight: "120g",
   nutrition: {
     servingSize: "Per 1 Piece (70 g)",
     calories: 120,

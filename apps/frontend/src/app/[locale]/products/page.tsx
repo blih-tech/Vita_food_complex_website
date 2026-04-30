@@ -22,9 +22,9 @@ export default function ProductsPage() {
   return (
     <main className="flex flex-col min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative w-full bg-[#23B349] pt-32 pb-40 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute right-0 top-0 w-1/2 h-full bg-[url('/assets/pattern.png')] bg-cover bg-no-repeat" />
+      <section className="relative w-full pb-40 md:pb-52 overflow-hidden bg-[url('/product-hero.svg')] bg-cover bg-bottom bg-no-repeat">
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute right-0 top-0 w-1/2 h-[70%] bg-[url('/assets/pattern.png')] bg-cover bg-no-repeat" />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-24 flex flex-col md:flex-row items-center justify-between">
           <div className="text-left">
@@ -41,6 +41,7 @@ export default function ProductsPage() {
                alt="Products Display" 
                fill 
                className="object-contain drop-shadow-2xl z-10 rotate-12" 
+               priority
              />
           </div>
         </div>
@@ -53,21 +54,6 @@ export default function ProductsPage() {
             <div className="absolute bottom-40 left-10 w-24 h-24 opacity-80">
                 <Image src="/assets/products/biscuit-scatter.png" alt="Cookie" fill sizes="(max-width: 768px) 30vw, 15vw" className="object-contain -rotate-12" />
             </div>
-        </div>
-
-        {/* Bottom Curve Wave */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-0 rotate-180">
-          <svg
-            className="relative block w-[calc(100%+1.3px)] h-[80px] md:h-[120px] lg:h-[180px]"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-            viewBox="0 0 1200 120"
-          >
-            <path
-              d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-              className="fill-white"
-            ></path>
-          </svg>
         </div>
       </section>
 
