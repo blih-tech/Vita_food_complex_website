@@ -3,7 +3,6 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import Navbar from "@frontend/components/layout/Navbar";
 import { ABOUT_ASSETS } from "@frontend/constants/aboutAssets";
 
 export default function AboutHeroSection() {
@@ -67,11 +66,6 @@ export default function AboutHeroSection() {
 
       {/* Gradient Overlay for better text readability */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/20 pointer-events-none" />
-
-      {/* Navbar */}
-      <div className="relative z-20">
-        <Navbar />
-      </div>
 
       {/* Hero Content - Exact Figma positioning and typography with animations */}
       <div className="relative z-10 flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
