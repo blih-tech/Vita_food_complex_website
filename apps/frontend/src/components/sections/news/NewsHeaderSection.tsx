@@ -1,16 +1,24 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-export default function NewsHeaderSection() {
+export default function NewsHeaderSection({
+  activeCategory,
+  setActiveCategory,
+}: {
+  activeCategory: string;
+  setActiveCategory: (category: string) => void;
+}) {
   const categories = [
-    { name: "All News", active: true },
-    { name: "News", active: false },
-    { name: "Updates", active: false },
-    { name: "Market insights", active: false },
-    { name: "Company News", active: false },
-    { name: "Product Updates", active: false },
+    { label: "All News", slug: "all-news" },
+    { label: "News", slug: "news" },
+    { label: "Updates", slug: "updates" },
+    { label: "Market Insights", slug: "market-insights" },
+    { label: "Company News", slug: "company-news" },
+    { label: "Product Updates", slug: "product-updates" },
   ];
 
   return (
@@ -47,19 +55,21 @@ export default function NewsHeaderSection() {
           {categories.map((cat, idx) => (
             <button
               key={idx}
+              onClick={() => setActiveCategory(cat.slug)}
               className={`flex-shrink-0 font-funnel-display font-medium text-[20px] md:text-[24px] leading-tight transition-colors hover:text-[#23B349] px-3 ${
-                cat.active ? "text-[#23B349]" : "text-[#333733]"
+                activeCategory === cat.slug ? "text-[#23B349]" : "text-[#333733]"
               }`}
             >
-              {cat.name}
+              {cat.label}
             </button>
           ))}
         </div>
         <div className="w-full h-0 border-t-[1.26px] border-[#333733]"></div>
       </div>
 
-      {/* Featured Hero Article */}
-      <div className="w-full relative mt-4 md:mt-12 group cursor-pointer">
+      {/* Featured Hero Article - ONLY show for All News */}
+      {activeCategory === "all-news" && (
+        <div className="w-full relative mt-4 md:mt-12 group cursor-pointer">
         <div className="relative w-full aspect-[16/7] md:h-[731px] rounded-3xl md:rounded-[48px] overflow-hidden">
           <Image
             src="https://picsum.photos/1664/731"
@@ -110,7 +120,8 @@ export default function NewsHeaderSection() {
             </Link>
           </div>
         </div>
-      </div>
+        </div>
+      )}
     </section>
   );
 }
