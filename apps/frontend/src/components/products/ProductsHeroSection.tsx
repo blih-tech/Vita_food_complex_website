@@ -1,87 +1,135 @@
-import { memo } from "react";
+"use client";
+
+import { memo, useState, useEffect } from "react";
 import Image from "next/image";
+import { products } from "@frontend/app/[locale]/products/data";
 
 interface ProductsHeroProps {
   title: string;
 }
 
-export const ProductsHeroSection = memo(({ title }: ProductsHeroProps) => (
-  <section className="relative w-full h-[50vh] md:h-[60vh] lg:h-[80vh] overflow-hidden bg-[url('/product-hero.svg')] bg-cover bg-bottom bg-no-repeat">
-    <div
-      className="absolute inset-0 opacity-10 pointer-events-none"
-      aria-hidden="true"
-    >
-      <div className="absolute right-0 top-0 w-1/2 h-[70%] bg-[url('/assets/pattern.png')] bg-cover bg-no-repeat" />
-    </div>
+export const ProductsHeroSection = memo(({ title }: ProductsHeroProps) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-    {/* FLEX CONTENT (UNCHANGED) */}
-    <div className="relative z-10 max-w-[1600px] mx-auto px-6 lg:px-20 h-full flex flex-col md:flex-row items-center justify-between gap-10">
-      {/* Left Title */}
-      <div className="w-full md:w-1/2 flex items-center justify-start z-0 relative">
-        <h1 className="font-['Funnel_Display'] font-black text-[6rem] md:text-[10rem] lg:text-[16rem] text-white leading-none drop-shadow-md tracking-tighter">
-          {title}
-        </h1>
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % products.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section className="relative w-full h-[50vh] md:h-[60vh] lg:h-[95vh] overflow-hidden bg-[url('/product-hero.svg')] bg-cover bg-bottom bg-no-repeat">
+      <div
+        className="absolute inset-0 opacity-10 pointer-events-none"
+        aria-hidden="true"
+      >
+        <div className="absolute right-0 top-0 w-1/2 h-[70%] bg-[url('/assets/pattern.png')] bg-cover bg-no-repeat" />
       </div>
 
-      {/* Right Content (kept for spacing only) */}
-      <div className="w-full md:w-1/2 flex flex-col items-center md:items-end justify-center z-20 relative mt-10 md:mt-24">
-        <div className="hidden md:block absolute top-[-40px] right-10 z-0">
-          <p className="font-['Outfit'] font-bold text-sm text-white/90 tracking-wider uppercase">
+      {/* Title & Subtext Row */}
+      <div className="absolute inset-0 z-0 max-w-[1600px] mx-auto px-6 lg:px-20 flex items-center justify-between w-full pointer-events-none select-none pb-20">
+        <h1 className="font-['Funnel_Display'] font-black text-[6rem] md:text-[10rem] lg:text-[16rem] text-white leading-none drop-shadow-md tracking-tighter text-left">
+          {title}
+        </h1>
+        <div className="hidden md:block text-right">
+          <p className="font-['Outfit'] font-bold text-sm text-white/90 tracking-wider uppercase drop-shadow-sm">
             Brand Biscuit Products
           </p>
         </div>
       </div>
-    </div>
 
-    {/* ✅ CENTERED HERO IMAGE (FIXED) */}
-    <div className="absolute left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2 w-full max-w-[400px] md:max-w-[700px] lg:max-w-[1000px] aspect-[1.8] z-20 pointer-events-none">
-      <Image
-        src="/assets/products/figma/figma_prod_12.png"
-        alt=""
-        fill
-        className="object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
-        priority
-      />
-    </div>
+      {/* ✅ HORIZONTAL SLIDER HERO IMAGES */}
+      <div className="absolute left-0 top-[55%] -translate-y-1/2 w-full z-20 pointer-events-none">
+        <div
+          className="flex transition-transform duration-1000 ease-in-out w-full"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className="w-full flex-shrink-0 flex justify-center items-center"
+            >
+              <div className="relative w-full max-w-[400px] md:max-w-[700px] lg:max-w-[1000px] aspect-[1.8]">
+                <Image
+                  src={product.media.image}
+                  alt={product.name}
+                  fill
+                  className="object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+                  priority={currentIndex === 0}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
-    {/* Floating background elements */}
-    <div
-      className="absolute inset-0 pointer-events-none z-10"
-      aria-hidden="true"
-    >
-      <div className="absolute top-24 left-32 w-12 h-12 opacity-80">
-        <Image
-          src="/assets/products/biscuit-piece.png"
-          alt=""
-          fill
-          className="object-contain rotate-12"
-        />
+      {/* Floating background elements */}
+      <div
+        className="absolute inset-0 pointer-events-none z-10"
+        aria-hidden="true"
+      >
+        {/* Top left piece on 'P' */}
+        <div className="absolute top-[28%] lg:top-[35%] left-[5%] lg:left-[10%] w-24 h-24 md:w-32 md:h-32 lg:w-48 lg:h-48 drop-shadow-xl z-10">
+          <Image
+            src="/assets/products/biscuts/biscut-1.png"
+            alt=""
+            fill
+            className="object-contain -rotate-12"
+          />
+        </div>
+
+        {/* Crumb top left */}
+        <div className="absolute top-[20%] lg:top-[25%] left-[20%] lg:left-[22%] w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 drop-shadow-md">
+          <Image
+            src="/assets/products/biscuts/biscut-6.png"
+            alt=""
+            fill
+            className="object-contain rotate-45"
+          />
+        </div>
+
+        {/* Crumb middle top */}
+        <div className="absolute top-[25%] lg:top-[20%] left-[25%] lg:left-[28%] w-8 h-8 md:w-10 md:h-10 lg:w-14 lg:h-14 drop-shadow-md">
+          <Image
+            src="/assets/products/biscuts/biscut-4.png"
+            alt=""
+            fill
+            className="object-contain rotate-[30deg]"
+          />
+        </div>
+
+        {/* Bottom left half-cookie */}
+        <div className="absolute bottom-[20%] lg:bottom-[15%] left-[10%] lg:left-[12%] w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 drop-shadow-xl">
+          <Image
+            src="/assets/products/biscuts/biscut-2.png"
+            alt=""
+            fill
+            className="object-contain rotate-[15deg]"
+          />
+        </div>
+
+        {/* Bottom left crumbs near half-cookie */}
+        <div className="absolute bottom-[10%] lg:bottom-[18%] left-[15%] lg:left-[19%] w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 drop-shadow-md">
+          <Image
+            src="/assets/products/biscuts/biscut-5.png"
+            alt=""
+            fill
+            className="object-contain -rotate-45"
+          />
+        </div>
+
+        {/* Giant blurry cookie bottom right */}
+        <div className="absolute bottom-[-5%] lg:bottom-[-10%] right-[-5%] lg:right-[-2%] w-64 h-64 md:w-96 md:h-96 lg:w-[500px] lg:h-[500px] drop-shadow-2xl blur-[4px] lg:blur-[6px] z-30">
+          <Image
+            src="/assets/products/biscuts/biscut-3.png"
+            alt=""
+            fill
+            className="object-contain rotate-[-20deg]"
+          />
+        </div>
       </div>
-      <div className="absolute top-48 left-[40%] w-16 h-16 opacity-90">
-        <Image
-          src="/assets/products/biscuit-scatter.png"
-          alt=""
-          fill
-          className="object-contain rotate-45"
-        />
-      </div>
-      <div className="absolute top-32 left-[60%] w-10 h-10 opacity-70">
-        <Image
-          src="/assets/products/biscuit-piece.png"
-          alt=""
-          fill
-          className="object-contain -rotate-12"
-        />
-      </div>
-      <div className="absolute bottom-[20%] right-[10%] w-32 h-32 opacity-90 blur-[1px]">
-        <Image
-          src="/assets/products/biscuit-scatter.png"
-          alt=""
-          fill
-          className="object-contain rotate-60 scale-150"
-        />
-      </div>
-    </div>
-  </section>
-));
+    </section>
+  );
+});
 ProductsHeroSection.displayName = "ProductsHeroSection";
