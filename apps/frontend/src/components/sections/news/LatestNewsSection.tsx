@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@frontend/navigation";
 import { Play } from "lucide-react";
 
 export default function LatestNewsSection() {
@@ -65,7 +65,7 @@ export default function LatestNewsSection() {
       {/* Top Layout: 1 Large Left, 2 Horizontal Right */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
         {/* Large Left Article */}
-        <Link href="/news/slug" className="group relative w-full aspect-[4/3] lg:h-[630px] rounded-3xl overflow-hidden block">
+        <Link href="/news/vita-food-complex-ai-driven-food-solutions" className="group relative w-full aspect-[4/3] lg:h-[630px] rounded-3xl overflow-hidden block">
           <Image
             src="https://picsum.photos/800/600?random=9"
             alt="Podcast thumbnail"
@@ -97,7 +97,7 @@ export default function LatestNewsSection() {
         {/* 2 Horizontal Right Articles */}
         <div className="flex flex-col gap-8 md:gap-10 justify-between h-full">
           {horizontalArticles.map((article, idx) => (
-            <Link key={idx} href="/news/slug" className="group flex flex-col sm:flex-row items-center gap-6 w-full h-full sm:h-[290px]">
+            <Link key={idx} href="/news/vita-food-complex-ai-driven-food-solutions" className="group flex flex-col sm:flex-row items-center gap-6 w-full h-full sm:h-[290px]">
               <div className="flex flex-col gap-4 flex-1 py-4 sm:py-8">
                 <h3 className="font-funnel-display font-medium text-xl leading-snug text-[#27221B]/80 group-hover:text-[#23B349] transition-colors">
                   {article.title}
@@ -125,7 +125,7 @@ export default function LatestNewsSection() {
       {/* Bottom Layout: 6 Articles Grid (2 rows of 3) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-[30px] mt-8">
         {gridArticles.map((article, idx) => (
-          <Link key={idx} href="/news/slug" className="group flex flex-col w-full gap-5">
+          <Link key={idx} href="/news/vita-food-complex-ai-driven-food-solutions" className="group flex flex-col w-full gap-5">
             <div className="relative w-full aspect-[16/10] lg:h-[346px] rounded-2xl overflow-hidden">
               <Image
                 src={article.image}

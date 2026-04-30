@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@frontend/navigation";
 
 export default function FilteredNewsGrid({ category }: { category: string }) {
   // In a real app, you would fetch or filter articles based on the `category` prop
@@ -41,7 +41,7 @@ export default function FilteredNewsGrid({ category }: { category: string }) {
     <section className="flex flex-col w-full">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-[30px]">
         {gridArticles.map((article, idx) => (
-          <Link key={idx} href="/news/slug" className="group flex flex-col w-full gap-5">
+          <Link key={idx} href="/news/vita-food-complex-ai-driven-food-solutions" className="group flex flex-col w-full gap-5">
             <div className="relative w-full aspect-[16/10] lg:h-[346px] rounded-2xl overflow-hidden">
               <Image
                 src={article.image}

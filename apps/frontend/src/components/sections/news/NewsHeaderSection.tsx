@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@frontend/navigation";
 import { ArrowRight } from "lucide-react";
 
 export default function NewsHeaderSection({
@@ -112,7 +112,7 @@ export default function NewsHeaderSection({
               <div className="w-4 h-[1.26px] bg-[#404040]"></div>
               <span className="font-outfit text-sm text-[#202124]">06 Minute</span>
             </div>
-            <Link href="/news/slug" className="flex items-center gap-2 group/link hover:opacity-70 transition-opacity">
+            <Link href="/news/vita-food-complex-ai-driven-food-solutions" className="flex items-center gap-2 group/link hover:opacity-70 transition-opacity">
               <span className="font-funnel-display font-light text-xl text-[#000000]">Read Article</span>
               <div className="w-6 h-6 rounded-full border-[1.26px] border-[#202124] flex items-center justify-center">
                 <ArrowRight className="w-3 h-3 text-[#202124] -rotate-45 group-hover/link:rotate-0 transition-transform" />

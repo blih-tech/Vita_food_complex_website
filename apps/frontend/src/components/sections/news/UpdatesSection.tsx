@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@frontend/navigation";
 import { ArrowRight } from "lucide-react";
 
 export default function UpdatesSection() {
@@ -52,7 +52,7 @@ export default function UpdatesSection() {
       {/* Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-[38px]">
         {articles.map((article, idx) => (
-          <Link key={idx} href="/news/slug" className="group flex flex-col gap-4">
+          <Link key={idx} href="/news/vita-food-complex-ai-driven-food-solutions" className="group flex flex-col gap-4">
             <div className="relative w-full aspect-[5/4] rounded-[16px] overflow-hidden">
               <Image
                 src={article.image}
