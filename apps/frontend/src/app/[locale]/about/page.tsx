@@ -44,55 +44,57 @@ export default function AboutPage() {
       <BackToTop />
 
       {/* Global styles for page transitions */}
-      <style jsx global>{`
-        html {
-          scroll-behavior: smooth;
-        }
-        
-        .page-section {
-          position: relative;
-          opacity: 0;
-          transform: translateY(30px);
-          transition: all 0.8s ease-out;
-        }
-        
-        .page-section.section-visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        
-        /* Enhanced scrollbar */
-        ::-webkit-scrollbar {
-          width: 10px;
-        }
-        
-        ::-webkit-scrollbar-track {
-          background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-          background: #23B349;
-          border-radius: 5px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-          background: #0F4B1F;
-        }
-        
-        /* Focus styles for accessibility */
-        button:focus-visible {
-          outline: 2px solid #23B349;
-          outline-offset: 2px;
-        }
-        
-        /* Print styles */
-        @media print {
-          .page-section {
-            break-inside: avoid;
-            page-break-inside: avoid;
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          html {
+            scroll-behavior: smooth;
           }
-        }
-      `}</style>
+          
+          .page-section {
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+          }
+          
+          .page-section.section-visible {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          
+          /* Enhanced scrollbar */
+          ::-webkit-scrollbar {
+            width: 10px;
+          }
+          
+          ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+          }
+          
+          ::-webkit-scrollbar-thumb {
+            background: #23B349;
+            border-radius: 5px;
+          }
+          
+          ::-webkit-scrollbar-thumb:hover {
+            background: #0F4B1F;
+          }
+          
+          /* Focus styles for accessibility */
+          button:focus-visible {
+            outline: 2px solid #23B349;
+            outline-offset: 2px;
+          }
+          
+          /* Print styles */
+          @media print {
+            .page-section {
+              break-inside: avoid;
+              page-break-inside: avoid;
+            }
+          }
+        `
+      }} />
     </main>
   );
 }
