@@ -147,6 +147,7 @@ export const products: Product[] = [
     content: {
       description:
         "Delicious chocolate biscuits filled with smooth, creamy goodness made for everyday enjoyment.",
+      netWeight: "48g",
       nutrition: {
         servingSize: "Per 1 Piece (70 g)",
         calories: 120,

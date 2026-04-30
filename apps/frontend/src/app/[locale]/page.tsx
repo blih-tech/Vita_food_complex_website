@@ -1,5 +1,5 @@
 import HeroSection from "@frontend/components/sections/HeroSection";
-import ProductsSection from "@frontend/components/sections/ProductsSection";
+import ProductsSection from "@frontend/components/products/ProductsSection";
 import BiscuitBrandSection from "@frontend/components/sections/BiscuitBrandSection";
 import RecipesSection from "@frontend/components/sections/RecipesSection";
 import MerchandiseSection from "@frontend/components/sections/MerchandiseSection";

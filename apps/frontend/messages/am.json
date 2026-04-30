@@ -152,6 +152,11 @@
     }
   },
   "ProductsPage": {
+    "categories": {
+      "all": "ሁሉም ምርቶች",
+      "biscuit": "ብስኩት",
+      "flour": "ዱቄት"
+    },
     "heading": "ምርቶቻችን",
     "subtext": "ለዕለት ቤቶስ ጊዜ በጥንቃቄ የተዘጋጁ የቢስኩት እና የዱቄት ምርቶቻችንን ይመልከቱ።",
     "ctaHeading": "አብረን እንስራ",

@@ -152,6 +152,11 @@
     }
   },
   "ProductsPage": {
+    "categories": {
+      "all": "All products",
+      "biscuit": "Biscuit",
+      "flour": "Flour"
+    },
     "heading": "Our Products",
     "subtext": "Discover our delicious range of biscuits and flour products, crafted with care for every moment.",
     "ctaHeading": "Let's Work Together",

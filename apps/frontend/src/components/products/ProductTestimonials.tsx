@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function ProductTestimonials() {
   return (
-    <section className="w-full bg-gradient-to-b from-[#1FA03B] to-[#126723] px-4 md:px-8 lg:px-24 py-24 pb-48 relative overflow-hidden">
+    <section className="w-full bg-gradient-to-b from-[#1FA03B] to-[#126723] px-4 md:px-8 lg:px-32 py-24 pb-48 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
         <div className="absolute top-10 left-10 w-32 h-32 rounded-full border-4 border-white"></div>
@@ -20,13 +20,13 @@ export default function ProductTestimonials() {
         <div className="flex flex-col md:flex-row justify-center gap-8">
           {/* Testimonial Card 1 */}
           <div className="bg-transparent flex flex-col md:flex-row items-center md:items-start text-left gap-6 max-w-xl mx-auto">
-            <div className="w-[120px] h-[120px] rounded-2xl overflow-hidden shrink-0 border-4 border-white/20">
+            <div className="w-28 h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden shrink-0 border-4 border-white/20">
               <div className="w-full h-full bg-[#E5D5B8] flex items-end justify-center">
                 <Image
                   src="/assets/hero/client-1.png"
                   alt="Client"
-                  width={120}
-                  height={120}
+                  width={128}
+                  height={128}
                   className="object-cover"
                 />
               </div>
@@ -51,13 +51,13 @@ export default function ProductTestimonials() {
 
           {/* Testimonial Card 2 */}
           <div className="bg-transparent flex flex-col md:flex-row items-center md:items-start text-left gap-6 max-w-xl mx-auto hidden lg:flex">
-            <div className="w-[120px] h-[120px] rounded-2xl overflow-hidden shrink-0 border-4 border-white/20">
+            <div className="w-28 h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden shrink-0 border-4 border-white/20">
               <div className="w-full h-full bg-[#E5D5B8] flex items-end justify-center">
                 <Image
                   src="/assets/hero/client-2.png"
                   alt="Client"
-                  width={120}
-                  height={120}
+                  width={128}
+                  height={128}
                   className="object-cover"
                 />
               </div>

@@ -2,10 +2,10 @@ import { use } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@frontend/navigation";
 import { products, Product } from "../data";
-import ProductTestimonials from "@frontend/components/sections/ProductTestimonials";
-import ProductHeroSection from "@frontend/components/sections/ProductHeroSection";
-import ProductNutritionSection from "@frontend/components/sections/ProductNutritionSection";
-import ProductRelatedSection from "@frontend/components/sections/ProductRelatedSection";
+import ProductTestimonials from "@frontend/components/products/ProductTestimonials";
+import ProductHeroSection from "@frontend/components/products/ProductDetailsHeroSection";
+import ProductNutritionSection from "@frontend/components/products/ProductNutritionSection";
+import ProductRelatedSection from "@frontend/components/products/ProductRelatedSection";
 
 interface ProductDetailPageProps {
   params: Promise<{

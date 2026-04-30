@@ -1,25 +1,16 @@
 import Image from "next/image";
 import { Link } from "@frontend/navigation";
+import { memo } from "react";
+import { Product } from "@frontend/app/[locale]/products/data";
 
 export interface ProductCardProps {
-  id: string;
-  name: string;
-  media: {
-    image: string;
-    tagIcon?: string;
-  };
-  ui: {
-    bgColor: string;
-    nameColor?: string;
-  };
+  product: Product;
 }
 
-export function ProductCard({
-  id,
-  name,
-  media,
-  ui,
+export const ProductCard = memo(function ProductCard({
+  product,
 }: ProductCardProps) {
+  const { id, name, media, ui } = product;
   return (
     <Link
       href={`/products/${id}`}
@@ -52,7 +43,7 @@ export function ProductCard({
         {/* Synthetic drop shadow under product */}
         <div className="absolute top-[65%] w-[60%] h-[40px] bg-[#404040] mix-blend-multiply opacity-20 blur-[18px] rotate-[-5deg] scale-y-50 transition-all duration-500" />
 
-        <div className="relative w-[70%] h-[90%] -mt-[35%]">
+        <div className="relative w-[80%] h-[95%] -mt-[25%]">
           <Image
             src={media.image}
             alt={name}
@@ -99,4 +90,4 @@ export function ProductCard({
       </div>
     </Link>
   );
-}
+});
