@@ -27,7 +27,13 @@ export default function AboutPage() {
     }, observerOptions);
 
     const sections = document.querySelectorAll('.page-section');
-    sections.forEach(section => observer.observe(section));
+    sections.forEach((section, index) => {
+      // Make the first section (Hero) visible immediately
+      if (index === 0) {
+        section.classList.add('section-visible');
+      }
+      observer.observe(section);
+    });
 
     return () => observer.disconnect();
   }, []);

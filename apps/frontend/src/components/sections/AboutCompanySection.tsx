@@ -43,7 +43,7 @@ export default function AboutCompanySection() {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Our Story Heading - Enhanced with animations */}
         <div className={`text-center mb-16 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-             style={{ marginTop: 'clamp(60px, 10vw, 1248px)' }}>
+             style={{ marginTop: 'clamp(40px, 8vw, 120px)' }}>
           <h2 className="font-['Outfit'] font-bold text-[#23B349] leading-[0.96] tracking-[-1.28px] transition-all duration-700 ease-out"
               style={{ 
                 fontSize: 'clamp(32px, 4vw, 64px)',
@@ -114,7 +114,7 @@ export default function AboutCompanySection() {
                    style={{ 
                      width: 'clamp(200px, 40vw, 312px)', 
                      height: 'clamp(140px, 30vw, 211px)',
-                     marginTop: 'clamp(40px, 8vw, 1070px)'
+                     marginTop: 'clamp(20px, 4vw, 40px)'
                    }}>
                 <Image
                   src={ABOUT_ASSETS.content.madeInEthiopia}
@@ -143,7 +143,7 @@ export default function AboutCompanySection() {
                    style={{ 
                      width: 'clamp(300px, 70vw, 824px)', 
                      height: 'clamp(200px, 45vw, 586px)',
-                     marginTop: 'clamp(30px, 6vw, 590px)'
+                     marginTop: 'clamp(20px, 4vw, 30px)'
                    }}>
                 <Image
                   src={ABOUT_ASSETS.content.storyImage}
