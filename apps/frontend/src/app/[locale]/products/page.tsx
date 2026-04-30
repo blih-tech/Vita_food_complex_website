@@ -110,10 +110,8 @@ export default function ProductsPage() {
                 key={product.id}
                 id={product.id}
                 name={product.name}
-                image={product.image}
-                bgColor={product.bgColor}
-                nameColor={product.nameColor}
-                tagIcon={product.tagIcon}
+                media={product.media}
+                ui={product.ui}
               />
             ))}
           </div>

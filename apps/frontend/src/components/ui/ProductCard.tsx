@@ -4,19 +4,21 @@ import { Link } from "@frontend/navigation";
 export interface ProductCardProps {
   id: string;
   name: string;
-  image: string;
-  bgColor: string;
-  nameColor?: string;
-  tagIcon?: string;
+  media: {
+    image: string;
+    tagIcon?: string;
+  };
+  ui: {
+    bgColor: string;
+    nameColor?: string;
+  };
 }
 
 export function ProductCard({
   id,
   name,
-  image,
-  bgColor,
-  nameColor = "#FFFFFF",
-  tagIcon,
+  media,
+  ui,
 }: ProductCardProps) {
   return (
     <Link
@@ -30,7 +32,7 @@ export function ProductCard({
       {/* --- Background Container (Clipped) --- */}
       <div
         className="absolute inset-0 rounded-[16px] overflow-hidden transition-shadow duration-500"
-        style={{ background: bgColor }}
+        style={{ background: ui.bgColor }}
       >
         {/* Top Gradient Overlay */}
         <div className="absolute inset-0 top-0 h-[50%] bg-gradient-to-b from-black to-transparent mix-blend-overlay opacity-50 pointer-events-none z-0" />
@@ -52,7 +54,7 @@ export function ProductCard({
 
         <div className="relative w-[70%] h-[90%] -mt-[35%]">
           <Image
-            src={image}
+            src={media.image}
             alt={name}
             fill
             className="
@@ -70,7 +72,7 @@ export function ProductCard({
         {/* Brand Logo / Tag Icon */}
         <div className="relative w-[80px] md:w-[120px] h-[40px] md:h-[60px]">
           <Image
-            src={tagIcon || image}
+            src={media.tagIcon || media.image}
             alt={`${name} icon`}
             fill
             className="object-contain drop-shadow-[0_14px_24px_rgba(0,0,0,0.15)] origin-left transition-transform duration-300"
@@ -88,7 +90,7 @@ export function ProductCard({
             tracking-[-0.08rem]
           "
           style={{
-            color: nameColor,
+            color: ui.nameColor || "#FFFFFF",
             fontFeatureSettings: "'liga' off",
           }}
         >
