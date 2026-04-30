@@ -193,5 +193,27 @@
       "marie": "Classic Marie biscuit",
       "bora": "Rich chocolate biscuit"
     }
+  },
+  "Contact": {
+    "title": "Contact us",
+    "heading": "Let's Talk",
+    "description": "We'd love to hear from you. Whether you have a question, feedback, or a partnership idea, our team is here to help",
+    "form": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "John Doe",
+      "phone": "Phone number",
+      "phonePlaceholder": "+251 911 123 456",
+      "email": "Email Address",
+      "emailPlaceholder": "hello@example.com",
+      "message": "Message",
+      "messagePlaceholder": "How can we help you?",
+      "agreeText": "I agree to the",
+      "terms": "terms & conditions",
+      "submit": "Send Message"
+    },
+    "map": {
+      "locatedAt": "Located At",
+      "locationName": "Lideta, Alemali mall"
+    }
   }
 }
