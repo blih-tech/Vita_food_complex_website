@@ -22,15 +22,9 @@ export default function ContactFormSection() {
   };
 
   return (
-    <section className="relative w-full min-h-[800px] pt-40 pb-20 flex justify-center overflow-hidden">
-      {/* Background gradients representing the neon green glow */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white via-[#D9F9CC] to-white opacity-80" />
-        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[70%] bg-[#74FF38]/30 blur-[150px] rounded-[100%]" />
-        <div className="absolute top-[10%] right-[-10%] w-[60%] h-[80%] bg-[#4EE044]/20 blur-[180px] rounded-[100%]" />
-      </div>
+    <section className="relative w-full pt-40 pb-20 flex justify-center">
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1500px] relative z-10 flex flex-col lg:flex-row gap-16 lg:gap-8 justify-between">
+      <div className="container mx-auto px-4 sm:px-8 lg:px-16 xl:px-32 max-w-[1920px] relative z-10 flex flex-col lg:flex-row gap-16 lg:gap-8 justify-between">
         
         {/* Left Side Content */}
         <div className="lg:w-1/2 flex flex-col justify-center pt-10 lg:pt-20">
