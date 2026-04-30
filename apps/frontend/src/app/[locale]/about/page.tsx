@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import AboutHeroSection from "@frontend/components/sections/AboutHeroSection";
 import AboutCompanySection from "@frontend/components/sections/AboutCompanySection";
 import AboutStorySection from "@frontend/components/sections/AboutStorySection";
@@ -10,6 +11,27 @@ import ScrollProgress from "@frontend/components/ui/ScrollProgress";
 import BackToTop from "@frontend/components/ui/BackToTop";
 
 export default function AboutPage() {
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('section-visible');
+        }
+      });
+    }, observerOptions);
+
+    const sections = document.querySelectorAll('.page-section');
+    sections.forEach(section => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main className="flex flex-col scroll-smooth">
       {/* Smooth scroll indicator */}
