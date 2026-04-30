@@ -172,7 +172,7 @@ export default function HeroSection() {
 
           {/* White Inspirational Quote */}
           <h3 className="font-[family-name:var(--font-outfit)] font-semibold text-[18px] min-[375px]:text-[24px] sm:text-[32px] md:text-[42px] lg:text-[52px] text-white leading-[1.1] tracking-[-0.01em] max-w-[900px] text-left drop-shadow-lg">
-            "{t("secondaryQuote")}"
+            &quot;{t("secondaryQuote")}&quot;
           </h3>
 
           {/* Client Avatars */}

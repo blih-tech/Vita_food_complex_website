@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { useState, useEffect, Suspense } from "react";
+import { Suspense } from "react";
 import NewsHeaderSection from "@frontend/components/sections/news/NewsHeaderSection";
 import LatestNewsSection from "@frontend/components/sections/news/LatestNewsSection";
 import UpdatesSection from "@frontend/components/sections/news/UpdatesSection";
@@ -13,14 +13,8 @@ function NewsContent() {
   const router = useRouter();
   const pathname = usePathname();
 
-  // Initialize with the current URL parameter or default
-  const [activeCategory, setActiveCategory] = useState("all-news");
-
-  // Listen to searchParams changes using useEffect as requested
-  useEffect(() => {
-    const category = searchParams.get("category") || "all-news";
-    setActiveCategory(category);
-  }, [searchParams]);
+  // Derive the active category directly from URL searchParams
+  const activeCategory = searchParams.get("category") || "all-news";
 
   const handleCategoryChange = (slug: string) => {
     // Use Next.js searchParams to build the new query
