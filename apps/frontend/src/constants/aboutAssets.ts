@@ -1,6 +1,6 @@
 export const ABOUT_ASSETS = {
   hero: {
-    backgroundFrame: "/assets/about/hero-background-frame.webp",
+    backgroundFrame: "/assets/about/hero-bg-28c707.png",
     ellipse: "/assets/about/hero-ellipse.svg",
     storyImage: "/assets/about/story-image-356f72.png",
   },

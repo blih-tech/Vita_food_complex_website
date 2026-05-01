@@ -20,7 +20,7 @@ export default function AboutHeroSection() {
       className="relative w-full overflow-hidden"
       style={{ background: "#E9F7ED" }}
     >
-      {/* Blurred green background with parallax */}
+      {/* Blurred green background with parallax — Figma node 2376:9999 */}
       <div className="absolute inset-0 z-0">
         <div
           className="absolute left-1/2 top-[-10%] h-[120%] w-[120%]"
@@ -58,17 +58,16 @@ export default function AboutHeroSection() {
         />
       </div>
 
-      {/* Content */}
+      {/* Content — Figma layout_A6NW2R: column, gap:32px, CENTER, x=548, y=252 */}
       <div
         className="relative z-20 mx-auto px-4 sm:px-6 lg:px-[128px] pb-24"
         style={{ maxWidth: 1664 }}
       >
-        {/* Story Heading — layout_A6NW2R: column, gap:32px, CENTER, x=548, y=252 */}
         <div
           className="flex flex-col items-center text-center pt-[120px] md:pt-[160px] lg:pt-[172px]"
           style={{ gap: 32 }}
         >
-          {/* Headline — Headline: Outfit 800, 80px, 0.9em lh, -2% ls, CENTER, #FFFFFF */}
+          {/* Headline — Figma: Outfit 800, 80px, 0.9em lh, -2% ls, #FFFFFF */}
           <h1
             style={{
               fontFamily: "'Outfit', sans-serif",
@@ -83,7 +82,7 @@ export default function AboutHeroSection() {
             {t("hero.headline")}
           </h1>
 
-          {/* Subtitle — style_ARAJAL: Funnel Display 500, 24px, 1.25em lh, CENTER, #E8E8E8 */}
+          {/* Subtitle — Figma style_ARAJAL: Funnel Display 500, 24px, 1.25em lh, -0.4% ls, #E8E8E8 */}
           <p
             style={{
               fontFamily: "'Funnel Display', sans-serif",
@@ -100,12 +99,12 @@ export default function AboutHeroSection() {
           </p>
         </div>
 
-        {/* Story Image — Figma node 277:8195: 824×586, x=548 (centered), y=590, radius=16px */}
+        {/* Story Image — Figma node 277:8195: 824×586, x=548, y=590, radius=16px */}
         <div
           className="relative mx-auto mt-10 overflow-hidden"
           style={{ maxWidth: 824, borderRadius: 16 }}
         >
-          <div className="relative" style={{ paddingBottom: "71.11%" /* 586/824 */ }}>
+          <div className="relative" style={{ paddingBottom: "71.11%" }}>
             <Image
               src={ABOUT_ASSETS.hero.storyImage}
               alt="Vita Story"
