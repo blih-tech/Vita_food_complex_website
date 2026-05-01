@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 
 const LOGOS = [
   { name: "Belayab Groups", src: "/assets/sister/belayab.png" },
@@ -16,60 +16,40 @@ const LOGOS = [
 export default function SisterCompaniesSection() {
   const t = useTranslations("About");
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const check = () => {
-      setCanScrollLeft(el.scrollLeft > 0);
-      setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
-    };
-    check();
-    el.addEventListener("scroll", check, { passive: true });
-    return () => el.removeEventListener("scroll", check);
-  }, []);
-
-  const scroll = (dir: "left" | "right") => {
-    scrollRef.current?.scrollBy({
-      left: dir === "left" ? -300 : 300,
-      behavior: "smooth",
-    });
-  };
 
   return (
     <section
       className="px-4 sm:px-6 lg:px-[128px]"
       style={{ background: "#FFFFFF", paddingTop: 64, paddingBottom: 64 }}
     >
-      <div className="mx-auto" style={{ maxWidth: 1664 }}>
-        {/* Header — Figma node 2066:3482 */}
-        <div className="mb-8">
-          {/* "Sister Companies" — Funnel Display Medium 13.3px, #404040 */}
+      {/* layout_GIW9UK: column, alignItems:center, gap:31.92px */}
+      <div className="mx-auto flex flex-col items-center" style={{ maxWidth: 1664, gap: 31.92 }}>
+        {/* text frame — layout_IDEUKV: column, alignItems:center, gap:31.92px */}
+        <div className="flex flex-col items-center text-center" style={{ gap: 31.92 }}>
+          {/* "Sister Companies" — style_AJAP13: Funnel Display 500, 13.3px, 1.25em lh, CENTER, #404040 */}
           <span
-            className="block mb-1"
             style={{
               fontFamily: "'Funnel Display', sans-serif",
               fontWeight: 500,
-              fontSize: 14,
-              lineHeight: "16.6px",
+              fontSize: 13.3,
+              lineHeight: "1.25em",
               letterSpacing: "-0.053px",
               color: "#404040",
-              textTransform: "uppercase",
+              textAlign: "center",
             }}
           >
             {t("sisterCompanies.label")}
           </span>
-          {/* "Different Experiences" — Outfit ExtraBold 53px, lh 47.9px, ls -1.06px, #23B349 */}
+          {/* title — style_R06MT2: Outfit 800, 53.2px, 0.9em lh, -2% ls, CENTER, #23B349 */}
           <h2
             style={{
               fontFamily: "'Outfit', sans-serif",
               fontWeight: 800,
-              fontSize: "clamp(32px, 4vw, 53px)",
-              lineHeight: 0.9,
-              letterSpacing: "-1.06px",
+              fontSize: "clamp(32px, 4vw, 53.2px)",
+              lineHeight: "0.9em",
+              letterSpacing: "-1.064px",
               color: "#23B349",
+              textAlign: "center",
             }}
           >
             {t("sisterCompanies.title")}
@@ -102,65 +82,50 @@ export default function SisterCompaniesSection() {
           </div>
         </div>
 
-        {/* Description + CTA */}
-        <div className="mt-10 flex flex-col sm:flex-row items-start gap-6">
-          {/* Description — Funnel Display Medium 13.3px, #404040 */}
+        {/* TEXT with btn — layout_IDEUKV: column, alignItems:center, gap:31.92px */}
+        <div className="flex flex-col items-center text-center" style={{ gap: 31.92 }}>
+          {/* Description — style_AJAP13: Funnel Display 500, 13.3px, 1.25em lh, CENTER, #404040, max-width 365 */}
           <p
             style={{
               fontFamily: "'Funnel Display', sans-serif",
               fontWeight: 500,
-              fontSize: 16,
-              lineHeight: "16.6px",
+              fontSize: 13.3,
+              lineHeight: "1.25em",
               letterSpacing: "-0.053px",
               color: "#404040",
               maxWidth: 365,
+              textAlign: "center",
             }}
           >
             {t("sisterCompanies.description")}
           </p>
 
-          {/* "See more" Button */}
-          <div className="flex items-center gap-4">
+          {/* "See more" Button — layout_42E7K9: row, alignItems:center, gap:15.96px */}
+          <div className="flex items-center" style={{ gap: 15.96 }}>
+            {/* layout_BVZOUK: row, center, gap:10.64px, padding:10.64px 21.28px, radius:664px */}
+            {/* style_Q17P5T: Funnel Display 500, 15.96px, 1.25em lh, #000 on green bg */}
             <button
-              className="rounded-full flex items-center gap-2"
+              className="rounded-full flex items-center"
               style={{
-                padding: "10px 24px",
+                gap: 10.64,
+                padding: "10.64px 21.28px",
                 background: "#23B349",
-                boxShadow: "0 4px 12px rgba(0,72,21,0.5)",
+                borderRadius: 664,
               }}
             >
               <span
-                className="font-['Funnel_Display'] font-medium text-white"
                 style={{
-                  fontSize: 16,
-                  lineHeight: "20px",
+                  fontFamily: "'Funnel Display', sans-serif",
+                  fontWeight: 500,
+                  fontSize: 15.96,
+                  lineHeight: "1.25em",
                   letterSpacing: "-0.064px",
+                  color: "#FFFFFF",
                 }}
               >
                 {t("sisterCompanies.cta")}
               </span>
-              <span className="text-white" style={{ fontSize: 14 }}>
-                →
-              </span>
-            </button>
-            <button
-              className="rounded-full flex items-center gap-2"
-              style={{
-                padding: "10px 24px",
-                background: "#000000",
-              }}
-            >
-              <span
-                className="font-['Funnel_Display'] font-medium text-white"
-                style={{
-                  fontSize: 16,
-                  lineHeight: "20px",
-                  letterSpacing: "-0.064px",
-                }}
-              >
-                Why Vita®
-              </span>
-              <span className="text-white" style={{ fontSize: 14 }}>
+              <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 400, fontSize: 13.3, color: "#FFFFFF" }}>
                 →
               </span>
             </button>

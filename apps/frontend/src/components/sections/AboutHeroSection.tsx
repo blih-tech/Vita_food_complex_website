@@ -59,36 +59,37 @@ export default function AboutHeroSection() {
         className="relative z-20 mx-auto px-4 sm:px-6 lg:px-[128px]"
         style={{ maxWidth: 1664 }}
       >
-        {/* Story Heading — Figma node 277:8185 */}
+        {/* Story Heading — Figma node 277:8185 — layout_53ZLGZ: column, gap:32px, CENTER */}
         <div
-          className="pt-[120px] md:pt-[160px] lg:pt-[200px]"
-          style={{ maxWidth: 824 }}
+          className="flex flex-col items-center text-center pt-[120px] md:pt-[160px] lg:pt-[200px]"
+          style={{ gap: 32 }}
         >
-          {/* Headline: Outfit ExtraBold 80px, line-height 72px, letter-spacing -1.6px, #FFFFFF */}
+          {/* Headline — Headline (179:449): Outfit 800, 80px, 0.9em lh, -2% ls, CENTER, #FFFFFF */}
           <h1
-            className="mb-6"
             style={{
               fontFamily: "'Outfit', sans-serif",
               fontWeight: 800,
               fontSize: "clamp(48px, 6vw, 80px)",
-              lineHeight: "72px",
+              lineHeight: "0.9em",
               letterSpacing: "-1.6px",
               color: "#FFFFFF",
+              textAlign: "center",
             }}
           >
             {t("hero.headline")}
           </h1>
 
-          {/* Subtitle: Funnel Display Medium 24px, line-height 30px, letter-spacing -0.096px, #E8E8E8 */}
+          {/* Subtitle — style_56XI9S: Funnel Display 500, 24px, 1.25em lh, -0.4% ls, CENTER, #E8E8E8 */}
           <p
             style={{
               fontFamily: "'Funnel Display', sans-serif",
               fontWeight: 500,
               fontSize: "clamp(18px, 2.5vw, 24px)",
-              lineHeight: "30px",
+              lineHeight: "1.25em",
               letterSpacing: "-0.096px",
               color: "#E8E8E8",
-              maxWidth: 824,
+              textAlign: "center",
+              maxWidth: 900,
             }}
           >
             {t("hero.subtitle")}
