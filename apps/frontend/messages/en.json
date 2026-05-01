@@ -58,12 +58,45 @@
     },
     "sisterCompanies": {
       "label": "Sister Companies",
-      "title": "Different Experiences",
+      "title": "Meet Our Sister Company's",
       "description": "Through our diverse sister companies, we deliver value across every touchpoint of everyday life.",
-      "cta": "See more"
+      "cta": "See more",
+      "companies": {
+        "belayabFoods": "Belayab foods",
+        "anadiaCoffee": "Anadia Coffee",
+        "longTea": "Long Tea",
+        "belayabMotors": "Belayab Motors",
+        "belayabDelivery": "Belayab Delivery",
+        "goldenTulip": "Golden Tulip",
+        "belayabPoultry": "Belayab Poultry and feed",
+        "belayabGorges": "Belayab Gorges",
+        "belayabGlobal": "Belayab Global",
+        "lionstoneDistribution": "Lionstone Distribution",
+        "huaRaInternational": "HUA.RA International trade",
+        "lewiHotels": "Lewi Hotels"
+      }
     },
     "whoWeAre": {
-      "description": "Vita Food Complex is a modern FMCG company built to lead the future of everyday food in Ethiopia. We produce strategically designed biscuit and flour products tailored to multiple consumer moments — from children's snacks and youth lifestyle choices to family tea-time and professional bakery needs. With a strong focus on quality, innovation, market relevance, and scalable distribution, Vita is built to become a nationally trusted household brand."
+      "description": "Vita Food Complex is a modern FMCG company built to lead the future of everyday food in Ethiopia. We produce strategically designed biscuit and flour products tailored to multiple consumer moments — from children's snacks and youth lifestyle choices to family tea-time and professional bakery needs. With a strong focus on quality, innovation, market relevance, and scalable distribution, Vita is built to become a nationally trusted household brand.",
+      "cta": "Learn More About Us",
+      "products": {
+        "foods": {
+          "title": "Belayab foods",
+          "description": "Premium quality food products made from the finest local ingredients."
+        },
+        "coffee": {
+          "title": "Belayab coffee",
+          "description": "Rich, aromatic coffee beans sourced from Ethiopia's best highlands."
+        },
+        "juice": {
+          "title": "Belayab juice",
+          "description": "Fresh, natural fruit juices packed with vitamins and flavor."
+        },
+        "water": {
+          "title": "Belayab water",
+          "description": "Pure, refreshing water for healthy hydration."
+        }
+      }
     },
     "mv": {
       "newGen": {

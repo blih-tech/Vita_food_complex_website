@@ -2,51 +2,59 @@
 
 import { useTranslations } from "next-intl";
 
-// Figma assets
-const imgSisterComapny = "https://www.figma.com/api/mcp/asset/c7170dfe-be3a-42a9-8586-ae60ac032cd0";
+// Arrow icon component
+const ArrowIcon = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
 
 export default function SisterCompanySection() {
   const t = useTranslations("About");
 
-  return (
-    <div className="w-full px-[128px] py-[96px] bg-gray-50">
-      <div className="max-w-[1664px] mx-auto">
-        {/* Sister Company Image - Full width section */}
-        <div className="relative w-full h-[4720px] mb-[96px]">
-          <img
-            alt="Sister Companies"
-            className="w-full h-full object-cover"
-            src={imgSisterComapny}
-          />
-        </div>
+  const companies = [
+    { key: "belayabFoods" },
+    { key: "anadiaCoffee" },
+    { key: "longTea" },
+    { key: "belayabMotors" },
+    { key: "belayabDelivery" },
+    { key: "goldenTulip" },
+    { key: "belayabPoultry" },
+    { key: "belayabGorges" },
+    { key: "belayabGlobal" },
+    { key: "lionstoneDistribution" },
+    { key: "huaRaInternational" },
+    { key: "lewiHotels" }
+  ];
 
+  return (
+    <div className="w-full bg-[#23b349] py-[96px] px-[128px] lg:px-[128px] md:px-[64px] sm:px-[32px] lg:py-[96px] md:py-[64px] sm:py-[48px]">
+      <div className="max-w-[1664px] mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-[64px]">
-          <h2 className="font-['Outfit'] font-bold text-[64px] leading-[0.96] tracking-[-2px] text-[#1a1a1a] mb-8">
+        <div className="text-center mb-[80px] lg:mb-[80px] md:mb-[60px] sm:mb-[40px]">
+          <h2 className="font-['Outfit'] font-bold text-[64px] leading-[0.96] tracking-[-2px] text-white mb-[32px] lg:text-[64px] md:text-[48px] sm:text-[36px]">
             {t("sisterCompanies.title")}
           </h2>
-          <p className="font-['Funnel_Display'] font-medium text-[24px] leading-[1.5] tracking-[-0.4px] text-[#404040] max-w-3xl mx-auto">
+          <p className="font-['Funnel_Display'] font-medium text-[24px] leading-[1.5] tracking-[-0.4px] text-white max-w-3xl mx-auto lg:text-[24px] md:text-[20px] sm:text-[18px]">
             {t("sisterCompanies.description")}
           </p>
         </div>
 
-        {/* Sister Companies Content */}
-        <div className="bg-white rounded-[32px] shadow-xl p-12">
-          {/* This would contain the actual sister company content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Placeholder for sister company cards */}
-            {[1, 2, 3, 4, 5, 6].map((item) => (
-              <div key={item} className="bg-gray-50 rounded-[16px] p-8 text-center">
-                <div className="w-20 h-20 bg-[#23b349] rounded-full mx-auto mb-4" />
-                <h3 className="font-['Funnel_Display'] font-bold text-[20px] text-[#1a1a1a] mb-2">
-                  Sister Company {item}
-                </h3>
-                <p className="font-['Funnel_Display'] font-medium text-[16px] text-[#666]">
-                  Supporting our ecosystem with complementary products and services.
-                </p>
+        {/* Companies List */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[32px] max-w-[1200px] mx-auto lg:gap-[32px] md:gap-[24px] sm:gap-[16px]">
+          {companies.map((company, index) => (
+            <div 
+              key={company.key}
+              className="group flex items-center justify-between bg-white/10 backdrop-blur-sm rounded-[16px] p-6 hover:bg-white/20 transition-all duration-300 cursor-pointer border border-white/20"
+            >
+              <span className="font-['Funnel_Display'] font-medium text-[20px] text-white lg:text-[20px] md:text-[18px] sm:text-[16px]">
+                {t(`sisterCompanies.companies.${company.key}`)}
+              </span>
+              <div className="flex-shrink-0 ml-4">
+                <ArrowIcon />
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Outfit, Funnel_Display } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Outfit,
+  Funnel_Display,
+  Inter,
+} from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -29,6 +35,11 @@ const funnelDisplay = Funnel_Display({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "Vita Food Complex",
   description: "Official Website of Vita Hydro Agro-Processing PLC",
@@ -55,7 +66,7 @@ export default async function RootLayout({
   return (
     <html
       lang={locale}
-      className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${funnelDisplay.variable} h-full antialiased scroll-smooth`}
+      className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${funnelDisplay.variable} ${inter.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider messages={messages}>

@@ -1,83 +1,151 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 import { useState } from "react";
 
 const TESTIMONIALS = [
   {
     id: 1,
-    quote: "Vita Hydro products have been a staple in our family for years. The quality is unmatched.",
-    author: "Happy Customer",
-    image: "/assets/about/testimonial-1.png",
+    quote:
+      "Partnering with Vita Food Complex Distributor made our corporate gala effortless. Their attention to detail and commitment to excellence exceeded our expectations.",
+    author: "Mulugeta Bekele",
+    role: "CEO, EthioTech Solutions",
   },
   {
     id: 2,
-    quote: "I trust Vita Hydro for all my baking needs. Their flour is simply the best.",
-    author: "Local Baker",
-    image: "/assets/about/testimonial-2.png",
+    quote:
+      "The Standard Event made our corporate gala seamless and stress-free. Their attention to detail and commitment to excellence exceeded our expectations.",
+    author: "Mulugeta Bekele",
+    role: "CEO, EthioTech Solutions",
+  },
+  {
+    id: 3,
+    quote:
+      "Partnering with Vita Food Complex Distributor made our corporate gala effortless. Their attention to detail and commitment to excellence exceeded our expectations.",
+    author: "Mulugeta Bekele",
+    role: "CEO, EthioTech Solutions",
   },
 ];
 
 export default function TestimonialSection() {
-  const t = useTranslations("About.testimonials");
+  const t = useTranslations("About");
   const [activeIndex, setActiveIndex] = useState(0);
 
   const next = () => setActiveIndex((prev) => (prev + 1) % TESTIMONIALS.length);
-  const prev = () => setActiveIndex((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+  const prev = () =>
+    setActiveIndex(
+      (prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length,
+    );
 
   return (
-    <section className="bg-[#F8FDFB] py-24 lg:py-32 overflow-hidden">
-      <div className="max-w-[1664px] mx-auto px-6 lg:px-[128px]">
-        {/* Header */}
-        <div className="flex flex-col items-center text-center gap-6 mb-20 lg:mb-24">
-          <h2 className="font-['Funnel_Display'] font-bold text-[#0F4B1F] text-5xl lg:text-[80px] leading-[1] tracking-[-1.28px]">
-            {t("title")}
+    <section
+      className="overflow-hidden px-4 sm:px-6 lg:px-[128px]"
+      style={{ background: "#232323", paddingTop: 80, paddingBottom: 80 }}
+    >
+      <div className="mx-auto" style={{ maxWidth: 1981 }}>
+        {/* Header — Figma node 2120:1668 */}
+        <div className="mb-12">
+          <span
+            className="block mb-4"
+            style={{
+              fontFamily: "'Funnel Display', sans-serif",
+              fontWeight: 500,
+              fontSize: 20,
+              lineHeight: "25px",
+              letterSpacing: "-0.08px",
+              color: "#FFFFFF",
+            }}
+          >
+            {t("testimonials.label")}
+          </span>
+
+          <h2
+            style={{
+              fontFamily: "'Funnel Display', sans-serif",
+              fontWeight: 700,
+              fontSize: "clamp(64px, 14vw, 183px)",
+              lineHeight: "228.77px",
+              letterSpacing: "-3.66px",
+              color: "#FFFFFF",
+            }}
+          >
+            {t("testimonials.title")}
           </h2>
-          <div className="flex text-yellow-400 text-3xl">★★★★★</div>
         </div>
 
-        {/* Testimonials Display */}
-        <div className="relative max-w-5xl mx-auto">
-          <div className="flex flex-col items-center">
-            <div className="relative w-24 h-24 lg:w-32 lg:h-32 rounded-full overflow-hidden border-4 border-[#23B349] mb-8 shadow-xl">
-              <Image
-                src={TESTIMONIALS[activeIndex].image}
-                alt={TESTIMONIALS[activeIndex].author}
-                fill
-                className="object-cover"
-              />
-            </div>
-            
-            <div className="bg-white rounded-[40px] p-10 lg:p-16 shadow-2xl relative">
-              <div className="absolute -top-6 left-10 text-6xl text-[#23B349] font-serif leading-none">“</div>
-              <p className="font-['Outfit'] text-[#333733] text-2xl lg:text-4xl font-medium leading-relaxed text-center mb-10 italic">
-                {TESTIMONIALS[activeIndex].quote}
+        {/* Testimonial Cards Carousel */}
+        <div
+          className="flex gap-8 overflow-x-auto pb-8 scrollbar-hide"
+          style={{ scrollSnapType: "x mandatory" }}
+        >
+          {TESTIMONIALS.map((tm) => (
+            <div
+              key={tm.id}
+              className="flex-shrink-0 rounded-[48px] p-10 md:p-12"
+              style={{
+                minWidth: "min(680px, 90vw)",
+                background: "#2E2E2E",
+                scrollSnapAlign: "start",
+              }}
+            >
+              <p
+                className="mb-8"
+                style={{
+                  fontFamily: "'Funnel Display', sans-serif",
+                  fontWeight: 400,
+                  fontSize: 32,
+                  lineHeight: "32px",
+                  letterSpacing: "-0.128px",
+                  color: "#FFFFFF",
+                }}
+              >
+                {tm.quote}
               </p>
-              <div className="text-center">
-                <span className="font-['Funnel_Display'] font-bold text-[#0F4B1F] text-2xl lg:text-3xl">
-                  {TESTIMONIALS[activeIndex].author}
+
+              <div>
+                <span
+                  style={{
+                    fontFamily: "'Outfit', sans-serif",
+                    fontWeight: 400,
+                    fontSize: 18,
+                    lineHeight: "23px",
+                    letterSpacing: "-0.073px",
+                    color: "#EAEAEA",
+                  }}
+                >
+                  {tm.author}
                 </span>
-                <p className="text-[#23B349] font-bold mt-2 uppercase tracking-widest text-sm">Verified Customer</p>
+                <br />
+                <span
+                  className="text-white/60"
+                  style={{
+                    fontFamily: "'Outfit', sans-serif",
+                    fontWeight: 400,
+                    fontSize: 18,
+                    lineHeight: "23px",
+                    letterSpacing: "-0.073px",
+                  }}
+                >
+                  {tm.role}
+                </span>
               </div>
             </div>
-          </div>
+          ))}
+        </div>
 
-          {/* Navigation Controls */}
-          <div className="flex justify-center gap-6 mt-12">
-            <button 
-              onClick={prev}
-              className="flex items-center justify-center w-16 h-16 rounded-full bg-white text-[#0F4B1F] border border-gray-100 cursor-pointer hover:bg-[#23B349] hover:text-white transition-all duration-300 shadow-lg group"
-            >
-              <span className="text-2xl group-hover:-translate-x-1 transition-transform">←</span>
-            </button>
-            <button 
-              onClick={next}
-              className="flex items-center justify-center w-16 h-16 rounded-full bg-[#0F4B1F] text-white cursor-pointer hover:bg-[#23B349] transition-all duration-300 shadow-lg group"
-            >
-              <span className="text-2xl group-hover:translate-x-1 transition-transform">→</span>
-            </button>
-          </div>
+        <div className="flex gap-4 mt-8">
+          <button
+            onClick={prev}
+            className="w-14 h-14 rounded-full flex items-center justify-center border border-white/20 text-white hover:bg-white/10 transition-colors"
+          >
+            ←
+          </button>
+          <button
+            onClick={next}
+            className="w-14 h-14 rounded-full flex items-center justify-center border border-white/20 text-white hover:bg-white/10 transition-colors"
+          >
+            →
+          </button>
         </div>
       </div>
     </section>

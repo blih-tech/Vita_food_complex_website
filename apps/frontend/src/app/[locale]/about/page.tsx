@@ -1,134 +1,37 @@
 "use client";
 
-import { useEffect } from "react";
-import WaveDivider from "@frontend/components/ui/WaveDivider";
 import AboutHeroSection from "@frontend/components/sections/AboutHeroSection";
 import AboutCompanySection from "@frontend/components/sections/AboutCompanySection";
-import AboutStorySection from "@frontend/components/sections/AboutStorySection";
-import AboutValuesSection from "@frontend/components/sections/AboutValuesSection";
-import AboutOwnersSection from "@frontend/components/sections/AboutOwnersSection";
+import SisterCompaniesSection from "@frontend/components/sections/SisterCompaniesSection";
+import WhoAreWeSection from "@frontend/components/sections/WhoAreWeSection";
+import MissionVisionSection from "@frontend/components/sections/MissionVisionSection";
+import ProcessSections from "@frontend/components/sections/ProcessSections";
 import TestimonialSection from "@frontend/components/sections/TestimonialSection";
 import BackToTop from "@frontend/components/ui/BackToTop";
 
+/* Figma About page section order (node 277:8084):
+   1. Hero (2376:9999)
+   2. Story: heading + image + badge + Our Story heading + paragraph
+   3. Sister Companies carousel (2066:3482)
+   4. Who Are We — large typography (2080:3549)
+   5. Mission/Vision/Purpose/Values grid (2080:3630)
+   6. Process: 01 Sourcing, 02 Crafting, 03 Production (2080:3663)
+   7. Testimonials (2120:1668)
+   8. Footer
+   Removed: timeline section, owners accordion (not in Figma)
+*/
+
 export default function AboutPage() {
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('section-visible');
-        }
-      });
-    }, observerOptions);
-
-    const sections = document.querySelectorAll('.page-section');
-    sections.forEach((section, index) => {
-      // Make the first section (Hero) visible immediately
-      if (index === 0) {
-        section.classList.add('section-visible');
-      }
-      observer.observe(section);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <main className="flex flex-col scroll-smooth">
-      <div className="page-section">
-        <AboutHeroSection />
-      </div>
-      
-      <WaveDivider fillColor="#F8FDFB" bgColor="#E9F7ED" /> {/* Wave from Hero (cream) to Company (green) */}
-
-      <div className="page-section">
-        <AboutCompanySection />
-      </div>
-      
-      <WaveDivider fillColor="#E9F7ED" bgColor="#FFFFFF" direction="up" /> {/* Wave from Company (green) to Story (cream) */}
-
-      <div className="page-section">
-        <AboutStorySection />
-      </div>
-      
-      <WaveDivider fillColor="#FFFFFF" bgColor="#E9F7ED" /> {/* Wave from Story (cream) to Values (green) */}
-
-      <div className="page-section">
-        <AboutValuesSection />
-      </div>
-      
-      <WaveDivider fillColor="#E9F7ED" bgColor="#FFFFFF" direction="up" /> {/* Wave from Values (green) to Owners (green) */}
-
-      <div className="page-section">
-        <AboutOwnersSection />
-      </div>
-      
-      <WaveDivider fillColor="#FFFFFF" bgColor="#E9F7ED" /> {/* Wave from Owners (green) to Testimonials (cream) */}
-
-      <div className="page-section">
-        <TestimonialSection />
-      </div>
-
-      {/* Back to top button */}
+      <AboutHeroSection />
+      <AboutCompanySection />
+      <SisterCompaniesSection />
+      <WhoAreWeSection />
+      <MissionVisionSection />
+      <ProcessSections />
+      <TestimonialSection />
       <BackToTop />
-
-      {/* Global styles for page transitions */}
-      <style dangerouslySetInnerHTML={{
-        __html: `
-          html {
-            scroll-behavior: smooth;
-          }
-          
-          .page-section {
-            position: relative;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-          }
-          
-          .page-section.section-visible {
-            opacity: 1;
-            transform: translateY(0);
-          }
-          
-          /* Enhanced scrollbar */
-          ::-webkit-scrollbar {
-            width: 10px;
-          }
-          
-          ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-          }
-          
-          ::-webkit-scrollbar-thumb {
-            background: #23B349;
-            border-radius: 5px;
-          }
-          
-          ::-webkit-scrollbar-thumb:hover {
-            background: #0F4B1F;
-          }
-          
-          /* Focus styles for accessibility */
-          button:focus-visible {
-            outline: 2px solid #23B349;
-            outline-offset: 2px;
-          }
-          
-          /* Print styles */
-          @media print {
-            .page-section {
-              break-inside: avoid;
-              page-break-inside: avoid;
-            }
-          }
-        `
-      }} />
     </main>
   );
 }
