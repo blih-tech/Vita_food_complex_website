@@ -127,46 +127,22 @@ export default function Navbar() {
 
           {/* Right side - Language switcher and CTA */}
           <div className="flex gap-[12px] sm:gap-[16px] lg:gap-[24px] items-center">
-            {/* Language switcher - Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                className="h-[24px] sm:h-[28px] lg:h-[31px] rounded-[12px] sm:rounded-[14px] lg:rounded-[15.55px] w-[80px] sm:w-[90px] lg:w-[100px] bg-black border border-white/20 flex items-center justify-center gap-1.5 cursor-pointer hover:bg-gray-900 transition-colors"
-                aria-expanded={langDropdownOpen}
-                aria-label={`Switch language. Current: ${locale === "en" ? "English" : "Amharic"}`}
-              >
-                <Globe
-                  size={14}
-                  strokeWidth={1.5}
-                  className="text-white flex-shrink-0"
-                />
-                <span className="text-white text-[10px] sm:text-[11px] lg:text-[12px] font-bold leading-none uppercase">
-                  {locale === "en" ? "UK|EN" : "ET|AM"}
-                </span>
-                <ChevronDown
-                  size={12}
-                  className={`text-white transition-transform ${langDropdownOpen ? "rotate-180" : ""}`}
-                />
-              </button>
-
-              {/* Dropdown Menu */}
-              {langDropdownOpen && (
-                <div className="absolute top-full mt-2 right-0 bg-white rounded-xl shadow-lg border border-gray-100 py-2 w-[140px] z-50 flex flex-col overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
-                  <button
-                    onClick={() => handleLanguageSwitch("en")}
-                    className={`px-4 py-2.5 text-left text-sm font-['Funnel_Display'] font-medium hover:bg-gray-50 transition-colors ${locale === "en" ? "text-[#23B349]" : "text-gray-700"}`}
-                  >
-                    UK | English
-                  </button>
-                  <button
-                    onClick={() => handleLanguageSwitch("am")}
-                    className={`px-4 py-2.5 text-left text-sm font-['Funnel_Display'] font-medium hover:bg-gray-50 transition-colors ${locale === "am" ? "text-[#23B349]" : "text-gray-700"}`}
-                  >
-                    ET | Amharic
-                  </button>
-                </div>
-              )}
-            </div>
+            {/* Language switcher - Black background with world icon */}
+            <button
+              onClick={handleLanguageSwitch}
+              className="h-[24px] sm:h-[28px] lg:h-[31px] rounded-[12px] sm:rounded-[14px] lg:rounded-[15.55px] w-[70px] sm:w-[80px] lg:w-[90px] bg-black border border-white/20 flex items-center justify-center gap-1.5 cursor-pointer hover:bg-gray-900 transition-colors"
+              aria-label={`Switch language. Current: ${currentLocale === "en" ? "English" : "Amharic"}`}
+            >
+              {/* World icon */}
+              <Globe
+                size={14}
+                strokeWidth={1.5}
+                className="text-white shrink-0"
+              />
+              <span className="text-white text-[10px] sm:text-[11px] lg:text-[12px] font-bold leading-none uppercase">
+                {currentLocale === "en" ? "UK|EN" : "ET|AM"}
+              </span>
+            </button>
 
             {/* Desktop CTA - Hidden on smaller screens */}
             <div className="hidden lg:block">
