@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { getAllJobIds } from "@frontend/constants/jobs";
 import JobDetailsContent from "@frontend/components/sections/JobDetailsContent";
 import OpenPositionsSection from "@frontend/components/sections/OpenPositionsSection";
 
@@ -7,10 +6,6 @@ import OpenPositionsSection from "@frontend/components/sections/OpenPositionsSec
    1. Job details card with Apply now CTA
    2. Open Positions section below
 */
-
-export function generateStaticParams() {
-  return getAllJobIds().map((id) => ({ id }));
-}
 
 export default async function JobDetailsPage({
   params,
