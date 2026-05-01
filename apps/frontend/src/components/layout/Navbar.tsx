@@ -448,14 +448,14 @@ export default function Navbar() {
           {activeDropdown === "company" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
               {[
-                { title: "About Us", desc: "Read our story and growth", active: true },
-                { title: "Why Choose Vita®", desc: "What makes us special" },
-                { title: "Careers", desc: "Join our growing and passionate team" },
-                { title: "Sustainability", desc: "Our commitment to the planet" },
+                { title: "About Us", desc: "Read our story and growth", href: "/about", active: true },
+                { title: "Why Choose Vita®", desc: "What makes us special", href: "/why-choose-vita" },
+                { title: "Careers", desc: "Join our growing and passionate team", href: "/careers" },
+                { title: "Sustainability", desc: "Our commitment to the planet", href: "/sustainability" },
               ].map((item, idx) => (
                 <Link
                   key={idx}
-                  href="/about"
+                  href={item.href}
                   onClick={() => setActiveDropdown(null)}
                   className={`flex flex-col p-6 rounded-[16px] hover:bg-gray-50 transition-colors group ${item.active ? "border-l-[4px] border-[#23B349] bg-gray-50" : "border-l-[4px] border-transparent"}`}
                 >

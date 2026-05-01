@@ -54,11 +54,99 @@
     },
     "company": {
       "title": "Our Story",
-      "description": "Vita Food Complex is a proudly Ethiopian food manufacturing company committed to delivering quality, innovation, and everyday nourishment. We combine modern production standards with deep local understanding to create products people love and trust. From delicious biscuits for family moments to high-performance flour for homes and businesses, Vita exists to uplift daily food experiences through quality, affordability, and consistency. We are not just producing food. We are building a stronger future for communities, families, retailers, and partners across Ethiopia."
+      "description": "Vita Food Complex is a proudly Ethiopian food manufacturing company committed to delivering quality, innovation, and everyday nourishment. We combine modern production standards with deep local understanding to create products people love and trust. From delicious biscuits for family moments to high-performance flour for homes and businesses, Vita exists to uplift daily food experiences through quality, affordability, and consistency. We are not just producing food. We are building a stronger future for communities, families, retailers, and partners across Ethiopia.",
+      "highlights": {
+        "quality": "Quality First",
+        "local": "Local Sourcing",
+        "community": "Community Focus",
+        "innovation": "Innovation Driven"
+      }
     },
     "story": {
       "title": "Our Journey",
-      "content": "Through our diverse sister companies, we deliver value across every touchpoint of everyday life."
+      "content": "Through our diverse sister companies, we deliver value across every touchpoint of everyday life.",
+      "timeline": {
+        "2010": {
+          "title": "The Beginning",
+          "description": "A simple idea took shape in the highlands of Debre Sina."
+        },
+        "2015": {
+          "title": "Growth & Investment",
+          "description": "With 210 million Birr investment, Vita Hydro Agro-Processing was born."
+        },
+        "2020": {
+          "title": "Community Impact",
+          "description": "Working closely with local farmers and creating employment opportunities."
+        },
+        "2024": {
+          "title": "Future Ready",
+          "description": "Preparing for a future beyond borders with expanded capabilities."
+        }
+      }
+    },
+    "values": {
+      "mission": {
+        "title": "Our Mission",
+        "description": "To provide high-quality, nutritious, and affordable food products while supporting local farmers and communities across Ethiopia."
+      },
+      "vision": {
+        "title": "Our Vision",
+        "description": "To become East Africa's leading food production company, known for quality, sustainability, and community impact."
+      },
+      "core": {
+        "title": "Our Core Values",
+        "items": [
+          "Quality First",
+          "Community Support",
+          "Sustainability",
+          "Innovation"
+        ]
+      },
+      "stats": {
+        "title": "By The Numbers",
+        "description": "210 Million Birr investment | 500+ local farmers supported | Products distributed across Ethiopia"
+      }
+    },
+    "owners": {
+      "title": "Meet the Owners",
+      "subtitle": "The People Behind Vita Hydro"
+    },
+    "testimonials": {
+      "title": "What Our Community Says"
+    }
+  },
+  "WhyChooseVita": {
+    "hero": {
+      "headline": "A Better Choice for Every Table",
+      "description": "Vita delivers reliable, modern food products designed to nourish everyday life from families to future generations."
+    },
+    "whoWeAre": {
+      "title": "Who We Are & What We Stand For",
+      "description": "We are a proudly Ethiopian food manufacturing company committed to delivering quality, innovation, and everyday nourishment. We combine modern production standards with deep local understanding to create products people love and trust.",
+      "cta": "Learn More About Us"
+    },
+    "sisterCompanies": {
+      "title": "Our Sister Companies",
+      "description": "Through our diverse sister companies, we deliver value across every touchpoint of everyday life."
+    },
+    "qualityAssurance": {
+      "subtitle": "Quality Assurance",
+      "title": "Certified Excellence in Every Product",
+      "description": "Our commitment to quality is backed by internationally recognized certifications and rigorous standards.",
+      "cta": "View Our Certificates"
+    },
+    "products": {
+      "title": "Our Products",
+      "biscuits": {
+        "title": "Premium Biscuits Collection",
+        "description": "Discover our extensive range of delicious biscuits crafted with the finest ingredients. From classic favorites to innovative new flavors, each biscuit delivers perfect taste and quality.",
+        "cta": "Explore Biscuits"
+      },
+      "flour": {
+        "title": "High-Quality Flour Products",
+        "description": "Our premium flour products are milled to perfection, ensuring consistent quality for all your baking needs. From all-purpose to specialty flours, we provide the foundation for perfect results every time.",
+        "cta": "Explore Flours"
+      }
     }
   },
   "Products": {

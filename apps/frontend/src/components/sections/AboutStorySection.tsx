@@ -6,34 +6,13 @@ import { useState, useEffect, useRef } from "react";
 import { ABOUT_ASSETS } from "@frontend/constants/aboutAssets";
 
 export default function AboutStorySection() {
-  const t = useTranslations("About");
+  const t = useTranslations("About.story");
   const [isVisible, setIsVisible] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Story timeline data
-  const storyTimeline = [
-    {
-      year: "2010",
-      title: "The Beginning",
-      description: "A simple idea took shape in the highlands of Debre Sina."
-    },
-    {
-      year: "2015", 
-      title: "Growth & Investment",
-      description: "With 210 million Birr investment, Vita Hydro Agro-Processing was born."
-    },
-    {
-      year: "2020",
-      title: "Community Impact",
-      description: "Working closely with local farmers and creating employment opportunities."
-    },
-    {
-      year: "2024",
-      title: "Future Ready",
-      description: "Preparing for a future beyond borders with expanded capabilities."
-    }
-  ];
+  // Story timeline data years
+  const years = ["2010", "2015", "2020", "2024"];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -59,16 +38,16 @@ export default function AboutStorySection() {
   useEffect(() => {
     if (isVisible) {
       const interval = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % storyTimeline.length);
-      }, 3000);
+        setCurrentSlide((prev) => (prev + 1) % years.length);
+      }, 5000);
       return () => clearInterval(interval);
     }
-  }, [isVisible, storyTimeline.length]);
+  }, [isVisible, years.length]);
 
   return (
     <section 
       ref={sectionRef}
-      className="py-20 px-4 sm:px-6 lg:px-8 xl:px-[128px] bg-gradient-to-br from-gray-50 to-[#f8fdfb] relative overflow-hidden"
+      className="py-24 lg:py-32 px-4 sm:px-6 lg:px-8 xl:px-[128px] bg-gradient-to-br from-gray-50 to-[#f8fdfb] relative overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-30">
@@ -78,48 +57,33 @@ export default function AboutStorySection() {
         }} />
       </div>
       
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-[1664px] mx-auto relative z-10">
         {/* Section Header */}
-        <div className={`text-center mb-16 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-             style={{ animationDelay: '0.2s' }}>
-          <h2 className="font-['Funnel_Display'] font-bold text-[#0F4B1F] leading-[0.96] tracking-[-1.28px] mb-4"
-              style={{ 
-                fontSize: 'clamp(28px, 4vw, 48px)',
-                textShadow: '0 2px 10px rgba(15, 75, 31, 0.1)'
-              }}
-          >
-            <span className="inline-block animate-fade-in-up">
-              {t("story.title")}
-            </span>
+        <div className={`text-center mb-20 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h2 className="font-['Funnel_Display'] font-bold text-[#0F4B1F] leading-[1] tracking-[-1.28px] mb-6 text-5xl lg:text-[80px]">
+            {t("title")}
           </h2>
-          <p className="font-['Outfit'] text-[#333733] leading-relaxed max-w-2xl mx-auto"
-             style={{ 
-               fontSize: 'clamp(16px, 2vw, 20px)'
-             }}
-          >
-            <span className="inline-block animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-              {t("story.content")}
-            </span>
+          <p className="font-['Outfit'] text-[#333733] text-lg lg:text-2xl leading-relaxed max-w-3xl mx-auto opacity-70">
+            {t("content")}
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Story Timeline - Interactive */}
-          <div className={`space-y-8 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
-               style={{ animationDelay: '0.6s' }}>
+          <div className={`space-y-12 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             {/* Timeline Navigation */}
-            <div className="flex flex-wrap gap-2 mb-8">
-              {storyTimeline.map((item, index) => (
+            <div className="flex flex-wrap gap-3 mb-12">
+              {years.map((year, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  className={`px-6 py-3 rounded-full text-lg font-bold transition-all duration-500 ${
                     currentSlide === index 
-                      ? 'bg-[#23B349] text-white shadow-lg scale-105' 
-                      : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                      ? "bg-[#23B349] text-white shadow-xl scale-110" 
+                      : "bg-white text-[#0F4B1F]/60 hover:bg-gray-100 border border-gray-100"
                   }`}
                 >
-                  {item.year}
+                  {year}
                 </button>
               ))}
             </div>
@@ -127,137 +91,79 @@ export default function AboutStorySection() {
             {/* Timeline Content */}
             <div className="relative">
               {/* Timeline Line */}
-              <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#23B349] to-[#0F4B1F]" />
+              <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#23B349] to-[#0F4B1F] opacity-20" />
               
               {/* Timeline Items */}
-              <div className="space-y-8">
-                {storyTimeline.map((item, index) => (
+              <div className="space-y-12">
+                {years.map((year, index) => (
                   <div 
                     key={index}
-                    className={`relative flex items-start space-x-6 transition-all duration-700 ${
+                    className={`relative flex items-start space-x-10 transition-all duration-700 ${
                       currentSlide === index 
-                        ? 'opacity-100 translate-x-0' 
-                        : 'opacity-50 translate-x-4'
+                        ? "opacity-100 translate-x-0" 
+                        : "opacity-30 scale-95"
                     }`}
                   >
                     {/* Timeline Dot */}
-                    <div className={`relative z-10 w-8 h-8 rounded-full border-4 transition-all duration-300 ${
+                    <div className={`relative z-10 w-12 h-12 rounded-full border-4 transition-all duration-500 flex items-center justify-center font-bold ${
                       currentSlide === index 
-                        ? 'bg-[#23B349] border-white shadow-lg scale-125' 
-                        : 'bg-white border-gray-300'
-                    }`} />
+                        ? "bg-[#23B349] border-white shadow-xl scale-125 text-white" 
+                        : "bg-white border-gray-200 text-[#0F4B1F]/40"
+                    }`}>
+                      {index + 1}
+                    </div>
                     
                     {/* Timeline Content */}
-                    <div className="flex-1 bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
-                      <h3 className="font-['Outfit'] font-bold text-[#0F4B1F] text-lg mb-2">
-                        {item.title}
+                    <div className="flex-1 bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-500">
+                      <h3 className="font-['Outfit'] font-extrabold text-[#0F4B1F] text-2xl lg:text-3xl mb-3">
+                        {t(`timeline.${year}.title`)}
                       </h3>
-                      <p className="font-['Outfit'] text-gray-600 text-sm leading-relaxed">
-                        {item.description}
+                      <p className="font-['Outfit'] text-[#333733]/80 text-lg lg:text-xl leading-relaxed">
+                        {t(`timeline.${year}.description`)}
                       </p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-
-            {/* Progress Indicator */}
-            <div className="flex items-center space-x-2">
-              <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-[#23B349] transition-all duration-500 ease-out"
-                  style={{ width: `${((currentSlide + 1) / storyTimeline.length) * 100}%` }}
-                />
-              </div>
-              <span className="text-sm font-medium text-gray-500">
-                {currentSlide + 1}/{storyTimeline.length}
-              </span>
-            </div>
           </div>
 
           {/* Story Visual - Enhanced */}
-          <div className={`relative transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}
-               style={{ animationDelay: '0.8s' }}>
+          <div className={`relative transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`} style={{ animationDelay: '0.2s' }}>
             {/* Main Image Container */}
             <div className="relative group">
-              {/* Glow Effect */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-[#23B349] to-[#0F4B1F] rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-xl" />
+              <div className="absolute -inset-6 bg-gradient-to-r from-[#23B349] to-[#0F4B1F] rounded-[40px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 blur-3xl" />
               
-              {/* Image */}
-              <div className="relative rounded-2xl overflow-hidden bg-white shadow-2xl transition-all duration-500 group-hover:shadow-3xl group-hover:scale-[1.02]">
+              <div className="relative rounded-[40px] overflow-hidden bg-white shadow-3xl aspect-[4/5] lg:aspect-square">
                 <Image
                   src={ABOUT_ASSETS.content.storyImage}
                   alt="Our Journey"
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  style={{ objectPosition: 'center' }}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority
+                  className="object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
                 
-                {/* Image Overlay with Current Story */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent">
-                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                    <div className="flex items-center space-x-3 mb-4">
-                      <div className="w-12 h-12 bg-[#23B349] rounded-full flex items-center justify-center">
-                        <span className="font-bold text-lg">{storyTimeline[currentSlide].year}</span>
-                      </div>
-                      <div>
-                        <h3 className="font-['Outfit'] font-bold text-xl">{storyTimeline[currentSlide].title}</h3>
-                        <p className="text-sm opacity-90">{storyTimeline[currentSlide].description}</p>
-                      </div>
+                {/* Image Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-12">
+                  <div className="flex items-center space-x-6 mb-6">
+                    <div className="w-20 h-20 bg-[#23B349] rounded-2xl flex items-center justify-center shadow-2xl rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                      <span className="font-bold text-3xl text-white">{years[currentSlide]}</span>
                     </div>
-                    
-                    {/* Navigation Arrows */}
-                    <div className="flex justify-between items-center mt-6">
-                      <button
-                        onClick={() => setCurrentSlide((prev) => (prev - 1 + storyTimeline.length) % storyTimeline.length)}
-                        className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors duration-300"
-                      >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                        </svg>
-                      </button>
-                      <button
-                        onClick={() => setCurrentSlide((prev) => (prev + 1) % storyTimeline.length)}
-                        className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors duration-300"
-                      >
-                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                      </button>
+                    <div>
+                      <h3 className="font-['Outfit'] font-extrabold text-3xl text-white mb-2">{t(`timeline.${years[currentSlide]}.title`)}</h3>
+                      <p className="text-white/80 text-lg leading-snug">{t(`timeline.${years[currentSlide]}.description`)}</p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Floating Elements */}
-            <div className="absolute -top-4 -right-4 w-20 h-20 bg-[#23B349] rounded-full opacity-10 animate-pulse" />
-            <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-[#0F4B1F] rounded-full opacity-10 animate-pulse" style={{ animationDelay: '1s' }} />
+            {/* Floating Spark Asset */}
+            <div className="absolute -top-12 -right-12 w-32 h-32 animate-pulse">
+              <Image src="/assets/about/spark.svg" alt="" fill className="object-contain" />
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Custom animations */}
-      <style dangerouslySetInnerHTML={{
-        __html: `
-          @keyframes fade-in-up {
-            from {
-              opacity: 0;
-              transform: translateY(30px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          
-          .animate-fade-in-up {
-            animation: fade-in-up 0.8s ease-out forwards;
-          }
-        `
-      }} />
     </section>
   );
 }

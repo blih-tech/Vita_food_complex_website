@@ -1,16 +1,17 @@
 "use client";
 
 import { useEffect } from "react";
-import WaveDivider from "@frontend/components/ui/WaveDivider";
-import AboutHeroSection from "@frontend/components/sections/AboutHeroSection";
-import AboutCompanySection from "@frontend/components/sections/AboutCompanySection";
-import AboutStorySection from "@frontend/components/sections/AboutStorySection";
-import AboutValuesSection from "@frontend/components/sections/AboutValuesSection";
-import AboutOwnersSection from "@frontend/components/sections/AboutOwnersSection";
-import TestimonialSection from "@frontend/components/sections/TestimonialSection";
+import { useTranslations } from "next-intl";
+import WhyChooseVitaHeroSection from "@frontend/components/sections/WhyChooseVitaHeroSection";
+import WhoWeAreSection from "@frontend/components/sections/WhoWeAreSection";
+import SisterCompanySection from "@frontend/components/sections/SisterCompanySection";
+import QualityAssuranceSection from "@frontend/components/sections/QualityAssuranceSection";
+import OurProductSection from "@frontend/components/sections/OurProductSection";
 import BackToTop from "@frontend/components/ui/BackToTop";
 
-export default function AboutPage() {
+export default function WhyChooseVitaPage() {
+  const t = useTranslations("WhyChooseVita");
+
   useEffect(() => {
     const observerOptions = {
       root: null,
@@ -40,38 +41,25 @@ export default function AboutPage() {
 
   return (
     <main className="flex flex-col scroll-smooth">
+      {/* Page sections with smooth transitions */}
       <div className="page-section">
-        <AboutHeroSection />
+        <WhyChooseVitaHeroSection />
       </div>
       
-      <WaveDivider fillColor="#F8FDFB" bgColor="#E9F7ED" /> {/* Wave from Hero (cream) to Company (green) */}
-
       <div className="page-section">
-        <AboutCompanySection />
+        <WhoWeAreSection />
       </div>
       
-      <WaveDivider fillColor="#E9F7ED" bgColor="#FFFFFF" direction="up" /> {/* Wave from Company (green) to Story (cream) */}
-
       <div className="page-section">
-        <AboutStorySection />
+        <SisterCompanySection />
       </div>
       
-      <WaveDivider fillColor="#FFFFFF" bgColor="#E9F7ED" /> {/* Wave from Story (cream) to Values (green) */}
-
       <div className="page-section">
-        <AboutValuesSection />
+        <QualityAssuranceSection />
       </div>
       
-      <WaveDivider fillColor="#E9F7ED" bgColor="#FFFFFF" direction="up" /> {/* Wave from Values (green) to Owners (green) */}
-
       <div className="page-section">
-        <AboutOwnersSection />
-      </div>
-      
-      <WaveDivider fillColor="#FFFFFF" bgColor="#E9F7ED" /> {/* Wave from Owners (green) to Testimonials (cream) */}
-
-      <div className="page-section">
-        <TestimonialSection />
+        <OurProductSection />
       </div>
 
       {/* Back to top button */}
