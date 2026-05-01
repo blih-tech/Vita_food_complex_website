@@ -565,7 +565,7 @@ export default function Navbar() {
                 {/* Right Column */}
                 <div className="flex flex-col gap-8 py-2 flex-1">
                   <Link
-                    href="/people-planet"
+                    href="/terms"
                     onClick={() => setActiveDropdown(null)}
                     className="flex flex-col group"
                   >
