@@ -64,9 +64,9 @@ export default function MerchandiseSection() {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               
-              {/* Product Info Overlay (similar to Frame 122 in Figma) */}
-              <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 bg-[#23B349]/90 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                <h3 className="font-['Outfit'] font-bold text-[32px] lg:text-[48px] xl:text-[64px] text-white leading-tight tracking-[-0.02em] mb-2">
+              {/* Product Info Area */}
+              <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 bg-[#23B349]">
+                <h3 className="font-['Outfit'] font-bold text-[32px] lg:text-[40px] xl:text-[48px] text-white leading-tight tracking-[-0.02em] mb-2">
                   {item.title}
                 </h3>
                 <p className="font-['Outfit'] font-medium text-[14px] lg:text-[16px] text-white/90">

@@ -3,37 +3,32 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-// Certification logos — actual images will be managed via CMS
+// Certification logos from Figma
 const certLogos = [
   {
-    alt: "ISO 9001:2015 — Quality Management System",
-    src: "/assets/quality/quality-1.png",
-    width: 248,
-    height: 150,
+    alt: "Fortified Food",
+    src: "/assets/quality/figma/cert_1.png",
+    width: 150,
   },
   {
-    alt: "HACCP — Food Safety Management",
-    src: "/assets/quality/quality-2.png",
-    width: 200,
-    height: 150,
+    alt: "EFDA",
+    src: "/assets/quality/figma/cert_efda.png",
+    width: 280,
   },
   {
-    alt: "Ethiopian Accreditation Service (EAS)",
-    src: "/assets/quality/quality-3.png",
-    width: 337,
-    height: 150,
+    alt: "LRQA",
+    src: "/assets/quality/figma/cert_lrqa.png",
+    width: 150,
   },
   {
-    alt: "Ethiopian Standards Agency (ESA)",
-    src: "/assets/quality/quality-1.png",
-    width: 418,
-    height: 150,
+    alt: "ISO 9001",
+    src: "/assets/quality/figma/cert_iso.png",
+    width: 150,
   },
   {
-    alt: "Quality Standards Compliance",
-    src: "/assets/quality/quality-2.png",
-    width: 200,
-    height: 150,
+    alt: "EAS",
+    src: "/assets/quality/figma/cert_eas.png",
+    width: 320,
   },
 ];
 
@@ -42,7 +37,6 @@ export default function PartnerSection() {
 
   return (
     <section id="quality" className="relative w-full bg-white overflow-hidden py-16 lg:py-24">
-
       {/* ── Header ── */}
       <div className="max-w-[1024px] mx-auto px-6 flex flex-col items-center text-center gap-4 mb-16">
         <p className="font-['Funnel_Display'] font-medium text-[20px] text-[#404040] leading-tight">
@@ -56,10 +50,10 @@ export default function PartnerSection() {
       {/* ── Certification Logo Marquee ── */}
       <div className="relative w-full overflow-hidden py-4">
         {/* Left fade */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 z-10 pointer-events-none"
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 z-10 pointer-events-none"
           style={{ background: "linear-gradient(to right, white, transparent)" }} />
         {/* Right fade */}
-        <div className="absolute right-0 top-0 bottom-0 w-32 z-10 pointer-events-none"
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 z-10 pointer-events-none"
           style={{ background: "linear-gradient(to left, white, transparent)" }} />
 
         <div className="flex items-center animate-marquee" style={{ gap: 128 }}>
@@ -74,8 +68,8 @@ export default function PartnerSection() {
                 src={logo.src}
                 alt={logo.alt}
                 width={logo.width}
-                height={logo.height}
-                className="object-contain grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all duration-500"
+                height={150}
+                className="object-contain hover:scale-105 transition-transform duration-500"
               />
             </div>
           ))}
@@ -90,8 +84,8 @@ export default function PartnerSection() {
                 src={logo.src}
                 alt={logo.alt}
                 width={logo.width}
-                height={logo.height}
-                className="object-contain grayscale hover:grayscale-0 opacity-50 hover:opacity-100 transition-all duration-500"
+                height={150}
+                className="object-contain hover:scale-105 transition-transform duration-500"
               />
             </div>
           ))}

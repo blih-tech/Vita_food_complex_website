@@ -76,35 +76,36 @@ export default function RecipesSection() {
           {recipes.map((recipe) => (
             <div 
               key={recipe.id}
-              className="relative shrink-0 w-[300px] sm:w-[450px] lg:w-[544px] h-[450px] sm:h-[550px] lg:h-[593px] rounded-[32px] sm:rounded-[48px] overflow-hidden snap-center group cursor-pointer shadow-xl transition-transform duration-500 hover:scale-[1.02]"
-              style={{ backgroundColor: recipe.color }}
+              className="relative shrink-0 w-[300px] sm:w-[400px] lg:w-[480px] h-[450px] sm:h-[550px] lg:h-[600px] rounded-[32px] sm:rounded-[40px] overflow-hidden snap-center group cursor-pointer shadow-xl flex flex-col transition-transform duration-500 hover:scale-[1.02]"
             >
-              {/* Product Image */}
-              <div className="absolute inset-0 z-0">
+              {/* Top Half: Product Image Area */}
+              <div className="relative w-full h-[60%] bg-gradient-to-b from-gray-700 to-gray-900 flex items-center justify-center p-8">
                  <Image 
                   src={recipe.image} 
                   alt={recipe.title} 
                   fill 
-                  className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-90"
+                  className="object-contain p-6 group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
               </div>
 
-              {/* Text Content */}
-              <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-10 lg:p-12 z-10 flex flex-col gap-3 sm:gap-4 transform group-hover:-translate-y-2 transition-transform duration-500">
-                <h3 className="font-['Funnel_Display'] font-bold text-[32px] sm:text-[36px] lg:text-[40px] text-white leading-tight">
+              {/* Bottom Half: Solid Color Text Area */}
+              <div 
+                className="relative w-full h-[40%] p-6 sm:p-8 flex flex-col justify-center gap-2 sm:gap-3"
+                style={{ backgroundColor: recipe.color }}
+              >
+                {/* Overlapping Arrow Indicator */}
+                <div className="absolute -top-6 right-6 w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={recipe.color} strokeWidth="3" className="translate-x-[1px] -translate-y-[1px]">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </div>
+
+                <h3 className="font-['Funnel_Display'] font-bold text-[24px] sm:text-[32px] lg:text-[36px] text-white leading-tight">
                   {recipe.title}
                 </h3>
-                <p className="font-['Outfit'] font-normal text-[18px] sm:text-[20px] lg:text-[24px] text-white/90 leading-relaxed max-w-[400px]">
+                <p className="font-['Outfit'] font-normal text-[14px] sm:text-[16px] text-white/90 leading-relaxed line-clamp-3">
                   {recipe.description}
                 </p>
-              </div>
-
-              {/* Arrow Indicator */}
-              <div className="absolute top-8 right-8 w-12 h-12 sm:w-16 sm:h-16 lg:w-[70px] lg:h-[70px] rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-[#23B349] transition-all duration-300">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg>
               </div>
             </div>
           ))}

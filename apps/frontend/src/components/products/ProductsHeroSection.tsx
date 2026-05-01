@@ -19,9 +19,34 @@ export const ProductsHeroSection = memo(({ title }: ProductsHeroProps) => {
   }, []);
 
   return (
-    <section className="relative w-full h-[50vh] md:h-[60vh] lg:h-[95vh] overflow-hidden bg-[url('/product-hero.svg')] bg-cover bg-bottom bg-no-repeat">
+    <section className="relative w-full h-[50vh] md:h-[60vh] lg:h-[95vh] overflow-hidden">
+      {/* Dynamic Background Container with Mask */}
       <div
-        className="absolute inset-0 opacity-10 pointer-events-none"
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          maskImage: `url('/product-hero.svg')`,
+          WebkitMaskImage: `url('/product-hero.svg')`,
+          maskSize: "cover",
+          WebkitMaskSize: "cover",
+          maskPosition: "bottom center",
+          WebkitMaskPosition: "bottom center",
+          maskRepeat: "no-repeat",
+          WebkitMaskRepeat: "no-repeat",
+        }}
+      >
+        {products.map((product, idx) => (
+          <div
+            key={`bg-${product.id}`}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              idx === currentIndex ? "opacity-100" : "opacity-0"
+            }`}
+            style={{ background: product.ui.bgColor }}
+          />
+        ))}
+      </div>
+
+      <div
+        className="absolute inset-0 opacity-10 pointer-events-none z-10"
         aria-hidden="true"
       >
         <div className="absolute right-0 top-0 w-1/2 h-[70%] bg-[url('/assets/pattern.png')] bg-cover bg-no-repeat" />
