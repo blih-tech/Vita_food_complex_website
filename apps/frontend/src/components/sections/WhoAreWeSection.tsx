@@ -29,14 +29,14 @@ export default function WhoAreWeSection() {
       className="relative overflow-hidden px-4 sm:px-6 lg:px-[128px]"
       style={{ background: "#232323", paddingTop: 120, paddingBottom: 120 }}
     >
-      {/* Blurred green bg — same as hero, Figma node 2066:3520 */}
+      {/* Blurred green bg — Figma node 2080:3549 fill_W0K03X */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div
           className="absolute left-1/2 top-0 h-full w-[120%]"
           style={{
             transform: "translateX(-50%)",
-            opacity: 0.5,
-            filter: "blur(30px)",
+            opacity: 0.4,
+            filter: "blur(80px)",
           }}
         >
           <div className="relative w-full h-full">
@@ -48,10 +48,15 @@ export default function WhoAreWeSection() {
             />
           </div>
         </div>
+        {/* Additional green overlay for richer color */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "rgba(35, 179, 73, 0.15)" }}
+        />
       </div>
 
       <div className="relative z-10 mx-auto" style={{ maxWidth: 1664 }}>
-        {/* Large Typography — layout_FI4QPU: row, center — Figma nodes 2066:3507, 2066:3508, 2066:3509 */}
+        {/* Large Typography — layout_FI4QPU: row, center — Figma nodes 2080:3549 */}
         <div
           className="flex items-center justify-center flex-wrap mb-10"
           style={{ maxWidth: 1357, margin: "0 auto 40px" }}
@@ -70,7 +75,7 @@ export default function WhoAreWeSection() {
             Who
           </span>
 
-          {/* Separator line — Figma node 2066:3508: 123.81×0, stroke #E6E6E6 */}
+          {/* Separator line — Figma: 123.81×0, stroke #E6E6E6 */}
           <div
             className="mx-6"
             style={{ width: 124, height: 2, background: "#E6E6E6" }}
@@ -91,7 +96,7 @@ export default function WhoAreWeSection() {
           </span>
         </div>
 
-        {/* Body Text — style_EP6WBQ: Outfit 400, 32px, 1.26em lh, -0.4% ls, CENTER, #E8E8E8, maxWidth 1291 */}
+        {/* Body Text — Figma: Outfit 400, 32px, 1.26em lh, -0.4% ls, CENTER, #E8E8E8, maxWidth 1291 */}
         <p
           className="mx-auto"
           style={{
