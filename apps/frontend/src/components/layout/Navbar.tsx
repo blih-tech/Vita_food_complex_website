@@ -127,7 +127,7 @@ export default function Navbar() {
             <button
               onClick={handleLanguageSwitch}
               className="h-[24px] sm:h-[28px] lg:h-[31px] rounded-[12px] sm:rounded-[14px] lg:rounded-[15.55px] w-[70px] sm:w-[80px] lg:w-[90px] bg-black border border-white/20 flex items-center justify-center gap-1.5 cursor-pointer hover:bg-gray-900 transition-colors"
-              aria-label={`Switch language. Current: ${currentLocale === "en" ? "English" : "Amharic"}`}
+              aria-label={`Switch language. Current: ${locale === "en" ? "English" : "Amharic"}`}
             >
               {/* World icon */}
               <Globe
@@ -136,7 +136,7 @@ export default function Navbar() {
                 className="text-white shrink-0"
               />
               <span className="text-white text-[10px] sm:text-[11px] lg:text-[12px] font-bold leading-none uppercase">
-                {currentLocale === "en" ? "UK|EN" : "ET|AM"}
+                {locale === "en" ? "UK|EN" : "ET|AM"}
               </span>
             </button>
 
@@ -430,38 +430,6 @@ export default function Navbar() {
               </div>
             )}
 
-            {activeDropdown === "company" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
-                {[
-                  {
-                    title: "About Us",
-                    desc: "Read our story and growth",
-                    active: true,
-                  },
-                  { title: "Why Choose Vita®", desc: "What makes us special" },
-                  {
-                    title: "Careers",
-                    desc: "Join our growing and passionate team",
-                  },
-                  {
-                    title: "Sustainability",
-                    desc: "Our commitment to the planet",
-                  },
-                ].map((item, idx) => (
-                  <Link
-                    key={idx}
-                    href="/about"
-                    onClick={() => setActiveDropdown(null)}
-                    className={`flex flex-col p-6 rounded-[16px] hover:bg-gray-50 transition-colors group ${item.active ? "border-l-[4px] border-[#23B349] bg-gray-50" : "border-l-[4px] border-transparent"}`}
-                  >
-                    <h3 className="text-[#1A1A1A] font-['Funnel_Display'] text-[20px] font-bold group-hover:text-[#23B349] transition-colors mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-500 text-[14px]">{item.desc}</p>
-                  </Link>
-                ))}
-              </div>
-            )}
 
             {activeDropdown === "people-planet" && (
               <div className="flex gap-12 w-full justify-between max-w-6xl mx-auto">
@@ -534,7 +502,6 @@ export default function Navbar() {
                   </Link>
                 </div>
 
-<<<<<<< HEAD
                 {/* Right Column */}
                 <div className="flex flex-col gap-8 py-2 flex-1">
                   <Link
@@ -552,7 +519,7 @@ export default function Navbar() {
                 </div>
               </div>
             )}
-=======
+
           {activeDropdown === "company" && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
               {[
@@ -575,7 +542,6 @@ export default function Navbar() {
               ))}
             </div>
           )}
->>>>>>> 987339b (feat(about): implement exact Figma design with WaveDividers and refined sections)
 
             {activeDropdown === "resources" && (
               <div className="flex gap-12 w-full justify-between max-w-6xl mx-auto">
