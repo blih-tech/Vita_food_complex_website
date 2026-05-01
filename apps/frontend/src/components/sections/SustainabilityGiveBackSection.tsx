@@ -48,22 +48,22 @@ export default function SustainabilityGiveBackSection() {
   return (
     <section
       ref={sectionRef}
-      style={{ background: "#FFFFFF", paddingTop: "80px", paddingBottom: "80px" }}
+      className="py-[48px] sm:py-[64px] md:py-[80px]"
+      style={{ background: "#FFFFFF" }}
     >
-      <div style={{ paddingLeft: "128px", paddingRight: "128px" }}>
+      <div className="px-4 sm:px-6 md:px-8 lg:px-[128px]">
         {/* Header — Figma node 274:5213 */}
-        <div className="mb-12" style={{ maxWidth: 1062 }}>
+        <div className="mb-8 sm:mb-12 max-w-[1062px]">
           {/* "How We Give Back" — Outfit Bold 64px, lh 61.44px, ls -1.28px, #23B349 */}
           <h2
+            className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[64px] mb-4 sm:mb-6"
             style={{
               fontFamily: "'Outfit', sans-serif",
               fontWeight: 700,
-              fontSize: "64px",
               lineHeight: "0.96",
               letterSpacing: "-1.28px",
               color: "#23B349",
               maxWidth: 528,
-              marginBottom: "48px"
             }}
           >
             {t("giveBack.title")}
@@ -71,11 +71,11 @@ export default function SustainabilityGiveBackSection() {
 
           {/* Description — Funnel Display Medium 20px, lh 25px, ls -0.08px, #333733 */}
           <p
+            className="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px]"
             style={{
               fontFamily: "'Funnel Display', sans-serif",
               fontWeight: 500,
-              fontSize: 20,
-              lineHeight: "25px",
+              lineHeight: "1.4",
               letterSpacing: "-0.08px",
               color: "#333733",
             }}
@@ -84,23 +84,23 @@ export default function SustainabilityGiveBackSection() {
           </p>
         </div>
 
-        {/* 3 Cards — staggered layout */}
+        {/* 3 Cards — responsive grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {cards.map((card, i) => (
             <div
               key={card.key}
+              className={`${i > 0 ? "md:mt-[30px] lg:mt-[60px]" : ""}`}
               style={{
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? "translateY(0)" : "translateY(30px)",
                 transition: `all 0.8s ease-out ${i * 0.15}s`,
-                marginTop: i * 60,
               }}
             >
               {/* Give Back images from Figma */}
               <div
-                className="rounded-[24px] overflow-hidden mb-6"
+                className="rounded-[16px] sm:rounded-[20px] lg:rounded-[24px] overflow-hidden mb-4 sm:mb-6"
                 style={{
-                  height: "400px",
+                  height: "250px",
                 }}
               >
                 <img
@@ -112,12 +112,11 @@ export default function SustainabilityGiveBackSection() {
 
               {/* Heading — Funnel Display Bold 24px, lh 24px, ls -0.096px, #000000 */}
               <h3
-                className="mb-3"
+                className="mb-2 sm:mb-3 text-[18px] sm:text-[20px] md:text-[24px]"
                 style={{
                   fontFamily: "'Funnel Display', sans-serif",
                   fontWeight: 700,
-                  fontSize: 24,
-                  lineHeight: "24px",
+                  lineHeight: "1.2",
                   letterSpacing:
                     card.key === "accessibility" ? "0px" : "-0.096px",
                   color: "#000000",
@@ -128,11 +127,11 @@ export default function SustainabilityGiveBackSection() {
 
               {/* Description — Outfit Regular 20px, lh 25.2px, ls -0.08px */}
               <p
+                className="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px]"
                 style={{
                   fontFamily: "'Outfit', sans-serif",
                   fontWeight: 400,
-                  fontSize: 20,
-                  lineHeight: "25.2px",
+                  lineHeight: "1.4",
                   letterSpacing: "-0.08px",
                   color: card.key === "farmers" ? "#404040" : "#333733",
                 }}

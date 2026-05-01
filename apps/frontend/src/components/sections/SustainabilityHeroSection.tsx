@@ -7,9 +7,8 @@ export default function SustainabilityHeroSection() {
 
   return (
     <section
-      className="relative w-full overflow-hidden"
+      className="relative w-full overflow-hidden min-h-[500px] sm:min-h-[600px] md:min-h-[700px] lg:min-h-[815px]"
       style={{
-        minHeight: 815,
         borderRadius: "0 0 48px 48px",
       }}
     >
@@ -25,27 +24,26 @@ export default function SustainabilityHeroSection() {
 
       {/* Hero text — Figma node 274:5183 */}
       <div
-        className="relative z-10 flex flex-col items-center text-white text-center"
+        className="relative z-10 flex flex-col items-center text-white text-center px-4 sm:px-6 md:px-8"
         style={{
           position: "absolute",
           left: "50%",
-          top: "calc(50% + 47px)",
-          transform: "translateX(-50%)",
-          width: "961px",
-          gap: "16px"
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+          maxWidth: "961px",
+          width: "100%",
+          gap: "16px",
         }}
       >
         {/* "Sourced with Care, Shared with Purpose" — Outfit ExtraBold 80px, lh 72px, ls -1.6px, #FFFFFF */}
         <h1
+          className="text-[32px] sm:text-[48px] md:text-[64px] lg:text-[80px]"
           style={{
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 800,
-            fontSize: "80px",
             lineHeight: "0.9",
             letterSpacing: "-1.6px",
             color: "#FFFFFF",
-            whiteSpace: "pre-wrap",
-            minWidth: "100%"
           }}
         >
           {t("hero.headline")}
@@ -53,15 +51,13 @@ export default function SustainabilityHeroSection() {
 
         {/* "We are committed to nourishing communities..." — Funnel Display Medium 24px, lh 24px, ls -0.096px, #FFFFFF */}
         <p
+          className="text-[16px] sm:text-[20px] md:text-[24px] max-w-[662px]"
           style={{
             fontFamily: "'Funnel Display', sans-serif",
             fontWeight: 500,
-            fontSize: "24px",
-            lineHeight: "24px",
+            lineHeight: "1.2",
             letterSpacing: "-0.096px",
             color: "#FFFFFF",
-            width: "662.922px",
-            height: "79px"
           }}
         >
           {t("hero.subtitle")}

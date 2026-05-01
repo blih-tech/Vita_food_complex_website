@@ -18,8 +18,8 @@ const navLinks: { key: NavKey; href: string; hasDropdown?: boolean }[] = [
   { key: "products", href: "/products", hasDropdown: true },
   { key: "company", href: "/about", hasDropdown: true },
   { key: "people-planet", href: "/people-planet", hasDropdown: true },
-  { key: "resources", href: "/resources", hasDropdown: true },
-  { key: "whats-new", href: "/whats-new", hasDropdown: true },
+  { key: "resources", href: "/research", hasDropdown: true },
+  { key: "whats-new", href: "/news", hasDropdown: true },
 ];
 
 export default function Navbar() {
@@ -196,7 +196,13 @@ export default function Navbar() {
                   {link.hasDropdown && activeDropdown === link.key && (
                     <div className="px-6 py-2 flex flex-col gap-2 pl-10 bg-black/5 rounded-[12px] mb-2 mx-2">
                       <Link
-                        href={link.href}
+                        href={
+                          link.key === "resources"
+                            ? "/research"
+                            : link.key === "whats-new"
+                              ? "/news"
+                              : link.href
+                        }
                         onClick={() => setMobileOpen(false)}
                         className="text-white/90 py-2 text-[16px]"
                       >
@@ -430,7 +436,6 @@ export default function Navbar() {
               </div>
             )}
 
-
             {activeDropdown === "people-planet" && (
               <div className="flex gap-12 w-full justify-between max-w-6xl mx-auto">
                 {/* Left Card (Collage) */}
@@ -520,35 +525,52 @@ export default function Navbar() {
               </div>
             )}
 
-          {activeDropdown === "company" && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
-              {[
-                { title: "About Us", desc: "Read our story and growth", href: "/about", active: true },
-                { title: "Why Choose Vita®", desc: "What makes us special", href: "/why-choose-vita" },
-                { title: "Careers", desc: "Join our growing and passionate team", href: "/careers" },
-                { title: "Sustainability", desc: "Our commitment to the planet", href: "/sustainability" },
-              ].map((item, idx) => (
-                <Link
-                  key={idx}
-                  href={item.href}
-                  onClick={() => setActiveDropdown(null)}
-                  className={`flex flex-col p-6 rounded-[16px] hover:bg-gray-50 transition-colors group ${item.active ? "border-l-[4px] border-[#23B349] bg-gray-50" : "border-l-[4px] border-transparent"}`}
-                >
-                  <h3 className="text-[#1A1A1A] font-['Funnel_Display'] text-[20px] font-bold group-hover:text-[#23B349] transition-colors mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-500 text-[14px]">{item.desc}</p>
-                </Link>
-              ))}
-            </div>
-          )}
+            {activeDropdown === "company" && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
+                {[
+                  {
+                    title: "About Us",
+                    desc: "Read our story and growth",
+                    href: "/about",
+                    active: true,
+                  },
+                  {
+                    title: "Why Choose Vita®",
+                    desc: "What makes us special",
+                    href: "/why-choose-vita",
+                  },
+                  {
+                    title: "Careers",
+                    desc: "Join our growing and passionate team",
+                    href: "/careers",
+                  },
+                  {
+                    title: "Sustainability",
+                    desc: "Our commitment to the planet",
+                    href: "/sustainability",
+                  },
+                ].map((item, idx) => (
+                  <Link
+                    key={idx}
+                    href={item.href}
+                    onClick={() => setActiveDropdown(null)}
+                    className={`flex flex-col p-6 rounded-[16px] hover:bg-gray-50 transition-colors group ${item.active ? "border-l-[4px] border-[#23B349] bg-gray-50" : "border-l-[4px] border-transparent"}`}
+                  >
+                    <h3 className="text-[#1A1A1A] font-['Funnel_Display'] text-[20px] font-bold group-hover:text-[#23B349] transition-colors mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-500 text-[14px]">{item.desc}</p>
+                  </Link>
+                ))}
+              </div>
+            )}
 
             {activeDropdown === "resources" && (
               <div className="flex gap-12 w-full justify-between max-w-6xl mx-auto">
                 {/* Left Column */}
                 <div className="flex flex-col gap-8 flex-1">
                   <Link
-                    href="/resources"
+                    href="/become-distributor"
                     onClick={() => setActiveDropdown(null)}
                     className="flex flex-col group"
                   >
@@ -556,11 +578,11 @@ export default function Navbar() {
                       Becoming Distributor
                     </h4>
                     <p className="text-gray-500 text-[14px]">
-                      Explore all our biscuit products
+                      Become a distributor partner
                     </p>
                   </Link>
                   <Link
-                    href="/resources"
+                    href="/research"
                     onClick={() => setActiveDropdown(null)}
                     className="flex flex-col group"
                   >
@@ -568,11 +590,11 @@ export default function Navbar() {
                       Research & Insights
                     </h4>
                     <p className="text-gray-500 text-[14px]">
-                      Explore all our biscuit products
+                      Explore our research insights
                     </p>
                   </Link>
                   <Link
-                    href="/resources"
+                    href="/faqs"
                     onClick={() => setActiveDropdown(null)}
                     className="flex flex-col group"
                   >
@@ -580,7 +602,7 @@ export default function Navbar() {
                       FAQs
                     </h4>
                     <p className="text-gray-500 text-[14px]">
-                      Explore all our biscuit products
+                      Frequently asked questions
                     </p>
                   </Link>
                 </div>
@@ -605,7 +627,7 @@ export default function Navbar() {
                 {/* Right Column */}
                 <div className="flex-1 max-w-[340px]">
                   <Link
-                    href="/resources"
+                    href="/research"
                     onClick={() => setActiveDropdown(null)}
                     className="rounded-[16px] p-6 flex flex-col justify-center relative overflow-hidden group min-h-[120px] shadow-sm hover:shadow-md transition-shadow"
                     style={{

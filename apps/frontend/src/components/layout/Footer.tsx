@@ -61,8 +61,16 @@ const footerLinks = {
     "Tea Biscuit",
   ],
   flour: ["All Purpose", "Burger"],
-  company: ["Investors", "About Us", "Why Choose Us"],
-  resources: ["Research", "Media Kit", "FAQs"],
+  company: [
+    { label: "Investors", href: "/about#investors" },
+    { label: "About Us", href: "/about" },
+    { label: "Why Choose Us", href: "/why-choose-vita" },
+  ],
+  resources: [
+    { label: "Research", href: "/research" },
+    { label: "Media Kit", href: "#" },
+    { label: "FAQs", href: "/faqs" },
+  ],
   whatsNew: ["News & Articles", "Updates"],
   peoplePlanet: [
     "Experiences",
@@ -185,14 +193,8 @@ export default function Footer() {
               title="Flour"
               links={mapLinks(footerLinks.flour, "/products")}
             />
-            <FooterColumn
-              title="Company"
-              links={mapLinks(footerLinks.company, "/about")}
-            />
-            <FooterColumn
-              title="Resources"
-              links={mapLinks(footerLinks.resources, "/resources")}
-            />
+            <FooterColumn title="Company" links={footerLinks.company} />
+            <FooterColumn title="Resources" links={footerLinks.resources} />
           </div>
         </div>
 
