@@ -50,69 +50,63 @@
   "About": {
     "hero": {
       "headline": "Built for Today. Trusted for Tomorrow",
-      "subtitle": "Vita is more than a food company - we are a growing force dedicated to delivering trusted food products while creating meaningful impact across communities."
+      "subtitle": "Vita is more than a food company — we are a growing force dedicated to delivering trusted food products while creating meaningful impact across communities."
     },
     "company": {
       "title": "Our Story",
-      "description": "Vita Food Complex is a proudly Ethiopian food manufacturing company committed to delivering quality, innovation, and everyday nourishment. We combine modern production standards with deep local understanding to create products people love and trust. From delicious biscuits for family moments to high-performance flour for homes and businesses, Vita exists to uplift daily food experiences through quality, affordability, and consistency. We are not just producing food. We are building a stronger future for communities, families, retailers, and partners across Ethiopia.",
-      "highlights": {
-        "quality": "Quality First",
-        "local": "Local Sourcing",
-        "community": "Community Focus",
-        "innovation": "Innovation Driven"
-      }
+      "description": "Vita Food Complex is a proudly Ethiopian food manufacturing company committed to delivering quality, innovation, and everyday nourishment. We combine modern production standards with deep local understanding to create products people love and trust. From delicious biscuits for family moments to high-performance flour for homes and businesses, Vita exists to uplift daily food experiences through quality, affordability, and consistency. We are not just producing food. We are building a stronger future for communities, families, retailers, and partners across Ethiopia."
     },
-    "story": {
-      "title": "Our Journey",
-      "content": "Through our diverse sister companies, we deliver value across every touchpoint of everyday life.",
-      "timeline": {
-        "2010": {
-          "title": "The Beginning",
-          "description": "A simple idea took shape in the highlands of Debre Sina."
-        },
-        "2015": {
-          "title": "Growth & Investment",
-          "description": "With 210 million Birr investment, Vita Hydro Agro-Processing was born."
-        },
-        "2020": {
-          "title": "Community Impact",
-          "description": "Working closely with local farmers and creating employment opportunities."
-        },
-        "2024": {
-          "title": "Future Ready",
-          "description": "Preparing for a future beyond borders with expanded capabilities."
-        }
-      }
+    "sisterCompanies": {
+      "label": "Sister Companies",
+      "title": "Different Experiences",
+      "description": "Through our diverse sister companies, we deliver value across every touchpoint of everyday life.",
+      "cta": "See more"
     },
-    "values": {
+    "whoWeAre": {
+      "description": "Vita Food Complex is a modern FMCG company built to lead the future of everyday food in Ethiopia. We produce strategically designed biscuit and flour products tailored to multiple consumer moments — from children's snacks and youth lifestyle choices to family tea-time and professional bakery needs. With a strong focus on quality, innovation, market relevance, and scalable distribution, Vita is built to become a nationally trusted household brand."
+    },
+    "mv": {
+      "newGen": {
+        "title": "A New Generation of Food",
+        "desc": "We build products that are reliable and meaningful to users daily."
+      },
       "mission": {
-        "title": "Our Mission",
-        "description": "To provide high-quality, nutritious, and affordable food products while supporting local farmers and communities across Ethiopia."
+        "label": "Our Mission",
+        "desc": "To deliver trusted food products that nourish everyday life and support communities"
       },
       "vision": {
-        "title": "Our Vision",
-        "description": "To become East Africa's leading food production company, known for quality, sustainability, and community impact."
+        "label": "Our Vision",
+        "desc": "To become a leading and trusted food brand known for quality and innovation"
       },
-      "core": {
-        "title": "Our Core Values",
-        "items": [
-          "Quality First",
-          "Community Support",
-          "Sustainability",
-          "Innovation"
-        ]
+      "purpose": {
+        "label": "Our Purpose",
+        "desc": "To make everyday moments better through food that brings people together"
       },
-      "stats": {
-        "title": "By The Numbers",
-        "description": "210 Million Birr investment | 500+ local farmers supported | Products distributed across Ethiopia"
+      "values": {
+        "label": "Our Values",
+        "desc": "Trust and quality lead the way. We build a strong community. Innovation drives our progress."
       }
     },
-    "owners": {
-      "title": "Meet the Owners",
-      "subtitle": "The People Behind Vita Hydro"
+    "process": {
+      "01": {
+        "heading": "From rich soil, a powerful beginning",
+        "desc": "In Ethiopia's fertile highlands, every grain begins its journey in the hands of dedicated farmers who understand the land.",
+        "captionDesc": "Our story begins in Ethiopia's farmlands, where quality is nurtured from the ground up."
+      },
+      "02": {
+        "heading": "Hands that shape nourishment",
+        "desc": "Behind every Vita product are skilled individuals who transform raw ingredients into trusted food essentials.",
+        "captionDesc": "Crafted by skilled professionals committed to delivering trusted food for every moment."
+      },
+      "03": {
+        "heading": "Refined with purpose, delivered",
+        "desc": "Inside our modern production facilities, innovation meets discipline. Using advanced technology and rigorous quality control, we ensure every product meets the highest standards.",
+        "captionDesc": "Where technology, quality control, and innovation come together to create Vita products."
+      }
     },
     "testimonials": {
-      "title": "What Our Community Says"
+      "label": "Partner Testimonials",
+      "title": "Our client"
     }
   },
   "WhyChooseVita": {
@@ -316,6 +310,194 @@
     "map": {
       "locatedAt": "Located At",
       "locationName": "Lideta, Alemali mall"
+    }
+  },
+  "Sustainability": {
+    "hero": {
+      "headline": "Sourced with Care, \nShared with Purpose",
+      "subtitle": "We are committed to nourishing communities while protecting the environment for future generations"
+    },
+    "commitment": {
+      "title": "Our Commitment",
+      "description": "We believe sustainability is not a choice — it's a responsibility. From sourcing local wheat to minimizing waste in production, every step is guided by our commitment to people and planet.",
+      "localSourcing": {
+        "title": "Local Sourcing",
+        "items": [
+          "Partnering with local farmers",
+          "Supporting Ethiopian agriculture",
+          "Strengthening rural economies"
+        ]
+      },
+      "communityImpact": {
+        "title": "Community Impact",
+        "items": [
+          "150–200 jobs created",
+          "Skills development opportunities",
+          "Local economic growth"
+        ]
+      },
+      "responsibleProduction": {
+        "title": "Responsible Production",
+        "items": [
+          "Efficient manufacturing processes",
+          "Waste reduction systems",
+          "By-products reused for livestock feed"
+        ]
+      }
+    },
+    "process": {
+      "sublabel": "From farm to table, sustainability at every step",
+      "title": "Our Sustainable Process",
+      "farmers": {
+        "heading": "Farmers",
+        "desc": "Partnering with local producers to secure quality inputs and strengthen agriculture"
+      },
+      "processing": {
+        "heading": "Processing",
+        "desc": "Transforming raw materials with manufacturing systems focused on safety and scale"
+      },
+      "distribution": {
+        "heading": "Distribution",
+        "desc": "Delivering products efficiently to retailers, wholesalers, and markets"
+      },
+      "reuse": {
+        "heading": "Reuse",
+        "desc": "Reducing waste with responsible recovery and value-maximizing operations"
+      }
+    },
+    "giveBack": {
+      "title": "How We Give Back",
+      "description": "We believe that business growth should benefit everyone. Through our operations and values, we actively support communities, empower local partners, and promote sustainable practices that create long-term impact.",
+      "farmers": {
+        "heading": "Supporting Local Farmers",
+        "desc": "We source wheat directly from local farmers, creating stable demand and helping strengthen Ethiopia's agricultural backbone"
+      },
+      "employment": {
+        "heading": "Creating Employment",
+        "desc": "Our facility provides jobs for over 150–200 individuals, supporting families and contributing to local economic growth"
+      },
+      "accessibility": {
+        "heading": "Food Accessibility",
+        "desc": "We aim to deliver high-quality, affordable food products that reach more communities across the country"
+      }
+    },
+    "stats": {
+      "quickFact": "Quick Fact",
+      "skus": {
+        "value": "+11",
+        "label": "Unique SKUs for Everyone."
+      },
+      "biscuits": {
+        "value": "2tn",
+        "label": "Biscuits/Hour"
+      },
+      "flour": {
+        "value": "60tn",
+        "label": "Tones of Flour Production/Day"
+      },
+      "jobs": {
+        "value": "+200",
+        "label": "Jobs Created"
+      },
+      "factory": {
+        "value": "22Km²",
+        "label": "Factory Size in Square Kilometer"
+      },
+      "investment": {
+        "value": "Br210M",
+        "label": "Total Investment"
+      },
+      "export": {
+        "value": "$1.4M",
+        "label": ""
+      }
+    }
+  },
+  "Careers": {
+    "hero": {
+      "headline": "Build Your Future with Vita",
+      "subtitle": "Join a growing team that is shaping the future of food in Ethiopia. We offer meaningful work, a supportive culture, and opportunities to grow your career.",
+      "cta": "View Open Positions"
+    },
+    "whyJoin": {
+      "title": "Why Join Vita?",
+      "benefits": {
+        "growth": "Career Growth",
+        "culture": "Supportive Culture",
+        "environment": "Modern Workplace",
+        "impact": "Community Impact",
+        "innovation": "Innovation-Driven",
+        "balance": "Work-Life Balance"
+      }
+    },
+    "openPositions": {
+      "title": "Open Positions",
+      "applyNow": "Apply now"
+    },
+    "details": {
+      "tab": "Job Details",
+      "applyNow": "Apply now",
+      "summaryTitle": "Job Summary",
+      "responsibilitiesTitle": "Responsibilities",
+      "requirementsTitle": "Requirements",
+      "benefitsTitle": "Benefits",
+      "notFound": "Job not found"
+    },
+    "form": {
+      "title": "Job Application Form",
+      "subtitle": "Fill out the form below to apply for this position. All fields are required unless otherwise noted.",
+      "personal": {
+        "title": "Personal Information",
+        "desc": "Tell us about yourself"
+      },
+      "professional": {
+        "title": "Professional Experience",
+        "desc": "Share your work background"
+      },
+      "education": {
+        "title": "Education",
+        "desc": "Tell us about your academic background"
+      },
+      "resume": {
+        "title": "Resume & Cover Letter",
+        "desc": "Upload your documents"
+      },
+      "additional": {
+        "title": "Additional Information",
+        "desc": "Anything else you'd like us to know"
+      },
+      "fields": {
+        "firstName": "First Name",
+        "firstNamePlaceholder": "Enter your first name",
+        "lastName": "Last Name",
+        "lastNamePlaceholder": "Enter your last name",
+        "email": "Email Address",
+        "emailPlaceholder": "you@example.com",
+        "phone": "Phone Number",
+        "phonePlaceholder": "+251 911 123 456",
+        "address": "Address",
+        "addressPlaceholder": "Enter your full address",
+        "currentRole": "Current Role",
+        "currentRolePlaceholder": "e.g. Production Supervisor",
+        "yearsExperience": "Years of Experience",
+        "yearsExperiencePlaceholder": "e.g. 5 years",
+        "skills": "Key Skills",
+        "skillsPlaceholder": "e.g. Team Leadership, Quality Control",
+        "highestEducation": "Highest Education",
+        "highestEducationPlaceholder": "e.g. Bachelor's Degree",
+        "institution": "Institution",
+        "institutionPlaceholder": "e.g. Addis Ababa University",
+        "fieldOfStudy": "Field of Study",
+        "fieldOfStudyPlaceholder": "e.g. Food Science",
+        "resume": "Resume/CV",
+        "coverLetter": "Cover Letter",
+        "coverLetterPlaceholder": "Tell us why you're a great fit for this role...",
+        "additionalInfo": "Additional Notes",
+        "additionalInfoPlaceholder": "Any other information you'd like to share...",
+        "uploadLabel": "Click to upload or drag and drop",
+        "uploadHint": "PDF, DOC, DOCX (Max 10MB)"
+      },
+      "submit": "Submit Application"
     }
   }
 }
