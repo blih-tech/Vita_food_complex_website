@@ -3,6 +3,15 @@
 import { useTranslations } from "next-intl";
 import { useState, useEffect, useRef } from "react";
 
+// Figma assets from MCP
+const imgQuickFact = "https://www.figma.com/api/mcp/asset/88c9664b-053f-4650-b3a7-5e6539068e18";
+const imgDollar1 = "https://www.figma.com/api/mcp/asset/f418b127-5c30-4b56-89f8-7fb3d447b8c7";
+const imgFrame = "https://www.figma.com/api/mcp/asset/a310c2c1-8101-453b-8041-3fc6c9715b6a";
+const imgVector = "https://www.figma.com/api/mcp/asset/d25ad5e8-5c9d-4532-abef-a40f6313e6d2";
+const imgFrame1 = "https://www.figma.com/api/mcp/asset/aa606042-4f6d-4557-9eda-4d275fc66dc6";
+const imgSubtract = "https://www.figma.com/api/mcp/asset/f62a2636-81eb-42fa-84ad-febc3ed7b80f";
+const imgSubtract1 = "https://www.figma.com/api/mcp/asset/38bca506-7565-480f-8d0d-7a0e75cecec8";
+
 export default function SustainabilityCommitmentSection() {
   const t = useTranslations("Sustainability");
   const [isVisible, setIsVisible] = useState(false);
@@ -24,144 +33,336 @@ export default function SustainabilityCommitmentSection() {
   const commitments = [
     {
       key: "localSourcing",
+      title: "Local Sourcing",
       items: [
-        "localSourcing.items.0",
-        "localSourcing.items.1",
-        "localSourcing.items.2",
+        "Partnering with local farmers",
+        "Supporting Ethiopian agriculture", 
+        "Strengthening rural economies",
+        "24/7 Property Support"
       ],
+      frame: imgFrame
     },
     {
-      key: "communityImpact",
+      key: "communityImpact", 
+      title: "Community Impact",
       items: [
-        "communityImpact.items.0",
-        "communityImpact.items.1",
-        "communityImpact.items.2",
+        "Creating meaningful employment",
+        "Skills development programs",
+        "Community health initiatives",
+        "Education support programs"
       ],
+      frame: imgFrame1
     },
     {
       key: "responsibleProduction",
+      title: "Responsible Production", 
       items: [
-        "responsibleProduction.items.0",
-        "responsibleProduction.items.1",
-        "responsibleProduction.items.2",
+        "Sustainable manufacturing processes",
+        "Waste reduction initiatives",
+        "Energy efficiency programs",
+        "Environmental compliance"
       ],
-    },
+      frame: imgFrame1
+    }
   ];
 
   return (
-    <section
+    <section 
       ref={sectionRef}
-      className="w-full bg-white px-[128px] py-[80px] lg:px-[128px] md:px-[64px] sm:px-[32px] lg:py-[80px] md:py-[60px] sm:py-[40px]"
+      className="w-full bg-white px-[128px] py-[96px] lg:px-[128px] md:px-[64px] sm:px-[32px] lg:py-[96px] md:py-[64px] sm:py-[48px]"
+      data-node-id="274:5236"
+      data-name="Commitment"
     >
-      {/* Commitment text */}
-      <div className="max-w-[1386px] mx-auto mb-[80px]">
-        <h2 className="font-['Outfit'] font-bold text-[64px] leading-[0.96] tracking-[-1.28px] text-[#23B349] max-w-[498px] mb-[48px] lg:text-[64px] md:text-[48px] sm:text-[36px]">
-          {t("commitment.title")}
-        </h2>
-        <p className="font-['Funnel_Display'] font-normal text-[clamp(20px,3vw,32px)] leading-[40px] tracking-[-0.128px] text-[#545854]">
-          {t("commitment.description")}
-        </p>
-      </div>
-
-      {/* 3 Commitment Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 max-w-[1386px] mx-auto">
-        {commitments.map((c, i) => (
-          <div
-            key={c.key}
-            className="rounded-[24px] p-8 md:p-10 bg-[#F5F5F5] min-h-[400px] transition-all duration-800 ease-out"
-            style={{
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? "translateY(0)" : "translateY(20px)",
-              transitionDelay: `${i * 0.1}s`,
-            }}
-          >
-            <h3
-              className="mb-6 font-['Funnel_Display'] font-bold text-[32px] leading-[32px] tracking-[-0.32px]"
-              style={{
-                color: c.key === "responsibleProduction" ? "#23B349" : "#197F34",
-              }}
-            >
-              {t(`commitment.${c.key}.title`)}
-            </h3>
-            <ul className="space-y-4">
-              {c.items.map((item, j) => (
-                <li key={j} className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full mt-3 flex-shrink-0 bg-[#23B349]" />
-                  <span className="font-['Outfit'] font-normal text-[20px] leading-[25.2px] tracking-[-0.08px] text-[#333733]">
-                    {t(item)}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-      {/* Quick Fact Stats - Responsive Grid Layout */}
-      <div className="bg-[#F5F5F5] rounded-[32px] p-8 md:p-12 max-w-[1386px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="max-w-[1664px] mx-auto">
+        {/* Commitments container - h-[1792px] */}
+        <div className="flex flex-col items-center gap-[48px]" data-node-id="274:5237" data-name="Commitments">
           
-          {/* +11 SKUs */}
-          <div className="border-2 border-white rounded-[20px] bg-[rgba(171,255,152,0.5)] backdrop-blur-[10px] p-6 md:p-8 h-[280px] md:h-[300px] flex flex-col justify-center">
-            <div className="font-['Outfit'] font-black text-[clamp(80px,8vw,160px)] leading-[0.88] tracking-[-4.8px] text-black text-center mb-4">
-              +11
-            </div>
-            <div className="font-['Funnel_Display'] font-medium text-[16px] md:text-[20px] leading-[20px] tracking-[-0.08px] text-[#404040] text-center">
-              Product SKUs
-            </div>
+          {/* Commitment text */}
+          <div className="text-center" data-node-id="274:5239" data-name="Commitment text">
+            <p 
+              className="font-['Funnel_Display'] font-normal text-[32px] leading-[normal] tracking-[-0.128px] text-[#545854] w-[1386px] mx-auto mb-[48px]"
+              data-node-id="274:5240"
+            >
+              We believe sustainability is not a choice — it's a responsibility. From sourcing local wheat to minimizing waste, every step of our process is designed to create long-term value for people, communities, and the environment
+            </p>
+            <h2 
+              className="font-['Outfit'] font-bold text-[64px] leading-[0.96] tracking-[-1.28px] text-[#23b349] whitespace-nowrap"
+              data-node-id="274:5241"
+              style={{ fontFeatureSettings: "'liga' 0" }}
+            >
+              Our Commitment
+            </h2>
           </div>
 
-          {/* 60tn Flour */}
-          <div className="border-2 border-white rounded-[20px] bg-[rgba(171,255,152,0.5)] backdrop-blur-[10px] p-6 md:p-8 h-[280px] md:h-[300px] flex flex-col justify-center">
-            <div className="font-['Outfit'] font-black text-[clamp(80px,8vw,160px)] leading-[0.88] tracking-[-4.8px] text-black text-center mb-4">
-              60tn
-            </div>
-            <div className="font-['Funnel_Display'] font-medium text-[16px] md:text-[20px] leading-[20px] tracking-[-0.08px] text-[#404040] text-center">
-              Tones of Flour Production/Day
-            </div>
+          {/* Commitment cards */}
+          <div className="flex gap-[16px] items-center w-full" data-node-id="274:5242" data-name="Commitment card">
+            {commitments.map((commitment, index) => (
+              <div
+                key={commitment.key}
+                className="flex gap-[23.524px] h-[558.703px] items-center justify-center px-[67.632px] py-[23.524px] rounded-[24px] w-[544px] flex-shrink-0 relative"
+                data-node-id={`274:${5243 + index}`}
+                data-name="card"
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? "translateY(0)" : "translateY(20px)",
+                  transition: `all 0.8s ease-out ${index * 0.1}s`,
+                }}
+              >
+                {/* Background gradient and frame */}
+                <div className="absolute inset-0" data-node-id={`274:${5244 + index}`} data-name="yellow-abstract-bg">
+                  <div 
+                    className="absolute inset-0 rounded-[17.643px]"
+                    style={{
+                      backgroundImage: "linear-gradient(145.96992870178786deg, rgb(233, 247, 237) 17.067%, rgb(35, 179, 73) 100%)"
+                    }}
+                    data-node-id={`274:${5245 + index}`}
+                  />
+                  <div 
+                    className="absolute h-[430.789px] left-1/2 top-[127.91px] w-[544px] -translate-x-1/2"
+                    data-node-id={`274:${5246 + index}`}
+                    data-name="Frame"
+                  >
+                    <img 
+                      alt="" 
+                      className="absolute inset-0 w-full h-full object-cover"
+                      src={commitment.frame}
+                    />
+                  </div>
+                </div>
+
+                {/* Card content */}
+                <div 
+                  className="bg-[#e9f7ed] border-[2.941px] border-[#9adcab] border-solid flex flex-col h-[373.449px] items-center justify-center px-[29.405px] py-[17.643px] rounded-[22.054px] relative"
+                  data-node-id={`274:${5250 + index}`}
+                >
+                  <div className="flex flex-col gap-[23.524px] items-center justify-center" data-node-id={`274:${5251 + index}`}>
+                    
+                    {/* Card title */}
+                    <div className="flex flex-col items-center" data-node-id={`274:${5252 + index}`}>
+                      <h3 
+                        className="font-['Funnel_Display'] font-bold text-[32px] leading-none tracking-[-0.32px] text-[#197f34] whitespace-nowrap"
+                        data-node-id={`274:${5253 + index}`}
+                      >
+                        {commitment.title}
+                      </h3>
+                    </div>
+
+                    {/* Card items */}
+                    <div className="flex flex-col gap-[11.762px] items-start w-full" data-node-id={`274:${5254 + index}`}>
+                      {commitment.items.map((item, itemIndex) => (
+                        <div
+                          key={itemIndex}
+                          className="bg-[rgba(255,249,242,0.74)] flex gap-[11.762px] items-center p-[11.762px] rounded-[8.822px] w-full"
+                          data-node-id={`274:${5255 + (index * 4) + itemIndex}`}
+                        >
+                          {/* Vector icon */}
+                          <div className="relative w-[23.524px] h-[23.524px] flex-shrink-0" data-node-id={`274:${5256 + (index * 4) + itemIndex}`} data-name="Vector">
+                            <img 
+                              alt="" 
+                              className="absolute inset-0 w-full h-full object-contain"
+                              src={imgVector}
+                            />
+                          </div>
+                          <p 
+                            className="font-['Outfit'] font-normal text-[24px] leading-[normal] tracking-[-0.096px] text-[#333733] whitespace-nowrap"
+                            data-node-id={`274:${5257 + (index * 4) + itemIndex}`}
+                          >
+                            {item}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
 
-          {/* +200 Jobs */}
-          <div className="border-2 border-white rounded-[20px] bg-[rgba(171,255,152,0.5)] backdrop-blur-[10px] p-6 md:p-8 h-[280px] md:h-[300px] flex flex-col justify-center">
-            <div className="font-['Outfit'] font-black text-[clamp(80px,8vw,160px)] leading-[0.88] tracking-[-4.8px] text-black text-center mb-4">
-              +200
+          {/* Quick Fact section */}
+          <div 
+            className="relative h-[943.333px] rounded-[48px] w-full max-w-[1600px] mx-auto"
+            data-node-id="274:5315"
+            data-name="Quick fact"
+          >
+            {/* Background image */}
+            <img 
+              alt="" 
+              className="absolute inset-0 w-full h-full object-cover rounded-[48px]"
+              src={imgQuickFact}
+            />
+
+            {/* +11 SKUs card */}
+            <div className="absolute h-[430px] left-[106.67px] top-[105px] w-[386.667px]" data-node-id="274:5316">
+              <div className="absolute flex h-[427.015px] items-center justify-center left-0 top-[2.3px] w-[386.666px]">
+                <div className="flex-none rotate-180">
+                  <div className="h-[427.015px] relative w-[386.666px]" data-node-id="274:5317" data-name="Subtract">
+                    <img 
+                      alt="" 
+                      className="absolute inset-0 w-full h-full object-cover"
+                      src={imgSubtract}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="absolute h-[279.167px] left-0 rounded-[20px] top-[-0.09px] w-[386.667px]">
+                <p 
+                  className="absolute font-['Outfit'] font-extrabold text-[160px] leading-[0.88] left-0 right-0 text-black text-center top-[48.33px] tracking-[-4.8px]"
+                  data-node-id="274:5321"
+                >
+                  +11
+                </p>
+                <p 
+                  className="absolute font-['Funnel_Display'] font-medium text-[20px] leading-none left-0 right-0 text-[#404040] text-center top-[210px] tracking-[-0.08px]"
+                  data-node-id="274:5322"
+                >
+                  Unique SKUs for Everyone.
+                </p>
+                <p 
+                  className="absolute font-['Funnel_Display'] font-medium text-[20px] leading-none left-[67.66px] right-[163.25px] text-[#404040] text-center top-[376.67px] tracking-[-0.08px]"
+                  data-node-id="274:5323"
+                >
+                  Biscuits/Hour
+                </p>
+              </div>
+              <p 
+                className="absolute font-['Outfit'] font-extrabold text-[80px] leading-[0.88] left-[66.82px] right-[110.27px] text-black text-center top-[296.59px] tracking-[-2.4px]"
+                data-node-id="274:5324"
+              >
+                2tn 
+              </p>
             </div>
-            <div className="font-['Funnel_Display'] font-medium text-[16px] md:text-[20px] leading-[20px] tracking-[-0.08px] text-[#404040] text-center">
-              Jobs Created
+
+            {/* 60tn Flour card */}
+            <div className="absolute flex flex-col h-[281.667px] items-center left-[513.33px] top-[104.8px] w-[480px]" data-node-id="274:5325">
+              <div 
+                className="border-[2.5px] border-white border-solid h-[281.667px] relative rounded-[20px] w-full"
+                data-node-id="274:5326"
+              >
+                <div 
+                  aria-hidden="true" 
+                  className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[20px]" 
+                />
+                <p 
+                  className="absolute font-['Outfit'] font-extrabold text-[160px] leading-[0.88] left-[-2.5px] right-[-2.5px] text-black text-center top-[47.39px] tracking-[-4.8px]"
+                  data-node-id="274:5327"
+                >
+                  60tn
+                </p>
+                <p 
+                  className="absolute font-['Funnel_Display'] font-medium text-[20px] leading-none left-[-2.5px] right-[-2.5px] text-[#404040] text-center top-[209.05px] tracking-[-0.08px]"
+                  data-node-id="274:5328"
+                >
+                  Tones of Flour Production/Day
+                </p>
+              </div>
+            </div>
+
+            {/* Quick Fact label */}
+            <div 
+              className="absolute border-[2.5px] border-white border-solid h-[128.333px] left-[403.33px] rounded-[20px] top-[406.46px] w-[381.667px]"
+              data-node-id="274:5329"
+            >
+              <div 
+                aria-hidden="true" 
+                className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[20px]" 
+              />
+              <p 
+                className="-translate-x-1/2 absolute font-['Outfit'] font-extrabold text-[66.667px] leading-[0.9] left-[calc(50%+0.08px)] text-[#404040] text-center top-[calc(50%-33.33px)] tracking-[-1.3333px] whitespace-nowrap"
+                data-node-id="274:5330"
+              >
+                Quick Fact
+              </p>
+            </div>
+
+            {/* +200 Jobs card */}
+            <div 
+              className="absolute border-[2.5px] border-white border-solid h-[281.667px] left-[1013.33px] rounded-[20px] top-[104.8px] w-[480px]"
+              data-node-id="274:5331"
+            >
+              <div 
+                aria-hidden="true" 
+                className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[20px]" 
+              />
+              <p 
+                className="absolute font-['Outfit'] font-extrabold text-[160px] leading-[0.88] left-[-2.5px] right-[-2.5px] text-black text-center top-[47.5px] tracking-[-4.8px]"
+                data-node-id="274:5332"
+              >
+                +200
+              </p>
+              <p 
+                className="absolute font-['Funnel_Display'] font-medium text-[20px] leading-none left-[-2.5px] right-[-2.5px] text-[#404040] text-center top-[209.17px] tracking-[-0.08px]"
+                data-node-id="274:5333"
+              >
+                Jobs Created
+              </p>
+            </div>
+
+            {/* 22Km² Factory card */}
+            <div 
+              className="absolute border-[2.5px] border-white border-solid h-[285.833px] left-[106.67px] rounded-[20px] top-[553.13px] w-[610.833px]"
+              data-node-id="274:5334"
+            >
+              <div 
+                aria-hidden="true" 
+                className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[20px]" 
+              />
+              <p 
+                className="absolute bottom-[237.5px] font-['Outfit'] font-extrabold leading-[0] left-[-2.5px] right-[-2.5px] text-[0px] text-white text-center tracking-[-4.8px] translate-y-full"
+                data-node-id="274:5335"
+              >
+                <span className="font-['Outfit'] font-extrabold leading-[0.88] text-[160px]">22Km</span>
+                <span className="font-['Outfit'] font-extrabold leading-[0.88] text-[96.2124934387207px]">2</span>
+              </p>
+              <p 
+                className="absolute bottom-[75.83px] font-['Funnel_Display'] font-medium text-[20px] leading-none left-[-2.5px] right-[-2.5px] text-white text-center tracking-[-0.08px] translate-y-full"
+                data-node-id="274:5336"
+              >
+                Factory Size in Square Killometer
+              </p>
+            </div>
+
+            {/* Investment card */}
+            <div className="absolute h-[435px] left-[737.5px] top-[404.17px] w-[755.833px]" data-node-id="274:5337">
+              <div className="absolute h-[432.615px] left-0 top-[2.18px] w-[755.833px]" data-node-id="274:5338" data-name="Subtract">
+                <img 
+                  alt="" 
+                  className="absolute inset-0 w-full h-full object-cover"
+                  src={imgSubtract1}
+                />
+              </div>
+              <div className="absolute bottom-[0.2px] h-[435px] left-0 overflow-hidden rounded-[20px] w-[755.833px]" data-node-id="274:5341">
+                <div className="absolute aspect-[750.9089179361399/510.8412153982499] bottom-[159.26px] flex items-center justify-center left-[220.62px] right-[-215.69px]" style={{ containerType: "size" }}>
+                  <div className="-scale-x-100 flex-none h-[hypot(12.3721cqw,62.5477cqh)] rotate-[-16.21deg] w-[hypot(-87.6279cqw,37.4523cqh)]">
+                    <div className="relative size-full" data-node-id="274:5342" data-name="Dollar 1">
+                      <img 
+                        alt="" 
+                        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                        src={imgDollar1}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <p 
+                  className="absolute bottom-[239.58px] font-['Outfit'] font-extrabold text-[160px] leading-[0.88] left-0 right-0 text-white text-center tracking-[-4.8px] translate-y-full"
+                  data-node-id="274:5343"
+                >
+                  Br210M
+                </p>
+                <p 
+                  className="absolute bottom-[77.92px] font-['Funnel_Display'] font-medium text-[20px] leading-none left-0 right-0 text-white text-center tracking-[-0.08px] translate-y-full"
+                  data-node-id="274:5344"
+                >
+                  Total Investment
+                </p>
+                <p 
+                  className="absolute bottom-[390.42px] font-['Outfit'] font-extrabold text-[80px] leading-[0.88] left-[109.64px] right-0 text-[#404040] text-center tracking-[-2.4px] translate-y-full"
+                  data-node-id="274:5345"
+                >
+                  $1.4M
+                </p>
+              </div>
             </div>
           </div>
-
-          {/* Quick Fact */}
-          <div className="border-2 border-white rounded-[20px] bg-[rgba(171,255,152,0.5)] backdrop-blur-[10px] p-6 md:p-8 h-[280px] md:h-[300px] flex items-center justify-center">
-            <div className="font-['Outfit'] font-black text-[clamp(40px,4vw,66px)] leading-[0.9] tracking-[-1.33px] text-[#404040] text-center">
-              Quick Fact
-            </div>
-          </div>
-
-          {/* 22Km² Factory */}
-          <div className="border-2 border-white rounded-[20px] bg-gradient-to-br from-[#23B349] to-[#0F4B1F] p-6 md:p-8 h-[280px] md:h-[300px] flex flex-col justify-center md:col-span-2">
-            <div className="font-['Outfit'] font-black text-[clamp(60px,6vw,160px)] leading-[0.88] tracking-[-4.8px] text-white text-center mb-4">
-              <span className="text-[clamp(60px,6vw,160px)]">22Km</span>
-              <span className="text-[clamp(36px,3.6vw,96px)] align-top">2</span>
-            </div>
-            <div className="font-['Funnel_Display'] font-medium text-[16px] md:text-[20px] leading-[20px] tracking-[-0.08px] text-white text-center">
-              Factory Size in Square Killometer
-            </div>
-          </div>
-
-          {/* Investment */}
-          <div className="border-2 border-white rounded-[20px] bg-gradient-to-br from-[#23B349] to-[#0F4B1F] p-6 md:p-8 h-[280px] md:h-[300px] flex flex-col justify-center md:col-span-2 lg:col-span-3">
-            <div className="font-['Outfit'] font-black text-[clamp(60px,6vw,160px)] leading-[0.88] tracking-[-4.8px] text-white text-center mb-4">
-              Br210M
-            </div>
-            <div className="font-['Funnel_Display'] font-medium text-[16px] md:text-[20px] leading-[20px] tracking-[-0.08px] text-white text-center mb-4">
-              Total Investment
-            </div>
-            <div className="font-['Outfit'] font-black text-[clamp(40px,4vw,80px)] leading-[0.88] tracking-[-2.4px] text-[#404040] text-center">
-              $1.4M
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
