@@ -82,23 +82,22 @@ export default function SustainabilityCommitmentSection() {
   return (
     <section
       ref={sectionRef}
-      className="px-4 sm:px-6 lg:px-[128px]"
-      style={{ background: "#FFFFFF", paddingTop: 80, paddingBottom: 80 }}
+      style={{ background: "#FFFFFF" }}
     >
-      <div className="mx-auto" style={{ maxWidth: 1664 }}>
+      <div style={{ paddingLeft: "128px", paddingRight: "128px", paddingTop: "80px", paddingBottom: "80px" }}>
         {/* Commitment text — Figma node 274:5239 */}
-        <div className="mb-12" style={{ maxWidth: 1386 }}>
+        <div style={{ maxWidth: 1386, marginBottom: "80px" }}>
           {/* "Our Commitment" — Outfit Bold 64px, lh 61.44px, ls -1.28px, #23B349 */}
           <h2
-            className="mb-6"
             style={{
               fontFamily: "'Outfit', sans-serif",
               fontWeight: 700,
-              fontSize: "clamp(40px, 5vw, 64px)",
-              lineHeight: "61.44px",
+              fontSize: "64px",
+              lineHeight: "0.96",
               letterSpacing: "-1.28px",
               color: "#23B349",
               maxWidth: 498,
+              marginBottom: "48px"
             }}
           >
             {t("commitment.title")}
@@ -176,61 +175,301 @@ export default function SustainabilityCommitmentSection() {
           ))}
         </div>
 
-        {/* Quick Fact Stats — Figma node 274:5315 */}
+        {/* Quick Fact Stats — Figma node 274:5315 - Exact positioning layout */}
         <div
-          className="rounded-[32px] p-8 md:p-12"
           style={{
+            position: "relative",
+            height: "815px",
+            width: "100%",
             background: "#F5F5F5",
+            borderRadius: "32px",
+            overflow: "hidden"
           }}
         >
-          {/* "Quick Fact" label — Outfit ExtraBold 66.67px, lh 60px, ls -1.33px, #404040 */}
-          <span
-            className="block mb-8"
+          {/* +11 SKUs - positioned at left: 106.67px, top: 104.8px */}
+          <div
             style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 800,
-              fontSize: "clamp(40px, 5vw, 66px)",
-              lineHeight: "60px",
-              letterSpacing: "-1.33px",
-              color: "#404040",
+              position: "absolute",
+              left: "106.67px",
+              top: "104.8px",
+              width: "381.667px",
+              height: "281.667px",
+              border: "2.5px solid #FFFFFF",
+              borderRadius: "20px",
+              background: "rgba(171,255,152,0.5)",
+              backdropFilter: "blur(10px)"
             }}
           >
-            {t("stats.quickFact")}
-          </span>
+            <div style={{
+              position: "absolute",
+              left: "-2.5px",
+              right: "-2.5px",
+              top: "47.39px",
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 800,
+              fontSize: "160px",
+              lineHeight: "0.88",
+              letterSpacing: "-4.8px",
+              color: "#000000",
+              textAlign: "center"
+            }}>
+              +11
+            </div>
+            <div style={{
+              position: "absolute",
+              left: "-2.5px",
+              right: "-2.5px",
+              top: "209.05px",
+              fontFamily: "'Funnel Display', sans-serif",
+              fontWeight: 500,
+              fontSize: "20px",
+              lineHeight: "20px",
+              letterSpacing: "-0.08px",
+              color: "#404040",
+              textAlign: "center"
+            }}>
+              Product SKUs
+            </div>
+          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, i) => (
-              <div key={i} className={stat.label ? "" : "hidden"}>
-                <div
-                  style={{
-                    fontFamily: "'Outfit', sans-serif",
-                    fontWeight: 800,
-                    fontSize:
-                      stat.value.length > 6
-                        ? "clamp(60px, 10vw, 160px)"
-                        : "clamp(40px, 6vw, 80px)",
-                    lineHeight: "0.9",
-                    letterSpacing: stat.value.length > 6 ? "-4.8px" : "-2.4px",
-                    color: stat.dark ? "#000000" : "#0F4B1F",
-                    marginBottom: 8,
-                  }}
-                >
-                  {stat.value}
-                </div>
-                <p
-                  style={{
-                    fontFamily: "'Funnel Display', sans-serif",
-                    fontWeight: 500,
-                    fontSize: 20,
-                    lineHeight: "20px",
-                    letterSpacing: "-0.08px",
-                    color: "#404040",
-                  }}
-                >
-                  {stat.label}
-                </p>
+          {/* 60tn Flour - positioned at left: 403.33px, top: 104.8px */}
+          <div
+            style={{
+              position: "absolute",
+              left: "403.33px",
+              top: "104.8px",
+              width: "480px",
+              height: "281.667px",
+              border: "2.5px solid #FFFFFF",
+              borderRadius: "20px",
+              background: "rgba(171,255,152,0.5)",
+              backdropFilter: "blur(10px)"
+            }}
+          >
+            <div style={{
+              position: "absolute",
+              left: "-2.5px",
+              right: "-2.5px",
+              top: "47.39px",
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 800,
+              fontSize: "160px",
+              lineHeight: "0.88",
+              letterSpacing: "-4.8px",
+              color: "#000000",
+              textAlign: "center"
+            }}>
+              60tn
+            </div>
+            <div style={{
+              position: "absolute",
+              left: "-2.5px",
+              right: "-2.5px",
+              top: "209.05px",
+              fontFamily: "'Funnel Display', sans-serif",
+              fontWeight: 500,
+              fontSize: "20px",
+              lineHeight: "20px",
+              letterSpacing: "-0.08px",
+              color: "#404040",
+              textAlign: "center"
+            }}>
+              Tones of Flour Production/Day
+            </div>
+          </div>
+
+          {/* Quick Fact label - positioned at left: 403.33px, top: 406.46px */}
+          <div
+            style={{
+              position: "absolute",
+              left: "403.33px",
+              top: "406.46px",
+              width: "381.667px",
+              height: "128.333px",
+              border: "2.5px solid #FFFFFF",
+              borderRadius: "20px",
+              background: "rgba(171,255,152,0.5)",
+              backdropFilter: "blur(10px)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            <div style={{
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 800,
+              fontSize: "66.667px",
+              lineHeight: "0.9",
+              letterSpacing: "-1.3333px",
+              color: "#404040",
+              textAlign: "center"
+            }}>
+              Quick Fact
+            </div>
+          </div>
+
+          {/* +200 Jobs - positioned at left: 1013.33px, top: 104.8px */}
+          <div
+            style={{
+              position: "absolute",
+              left: "1013.33px",
+              top: "104.8px",
+              width: "480px",
+              height: "281.667px",
+              border: "2.5px solid #FFFFFF",
+              borderRadius: "20px",
+              background: "rgba(171,255,152,0.5)",
+              backdropFilter: "blur(10px)"
+            }}
+          >
+            <div style={{
+              position: "absolute",
+              left: "-2.5px",
+              right: "-2.5px",
+              top: "47.5px",
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 800,
+              fontSize: "160px",
+              lineHeight: "0.88",
+              letterSpacing: "-4.8px",
+              color: "#000000",
+              textAlign: "center"
+            }}>
+              +200
+            </div>
+            <div style={{
+              position: "absolute",
+              left: "-2.5px",
+              right: "-2.5px",
+              top: "209.17px",
+              fontFamily: "'Funnel Display', sans-serif",
+              fontWeight: 500,
+              fontSize: "20px",
+              lineHeight: "20px",
+              letterSpacing: "-0.08px",
+              color: "#404040",
+              textAlign: "center"
+            }}>
+              Jobs Created
+            </div>
+          </div>
+
+          {/* 22Km² Factory - positioned at left: 106.67px, top: 553.13px */}
+          <div
+            style={{
+              position: "absolute",
+              left: "106.67px",
+              top: "553.13px",
+              width: "610.833px",
+              height: "285.833px",
+              border: "2.5px solid #FFFFFF",
+              borderRadius: "20px",
+              background: "rgba(171,255,152,0.5)",
+              backdropFilter: "blur(10px)"
+            }}
+          >
+            <div style={{
+              position: "absolute",
+              bottom: "237.5px",
+              left: "-2.5px",
+              right: "-2.5px",
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 800,
+              fontSize: "160px",
+              lineHeight: "0.88",
+              letterSpacing: "-4.8px",
+              color: "#FFFFFF",
+              textAlign: "center",
+              transform: "translateY(100%)"
+            }}>
+              <span style={{ fontSize: "160px" }}>22Km</span>
+              <span style={{ fontSize: "96.21px", verticalAlign: "top" }}>2</span>
+            </div>
+            <div style={{
+              position: "absolute",
+              bottom: "75.83px",
+              left: "-2.5px",
+              right: "-2.5px",
+              fontFamily: "'Funnel Display', sans-serif",
+              fontWeight: 500,
+              fontSize: "20px",
+              lineHeight: "20px",
+              letterSpacing: "-0.08px",
+              color: "#FFFFFF",
+              textAlign: "center",
+              transform: "translateY(100%)"
+            }}>
+              Factory Size in Square Killometer
+            </div>
+          </div>
+
+          {/* Investment stats - positioned at left: 737.5px, top: 404.17px */}
+          <div
+            style={{
+              position: "absolute",
+              left: "737.5px",
+              top: "404.17px",
+              width: "755.833px",
+              height: "435px",
+            }}
+          >
+            <div style={{
+              position: "absolute",
+              bottom: "0.2px",
+              width: "755.833px",
+              height: "435px",
+              borderRadius: "20px",
+              overflow: "hidden",
+              background: "linear-gradient(135deg, #23B349 0%, #0F4B1F 100%)"
+            }}>
+              <div style={{
+                position: "absolute",
+                bottom: "239.58px",
+                left: 0,
+                right: 0,
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 800,
+                fontSize: "160px",
+                lineHeight: "0.88",
+                letterSpacing: "-4.8px",
+                color: "#FFFFFF",
+                textAlign: "center",
+                transform: "translateY(100%)"
+              }}>
+                Br210M
               </div>
-            ))}
+              <div style={{
+                position: "absolute",
+                bottom: "77.92px",
+                left: 0,
+                right: 0,
+                fontFamily: "'Funnel Display', sans-serif",
+                fontWeight: 500,
+                fontSize: "20px",
+                lineHeight: "20px",
+                letterSpacing: "-0.08px",
+                color: "#FFFFFF",
+                textAlign: "center",
+                transform: "translateY(100%)"
+              }}>
+                Total Investment
+              </div>
+              <div style={{
+                position: "absolute",
+                bottom: "390.42px",
+                left: "109.64px",
+                right: 0,
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 800,
+                fontSize: "80px",
+                lineHeight: "0.88",
+                letterSpacing: "-2.4px",
+                color: "#404040",
+                transform: "translateY(100%)"
+              }}>
+                $1.4M
+              </div>
+            </div>
           </div>
         </div>
       </div>
