@@ -1,16 +1,17 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { useRef } from "react";
 
 const LOGOS = [
-  { name: "Belayab Groups", src: "/assets/sister/belayab.png" },
-  { name: "Motors", src: "/assets/sister/motors.png" },
-  { name: "Cables", src: "/assets/sister/cables.png" },
-  { name: "Golden Tulip", src: "/assets/sister/golden-tulip.png" },
-  { name: "Lewis", src: "/assets/sister/lewis.png" },
-  { name: "Foods", src: "/assets/sister/foods.png" },
-  { name: "Limestone", src: "/assets/sister/limestone.png" },
+  { name: "Belayab Groups", src: "/assets/sister/belayab.svg" },
+  { name: "Motors", src: "/assets/sister/motors.svg" },
+  { name: "Cables", src: "/assets/sister/cables.svg" },
+  { name: "Golden Tulip", src: "/assets/sister/golden-tulip.svg" },
+  { name: "Lewis", src: "/assets/sister/lewis.svg" },
+  { name: "Foods", src: "/assets/sister/foods.svg" },
+  { name: "Limestone", src: "/assets/sister/limestone.svg" },
 ];
 
 export default function SisterCompaniesSection() {
@@ -23,9 +24,15 @@ export default function SisterCompaniesSection() {
       style={{ background: "#FFFFFF", paddingTop: 64, paddingBottom: 64 }}
     >
       {/* layout_GIW9UK: column, alignItems:center, gap:31.92px */}
-      <div className="mx-auto flex flex-col items-center" style={{ maxWidth: 1664, gap: 31.92 }}>
+      <div
+        className="mx-auto flex flex-col items-center"
+        style={{ maxWidth: 1664, gap: 31.92 }}
+      >
         {/* text frame — layout_IDEUKV: column, alignItems:center, gap:31.92px */}
-        <div className="flex flex-col items-center text-center" style={{ gap: 31.92 }}>
+        <div
+          className="flex flex-col items-center text-center"
+          style={{ gap: 31.92 }}
+        >
           {/* "Sister Companies" — style_AJAP13: Funnel Display 500, 13.3px, 1.25em lh, CENTER, #404040 */}
           <span
             style={{
@@ -74,16 +81,23 @@ export default function SisterCompaniesSection() {
                   scrollSnapAlign: "start",
                 }}
               >
-                <span className="font-['Outfit'] font-semibold text-[#404040] text-lg">
-                  {logo.name}
-                </span>
+                <Image
+                  src={logo.src}
+                  alt={logo.name}
+                  width={160}
+                  height={60}
+                  className="object-contain"
+                />
               </div>
             ))}
           </div>
         </div>
 
         {/* TEXT with btn — layout_IDEUKV: column, alignItems:center, gap:31.92px */}
-        <div className="flex flex-col items-center text-center" style={{ gap: 31.92 }}>
+        <div
+          className="flex flex-col items-center text-center"
+          style={{ gap: 31.92 }}
+        >
           {/* Description — style_AJAP13: Funnel Display 500, 13.3px, 1.25em lh, CENTER, #404040, max-width 365 */}
           <p
             style={{
@@ -125,7 +139,14 @@ export default function SisterCompaniesSection() {
               >
                 {t("sisterCompanies.cta")}
               </span>
-              <span style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 400, fontSize: 13.3, color: "#FFFFFF" }}>
+              <span
+                style={{
+                  fontFamily: "'Outfit', sans-serif",
+                  fontWeight: 400,
+                  fontSize: 13.3,
+                  color: "#FFFFFF",
+                }}
+              >
                 →
               </span>
             </button>

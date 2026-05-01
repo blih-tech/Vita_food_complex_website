@@ -26,8 +26,7 @@ export default function AboutHeroSection() {
           className="absolute left-1/2 top-[-10%] h-[120%] w-[120%]"
           style={{
             transform: `translateX(-50%) translateY(${scrollY * 0.15}px)`,
-            opacity: 0.6,
-            filter: "blur(10px)",
+            filter: "blur(30px)",
           }}
         >
           <div className="relative w-full h-full">
@@ -40,6 +39,11 @@ export default function AboutHeroSection() {
             />
           </div>
         </div>
+        {/* Green overlay — Figma fill_9LFXW6: rgba(55,255,0,0.4) */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "rgba(55, 255, 0, 0.4)" }}
+        />
       </div>
 
       {/* White ellipse transition at bottom — Figma node 2066:3518 */}
@@ -61,7 +65,7 @@ export default function AboutHeroSection() {
       >
         {/* Story Heading — layout_A6NW2R: column, gap:32px, CENTER, x=548, y=252 */}
         <div
-          className="flex flex-col items-center text-center pt-[120px] md:pt-[160px] lg:pt-[200px]"
+          className="flex flex-col items-center text-center pt-[120px] md:pt-[160px] lg:pt-[172px]"
           style={{ gap: 32 }}
         >
           {/* Headline — Headline: Outfit 800, 80px, 0.9em lh, -2% ls, CENTER, #FFFFFF */}
