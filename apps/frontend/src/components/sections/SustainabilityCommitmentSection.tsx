@@ -111,16 +111,16 @@ export default function SustainabilityCommitmentSection() {
             </h2>
           </div>
 
-          {/* Commitment cards - responsive grid */}
+          {/* Commitment cards - horizontal scroll on mobile, flex on desktop */}
           <div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[16px] sm:gap-[24px] w-full"
+            className="flex gap-[16px] w-full overflow-x-auto sm:overflow-visible pb-4 sm:pb-0 snap-x sm:snap-none"
             data-node-id="274:5242"
             data-name="Commitment card"
           >
             {commitments.map((commitment, index) => (
               <div
                 key={commitment.key}
-                className="relative rounded-[24px] overflow-hidden min-h-[450px] sm:min-h-[500px] lg:min-h-[558px]"
+                className="flex gap-[23.524px] h-[500px] sm:h-[558.703px] items-center justify-center px-[40px] sm:px-[67.632px] py-[23.524px] rounded-[24px] min-w-[320px] sm:w-[544px] flex-shrink-0 relative snap-center"
                 data-node-id={`274:${5243 + index}`}
                 data-name="card"
                 style={{
@@ -136,7 +136,7 @@ export default function SustainabilityCommitmentSection() {
                   data-name="yellow-abstract-bg"
                 >
                   <div
-                    className="absolute inset-0 rounded-[24px]"
+                    className="absolute inset-0 rounded-[17.643px]"
                     style={{
                       backgroundImage:
                         "linear-gradient(145.96992870178786deg, rgb(233, 247, 237) 17.067%, rgb(35, 179, 73) 100%)",
@@ -144,13 +144,13 @@ export default function SustainabilityCommitmentSection() {
                     data-node-id={`274:${5245 + index}`}
                   />
                   <div
-                    className="absolute inset-0 flex items-center justify-center p-4"
+                    className="absolute h-[350px] sm:h-[430.789px] left-1/2 top-[80px] sm:top-[127.91px] w-[90%] sm:w-[544px] -translate-x-1/2"
                     data-node-id={`274:${5246 + index}`}
                     data-name="Frame"
                   >
                     <img
                       alt=""
-                      className="max-w-full max-h-full object-contain opacity-20"
+                      className="absolute inset-0 w-full h-full object-cover"
                       src={commitment.frame}
                     />
                   </div>
@@ -158,11 +158,11 @@ export default function SustainabilityCommitmentSection() {
 
                 {/* Card content */}
                 <div
-                  className="relative z-10 bg-[#e9f7ed]/90 backdrop-blur-sm border-[2px] border-[#9adcab] flex flex-col items-center justify-center p-[16px] sm:p-[24px] m-[12px] rounded-[16px] min-h-[400px] sm:min-h-[450px]"
+                  className="bg-[#e9f7ed] border-[2.941px] border-[#9adcab] border-solid flex flex-col h-[350px] sm:h-[373.449px] items-center justify-center px-[20px] sm:px-[29.405px] py-[17.643px] rounded-[22.054px] relative w-full max-w-[460px] sm:max-w-none"
                   data-node-id={`274:${5250 + index}`}
                 >
                   <div
-                    className="flex flex-col gap-[16px] sm:gap-[23px] items-center justify-center w-full"
+                    className="flex flex-col gap-[16px] sm:gap-[23.524px] items-center justify-center w-full"
                     data-node-id={`274:${5251 + index}`}
                   >
                     {/* Card title */}
@@ -171,7 +171,7 @@ export default function SustainabilityCommitmentSection() {
                       data-node-id={`274:${5252 + index}`}
                     >
                       <h3
-                        className="font-['Funnel_Display'] font-bold text-[24px] sm:text-[28px] lg:text-[32px] leading-none tracking-[-0.32px] text-[#197f34]"
+                        className="font-['Funnel_Display'] font-bold text-[24px] sm:text-[32px] leading-none tracking-[-0.32px] text-[#197f34]"
                         data-node-id={`274:${5253 + index}`}
                       >
                         {commitment.title}
@@ -180,18 +180,18 @@ export default function SustainabilityCommitmentSection() {
 
                     {/* Card items */}
                     <div
-                      className="flex flex-col gap-[8px] sm:gap-[11px] items-start w-full"
+                      className="flex flex-col gap-[8px] sm:gap-[11.762px] items-start w-full"
                       data-node-id={`274:${5254 + index}`}
                     >
                       {commitment.items.map((item, itemIndex) => (
                         <div
                           key={itemIndex}
-                          className="bg-[rgba(255,249,242,0.74)] flex gap-[8px] sm:gap-[11px] items-center p-[8px] sm:p-[11px] rounded-[8px] w-full"
+                          className="bg-[rgba(255,249,242,0.74)] flex gap-[8px] sm:gap-[11.762px] items-center p-[8px] sm:p-[11.762px] rounded-[8.822px] w-full"
                           data-node-id={`274:${5255 + index * 4 + itemIndex}`}
                         >
                           {/* Vector icon */}
                           <div
-                            className="relative w-[20px] h-[20px] sm:w-[23px] sm:h-[23px] flex-shrink-0"
+                            className="relative w-[20px] h-[20px] sm:w-[23.524px] sm:h-[23.524px] flex-shrink-0"
                             data-node-id={`274:${5256 + index * 4 + itemIndex}`}
                             data-name="Vector"
                           >
@@ -202,7 +202,7 @@ export default function SustainabilityCommitmentSection() {
                             />
                           </div>
                           <p
-                            className="font-['Outfit'] font-normal text-[16px] sm:text-[20px] lg:text-[24px] leading-normal tracking-[-0.096px] text-[#333733]"
+                            className="font-['Outfit'] font-normal text-[16px] sm:text-[24px] leading-normal tracking-[-0.096px] text-[#333733]"
                             data-node-id={`274:${5257 + index * 4 + itemIndex}`}
                           >
                             {item}
@@ -216,9 +216,9 @@ export default function SustainabilityCommitmentSection() {
             ))}
           </div>
 
-          {/* Quick Fact section - responsive grid */}
+          {/* Quick Fact section */}
           <div
-            className="relative rounded-[24px] sm:rounded-[32px] lg:rounded-[48px] w-full overflow-hidden"
+            className="relative min-h-[900px] sm:min-h-[800px] lg:h-[943.333px] rounded-[24px] sm:rounded-[32px] lg:rounded-[48px] w-full max-w-[1600px] mx-auto"
             data-node-id="274:5315"
             data-name="Quick fact"
           >
@@ -229,114 +229,310 @@ export default function SustainabilityCommitmentSection() {
               src={imgQuickFact}
             />
 
-            {/* Content overlay */}
-            <div className="relative z-10 p-[24px] sm:p-[32px] md:p-[48px] lg:p-[64px]">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[16px] sm:gap-[24px]">
-                {/* +11 SKUs card */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-[16px] p-[20px] sm:p-[24px] relative overflow-hidden min-h-[200px] sm:min-h-[250px] lg:min-h-[300px] flex flex-col justify-center">
-                  <img
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover opacity-20 rotate-180"
-                    src={imgSubtract}
-                  />
-                  <div className="relative z-10">
-                    <p className="font-['Outfit'] font-extrabold text-[48px] sm:text-[80px] lg:text-[96px] leading-[0.88] text-black">
-                      +11
-                    </p>
-                    <p className="font-['Funnel_Display'] font-medium text-[14px] sm:text-[16px] lg:text-[20px] text-[#404040] mt-2">
-                      Unique SKUs for Everyone.
-                    </p>
-                    <p className="font-['Outfit'] font-extrabold text-[32px] sm:text-[48px] lg:text-[64px] leading-[0.88] text-black mt-2">
-                      2tn
-                    </p>
-                    <p className="font-['Funnel_Display'] font-medium text-[14px] sm:text-[16px] lg:text-[20px] text-[#404040] mt-1">
-                      Biscuits/Hour
-                    </p>
-                  </div>
-                </div>
-
-                {/* 60tn Flour card */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-[16px] p-[20px] sm:p-[24px] relative min-h-[200px] sm:min-h-[250px] lg:min-h-[300px] flex flex-col justify-center">
-                  <div
-                    aria-hidden="true"
-                    className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[16px]"
-                  />
-                  <div className="relative z-10">
-                    <p className="font-['Outfit'] font-extrabold text-[48px] sm:text-[80px] lg:text-[96px] leading-[0.88] text-black">
-                      60tn
-                    </p>
-                    <p className="font-['Funnel_Display'] font-medium text-[14px] sm:text-[16px] lg:text-[20px] text-[#404040] mt-2">
-                      Tones of Flour Production/Day
-                    </p>
-                  </div>
-                </div>
-
-                {/* Quick Fact label */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-[16px] p-[20px] sm:p-[24px] relative flex items-center justify-center min-h-[100px] sm:min-h-[120px] lg:min-h-[130px]">
-                  <div
-                    aria-hidden="true"
-                    className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[16px]"
-                  />
-                  <p className="relative z-10 font-['Outfit'] font-extrabold text-[32px] sm:text-[48px] lg:text-[66px] leading-[0.9] text-[#404040] text-center">
-                    Quick Fact
-                  </p>
-                </div>
-
-                {/* +200 Jobs card */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-[16px] p-[20px] sm:p-[24px] relative min-h-[200px] sm:min-h-[250px] lg:min-h-[300px] flex flex-col justify-center">
-                  <div
-                    aria-hidden="true"
-                    className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[16px]"
-                  />
-                  <div className="relative z-10">
-                    <p className="font-['Outfit'] font-extrabold text-[48px] sm:text-[80px] lg:text-[96px] leading-[0.88] text-black">
-                      +200
-                    </p>
-                    <p className="font-['Funnel_Display'] font-medium text-[14px] sm:text-[16px] lg:text-[20px] text-[#404040] mt-2">
-                      Jobs Created
-                    </p>
-                  </div>
-                </div>
-
-                {/* 22Km² Factory card */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-[16px] p-[20px] sm:p-[24px] relative min-h-[200px] sm:min-h-[250px] lg:min-h-[300px] flex flex-col justify-center">
-                  <div
-                    aria-hidden="true"
-                    className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[16px]"
-                  />
-                  <div className="relative z-10">
-                    <p className="font-['Outfit'] font-extrabold text-[48px] sm:text-[80px] lg:text-[96px] leading-[0.88] text-white">
-                      22Km²
-                    </p>
-                    <p className="font-['Funnel_Display'] font-medium text-[14px] sm:text-[16px] lg:text-[20px] text-white mt-2">
-                      Factory Size in Square Kilometer
-                    </p>
-                  </div>
-                </div>
-
-                {/* Investment card */}
-                <div className="bg-white/90 backdrop-blur-sm rounded-[16px] p-[20px] sm:p-[24px] relative overflow-hidden min-h-[200px] sm:min-h-[250px] lg:min-h-[300px] flex flex-col justify-center sm:col-span-2 lg:col-span-1">
-                  <img
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover opacity-20"
-                    src={imgSubtract1}
-                  />
-                  <div className="relative z-10">
+            {/* Mobile/Tablet Layout - Stacked */}
+            <div className="relative z-10 flex flex-col gap-[16px] p-[20px] sm:p-[32px] lg:hidden">
+              {/* +11 SKUs card */}
+              <div className="relative h-[180px] sm:h-[220px] rounded-[20px] overflow-hidden">
+                <div className="absolute flex h-full items-center justify-center inset-0">
+                  <div className="flex-none rotate-180 h-full w-full">
                     <img
                       alt=""
-                      className="absolute right-[-20px] top-[-20px] w-[80px] sm:w-[120px] lg:w-[150px] opacity-30 -scale-x-100"
-                      src={imgDollar1}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      src={imgSubtract}
                     />
-                    <p className="font-['Outfit'] font-extrabold text-[48px] sm:text-[80px] lg:text-[96px] leading-[0.88] text-white">
-                      Br210M
-                    </p>
-                    <p className="font-['Funnel_Display'] font-medium text-[14px] sm:text-[16px] lg:text-[20px] text-white mt-2">
-                      Total Investment
-                    </p>
-                    <p className="font-['Outfit'] font-extrabold text-[32px] sm:text-[48px] lg:text-[64px] leading-[0.88] text-[#404040] mt-2">
-                      $1.4M
-                    </p>
                   </div>
+                </div>
+                <div className="absolute h-[120px] sm:h-[150px] left-0 rounded-[20px] top-0 w-full">
+                  <p className="absolute font-['Outfit'] font-extrabold text-[48px] sm:text-[64px] leading-[0.88] left-0 right-0 text-black text-center top-[20px] sm:top-[48.33px] tracking-[-2.4px] sm:tracking-[-4.8px]">
+                    +11
+                  </p>
+                  <p className="absolute font-['Funnel_Display'] font-medium text-[14px] sm:text-[16px] leading-none left-0 right-0 text-[#404040] text-center top-[90px] sm:top-[210px] tracking-[-0.08px]">
+                    Unique SKUs for Everyone.
+                  </p>
+                </div>
+                <p className="absolute font-['Outfit'] font-extrabold text-[32px] sm:text-[48px] leading-[0.88] left-[20px] sm:left-[66.82px] right-[20px] sm:right-[110.27px] text-black text-center top-[140px] sm:top-[296.59px] tracking-[-2.4px]">
+                  2tn
+                </p>
+              </div>
+
+              {/* 60tn Flour card */}
+              <div className="relative flex flex-col h-[120px] sm:h-[150px] items-center rounded-[20px] border-[2.5px] border-white border-solid">
+                <div
+                  aria-hidden="true"
+                  className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[20px]"
+                />
+                <p className="absolute font-['Outfit'] font-extrabold text-[48px] sm:text-[64px] leading-[0.88] left-0 right-0 text-black text-center top-[20px] sm:top-[47.39px] tracking-[-4.8px]">
+                  60tn
+                </p>
+                <p className="absolute font-['Funnel_Display'] font-medium text-[14px] sm:text-[16px] leading-none left-0 right-0 text-[#404040] text-center top-[90px] sm:top-[209.05px] tracking-[-0.08px]">
+                  Tones of Flour Production/Day
+                </p>
+              </div>
+
+              {/* Quick Fact label */}
+              <div className="relative border-[2.5px] border-white border-solid h-[80px] sm:h-[100px] rounded-[20px]">
+                <div
+                  aria-hidden="true"
+                  className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[20px]"
+                />
+                <p className="font-['Outfit'] font-extrabold text-[32px] sm:text-[48px] leading-[0.9] left-[calc(50%+0.08px)] text-[#404040] text-center top-[calc(50%-15px)] sm:top-[calc(50%-33.33px)] -translate-x-1/2 absolute">
+                  Quick Fact
+                </p>
+              </div>
+
+              {/* +200 Jobs card */}
+              <div className="relative border-[2.5px] border-white border-solid h-[120px] sm:h-[150px] rounded-[20px]">
+                <div
+                  aria-hidden="true"
+                  className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[20px]"
+                />
+                <p className="absolute font-['Outfit'] font-extrabold text-[48px] sm:text-[64px] leading-[0.88] left-0 right-0 text-black text-center top-[20px] sm:top-[47.5px] tracking-[-4.8px]">
+                  +200
+                </p>
+                <p className="absolute font-['Funnel_Display'] font-medium text-[14px] sm:text-[16px] leading-none left-0 right-0 text-[#404040] text-center top-[90px] sm:top-[209.17px] tracking-[-0.08px]">
+                  Jobs Created
+                </p>
+              </div>
+
+              {/* 22Km² Factory card */}
+              <div className="relative border-[2.5px] border-white border-solid h-[120px] sm:h-[150px] rounded-[20px]">
+                <div
+                  aria-hidden="true"
+                  className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[20px]"
+                />
+                <p className="absolute bottom-[40px] sm:bottom-[75.83px] font-['Outfit'] font-extrabold leading-[0] left-0 right-0 text-[0px] text-white text-center tracking-[-4.8px] translate-y-full">
+                  <span className="font-['Outfit'] font-extrabold leading-[0.88] text-[48px] sm:text-[64px]">
+                    22Km
+                  </span>
+                  <span className="font-['Outfit'] font-extrabold leading-[0.88] text-[32px] sm:text-[96px]">
+                    2
+                  </span>
+                </p>
+                <p className="absolute bottom-[10px] sm:bottom-[75.83px] font-['Funnel_Display'] font-medium text-[12px] sm:text-[16px] leading-none left-0 right-0 text-white text-center tracking-[-0.08px] translate-y-full">
+                  Factory Size in Square Kilometer
+                </p>
+              </div>
+
+              {/* Investment card */}
+              <div className="relative h-[180px] sm:h-[220px] rounded-[20px] overflow-hidden">
+                <img
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover"
+                  src={imgSubtract1}
+                />
+                <div className="absolute bottom-[0.2px] h-full left-0 overflow-hidden rounded-[20px] w-full">
+                  <p className="absolute bottom-[80px] sm:bottom-[239.58px] font-['Outfit'] font-extrabold text-[48px] sm:text-[64px] leading-[0.88] left-0 right-0 text-white text-center tracking-[-4.8px] translate-y-full">
+                    Br210M
+                  </p>
+                  <p className="absolute bottom-[20px] sm:bottom-[77.92px] font-['Funnel_Display'] font-medium text-[14px] sm:text-[16px] leading-none left-0 right-0 text-white text-center tracking-[-0.08px] translate-y-full">
+                    Total Investment
+                  </p>
+                  <p className="absolute bottom-[130px] sm:bottom-[390.42px] font-['Outfit'] font-extrabold text-[32px] sm:text-[48px] leading-[0.88] left-[20px] sm:left-[109.64px] right-0 text-[#404040] text-center tracking-[-2.4px] translate-y-full">
+                    $1.4M
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop Layout - Original absolute positioning */}
+            <div className="hidden lg:block">
+              {/* +11 SKUs card */}
+              <div
+                className="absolute h-[430px] left-[106.67px] top-[105px] w-[386.667px]"
+                data-node-id="274:5316"
+              >
+                <div className="absolute flex h-[427.015px] items-center justify-center left-0 top-[2.3px] w-[386.666px]">
+                  <div className="flex-none rotate-180">
+                    <div
+                      className="h-[427.015px] relative w-[386.666px]"
+                      data-node-id="274:5317"
+                      data-name="Subtract"
+                    >
+                      <img
+                        alt=""
+                        className="absolute inset-0 w-full h-full object-cover"
+                        src={imgSubtract}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="absolute h-[279.167px] left-0 rounded-[20px] top-[-0.09px] w-[386.667px]">
+                  <p
+                    className="absolute font-['Outfit'] font-extrabold text-[160px] leading-[0.88] left-0 right-0 text-black text-center top-[48.33px] tracking-[-4.8px]"
+                    data-node-id="274:5321"
+                  >
+                    +11
+                  </p>
+                  <p
+                    className="absolute font-['Funnel_Display'] font-medium text-[20px] leading-none left-0 right-0 text-[#404040] text-center top-[210px] tracking-[-0.08px]"
+                    data-node-id="274:5322"
+                  >
+                    Unique SKUs for Everyone.
+                  </p>
+                  <p
+                    className="absolute font-['Funnel_Display'] font-medium text-[20px] leading-none left-[67.66px] right-[163.25px] text-[#404040] text-center top-[376.67px] tracking-[-0.08px]"
+                    data-node-id="274:5323"
+                  >
+                    Biscuits/Hour
+                  </p>
+                </div>
+                <p
+                  className="absolute font-['Outfit'] font-extrabold text-[80px] leading-[0.88] left-[66.82px] right-[110.27px] text-black text-center top-[296.59px] tracking-[-2.4px]"
+                  data-node-id="274:5324"
+                >
+                  2tn
+                </p>
+              </div>
+
+              {/* 60tn Flour card */}
+              <div
+                className="absolute flex flex-col h-[281.667px] items-center left-[513.33px] top-[104.8px] w-[480px]"
+                data-node-id="274:5325"
+              >
+                <div
+                  className="border-[2.5px] border-white border-solid h-[281.667px] relative rounded-[20px] w-full"
+                  data-node-id="274:5326"
+                >
+                  <div
+                    aria-hidden="true"
+                    className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[20px]"
+                  />
+                  <p
+                    className="absolute font-['Outfit'] font-extrabold text-[160px] leading-[0.88] left-0 right-0 text-black text-center top-[47.39px] tracking-[-4.8px]"
+                    data-node-id="274:5327"
+                  >
+                    60tn
+                  </p>
+                  <p
+                    className="absolute font-['Funnel_Display'] font-medium text-[20px] leading-none left-0 right-0 text-[#404040] text-center top-[209.05px] tracking-[-0.08px]"
+                    data-node-id="274:5328"
+                  >
+                    Tones of Flour Production/Day
+                  </p>
+                </div>
+              </div>
+
+              {/* Quick Fact label */}
+              <div
+                className="absolute border-[2.5px] border-white border-solid h-[128.333px] left-[403.33px] rounded-[20px] top-[406.46px] w-[381.667px]"
+                data-node-id="274:5329"
+              >
+                <div
+                  aria-hidden="true"
+                  className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[20px]"
+                />
+                <p className="font-['Outfit'] font-extrabold text-[66.667px] leading-[0.9] left-[calc(50%+0.08px)] text-[#404040] text-center top-[calc(50%-33.33px)] -translate-x-1/2 absolute tracking-[-1.3333px] whitespace-nowrap">
+                  Quick Fact
+                </p>
+              </div>
+
+              {/* +200 Jobs card */}
+              <div
+                className="absolute border-[2.5px] border-white border-solid h-[281.667px] left-[1013.33px] top-[104.8px] w-[480px]"
+                data-node-id="274:5331"
+              >
+                <div
+                  aria-hidden="true"
+                  className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[20px]"
+                />
+                <p
+                  className="absolute font-['Outfit'] font-extrabold text-[160px] leading-[0.88] left-0 right-0 text-black text-center top-[47.5px] tracking-[-4.8px]"
+                  data-node-id="274:5332"
+                >
+                  +200
+                </p>
+                <p
+                  className="absolute font-['Funnel_Display'] font-medium text-[20px] leading-none left-0 right-0 text-[#404040] text-center top-[209.17px] tracking-[-0.08px]"
+                  data-node-id="274:5333"
+                >
+                  Jobs Created
+                </p>
+              </div>
+
+              {/* 22Km² Factory card */}
+              <div
+                className="absolute border-[2.5px] border-white border-solid h-[285.833px] left-[106.67px] rounded-[20px] top-[553.13px] w-[610.833px]"
+                data-node-id="274:5334"
+              >
+                <div
+                  aria-hidden="true"
+                  className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[20px]"
+                />
+                <p
+                  className="absolute bottom-[237.5px] font-['Outfit'] font-extrabold leading-[0] left-0 right-0 text-[0px] text-white text-center tracking-[-4.8px] translate-y-full"
+                  data-node-id="274:5335"
+                >
+                  <span className="font-['Outfit'] font-extrabold leading-[0.88] text-[160px]">
+                    22Km
+                  </span>
+                  <span className="font-['Outfit'] font-extrabold leading-[0.88] text-[96.212px]">
+                    2
+                  </span>
+                </p>
+                <p
+                  className="absolute bottom-[75.83px] font-['Funnel_Display'] font-medium text-[20px] leading-none left-0 right-0 text-white text-center tracking-[-0.08px] translate-y-full"
+                  data-node-id="274:5336"
+                >
+                  Factory Size in Square Kilometer
+                </p>
+              </div>
+
+              {/* Investment card */}
+              <div
+                className="absolute h-[435px] left-[737.5px] top-[404.17px] w-[755.833px]"
+                data-node-id="274:5337"
+              >
+                <div
+                  className="absolute h-[432.615px] left-0 top-[2.18px] w-[755.833px]"
+                  data-node-id="274:5338"
+                  data-name="Subtract"
+                >
+                  <img
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover"
+                    src={imgSubtract1}
+                  />
+                </div>
+                <div
+                  className="absolute bottom-[0.2px] h-[435px] left-0 overflow-hidden rounded-[20px] w-[755.833px]"
+                  data-node-id="274:5341"
+                >
+                  <div
+                    className="absolute aspect-[750.9089179361399/510.8412153982499] bottom-[159.26px] flex items-center justify-center left-[220.62px] right-[-215.69px]"
+                    style={{ containerType: "size" }}
+                  >
+                    <div className="-scale-x-100 flex-none h-[hypot(12.3721cqw,62.5477cqh)] rotate-[-16.21deg] w-[hypot(-87.6279cqw,37.4523cqh)]">
+                      <div
+                        className="relative size-full"
+                        data-node-id="274:5342"
+                        data-name="Dollar 1"
+                      >
+                        <img
+                          alt=""
+                          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                          src={imgDollar1}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <p
+                    className="absolute bottom-[239.58px] font-['Outfit'] font-extrabold text-[160px] leading-[0.88] left-0 right-0 text-white text-center tracking-[-4.8px] translate-y-full"
+                    data-node-id="274:5343"
+                  >
+                    Br210M
+                  </p>
+                  <p
+                    className="absolute bottom-[77.92px] font-['Funnel_Display'] font-medium text-[20px] leading-none left-0 right-0 text-white text-center tracking-[-0.08px] translate-y-full"
+                    data-node-id="274:5344"
+                  >
+                    Total Investment
+                  </p>
+                  <p
+                    className="absolute bottom-[390.42px] font-['Outfit'] font-extrabold text-[80px] leading-[0.88] left-[109.64px] right-0 text-[#404040] text-center tracking-[-2.4px] translate-y-full"
+                    data-node-id="274:5345"
+                  >
+                    $1.4M
+                  </p>
                 </div>
               </div>
             </div>
