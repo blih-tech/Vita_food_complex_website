@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { getJobById, type Job } from "@frontend/constants/jobs";
 
 interface JobDetailsContentProps {
@@ -11,6 +12,7 @@ interface JobDetailsContentProps {
 
 export default function JobDetailsContent({ jobId }: JobDetailsContentProps) {
   const t = useTranslations("Careers");
+  const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -356,7 +358,7 @@ export default function JobDetailsContent({ jobId }: JobDetailsContentProps) {
               {/* Positioned at flex-end (right-aligned) per layout_HIGVCA alignItems:flex-end */}
               <div className="flex justify-end">
                 <Link
-                  href="apply"
+                  href={`${pathname}/apply`}
                   className="inline-flex items-center justify-center"
                   style={{
                     gap: 10,
