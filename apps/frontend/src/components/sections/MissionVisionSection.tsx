@@ -47,15 +47,15 @@ export default function MissionVisionSection() {
           <div
             className="relative rounded-[24px] overflow-hidden flex-shrink-0"
             style={{
-              background: "#FFFFFF",
-              border: "1.49px solid #FFFFFF",
+              background: "#F9F9F9",
+              border: "1px solid #E8E8E8",
               width: "100%",
               maxWidth: 821,
-              minHeight: 500,
+              minHeight: 600,
               opacity: isVisible ? 1 : 0,
               transform: isVisible ? "translateY(0)" : "translateY(20px)",
               transition: "all 0.8s ease-out",
-              boxShadow: "0 2px 20px rgba(0,0,0,0.06)",
+              boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
             }}
           >
             {/* Text block — layout_DJE6HB: column, gap:22.35px, x=45, y=44.53, w=358 */}
@@ -63,7 +63,7 @@ export default function MissionVisionSection() {
               className="absolute top-0 left-0 p-10 md:p-12"
               style={{ zIndex: 2, maxWidth: 403 }}
             >
-              {/* UserCheck icon — layout_BMQLL1: 47.67×47.67 */}
+              {/* Leaf icon — Figma node: 47.67×47.67, green bg */}
               <div
                 className="mb-5 rounded-full overflow-hidden flex-shrink-0"
                 style={{ width: 48, height: 48 }}
@@ -73,7 +73,10 @@ export default function MissionVisionSection() {
                   style={{ background: "#23B349" }}
                 >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 3-1.34 3-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" fill="white"/>
+                    <path
+                      d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66L12 14h3l-2-5 3-3-2-2-2 3-3-2 5-3 5 5z"
+                      fill="white"
+                    />
                   </svg>
                 </div>
               </div>
@@ -136,13 +139,13 @@ export default function MissionVisionSection() {
                 className="rounded-[24px] p-8 md:p-10 flex flex-col gap-4"
                 style={{
                   background: "#F5F5F5",
-                  minHeight: 400,
+                  minHeight: 350,
                   opacity: isVisible ? 1 : 0,
                   transform: isVisible ? "translateY(0)" : "translateY(20px)",
                   transition: `all 0.8s ease-out ${0.1 * (i + 1)}s`,
                 }}
               >
-                {/* Icon */}
+                {/* Icon — Figma: 48×48, green bg, rounded full */}
                 <div
                   className="flex items-center justify-center rounded-full flex-shrink-0"
                   style={{ width: 48, height: 48, background: "#23B349" }}

@@ -117,6 +117,7 @@ export default function Footer() {
                 src="/assets/footer/cta-person.png"
                 alt="Fun characters"
                 fill
+                sizes="(max-width: 1024px) 100vw, 480px"
                 className="object-contain object-bottom"
               />
             </div>
@@ -153,6 +154,7 @@ export default function Footer() {
               alt="Vita Food Complex"
               width={120}
               height={120}
+              className="w-auto h-auto"
             />
 
             <div className="text-white/90 text-[13px]">
@@ -169,6 +171,7 @@ export default function Footer() {
               alt="Social Media"
               width={280}
               height={40}
+              className="w-auto h-auto"
             />
           </div>
 

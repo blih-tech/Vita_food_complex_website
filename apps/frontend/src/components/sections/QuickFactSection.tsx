@@ -3,134 +3,118 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-const stats = [
-  {
-    key: "investment",
-    icon: "/assets/quality/production-process.svg",
-    color: "#23B349",
-  },
-  {
-    key: "capacity",
-    icon: "/assets/quality/raw-materials.svg",
-    color: "#1648B5",
-  },
-  {
-    key: "jobs",
-    icon: "/assets/quality/quality-control.svg",
-    color: "#7E4627",
-  },
-  {
-    key: "farmers",
-    icon: "/assets/about/spark.svg",
-    color: "#A099B5",
-  },
-];
-
 export default function QuickFactSection() {
   const t = useTranslations("QuickFact");
 
   return (
-    <section className="relative w-full bg-[#E9F7ED] py-24 lg:py-40 overflow-hidden">
-      {/* Top Repeating Pattern Container */}
-      <div className="absolute top-0 left-0 w-full h-32 lg:h-48 z-10 pointer-events-none overflow-hidden">
-        {/* Repeating Biscuit Piece Pattern */}
+    <section className="relative w-full bg-white py-24 overflow-hidden">
+      {/* Decorative repeating pattern bottom border */}
+      <div className="absolute bottom-0 left-0 w-full h-16 pointer-events-none overflow-hidden opacity-20">
         <div 
-          className="absolute inset-0 opacity-[0.05]"
+          className="absolute inset-0"
           style={{
             backgroundImage: "url('/assets/hero/biscuit-piece.svg')",
-            backgroundRepeat: "repeat",
+            backgroundRepeat: "repeat-x",
             backgroundSize: "60px 60px",
-            maskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 100%)"
+            backgroundPosition: "bottom",
           }}
         />
-        {/* Solid Wave Overlay */}
-        <div className="absolute top-0 left-0 w-full h-24 lg:h-32">
-          <Image 
-            src="/assets/sections/top-wave.svg" 
-            alt="" 
-            fill 
-            className="object-cover object-bottom"
-          />
-        </div>
       </div>
 
-      {/* Background Decorative Spark */}
-      <div className="absolute top-24 right-[-5%] w-[300px] h-[300px] opacity-10 pointer-events-none rotate-12 z-0">
-        <Image src="/assets/about/spark.svg" alt="" fill className="object-contain" />
-      </div>
+      <div className="relative z-20 max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-[128px]">
+        {/* Bento Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[160px] md:auto-rows-[180px]">
+          
+          {/* Box 1: +11 (Tall box, spans 2 rows) */}
+          <div className="md:col-span-3 row-span-2 bg-[#F3F3F3] rounded-[24px] flex flex-col items-center justify-center p-8 relative overflow-hidden group hover:bg-[#E9F7ED] transition-colors duration-500">
+             <div className="flex flex-col items-center text-center">
+                <span className="font-['Outfit'] font-black text-[80px] lg:text-[110px] xl:text-[128px] text-[#23B349] leading-[0.9] tracking-[-0.03em] mb-4 group-hover:scale-105 transition-transform duration-500">
+                  +11
+                </span>
+                <p className="font-['Funnel_Display'] font-medium text-[20px] lg:text-[24px] text-[#404040] leading-tight">
+                  Unique SKUs for Everyone.
+                </p>
+             </div>
+          </div>
 
-      <div className="relative z-20 max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24">
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-16 lg:mb-20">
-          <p className="font-['Funnel_Display'] font-semibold text-[18px] text-[#23B349] tracking-widest uppercase mb-4">
-            {t("label")}
-          </p>
-          <h2 className="font-['Outfit'] font-black text-[42px] sm:text-[56px] lg:text-[72px] text-[#404040] leading-tight uppercase">
-            {t("heading")}
-          </h2>
-        </div>
+          {/* Box 2: 60tn (Wide box) */}
+          <div className="md:col-span-4 row-span-2 bg-[#F3F3F3] rounded-[24px] flex flex-col items-center justify-center p-8 group hover:bg-[#E9F7ED] transition-colors duration-500">
+            <div className="flex flex-col items-center text-center">
+                <span className="font-['Outfit'] font-black text-[80px] lg:text-[110px] xl:text-[128px] text-[#23B349] leading-[0.9] tracking-[-0.03em] mb-4 group-hover:scale-105 transition-transform duration-500">
+                  60tn
+                </span>
+                <p className="font-['Funnel_Display'] font-medium text-[20px] lg:text-[24px] text-[#404040] leading-tight">
+                  Tones of Flour Production/Day
+                </p>
+             </div>
+          </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {stats.map((stat, idx) => (
-            <div 
-              key={stat.key}
-              className="group bg-white rounded-[32px] p-8 lg:p-10 shadow-xl shadow-green-900/5 flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
-            >
-              <div 
-                className="w-20 h-20 rounded-2xl flex items-center justify-center mb-8 transform transition-transform duration-500 group-hover:rotate-12"
-                style={{ backgroundColor: `${stat.color}15` }}
-              >
-                <div className="relative w-10 h-10">
-                  <Image 
-                    src={stat.icon} 
-                    alt="" 
-                    fill 
-                    className="object-contain" 
-                    style={{ filter: idx === 3 ? "none" : "brightness(0) saturate(100%) invert(48%) sepia(82%) font-weight(700) hue-rotate(95deg) brightness(98%) contrast(102%)" }}
-                  />
+          {/* Box 3: +200 (Wide box) */}
+          <div className="md:col-span-5 row-span-2 bg-[#F3F3F3] rounded-[24px] flex flex-col items-center justify-center p-8 group hover:bg-[#E9F7ED] transition-colors duration-500">
+             <div className="flex flex-col items-center text-center">
+                <span className="font-['Outfit'] font-black text-[80px] lg:text-[110px] xl:text-[128px] text-[#23B349] leading-[0.9] tracking-[-0.03em] mb-4 group-hover:scale-105 transition-transform duration-500">
+                  +200
+                </span>
+                <p className="font-['Funnel_Display'] font-medium text-[20px] lg:text-[24px] text-[#404040] leading-tight">
+                  Jobs Created
+                </p>
+             </div>
+          </div>
+
+          {/* Box 4: 2tn (Small box) */}
+          <div className="md:col-span-3 row-span-1 bg-[#F3F3F3] rounded-[24px] flex flex-col items-center justify-center p-6 group hover:bg-[#FEF5D4] transition-colors duration-500">
+             <div className="flex flex-col items-center text-center">
+                <span className="font-['Outfit'] font-black text-[60px] lg:text-[80px] xl:text-[96px] text-[#E6B720] leading-[0.9] tracking-[-0.03em] group-hover:scale-105 transition-transform duration-500">
+                  2tn
+                </span>
+                <p className="font-['Funnel_Display'] font-medium text-[16px] lg:text-[20px] text-[#404040] leading-tight mt-2">
+                  Biscuits/Hour
+                </p>
+             </div>
+          </div>
+
+          {/* Box 5: Quick Fact (Green label) */}
+          <div className="md:col-span-4 row-span-1 bg-[#23B349] rounded-[24px] flex items-center justify-center p-6 shadow-xl shadow-green-600/20 transform transition-transform hover:scale-[1.02]">
+             <h2 className="font-['Outfit'] font-black text-[50px] lg:text-[64px] xl:text-[80px] text-white leading-[0.9] tracking-[-0.02em]">
+               Quick Fact
+             </h2>
+          </div>
+
+          {/* Spacer block for empty space on the right of Quick Fact if needed, or we just let Box 7 span correctly */}
+          <div className="hidden md:block md:col-span-5 row-span-1"></div>
+
+          {/* Box 6: 22Km2 (Wide box) */}
+          <div className="md:col-span-5 row-span-2 bg-[#F3F3F3] rounded-[24px] flex flex-col items-center justify-center p-8 group hover:bg-[#E9F7ED] transition-colors duration-500">
+             <div className="flex flex-col items-center text-center">
+                <span className="font-['Outfit'] font-black text-[80px] lg:text-[110px] xl:text-[128px] text-[#23B349] leading-[0.9] tracking-[-0.03em] mb-4 group-hover:scale-105 transition-transform duration-500">
+                  22Km²
+                </span>
+                <p className="font-['Funnel_Display'] font-medium text-[20px] lg:text-[24px] text-[#404040] leading-tight">
+                  Factory Size in Square Kilometer
+                </p>
+             </div>
+          </div>
+
+          {/* Box 7: Investment (Large box) */}
+          <div className="md:col-span-7 row-span-2 bg-[#F3F3F3] rounded-[24px] flex flex-col items-center justify-center p-8 relative overflow-hidden group border-2 border-transparent hover:border-[#E6B720]/30 transition-all duration-500">
+             <div className="absolute inset-0 bg-[#FCFF98]/70 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+             <div className="relative z-10 flex flex-col items-center text-center w-full">
+                <div className="flex flex-col sm:flex-row items-center sm:items-end justify-center gap-4 sm:gap-8 mb-6">
+                   <span className="font-['Outfit'] font-black text-[60px] lg:text-[80px] xl:text-[96px] text-[#E6B720] leading-[0.9] tracking-[-0.03em] group-hover:scale-105 transition-transform duration-500">
+                     $1.4M
+                   </span>
+                   <span className="font-['Outfit'] font-black text-[80px] lg:text-[110px] xl:text-[128px] text-[#23B349] leading-[0.9] tracking-[-0.03em] group-hover:scale-105 transition-transform duration-500">
+                     Br210M
+                   </span>
                 </div>
-              </div>
-
-              <span 
-                className="font-['Outfit'] font-black text-[48px] lg:text-[56px] leading-none mb-4"
-                style={{ color: stat.color }}
-              >
-                {t(`stats.${stat.key}.value`)}
-              </span>
-              
-              <p className="font-['Funnel_Display'] font-bold text-[18px] lg:text-[22px] text-[#404040]/70 leading-tight">
-                {t(`stats.${stat.key}.label`)}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Bottom Repeating Pattern Container */}
-      <div className="absolute bottom-0 left-0 w-full h-32 lg:h-48 z-10 pointer-events-none overflow-hidden">
-        {/* Repeating Biscuit Piece Pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage: "url('/assets/hero/biscuit-piece.svg')",
-            backgroundRepeat: "repeat",
-            backgroundSize: "60px 60px",
-            maskImage: "linear-gradient(to top, black 0%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to top, black 0%, transparent 100%)"
-          }}
-        />
-        {/* Solid Wave Overlay */}
-        <div className="absolute bottom-0 left-0 w-full h-24 lg:h-32">
-          <Image 
-            src="/assets/sections/bottom-wave.svg" 
-            alt="" 
-            fill 
-            className="object-cover object-top"
-          />
+                <p className="font-['Funnel_Display'] font-medium text-[20px] lg:text-[24px] text-[#404040] leading-tight">
+                  Total Investment
+                </p>
+             </div>
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
