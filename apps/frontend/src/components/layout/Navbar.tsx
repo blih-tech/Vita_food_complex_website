@@ -66,9 +66,10 @@ export default function Navbar() {
       ref={navRef}
       className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center px-4 sm:px-6 lg:px-8 py-4 sm:py-6"
     >
-      {/* Main bar - Exact Figma design specifications with proper containment */}
-      <div
-        className="w-full max-w-[1664px] pl-[12px] sm:pl-[24px] lg:pl-[48px] pr-[12px] sm:pr-[16px] lg:pr-[32px] py-[8px] sm:py-[12px] rounded-[16px] sm:rounded-[24px] lg:rounded-[32px] flex items-center shadow-lg transition-all duration-300 relative z-50"
+      <div className="w-full max-w-[1664px] relative">
+        {/* Main bar - Exact Figma design specifications with proper containment */}
+        <div
+          className="w-full pl-[12px] sm:pl-[24px] lg:pl-[48px] pr-[12px] sm:pr-[16px] lg:pr-[32px] py-[8px] sm:py-[12px] rounded-[16px] sm:rounded-[24px] lg:rounded-[32px] flex items-center shadow-lg transition-all duration-300 relative z-50"
         style={{
           background:
             "radial-gradient(ellipse at 25.041px 143.28px, rgba(31,214,80,1) 0%, rgba(35,179,73,1) 60%, rgba(75,217,64,1) 80%, rgba(116,255,56,1) 100%)",
@@ -193,7 +194,7 @@ export default function Navbar() {
 
       {/* Mobile dropdown - Responsive design with proper containment */}
       {mobileOpen && (
-        <div className="absolute top-[80px] sm:top-[100px] left-4 right-4 max-w-[calc(100vw-2rem)] bg-[#23B349] rounded-[24px] sm:rounded-[32px] shadow-2xl flex flex-col xl:hidden overflow-hidden z-50 animate-in fade-in slide-in-from-top-4 duration-300">
+        <div className="absolute top-[calc(100%+0.5rem)] left-0 right-0 w-full bg-[#23B349] rounded-[24px] sm:rounded-[32px] shadow-2xl flex flex-col xl:hidden overflow-hidden z-50 animate-in fade-in slide-in-from-top-4 duration-300">
           <div className="flex flex-col p-2">
             {navLinks.map((link) => (
               <div key={link.key}>
@@ -284,14 +285,13 @@ export default function Navbar() {
 
       {/* Mega Menu Dropdown */}
       <div
-        className={`w-full max-w-[1664px] bg-white rounded-[32px] shadow-[0_20px_40px_rgba(0,0,0,0.1)] transition-all duration-300 overflow-hidden absolute top-[calc(100%-1.5rem)] lg:top-[calc(100%-2rem)] z-40 ${
+        className={`w-full bg-white rounded-[32px] shadow-[0_20px_40px_rgba(0,0,0,0.1)] transition-all duration-300 overflow-hidden absolute top-[calc(100%+0.5rem)] left-0 z-40 ${
           activeDropdown && !mobileOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
-        style={{ paddingTop: "2rem" }}
       >
-        <div className="p-8 lg:p-12 pt-12 lg:pt-16">
+        <div className="py-8 lg:py-10 pl-[12px] sm:pl-[24px] lg:pl-[48px] pr-[12px] sm:pr-[16px] lg:pr-[32px]">
           {activeDropdown === "products" && (
             <div className="flex flex-col lg:flex-row justify-between gap-12 w-full">
               {/* Left Column: Categories */}
@@ -595,6 +595,7 @@ export default function Navbar() {
             </div>
           )}
         </div>
+      </div>
       </div>
     </nav>
   );

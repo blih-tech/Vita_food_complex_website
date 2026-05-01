@@ -48,7 +48,7 @@ export default function ProductHeroSection({
           {/* Faint Background Vector behind the product */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] opacity-[0.04] pointer-events-none z-0">
             <Image
-              src="/assets/products/items/related-vector.png"
+              src="/assets/product-vector.svg"
               alt="Vita Background Crest"
               fill
               className="object-contain"
