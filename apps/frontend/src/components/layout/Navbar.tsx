@@ -156,7 +156,7 @@ export default function Navbar() {
             <Globe
               size={14}
               strokeWidth={1.5}
-              className="text-white flex-shrink-0"
+              className="text-white shrink-0"
             />
             <span className="text-white text-[10px] sm:text-[11px] lg:text-[12px] font-bold leading-none uppercase">
               {currentLocale === "en" ? "UK|EN" : "ET|AM"}
