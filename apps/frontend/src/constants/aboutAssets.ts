@@ -2,7 +2,7 @@ export const ABOUT_ASSETS = {
   hero: {
     backgroundFrame: "/assets/about/hero-background-frame.webp",
     ellipse: "/assets/about/hero-ellipse.svg",
-    storyImage: "/assets/about/story-image.png",
+    storyImage: "/assets/about/story-image-356f72.png",
   },
   content: {
     madeInEthiopia: "/assets/about/made-in-ethiopia.svg",
