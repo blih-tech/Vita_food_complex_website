@@ -41,21 +41,15 @@ export default function PartnerSection() {
   const t = useTranslations("Partner");
 
   return (
-    <section id="quality" className="relative w-full bg-white overflow-hidden py-16">
+    <section id="quality" className="relative w-full bg-white overflow-hidden py-16 lg:py-24">
 
       {/* ── Header ── */}
-      <div className="max-w-[1024px] mx-auto px-6 flex flex-col items-center text-center gap-12 mb-12">
-        <p
-          className="font-['Funnel_Display'] font-medium text-[#404040]"
-          style={{ fontSize: 20, lineHeight: "1.25em", letterSpacing: "-0.004em" }}
-        >
+      <div className="max-w-[1024px] mx-auto px-6 flex flex-col items-center text-center gap-4 mb-16">
+        <p className="font-['Funnel_Display'] font-medium text-[20px] text-[#404040] leading-tight">
           {t("subtitle")}
         </p>
-        <h2
-          className="font-['Outfit'] font-extrabold text-[#23B349]"
-          style={{ fontSize: 80, lineHeight: "0.9em", letterSpacing: "-0.02em" }}
-        >
-          {t("heading")}
+        <h2 className="font-['Outfit'] font-black text-[50px] sm:text-[64px] lg:text-[80px] text-[#23B349] leading-[0.9] tracking-[-0.02em]">
+          Quality is Built Around Us!
         </h2>
       </div>
 
