@@ -1,76 +1,183 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import Image from "next/image";
 
-// Figma assets
-const imgEthiopianAccreditationServiceEas1 = "https://www.figma.com/api/mcp/asset/53466621-6252-4e83-892b-91eac1e581dd";
-const imgLogoPng1 = "https://www.figma.com/api/mcp/asset/21782677-9757-459e-9c9d-c8cc2718e9b1";
-const imgIso9001Cmyk1 = "https://www.figma.com/api/mcp/asset/90f6b9b1-fc65-4c60-82a8-749a1e2f22ac";
-const img6798B7Fe93F49D346D6F8Eb7PngwingCom11 = "https://www.figma.com/api/mcp/asset/97f535c8-7378-4184-8cb2-d7d0868d5491";
+// Figma assets - pixel-perfect local copies from node 2120-2195
+const imgImages1 = "/assets/images/why-choose-vita/qa-image-1.png";
+const imgEthiopianAccreditationServiceEas1 = "/assets/images/why-choose-vita/qa-eas.png";
+const imgLogoPng1 = "/assets/images/why-choose-vita/qa-logo.png";
+const imgIso9001Cmyk1 = "/assets/images/why-choose-vita/qa-iso.png";
+const img6798B7Fe93F49D346D6F8Eb7PngwingCom11 = "/assets/images/why-choose-vita/qa-cert.png";
 
 export default function QualityAssuranceSection() {
-  const t = useTranslations("About");
+  const t = useTranslations("WhyChooseVita");
 
   return (
-    <div className="w-full px-[128px] py-[96px] bg-white">
-      <div className="max-w-[1024px] mx-auto">
-        {/* Section Header - Exact Figma positioning */}
-        <div className="text-center mb-[64px]">
-          <div className="mb-8">
-            <span className="font-['Funnel_Display'] font-medium text-[20px] tracking-[-0.4px] text-[#23b349] uppercase">
-              {t("qualityAssurance.subtitle")}
-            </span>
-          </div>
-          <h2 className="font-['Outfit'] font-bold text-[64px] leading-[0.96] tracking-[-2px] text-[#1a1a1a] mb-8">
-            {t("qualityAssurance.title")}
-          </h2>
-          <p className="font-['Funnel_Display'] font-medium text-[24px] leading-[1.5] tracking-[-0.4px] text-[#404040] max-w-3xl mx-auto">
-            {t("qualityAssurance.description")}
-          </p>
+    <div 
+      className="content-stretch flex flex-col gap-[48px] items-center relative size-full"
+      data-node-id="2120:2195" 
+      data-name="Quality Assurance"
+    >
+      {/* Text content container - Node 2120:2196 */}
+      <div 
+        className="content-stretch flex flex-col gap-[48px] items-center relative shrink-0 text-center whitespace-nowrap"
+        data-node-id="2120:2196" 
+        data-name="Container"
+      >
+        {/* Subtitle - Node 2120:2197 */}
+        <p 
+          className="not-italic relative shrink-0"
+          style={{
+            fontFamily: "'Funnel Display', sans-serif",
+            fontWeight: 500,
+            lineHeight: "normal",
+            fontSize: "20px",
+            color: "#404040",
+            letterSpacing: "-0.08px"
+          }} 
+          data-node-id="2120:2197"
+        >
+          Uplifting Every Daily Food Moment.
+        </p>
+
+        {/* Main headline - Node 2120:2198 */}
+        <p 
+          className="font-extrabold relative shrink-0"
+          style={{
+            fontFamily: "'Outfit', sans-serif",
+            fontWeight: 800,
+            lineHeight: "0.9",
+            fontSize: "80px",
+            color: "#23b349",
+            letterSpacing: "-1.6px"
+          }} 
+          data-node-id="2120:2198"
+        >
+          Quality is Built Around Us!
+        </p>
+      </div>
+
+      {/* Image gallery - Node 2120:2199 */}
+      <div 
+        className="relative shrink-0"
+        style={{ height: "250px", width: "1672px" }} 
+        data-node-id="2120:2199" 
+        data-name="Image Gallery"
+      >
+        {/* Image 1 - Node 2120:2200 */}
+        <div 
+          className="absolute"
+          style={{
+            height: "201.735px",
+            left: "calc(50% - 869.3px)",
+            transform: "translateX(-50%)",
+            width: "201.735px",
+            top: "32.09px"
+          }} 
+          data-node-id="2120:2200" 
+          data-name="images 1"
+        >
+          <img
+            alt=""
+            className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+            src={imgImages1}
+          />
         </div>
 
-        {/* Certification Images Gallery - Exact Figma positioning */}
-        <div className="flex justify-center items-center gap-8 mb-[64px] flex-wrap">
-          <div className="relative w-[201.734px] h-[201.734px]">
-            <img
-              alt="Ethiopian Accreditation Service"
-              className="w-full h-full object-contain"
-              src={imgEthiopianAccreditationServiceEas1}
-            />
-          </div>
-          
-          <div className="relative w-[418.880px] h-[151.646px]">
-            <img
-              alt="Quality Certification"
-              className="w-full h-full object-contain"
-              src={imgLogoPng1}
-            />
-          </div>
-          
-          <div className="relative w-[248.231px] h-[266.510px]">
-            <img
-              alt="ISO 9001 Certification"
-              className="w-full h-full object-contain"
-              src={imgIso9001Cmyk1}
-            />
-          </div>
-          
-          <div className="relative w-[199.737px] h-[201.735px]">
-            <img
-              alt="Additional Certification"
-              className="w-full h-full object-contain"
-              src={img6798B7Fe93F49D346D6F8Eb7PngwingCom11}
-            />
-          </div>
+        {/* Image 2 - Node 2120:2201 */}
+        <div 
+          className="absolute"
+          style={{
+            height: "151.646px",
+            left: "calc(50% + 787.03px)",
+            transform: "translateX(-50%)",
+            width: "337.219px",
+            top: "57.13px"
+          }} 
+          data-node-id="2120:2201" 
+          data-name="ethiopian_accreditation_service_eas 1"
+        >
+          <img
+            alt=""
+            className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+            src={imgEthiopianAccreditationServiceEas1}
+          />
         </div>
 
-        {/* CTA Button */}
-        <div className="text-center">
-          <button className="bg-[#23b349] text-white px-8 py-4 rounded-full font-['Funnel_Display'] font-medium text-[20px] tracking-[-0.4px] hover:bg-[#1a9a3a] transition-colors">
-            {t("qualityAssurance.cta")}
-          </button>
+        {/* Image 3 - Node 2120:2202 */}
+        <div 
+          className="absolute"
+          style={{
+            height: "151.647px",
+            left: "calc(50% - 428.99px)",
+            transform: "translateX(-50%)",
+            width: "418.881px",
+            top: "57.13px"
+          }} 
+          data-node-id="2120:2202" 
+          data-name="Logo.png 1"
+        >
+          <img
+            alt=""
+            className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+            src={imgLogoPng1}
+          />
         </div>
+
+        {/* Image 4 - Node 2120:2203 */}
+        <div 
+          className="absolute"
+          style={{
+            height: "266.511px",
+            left: "calc(50% + 34.56px)",
+            transform: "translateX(-50%)",
+            width: "248.232px",
+            top: "-0.3px"
+          }} 
+          data-node-id="2120:2203" 
+          data-name="ISO-9001-CMYK 1"
+        >
+          <img
+            alt=""
+            className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+            src={imgIso9001Cmyk1}
+          />
+        </div>
+
+        {/* Image 5 - Node 2120:2204 */}
+        <div 
+          className="absolute"
+          style={{
+            height: "201.735px",
+            left: "calc(50% + 388.55px)",
+            transform: "translateX(-50%)",
+            width: "199.738px",
+            top: "32.09px"
+          }} 
+          data-node-id="2120:2204" 
+          data-name="6798b7fe93f49d346d6f8eb7_pngwing.com (1) 1"
+        >
+          <img
+            alt=""
+            className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
+            src={img6798B7Fe93F49D346D6F8Eb7PngwingCom11}
+          />
+        </div>
+      </div>
+
+      {/* Bottom container - Node 2120:2205 */}
+      <div 
+        className="content-stretch flex flex-col items-center relative shrink-0"
+        data-node-id="2120:2205" 
+        data-name="Container"
+      >
+        {/* Inner container - Node 2120:2206 */}
+        <div 
+          className="content-stretch flex gap-[24px] items-center relative shrink-0"
+          style={{ height: "56px", width: "180px" }} 
+          data-node-id="2120:2206" 
+          data-name="Container"
+        />
       </div>
     </div>
   );
