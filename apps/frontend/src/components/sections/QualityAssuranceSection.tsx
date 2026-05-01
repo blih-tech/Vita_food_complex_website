@@ -14,170 +14,190 @@ export default function QualityAssuranceSection() {
 
   return (
     <div 
-      className="content-stretch flex flex-col gap-[48px] items-center relative size-full"
+      className="content-stretch flex flex-col lg:gap-[48px] md:gap-[36px] sm:gap-[24px] items-center relative w-full lg:px-[128px] md:px-[64px] sm:px-[32px] lg:py-[96px] md:py-[64px] sm:py-[48px]"
       data-node-id="2120:2195" 
       data-name="Quality Assurance"
     >
-      {/* Text content container - Node 2120:2196 */}
+      {/* Text content container - Responsive */}
       <div 
-        className="content-stretch flex flex-col gap-[48px] items-center relative shrink-0 text-center whitespace-nowrap"
+        className="content-stretch flex flex-col lg:gap-[48px] md:gap-[36px] sm:gap-[24px] items-center relative shrink-0 text-center w-full lg:max-w-[1200px] md:max-w-[800px] sm:max-w-[100%]"
         data-node-id="2120:2196" 
         data-name="Container"
       >
-        {/* Subtitle - Node 2120:2197 */}
+        {/* Subtitle - Responsive */}
         <p 
-          className="not-italic relative shrink-0"
+          className="not-italic relative shrink-0 lg:block md:block sm:hidden"
           style={{
             fontFamily: "'Funnel Display', sans-serif",
             fontWeight: 500,
-            lineHeight: "normal",
-            fontSize: "20px",
-            color: "#404040",
-            letterSpacing: "-0.08px"
-          }} 
+            lineHeight: '1.5',
+            fontSize: '24px',
+            color: '#23b349',
+            letterSpacing: '-0.4px',
+          }}
           data-node-id="2120:2197"
         >
-          Uplifting Every Daily Food Moment.
+          Quality Assurance
         </p>
 
-        {/* Main headline - Node 2120:2198 */}
-        <p 
-          className="font-extrabold relative shrink-0"
+        {/* Headline - Responsive */}
+        <h2 
+          className="font-['Outfit'] font-bold not-italic relative shrink-0 text-center lg:block md:block sm:block lg:text-[64px] lg:tracking-[-2px] md:text-[48px] md:tracking-[-1.5px] sm:text-[32px] sm:tracking-[-1px]"
           style={{
-            fontFamily: "'Outfit', sans-serif",
-            fontWeight: 800,
-            lineHeight: "0.9",
-            fontSize: "80px",
-            color: "#23b349",
-            letterSpacing: "-1.6px"
-          }} 
+            color: '#1a1a1a',
+            lineHeight: '0.96',
+          }}
           data-node-id="2120:2198"
         >
-          Quality is Built Around Us!
+          <span className="lg:inline md:inline sm:block">Committed to Excellence</span>
+          <span className="lg:inline md:inline sm:block">in Every Product</span>
+        </h2>
+
+        {/* Description - Responsive */}
+        <p 
+          className="font-['Funnel_Display'] font-medium not-italic relative shrink-0 text-center lg:text-[24px] lg:tracking-[-0.4px] md:text-[20px] md:tracking-[-0.32px] sm:text-[16px] sm:tracking-[-0.24px] lg:px-0 md:px-4 sm:px-2"
+          style={{
+            color: '#404040',
+            lineHeight: '1.5',
+          }}
+          data-node-id="2120:2199"
+        >
+          {t("qualityAssurance.description")}
         </p>
       </div>
 
-      {/* Image gallery - Node 2120:2199 */}
-      <div 
-        className="relative shrink-0"
-        style={{ height: "250px", width: "1672px" }} 
-        data-node-id="2120:2199" 
-        data-name="Image Gallery"
-      >
-        {/* Image 1 - Node 2120:2200 */}
-        <div 
-          className="absolute"
-          style={{
-            height: "201.735px",
-            left: "calc(50% - 869.3px)",
-            transform: "translateX(-50%)",
-            width: "201.735px",
-            top: "32.09px"
-          }} 
-          data-node-id="2120:2200" 
-          data-name="images 1"
-        >
-          <img
-            alt=""
-            className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
-            src={imgImages1}
-          />
+      {/* Main content grid - Responsive */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative w-full lg:max-w-[1200px] md:max-w-[800px] sm:max-w-[100%]">
+        
+        {/* Left side - Image and certifications */}
+        <div className="flex flex-col gap-6">
+          {/* Main image - Responsive */}
+          <div className="relative lg:h-[400px] md:h-[300px] sm:h-[200px] rounded-[24px] overflow-hidden">
+            <img
+              alt="Quality Assurance"
+              className="w-full h-full object-cover"
+              src={imgImages1}
+            />
+            {/* Overlay gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+          </div>
+
+          {/* Certification badges - Responsive */}
+          <div className="grid grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 gap-4">
+            <div className="bg-white rounded-[16px] p-4 shadow-md flex items-center justify-center h-[100px]">
+              <img
+                alt="EAS Certification"
+                className="max-h-[60px] max-w-[100%] object-contain"
+                src={imgEthiopianAccreditationServiceEas1}
+              />
+            </div>
+            <div className="bg-white rounded-[16px] p-4 shadow-md flex items-center justify-center h-[100px]">
+              <img
+                alt="ISO 9001"
+                className="max-h-[60px] max-w-[100%] object-contain"
+                src={imgIso9001Cmyk1}
+              />
+            </div>
+            <div className="bg-white rounded-[16px] p-4 shadow-md flex items-center justify-center h-[100px]">
+              <img
+                alt="Quality Certification"
+                className="max-h-[60px] max-w-[100%] object-contain"
+                src={img6798B7Fe93F49D346D6F8Eb7PngwingCom11}
+              />
+            </div>
+            <div className="bg-white rounded-[16px] p-4 shadow-md flex items-center justify-center h-[100px]">
+              <img
+                alt="Company Logo"
+                className="max-h-[60px] max-w-[100%] object-contain"
+                src={imgLogoPng1}
+              />
+            </div>
+          </div>
         </div>
 
-        {/* Image 2 - Node 2120:2201 */}
-        <div 
-          className="absolute"
-          style={{
-            height: "151.646px",
-            left: "calc(50% + 787.03px)",
-            transform: "translateX(-50%)",
-            width: "337.219px",
-            top: "57.13px"
-          }} 
-          data-node-id="2120:2201" 
-          data-name="ethiopian_accreditation_service_eas 1"
-        >
-          <img
-            alt=""
-            className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
-            src={imgEthiopianAccreditationServiceEas1}
-          />
-        </div>
+        {/* Right side - Quality features */}
+        <div className="flex flex-col gap-6">
+          {/* Quality standards - Responsive */}
+          <div className="bg-white rounded-[24px] p-6 lg:p-8 md:p-6 sm:p-4 shadow-lg">
+            <h3 className="font-['Outfit'] font-bold text-[24px] leading-[1.2] text-[#1a1a1a] mb-4 lg:text-[24px] md:text-[20px] sm:text-[18px]">
+              International Standards
+            </h3>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-[#23b349] rounded-full mt-2 flex-shrink-0" />
+                <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
+                  ISO 9001:2015 certified quality management system
+                </p>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-[#23b349] rounded-full mt-2 flex-shrink-0" />
+                <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
+                  Ethiopian Accreditation Service (EAS) approved
+                </p>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-[#23b349] rounded-full mt-2 flex-shrink-0" />
+                <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
+                  HACCP food safety management implementation
+                </p>
+              </li>
+            </ul>
+          </div>
 
-        {/* Image 3 - Node 2120:2202 */}
-        <div 
-          className="absolute"
-          style={{
-            height: "151.647px",
-            left: "calc(50% - 428.99px)",
-            transform: "translateX(-50%)",
-            width: "418.881px",
-            top: "57.13px"
-          }} 
-          data-node-id="2120:2202" 
-          data-name="Logo.png 1"
-        >
-          <img
-            alt=""
-            className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
-            src={imgLogoPng1}
-          />
-        </div>
+          {/* Testing procedures - Responsive */}
+          <div className="bg-white rounded-[24px] p-6 lg:p-8 md:p-6 sm:p-4 shadow-lg">
+            <h3 className="font-['Outfit'] font-bold text-[24px] leading-[1.2] text-[#1a1a1a] mb-4 lg:text-[24px] md:text-[20px] sm:text-[18px]">
+              Rigorous Testing
+            </h3>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-[#23b349] rounded-full mt-2 flex-shrink-0" />
+                <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
+                  Daily quality control checks at every production stage
+                </p>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-[#23b349] rounded-full mt-2 flex-shrink-0" />
+                <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
+                  Third-party laboratory testing and verification
+                </p>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-[#23b349] rounded-full mt-2 flex-shrink-0" />
+                <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
+                  Shelf-life testing and stability studies
+                </p>
+              </li>
+            </ul>
+          </div>
 
-        {/* Image 4 - Node 2120:2203 */}
-        <div 
-          className="absolute"
-          style={{
-            height: "266.511px",
-            left: "calc(50% + 34.56px)",
-            transform: "translateX(-50%)",
-            width: "248.232px",
-            top: "-0.3px"
-          }} 
-          data-node-id="2120:2203" 
-          data-name="ISO-9001-CMYK 1"
-        >
-          <img
-            alt=""
-            className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
-            src={imgIso9001Cmyk1}
-          />
+          {/* Continuous improvement - Responsive */}
+          <div className="bg-white rounded-[24px] p-6 lg:p-8 md:p-6 sm:p-4 shadow-lg">
+            <h3 className="font-['Outfit'] font-bold text-[24px] leading-[1.2] text-[#1a1a1a] mb-4 lg:text-[24px] md:text-[20px] sm:text-[18px]">
+              Continuous Improvement
+            </h3>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-[#23b349] rounded-full mt-2 flex-shrink-0" />
+                <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
+                  Regular audit and review processes
+                </p>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-[#23b349] rounded-full mt-2 flex-shrink-0" />
+                <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
+                  Customer feedback integration and response
+                </p>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-[#23b349] rounded-full mt-2 flex-shrink-0" />
+                <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
+                  Staff training and development programs
+                </p>
+              </li>
+            </ul>
+          </div>
         </div>
-
-        {/* Image 5 - Node 2120:2204 */}
-        <div 
-          className="absolute"
-          style={{
-            height: "201.735px",
-            left: "calc(50% + 388.55px)",
-            transform: "translateX(-50%)",
-            width: "199.738px",
-            top: "32.09px"
-          }} 
-          data-node-id="2120:2204" 
-          data-name="6798b7fe93f49d346d6f8eb7_pngwing.com (1) 1"
-        >
-          <img
-            alt=""
-            className="absolute inset-0 max-w-none object-cover pointer-events-none size-full"
-            src={img6798B7Fe93F49D346D6F8Eb7PngwingCom11}
-          />
-        </div>
-      </div>
-
-      {/* Bottom container - Node 2120:2205 */}
-      <div 
-        className="content-stretch flex flex-col items-center relative shrink-0"
-        data-node-id="2120:2205" 
-        data-name="Container"
-      >
-        {/* Inner container - Node 2120:2206 */}
-        <div 
-          className="content-stretch flex gap-[24px] items-center relative shrink-0"
-          style={{ height: "56px", width: "180px" }} 
-          data-node-id="2120:2206" 
-          data-name="Container"
-        />
       </div>
     </div>
   );

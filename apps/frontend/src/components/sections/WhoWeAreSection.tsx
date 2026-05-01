@@ -13,432 +13,143 @@ export default function WhoWeAreSection() {
   const t = useTranslations("WhyChooseVita");
 
   return (
-    <div className="content-stretch flex flex-col gap-[120px] items-center relative size-full" data-node-id="486:2897" data-name="Who we are section">
-      {/* Who we are text content - Node 364:3320 */}
-      <div className="content-stretch flex flex-col gap-[32px] items-center relative shrink-0" style={{ width: '1296px' }} data-node-id="364:3320" data-name="Who we are text">
-        {/* Section header - Node 364:3321 */}
-        <div className="content-stretch flex items-center justify-center relative shrink-0" data-node-id="364:3321" data-name="Section Header">
-          {/* "Who" text - Node 364:3322 */}
+    <div className="content-stretch flex flex-col items-center relative w-full lg:gap-[120px] md:gap-[80px] sm:gap-[60px] lg:px-[128px] md:px-[64px] sm:px-[32px] lg:py-[96px] md:py-[64px] sm:py-[48px]" data-node-id="486:2897" data-name="Who we are section">
+      {/* Who we are text content - Responsive */}
+      <div className="content-stretch flex flex-col gap-[32px] items-center relative shrink-0 w-full lg:max-w-[1296px] md:max-w-[900px] sm:max-w-[100%]" data-node-id="364:3320" data-name="Who we are text">
+        {/* Section header - Responsive */}
+        <div className="content-stretch flex items-center justify-center relative shrink-0 w-full lg:flex-row md:flex-col sm:flex-col lg:gap-[123.809px] md:gap-[60px] sm:gap-[40px]" data-node-id="364:3321" data-name="Section Header">
+          {/* "Who" text - Responsive */}
+          <p 
+            className="font-bold not-italic relative shrink-0 lg:block md:block sm:hidden"
+            style={{
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 700,
+              lineHeight: '0.96',
+              fontSize: '64px',
+              color: '#1a1a1a',
+              letterSpacing: '-2px',
+            }}
+            data-node-id="364:3322"
+          >
+            Who
+          </p>
+          
+          {/* Line separator - Responsive */}
+          <div className="lg:w-[123.809px] md:w-[60px] sm:w-[40px] lg:h-px md:h-px sm:h-px bg-[#23b349]" />
+
+          {/* "We Are" text - Responsive */}
           <p 
             className="font-bold not-italic relative shrink-0"
             style={{
-              fontFamily: "'Bricolage Grotesque', sans-serif",
+              fontFamily: "'Outfit', sans-serif",
               fontWeight: 700,
-              lineHeight: '0',
-              fontSize: '0px',
-              color: '#404040',
-              letterSpacing: '-3px',
-              width: '354px',
-              fontVariationSettings: "'opsz' 14, 'wdth' 100"
-            }} 
-            data-node-id="364:3322"
-          >
-            <span style={{ fontFamily: "'Funnel Display', sans-serif", fontWeight: 700, lineHeight: 'normal', color: '#404040', fontSize: '150px' }}>Who</span>
-            <span style={{ fontFamily: "'Funnel Display', sans-serif", fontWeight: 700, lineHeight: 'normal', fontSize: '150px' }}>{` `}</span>
-          </p>
-
-          {/* Line separator - Node 364:3323 */}
-          <div 
-            className="relative shrink-0" 
-            style={{ height: '0px', width: '123.809px' }} 
+              lineHeight: '0.96',
+              fontSize: '64px',
+              color: '#1a1a1a',
+              letterSpacing: '-2px',
+            }}
             data-node-id="364:3323"
           >
-            <div className="absolute inset-[-5px_-4.04%]">
-              <img alt="" className="block max-w-none size-full" src={imgLine1} />
-            </div>
-          </div>
-
-          {/* "Are We" text - Node 364:3324 */}
-          <p 
-            className="not-italic relative shrink-0"
-            style={{
-              fontFamily: "'Funnel Display', sans-serif",
-              fontWeight: 800,
-              lineHeight: '0.9',
-              fontSize: '150px',
-              color: '#23b349',
-              letterSpacing: '-3px',
-              width: '518px'
-            }} 
-            data-node-id="364:3324"
-          >
-            Are We
+            <span className="lg:inline md:inline sm:block">We Are</span>
+            <span className="lg:inline md:inline sm:block"> & What We Stand For</span>
           </p>
         </div>
 
-        {/* Section description - Node 364:3325 */}
-        <div className="content-stretch flex flex-col gap-[78px] items-center relative shrink-0 w-full" data-node-id="364:3325" data-name="Section Description">
-          {/* Description text - Node 364:3326 */}
-          <p 
-            className="font-normal min-w-full relative shrink-0 text-center"
-            style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 400,
-              lineHeight: 'normal',
-              fontSize: '32px',
-              color: 'rgba(16,15,15,0.9)',
-              letterSpacing: '-0.128px',
-              width: 'min-content'
-            }} 
-            data-node-id="364:3326"
-          >
-            Vita Food Complex is a modern FMCG company built to lead the future of everyday food in Ethiopia. We produce strategically designed biscuit and flour products tailored to multiple consumer moments—from children's snacks and youth lifestyle choices to family tea-time and professional bakery needs
-          </p>
+        {/* Description text - Responsive */}
+        <p 
+          className="font-['Funnel_Display'] font-medium leading-[1.5] not-italic relative shrink-0 text-center lg:text-[24px] lg:tracking-[-0.4px] md:text-[20px] md:tracking-[-0.32px] sm:text-[16px] sm:tracking-[-0.24px] lg:px-0 md:px-4 sm:px-2"
+          style={{
+            color: '#404040',
+          }}
+          data-node-id="364:3324"
+        >
+          {t("whoWeAre.description")}
+        </p>
 
-          {/* CTA button - Node 364:3327 */}
-          <Link
-            href="/about"
-            className="content-stretch flex gap-[16px] items-center justify-center relative shrink-0 text-white whitespace-nowrap"
-            style={{
-              backgroundColor: '#23b349',
-              height: '56px',
-              paddingLeft: '32px',
-              paddingRight: '32px',
-              paddingTop: '16px',
-              paddingBottom: '16px',
-              borderRadius: '999px'
-            }} 
-            data-node-id="364:3327"
-          >
-            <p 
-              className="not-italic relative shrink-0"
-              style={{
-                fontFamily: "'Funnel Display', sans-serif",
-                fontWeight: 500,
-                lineHeight: 'normal',
-                fontSize: '24px',
-                letterSpacing: '-0.096px',
-                color: '#ffffff'
-              }} 
-              data-node-id="I364:3327;18:1725"
-            >
-              More About Vita
-            </p>
-          </Link>
-        </div>
+        {/* CTA Button - Responsive */}
+        <Link
+          href="/about"
+          className="inline-flex items-center justify-center gap-[16px] bg-[#23b349] text-white rounded-[999px] font-['Funnel_Display'] font-medium hover:bg-[#1a9a3a] transition-colors lg:px-[32px] lg:py-[16px] lg:text-[20px] lg:tracking-[-0.4px] md:px-[24px] md:py-[12px] md:text-[18px] md:tracking-[-0.36px] sm:px-[20px] sm:py-[10px] sm:text-[16px] sm:tracking-[-0.32px]"
+          data-node-id="364:3325"
+        >
+          {t("whoWeAre.cta")}
+        </Link>
       </div>
 
-      {/* Who we are cards - Node 364:3329 */}
-      <div 
-        className="relative shrink-0 w-full" 
-        style={{ height: '540px' }} 
-        data-node-id="364:3329" 
-        data-name="who we are card"
-      >
-        {/* Card 1 - Quality You Can Trust - Node 364:3330 */}
-        <div className="absolute contents" style={{ left: '0px', top: '0px' }} data-node-id="364:3330" data-name="Card">
-          {/* Card background - Node 364:3331 */}
-          <div 
-            className="absolute"
-            style={{
-              backdropFilter: 'blur(8.285px)',
-              backgroundColor: '#f3f3f3',
-              height: '540px',
-              left: '0px',
-              borderRadius: '24px',
-              top: '0px',
-              width: '404px'
-            }} 
-            data-node-id="364:3331" 
-            data-name="Card Background" 
-          />
-          
-          {/* Card image - Node 364:3332 */}
-          <div 
-            className="absolute"
-            style={{
-              height: '354px',
-              left: 'calc(50% - 630px)',
-              transform: 'translateX(-50%)',
-              borderRadius: '16px',
-              top: '18px',
-              width: '372px'
-            }} 
-            data-node-id="364:3332" 
-            data-name="a-clean--modern-vector-illustration-of-an-elegant- (1)"
-          >
+      {/* Cards Grid - Responsive */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 relative w-full lg:max-w-[1296px] md:max-w-[900px] sm:max-w-[100%]">
+        {/* Card 1 - Top left */}
+        <div className="bg-white rounded-[24px] shadow-lg overflow-hidden lg:translate-y-0 md:translate-y-0 sm:translate-y-0">
+          <div className="relative lg:h-[354px] md:h-[280px] sm:h-[200px] overflow-hidden">
             <img
-              alt=""
-              className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[16px] size-full"
+              alt="Quality Innovation"
+              className="w-full h-full object-cover"
               src={imgACleanModernVectorIllustrationOfAnElegant1}
             />
           </div>
-          
-          {/* Card content - Node 364:3333 */}
-          <div 
-            className="absolute content-stretch flex flex-col items-center text-center"
-            style={{
-              lineHeight: '1.443',
-              left: 'calc(50% - 630px)',
-              transform: 'translateX(-50%)',
-              borderRadius: '24px',
-              color: '#272726',
-              top: '393px',
-              width: '358px'
-            }} 
-            data-node-id="364:3333" 
-            data-name="Card Content"
-          >
-            <p 
-              className="not-italic relative shrink-0 w-full"
-              style={{
-                fontFamily: "'Funnel Display', sans-serif",
-                fontWeight: 700,
-                fontSize: "28px"
-              }} 
-              data-node-id="364:3334"
-            >
-              Quality You Can Trust
-            </p>
-            <p 
-              className="font-normal relative shrink-0 w-full"
-              style={{
-                fontFamily: "'Outfit', sans-serif",
-                fontWeight: 400,
-                fontSize: "22px"
-              }} 
-              data-node-id="364:3335"
-            >
-              Produced with strict standards to ensure consistency, freshness, and satisfaction
+          <div className="p-6 lg:p-8 md:p-6 sm:p-4">
+            <h3 className="font-['Funnel_Display'] font-bold text-[20px] leading-[1.2] text-[#1a1a1a] mb-4 lg:text-[20px] md:text-[18px] sm:text-[16px]">
+              {t("whoWeAre.products.quality.title")}
+            </h3>
+            <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
+              {t("whoWeAre.products.quality.description")}
             </p>
           </div>
         </div>
 
-        {/* Card 2 - Reliable Supply - Node 364:3336 */}
-        <div className="absolute contents" style={{ left: '420px', top: '60px' }} data-node-id="364:3336" data-name="Card">
-          {/* Card background - Node 364:3337 */}
-          <div 
-            className="absolute"
-            style={{
-              backdropFilter: 'blur(8.285px)',
-              backgroundColor: '#f3f3f3',
-              height: '547px',
-              left: '420px',
-              borderRadius: '24px',
-              top: '60px',
-              width: '404px'
-            }} 
-            data-node-id="364:3337" 
-            data-name="Card Background" 
-          />
-          
-          {/* Card image - Node 364:3338 */}
-          <div 
-            className="absolute"
-            style={{
-              height: '354px',
-              left: 'calc(50% - 210px)',
-              transform: 'translateX(-50%)',
-              borderRadius: '16px',
-              top: '78px',
-              width: '372px'
-            }} 
-            data-node-id="364:3338" 
-            data-name="a-clean--modern-vector-illustration-of-an-elegant- (1)"
-          >
+        {/* Card 2 - Top right with offset */}
+        <div className="bg-white rounded-[24px] shadow-lg overflow-hidden lg:translate-y-[60px] md:translate-y-[40px] sm:translate-y-[20px]">
+          <div className="relative lg:h-[354px] md:h-[280px] sm:h-[200px] overflow-hidden">
             <img
-              alt=""
-              className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[16px] size-full"
+              alt="Local Sourcing"
+              className="w-full h-full object-cover"
               src={imgACleanModernVectorIllustrationOfAnElegant2}
             />
           </div>
-          
-          {/* Card content - Node 364:3339 */}
-          <div 
-            className="absolute content-stretch flex flex-col items-center text-center"
-            style={{
-              lineHeight: '1.443',
-              left: 'calc(50% - 210px)',
-              transform: 'translateX(-50%)',
-              borderRadius: '24px',
-              color: '#272726',
-              top: '453px',
-              width: '358px'
-            }} 
-            data-node-id="364:3339" 
-            data-name="Card Content"
-          >
-            <p 
-              className="not-italic relative shrink-0 w-full"
-              style={{
-                fontFamily: "'Funnel Display', sans-serif",
-                fontWeight: 700,
-                fontSize: "28px"
-              }} 
-              data-node-id="364:3340"
-            >
-              Reliable Supply
-            </p>
-            <p 
-              className="font-normal relative shrink-0 w-full"
-              style={{
-                fontFamily: "'Outfit', sans-serif",
-                fontWeight: 400,
-                fontSize: "22px"
-              }} 
-              data-node-id="364:3341"
-            >
-              Strong manufacturing and distribution systems that keep products available
+          <div className="p-6 lg:p-8 md:p-6 sm:p-4">
+            <h3 className="font-['Funnel_Display'] font-bold text-[20px] leading-[1.2] text-[#1a1a1a] mb-4 lg:text-[20px] md:text-[18px] sm:text-[16px]">
+              {t("whoWeAre.products.local.title")}
+            </h3>
+            <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
+              {t("whoWeAre.products.local.description")}
             </p>
           </div>
         </div>
 
-        {/* Card 3 - Innovation Driven - Node 364:3342 */}
-        <div className="absolute contents" style={{ left: '840px', top: '0px' }} data-node-id="364:3342" data-name="Card">
-          {/* Card background - Node 364:3343 */}
-          <div 
-            className="absolute"
-            style={{
-              backdropFilter: 'blur(8.285px)',
-              backgroundColor: '#f3f3f3',
-              height: '540px',
-              left: '840px',
-              borderRadius: '24px',
-              top: '0px',
-              width: '404px'
-            }} 
-            data-node-id="364:3343" 
-            data-name="Card Background" 
-          />
-          
-          {/* Card image - Node 364:3344 */}
-          <div 
-            className="absolute"
-            style={{
-              height: '354px',
-              left: 'calc(50% + 210px)',
-              transform: 'translateX(-50%)',
-              borderRadius: '16px',
-              top: '18px',
-              width: '372px'
-            }} 
-            data-node-id="364:3344" 
-            data-name="a-clean--modern-vector-illustration-of-an-elegant- (1)"
-          >
+        {/* Card 3 - Bottom left */}
+        <div className="bg-white rounded-[24px] shadow-lg overflow-hidden lg:translate-y-0 md:translate-y-0 sm:translate-y-0">
+          <div className="relative lg:h-[354px] md:h-[280px] sm:h-[200px] overflow-hidden">
             <img
-              alt=""
-              className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[16px] size-full"
+              alt="Sustainability Focus"
+              className="w-full h-full object-cover"
               src={imgACleanModernVectorIllustrationOfAnElegant3}
             />
           </div>
-          
-          {/* Card content - Node 364:3345 */}
-          <div 
-            className="absolute content-stretch flex flex-col items-center text-center"
-            style={{
-              lineHeight: '1.443',
-              left: 'calc(50% + 210px)',
-              transform: 'translateX(-50%)',
-              borderRadius: '24px',
-              color: '#272726',
-              top: '393px',
-              width: '358px'
-            }} 
-            data-node-id="364:3345" 
-            data-name="Card Content"
-          >
-            <p 
-              className="not-italic relative shrink-0 w-full"
-              style={{
-                fontFamily: "'Funnel Display', sans-serif",
-                fontWeight: 700,
-                fontSize: "28px"
-              }} 
-              data-node-id="364:3346"
-            >
-              Innovation Driven
-            </p>
-            <p 
-              className="font-normal relative shrink-0 w-full"
-              style={{
-                fontFamily: "'Outfit', sans-serif",
-                fontWeight: 400,
-                fontSize: "22px"
-              }} 
-              data-node-id="364:3347"
-            >
-              Modern packaging, new product ideas, and evolving solutions for future markets
+          <div className="p-6 lg:p-8 md:p-6 sm:p-4">
+            <h3 className="font-['Funnel_Display'] font-bold text-[20px] leading-[1.2] text-[#1a1a1a] mb-4 lg:text-[20px] md:text-[18px] sm:text-[16px]">
+              {t("whoWeAre.products.community.title")}
+            </h3>
+            <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
+              {t("whoWeAre.products.community.description")}
             </p>
           </div>
         </div>
 
-        {/* Card 4 - Community Impact - Node 364:3348 */}
-        <div className="absolute contents" style={{ left: '1260px', top: '60px' }} data-node-id="364:3348" data-name="Card">
-          {/* Card background - Node 364:3349 */}
-          <div 
-            className="absolute"
-            style={{
-              backdropFilter: 'blur(8.285px)',
-              backgroundColor: '#f3f3f3',
-              height: '547px',
-              left: '1260px',
-              borderRadius: '24px',
-              top: '60px',
-              width: '404px'
-            }} 
-            data-node-id="364:3349" 
-            data-name="Card Background" 
-          />
-          
-          {/* Card image - Node 364:3350 */}
-          <div 
-            className="absolute"
-            style={{
-              height: '354px',
-              left: 'calc(50% + 630px)',
-              transform: 'translateX(-50%)',
-              borderRadius: '16px',
-              top: '78px',
-              width: '372px'
-            }} 
-            data-node-id="364:3350" 
-            data-name="a-clean--modern-vector-illustration-of-an-elegant- (1)"
-          >
+        {/* Card 4 - Bottom right with offset */}
+        <div className="bg-white rounded-[24px] shadow-lg overflow-hidden lg:translate-y-[60px] md:translate-y-[40px] sm:translate-y-[20px]">
+          <div className="relative lg:h-[354px] md:h-[280px] sm:h-[200px] overflow-hidden">
             <img
-              alt=""
-              className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[16px] size-full"
-              src={imgACleanModernVectorIllustrationOfAnElegant3}
+              alt="Community Impact"
+              className="w-full h-full object-cover"
+              src={imgACleanModernVectorIllustrationOfAnElegant1}
             />
           </div>
-          
-          {/* Card content - Node 364:3351 */}
-          <div 
-            className="absolute content-stretch flex flex-col items-center text-center"
-            style={{
-              lineHeight: '1.443',
-              left: 'calc(50% + 630px)',
-              transform: 'translateX(-50%)',
-              borderRadius: '24px',
-              color: '#272726',
-              top: '453px',
-              width: '358px'
-            }} 
-            data-node-id="364:3351" 
-            data-name="Card Content"
-          >
-            <p 
-              className="min-w-full not-italic relative shrink-0"
-              style={{
-                fontFamily: "'Funnel Display', sans-serif",
-                fontWeight: 700,
-                fontSize: "28px",
-                width: "min-content"
-              }} 
-              data-node-id="364:3352"
-            >
-              Community Impact
-            </p>
-            <p 
-              className="font-normal relative shrink-0"
-              style={{
-                fontFamily: "'Outfit', sans-serif",
-                fontWeight: 400,
-                fontSize: "22px",
-                width: "334px"
-              }} 
-              data-node-id="364:3353"
-            >
-              Creating jobs, supporting farmers, and contributing to national growth
+          <div className="p-6 lg:p-8 md:p-6 sm:p-4">
+            <h3 className="font-['Funnel_Display'] font-bold text-[20px] leading-[1.2] text-[#1a1a1a] mb-4 lg:text-[20px] md:text-[18px] sm:text-[16px]">
+              {t("whoWeAre.products.innovation.title")}
+            </h3>
+            <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
+              {t("whoWeAre.products.innovation.description")}
             </p>
           </div>
         </div>

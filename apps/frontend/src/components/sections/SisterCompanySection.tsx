@@ -2,834 +2,128 @@
 
 import { useTranslations } from "next-intl";
 
-// Figma assets - pixel-perfect local copies from node 2116-1586
-const imgSisterComapny = "/assets/images/why-choose-vita/sister-company-bg.jpg";
-const imgVector = "/assets/images/why-choose-vita/arrow-icon.png";
+// Figma assets from MCP
+const imgSisterComapny = "https://www.figma.com/api/mcp/asset/e9156c87-ac2a-421d-a687-1467f08f4267";
+const imgVector = "https://www.figma.com/api/mcp/asset/4bc0dda0-d0d4-4f09-92d9-ffabc43156a4";
+
+// Sister company data from Figma
+const sisterCompanies = [
+  { id: "01", name: "Belayab foods" },
+  { id: "02", name: "Arada Coffee" },
+  { id: "03", name: "long tea" },
+  { id: "04", name: "Belayab Motors" },
+  { id: "05", name: "Belayab Geepas" },
+  { id: "06", name: "Belayab Cabel" },
+  { id: "07", name: "Lionstone Distribution" },
+  { id: "08", name: "HUAJIA international trade" },
+  { id: "09", name: "Lewis Retails" },
+];
 
 export default function SisterCompanySection() {
   const t = useTranslations("WhyChooseVita");
 
   return (
     <div 
-      className="content-stretch flex flex-col items-start relative size-full"
-      style={{
-        paddingLeft: "73px",
-        paddingRight: "73px",
-        paddingTop: "128px",
-        paddingBottom: "128px",
-        borderRadius: "48px"
-      }} 
+      className="content-stretch flex flex-col items-start relative w-full lg:px-[73px] md:px-[48px] sm:px-[24px] lg:py-[128px] md:py-[96px] sm:py-[64px] rounded-[48px]" 
       data-node-id="2116:1586" 
       data-name="sister comapny"
     >
-      {/* Background effects */}
-      <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ borderRadius: "48px" }}>
-        <div className="absolute inset-0 overflow-hidden" style={{ borderRadius: "48px" }}>
+      {/* Background effects - Responsive */}
+      <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[48px]">
+        <div className="absolute inset-0 overflow-hidden rounded-[48px]">
           <img
             alt=""
-            className="absolute max-w-none"
+            className="absolute lg:h-[-193.75%] lg:left-[101.26%] lg:max-w-none lg:top-[154.74%] lg:w-[-110.38%] md:h-[-150%] md:left-[90%] md:max-w-none md:top-[120%] md:w-[-80%] sm:h-[-100%] sm:left-[80%] sm:max-w-none sm:top-[100%] sm:w-[-60%]"
             src={imgSisterComapny}
-            style={{
-              position: "absolute",
-              height: "-193.75%",
-              left: "101.26%",
-              top: "154.74%",
-              width: "-110.38%"
-            }}
           />
         </div>
-        <div 
-          className="absolute inset-0 mix-blend-soft-light pointer-events-none" 
-          style={{ 
-            backgroundColor: "rgba(55,255,0,0.4)",
-            borderRadius: "48px"
-          }} 
-        />
+        <div className="absolute bg-[rgba(55,255,0,0.4)] inset-0 mix-blend-soft-light rounded-[48px]" />
       </div>
 
-      {/* Content container - Node 2116:1585 */}
-      <div 
-        className="content-stretch flex flex-col gap-[96px] items-center relative shrink-0"
-        data-node-id="2116:1585" 
-        data-name="Container"
-      >
-        {/* Section title - Node 2111:1555 */}
+      {/* Content container - Responsive */}
+      <div className="content-stretch flex flex-col gap-[96px] items-center relative shrink-0 w-full lg:gap-[96px] md:gap-[72px] sm:gap-[48px]" data-node-id="2116:1585" data-name="Container">
+        
+        {/* Section headline - Responsive */}
         <p 
-          className="font-extrabold relative shrink-0 text-center text-white"
-          style={{
-            fontFamily: "'Outfit', sans-serif",
-            fontWeight: 800,
-            lineHeight: "0.9",
-            fontSize: "80px",
-            letterSpacing: "-1.6px",
-            width: "604px"
-          }} 
+          className="font-['Outfit'] font-extrabold leading-[0.9] relative shrink-0 text-center text-white lg:text-[80px] lg:tracking-[-1.6px] lg:w-[604px] md:text-[60px] md:tracking-[-1.2px] md:w-[500px] sm:text-[40px] sm:tracking-[-0.8px] sm:w-[300px]" 
           data-node-id="2111:1555"
         >
-          Meet Our Sister Company's
+          <span className="lg:block md:block sm:block">Meet Our</span>
+          <span className="lg:block md:block sm:block">Sister Company's</span>
         </p>
 
-        {/* Companies list - Node 2209:8526 */}
-        <div 
-          className="content-stretch flex flex-col gap-[96px] items-start relative shrink-0"
-          data-node-id="2209:8526" 
-          data-name="List"
-        >
-          {/* Company 1: Belayab Foods - Node 2209:8451 */}
-          <div 
-            className="relative shrink-0"
-            style={{ height: "264px", width: "1518px" }} 
-            data-node-id="2209:8451" 
-            data-name="Component 25"
-          >
+        {/* Companies list - Responsive */}
+        <div className="content-stretch flex flex-col gap-[96px] items-start relative shrink-0 w-full lg:gap-[96px] md:gap-[72px] sm:gap-[48px]" data-node-id="2209:8526" data-name="List">
+          
+          {sisterCompanies.map((company, index) => (
             <div 
-              className="absolute border border-solid inset-0 pointer-events-none"
-              style={{ 
-                borderColor: "#23b349",
-                borderRadius: "48px"
-              }} 
-              data-node-id="I2209:8451;2209:8441;2209:8436" 
-            />
-            
-            {/* Number 01 */}
-            <div 
-              className="absolute"
-              style={{ inset: "40.91% 92.69% 40.91% 3.69%" }} 
-              data-node-id="I2209:8451;2209:8445" 
-              data-name="20250821"
+              key={company.id}
+              className="relative shrink-0 w-full lg:h-[264px] lg:w-[1518px] md:h-[200px] md:w-[100%] sm:h-[160px] sm:w-[100%]" 
+              data-node-id={`2209:${8451 + index * 35}`} 
+              data-name={`Component ${25 + index}`}
             >
-              <p 
-                className="absolute inset-0 leading-none not-italic text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Funnel Display', sans-serif",
-                  fontWeight: 300,
-                  fontSize: "48px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-0.48px"
-                }} 
-                data-node-id="I2209:8451;2209:8445;2206:8282"
-              >
-                01
-              </p>
-            </div>
-            
-            {/* Company name */}
-            <div 
-              className="absolute"
-              style={{ inset: "38.26% 60.8% 38.64% 11.73%" }} 
-              data-node-id="I2209:8451;2209:8443" 
-              data-name="Belay ab foods"
-            >
-              <p 
-                className="absolute inset-0 text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Outfit', sans-serif",
-                  fontWeight: 700,
-                  lineHeight: "0.96",
-                  fontSize: "64px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-1.28px",
-                  fontFeatureSettings: "'liga' 0"
-                }} 
-                data-node-id="I2209:8451;2209:8443;2206:8281"
-              >
-                Belayab foods
-              </p>
-            </div>
-            
-            {/* Arrow icon */}
-            <div 
-              className="absolute flex items-center justify-center"
-              style={{
-                aspectRatio: "58.666656494140625 / 58.66667556762695",
-                left: "90.25%",
-                right: "5.53%",
-                top: "calc(50% + 8px)",
-                transform: "translateY(-50%)",
-                containerType: "size"
-              }}
-            >
-              <div className="flex-none -scale-x-100" style={{ height: "100cqh", width: "100cqw" }}>
-                <div className="relative size-full" data-node-id="I2209:8451;2209:8447" data-name="Vector">
-                  <div className="absolute inset-[-7.81%]">
-                    <img alt="" className="block max-w-none size-full" src={imgVector} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+              {/* Border container - Responsive */}
+              <div 
+                className="absolute border border-[#23b349] border-solid inset-0 rounded-[48px] lg:rounded-[48px] md:rounded-[36px] sm:rounded-[24px]" 
+                data-node-id={`I2209:${8451 + index * 35};2209:8441;2209:8436`} 
+              />
 
-          {/* Company 2: Arada Coffee - Node 2209:8486 */}
-          <div 
-            className="relative shrink-0"
-            style={{ height: "264px", width: "1518px" }} 
-            data-node-id="2209:8486" 
-            data-name="Component 28"
-          >
-            <div 
-              className="absolute border border-solid inset-0 pointer-events-none"
-              style={{ 
-                borderColor: "#23b349",
-                borderRadius: "48px"
-              }} 
-              data-node-id="I2209:8486;2209:8441;2209:8436" 
-            />
-            
-            {/* Number 02 */}
-            <div 
-              className="absolute"
-              style={{ inset: "40.91% 92.69% 40.91% 3.69%" }} 
-              data-node-id="I2209:8486;2209:8445" 
-              data-name="20250821"
-            >
-              <p 
-                className="absolute inset-0 leading-none not-italic text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Funnel Display', sans-serif",
-                  fontWeight: 300,
-                  fontSize: "48px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-0.48px"
-                }} 
-                data-node-id="I2209:8486;2209:8445;2206:8282"
+              {/* Company number - Responsive */}
+              <div 
+                className="absolute lg:inset-[40.91%_92.69%_40.91%_3.69%] md:inset-[35%_90%_35%_5%] sm:inset-[30%_85%_30%_7%]" 
+                data-node-id={`I2209:${8451 + index * 35};2209:8445`} 
+                data-name={company.id}
               >
-                02
-              </p>
-            </div>
-            
-            {/* Company name */}
-            <div 
-              className="absolute"
-              style={{ inset: "38.26% 60.8% 38.64% 11.73%" }} 
-              data-node-id="I2209:8486;2209:8443" 
-              data-name="Belay ab foods"
-            >
-              <p 
-                className="absolute inset-0 text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Outfit', sans-serif",
-                  fontWeight: 700,
-                  lineHeight: "0.96",
-                  fontSize: "64px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-1.28px",
-                  fontFeatureSettings: "'liga' 0"
-                }} 
-                data-node-id="I2209:8486;2209:8443;2206:8281"
-              >
-                Arada Coffee
-              </p>
-            </div>
-            
-            {/* Arrow icon */}
-            <div 
-              className="absolute flex items-center justify-center"
-              style={{
-                aspectRatio: "58.666656494140625 / 58.66667556762695",
-                left: "90.25%",
-                right: "5.53%",
-                top: "calc(50% + 8px)",
-                transform: "translateY(-50%)",
-                containerType: "size"
-              }}
-            >
-              <div className="flex-none -scale-x-100" style={{ height: "100cqh", width: "100cqw" }}>
-                <div className="relative size-full" data-node-id="I2209:8486;2209:8447" data-name="Vector">
-                  <div className="absolute inset-[-7.81%]">
-                    <img alt="" className="block max-w-none size-full" src={imgVector} />
-                  </div>
-                </div>
+                <p 
+                  className="font-['Funnel_Display'] font-light leading-none not-italic text-[#e8e8e8] whitespace-nowrap lg:text-[48px] lg:tracking-[-0.48px] md:text-[36px] md:tracking-[-0.36px] sm:text-[24px] sm:tracking-[-0.24px]" 
+                  data-node-id={`I2209:${8451 + index * 35};2209:8445;2206:8282`}
+                >
+                  {company.id}
+                </p>
               </div>
-            </div>
-          </div>
 
-          {/* Company 3: Long Tea - Node 2209:8494 */}
-          <div 
-            className="relative shrink-0"
-            style={{ height: "264px", width: "1518px" }} 
-            data-node-id="2209:8494" 
-            data-name="Component 29"
-          >
-            <div 
-              className="absolute border border-solid inset-0 pointer-events-none"
-              style={{ 
-                borderColor: "#23b349",
-                borderRadius: "48px"
-              }} 
-              data-node-id="I2209:8494;2209:8441;2209:8436" 
-            />
-            
-            {/* Number 03 */}
-            <div 
-              className="absolute"
-              style={{ inset: "40.91% 92.69% 40.91% 3.69%" }} 
-              data-node-id="I2209:8494;2209:8445" 
-              data-name="20250821"
-            >
-              <p 
-                className="absolute inset-0 leading-none not-italic text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Funnel Display', sans-serif",
-                  fontWeight: 300,
-                  fontSize: "48px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-0.48px"
-                }} 
-                data-node-id="I2209:8494;2209:8445;2206:8282"
+              {/* Company name - Responsive */}
+              <div 
+                className="absolute lg:inset-[38.26%_60.8%_38.64%_11.73%] md:inset-[25%_20%_25%_15%] sm:inset-[20%_15%_20%_20%]" 
+                data-node-id={`I2209:${8451 + index * 35};2209:8443`} 
+                data-name={company.name}
               >
-                03
-              </p>
-            </div>
-            
-            {/* Company name */}
-            <div 
-              className="absolute"
-              style={{ inset: "38.26% 60.8% 38.64% 11.73%" }} 
-              data-node-id="I2209:8494;2209:8443" 
-              data-name="Belay ab foods"
-            >
-              <p 
-                className="absolute inset-0 text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Outfit', sans-serif",
-                  fontWeight: 700,
-                  lineHeight: "0.96",
-                  fontSize: "64px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-1.28px",
-                  fontFeatureSettings: "'liga' 0"
-                }} 
-                data-node-id="I2209:8494;2209:8443;2206:8281"
-              >
-                long tea
-              </p>
-            </div>
-            
-            {/* Arrow icon */}
-            <div 
-              className="absolute flex items-center justify-center"
-              style={{
-                aspectRatio: "58.666656494140625 / 58.66667556762695",
-                left: "90.25%",
-                right: "5.53%",
-                top: "calc(50% + 8px)",
-                transform: "translateY(-50%)",
-                containerType: "size"
-              }}
-            >
-              <div className="flex-none -scale-x-100" style={{ height: "100cqh", width: "100cqw" }}>
-                <div className="relative size-full" data-node-id="I2209:8494;2209:8447" data-name="Vector">
-                  <div className="absolute inset-[-7.81%]">
-                    <img alt="" className="block max-w-none size-full" src={imgVector} />
-                  </div>
-                </div>
+                <p 
+                  className="font-['Outfit'] font-bold leading-[0.96] text-[#e8e8e8] whitespace-nowrap lg:text-[64px] lg:tracking-[-1.28px] md:text-[48px] md:tracking-[-0.96px] sm:text-[32px] sm:tracking-[-0.64px]" 
+                  style={{ fontFeatureSettings: "'liga' 0" }}
+                  data-node-id={`I2209:${8451 + index * 35};2209:8443;2206:8281`}
+                >
+                  {company.name}
+                </p>
               </div>
-            </div>
-          </div>
 
-          {/* Company 4: Belayab Motors - Node 2209:8502 */}
-          <div 
-            className="relative shrink-0"
-            style={{ height: "264px", width: "1518px" }} 
-            data-node-id="2209:8502" 
-            data-name="Component 30"
-          >
-            <div 
-              className="absolute border border-solid inset-0 pointer-events-none"
-              style={{ 
-                borderColor: "#23b349",
-                borderRadius: "48px"
-              }} 
-              data-node-id="I2209:8502;2209:8441;2209:8436" 
-            />
-            
-            {/* Number 04 */}
-            <div 
-              className="absolute"
-              style={{ inset: "40.91% 92.69% 40.91% 3.69%" }} 
-              data-node-id="I2209:8502;2209:8445" 
-              data-name="20250821"
-            >
-              <p 
-                className="absolute inset-0 leading-none not-italic text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Funnel Display', sans-serif",
-                  fontWeight: 300,
-                  fontSize: "48px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-0.48px"
-                }} 
-                data-node-id="I2209:8502;2209:8445;2206:8282"
+              {/* Arrow icon - Responsive */}
+              <div 
+                className="-translate-y-1/2 absolute flex items-center justify-center lg:left-[90.25%] lg:right-[5.53%] lg:top-[calc(50%+8px)] md:left-[85%] md:right-[10%] md:top-[calc(50%+6px)] sm:left-[80%] sm:right-[15%] sm:top-[calc(50%+4px)]" 
+                style={{ 
+                  containerType: "size",
+                  aspectRatio: "58.666656494140625 / 58.66667556762695"
+                }}
               >
-                04
-              </p>
-            </div>
-            
-            {/* Company name */}
-            <div 
-              className="absolute"
-              style={{ inset: "38.26% 60.8% 38.64% 11.73%" }} 
-              data-node-id="I2209:8502;2209:8443" 
-              data-name="Belay ab foods"
-            >
-              <p 
-                className="absolute inset-0 text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Outfit', sans-serif",
-                  fontWeight: 700,
-                  lineHeight: "0.96",
-                  fontSize: "64px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-1.28px",
-                  fontFeatureSettings: "'liga' 0"
-                }} 
-                data-node-id="I2209:8502;2209:8443;2206:8281"
-              >
-                Belayab Motors
-              </p>
-            </div>
-            
-            {/* Arrow icon */}
-            <div 
-              className="absolute flex items-center justify-center"
-              style={{
-                aspectRatio: "58.666656494140625 / 58.66667556762695",
-                left: "90.25%",
-                right: "5.53%",
-                top: "calc(50% + 8px)",
-                transform: "translateY(-50%)",
-                containerType: "size"
-              }}
-            >
-              <div className="flex-none -scale-x-100" style={{ height: "100cqh", width: "100cqw" }}>
-                <div className="relative size-full" data-node-id="I2209:8502;2209:8447" data-name="Vector">
-                  <div className="absolute inset-[-7.81%]">
-                    <img alt="" className="block max-w-none size-full" src={imgVector} />
+                <div className="-scale-x-100 flex-none h-[100cqh] w-[100cqw]">
+                  <div 
+                    className="relative size-full" 
+                    data-node-id={`I2209:${8451 + index * 35};2209:8447`} 
+                    data-name="Vector"
+                  >
+                    <div className="absolute inset-[-7.81%]">
+                      <img 
+                        alt="" 
+                        className="block max-w-none size-full" 
+                        src={imgVector} 
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          ))}
 
-          {/* Company 5: Belayab Geepas - Node 2209:8550 */}
-          <div 
-            className="relative shrink-0"
-            style={{ height: "264px", width: "1518px" }} 
-            data-node-id="2209:8550" 
-            data-name="Component 34"
-          >
-            <div 
-              className="absolute border border-solid inset-0 pointer-events-none"
-              style={{ 
-                borderColor: "#23b349",
-                borderRadius: "48px"
-              }} 
-              data-node-id="I2209:8550;2209:8441;2209:8436" 
-            />
-            
-            {/* Number 05 */}
-            <div 
-              className="absolute"
-              style={{ inset: "40.91% 92.69% 40.91% 3.69%" }} 
-              data-node-id="I2209:8550;2209:8445" 
-              data-name="20250821"
-            >
-              <p 
-                className="absolute inset-0 leading-none not-italic text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Funnel Display', sans-serif",
-                  fontWeight: 300,
-                  fontSize: "48px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-0.48px"
-                }} 
-                data-node-id="I2209:8550;2209:8445;2206:8282"
-              >
-                05
-              </p>
-            </div>
-            
-            {/* Company name */}
-            <div 
-              className="absolute"
-              style={{ inset: "38.26% 60.8% 38.64% 11.73%" }} 
-              data-node-id="I2209:8550;2209:8443" 
-              data-name="Belay ab foods"
-            >
-              <p 
-                className="absolute inset-0 text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Outfit', sans-serif",
-                  fontWeight: 700,
-                  lineHeight: "0.96",
-                  fontSize: "64px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-1.28px",
-                  fontFeatureSettings: "'liga' 0"
-                }} 
-                data-node-id="I2209:8550;2209:8443;2206:8281"
-              >
-                {`Belayab Geepas `}
-              </p>
-            </div>
-            
-            {/* Arrow icon */}
-            <div 
-              className="absolute flex items-center justify-center"
-              style={{
-                aspectRatio: "58.666656494140625 / 58.66667556762695",
-                left: "90.25%",
-                right: "5.53%",
-                top: "calc(50% + 8px)",
-                transform: "translateY(-50%)",
-                containerType: "size"
-              }}
-            >
-              <div className="flex-none -scale-x-100" style={{ height: "100cqh", width: "100cqw" }}>
-                <div className="relative size-full" data-node-id="I2209:8550;2209:8447" data-name="Vector">
-                  <div className="absolute inset-[-7.81%]">
-                    <img alt="" className="block max-w-none size-full" src={imgVector} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Company 6: Belayab Cabel - Node 2209:8542 */}
-          <div 
-            className="relative shrink-0"
-            style={{ height: "264px", width: "1518px" }} 
-            data-node-id="2209:8542" 
-            data-name="Component 33"
-          >
-            <div 
-              className="absolute border border-solid inset-0 pointer-events-none"
-              style={{ 
-                borderColor: "#23b349",
-                borderRadius: "48px"
-              }} 
-              data-node-id="I2209:8542;2209:8441;2209:8436" 
-            />
-            
-            {/* Number 09 */}
-            <div 
-              className="absolute"
-              style={{ inset: "40.91% 92.69% 40.91% 3.69%" }} 
-              data-node-id="I2209:8542;2209:8445" 
-              data-name="20250821"
-            >
-              <p 
-                className="absolute inset-0 leading-none not-italic text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Funnel Display', sans-serif",
-                  fontWeight: 300,
-                  fontSize: "48px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-0.48px"
-                }} 
-                data-node-id="I2209:8542;2209:8445;2206:8282"
-              >
-                09
-              </p>
-            </div>
-            
-            {/* Company name */}
-            <div 
-              className="absolute"
-              style={{ inset: "38.26% 60.8% 38.64% 11.73%" }} 
-              data-node-id="I2209:8542;2209:8443" 
-              data-name="Belay ab foods"
-            >
-              <p 
-                className="absolute inset-0 text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Outfit', sans-serif",
-                  fontWeight: 700,
-                  lineHeight: "0.96",
-                  fontSize: "64px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-1.28px",
-                  fontFeatureSettings: "'liga' 0"
-                }} 
-                data-node-id="I2209:8542;2209:8443;2206:8281"
-              >
-                Belayab Cabel
-              </p>
-            </div>
-            
-            {/* Arrow icon */}
-            <div 
-              className="absolute flex items-center justify-center"
-              style={{
-                aspectRatio: "58.666656494140625 / 58.66667556762695",
-                left: "90.25%",
-                right: "5.53%",
-                top: "calc(50% + 8px)",
-                transform: "translateY(-50%)",
-                containerType: "size"
-              }}
-            >
-              <div className="flex-none -scale-x-100" style={{ height: "100cqh", width: "100cqw" }}>
-                <div className="relative size-full" data-node-id="I2209:8542;2209:8447" data-name="Vector">
-                  <div className="absolute inset-[-7.81%]">
-                    <img alt="" className="block max-w-none size-full" src={imgVector} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Company 7: Lionstone Distribution - Node 2209:8559 */}
-          <div 
-            className="relative shrink-0"
-            style={{ height: "264px", width: "1518px" }} 
-            data-node-id="2209:8559" 
-            data-name="Component 35"
-          >
-            <div 
-              className="absolute border border-solid inset-0 pointer-events-none"
-              style={{ 
-                borderColor: "#23b349",
-                borderRadius: "48px"
-              }} 
-              data-node-id="I2209:8559;2209:8441;2209:8436" 
-            />
-            
-            {/* Number 10 */}
-            <div 
-              className="absolute"
-              style={{ inset: "40.91% 92.69% 40.91% 3.69%" }} 
-              data-node-id="I2209:8559;2209:8445" 
-              data-name="20250821"
-            >
-              <p 
-                className="absolute inset-0 leading-none not-italic text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Funnel Display', sans-serif",
-                  fontWeight: 300,
-                  fontSize: "48px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-0.48px"
-                }} 
-                data-node-id="I2209:8559;2209:8445;2206:8282"
-              >
-                10
-              </p>
-            </div>
-            
-            {/* Company name */}
-            <div 
-              className="absolute"
-              style={{ inset: "38.26% 60.8% 38.64% 11.73%" }} 
-              data-node-id="I2209:8559;2209:8443" 
-              data-name="Belay ab foods"
-            >
-              <p 
-                className="absolute inset-0 text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Outfit', sans-serif",
-                  fontWeight: 700,
-                  lineHeight: "0.96",
-                  fontSize: "64px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-1.28px",
-                  fontFeatureSettings: "'liga' 0"
-                }} 
-                data-node-id="I2209:8559;2209:8443;2206:8281"
-              >
-                Lionstone Distribution
-              </p>
-            </div>
-            
-            {/* Arrow icon */}
-            <div 
-              className="absolute flex items-center justify-center"
-              style={{
-                aspectRatio: "58.666656494140625 / 58.66667556762695",
-                left: "90.25%",
-                right: "5.53%",
-                top: "calc(50% + 8px)",
-                transform: "translateY(-50%)",
-                containerType: "size"
-              }}
-            >
-              <div className="flex-none -scale-x-100" style={{ height: "100cqh", width: "100cqw" }}>
-                <div className="relative size-full" data-node-id="I2209:8559;2209:8447" data-name="Vector">
-                  <div className="absolute inset-[-7.81%]">
-                    <img alt="" className="block max-w-none size-full" src={imgVector} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Company 8: HUAJIA international trade - Node 2212:8568 */}
-          <div 
-            className="relative shrink-0"
-            style={{ height: "264px", width: "1518px" }} 
-            data-node-id="2212:8568" 
-            data-name="Component 36"
-          >
-            <div 
-              className="absolute border border-solid inset-0 pointer-events-none"
-              style={{ 
-                borderColor: "#23b349",
-                borderRadius: "48px"
-              }} 
-              data-node-id="I2212:8568;2209:8441;2209:8436" 
-            />
-            
-            {/* Number 11 */}
-            <div 
-              className="absolute"
-              style={{ inset: "40.91% 92.69% 40.91% 3.69%" }} 
-              data-node-id="I2212:8568;2209:8445" 
-              data-name="20250821"
-            >
-              <p 
-                className="absolute inset-0 leading-none not-italic text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Funnel Display', sans-serif",
-                  fontWeight: 300,
-                  fontSize: "48px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-0.48px"
-                }} 
-                data-node-id="I2212:8568;2209:8445;2206:8282"
-              >
-                11
-              </p>
-            </div>
-            
-            {/* Company name */}
-            <div 
-              className="absolute"
-              style={{ inset: "38.26% 60.8% 38.64% 11.73%" }} 
-              data-node-id="I2212:8568;2209:8443" 
-              data-name="Belay ab foods"
-            >
-              <p 
-                className="absolute inset-0 text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Outfit', sans-serif",
-                  fontWeight: 700,
-                  lineHeight: "0.96",
-                  fontSize: "64px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-1.28px",
-                  fontFeatureSettings: "'liga' 0"
-                }} 
-                data-node-id="I2212:8568;2209:8443;2206:8281"
-              >
-                HUAJIA international trade
-              </p>
-            </div>
-            
-            {/* Arrow icon */}
-            <div 
-              className="absolute flex items-center justify-center"
-              style={{
-                aspectRatio: "58.666656494140625 / 58.66667556762695",
-                left: "90.25%",
-                right: "5.53%",
-                top: "calc(50% + 8px)",
-                transform: "translateY(-50%)",
-                containerType: "size"
-              }}
-            >
-              <div className="flex-none -scale-x-100" style={{ height: "100cqh", width: "100cqw" }}>
-                <div className="relative size-full" data-node-id="I2212:8568;2209:8447" data-name="Vector">
-                  <div className="absolute inset-[-7.81%]">
-                    <img alt="" className="block max-w-none size-full" src={imgVector} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Company 9: Lewis Retails - Node 2212:8576 */}
-          <div 
-            className="relative shrink-0"
-            style={{ height: "264px", width: "1518px" }} 
-            data-node-id="2212:8576" 
-            data-name="Component 37"
-          >
-            <div 
-              className="absolute border border-solid inset-0 pointer-events-none"
-              style={{ 
-                borderColor: "#23b349",
-                borderRadius: "48px"
-              }} 
-              data-node-id="I2212:8576;2209:8441;2209:8436" 
-            />
-            
-            {/* Number 12 */}
-            <div 
-              className="absolute"
-              style={{ inset: "40.91% 92.69% 40.91% 3.69%" }} 
-              data-node-id="I2212:8576;2209:8445" 
-              data-name="20250821"
-            >
-              <p 
-                className="absolute inset-0 leading-none not-italic text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Funnel Display', sans-serif",
-                  fontWeight: 300,
-                  fontSize: "48px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-0.48px"
-                }} 
-                data-node-id="I2212:8576;2209:8445;2206:8282"
-              >
-                12
-              </p>
-            </div>
-            
-            {/* Company name */}
-            <div 
-              className="absolute"
-              style={{ inset: "38.26% 60.8% 38.64% 11.73%" }} 
-              data-node-id="I2212:8576;2209:8443" 
-              data-name="Belay ab foods"
-            >
-              <p 
-                className="absolute inset-0 text-center whitespace-nowrap"
-                style={{
-                  fontFamily: "'Outfit', sans-serif",
-                  fontWeight: 700,
-                  lineHeight: "0.96",
-                  fontSize: "64px",
-                  color: "#e8e8e8",
-                  letterSpacing: "-1.28px",
-                  fontFeatureSettings: "'liga' 0"
-                }} 
-                data-node-id="I2212:8576;2209:8443;2206:8281"
-              >
-                Lewis Retails
-              </p>
-            </div>
-            
-            {/* Arrow icon */}
-            <div 
-              className="absolute flex items-center justify-center"
-              style={{
-                aspectRatio: "58.666656494140625 / 58.66667556762695",
-                left: "90.25%",
-                right: "5.53%",
-                top: "calc(50% + 8px)",
-                transform: "translateY(-50%)",
-                containerType: "size"
-              }}
-            >
-              <div className="flex-none -scale-x-100" style={{ height: "100cqh", width: "100cqw" }}>
-                <div className="relative size-full" data-node-id="I2212:8576;2209:8447" data-name="Vector">
-                  <div className="absolute inset-[-7.81%]">
-                    <img alt="" className="block max-w-none size-full" src={imgVector} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
