@@ -60,10 +60,9 @@ export default function SustainabilityProcessSection() {
   return (
     <section
       ref={sectionRef}
-      className="px-4 sm:px-6 lg:px-[128px]"
-      style={{ background: "#FFFFFF", paddingTop: 80, paddingBottom: 80 }}
+      style={{ background: "#FFFFFF", paddingTop: "80px", paddingBottom: "80px" }}
     >
-      <div className="mx-auto" style={{ maxWidth: 1656 }}>
+      <div style={{ paddingLeft: "128px", paddingRight: "128px" }}>
         {/* Process text — Figma node 2080:3766 */}
         <div className="mb-12" style={{ maxWidth: 871 }}>
           {/* "From farm to table..." — Funnel Display Medium 24px, lh 24px, ls -0.096px, #333733 */}
@@ -86,8 +85,8 @@ export default function SustainabilityProcessSection() {
             style={{
               fontFamily: "'Outfit', sans-serif",
               fontWeight: 800,
-              fontSize: "clamp(40px, 6vw, 80px)",
-              lineHeight: "72px",
+              fontSize: "80px",
+              lineHeight: "0.9",
               letterSpacing: "-1.6px",
               color: "#23B349",
             }}
@@ -127,22 +126,18 @@ export default function SustainabilityProcessSection() {
                 {step.heading}
               </h3>
 
-              {/* Image placeholder */}
+              {/* Process images from Figma */}
               <div
                 className="rounded-[24px] overflow-hidden mb-6"
                 style={{
-                  minHeight: step.imageHeight * 0.6,
-                  background:
-                    "linear-gradient(135deg, #E9F7ED 0%, #F5F5F5 100%)",
+                  height: `${step.imageHeight * 0.6}px`,
                 }}
               >
-                <div className="w-full h-full flex items-center justify-center p-6">
-                  <div className="w-full aspect-[3/4] rounded-[16px] bg-white/60 flex items-center justify-center">
-                    <span className="text-[#23B349] text-4xl font-bold opacity-30">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                </div>
+                <img
+                  src={`/assets/images/sustainability/process-${step.key}.jpg`}
+                  alt={step.heading}
+                  className="w-full h-full object-cover"
+                />
               </div>
 
               {/* Description — Funnel Display Medium 20px, lh 25px, ls -0.08px */}

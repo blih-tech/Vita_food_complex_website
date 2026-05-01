@@ -2,114 +2,444 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "@frontend/navigation";
-import Image from "next/image";
 
-// Figma assets for Belayab products
-const imgBelayabFoods = "https://www.figma.com/api/mcp/asset/b2b5777b-2996-4707-999c-89e635b9145c";
-const imgBelayabCoffee = "https://www.figma.com/api/mcp/asset/d5225015-1421-432f-a6ae-0904447fb6a7";
-const imgBelayabJuice = "https://www.figma.com/api/mcp/asset/ee5c6aa7-5173-4180-ba8b-fa3ebce96f96";
-const imgBelayabWater = "https://www.figma.com/api/mcp/asset/b2b5777b-2996-4707-999c-89e635b9145c";
+// Figma assets - pixel-perfect local copies from node 486-2897
+const imgACleanModernVectorIllustrationOfAnElegant1 = "/assets/images/why-choose-vita/card-image-1.jpg";
+const imgACleanModernVectorIllustrationOfAnElegant2 = "/assets/images/why-choose-vita/card-image-2.jpg";
+const imgACleanModernVectorIllustrationOfAnElegant3 = "/assets/images/why-choose-vita/card-image-3.jpg";
+const imgLine1 = "/assets/images/why-choose-vita/section-line.png";
 
 export default function WhoWeAreSection() {
-  const t = useTranslations("About");
+  const t = useTranslations("WhyChooseVita");
 
   return (
-    <div className="w-full px-[128px] py-[96px] bg-white lg:px-[128px] md:px-[64px] sm:px-[32px] lg:py-[96px] md:py-[64px] sm:py-[48px]">
-      <div className="max-w-[1664px] mx-auto">
-        {/* Section Header - Exact Figma positioning */}
-        <div className="max-w-[1296px] mx-auto mb-[120px] lg:mb-[120px] md:mb-[80px] sm:mb-[64px]">
-          <div className="text-center mb-[64px] lg:mb-[64px] md:mb-[48px] sm:mb-[32px]">
-            <h2 className="font-['Outfit'] font-bold text-[64px] leading-[0.96] tracking-[-2px] text-[#1a1a1a] mb-[32px] lg:text-[64px] md:text-[48px] sm:text-[36px]">
-              Who—Are We
-            </h2>
-            <p className="font-['Funnel_Display'] font-medium text-[24px] leading-[1] tracking-[-0.4px] text-[#404040] max-w-[800px] mx-auto mb-[64px] lg:text-[24px] md:text-[20px] sm:text-[18px] lg:mb-[64px] md:mb-[48px] sm:mb-[32px]">
-              {t("whoWeAre.description")}
-            </p>
-            <Link
-              href="/about"
-              className="inline-flex items-center gap-[16px] bg-[#23b349] text-white px-[32px] py-[16px] rounded-[999px] font-['Funnel_Display'] font-medium text-[20px] tracking-[-0.4px] hover:bg-[#1a9a3a] transition-colors lg:text-[20px] md:text-[18px] sm:text-[16px] lg:px-[32px] md:px-[24px] sm:px-[20px]"
+    <div className="content-stretch flex flex-col gap-[120px] items-center relative size-full" data-node-id="486:2897" data-name="Who we are section">
+      {/* Who we are text content - Node 364:3320 */}
+      <div className="content-stretch flex flex-col gap-[32px] items-center relative shrink-0" style={{ width: '1296px' }} data-node-id="364:3320" data-name="Who we are text">
+        {/* Section header - Node 364:3321 */}
+        <div className="content-stretch flex items-center justify-center relative shrink-0" data-node-id="364:3321" data-name="Section Header">
+          {/* "Who" text - Node 364:3322 */}
+          <p 
+            className="font-bold not-italic relative shrink-0"
+            style={{
+              fontFamily: "'Bricolage Grotesque', sans-serif",
+              fontWeight: 700,
+              lineHeight: '0',
+              fontSize: '0px',
+              color: '#404040',
+              letterSpacing: '-3px',
+              width: '354px',
+              fontVariationSettings: "'opsz' 14, 'wdth' 100"
+            }} 
+            data-node-id="364:3322"
+          >
+            <span style={{ fontFamily: "'Funnel Display', sans-serif", fontWeight: 700, lineHeight: 'normal', color: '#404040', fontSize: '150px' }}>Who</span>
+            <span style={{ fontFamily: "'Funnel Display', sans-serif", fontWeight: 700, lineHeight: 'normal', fontSize: '150px' }}>{` `}</span>
+          </p>
+
+          {/* Line separator - Node 364:3323 */}
+          <div 
+            className="relative shrink-0" 
+            style={{ height: '0px', width: '123.809px' }} 
+            data-node-id="364:3323"
+          >
+            <div className="absolute inset-[-5px_-4.04%]">
+              <img alt="" className="block max-w-none size-full" src={imgLine1} />
+            </div>
+          </div>
+
+          {/* "Are We" text - Node 364:3324 */}
+          <p 
+            className="not-italic relative shrink-0"
+            style={{
+              fontFamily: "'Funnel Display', sans-serif",
+              fontWeight: 800,
+              lineHeight: '0.9',
+              fontSize: '150px',
+              color: '#23b349',
+              letterSpacing: '-3px',
+              width: '518px'
+            }} 
+            data-node-id="364:3324"
+          >
+            Are We
+          </p>
+        </div>
+
+        {/* Section description - Node 364:3325 */}
+        <div className="content-stretch flex flex-col gap-[78px] items-center relative shrink-0 w-full" data-node-id="364:3325" data-name="Section Description">
+          {/* Description text - Node 364:3326 */}
+          <p 
+            className="font-normal min-w-full relative shrink-0 text-center"
+            style={{
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 400,
+              lineHeight: 'normal',
+              fontSize: '32px',
+              color: 'rgba(16,15,15,0.9)',
+              letterSpacing: '-0.128px',
+              width: 'min-content'
+            }} 
+            data-node-id="364:3326"
+          >
+            Vita Food Complex is a modern FMCG company built to lead the future of everyday food in Ethiopia. We produce strategically designed biscuit and flour products tailored to multiple consumer moments—from children's snacks and youth lifestyle choices to family tea-time and professional bakery needs
+          </p>
+
+          {/* CTA button - Node 364:3327 */}
+          <Link
+            href="/about"
+            className="content-stretch flex gap-[16px] items-center justify-center relative shrink-0 text-white whitespace-nowrap"
+            style={{
+              backgroundColor: '#23b349',
+              height: '56px',
+              paddingLeft: '32px',
+              paddingRight: '32px',
+              paddingTop: '16px',
+              paddingBottom: '16px',
+              borderRadius: '999px'
+            }} 
+            data-node-id="364:3327"
+          >
+            <p 
+              className="not-italic relative shrink-0"
+              style={{
+                fontFamily: "'Funnel Display', sans-serif",
+                fontWeight: 500,
+                lineHeight: 'normal',
+                fontSize: '24px',
+                letterSpacing: '-0.096px',
+                color: '#ffffff'
+              }} 
+              data-node-id="I364:3327;18:1725"
             >
-              {t("whoWeAre.cta")}
-            </Link>
+              More About Vita
+            </p>
+          </Link>
+        </div>
+      </div>
+
+      {/* Who we are cards - Node 364:3329 */}
+      <div 
+        className="relative shrink-0 w-full" 
+        style={{ height: '540px' }} 
+        data-node-id="364:3329" 
+        data-name="who we are card"
+      >
+        {/* Card 1 - Quality You Can Trust - Node 364:3330 */}
+        <div className="absolute contents" style={{ left: '0px', top: '0px' }} data-node-id="364:3330" data-name="Card">
+          {/* Card background - Node 364:3331 */}
+          <div 
+            className="absolute"
+            style={{
+              backdropFilter: 'blur(8.285px)',
+              backgroundColor: '#f3f3f3',
+              height: '540px',
+              left: '0px',
+              borderRadius: '24px',
+              top: '0px',
+              width: '404px'
+            }} 
+            data-node-id="364:3331" 
+            data-name="Card Background" 
+          />
+          
+          {/* Card image - Node 364:3332 */}
+          <div 
+            className="absolute"
+            style={{
+              height: '354px',
+              left: 'calc(50% - 630px)',
+              transform: 'translateX(-50%)',
+              borderRadius: '16px',
+              top: '18px',
+              width: '372px'
+            }} 
+            data-node-id="364:3332" 
+            data-name="a-clean--modern-vector-illustration-of-an-elegant- (1)"
+          >
+            <img
+              alt=""
+              className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[16px] size-full"
+              src={imgACleanModernVectorIllustrationOfAnElegant1}
+            />
+          </div>
+          
+          {/* Card content - Node 364:3333 */}
+          <div 
+            className="absolute content-stretch flex flex-col items-center text-center"
+            style={{
+              lineHeight: '1.443',
+              left: 'calc(50% - 630px)',
+              transform: 'translateX(-50%)',
+              borderRadius: '24px',
+              color: '#272726',
+              top: '393px',
+              width: '358px'
+            }} 
+            data-node-id="364:3333" 
+            data-name="Card Content"
+          >
+            <p 
+              className="not-italic relative shrink-0 w-full"
+              style={{
+                fontFamily: "'Funnel Display', sans-serif",
+                fontWeight: 700,
+                fontSize: "28px"
+              }} 
+              data-node-id="364:3334"
+            >
+              Quality You Can Trust
+            </p>
+            <p 
+              className="font-normal relative shrink-0 w-full"
+              style={{
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 400,
+                fontSize: "22px"
+              }} 
+              data-node-id="364:3335"
+            >
+              Produced with strict standards to ensure consistency, freshness, and satisfaction
+            </p>
           </div>
         </div>
 
-        {/* Belayab Products Grid - Exact Figma layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[32px] max-w-[1200px] mx-auto lg:gap-[32px] md:gap-[24px] sm:gap-[16px]">
-          {/* Belayab Foods - Top Left */}
-          <div className="bg-white rounded-[16px] shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-            <div className="relative h-[300px] overflow-hidden lg:h-[300px] md:h-[250px] sm:h-[200px]">
-              <img
-                alt="Belayab foods"
-                className="w-full h-full object-cover"
-                src={imgBelayabFoods}
-              />
-            </div>
-            <div className="p-6 lg:p-6 md:p-4 sm:p-3">
-              <h3 className="font-['Funnel_Display'] font-bold text-[24px] leading-[1.2] text-[#1a1a1a] mb-3 lg:text-[24px] md:text-[20px] sm:text-[18px]">
-                {t("whoWeAre.products.foods.title")}
-              </h3>
-              <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[13px]">
-                {t("whoWeAre.products.foods.description")}
-              </p>
-            </div>
+        {/* Card 2 - Reliable Supply - Node 364:3336 */}
+        <div className="absolute contents" style={{ left: '420px', top: '60px' }} data-node-id="364:3336" data-name="Card">
+          {/* Card background - Node 364:3337 */}
+          <div 
+            className="absolute"
+            style={{
+              backdropFilter: 'blur(8.285px)',
+              backgroundColor: '#f3f3f3',
+              height: '547px',
+              left: '420px',
+              borderRadius: '24px',
+              top: '60px',
+              width: '404px'
+            }} 
+            data-node-id="364:3337" 
+            data-name="Card Background" 
+          />
+          
+          {/* Card image - Node 364:3338 */}
+          <div 
+            className="absolute"
+            style={{
+              height: '354px',
+              left: 'calc(50% - 210px)',
+              transform: 'translateX(-50%)',
+              borderRadius: '16px',
+              top: '78px',
+              width: '372px'
+            }} 
+            data-node-id="364:3338" 
+            data-name="a-clean--modern-vector-illustration-of-an-elegant- (1)"
+          >
+            <img
+              alt=""
+              className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[16px] size-full"
+              src={imgACleanModernVectorIllustrationOfAnElegant2}
+            />
           </div>
-
-          {/* Belayab Coffee - Top Right */}
-          <div className="bg-white rounded-[16px] shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-            <div className="relative h-[300px] overflow-hidden lg:h-[300px] md:h-[250px] sm:h-[200px]">
-              <img
-                alt="Belayab coffee"
-                className="w-full h-full object-cover"
-                src={imgBelayabCoffee}
-              />
-            </div>
-            <div className="p-6 lg:p-6 md:p-4 sm:p-3">
-              <h3 className="font-['Funnel_Display'] font-bold text-[24px] leading-[1.2] text-[#1a1a1a] mb-3 lg:text-[24px] md:text-[20px] sm:text-[18px]">
-                {t("whoWeAre.products.coffee.title")}
-              </h3>
-              <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[13px]">
-                {t("whoWeAre.products.coffee.description")}
-              </p>
-            </div>
+          
+          {/* Card content - Node 364:3339 */}
+          <div 
+            className="absolute content-stretch flex flex-col items-center text-center"
+            style={{
+              lineHeight: '1.443',
+              left: 'calc(50% - 210px)',
+              transform: 'translateX(-50%)',
+              borderRadius: '24px',
+              color: '#272726',
+              top: '453px',
+              width: '358px'
+            }} 
+            data-node-id="364:3339" 
+            data-name="Card Content"
+          >
+            <p 
+              className="not-italic relative shrink-0 w-full"
+              style={{
+                fontFamily: "'Funnel Display', sans-serif",
+                fontWeight: 700,
+                fontSize: "28px"
+              }} 
+              data-node-id="364:3340"
+            >
+              Reliable Supply
+            </p>
+            <p 
+              className="font-normal relative shrink-0 w-full"
+              style={{
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 400,
+                fontSize: "22px"
+              }} 
+              data-node-id="364:3341"
+            >
+              Strong manufacturing and distribution systems that keep products available
+            </p>
           </div>
+        </div>
 
-          {/* Belayab Juice - Bottom Left */}
-          <div className="bg-white rounded-[16px] shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-            <div className="relative h-[300px] overflow-hidden lg:h-[300px] md:h-[250px] sm:h-[200px]">
-              <img
-                alt="Belayab juice"
-                className="w-full h-full object-cover"
-                src={imgBelayabJuice}
-              />
-            </div>
-            <div className="p-6 lg:p-6 md:p-4 sm:p-3">
-              <h3 className="font-['Funnel_Display'] font-bold text-[24px] leading-[1.2] text-[#1a1a1a] mb-3 lg:text-[24px] md:text-[20px] sm:text-[18px]">
-                {t("whoWeAre.products.juice.title")}
-              </h3>
-              <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[13px]">
-                {t("whoWeAre.products.juice.description")}
-              </p>
-            </div>
+        {/* Card 3 - Innovation Driven - Node 364:3342 */}
+        <div className="absolute contents" style={{ left: '840px', top: '0px' }} data-node-id="364:3342" data-name="Card">
+          {/* Card background - Node 364:3343 */}
+          <div 
+            className="absolute"
+            style={{
+              backdropFilter: 'blur(8.285px)',
+              backgroundColor: '#f3f3f3',
+              height: '540px',
+              left: '840px',
+              borderRadius: '24px',
+              top: '0px',
+              width: '404px'
+            }} 
+            data-node-id="364:3343" 
+            data-name="Card Background" 
+          />
+          
+          {/* Card image - Node 364:3344 */}
+          <div 
+            className="absolute"
+            style={{
+              height: '354px',
+              left: 'calc(50% + 210px)',
+              transform: 'translateX(-50%)',
+              borderRadius: '16px',
+              top: '18px',
+              width: '372px'
+            }} 
+            data-node-id="364:3344" 
+            data-name="a-clean--modern-vector-illustration-of-an-elegant- (1)"
+          >
+            <img
+              alt=""
+              className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[16px] size-full"
+              src={imgACleanModernVectorIllustrationOfAnElegant3}
+            />
           </div>
+          
+          {/* Card content - Node 364:3345 */}
+          <div 
+            className="absolute content-stretch flex flex-col items-center text-center"
+            style={{
+              lineHeight: '1.443',
+              left: 'calc(50% + 210px)',
+              transform: 'translateX(-50%)',
+              borderRadius: '24px',
+              color: '#272726',
+              top: '393px',
+              width: '358px'
+            }} 
+            data-node-id="364:3345" 
+            data-name="Card Content"
+          >
+            <p 
+              className="not-italic relative shrink-0 w-full"
+              style={{
+                fontFamily: "'Funnel Display', sans-serif",
+                fontWeight: 700,
+                fontSize: "28px"
+              }} 
+              data-node-id="364:3346"
+            >
+              Innovation Driven
+            </p>
+            <p 
+              className="font-normal relative shrink-0 w-full"
+              style={{
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 400,
+                fontSize: "22px"
+              }} 
+              data-node-id="364:3347"
+            >
+              Modern packaging, new product ideas, and evolving solutions for future markets
+            </p>
+          </div>
+        </div>
 
-          {/* Belayab Water - Bottom Right */}
-          <div className="bg-white rounded-[16px] shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-            <div className="relative h-[300px] overflow-hidden lg:h-[300px] md:h-[250px] sm:h-[200px]">
-              <img
-                alt="Belayab water"
-                className="w-full h-full object-cover"
-                src={imgBelayabWater}
-              />
-            </div>
-            <div className="p-6 lg:p-6 md:p-4 sm:p-3">
-              <h3 className="font-['Funnel_Display'] font-bold text-[24px] leading-[1.2] text-[#1a1a1a] mb-3 lg:text-[24px] md:text-[20px] sm:text-[18px]">
-                {t("whoWeAre.products.water.title")}
-              </h3>
-              <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[13px]">
-                {t("whoWeAre.products.water.description")}
-              </p>
-            </div>
+        {/* Card 4 - Community Impact - Node 364:3348 */}
+        <div className="absolute contents" style={{ left: '1260px', top: '60px' }} data-node-id="364:3348" data-name="Card">
+          {/* Card background - Node 364:3349 */}
+          <div 
+            className="absolute"
+            style={{
+              backdropFilter: 'blur(8.285px)',
+              backgroundColor: '#f3f3f3',
+              height: '547px',
+              left: '1260px',
+              borderRadius: '24px',
+              top: '60px',
+              width: '404px'
+            }} 
+            data-node-id="364:3349" 
+            data-name="Card Background" 
+          />
+          
+          {/* Card image - Node 364:3350 */}
+          <div 
+            className="absolute"
+            style={{
+              height: '354px',
+              left: 'calc(50% + 630px)',
+              transform: 'translateX(-50%)',
+              borderRadius: '16px',
+              top: '78px',
+              width: '372px'
+            }} 
+            data-node-id="364:3350" 
+            data-name="a-clean--modern-vector-illustration-of-an-elegant- (1)"
+          >
+            <img
+              alt=""
+              className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[16px] size-full"
+              src={imgACleanModernVectorIllustrationOfAnElegant3}
+            />
+          </div>
+          
+          {/* Card content - Node 364:3351 */}
+          <div 
+            className="absolute content-stretch flex flex-col items-center text-center"
+            style={{
+              lineHeight: '1.443',
+              left: 'calc(50% + 630px)',
+              transform: 'translateX(-50%)',
+              borderRadius: '24px',
+              color: '#272726',
+              top: '453px',
+              width: '358px'
+            }} 
+            data-node-id="364:3351" 
+            data-name="Card Content"
+          >
+            <p 
+              className="min-w-full not-italic relative shrink-0"
+              style={{
+                fontFamily: "'Funnel Display', sans-serif",
+                fontWeight: 700,
+                fontSize: "28px",
+                width: "min-content"
+              }} 
+              data-node-id="364:3352"
+            >
+              Community Impact
+            </p>
+            <p 
+              className="font-normal relative shrink-0"
+              style={{
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 400,
+                fontSize: "22px",
+                width: "334px"
+              }} 
+              data-node-id="364:3353"
+            >
+              Creating jobs, supporting farmers, and contributing to national growth
+            </p>
           </div>
         </div>
       </div>

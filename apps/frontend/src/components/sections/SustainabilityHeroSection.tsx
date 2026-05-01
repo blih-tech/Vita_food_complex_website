@@ -7,53 +7,45 @@ export default function SustainabilityHeroSection() {
 
   return (
     <section
-      className="relative w-full overflow-hidden px-4 sm:px-6 lg:px-[128px]"
+      className="relative w-full overflow-hidden"
       style={{
-        background:
-          "linear-gradient(135deg, #0F4B1F 0%, #23B349 50%, #0F4B1F 100%)",
         minHeight: 815,
-        paddingTop: 152,
+        borderRadius: "0 0 48px 48px",
       }}
     >
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div
-          className="absolute rounded-full"
-          style={{
-            width: 600,
-            height: 600,
-            top: -200,
-            right: -100,
-            background: "rgba(255,255,255,0.05)",
-          }}
-        />
-        <div
-          className="absolute rounded-full"
-          style={{
-            width: 400,
-            height: 400,
-            bottom: -100,
-            left: -50,
-            background: "rgba(255,255,255,0.03)",
-          }}
+      {/* Hero background image from Figma */}
+      <div className="absolute inset-0">
+        <img
+          src="/assets/images/sustainability/hero-bg.jpg"
+          alt=""
+          className="w-full h-full object-cover"
+          style={{ borderRadius: "0 0 48px 48px" }}
         />
       </div>
 
       {/* Hero text — Figma node 274:5183 */}
       <div
-        className="relative z-10 mx-auto pt-20 pb-24"
-        style={{ maxWidth: 961 }}
+        className="relative z-10 flex flex-col items-center text-white text-center"
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: "calc(50% + 47px)",
+          transform: "translateX(-50%)",
+          width: "961px",
+          gap: "16px"
+        }}
       >
         {/* "Sourced with Care, Shared with Purpose" — Outfit ExtraBold 80px, lh 72px, ls -1.6px, #FFFFFF */}
         <h1
-          className="mb-6"
           style={{
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 800,
-            fontSize: "clamp(48px, 6vw, 80px)",
-            lineHeight: "72px",
+            fontSize: "80px",
+            lineHeight: "0.9",
             letterSpacing: "-1.6px",
             color: "#FFFFFF",
+            whiteSpace: "pre-wrap",
+            minWidth: "100%"
           }}
         >
           {t("hero.headline")}
@@ -64,11 +56,12 @@ export default function SustainabilityHeroSection() {
           style={{
             fontFamily: "'Funnel Display', sans-serif",
             fontWeight: 500,
-            fontSize: "clamp(18px, 2.5vw, 24px)",
+            fontSize: "24px",
             lineHeight: "24px",
             letterSpacing: "-0.096px",
             color: "#FFFFFF",
-            maxWidth: 663,
+            width: "662.922px",
+            height: "79px"
           }}
         >
           {t("hero.subtitle")}

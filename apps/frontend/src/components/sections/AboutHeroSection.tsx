@@ -20,14 +20,13 @@ export default function AboutHeroSection() {
       className="relative w-full overflow-hidden"
       style={{ background: "#E9F7ED" }}
     >
-      {/* Background Frame with parallax — Figma node 2376:9999 */}
+      {/* Blurred green background with parallax */}
       <div className="absolute inset-0 z-0">
         <div
           className="absolute left-1/2 top-[-10%] h-[120%] w-[120%]"
           style={{
             transform: `translateX(-50%) translateY(${scrollY * 0.15}px)`,
-            opacity: 0.6,
-            filter: "blur(10px)",
+            filter: "blur(30px)",
           }}
         >
           <div className="relative w-full h-full">
@@ -40,9 +39,14 @@ export default function AboutHeroSection() {
             />
           </div>
         </div>
+        {/* Green overlay — Figma fill_9LFXW6: rgba(55,255,0,0.4) */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "rgba(55, 255, 0, 0.4)" }}
+        />
       </div>
 
-      {/* Ellipse — Figma node 2066:3518 */}
+      {/* White ellipse transition at bottom — Figma node 2066:3518 */}
       <div className="absolute bottom-0 left-0 w-full z-10">
         <Image
           src={ABOUT_ASSETS.hero.ellipse}
@@ -56,15 +60,15 @@ export default function AboutHeroSection() {
 
       {/* Content */}
       <div
-        className="relative z-20 mx-auto px-4 sm:px-6 lg:px-[128px]"
+        className="relative z-20 mx-auto px-4 sm:px-6 lg:px-[128px] pb-24"
         style={{ maxWidth: 1664 }}
       >
-        {/* Story Heading — Figma node 277:8185 — layout_53ZLGZ: column, gap:32px, CENTER */}
+        {/* Story Heading — layout_A6NW2R: column, gap:32px, CENTER, x=548, y=252 */}
         <div
-          className="flex flex-col items-center text-center pt-[120px] md:pt-[160px] lg:pt-[200px]"
+          className="flex flex-col items-center text-center pt-[120px] md:pt-[160px] lg:pt-[172px]"
           style={{ gap: 32 }}
         >
-          {/* Headline — Headline (179:449): Outfit 800, 80px, 0.9em lh, -2% ls, CENTER, #FFFFFF */}
+          {/* Headline — Headline: Outfit 800, 80px, 0.9em lh, -2% ls, CENTER, #FFFFFF */}
           <h1
             style={{
               fontFamily: "'Outfit', sans-serif",
@@ -79,7 +83,7 @@ export default function AboutHeroSection() {
             {t("hero.headline")}
           </h1>
 
-          {/* Subtitle — style_56XI9S: Funnel Display 500, 24px, 1.25em lh, -0.4% ls, CENTER, #E8E8E8 */}
+          {/* Subtitle — style_ARAJAL: Funnel Display 500, 24px, 1.25em lh, CENTER, #E8E8E8 */}
           <p
             style={{
               fontFamily: "'Funnel Display', sans-serif",
@@ -94,6 +98,22 @@ export default function AboutHeroSection() {
           >
             {t("hero.subtitle")}
           </p>
+        </div>
+
+        {/* Story Image — Figma node 277:8195: 824×586, x=548 (centered), y=590, radius=16px */}
+        <div
+          className="relative mx-auto mt-10 overflow-hidden"
+          style={{ maxWidth: 824, borderRadius: 16 }}
+        >
+          <div className="relative" style={{ paddingBottom: "71.11%" /* 586/824 */ }}>
+            <Image
+              src={ABOUT_ASSETS.hero.storyImage}
+              alt="Vita Story"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
         </div>
       </div>
     </section>

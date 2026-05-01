@@ -1,0 +1,8 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="sound_mute_light">
+<rect width="63" height="63" rx="31.5" fill="var(--fill-0, black)" fill-opacity="0.29"/>
+<path id="Rectangle 1" d="M13.7999 35.7355C12.3676 33.3895 12.3676 30.4395 13.7999 28.0935C14.2282 27.392 14.9312 26.9024 15.7376 26.7438L19.1687 26.0695C19.3704 26.0298 19.5526 25.9228 19.6856 25.7661L26.6764 17.5218C27.8573 16.129 28.4478 15.4327 28.9723 15.6251C29.4967 15.8175 29.4967 16.7305 29.4967 18.5566L29.4967 45.2724C29.4967 47.0984 29.4967 48.0114 28.9723 48.2038C28.4478 48.3963 27.8573 47.6999 26.6764 46.3072L19.6856 38.0629C19.5526 37.9061 19.3704 37.7991 19.1687 37.7595L15.7376 37.0851C14.9312 36.9266 14.2282 36.437 13.7999 35.7355Z" stroke="var(--stroke-0, white)" stroke-width="3"/>
+<path id="Vector 3" d="M37.5099 37.8207L49.5296 26.0082" stroke="var(--stroke-0, white)" stroke-width="3" stroke-linecap="round"/>
+<path id="Vector 4" d="M49.5296 37.8207L37.5099 26.0082" stroke="var(--stroke-0, white)" stroke-width="3" stroke-linecap="round"/>
+</g>
+</svg>
