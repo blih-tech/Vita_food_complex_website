@@ -20,13 +20,13 @@ const geistMono = Geist_Mono({
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["400", "600", "900"],
+  weight: ["400", "600", "800", "900"],
 });
 
 const funnelDisplay = Funnel_Display({
   variable: "--font-funnel-display",
   subsets: ["latin"],
-  weight: ["300", "400", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {

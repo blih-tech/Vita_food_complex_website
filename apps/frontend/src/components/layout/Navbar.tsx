@@ -49,16 +49,12 @@ export default function Navbar() {
   const locale = useLocale();
   const searchParams = useSearchParams();
 
-  // Language switcher function
-  const handleLanguageSwitch = (newLocale: string) => {
-    if (newLocale === locale) {
-      setLangDropdownOpen(false);
-      return;
-    }
+  // Language switcher function — toggles between en/am
+  const handleLanguageSwitch = () => {
+    const newLocale = locale === "en" ? "am" : "en";
     const search = searchParams.toString();
     const href = search ? `${pathname}?${search}` : pathname;
     router.replace(href, { locale: newLocale });
-    setLangDropdownOpen(false);
   };
 
   return (
@@ -538,6 +534,7 @@ export default function Navbar() {
                   </Link>
                 </div>
 
+<<<<<<< HEAD
                 {/* Right Column */}
                 <div className="flex flex-col gap-8 py-2 flex-1">
                   <Link
@@ -555,6 +552,30 @@ export default function Navbar() {
                 </div>
               </div>
             )}
+=======
+          {activeDropdown === "company" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl mx-auto">
+              {[
+                { title: "About Us", desc: "Read our story and growth", href: "/about", active: true },
+                { title: "Why Choose Vita®", desc: "What makes us special", href: "/why-choose-vita" },
+                { title: "Careers", desc: "Join our growing and passionate team", href: "/careers" },
+                { title: "Sustainability", desc: "Our commitment to the planet", href: "/sustainability" },
+              ].map((item, idx) => (
+                <Link
+                  key={idx}
+                  href={item.href}
+                  onClick={() => setActiveDropdown(null)}
+                  className={`flex flex-col p-6 rounded-[16px] hover:bg-gray-50 transition-colors group ${item.active ? "border-l-[4px] border-[#23B349] bg-gray-50" : "border-l-[4px] border-transparent"}`}
+                >
+                  <h3 className="text-[#1A1A1A] font-['Funnel_Display'] text-[20px] font-bold group-hover:text-[#23B349] transition-colors mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-500 text-[14px]">{item.desc}</p>
+                </Link>
+              ))}
+            </div>
+          )}
+>>>>>>> 987339b (feat(about): implement exact Figma design with WaveDividers and refined sections)
 
             {activeDropdown === "resources" && (
               <div className="flex gap-12 w-full justify-between max-w-6xl mx-auto">
