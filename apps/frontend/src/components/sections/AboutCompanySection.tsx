@@ -30,9 +30,9 @@ export default function AboutCompanySection() {
       style={{ background: "#FFFFFF", paddingTop: 80, paddingBottom: 80 }}
     >
       <div className="mx-auto" style={{ maxWidth: 1664 }}>
-        {/* Story Image Frame — Figma node 277:8195 (824x586) */}
+        {/* Story Image Frame — Figma node 277:8195: 824×586, centered (x=548 in 1920 = center in 1664 content) */}
         <div
-          className={`relative mb-10 overflow-hidden`}
+          className={`relative mx-auto mb-10 overflow-hidden`}
           style={{
             maxWidth: 824,
             borderRadius: 16,
@@ -66,16 +66,17 @@ export default function AboutCompanySection() {
           />
         </div>
 
-        {/* "Our Story" Heading — Figma node 2066:2563: Outfit Bold 64px, lh 61.44px, ls -1.28px, #23B349 */}
+        {/* "Our Story" Heading — Figma node 2066:2563: Display (20:2097): Outfit 700, 64px, 0.96em lh, -2% ls, CENTER, #23B349 */}
         <h2
-          className={`mb-8`}
+          className={`mb-8 text-center`}
           style={{
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 700,
             fontSize: "clamp(40px, 5vw, 64px)",
-            lineHeight: "61.44px",
+            lineHeight: "0.96em",
             letterSpacing: "-1.28px",
             color: "#23B349",
+            textAlign: "center",
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? "translateY(0)" : "translateY(20px)",
             transition: "all 0.8s ease-out 0.1s",
@@ -84,16 +85,18 @@ export default function AboutCompanySection() {
           {t("company.title")}
         </h2>
 
-        {/* Body Paragraph — Figma node 277:8190: Outfit Regular 48px, lh 48px, ls -0.48px, #8A8C8A */}
+        {/* Body Paragraph — Figma node 277:8190: style_38I540: Outfit 400, 48px, 1em lh, -1% ls, CENTER, #8A8C8A */}
         <p
+          className="mx-auto"
           style={{
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 400,
             fontSize: "clamp(20px, 3vw, 48px)",
-            lineHeight: "48px",
+            lineHeight: "1em",
             letterSpacing: "-0.48px",
             color: "#8A8C8A",
             maxWidth: 1522,
+            textAlign: "center",
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? "translateY(0)" : "translateY(20px)",
             transition: "all 0.8s ease-out 0.2s",
