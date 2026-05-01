@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Link } from "@frontend/navigation";
-import { Product } from "@/app/[locale]/products/data";
+import { Product } from "@frontend/app/[locale]/products/data";
 
 interface ProductRelatedSectionProps {
   relatedProducts: Product[];

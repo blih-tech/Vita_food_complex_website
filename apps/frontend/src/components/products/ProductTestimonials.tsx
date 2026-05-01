@@ -33,9 +33,9 @@ export default function ProductTestimonials() {
             </div>
             <div className="text-white">
               <p className="font-['Outfit'] text-lg italic mb-4 leading-relaxed">
-                "I love the Vita products! They are my go-to snack every day.
+                &quot;I love the Vita products! They are my go-to snack every day.
                 The quality is consistently high and the taste is unparalleled.
-                My family enjoys them as much as I do."
+                My family enjoys them as much as I do.&quot;
               </p>
               <div className="flex items-center gap-2 mb-1">
                 <div className="flex text-yellow-400 text-lg">★★★★★</div>
@@ -64,9 +64,9 @@ export default function ProductTestimonials() {
             </div>
             <div className="text-white">
               <p className="font-['Outfit'] text-lg italic mb-4 leading-relaxed">
-                "I love the Vita products! They are my go-to snack every day.
+                &quot;I love the Vita products! They are my go-to snack every day.
                 The quality is consistently high and the taste is unparalleled.
-                My family enjoys them as much as I do."
+                My family enjoys them as much as I do.&quot;
               </p>
               <div className="flex items-center gap-2 mb-1">
                 <div className="flex text-yellow-400 text-lg">★★★★★</div>

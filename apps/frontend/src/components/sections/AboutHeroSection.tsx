@@ -2,83 +2,133 @@
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import Navbar from "@frontend/components/layout/Navbar";
+import { useState, useEffect } from "react";
+import { ABOUT_ASSETS } from "@frontend/constants/aboutAssets";
 
 export default function AboutHeroSection() {
   const t = useTranslations("About");
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    setIsLoaded(true);
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <section className="relative w-full bg-[#E9F7ED] overflow-hidden">
-      {/* Desktop/Tablet Hero (1920px design) */}
-      <div className="hidden md:block relative w-full min-h-screen lg:min-h-[792px]">
-        {/* Background decorative elements - positioned from left */}
-        <div className="absolute left-0 top-0 w-[22.656%] h-full z-[1]">
+    <section className="relative w-full min-h-screen overflow-hidden bg-[#E9F7ED]">
+      {/* Hero Background with Figma Assets - Pixel Perfect */}
+      <div className="absolute inset-0 z-0">
+        {/* Background Frame - Exact Figma positioning with parallax */}
+        <div className="absolute left-0 top-0 w-full h-full">
+          <div 
+            className="absolute blur-[10px] h-[120%] w-[120%] left-1/2 top-[-10%] transition-transform duration-1000 ease-out"
+            style={{ 
+              transform: `translateX(-50%) translateY(${scrollY * 0.2}px)`,
+              opacity: isLoaded ? 0.6 : 0
+            }}
+          >
+            <div className="relative w-full h-full">
+              <Image
+                src={ABOUT_ASSETS.hero.backgroundFrame}
+                alt=""
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+        
+        {/* Ellipse Element - Bottom decorative curve */}
+        <div 
+          className="absolute bottom-0 left-0 w-full h-64 z-10 transition-all duration-1000 ease-out"
+          style={{ 
+            opacity: isLoaded ? 1 : 0
+          }}
+        >
           <Image
-            src="/assets/hero/hero-bg-element.svg"
+            src={ABOUT_ASSETS.hero.ellipse}
             alt=""
             fill
-            className="object-cover opacity-[0.15]"
+            className="object-cover object-top"
+            priority
           />
-        </div>
-
-        {/* Navbar */}
-        <div className="relative z-10">
-          <Navbar />
-        </div>
-
-        {/* Hero Content - centered */}
-        <div className="relative z-[2] flex flex-col items-center justify-center px-8 lg:px-[128px] pt-8 lg:pt-12">
-          {/* Our Story Heading */}
-          <h1 className="font-['Funnel_Display'] font-bold text-[#0F4B1F] text-center w-full max-w-[916px]">
-            <span className="block text-[80px] md:text-[120px] lg:text-[180px] leading-[1]">
-              Our
-            </span>
-            <span className="block text-[80px] md:text-[120px] lg:text-[180px] leading-[1]">
-              Story
-            </span>
-          </h1>
-
-          {/* Subtitle */}
-          <p className="mt-8 lg:mt-12 font-['Outfit'] font-normal text-[#333733] text-center text-lg md:text-2xl lg:text-[32px] leading-[1.625] max-w-[916px]">
-            Nourishing everyday life while supporting sustainable growth and
-            progress across Ethiopia.
-          </p>
         </div>
       </div>
 
-      {/* Mobile Hero (< 768px) */}
-      <div className="md:hidden relative flex flex-col items-center">
-        {/* Background decorative element */}
-        <div className="absolute top-0 left-0 w-[60%] h-[400px] opacity-[0.15] z-[1]">
-          <Image
-            src="/assets/hero/hero-bg-element.svg"
-            alt=""
-            fill
-            className="object-cover"
-          />
-        </div>
-
-        {/* Navbar */}
-        <div className="relative z-10 w-full">
-          <Navbar />
-        </div>
-
-        {/* Hero Content */}
-        <div className="relative z-[2] flex flex-col items-center px-6 pt-6 pb-12">
-          <h1 className="font-['Funnel_Display'] font-bold text-[#0F4B1F] text-center">
-            <span className="block text-[48px] sm:text-[60px] leading-[1]">
-              Our
-            </span>
-            <span className="block text-[48px] sm:text-[60px] leading-[1]">
-              Story
+      {/* Hero Content - Exact Figma positioning and typography with animations */}
+      <div className="relative z-20 flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
+        <div 
+          className="text-center transition-all duration-1000 ease-out"
+          style={{ 
+            maxWidth: '1000px',
+            opacity: isLoaded ? 1 : 0,
+            transform: `translateY(${isLoaded ? '0' : '50px'})`
+          }}
+        >
+          {/* Main Headline - Outfit 900 for maximum impact */}
+          <h1 className="font-['Outfit'] font-black text-[#0F4B1F] leading-[0.9] tracking-[-0.04em] mb-10 transition-all duration-700 ease-out"
+              style={{ 
+                fontSize: 'clamp(60px, 12vw, 180px)',
+                textShadow: '0 4px 30px rgba(15, 75, 31, 0.1)'
+              }}
+          >
+            <span className="block animate-fade-in-up">
+              {t("hero.headline")}
             </span>
           </h1>
-          <p className="mt-6 font-['Outfit'] font-normal text-[#333733] text-center text-base leading-relaxed max-w-[340px]">
-            Nourishing everyday life while supporting sustainable growth and
-            progress across Ethiopia.
+          
+          {/* Subtitle - Funnel Display 500 */}
+          <p className="font-['Funnel_Display'] font-medium text-[#333733] leading-relaxed tracking-tight max-w-3xl mx-auto opacity-80"
+              style={{ 
+                fontSize: 'clamp(20px, 3vw, 32px)',
+                animationDelay: '0.3s'
+              }}
+          >
+            <span className="block animate-fade-in-up">
+              {t("hero.subtitle")}
+            </span>
           </p>
+
+          {/* Floating decorative elements */}
+          <div className="absolute -top-20 -left-20 w-40 h-40 opacity-20 animate-pulse pointer-events-none">
+             <Image src="/assets/about/spark.svg" alt="" fill className="object-contain rotate-12" />
+          </div>
+          <div className="absolute -bottom-20 -right-20 w-60 h-60 opacity-10 animate-bounce pointer-events-none" style={{ animationDuration: '6s' }}>
+             <Image src="/assets/about/spark.svg" alt="" fill className="object-contain -rotate-45" />
+          </div>
         </div>
       </div>
+
+      {/* Custom styles for animations */}
+      <style jsx>{`
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fade-in-up {
+          animation: fade-in-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        
+        .animate-float {
+          animation: float 8s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(2deg); }
+        }
+      `}</style>
     </section>
   );
 }
