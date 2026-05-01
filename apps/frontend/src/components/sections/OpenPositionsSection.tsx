@@ -53,15 +53,16 @@ export default function OpenPositionsSection() {
       className="px-4 sm:px-6 lg:px-[128px]"
       style={{ background: "#FFFFFF", paddingTop: 80, paddingBottom: 80 }}
     >
-      <div className="mx-auto" style={{ maxWidth: 1664 }}>
-        {/* "Open Positions" — Outfit Bold 64px, lh 61.44px, ls -1.28px, #23B349 */}
+      {/* layout_MKIYGN: column, stretch, gap:140px, width:1664px */}
+      <div className="mx-auto flex flex-col" style={{ maxWidth: 1664, gap: 140 }}>
+        {/* "Open Positions" — Display (20:2097): Outfit 700, 64px, 0.96em lh, -2% ls, CENTER, #23B349 */}
         <h2
-          className="mb-12"
+          className="text-center"
           style={{
             fontFamily: "'Outfit', sans-serif",
             fontWeight: 700,
             fontSize: "clamp(40px, 5vw, 64px)",
-            lineHeight: "61.44px",
+            lineHeight: "0.96em",
             letterSpacing: "-1.28px",
             color: "#23B349",
           }}
@@ -69,100 +70,114 @@ export default function OpenPositionsSection() {
           {t("openPositions.title")}
         </h2>
 
-        {/* Job listing cards — Figma node 2546:10798 */}
-        <div className="flex flex-col gap-6">
-          {JOBS.map((job, i) => (
-            <Link
-              key={job.id}
-              href={`/careers/${job.id}`}
-              className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-8 rounded-[24px] transition-all hover:shadow-lg"
-              style={{
-                background: "#F5F5F5",
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? "translateY(0)" : "translateY(20px)",
-                transition: `all 0.6s ease-out ${i * 0.1}s`,
-              }}
-            >
-              <div className="flex-1">
-                {/* Job title — Outfit Bold 32px, #23B349 */}
-                <h3
-                  className="mb-2"
-                  style={{
-                    fontFamily: "'Outfit', sans-serif",
-                    fontWeight: 700,
-                    fontSize: 32,
-                    lineHeight: "1.2",
-                    letterSpacing: "-0.64px",
-                    color: "#23B349",
-                  }}
-                >
-                  {job.title}
-                </h3>
+        {/* layout_J85ETT: column, stretch, gap:146px */}
+        <div className="flex flex-col" style={{ gap: 146 }}>
+          {/* layout_SSJ2BM: row, center, stretch, gap:132px — 3 cards per row */}
+          {/* Each card — layout_00YT6Y: column, flex-end, gap:13.32px, width:466.61px */}
+          <div
+            className="flex flex-col sm:flex-row items-start justify-between"
+            style={{ gap: "clamp(40px, 8vw, 132px)" }}
+          >
+            {JOBS.map((job, i) => (
+              <div
+                key={job.id}
+                className="flex flex-col"
+                style={{
+                  gap: 13.32,
+                  flex: "1 1 0",
+                  maxWidth: 467,
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? "translateY(0)" : "translateY(20px)",
+                  transition: `all 0.6s ease-out ${i * 0.12}s`,
+                }}
+              >
+                {/* layout_UMTMGS: column, fill, gap:19.98px */}
+                <div className="flex flex-col" style={{ gap: 19.98 }}>
+                  {/* layout_UO9DB3: column, gap:8.88px */}
+                  <div className="flex flex-col" style={{ gap: 8.88 }}>
+                    {/* Job title — style_2SVQRJ: Funnel Display 400, 35.52px, 1em lh, -1% ls, #23B349 */}
+                    <h3
+                      style={{
+                        fontFamily: "'Funnel Display', sans-serif",
+                        fontWeight: 400,
+                        fontSize: "clamp(24px, 2.8vw, 35.52px)",
+                        lineHeight: "1em",
+                        letterSpacing: "-0.355px",
+                        color: "#23B349",
+                      }}
+                    >
+                      {job.title}
+                    </h3>
 
-                {/* Description — Outfit Medium 22px, #333733 */}
-                <p
-                  className="mb-3"
-                  style={{
-                    fontFamily: "'Outfit', sans-serif",
-                    fontWeight: 500,
-                    fontSize: 22,
-                    lineHeight: "1.3",
-                    color: "#333733",
-                  }}
-                >
-                  {job.desc}
-                </p>
+                    {/* Tags — layout_OA0UX3: row, gap:8.88px */}
+                    <div className="flex flex-row" style={{ gap: 8.88 }}>
+                      {[job.location, job.type].map((tag, ti) => (
+                        <span
+                          key={ti}
+                          style={{
+                            fontFamily: "'Roboto', sans-serif",
+                            fontWeight: 500,
+                            fontSize: 15.54,
+                            lineHeight: "1.17em",
+                            color: "#404040",
+                            padding: "8.88px 17.76px",
+                            borderRadius: 32.19,
+                            background: "transparent",
+                            border: "1.11px solid #404040",
+                          }}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
 
-                {/* Location + Type badges */}
-                <div className="flex gap-3">
-                  <span
-                    className="px-4 py-1.5 rounded-full"
+                  {/* Description — style_IXAA2U: Outfit 500, 22.20px, 1.26em lh, -0.4% ls, #333733 */}
+                  <p
                     style={{
-                      fontFamily: "'Funnel Display', sans-serif",
+                      fontFamily: "'Outfit', sans-serif",
                       fontWeight: 500,
-                      fontSize: 14,
-                      background: "#E9F7ED",
-                      color: "#23B349",
+                      fontSize: "clamp(16px, 1.8vw, 22.2px)",
+                      lineHeight: "1.26em",
+                      letterSpacing: "-0.089px",
+                      color: "#333733",
                     }}
                   >
-                    {job.location}
-                  </span>
-                  <span
-                    className="px-4 py-1.5 rounded-full"
+                    {job.desc}
+                  </p>
+                </div>
+
+                {/* Apply now button — layout_RHQPX4: row, center, gap:9.55px, padding:9.55px 19.10px, h:33.42px, radius:596px, #23B349 */}
+                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                  <Link
+                    href={`/careers/${job.id}`}
+                    className="inline-flex items-center justify-center"
                     style={{
-                      fontFamily: "'Funnel Display', sans-serif",
-                      fontWeight: 500,
-                      fontSize: 14,
-                      background: "#F0F0F0",
-                      color: "#404040",
+                      gap: 9.55,
+                      padding: "9.55px 19.10px",
+                      height: 33.42,
+                      borderRadius: 596,
+                      background: "#23B349",
                     }}
                   >
-                    {job.type}
-                  </span>
+                    {/* "Apply now" — style_LMTW3S: Funnel Display 500, 14.32px, 1.25em lh, -0.4% ls, white */}
+                    <span
+                      style={{
+                        fontFamily: "'Funnel Display', sans-serif",
+                        fontWeight: 500,
+                        fontSize: 14.32,
+                        lineHeight: "1.25em",
+                        letterSpacing: "-0.057px",
+                        color: "#FFFFFF",
+                      }}
+                    >
+                      {t("openPositions.applyNow")}
+                    </span>
+                  </Link>
                 </div>
               </div>
-
-              {/* Apply now button — Funnel Display Medium 14px, white on green */}
-              <div
-                className="flex items-center gap-2 rounded-full px-6 py-3 flex-shrink-0"
-                style={{ background: "#23B349" }}
-              >
-                <span
-                  className="font-['Funnel_Display'] font-medium text-white"
-                  style={{
-                    fontSize: 14,
-                    lineHeight: "18px",
-                    letterSpacing: "-0.057px",
-                  }}
-                >
-                  {t("openPositions.applyNow")}
-                </span>
-                <span className="text-white" style={{ fontSize: 12 }}>
-                  →
-                </span>
-              </div>
-            </Link>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
