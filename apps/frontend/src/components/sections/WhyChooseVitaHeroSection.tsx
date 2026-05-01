@@ -18,7 +18,7 @@ export default function WhyChooseVitaHeroSection() {
   const t = useTranslations("WhyChooseVita");
 
   return (
-    <div className="relative w-full min-h-screen overflow-hidden bg-gray-50">
+    <div className="relative w-full min-h-screen overflow-hidden bg-gray-50 lg:min-h-screen">
       {/* Hero Background - Exact Figma positioning */}
       <div className="absolute inset-0 w-full h-full">
         <div className="relative w-full h-full">
@@ -117,35 +117,35 @@ export default function WhyChooseVitaHeroSection() {
       </div>
 
       {/* Hero Content - Exact Figma positioning */}
-      <div className="absolute left-[calc(50%-2.5px)] top-[304px] -translate-x-1/2 w-[899px] z-10">
-        <div className="flex flex-col gap-[48px] items-center text-center">
+      <div className="absolute left-[calc(50%-2.5px)] top-[304px] -translate-x-1/2 w-[899px] z-10 lg:w-[899px] md:w-[90%] sm:w-[95%] px-4 md:px-0">
+        <div className="flex flex-col gap-[48px] items-center text-center md:gap-[32px]">
           {/* Main Headline */}
-          <div className="flex flex-col gap-[32px] items-center w-full">
-            <h1 className="font-['Outfit'] font-extrabold h-[142px] leading-[0.9] tracking-[-1.6px] text-[#23b349] text-[80px] w-[624px]">
+          <div className="flex flex-col gap-[32px] items-center w-full md:gap-[24px]">
+            <h1 className="font-['Outfit'] font-extrabold h-[142px] leading-[0.9] tracking-[-1.6px] text-[#23b349] text-[80px] w-[624px] lg:text-[80px] md:text-[64px] sm:text-[48px] lg:w-[624px] md:w-full sm:w-full lg:h-[142px] md:h-auto sm:h-auto">
               {t("hero.headline")}
             </h1>
             
             {/* Description */}
-            <p className="font-['Funnel_Display'] font-medium leading-none text-[#404040] tracking-[-0.096px] w-[894px] whitespace-pre-line">
+            <p className="font-['Funnel_Display'] font-medium leading-[1.2] text-[#404040] tracking-[-0.096px] w-[894px] whitespace-pre-line lg:w-[894px] md:w-full sm:w-full lg:text-[inherit] md:text-[18px] sm:text-[16px]">
               {t("hero.description")}
             </p>
           </div>
 
           {/* Button Row - Exact Figma spacing */}
-          <div className="flex gap-[24px] items-center">
+          <div className="flex gap-[24px] items-center md:flex-col md:gap-[16px] md:w-full">
             {/* Primary Button */}
             <Link
               href="/products"
-              className="bg-[#23b349] text-white flex items-center gap-[16px] h-[56px] px-[32px] py-[16px] rounded-[999px] font-['Funnel_Display'] font-medium text-[24px] tracking-[-0.096px] hover:bg-[#1a9a3a] transition-colors whitespace-nowrap"
+              className="bg-[#23b349] text-white flex items-center gap-[16px] h-[56px] px-[32px] py-[16px] rounded-[999px] font-['Funnel_Display'] font-medium text-[24px] tracking-[-0.096px] hover:bg-[#1a9a3a] transition-colors whitespace-nowrap lg:text-[24px] md:text-[20px] sm:text-[18px] md:w-full md:justify-center"
             >
               Explore products
-              <span className="font-['Outfit'] font-normal text-[20px] tracking-[-0.08px]">→</span>
+              <span className="font-['Outfit'] font-normal text-[20px] tracking-[-0.08px] lg:text-[20px] md:text-[18px] sm:text-[16px]">→</span>
             </Link>
 
             {/* Secondary Button */}
             <Link
               href="/contact"
-              className="border border-[#1fd650] text-black flex items-center gap-[16px] h-[56px] px-[32px] py-[16px] rounded-[999px] font-['Funnel_Display'] font-medium text-[24px] tracking-[-0.096px] hover:bg-[#1fd650] hover:text-white transition-colors whitespace-nowrap"
+              className="border border-[#1fd650] text-black flex items-center gap-[16px] h-[56px] px-[32px] py-[16px] rounded-[999px] font-['Funnel_Display'] font-medium text-[24px] tracking-[-0.096px] hover:bg-[#1fd650] hover:text-white transition-colors whitespace-nowrap lg:text-[24px] md:text-[20px] sm:text-[18px] md:w-full md:justify-center"
             >
               Contact US
             </Link>
