@@ -532,5 +532,75 @@
       },
       "submit": "Submit Application"
     }
+  },
+  "Distributor": {
+    "hero": {
+      "label": "Partner With Vita",
+      "headline": "Grow Your Business with Vita",
+      "subtitle": "Join a fast-growing distribution network and bring trusted, high-quality food products to your market. Start today with a simple call — our team is ready to guide you every step of the way.",
+      "cta": "Call Now"
+    },
+    "whyWork": {
+      "title": "Why Work With Vita?",
+      "description": "We make it easier for you to grow. With strong demand, reliable supply, and continuous support, Vita gives you everything you need to succeed in your market.",
+      "cards": {
+        "demand": "High Market Demand",
+        "supply": "Reliable Supply Chain",
+        "brand": "Strong Brand Support",
+        "margins": "Attractive Margins"
+      }
+    },
+    "whoCanPartner": {
+      "sectionTitle": "WHO CAN BECOME A DISTRIBUTOR",
+      "title": "Who Can Partner With Us?",
+      "description": "We're looking for driven partners who want to grow with a reliable and expanding brand.",
+      "items": [
+        "Business owners and retailers",
+        "Distributors with local market knowledge",
+        "Ability to store and manage products",
+        "Strong commitment to growth",
+        "Long-term partnership mindset"
+      ]
+    },
+    "steps": {
+      "title": "Start in 3 Easy Steps",
+      "subtitle": "Simple Process",
+      "call": {
+        "title": "Call Our Team",
+        "description": "Reach out using one of the contact numbers below"
+      },
+      "discussion": {
+        "title": "Quick Discussion",
+        "description": "We understand your location and business"
+      },
+      "started": {
+        "title": "Get Started",
+        "description": "Receive guidance and begin distribution"
+      }
+    },
+    "contact": {
+      "title": "Contact Our Distribution Team",
+      "description": "Speak directly with our team and get started today. Choose the contact that matches your location.",
+      "offices": [
+        {
+          "name": "Central Office",
+          "phone": "+251 XXX XXX XXX",
+          "address": "Addis Ababa, Ethiopia",
+          "coverage": "Nationwide coordination and support"
+        },
+        {
+          "name": "Central Office",
+          "phone": "+251 XXX XXX XXX",
+          "address": "Addis Ababa, Ethiopia",
+          "coverage": "Nationwide coordination and support"
+        },
+        {
+          "name": "Central Office",
+          "phone": "+251 XXX XXX XXX",
+          "address": "Addis Ababa, Ethiopia",
+          "coverage": "Nationwide coordination and support"
+        }
+      ]
+    }
   }
 }
