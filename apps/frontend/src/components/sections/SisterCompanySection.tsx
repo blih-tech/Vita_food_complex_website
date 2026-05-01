@@ -12,11 +12,14 @@ const sisterCompanies = [
   { id: "02", name: "Arada Coffee" },
   { id: "03", name: "long tea" },
   { id: "04", name: "Belayab Motors" },
-  { id: "05", name: "Belayab Geepas" },
-  { id: "06", name: "Belayab Cabel" },
-  { id: "07", name: "Lionstone Distribution" },
-  { id: "08", name: "HUAJIA international trade" },
-  { id: "09", name: "Lewis Retails" },
+  { id: "05", name: "Belayab Delivery" },
+  { id: "06", name: "Golden Tulip" },
+  { id: "07", name: "Belayab Poultry and feed" },
+  { id: "08", name: "Belayab Geepas" },
+  { id: "09", name: "Belayab Cabel" },
+  { id: "10", name: "Lionstone Distribution" },
+  { id: "11", name: "HUAJIA international trade" },
+  { id: "12", name: "Lewis Retails" },
 ];
 
 export default function SisterCompanySection() {
@@ -24,22 +27,12 @@ export default function SisterCompanySection() {
 
   return (
     <div 
-      className="content-stretch flex flex-col items-start relative w-full lg:px-[73px] md:px-[48px] sm:px-[24px] lg:py-[128px] md:py-[96px] sm:py-[64px] rounded-[48px]" 
+      className="content-stretch flex flex-col items-start relative w-full lg:px-[73px] md:px-[48px] sm:px-[24px] lg:py-[128px] md:py-[96px] sm:py-[64px] rounded-[48px] 
+                 bg-gradient-to-br from-green-800 to-green-600 
+                 overflow-hidden"
       data-node-id="2116:1586" 
       data-name="sister comapny"
     >
-      {/* Background effects - Responsive */}
-      <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[48px]">
-        <div className="absolute inset-0 overflow-hidden rounded-[48px]">
-          <img
-            alt=""
-            className="absolute lg:h-[-193.75%] lg:left-[101.26%] lg:max-w-none lg:top-[154.74%] lg:w-[-110.38%] md:h-[-150%] md:left-[90%] md:max-w-none md:top-[120%] md:w-[-80%] sm:h-[-100%] sm:left-[80%] sm:max-w-none sm:top-[100%] sm:w-[-60%]"
-            src={imgSisterComapny}
-          />
-        </div>
-        <div className="absolute bg-[rgba(55,255,0,0.4)] inset-0 mix-blend-soft-light rounded-[48px]" />
-      </div>
-
       {/* Content container - Responsive */}
       <div className="content-stretch flex flex-col gap-[96px] items-center relative shrink-0 w-full lg:gap-[96px] md:gap-[72px] sm:gap-[48px]" data-node-id="2116:1585" data-name="Container">
         
@@ -75,7 +68,7 @@ export default function SisterCompanySection() {
                 data-name={company.id}
               >
                 <p 
-                  className="font-['Funnel_Display'] font-light leading-none not-italic text-[#e8e8e8] whitespace-nowrap lg:text-[48px] lg:tracking-[-0.48px] md:text-[36px] md:tracking-[-0.36px] sm:text-[24px] sm:tracking-[-0.24px]" 
+                  className="font-['Funnel_Display'] font-light leading-none not-italic text-white whitespace-nowrap lg:text-[48px] lg:tracking-[-0.48px] md:text-[36px] md:tracking-[-0.36px] sm:text-[24px] sm:tracking-[-0.24px]" 
                   data-node-id={`I2209:${8451 + index * 35};2209:8445;2206:8282`}
                 >
                   {company.id}
@@ -89,7 +82,7 @@ export default function SisterCompanySection() {
                 data-name={company.name}
               >
                 <p 
-                  className="font-['Outfit'] font-bold leading-[0.96] text-[#e8e8e8] whitespace-nowrap lg:text-[64px] lg:tracking-[-1.28px] md:text-[48px] md:tracking-[-0.96px] sm:text-[32px] sm:tracking-[-0.64px]" 
+                  className="font-['Outfit'] font-bold leading-[0.96] text-white whitespace-nowrap lg:text-[64px] lg:tracking-[-1.28px] md:text-[48px] md:tracking-[-0.96px] sm:text-[32px] sm:tracking-[-0.64px]" 
                   style={{ fontFeatureSettings: "'liga' 0" }}
                   data-node-id={`I2209:${8451 + index * 35};2209:8443;2206:8281`}
                 >

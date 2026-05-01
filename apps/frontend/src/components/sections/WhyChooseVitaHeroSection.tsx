@@ -13,7 +13,7 @@ export default function WhyChooseVitaHeroSection() {
   const t = useTranslations("WhyChooseVita");
 
   return (
-    <div className="contents relative size-full" data-node-id="486:2896" data-name="Hero section">
+    <div className="contents relative size-full min-h-[1400px]" data-node-id="486:2896" data-name="Hero section">
       {/* Main background image - Node 364:3163 */}
       <div 
         className="absolute h-[934px] left-0 top-0 w-[1920px]" 
