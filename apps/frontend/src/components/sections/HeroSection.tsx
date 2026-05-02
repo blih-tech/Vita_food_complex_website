@@ -91,21 +91,18 @@ export default function HeroSection() {
       </div>
 
       {/* ── THE HILL (Transition Section) ── */}
-      <div className="relative w-full h-[350px] md:h-[550px] lg:h-[650px] mt-[-60px] md:mt-[-100px] lg:mt-[-120px]">
+      <div className="relative w-full h-[400px] md:h-[600px] lg:h-[750px] mt-[-80px] md:mt-[-120px] lg:mt-[-160px] flex justify-center">
         
-        {/* Figma-Accurate Semicircle Arc */}
-        <div className="absolute bottom-0 left-0 w-full h-full z-0">
-          <Image
-            src="/assets/hero/semicircle-vector.svg"
-            alt=""
-            fill
-            className="object-cover object-bottom"
-            priority
-          />
-        </div>
+        {/* Perfect CSS Semicircle Arc (The "Hill") */}
+        <div 
+          className="absolute bottom-0 w-[250%] md:w-[180%] lg:w-[140%] h-[150%] bg-[#23B349] rounded-t-[100%] z-0"
+          style={{
+            boxShadow: '0 -20px 60px rgba(35, 179, 73, 0.15)'
+          }}
+        />
 
         {/* Duck Doctor - Grounded on the Hill */}
-        <div className="absolute left-[3%] md:left-[8%] lg:left-[12%] bottom-[12%] md:bottom-[18%] lg:bottom-[22%] w-[160px] h-[160px] md:w-[280px] md:h-[280px] lg:w-[380px] lg:h-[380px] z-10 animate-float">
+        <div className="absolute left-[5%] md:left-[10%] lg:left-[15%] bottom-[10%] md:bottom-[15%] lg:bottom-[18%] w-[180px] h-[180px] md:w-[320px] md:h-[320px] lg:w-[420px] lg:h-[420px] z-10 animate-float">
           <div className="relative w-full h-full">
             <Image
               src="/assets/hero/doctor-duck.png"
@@ -114,13 +111,13 @@ export default function HeroSection() {
               className="object-contain"
               priority
             />
-            {/* Contact Shadow */}
-            <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-[60%] h-[10%] bg-black/10 blur-xl rounded-full -z-10" />
+            {/* Soft Contact Shadow */}
+            <div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 w-[50%] h-[8%] bg-black/10 blur-2xl rounded-full -z-10" />
           </div>
         </div>
 
         {/* Biscuit Stack - Grounded on the Hill */}
-        <div className="absolute right-[3%] md:right-[8%] lg:right-[12%] bottom-[18%] md:bottom-[24%] lg:bottom-[28%] w-[130px] h-[130px] md:w-[230px] md:h-[230px] lg:w-[320px] lg:h-[320px] z-10 animate-float-delayed">
+        <div className="absolute right-[5%] md:right-[10%] lg:right-[15%] bottom-[15%] md:bottom-[20%] lg:bottom-[24%] w-[150px] h-[150px] md:w-[260px] md:h-[260px] lg:w-[360px] lg:h-[360px] z-10 animate-float-delayed">
           <div className="relative w-full h-full">
             <Image
               src="/assets/hero/biscuit-stack.png"
@@ -129,8 +126,8 @@ export default function HeroSection() {
               className="object-contain"
               priority
             />
-            {/* Contact Shadow */}
-            <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-[70%] h-[15%] bg-black/15 blur-xl rounded-full -z-10" />
+            {/* Soft Contact Shadow */}
+            <div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 w-[60%] h-[12%] bg-black/15 blur-2xl rounded-full -z-10" />
           </div>
         </div>
       </div>
