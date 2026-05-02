@@ -13,14 +13,12 @@ export default function HeroSection() {
       className="relative w-full overflow-hidden flex flex-col items-center bg-white min-h-[100vh]"
       style={{ paddingTop: '267.71px' }}
     >
-      {/* ── Semicircle Background Vector ── */}
-      <div className="absolute left-1/2 -translate-x-1/2 h-[2286.921px] top-[934.79px] w-[7210.039px] z-0">
-        <Image
-          src="/assets/hero/semicircle-vector.svg"
-          alt="Semicircle Background"
-          fill
-          className="object-cover"
-        />
+      {/* ── Green Semicircle Background ── */}
+      <div className="absolute left-1/2 -translate-x-1/2 h-[800px] top-[200px] w-full max-w-[1400px] z-0">
+        <div className="relative w-full h-full">
+          <div className="absolute inset-0 bg-[#23B349] rounded-t-[50%] opacity-80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#23B349] to-[#1FD650] rounded-t-[50%] opacity-60" />
+        </div>
       </div>
       {/* ── Background Elements ── */}
       <div className="absolute top-0 left-0 w-full h-[1180.918px] pointer-events-none z-0 overflow-hidden">
