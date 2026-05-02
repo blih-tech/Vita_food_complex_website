@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@frontend/navigation";
 import { products, Product } from "../data";
+import { routing } from "@frontend/routing";
 import ProductTestimonials from "@frontend/components/products/ProductTestimonials";
 import ProductHeroSection from "@frontend/components/products/ProductDetailsHeroSection";
 import ProductNutritionSection from "@frontend/components/products/ProductNutritionSection";
@@ -14,17 +15,17 @@ interface ProductDetailPageProps {
 }
 
 export function generateStaticParams() {
-  return products.map((product) => ({
-    id: product.id,
-  }));
+  return routing.locales.flatMap((locale) =>
+    products.map((product) => ({ locale, id: product.id }))
+  );
 }
 
 // Starburst component moved to ProductRelatedSection
 export default async function ProductDetailPage({
   params,
 }: ProductDetailPageProps) {
-  const { id } = await params;
-  const t = await getTranslations("ProductsPage");
+  const { id, locale } = await params;
+  const t = await getTranslations({ locale, namespace: "ProductsPage" });
 
   if (!id) {
     return null;
