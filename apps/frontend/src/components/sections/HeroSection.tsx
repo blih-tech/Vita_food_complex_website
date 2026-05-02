@@ -91,18 +91,18 @@ export default function HeroSection() {
       </div>
 
       {/* ── THE HILL (Transition Section) ── */}
-      <div className="relative w-full h-[400px] md:h-[600px] lg:h-[750px] mt-[-80px] md:mt-[-120px] lg:mt-[-160px] flex justify-center">
+      <div className="relative w-full h-[300px] md:h-[450px] lg:h-[550px] mt-[-40px] md:mt-[-60px] lg:mt-[-80px] flex justify-center">
         
-        {/* Perfect CSS Semicircle Arc (The "Hill") */}
+        {/* Gentle CSS Arc (Flattened "Hill") */}
         <div 
-          className="absolute bottom-0 w-[250%] md:w-[180%] lg:w-[140%] h-[150%] bg-[#23B349] rounded-t-[100%] z-0"
+          className="absolute bottom-0 w-[400%] md:w-[300%] lg:w-[220%] h-[100%] bg-[#23B349] rounded-t-[100%] z-0"
           style={{
-            boxShadow: '0 -20px 60px rgba(35, 179, 73, 0.15)'
+            boxShadow: '0 -20px 60px rgba(35, 179, 73, 0.12)'
           }}
         />
 
-        {/* Duck Doctor - Grounded on the Hill */}
-        <div className="absolute left-[5%] md:left-[10%] lg:left-[15%] bottom-[10%] md:bottom-[15%] lg:bottom-[18%] w-[180px] h-[180px] md:w-[320px] md:h-[320px] lg:w-[420px] lg:h-[420px] z-10 animate-float">
+        {/* Duck Doctor - Grounded on the gentler peak */}
+        <div className="absolute left-[8%] md:left-[12%] lg:left-[18%] bottom-[5%] md:bottom-[10%] lg:bottom-[12%] w-[160px] h-[160px] md:w-[280px] md:h-[280px] lg:w-[380px] lg:h-[380px] z-10 animate-float">
           <div className="relative w-full h-full">
             <Image
               src="/assets/hero/doctor-duck.png"
@@ -116,8 +116,8 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Biscuit Stack - Grounded on the Hill */}
-        <div className="absolute right-[5%] md:right-[10%] lg:right-[15%] bottom-[15%] md:bottom-[20%] lg:bottom-[24%] w-[150px] h-[150px] md:w-[260px] md:h-[260px] lg:w-[360px] lg:h-[360px] z-10 animate-float-delayed">
+        {/* Biscuit Stack - Grounded on the gentler peak */}
+        <div className="absolute right-[8%] md:right-[12%] lg:right-[18%] bottom-[10%] md:bottom-[15%] lg:bottom-[18%] w-[130px] h-[130px] md:w-[230px] md:h-[230px] lg:w-[320px] lg:h-[320px] z-10 animate-float-delayed">
           <div className="relative w-full h-full">
             <Image
               src="/assets/hero/biscuit-stack.png"
