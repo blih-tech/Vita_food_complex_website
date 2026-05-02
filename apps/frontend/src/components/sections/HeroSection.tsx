@@ -206,13 +206,29 @@ export default function HeroSection() {
           {/* Diagonal Background Layers */}
           {/* Dark Grey Background Layer */}
           <div className="absolute left-1/2 -translate-x-1/2 flex h-[322.73px] items-center justify-center top-[148.3px] w-full max-w-[2052.554px]">
-            <div className="flex-none rotate-[-6.1deg] w-full h-[105.185px] bg-[#404040]" />
+            <div className="flex-none rotate-[-6.1deg] w-full h-[105.185px] bg-[#404040] shadow-xl" />
           </div>
           
-          {/* Yellow Text Tape Layer */}
+          {/* Yellow Text Tape Layer with Animation */}
           <div className="absolute left-1/2 -translate-x-1/2 flex h-[290.888px] items-center justify-center top-[161.1px] w-full max-w-[2054.879px]">
-            <div className="flex-none rotate-[-5.02deg] w-full h-[111.526px] bg-[#FFEC19] overflow-hidden">
+            <div className="flex-none rotate-[-5.02deg] w-full h-[111.526px] bg-[#FFEC19] overflow-hidden shadow-xl animate-pulse">
               <div className="relative h-full w-full">
+                {/* Animated Marquee Text */}
+                <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+                  <div className="flex whitespace-nowrap animate-marquee">
+                    <div className="font-[family-name:var(--font-funnel-display)] font-extrabold text-[96px] text-[#DB4426] leading-[0.88] tracking-[-0.384px] whitespace-nowrap px-8">
+                      A new stylish way of Connecting!
+                    </div>
+                    <div className="font-[family-name:var(--font-funnel-display)] font-extrabold text-[96px] text-[#DB4426] leading-[0.88] tracking-[-0.384px] whitespace-nowrap px-8">
+                      A new stylish way of Connecting!
+                    </div>
+                    <div className="font-[family-name:var(--font-funnel-display)] font-extrabold text-[96px] text-[#DB4426] leading-[0.88] tracking-[-0.384px] whitespace-nowrap px-8">
+                      A new stylish way of Connecting!
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Static positioned text from Figma */}
                 <div className="absolute font-[family-name:var(--font-funnel-display)] font-extrabold text-[96px] text-[#DB4426] leading-[0.88] tracking-[-0.384px] whitespace-nowrap">
                   <p className="absolute left-[643.46px] top-[calc(50%-51.4px)] -translate-x-1/2">
                     A new stylish way of Connecting!
@@ -325,5 +341,34 @@ export default function HeroSection() {
       </div>
 
     </section>
+
+    {/* Animation Styles */}
+    <style jsx>{`
+      @keyframes marquee {
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(-33.333%);
+        }
+      }
+      
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.9;
+        }
+      }
+      
+      .animate-marquee {
+        animation: marquee 15s linear infinite;
+      }
+      
+      .animate-pulse {
+        animation: pulse 3s ease-in-out infinite;
+      }
+    `}</style>
   );
 }
