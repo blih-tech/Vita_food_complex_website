@@ -212,12 +212,71 @@ export default function HeroSection() {
           </div>
 
           {/* Complex VITA Badge */}
-          <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-[#FFEC19] flex items-center justify-center shadow-2xl rotate-12 border-4 border-white">
-            <div className="relative w-full h-full flex items-center justify-center">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#FFEC19] to-[#F4D03F]" />
-              <div className="absolute inset-2 rounded-full bg-white opacity-30" />
-              <div className="relative text-[#DB4426] font-[family-name:var(--font-funnel-display)] font-extrabold text-[20px] lg:text-[24px] uppercase tracking-tight z-10">
-                VITA
+          <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-[#FFEC19] flex items-center justify-center shadow-2xl rotate-12 border-4 border-white overflow-hidden">
+            <div className="relative w-full h-full">
+              {/* Background Layer */}
+              <div className="absolute inset-0 rounded-full bg-[#FFEC19]" />
+              
+              {/* Complex Badge Layers from Figma */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="relative w-[80%] h-[80%]">
+                  {/* Layer 1 */}
+                  <div className="absolute inset-[14.21%_15.42%_13.32%_15.41%]">
+                    <Image
+                      src="/assets/hero/badge-layer1.svg"
+                      alt="Badge Layer 1"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  
+                  {/* Layer 2 */}
+                  <div className="absolute inset-[0_6.76%_79.9%_6.08%]">
+                    <Image
+                      src="/assets/hero/badge-layer2.svg"
+                      alt="Badge Layer 2"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  
+                  {/* Layer 3 */}
+                  <div className="absolute inset-[75.03%_9.07%_0_9.35%]">
+                    <Image
+                      src="/assets/hero/badge-layer3.svg"
+                      alt="Badge Layer 3"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  
+                  {/* Layer 4 */}
+                  <div className="absolute inset-[51.54%_0.57%_27.98%_0.57%]">
+                    <Image
+                      src="/assets/hero/badge-layer4.svg"
+                      alt="Badge Layer 4"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                  
+                  {/* Union Layer */}
+                  <div className="absolute inset-[23.9%_25.4%_24.41%_25.91%]">
+                    <Image
+                      src="/assets/hero/badge-union.svg"
+                      alt="Badge Union"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              {/* VITA Text */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="relative text-[#DB4426] font-[family-name:var(--font-funnel-display)] font-extrabold text-[20px] lg:text-[24px] uppercase tracking-tight z-10">
+                  VITA
+                </div>
               </div>
             </div>
           </div>
