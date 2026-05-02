@@ -205,12 +205,12 @@ export default function HeroSection() {
           
           {/* Diagonal Background Layers */}
           {/* Dark Grey Background Layer */}
-          <div className="absolute left-1/2 -translate-x-1/2 flex h-[322.73px] items-center justify-center top-[148.3px] w-full max-w-[2052.554px]">
+          <div className="absolute left-1/2 -translate-x-1/2 flex h-[322.73px] items-center justify-center top-[148.3px] w-full max-w-[2052.554px] z-0">
             <div className="flex-none rotate-[-6.1deg] w-full h-[105.185px] bg-[#404040] shadow-xl" />
           </div>
           
           {/* Yellow Text Tape Layer with Animation */}
-          <div className="absolute left-1/2 -translate-x-1/2 flex h-[290.888px] items-center justify-center top-[161.1px] w-full max-w-[2054.879px]">
+          <div className="absolute left-1/2 -translate-x-1/2 flex h-[290.888px] items-center justify-center top-[161.1px] w-full max-w-[2054.879px] z-0">
             <div className="flex-none rotate-[-5.02deg] w-full h-[111.526px] bg-[#FFEC19] overflow-hidden shadow-xl animate-pulse">
               <div className="relative h-full w-full">
                 {/* Animated Marquee Text */}
@@ -242,7 +242,7 @@ export default function HeroSection() {
           </div>
 
           {/* Main Video Frame */}
-          <div className="relative left-1/2 -translate-x-1/2 border-4 border-white border-solid h-[647px] rounded-[48px] top-0 w-full max-w-[1380px] overflow-hidden">
+          <div className="relative left-1/2 -translate-x-1/2 border-4 border-white border-solid h-[647px] rounded-[48px] top-0 w-full max-w-[1380px] overflow-hidden z-10">
             {/* Video Background with Gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#74E648] via-[#4ADE80] to-[#1FD650]" />
             
@@ -258,7 +258,7 @@ export default function HeroSection() {
             </div>
             
             {/* Sound Mute Icon */}
-            <div className="absolute left-[calc(50%-631.5px)] top-[calc(50%-262px)] w-[63px] h-[63px]">
+            <div className="absolute left-[calc(50%-631.5px)] top-[calc(50%-262px)] w-[63px] h-[63px] z-20">
               <Image
                 src="/assets/hero/sound-mute-video.svg"
                 alt="Mute"
