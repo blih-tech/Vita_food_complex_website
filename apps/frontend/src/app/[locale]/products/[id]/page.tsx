@@ -21,9 +21,16 @@ export function generateStaticParams() {
 }
 
 // Starburst component moved to ProductRelatedSection
-export default function ProductDetailPage({ params }: ProductDetailPageProps) {
-  const { id } = use(params);
+export default async function ProductDetailPage({
+  params,
+}: ProductDetailPageProps) {
+  const { id } = await params;
   const t = useTranslations("ProductsPage");
+
+  if (!id) {
+    return null;
+  }
+
   const product = products.find((p: Product) => p.id === id);
 
   if (!product) {
