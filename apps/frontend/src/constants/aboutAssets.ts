@@ -1,12 +1,13 @@
 export const ABOUT_ASSETS = {
   hero: {
-    backgroundFrame: "/assets/about/hero-bg-28c707.png",
+    backgroundFrame: "/assets/about/hero-background-frame.webp",
     ellipse: "/assets/about/hero-ellipse.svg",
     storyImage: "/assets/about/story-image-356f72.png",
   },
   content: {
     madeInEthiopia: "/assets/about/made-in-ethiopia.svg",
     storyImage: "/assets/about/story-image.png",
+    snackBag: "/assets/company/snack-bag.png",
   },
   process: {
     sourcing: "/assets/about/wheat-farming.png",

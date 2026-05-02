@@ -2,152 +2,83 @@
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useRef } from "react";
 
 const LOGOS = [
-  { name: "YAB FOOD AND FEED", src: "/assets/sister/belayab.svg" },
-  { name: "GOLDEN TULIP", src: "/assets/sister/golden-tulip.svg" },
-  { name: "Lewis Retails supermarket", src: "/assets/sister/lewis.svg" },
+  { name: "Belayab", src: "/assets/sister/belayab.svg" },
+  { name: "Golden Tulip", src: "/assets/sister/golden-tulip.svg" },
+  { name: "Lewis", src: "/assets/sister/lewis.svg" },
+  { name: "Foods", src: "/assets/sister/foods.svg" },
   { name: "Motors", src: "/assets/sister/motors.svg" },
   { name: "Cables", src: "/assets/sister/cables.svg" },
-  // "LONG TEA" is visible in the image but the asset is missing, so it's omitted.
+  { name: "Limestone", src: "/assets/sister/limestone.svg" },
 ];
 
 export default function SisterCompaniesSection() {
   const t = useTranslations("About");
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
     <section
       className="px-4 sm:px-6 lg:px-[128px]"
-      style={{ background: "#FFFFFF", paddingTop: 64, paddingBottom: 64 }}
+      style={{ background: "#FFFFFF", paddingTop: 48, paddingBottom: 64 }}
     >
-      {/* layout_GIW9UK: column, alignItems:center, gap:31.92px */}
-      <div
-        className="mx-auto flex flex-col items-center gap-8" // Replaced inline style gap with Tailwind
-        style={{ maxWidth: 1664 }}
-      >
-        {/* text frame — layout_IDEUKV: column, alignItems:center, gap:31.92px */}
-        <div
-          className="flex flex-col items-center text-center gap-8" // Replaced inline style gap with Tailwind
+      {/* Figma 2066:3484 — column, center, gap:31.92px */}
+      <div className="mx-auto flex flex-col items-center" style={{ maxWidth: 1664, gap: 24 }}>
+        {/* Label — Funnel Display 500, 13.3px, #8A8C8A */}
+        <span
+          style={{
+            fontFamily: "'Funnel Display', sans-serif",
+            fontWeight: 500,
+            fontSize: 13.3,
+            lineHeight: "1.25em",
+            letterSpacing: "-0.053px",
+            color: "#8A8C8A",
+            textAlign: "center",
+          }}
         >
-          {/* "Sister Companies" — style_AJAP13: Funnel Display 500, 13.3px, 1.25em lh, CENTER, #404040 */}
-          <span
-            style={{
-              fontFamily: "'Funnel Display', sans-serif",
-              fontWeight: 500,
-              fontSize: 13.3,
-              lineHeight: "1.25em",
-              letterSpacing: "-0.053px",
-              color: "#23B349", // Updated to green
-              textAlign: "center",
-            }}
-          >
-            {t("sisterCompanies.label")}
-          </span>
-          {/* title — style_R06MT2: Outfit 800, 53.2px, 0.9em lh, -2% ls, CENTER, #23B349 */}
-          <h2
-            style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 800,
-              fontSize: "clamp(32px, 4vw, 53.2px)",
-              lineHeight: "0.9em",
-              letterSpacing: "-1.064px",
-              color: "#23B349",
-              textAlign: "center",
-            }}
-          >
-            {t("sisterCompanies.title")}
-          </h2>
-        </div>
+          {t("sisterCompanies.label")}
+        </span>
 
-        {/* Scrollable Logo Carousel */}
-        <div className="relative w-full"> {/* Added w-full to ensure carousel takes full width */}
+        {/* Horizontal divider */}
+        <div style={{ width: "100%", maxWidth: 1200, height: 1, background: "#E8E8E8" }} />
+
+        {/* Logo row — horizontal scroll on mobile */}
+        <div className="w-full overflow-x-auto scrollbar-hide">
           <div
-            ref={scrollRef}
-            className="flex gap-8 overflow-x-auto pb-4 scrollbar-hide"
-            style={{ scrollSnapType: "x mandatory" }}
+            className="flex items-center justify-start md:justify-center"
+            style={{ gap: 24, minWidth: "max-content", padding: "8px 0" }}
           >
-            {LOGOS.map((logo, i) => (
+            {LOGOS.map((logo) => (
               <div
-                key={i}
-                className="flex-shrink-0 flex items-center justify-center rounded-[16px] px-10 py-8"
-                style={{
-                  minWidth: 240,
-                  height: 146,
-                  background: "#F5F5F5",
-                  scrollSnapAlign: "start",
-                }}
+                key={logo.name}
+                className="flex-shrink-0 flex items-center justify-center rounded-[16px]"
+                style={{ width: 160, height: 96, background: "#F5F5F5", padding: "12px 20px" }}
               >
-                <Image
-                  src={logo.src}
-                  alt={logo.name}
-                  width={160}
-                  height={60}
-                  className="object-contain"
-                />
+                <div className="relative w-full h-full">
+                  <Image src={logo.src} alt={logo.name} fill className="object-contain" />
+                </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* TEXT with btn — layout_IDEUKV: column, alignItems:center, gap:31.92px */}
-        <div
-          className="flex flex-col items-center text-center gap-8" // Replaced inline style gap with Tailwind
+        {/* See more — Figma layout_BVZOUK: green pill button */}
+        <button
+          className="flex items-center rounded-full"
+          style={{ gap: 10, padding: "10px 24px", background: "#23B349" }}
         >
-          {/* Description — style_AJAP13: Funnel Display 500, 13.3px, 1.25em lh, CENTER, #404040, max-width 365 */}
-          <p
+          <span
             style={{
               fontFamily: "'Funnel Display', sans-serif",
               fontWeight: 500,
-              fontSize: 13.3,
+              fontSize: 16,
               lineHeight: "1.25em",
-              letterSpacing: "-0.053px",
-              color: "#404040",
-              maxWidth: 365,
-              textAlign: "center",
+              color: "#FFFFFF",
             }}
           >
-            {t("sisterCompanies.description")}
-          </p>
-
-          {/* "See more" Button — layout_42E7K9: row, alignItems:center, gap:15.96px */}
-          <div className="flex items-center gap-4"> {/* Replaced inline style gap with Tailwind */}
-            {/* layout_BVZOUK: row, center, gap:10.64px, padding:10.64px 21.28px, radius:664px */}
-            {/* style_Q17P5T: Funnel Display 500, 15.96px, 1.25em lh, #000 on green bg */}
-            <button
-              className="rounded-full flex items-center"
-              style={{
-                padding: "10.64px 21.28px",
-                background: "#23B349",
-                borderRadius: 664,
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "'Funnel Display', sans-serif",
-                  fontWeight: 500,
-                  fontSize: 15.96,
-                  lineHeight: "1.25em",
-                  letterSpacing: "-0.064px",
-                  color: "#FFFFFF",
-                }}
-              >
-                {t("sisterCompanies.cta")}
-              </span>
-              <span
-                style={{
-                  fontFamily: "'Outfit', sans-serif",
-                  fontWeight: 400,
-                  fontSize: 13.3,
-                  color: "#FFFFFF",
-                }}
-              >
-                →
-              </span>
-            </button>
-          </div>
-        </div>
+            {t("sisterCompanies.cta")}
+          </span>
+          <span style={{ color: "#FFFFFF", fontSize: 14 }}>→</span>
+        </button>
       </div>
     </section>
   );
