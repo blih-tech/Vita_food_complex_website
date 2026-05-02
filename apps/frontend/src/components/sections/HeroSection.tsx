@@ -189,24 +189,53 @@ export default function HeroSection() {
 
       {/* ── Bottom Video Section ── */}
       <div className="relative w-full bg-white px-4 py-16">
-        <div className="max-w-[900px] mx-auto relative">
-          {/* Family Video Frame */}
-          <div className="relative w-full aspect-[16/9] rounded-[20px] overflow-hidden shadow-2xl border-[8px] border-white">
-            <Image
-              src="/assets/hero/family-video.png"
-              alt="Family enjoying Vita products"
-              fill
-              className="object-cover"
-              priority
-            />
+        <div className="max-w-[1400px] mx-auto relative">
+          
+          {/* Diagonal Background Layers */}
+          {/* Dark Grey Background Layer */}
+          <div className="absolute left-1/2 -translate-x-1/2 flex h-[322.73px] items-center justify-center top-[148.3px] w-full max-w-[2052.554px]">
+            <div className="flex-none rotate-[-6.1deg] w-full h-[105.185px] bg-[#404040]" />
+          </div>
+          
+          {/* Yellow Text Tape Layer */}
+          <div className="absolute left-1/2 -translate-x-1/2 flex h-[290.888px] items-center justify-center top-[161.1px] w-full max-w-[2054.879px]">
+            <div className="flex-none rotate-[-5.02deg] w-full h-[111.526px] bg-[#FFEC19] overflow-hidden">
+              <div className="relative h-full w-full">
+                <div className="absolute font-[family-name:var(--font-funnel-display)] font-extrabold text-[96px] text-[#DB4426] leading-[0.88] tracking-[-0.384px] whitespace-nowrap">
+                  <p className="absolute left-[643.46px] top-[calc(50%-51.4px)] -translate-x-1/2">
+                    A new stylish way of Connecting!
+                  </p>
+                  <p className="absolute left-[1325.75px] top-[calc(50%-47.63px)] -translate-x-1/2">
+                    A new stylish way of Connecting!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Main Video Frame */}
+          <div className="relative left-1/2 -translate-x-1/2 border-4 border-white border-solid h-[647px] rounded-[48px] top-0 w-full max-w-[1380px] overflow-hidden">
+            {/* Video Background with Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#74E648] via-[#4ADE80] to-[#1FD650]" />
+            
+            {/* Family Video Image */}
+            <div className="absolute left-1/2 -translate-x-1/2 h-[768px] top-[-64.5px] w-full max-w-[1408px]">
+              <Image
+                src="/assets/hero/video-family.png"
+                alt="Family enjoying Vita products"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
             
             {/* Sound Mute Icon */}
-            <div className="absolute top-4 left-4 w-12 h-12 rounded-full bg-black/30 backdrop-blur-md flex items-center justify-center border-2 border-white/20">
+            <div className="absolute left-[calc(50%-631.5px)] top-[calc(50%-262px)] w-[63px] h-[63px]">
               <Image
-                src="/assets/hero/sound-mute.svg"
+                src="/assets/hero/sound-mute-video.svg"
                 alt="Mute"
                 fill
-                className="object-contain p-3"
+                className="object-contain"
               />
             </div>
           </div>
