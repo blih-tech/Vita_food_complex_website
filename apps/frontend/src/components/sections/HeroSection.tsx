@@ -13,10 +13,10 @@ export default function HeroSection() {
       className="relative w-full overflow-hidden flex flex-col items-center bg-white min-h-[100vh]"
       style={{ paddingTop: '267.71px' }}
     >
-      {/* ── Green Wave/Semicircle Background ── */}
-      <div className="absolute left-1/2 -translate-x-1/2 h-[1000px] top-[100px] w-full max-w-[1400px] z-0">
+      {/* ── Green Wave/Semicircle Background (Text Section Only) ── */}
+      <div className="absolute left-1/2 -translate-x-1/2 h-[600px] top-[100px] w-full max-w-[1400px] z-0">
         <div className="relative w-full h-full">
-          {/* Main semicircle wave - larger and more prominent */}
+          {/* Main semicircle wave - limited to text section */}
           <div className="absolute inset-0">
             <Image
               src="/assets/hero/semicircle-vector.svg"
@@ -210,6 +210,9 @@ export default function HeroSection() {
 
       {/* ── Bottom Video Section ── */}
       <div className="relative w-full bg-white px-4 py-16">
+        {/* Rectangle Background Behind Video */}
+        <div className="absolute left-1/2 -translate-x-1/2 h-[800px] top-0 w-full max-w-[1400px] bg-[#23b349] z-0" />
+        
         <div className="max-w-[1400px] mx-auto relative">
           
           {/* Diagonal Background Layers */}
