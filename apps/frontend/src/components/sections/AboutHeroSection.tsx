@@ -17,8 +17,8 @@ export default function AboutHeroSection() {
 
   return (
     <section
-      className="relative w-full overflow-hidden"
-      style={{ background: "#E9F7ED" }}
+      className="relative w-full overflow-hidden bg-gradient-to-br from-green-800 to-green-600" // Updated background
+      // Removed style={{ background: "#E9F7ED" }}
     >
       {/* Blurred green background with parallax — Figma node 2376:9999 */}
       <div className="absolute inset-0 z-0">
@@ -42,7 +42,7 @@ export default function AboutHeroSection() {
         {/* Green overlay — Figma fill_9LFXW6: rgba(55,255,0,0.4) */}
         <div
           className="absolute inset-0"
-          style={{ background: "rgba(55, 255, 0, 0.4)" }}
+          style={{ background: "rgba(35, 179, 73, 0.4)" }} // Updated to a darker green overlay
         />
       </div>
 
@@ -90,7 +90,7 @@ export default function AboutHeroSection() {
               fontSize: "clamp(18px, 2.5vw, 24px)",
               lineHeight: "1.25em",
               letterSpacing: "-0.096px",
-              color: "#E8E8E8",
+              color: "#FFFFFF", // Updated to white
               textAlign: "center",
               maxWidth: 900,
             }}

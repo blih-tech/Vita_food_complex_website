@@ -177,7 +177,7 @@ export default function MissionVisionSection() {
                     fontSize: 20,
                     lineHeight: "1.26em",
                     letterSpacing: "-0.08px",
-                    color: "#8A8C8A",
+                    color: "#333333", // Updated to dark gray
                   }}
                 >
                   {t(card.descKey)}

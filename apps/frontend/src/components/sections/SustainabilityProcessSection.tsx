@@ -95,12 +95,12 @@ export default function SustainabilityProcessSection() {
           </h2>
         </div>
 
-        {/* Process Steps — Figma node 274:5191, 4 columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Process Steps — Figma node 274:5191, responsive grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {steps.map((step, i) => (
             <div
               key={step.key}
-              className={`${i > 0 ? "sm:mt-[50px] lg:mt-[100px]" : ""}`}
+              className={`${i > 0 ? "sm:mt-[30px] lg:mt-[60px]" : ""}`}
               style={{
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? "translateY(0)" : "translateY(30px)",
@@ -109,7 +109,7 @@ export default function SustainabilityProcessSection() {
             >
               {/* Heading — Outfit Bold 64px (Reuse is Funnel Display Bold 40px), lh 61.44px, ls -1.28px, #333733 */}
               <h3
-                className="mb-4 sm:mb-6 text-[24px] sm:text-[32px] md:text-[48px] lg:text-[64px]"
+                className="mb-3 sm:mb-4 text-[20px] sm:text-[24px] md:text-[32px] lg:text-[48px]"
                 style={{
                   fontFamily:
                     step.key === "reuse"
@@ -117,7 +117,7 @@ export default function SustainabilityProcessSection() {
                       : "'Outfit', sans-serif",
                   fontWeight: 700,
                   lineHeight: step.key === "reuse" ? "1.2" : "1.2",
-                  letterSpacing: "-1.28px",
+                  letterSpacing: "-0.8px",
                   color: "#333733",
                 }}
               >
@@ -126,9 +126,9 @@ export default function SustainabilityProcessSection() {
 
               {/* Process images from Figma */}
               <div
-                className="rounded-[16px] sm:rounded-[20px] lg:rounded-[24px] overflow-hidden mb-4 sm:mb-6"
+                className="rounded-[12px] sm:rounded-[16px] lg:rounded-[20px] overflow-hidden mb-3 sm:mb-4"
                 style={{
-                  height: `${Math.min(step.imageHeight * 0.4, 300)}px`,
+                  height: `${Math.min(step.imageHeight * 0.3, 200)}px`,
                 }}
               >
                 <img
@@ -140,12 +140,12 @@ export default function SustainabilityProcessSection() {
 
               {/* Description — Funnel Display Medium 20px, lh 25px, ls -0.08px */}
               <p
-                className="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px]"
+                className="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]"
                 style={{
                   fontFamily: "'Funnel Display', sans-serif",
                   fontWeight: 500,
                   lineHeight: "1.4",
-                  letterSpacing: "-0.08px",
+                  letterSpacing: "-0.06px",
                   color: i === 1 || i === 3 ? "#545854" : "#404040",
                 }}
               >

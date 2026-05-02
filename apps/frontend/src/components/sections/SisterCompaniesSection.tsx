@@ -5,13 +5,12 @@ import Image from "next/image";
 import { useRef } from "react";
 
 const LOGOS = [
-  { name: "Belayab Groups", src: "/assets/sister/belayab.svg" },
+  { name: "YAB FOOD AND FEED", src: "/assets/sister/belayab.svg" },
+  { name: "GOLDEN TULIP", src: "/assets/sister/golden-tulip.svg" },
+  { name: "Lewis Retails supermarket", src: "/assets/sister/lewis.svg" },
   { name: "Motors", src: "/assets/sister/motors.svg" },
   { name: "Cables", src: "/assets/sister/cables.svg" },
-  { name: "Golden Tulip", src: "/assets/sister/golden-tulip.svg" },
-  { name: "Lewis", src: "/assets/sister/lewis.svg" },
-  { name: "Foods", src: "/assets/sister/foods.svg" },
-  { name: "Limestone", src: "/assets/sister/limestone.svg" },
+  // "LONG TEA" is visible in the image but the asset is missing, so it's omitted.
 ];
 
 export default function SisterCompaniesSection() {
@@ -25,13 +24,12 @@ export default function SisterCompaniesSection() {
     >
       {/* layout_GIW9UK: column, alignItems:center, gap:31.92px */}
       <div
-        className="mx-auto flex flex-col items-center"
-        style={{ maxWidth: 1664, gap: 31.92 }}
+        className="mx-auto flex flex-col items-center gap-8" // Replaced inline style gap with Tailwind
+        style={{ maxWidth: 1664 }}
       >
         {/* text frame — layout_IDEUKV: column, alignItems:center, gap:31.92px */}
         <div
-          className="flex flex-col items-center text-center"
-          style={{ gap: 31.92 }}
+          className="flex flex-col items-center text-center gap-8" // Replaced inline style gap with Tailwind
         >
           {/* "Sister Companies" — style_AJAP13: Funnel Display 500, 13.3px, 1.25em lh, CENTER, #404040 */}
           <span
@@ -41,7 +39,7 @@ export default function SisterCompaniesSection() {
               fontSize: 13.3,
               lineHeight: "1.25em",
               letterSpacing: "-0.053px",
-              color: "#404040",
+              color: "#23B349", // Updated to green
               textAlign: "center",
             }}
           >
@@ -64,7 +62,7 @@ export default function SisterCompaniesSection() {
         </div>
 
         {/* Scrollable Logo Carousel */}
-        <div className="relative">
+        <div className="relative w-full"> {/* Added w-full to ensure carousel takes full width */}
           <div
             ref={scrollRef}
             className="flex gap-8 overflow-x-auto pb-4 scrollbar-hide"
@@ -95,8 +93,7 @@ export default function SisterCompaniesSection() {
 
         {/* TEXT with btn — layout_IDEUKV: column, alignItems:center, gap:31.92px */}
         <div
-          className="flex flex-col items-center text-center"
-          style={{ gap: 31.92 }}
+          className="flex flex-col items-center text-center gap-8" // Replaced inline style gap with Tailwind
         >
           {/* Description — style_AJAP13: Funnel Display 500, 13.3px, 1.25em lh, CENTER, #404040, max-width 365 */}
           <p
@@ -115,13 +112,12 @@ export default function SisterCompaniesSection() {
           </p>
 
           {/* "See more" Button — layout_42E7K9: row, alignItems:center, gap:15.96px */}
-          <div className="flex items-center" style={{ gap: 15.96 }}>
+          <div className="flex items-center gap-4"> {/* Replaced inline style gap with Tailwind */}
             {/* layout_BVZOUK: row, center, gap:10.64px, padding:10.64px 21.28px, radius:664px */}
             {/* style_Q17P5T: Funnel Display 500, 15.96px, 1.25em lh, #000 on green bg */}
             <button
               className="rounded-full flex items-center"
               style={{
-                gap: 10.64,
                 padding: "10.64px 21.28px",
                 background: "#23B349",
                 borderRadius: 664,

@@ -85,11 +85,11 @@ export default function SustainabilityGiveBackSection() {
         </div>
 
         {/* 3 Cards — responsive grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {cards.map((card, i) => (
             <div
               key={card.key}
-              className={`${i > 0 ? "md:mt-[30px] lg:mt-[60px]" : ""}`}
+              className={`${i > 0 ? "md:mt-[20px] lg:mt-[40px]" : ""}`}
               style={{
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? "translateY(0)" : "translateY(30px)",
@@ -98,9 +98,9 @@ export default function SustainabilityGiveBackSection() {
             >
               {/* Give Back images from Figma */}
               <div
-                className="rounded-[16px] sm:rounded-[20px] lg:rounded-[24px] overflow-hidden mb-4 sm:mb-6"
+                className="rounded-[12px] sm:rounded-[16px] lg:rounded-[20px] overflow-hidden mb-3 sm:mb-4"
                 style={{
-                  height: "250px",
+                  height: "180px",
                 }}
               >
                 <img
@@ -112,13 +112,13 @@ export default function SustainabilityGiveBackSection() {
 
               {/* Heading — Funnel Display Bold 24px, lh 24px, ls -0.096px, #000000 */}
               <h3
-                className="mb-2 sm:mb-3 text-[18px] sm:text-[20px] md:text-[24px]"
+                className="mb-2 sm:mb-3 text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px]"
                 style={{
                   fontFamily: "'Funnel Display', sans-serif",
                   fontWeight: 700,
                   lineHeight: "1.2",
                   letterSpacing:
-                    card.key === "accessibility" ? "0px" : "-0.096px",
+                    card.key === "accessibility" ? "0px" : "-0.08px",
                   color: "#000000",
                 }}
               >
@@ -127,12 +127,12 @@ export default function SustainabilityGiveBackSection() {
 
               {/* Description — Outfit Regular 20px, lh 25.2px, ls -0.08px */}
               <p
-                className="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px]"
+                className="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]"
                 style={{
                   fontFamily: "'Outfit', sans-serif",
                   fontWeight: 400,
                   lineHeight: "1.4",
-                  letterSpacing: "-0.08px",
+                  letterSpacing: "-0.06px",
                   color: card.key === "farmers" ? "#404040" : "#333733",
                 }}
               >

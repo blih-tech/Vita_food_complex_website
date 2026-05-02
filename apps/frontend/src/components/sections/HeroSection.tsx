@@ -13,117 +13,115 @@ export default function HeroSection() {
       className="relative w-full overflow-hidden flex flex-col items-center bg-gradient-to-b from-[var(--color-background-page)] to-white min-h-[100vh] pt-20"
     >
       {/* ── Background Elements ── */}
-      <div className="absolute top-0 left-0 w-full h-[800px] pointer-events-none z-0 overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-[1180.918px] pointer-events-none z-0 overflow-hidden">
 
-        {/* Top-left green glow */}
-        <div className="absolute top-[-100px] left-[-150px] w-[500px] h-[500px] bg-[var(--color-primary)] blur-[140px] rounded-full opacity-30 mix-blend-multiply" />
+        {/* Left blur shape - matching Figma exactly */}
+        <div className="absolute top-[-1px] left-[-33.02px] w-[425.017px] h-[1125.277px] bg-[#23b349] blur-[13.55px] rounded-full opacity-30 mix-blend-screen" 
+             style={{
+               background: 'linear-gradient(73.61234608838203deg, rgba(255, 255, 255, 0) 31.925%, rgb(255, 255, 255) 73.82%)',
+               mixBlendMode: 'screen'
+             }}
+        />
 
-        {/* Top-right green glow */}
-        <div className="absolute top-[-150px] right-[-150px] w-[600px] h-[600px] bg-[var(--color-primary)] blur-[150px] rounded-full opacity-25 mix-blend-multiply" />
+        {/* Right decorative element - matching Figma positioning */}
+        <div className="absolute top-[-1px] left-[1196.2px] w-[723.803px] h-[1180.918px] pointer-events-none">
+          <div className="w-full h-full rotate-180">
+            <div className="w-full h-full relative overflow-hidden">
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#23b349]/20 to-transparent" />
+            </div>
+          </div>
+        </div>
 
-        {/* Decorative circles */}
-        <div className="absolute top-[10%] left-[10%] w-[100px] h-[100px] bg-[#FFEC19] rounded-full opacity-20 blur-xl" />
-        <div className="absolute top-[20%] right-[15%] w-[80px] h-[80px] bg-[#DB4426] rounded-full opacity-15 blur-xl" />
+        {/* Bottom wave vector */}
+        <div className="absolute top-[934.79px] left-1/2 -translate-x-1/2 w-[7210.039px] h-[2286.921px] pointer-events-none">
+          <svg viewBox="0 0 7210.039 2286.921" className="w-full h-full">
+            <path d="M0,0 C1000,500 2000,300 3000,600 C4000,900 5000,200 6000,400 C7000,600 7210,300 7210,0 L7210,2286.921 L0,2286.921 Z" 
+                  fill="rgba(35,179,73,0.1)" />
+          </svg>
+        </div>
       </div>
 
       {/* ── Top Section: Heading + Subtitle + CTAs ── */}
-      <div className="relative z-20 w-full max-w-[1200px] px-4 flex flex-col items-center pt-8 md:pt-16 pb-12">
+      <div className="relative z-20 w-full max-w-[1024px] px-4 flex flex-col items-center pt-8 md:pt-16 pb-12 mx-auto">
 
-        {/* Butterfly - Top Left (using existing fish-cookie temporarily) */}
-        <div className="absolute top-0 left-[5%] sm:left-[10%] w-[80px] sm:w-[120px] md:w-[160px] h-[80px] sm:h-[120px] md:h-[160px] animate-float z-10">
-          <Image
-            src="/assets/hero/fish-cookie.png"
-            alt="Decorative element"
-            fill
-            className="object-contain"
-            priority
-          />
-        </div>
-
-        {/* Main Heading Group */}
-        <div className="flex flex-col items-center text-center relative w-full mt-8 sm:mt-12">
-
-          {/* Line 1: "A new stylish" */}
-          <h2
-            className="font-[family-name:var(--font-outfit)] font-black text-[6vw] min-[375px]:text-[32px] sm:text-[56px] md:text-[72px] lg:text-[88px] text-[var(--color-body-text)] leading-[0.9] tracking-[-0.01em]"
-          >
-            A new stylish
-          </h2>
-
-          {/* Line 2: 🍪 way of 🍓 */}
-          <div className="flex items-center justify-center gap-2 min-[375px]:gap-3 mt-0">
-            {/* Chocolate Chip Cookie */}
-            <div className="relative w-[6vw] h-[6vw] min-[375px]:w-[28px] min-[375px]:h-[28px] sm:w-[40px] sm:h-[40px] md:w-[50px] md:h-[50px] animate-float shrink-0 self-baseline -mb-2 sm:-mb-3">
+        {/* Hero text container - matching Figma exactly */}
+        <div className="relative w-full flex flex-col items-center gap-[48px] mt-[267.71px] md:mt-[300px]">
+          
+          {/* Main heading container */}
+          <div className="relative w-full h-[326.885px] md:h-[400px]">
+            
+            {/* "A new stylish way of" text */}
+            <div className="absolute left-1/2 -translate-x-1/2 top-0 w-full md:w-[1024px]">
+              <h2 className="font-[family-name:var(--font-outfit)] font-extrabold text-[60px] md:text-[96px] leading-[0.88] tracking-[-0.384px] text-[#404040] text-center whitespace-nowrap">
+                <span className="block leading-[0.88]">A new stylish</span>
+                <span className="block leading-[0.88]">way of</span>
+              </h2>
+            </div>
+            
+            {/* Strawberry decoration - responsive positioning */}
+            <div className="absolute right-[10%] top-[84.25px] md:left-[708.48px] md:right-auto w-[60px] h-[60px] md:w-[81.73px] md:h-[81.73px]">
               <Image
-                src="/assets/hero/cookie-decoration-1.png"
-                alt="Chocolate Chip Cookie"
+                src="/assets/hero/strawberry.png"
+                alt="Strawberry decoration"
                 fill
-                className="object-contain"
+                className="object-cover"
                 priority
               />
             </div>
-
-            <h2
-              className="font-[family-name:var(--font-outfit)] font-black text-[6vw] min-[375px]:text-[32px] sm:text-[56px] md:text-[72px] lg:text-[88px] text-[var(--color-body-text)] leading-[0.9] tracking-[-0.01em]"
-            >
-              way of
-            </h2>
-
-            {/* Strawberry */}
-            <div className="relative w-[6vw] h-[6vw] min-[375px]:w-[28px] min-[375px]:h-[28px] sm:w-[40px] sm:h-[40px] md:w-[50px] md:h-[50px] animate-float-delayed shrink-0 self-end -mb-1 sm:-mb-2">
-              <Image
-                src="/assets/hero/strawberry.png"
-                alt="Strawberry"
-                fill
-                className="object-contain"
-                priority
-              />
+            
+            {/* Gemini decoration - responsive positioning */}
+            <div className="absolute left-[10%] top-[86.42px] md:left-[224.6px] w-[80px] h-[80px] md:w-[108px] md:h-[108px] flex items-center justify-center">
+              <div className="w-[60px] h-[60px] md:w-[84.994px] md:h-[84.994px] rotate-[18.96deg]">
+                <Image
+                  src="/assets/hero/gemini-generated-image-1.png"
+                  alt="Decoration"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
+            
+            {/* "Connecting!" text - large green */}
+            <div className="absolute left-1/2 -translate-x-1/2 top-[157.89px] md:top-[157.89px] w-full md:w-[1024px] h-[120px] md:h-[169px]">
+              <h1 className="font-[family-name:var(--font-outfit)] font-extrabold text-[120px] md:text-[192px] leading-[0.88] tracking-[-5.76px] text-[#23b349] text-center whitespace-nowrap">
+                {t("connecting")}
+              </h1>
             </div>
           </div>
 
-          {/* Line 3: "Connecting!" — large green */}
-          <h1
-            className="font-[family-name:var(--font-funnel-display)] font-bold text-[10vw] min-[375px]:text-[50px] sm:text-[90px] md:text-[140px] lg:text-[180px] text-[var(--color-primary)] leading-[0.85] tracking-[-0.03em] mt-2"
-          >
-            {t("connecting")}
-          </h1>
-        </div>
+          {/* Subtitle - matching Figma typography exactly */}
+          <div className="relative w-full text-center">
+            <p className="font-[family-name:var(--font-funnel-display)] font-medium text-[20px] leading-[normal] tracking-[-0.08px] text-[#404040] text-center whitespace-nowrap">
+              <span className="block leading-[normal]">{t("description")}</span>
+            </p>
+          </div>
 
-        {/* Subtitle */}
-        <div className="max-w-[400px] sm:max-w-[500px] md:max-w-[600px] text-center mt-6 sm:mt-8">
-          <p className="font-[family-name:var(--font-outfit)] font-normal text-[12px] sm:text-[16px] md:text-[18px] text-[var(--color-body-text)] leading-[1.4] tracking-tight">
-            {t("description")}
-          </p>
-        </div>
+          {/* CTA Buttons - matching Figma exactly */}
+          <div className="flex flex-col md:flex-row gap-[16px] md:gap-[24px] items-center justify-center">
+            
+            {/* Primary button - filled green */}
+            <Link
+              href="/products"
+              className="bg-[#23b349] text-white flex gap-[12px] md:gap-[16px] items-center justify-center px-[24px] md:px-[32px] py-[12px] md:py-[16px] h-[48px] md:h-[56px] rounded-[999px] whitespace-nowrap hover:bg-[#1e9a3e] transition-all duration-300 shadow-lg shadow-green-600/25 active:scale-95 w-full md:w-auto"
+            >
+              <span className="font-[family-name:var(--font-funnel-display)] font-medium text-[18px] md:text-[24px] leading-[normal] tracking-[-0.096px]">
+                {t("ourProducts")}
+              </span>
+              <span className="text-[16px] md:text-[20px]">→</span>
+            </Link>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center mt-8 sm:mt-12 pb-12 sm:pb-20">
-
-          {/* Primary — filled green */}
-          <Link
-            href="/products"
-            className="group bg-[var(--color-primary)] text-white px-8 sm:px-10 py-3 sm:py-4 rounded-full flex items-center justify-center gap-3 hover:bg-[#1e9a3e] transition-all duration-300 shadow-lg shadow-green-600/25 active:scale-95 min-w-[160px] justify-center"
-          >
-            <span className="font-[family-name:var(--font-funnel-display)] font-semibold text-[14px] sm:text-[16px] whitespace-nowrap">
-              {t("ourProducts")}
-            </span>
-            <span className="text-[16px] group-hover:translate-x-1 transition-transform">→</span>
-          </Link>
-
-          {/* Secondary — white with green border */}
-          <Link
-            href="/about"
-            className="relative px-8 sm:px-10 py-3 sm:py-4 bg-white border-2 border-[var(--color-primary)] rounded-full flex items-center justify-center hover:bg-[var(--color-primary)] hover:text-white transition-all active:scale-95 shadow-md min-w-[160px] justify-center group"
-          >
-            <span className="font-[family-name:var(--font-funnel-display)] font-semibold text-[14px] sm:text-[16px] text-[var(--color-primary)] whitespace-nowrap group-hover:text-white">
-              {t("whyVita")}
-            </span>
-            <div className="w-[20px] h-[20px] flex items-center justify-center rounded-full bg-[var(--color-primary)] text-white transition-colors group-hover:bg-white">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3 group-hover:fill-[var(--color-primary)]">
-                <polygon points="9 6 18 12 9 18 9 6" />
-              </svg>
-            </div>
-          </Link>
+            {/* Secondary button - bordered */}
+            <Link
+              href="/about"
+              className="border border-[#1fd650] border-solid flex gap-[12px] md:gap-[16px] items-center justify-center px-[24px] md:px-[32px] py-[12px] md:py-[16px] h-[48px] md:h-[56px] rounded-[999px] whitespace-nowrap hover:bg-[#23b349] hover:text-white transition-all duration-300 active:scale-95 w-full md:w-auto"
+            >
+              <span className="font-[family-name:var(--font-funnel-display)] font-medium text-[18px] md:text-[24px] leading-[0] tracking-[-0.096px] text-[#000000]">
+                {t("whyVita")}
+                <span className="font-[family-name:var(--font-outfit)] font-normal text-[16px] md:text-[20px] tracking-[-0.08px]">®</span>
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -141,29 +139,63 @@ export default function HeroSection() {
           </svg>
         </div>
 
-        {/* Doctor Duck — left, floating above curve */}
-        <div className="absolute top-[-4vw] sm:top-[-6vw] md:top-[-8vw] left-[2%] sm:left-[5%] md:left-[8%] z-30 drop-shadow-[0_20px_40px_rgba(0,0,0,0.3)]">
-          <div className="relative w-[25vw] min-[375px]:w-[120px] sm:w-[180px] md:w-[240px] lg:w-[300px] aspect-square animate-float -translate-y-[90%]">
-            <Image
-              src="/assets/hero/doctor-duck.png"
-              alt="Doctor Duck"
-              fill
-              className="object-contain object-bottom"
-              priority
-            />
-          </div>
-        </div>
-
-        {/* Biscuit Stack — right, floating above curve */}
-        <div className="absolute top-[-3vw] sm:top-[-5vw] md:top-[-7vw] right-[-5%] sm:right-[-3%] md:right-[-1%] z-30 drop-shadow-[0_20px_40px_rgba(0,0,0,0.3)]">
-          <div className="relative w-[20vw] min-[375px]:w-[100px] sm:w-[150px] md:w-[200px] lg:w-[250px] aspect-square animate-float-delayed -translate-y-[90%]">
-            <Image
-              src="/assets/hero/biscuit-stack.png"
-              alt="Biscuit Stack"
-              fill
-              className="object-contain object-bottom"
-              priority
-            />
+        {/* Doctor Duck - matching Figma positioning */}
+        <div className="absolute top-[3.87px] left-[-432.14px] z-30">
+          <div className="relative w-[685px] h-[612px]">
+            {/* Tiramisu */}
+            <div className="absolute top-[548px] left-[1386px] w-[250.296px] h-[250.296px] mix-blend-multiply">
+              <Image
+                src="/assets/hero/tiramisu.png"
+                alt="Tiramisu"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+            
+            {/* Doctor Duck */}
+            <div className="absolute top-[548px] left-[1386px] w-[250.296px] h-[250.296px] mix-blend-multiply">
+              <Image
+                src="/assets/hero/doctor-duck-delight.png"
+                alt="Doctor Duck"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+            
+            {/* ChatGPT Image */}
+            <div className="absolute top-[548px] left-[1386px] w-[250.296px] h-[250.296px] mix-blend-multiply">
+              <Image
+                src="/assets/hero/chatgpt-image.png"
+                alt="ChatGPT"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+            
+            {/* Gemini Generated Image 2 */}
+            <div className="absolute top-[548px] left-[1386px] w-[250.296px] h-[250.296px] mix-blend-multiply">
+              <Image
+                src="/assets/hero/gemini-generated-image-2.png"
+                alt="Gemini"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+            
+            {/* Sound Mute Icon */}
+            <div className="absolute left-[calc(50%-631.5px)] top-[calc(50%-262px)] w-[63px] h-[63px] flex items-center justify-center">
+              <Image
+                src="/assets/hero/sound-mute-light.svg"
+                alt="Sound Mute"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
           </div>
         </div>
 
@@ -242,9 +274,20 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Yellow Quality Badge — top-right */}
-          <div className="absolute -top-6 -right-6 sm:-top-10 sm:-right-10 w-[18vw] h-[18vw] min-[375px]:w-[90px] min-[375px]:h-[90px] sm:w-[140px] sm:h-[140px] z-40 animate-float pointer-events-none drop-shadow-2xl">
-            <Image src="/assets/hero/true-badge.svg" alt="Quality Badge" fill className="object-contain" />
+          {/* Quality Badge — top-right */}
+          <div className="absolute top-[1705.96px] left-[1489.22px] w-[249.646px] h-[249.646px] z-40">
+            <div className="relative w-[214.946px] h-[214.946px] rounded-full rotate-[10.21deg]">
+              <div className="absolute inset-0 flex items-center justify-center" style={{ containerType: "size" }}>
+                <div className="w-full h-full rotate-[23.84deg]">
+                  <div className="w-full h-full relative">
+                    <svg viewBox="0 0 100 100" className="w-full h-full">
+                      <circle cx="50" cy="50" r="45" fill="#FFEC19" />
+                      <text x="50" y="55" textAnchor="middle" fill="#DB4426" fontSize="12" fontWeight="bold">QUALITY</text>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

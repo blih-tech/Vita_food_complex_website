@@ -37,10 +37,9 @@ export default function AboutCompanySection() {
       style={{ background: "#FFFFFF", paddingTop: 80, paddingBottom: 80 }}
     >
       <div
-        className="mx-auto flex flex-col lg:flex-row items-center gap-12"
+        className="mx-auto flex flex-col lg:flex-row items-center gap-8" // Updated gap to match Figma's 32px
         style={{ maxWidth: 1664 }}
-      >
-        {/* Left: Story Image + Badge — Figma layout_1WPN5A */}
+      >        {/* Left: Story Image + Badge — Figma layout_1WPN5A */}
         <div
           className="relative flex-shrink-0 w-full lg:w-[600px]"
           style={{

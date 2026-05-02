@@ -27,7 +27,7 @@ export default function WhoAreWeSection() {
     <section
       ref={sectionRef}
       className="relative overflow-hidden px-4 sm:px-6 lg:px-[128px]"
-      style={{ background: "#232323", paddingTop: 120, paddingBottom: 120 }}
+      style={{ background: "#1E4620", paddingTop: 120, paddingBottom: 120 }} // Updated background to dark green
     >
       {/* Blurred green bg — Figma node 2080:3549 fill_W0K03X */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -69,7 +69,7 @@ export default function WhoAreWeSection() {
               fontSize: "clamp(80px, 12vw, 140px)",
               lineHeight: "1.25em",
               letterSpacing: "-2.8px",
-              color: "#E6E6E6",
+              color: "#FFFFFF", // Updated to white
             }}
           >
             Who
@@ -96,7 +96,7 @@ export default function WhoAreWeSection() {
           </span>
         </div>
 
-        {/* Body Text — Figma: Outfit 400, 32px, 1.26em lh, -0.4% ls, CENTER, #E8E8E8, maxWidth 1291 */}
+        {/* Body Text — Figma: Outfit 400, 32px, 1.26em lh, -1% ls, CENTER, #E8E8E8, maxWidth 1291 */}
         <p
           className="mx-auto"
           style={{
@@ -105,7 +105,7 @@ export default function WhoAreWeSection() {
             fontSize: "clamp(18px, 2.5vw, 32px)",
             lineHeight: "1.26em",
             letterSpacing: "-0.128px",
-            color: "#E8E8E8",
+            color: "#FFFFFF", // Updated to white
             maxWidth: 1291,
             textAlign: "center",
             opacity: isVisible ? 1 : 0,
