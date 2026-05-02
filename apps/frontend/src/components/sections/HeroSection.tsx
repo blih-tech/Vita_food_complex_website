@@ -50,6 +50,31 @@ export default function HeroSection() {
         style={{ width: '1024px' }}
       >
 
+        {/* Doctor Duck - Left Side */}
+        <div className="absolute left-[-100px] top-0 w-[200px] h-[200px] z-10">
+          <Image
+            src="/assets/hero/doctor-duck.png"
+            alt="Doctor Duck"
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
+
+        {/* Biscuit Stack - Right Side */}
+        <div className="absolute right-[-100px] top-0 w-[180px] h-[180px] z-10">
+          <Image
+            src="/assets/hero/biscuit-stack.png"
+            alt="Biscuit Stack"
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
+
+        {/* Blurred Yellow/Orange Circle - Top Left */}
+        <div className="absolute left-[-50px] top-[-30px] w-[120px] h-[120px] bg-[#FFEC19] rounded-full opacity-20 blur-xl z-5" />
+
 
         {/* Main Heading Group */}
         <div className="flex flex-col items-center text-center relative w-full" style={{ height: '326.885px' }}>
@@ -131,33 +156,66 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ── Hero Image Section ── */}
-      <div className="absolute right-0 top-[400px] w-[600px] h-[400px] z-10">
-        {/* Family video frame */}
-        <div className="relative w-full h-full rounded-[20px] overflow-hidden shadow-2xl border-[8px] border-white">
-          <Image
-            src="/assets/hero/family-video.png"
-            alt="Family enjoying Vita products"
-            fill
-            className="object-cover"
-            priority
-          />
-          
-          {/* Sound mute icon */}
-          <div className="absolute top-4 left-4 w-12 h-12 rounded-full bg-black/30 backdrop-blur-md flex items-center justify-center border-2 border-white/20">
-            <Image
-              src="/assets/hero/sound-mute.svg"
-              alt="Mute"
-              fill
-              className="object-contain p-3"
-            />
+      {/* ── Green Middle Section ── */}
+      <div className="relative w-full z-30 bg-[#23b349] px-4 py-16">
+        <div className="max-w-[1000px] mx-auto flex flex-col items-center gap-8">
+          {/* Quote */}
+          <h3 className="font-[family-name:var(--font-outfit)] font-semibold text-[32px] md:text-[42px] lg:text-[52px] text-white leading-[1.1] tracking-[-0.01em] max-w-[900px] text-center">
+            "As a modern multi-category food complex, Vita balances industrial excellence with deep emotional connection by housing a diverse portfolio of brands tailored to every moments."
+          </h3>
+
+          {/* Client Avatars */}
+          <div className="flex items-center gap-6">
+            <div className="flex -space-x-4">
+              <div className="relative w-12 h-12 rounded-full border-3 border-white bg-[#BDBDBD] overflow-hidden z-30">
+                <Image src="/assets/hero/client-1.png" alt="Client" fill className="object-cover" />
+              </div>
+              <div className="relative w-12 h-12 rounded-full border-3 border-white overflow-hidden z-20" style={{ background: "#b0b0b0" }}>
+                <Image src="/assets/hero/client-2.png" alt="Client" fill className="object-cover object-top" />
+              </div>
+              <div className="relative w-12 h-12 rounded-full border-3 border-white overflow-hidden z-10" style={{ background: "#c0c0c0" }}>
+                <Image src="/assets/hero/client-3.png" alt="Client" fill className="object-cover object-top" />
+              </div>
+              <div className="w-12 h-12 rounded-full border-3 border-white bg-[#BDBDBD] flex items-center justify-center text-white font-[family-name:var(--font-outfit)] font-semibold text-[14px] z-0">
+                +3
+              </div>
+            </div>
+            <span className="font-[family-name:var(--font-outfit)] font-semibold text-white text-[16px] tracking-wide">
+              Our Clients
+            </span>
           </div>
         </div>
+      </div>
 
-        {/* Quality Badge */}
-        <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-[#FFEC19] flex items-center justify-center shadow-2xl rotate-12">
-          <div className="text-[#DB4426] font-[family-name:var(--font-funnel-display)] font-extrabold text-[24px] uppercase tracking-tight">
-            VITA
+      {/* ── Bottom Video Section ── */}
+      <div className="relative w-full bg-white px-4 py-16">
+        <div className="max-w-[900px] mx-auto relative">
+          {/* Family Video Frame */}
+          <div className="relative w-full aspect-[16/9] rounded-[20px] overflow-hidden shadow-2xl border-[8px] border-white">
+            <Image
+              src="/assets/hero/family-video.png"
+              alt="Family enjoying Vita products"
+              fill
+              className="object-cover"
+              priority
+            />
+            
+            {/* Sound Mute Icon */}
+            <div className="absolute top-4 left-4 w-12 h-12 rounded-full bg-black/30 backdrop-blur-md flex items-center justify-center border-2 border-white/20">
+              <Image
+                src="/assets/hero/sound-mute.svg"
+                alt="Mute"
+                fill
+                className="object-contain p-3"
+              />
+            </div>
+          </div>
+
+          {/* Complex VITA Badge */}
+          <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-[#FFEC19] flex items-center justify-center shadow-2xl rotate-12">
+            <div className="text-[#DB4426] font-[family-name:var(--font-funnel-display)] font-extrabold text-[24px] uppercase tracking-tight">
+              VITA
+            </div>
           </div>
         </div>
       </div>
