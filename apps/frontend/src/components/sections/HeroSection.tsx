@@ -13,11 +13,35 @@ export default function HeroSection() {
       className="relative w-full overflow-hidden flex flex-col items-center bg-white min-h-[100vh]"
       style={{ paddingTop: '267.71px' }}
     >
-      {/* ── Green Semicircle Background ── */}
-      <div className="absolute left-1/2 -translate-x-1/2 h-[800px] top-[200px] w-full max-w-[1400px] z-0">
+      {/* ── Green Wave/Semicircle Background ── */}
+      <div className="absolute left-1/2 -translate-x-1/2 h-[1200px] top-0 w-full max-w-[1600px] z-0">
         <div className="relative w-full h-full">
-          <div className="absolute inset-0 bg-[#23B349] rounded-t-[50%] opacity-80" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#23B349] to-[#1FD650] rounded-t-[50%] opacity-60" />
+          {/* Main semicircle wave */}
+          <div className="absolute inset-0">
+            <Image
+              src="/assets/hero/semicircle-vector.svg"
+              alt="Semicircle Background"
+              fill
+              className="object-cover"
+              style={{
+                objectPosition: 'center bottom',
+                filter: 'opacity(0.9)'
+              }}
+            />
+          </div>
+          {/* Additional wave overlay for depth */}
+          <div className="absolute inset-0">
+            <Image
+              src="/assets/hero/wave.svg"
+              alt="Wave Overlay"
+              fill
+              className="object-cover opacity-30"
+              style={{
+                objectPosition: 'center bottom',
+                transform: 'scale(1.2) translateY(50px)'
+              }}
+            />
+          </div>
         </div>
       </div>
       {/* ── Background Elements ── */}
@@ -57,8 +81,8 @@ export default function HeroSection() {
         style={{ width: '1024px', maxWidth: '90vw' }}
       >
 
-        {/* Doctor Duck - Left Side on Semicircle */}
-        <div className="absolute left-[-100px] top-[100px] w-[200px] h-[200px] z-10 lg:left-[-150px] lg:top-[120px] lg:w-[250px] lg:h-[250px]">
+        {/* Doctor Duck - Sitting on Semicircle Left */}
+        <div className="absolute left-[-80px] top-[180px] w-[180px] h-[180px] z-10 lg:left-[-120px] lg:top-[200px] lg:w-[220px] lg:h-[220px]">
           <Image
             src="/assets/hero/doctor-duck.png"
             alt="Doctor Duck"
@@ -68,8 +92,8 @@ export default function HeroSection() {
           />
         </div>
 
-        {/* Biscuit Stack - Right Side on Semicircle */}
-        <div className="absolute right-[-100px] top-[80px] w-[180px] h-[180px] z-10 lg:right-[-150px] lg:top-[100px] lg:w-[220px] lg:h-[220px]">
+        {/* Biscuit Stack - Sitting on Semicircle Right */}
+        <div className="absolute right-[-80px] top-[160px] w-[160px] h-[160px] z-10 lg:right-[-120px] lg:top-[180px] lg:w-[200px] lg:h-[200px]">
           <Image
             src="/assets/hero/biscuit-stack.png"
             alt="Biscuit Stack"
@@ -80,7 +104,7 @@ export default function HeroSection() {
         </div>
 
         {/* Blurred Yellow/Orange Circle - Top Left */}
-        <div className="absolute left-[-30px] top-[-20px] w-[80px] h-[80px] bg-[#FFEC19] rounded-full opacity-20 blur-xl z-5 lg:left-[-50px] lg:top-[-30px] lg:w-[120px] lg:h-[120px]" />
+        <div className="absolute left-[-20px] top-[40px] w-[60px] h-[60px] bg-[#FFEC19] rounded-full opacity-20 blur-xl z-5 lg:left-[-30px] lg:top-[60px] lg:w-[80px] lg:h-[80px]" />
 
 
         {/* Main Heading Group */}

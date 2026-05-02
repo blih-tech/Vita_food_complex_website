@@ -99,18 +99,18 @@ export default function AboutHeroSection() {
 
         {/* Story Image — Figma node 277:8195: 824×586, fill_TW1E4Y: IMAGE + #FFFFFF */}
         {/* White fill in Figma renders as a thick white frame/mat around the portrait */}
-        <div className="mx-auto mt-10" style={{ maxWidth: 824 }}>
+        <div className="mx-auto mt-16" style={{ maxWidth: 940 }}>
           <div
             style={{
               background: "#FFFFFF",
-              borderRadius: 24,
-              padding: 10,
-              boxShadow: "0 8px 48px rgba(0,0,0,0.25)",
+              borderRadius: 32,
+              padding: 24, // Thicker white border
+              boxShadow: "0 12px 64px rgba(0,0,0,0.3)",
             }}
           >
             <div
               className="relative overflow-hidden"
-              style={{ borderRadius: 16, paddingBottom: "71.11%" /* 586/824 */ }}
+              style={{ borderRadius: 20, paddingBottom: "71.11%" /* 586/824 ratio */ }}
             >
               <Image
                 src={ABOUT_ASSETS.hero.storyImage}
