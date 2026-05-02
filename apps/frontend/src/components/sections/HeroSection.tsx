@@ -132,39 +132,32 @@ export default function HeroSection() {
       </div>
 
       {/* ── Hero Image Section ── */}
-      <div className="absolute contents left-[-432.14px] top-[3.87px]">
-        <div className="absolute h-[612px] left-[1386px] top-[548px] w-[685px]">
-          <div className="absolute flex h-[250.296px] items-center justify-center left-[114.77px] mix-blend-multiply top-[341.56px] w-[455.456px]">
-            <div className="flex-none rotate-[10.21deg]">
-              <div className="relative h-[250.296px] w-[455.456px]">
-                <Image
-                  src="/assets/hero/family-video.png"
-                  alt="Family enjoying Vita products"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </div>
-          </div>
-          <div className="absolute flex h-[63px] items-center justify-center left-[calc(50%-631.5px)] top-[calc(50%-262px)] w-[63px]">
+      <div className="absolute right-0 top-[400px] w-[600px] h-[400px] z-10">
+        {/* Family video frame */}
+        <div className="relative w-full h-full rounded-[20px] overflow-hidden shadow-2xl border-[8px] border-white">
+          <Image
+            src="/assets/hero/family-video.png"
+            alt="Family enjoying Vita products"
+            fill
+            className="object-cover"
+            priority
+          />
+          
+          {/* Sound mute icon */}
+          <div className="absolute top-4 left-4 w-12 h-12 rounded-full bg-black/30 backdrop-blur-md flex items-center justify-center border-2 border-white/20">
             <Image
               src="/assets/hero/sound-mute.svg"
               alt="Mute"
               fill
-              className="object-contain"
+              className="object-contain p-3"
             />
           </div>
         </div>
 
         {/* Quality Badge */}
-        <div className="absolute flex items-center justify-center left-[1489.22px] top-[1705.96px] w-[249.646px] h-[249.646px]">
-          <div className="flex-none rotate-[10.21deg]">
-            <div className="relative rounded-[999px] w-[214.946px] h-[214.946px] bg-[#FFEC19] flex items-center justify-center">
-              <div className="text-[#DB4426] font-[family-name:var(--font-funnel-display)] font-extrabold text-[48px] uppercase tracking-tight">
-                VITA
-              </div>
-            </div>
+        <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-[#FFEC19] flex items-center justify-center shadow-2xl rotate-12">
+          <div className="text-[#DB4426] font-[family-name:var(--font-funnel-display)] font-extrabold text-[24px] uppercase tracking-tight">
+            VITA
           </div>
         </div>
       </div>
