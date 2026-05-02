@@ -13,6 +13,15 @@ export default function HeroSection() {
       className="relative w-full overflow-hidden flex flex-col items-center bg-white min-h-[100vh]"
       style={{ paddingTop: '267.71px' }}
     >
+      {/* ── Semicircle Background Vector ── */}
+      <div className="absolute left-1/2 -translate-x-1/2 h-[2286.921px] top-[934.79px] w-[7210.039px] z-0">
+        <Image
+          src="/assets/hero/semicircle-vector.svg"
+          alt="Semicircle Background"
+          fill
+          className="object-cover"
+        />
+      </div>
       {/* ── Background Elements ── */}
       <div className="absolute top-0 left-0 w-full h-[1180.918px] pointer-events-none z-0 overflow-hidden">
 
@@ -50,8 +59,8 @@ export default function HeroSection() {
         style={{ width: '1024px', maxWidth: '90vw' }}
       >
 
-        {/* Doctor Duck - Left Side */}
-        <div className="absolute left-[-50px] top-0 w-[150px] h-[150px] z-10 lg:left-[-100px] lg:w-[200px] lg:h-[200px]">
+        {/* Doctor Duck - Left Side on Semicircle */}
+        <div className="absolute left-[-100px] top-[100px] w-[200px] h-[200px] z-10 lg:left-[-150px] lg:top-[120px] lg:w-[250px] lg:h-[250px]">
           <Image
             src="/assets/hero/doctor-duck.png"
             alt="Doctor Duck"
@@ -61,8 +70,8 @@ export default function HeroSection() {
           />
         </div>
 
-        {/* Biscuit Stack - Right Side */}
-        <div className="absolute right-[-50px] top-0 w-[140px] h-[140px] z-10 lg:right-[-100px] lg:w-[180px] lg:h-[180px]">
+        {/* Biscuit Stack - Right Side on Semicircle */}
+        <div className="absolute right-[-100px] top-[80px] w-[180px] h-[180px] z-10 lg:right-[-150px] lg:top-[100px] lg:w-[220px] lg:h-[220px]">
           <Image
             src="/assets/hero/biscuit-stack.png"
             alt="Biscuit Stack"
@@ -158,7 +167,10 @@ export default function HeroSection() {
 
       {/* ── Green Middle Section ── */}
       <div className="relative w-full z-30 bg-[#23b349] px-4 py-16">
-        <div className="max-w-[1000px] mx-auto flex flex-col items-center gap-8">
+        {/* Flat Rectangle Background */}
+        <div className="absolute inset-0 bg-[#23b349] size-full" />
+        
+        <div className="relative max-w-[1000px] mx-auto flex flex-col items-center gap-8">
           {/* Quote */}
           <h3 className="font-[family-name:var(--font-outfit)] font-semibold text-[32px] md:text-[42px] lg:text-[52px] text-white leading-[1.1] tracking-[-0.01em] max-w-[900px] text-center">
             "As a modern multi-category food complex, Vita balances industrial excellence with deep emotional connection by housing a diverse portfolio of brands tailored to every moments."
