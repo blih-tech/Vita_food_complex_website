@@ -341,34 +341,34 @@ export default function HeroSection() {
       </div>
 
     </section>
-
-    {/* Animation Styles */}
-    <style jsx>{`
-      @keyframes marquee {
-        0% {
-          transform: translateX(0%);
-        }
-        100% {
-          transform: translateX(-33.333%);
-        }
-      }
-      
-      @keyframes pulse {
-        0%, 100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.9;
-        }
-      }
-      
-      .animate-marquee {
-        animation: marquee 15s linear infinite;
-      }
-      
-      .animate-pulse {
-        animation: pulse 3s ease-in-out infinite;
-      }
-    `}</style>
   );
 }
+
+{/* Animation Styles */}
+<style jsx>{`
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-33.333%);
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.9;
+    }
+  }
+  
+  .animate-marquee {
+    animation: marquee 15s linear infinite;
+  }
+  
+  .animate-pulse {
+    animation: pulse 3s ease-in-out infinite;
+  }
+`}</style>
