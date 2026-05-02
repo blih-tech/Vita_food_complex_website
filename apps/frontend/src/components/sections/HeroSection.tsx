@@ -14,9 +14,9 @@ export default function HeroSection() {
       style={{ paddingTop: '267.71px' }}
     >
       {/* ── Green Wave/Semicircle Background (Text Section Only) ── */}
-      <div className="absolute left-1/2 -translate-x-1/2 h-[600px] top-[100px] w-full max-w-[1400px] z-0">
+      <div className="absolute left-1/2 -translate-x-1/2 h-[800px] top-[50px] w-full max-w-[1400px] z-0">
         <div className="relative w-full h-full">
-          {/* Main semicircle wave - limited to text section */}
+          {/* Main semicircle wave - extended for better curve */}
           <div className="absolute inset-0">
             <Image
               src="/assets/hero/semicircle-vector.svg"
@@ -69,7 +69,7 @@ export default function HeroSection() {
       >
 
         {/* Doctor Duck - Sitting on Semicircle Left */}
-        <div className="absolute left-[-60px] top-[220px] w-[160px] h-[160px] z-10 lg:left-[-80px] lg:top-[240px] lg:w-[200px] lg:h-[200px]">
+        <div className="absolute left-[-60px] top-[180px] w-[160px] h-[160px] z-10 lg:left-[-80px] lg:top-[200px] lg:w-[200px] lg:h-[200px]">
           <Image
             src="/assets/hero/doctor-duck.png"
             alt="Doctor Duck"
@@ -80,7 +80,7 @@ export default function HeroSection() {
         </div>
 
         {/* Biscuit Stack - Sitting on Semicircle Right */}
-        <div className="absolute right-[-60px] top-[200px] w-[140px] h-[140px] z-10 lg:right-[-80px] lg:top-[220px] lg:w-[180px] lg:h-[180px]">
+        <div className="absolute right-[-60px] top-[160px] w-[140px] h-[140px] z-10 lg:right-[-80px] lg:top-[180px] lg:w-[180px] lg:h-[180px]">
           <Image
             src="/assets/hero/biscuit-stack.png"
             alt="Biscuit Stack"
@@ -211,7 +211,7 @@ export default function HeroSection() {
       {/* ── Bottom Video Section ── */}
       <div className="relative w-full bg-white px-4 py-16">
         {/* Rectangle Background Behind Video */}
-        <div className="absolute left-1/2 -translate-x-1/2 h-[800px] top-0 w-full max-w-[1400px] bg-[#23b349] z-0" />
+        <div className="absolute left-1/2 -translate-x-1/2 h-[600px] top-[100px] w-full max-w-[1400px] bg-[#23b349] z-0" />
         
         <div className="max-w-[1400px] mx-auto relative">
           
