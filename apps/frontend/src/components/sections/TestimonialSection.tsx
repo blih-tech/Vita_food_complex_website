@@ -37,15 +37,15 @@ export default function TestimonialSection() {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ background: "#232323", paddingTop: 80, paddingBottom: 80 }}
+      style={{ background: "#1a1a1a", paddingTop: 120, paddingBottom: 120 }}
     >
       {/* Blurred green bg — same pattern as WhoAreWe, Figma fill_W0K03X */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div
-          className="absolute right-0 top-0 h-full w-[60%]"
+          className="absolute right-[-10%] top-[-10%] h-[120%] w-[70%]"
           style={{
-            opacity: 0.5,
-            filter: "blur(30px)",
+            opacity: 0.4,
+            filter: "blur(100px)",
           }}
         >
           <div className="relative w-full h-full">
@@ -61,20 +61,19 @@ export default function TestimonialSection() {
 
       <div
         className="relative z-10 mx-auto px-4 sm:px-6 lg:px-[128px]"
-        style={{ maxWidth: 1981, paddingTop: 80, paddingBottom: 80 }}
+        style={{ maxWidth: 1664 }}
       >
         {/* Header — Figma: "Partner Testimonials" label + "Our client" large text */}
-        <div className="mb-12">
+        <div className="mb-20">
           {/* label — Subtitle 2: Funnel Display 500, 20px, 1.25em lh, #FFFFFF */}
           <span
-            className="block mb-4"
+            className="block mb-6 uppercase tracking-wider"
             style={{
               fontFamily: "'Funnel Display', sans-serif",
               fontWeight: 500,
-              fontSize: 20,
+              fontSize: 18,
               lineHeight: "1.25em",
-              letterSpacing: "-0.08px",
-              color: "#FFFFFF",
+              color: "rgba(255, 255, 255, 0.6)",
             }}
           >
             {t("testimonials.label")}
@@ -85,9 +84,9 @@ export default function TestimonialSection() {
             style={{
               fontFamily: "'Funnel Display', sans-serif",
               fontWeight: 700,
-              fontSize: "clamp(64px, 14vw, 183px)",
-              lineHeight: "1.25em",
-              letterSpacing: "-3.66px",
+              fontSize: "clamp(64px, 12vw, 160px)",
+              lineHeight: "1em",
+              letterSpacing: "-0.04em",
               color: "#FFFFFF",
             }}
           >
@@ -96,73 +95,72 @@ export default function TestimonialSection() {
         </div>
 
         {/* Testimonial Cards — horizontal scroll, each card has image left + text right */}
-        {/* layout_LBJM0O: row, center, gap:256px (overflow carousel) */}
         <div
-          className="flex gap-8 overflow-x-auto pb-6 scrollbar-hide"
+          className="flex gap-10 overflow-x-auto pb-10 scrollbar-hide"
           style={{ scrollSnapType: "x mandatory" }}
         >
           {TESTIMONIALS.map((tm) => (
             <div
               key={tm.id}
-              className="flex-shrink-0 flex overflow-hidden rounded-[48px]"
+              className="flex-shrink-0 flex flex-col md:flex-row overflow-hidden rounded-[40px]"
               style={{
-                minWidth: "min(1040px, 90vw)",
-                height: 340,
-                background: "rgba(255,255,255,0.05)",
-                scrollSnapAlign: "start",
+                width: "min(1100px, 95vw)",
+                minHeight: 420,
+                background: "rgba(255, 255, 255, 0.03)",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
+                backdropFilter: "blur(20px)",
+                scrollSnapAlign: "center",
               }}
             >
-              {/* Person Image — layout_4J9ISU: 314.56 × 339.72, fill_VX4H2S */}
+              {/* Person Image */}
               <div
-                className="relative flex-shrink-0"
-                style={{ width: "30%", minWidth: 160 }}
+                className="relative flex-shrink-0 w-full md:w-[350px] h-[300px] md:h-auto"
               >
                 <Image
                   src={tm.image}
                   alt={tm.author}
                   fill
-                  className="object-cover object-center"
+                  className="object-cover"
                 />
               </div>
 
-              {/* Text block — layout_6YN0YI: x=359.17, y=28.6, 680.58 × 220.44 */}
+              {/* Text block */}
               <div
-                className="flex flex-col justify-between p-8 flex-1"
+                className="flex flex-col justify-between p-10 md:p-14 flex-1"
               >
-                <div>
+                <div className="mb-10">
                   {/* Quote — style_OK5XSG: Funnel Display 400, 32px, 1em lh, -0.4% ls, #FFFFFF */}
                   <p
                     style={{
                       fontFamily: "'Funnel Display', sans-serif",
                       fontWeight: 400,
-                      fontSize: "clamp(16px, 2vw, 32px)",
-                      lineHeight: "1em",
-                      letterSpacing: "-0.128px",
+                      fontSize: "clamp(20px, 2.5vw, 32px)",
+                      lineHeight: "1.4em",
+                      letterSpacing: "-0.02em",
                       color: "#FFFFFF",
                     }}
                   >
-                    {tm.quote}
+                    "{tm.quote}"
                   </p>
                 </div>
 
-                <div>
+                <div className="mt-auto">
                   {/* Divider */}
                   <div
-                    className="mb-4"
-                    style={{ height: 1, background: "#777777" }}
+                    className="mb-8"
+                    style={{ height: 1, background: "rgba(255, 255, 255, 0.1)" }}
                   />
 
                   {/* Author — style_U0YIOM: Outfit 400, 18px, 1.26em, #EAEAEA */}
                   <div className="flex items-center justify-between">
                     <div>
                       <p
+                        className="mb-1"
                         style={{
                           fontFamily: "'Outfit', sans-serif",
-                          fontWeight: 400,
-                          fontSize: 18,
-                          lineHeight: "1.26em",
-                          letterSpacing: "-0.073px",
-                          color: "#EAEAEA",
+                          fontWeight: 600,
+                          fontSize: 22,
+                          color: "#FFFFFF",
                         }}
                       >
                         {tm.author}
@@ -171,10 +169,8 @@ export default function TestimonialSection() {
                         style={{
                           fontFamily: "'Outfit', sans-serif",
                           fontWeight: 400,
-                          fontSize: 18,
-                          lineHeight: "1.26em",
-                          letterSpacing: "-0.073px",
-                          color: "rgba(234,234,234,0.6)",
+                          fontSize: 16,
+                          color: "rgba(255, 255, 255, 0.5)",
                         }}
                       >
                         {tm.role}
@@ -185,12 +181,13 @@ export default function TestimonialSection() {
                     <div
                       className="flex items-center justify-center rounded-full flex-shrink-0"
                       style={{
-                        width: 44,
-                        height: 44,
+                        width: 56,
+                        height: 56,
                         background: "#23B349",
+                        boxShadow: "0 4px 20px rgba(35, 179, 73, 0.3)",
                       }}
                     >
-                      <span style={{ color: "#FFFFFF", fontSize: 20 }}>→</span>
+                      <span className="text-white text-2xl">→</span>
                     </div>
                   </div>
                 </div>
