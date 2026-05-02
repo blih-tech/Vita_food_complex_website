@@ -47,11 +47,11 @@ export default function HeroSection() {
       {/* ── Hero Text Container (1024px centered) ── */}
       <div 
         className="relative z-20 mx-auto flex flex-col items-center gap-[48px]"
-        style={{ width: '1024px' }}
+        style={{ width: '1024px', maxWidth: '90vw' }}
       >
 
         {/* Doctor Duck - Left Side */}
-        <div className="absolute left-[-100px] top-0 w-[200px] h-[200px] z-10">
+        <div className="absolute left-[-50px] top-0 w-[150px] h-[150px] z-10 lg:left-[-100px] lg:w-[200px] lg:h-[200px]">
           <Image
             src="/assets/hero/doctor-duck.png"
             alt="Doctor Duck"
@@ -62,7 +62,7 @@ export default function HeroSection() {
         </div>
 
         {/* Biscuit Stack - Right Side */}
-        <div className="absolute right-[-100px] top-0 w-[180px] h-[180px] z-10">
+        <div className="absolute right-[-50px] top-0 w-[140px] h-[140px] z-10 lg:right-[-100px] lg:w-[180px] lg:h-[180px]">
           <Image
             src="/assets/hero/biscuit-stack.png"
             alt="Biscuit Stack"
@@ -73,7 +73,7 @@ export default function HeroSection() {
         </div>
 
         {/* Blurred Yellow/Orange Circle - Top Left */}
-        <div className="absolute left-[-50px] top-[-30px] w-[120px] h-[120px] bg-[#FFEC19] rounded-full opacity-20 blur-xl z-5" />
+        <div className="absolute left-[-30px] top-[-20px] w-[80px] h-[80px] bg-[#FFEC19] rounded-full opacity-20 blur-xl z-5 lg:left-[-50px] lg:top-[-30px] lg:w-[120px] lg:h-[120px]" />
 
 
         {/* Main Heading Group */}
@@ -212,9 +212,13 @@ export default function HeroSection() {
           </div>
 
           {/* Complex VITA Badge */}
-          <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-[#FFEC19] flex items-center justify-center shadow-2xl rotate-12">
-            <div className="text-[#DB4426] font-[family-name:var(--font-funnel-display)] font-extrabold text-[24px] uppercase tracking-tight">
-              VITA
+          <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-[#FFEC19] flex items-center justify-center shadow-2xl rotate-12 border-4 border-white">
+            <div className="relative w-full h-full flex items-center justify-center">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#FFEC19] to-[#F4D03F]" />
+              <div className="absolute inset-2 rounded-full bg-white opacity-30" />
+              <div className="relative text-[#DB4426] font-[family-name:var(--font-funnel-display)] font-extrabold text-[20px] lg:text-[24px] uppercase tracking-tight z-10">
+                VITA
+              </div>
             </div>
           </div>
         </div>
