@@ -8,68 +8,85 @@ export default function HeroSection() {
   const t = useTranslations("Hero");
 
   return (
-    <section
-      id="hero"
-      className="relative w-full overflow-hidden flex flex-col items-center bg-white min-h-[100vh]"
-      style={{ paddingTop: '267.71px' }}
-    >
-      {/* ── Green Wave/Semicircle Background (Text Section Only) ── */}
-      <div className="absolute left-1/2 -translate-x-1/2 h-[800px] top-[50px] w-full max-w-[1400px] z-0">
-        <div className="relative w-full h-full">
-          {/* Main semicircle wave - extended for better curve */}
-          <div className="absolute inset-0">
-            <Image
-              src="/assets/hero/semicircle-vector.svg"
-              alt="Semicircle Background"
-              fill
-              className="object-contain"
-              style={{
-                objectPosition: 'center bottom',
-                filter: 'none'
-              }}
-            />
-          </div>
-        </div>
-      </div>
-      {/* ── Background Elements ── */}
-      <div className="absolute top-0 left-0 w-full h-[1180.918px] pointer-events-none z-0 overflow-hidden">
+    <section id="hero" className="relative w-full overflow-hidden bg-white">
+      {/* ── TOP SECTION (White Background) ── */}
+      <div className="relative pt-[120px] pb-[60px] md:pt-[160px] md:pb-[80px] lg:pt-[180px] lg:pb-[100px] flex flex-col items-center z-10">
+        
+        {/* Background Glows */}
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[60%] bg-[#23B349]/10 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-[10%] right-[-5%] w-[40%] h-[50%] bg-[#23B349]/10 blur-[100px] rounded-full pointer-events-none" />
+        <div className="absolute top-[-20%] right-[10%] w-[30%] h-[40%] bg-[#FFEC19]/10 blur-[100px] rounded-full pointer-events-none" />
 
-        {/* Left blurred green rectangle */}
-        <div 
-          className="absolute blur-[13.55px] h-[1125.277px] left-[-33.02px] top-[-1px] w-[425.017px]"
-          style={{
-            background: 'linear-gradient(73.61deg, rgba(255, 255, 255, 0) 31.925%, rgb(255, 255, 255) 73.82%)',
-            backgroundColor: '#23b349',
-            mixBlendMode: 'screen'
-          }}
-        />
-
-        {/* Right decorative rectangle */}
-        <div className="absolute flex h-[1180.918px] items-center justify-center left-[1196.2px] top-[-1px] w-[723.803px]">
-          <div className="flex-none rotate-180">
-            <div className="h-[1180.918px] relative w-[723.803px] overflow-hidden">
-              <Image
-                src="/assets/hero/wave.svg"
-                alt=""
-                fill
-                className="object-cover"
-                style={{
-                  transform: 'translate(-59.07%, 158.67%) scale(3.3286, 2.0114)'
-                }}
-              />
+        {/* Heading Group */}
+        <div className="relative flex flex-col items-center text-center px-4 max-w-[1200px] mx-auto">
+          
+          {/* "A new stylish way of" with Icons */}
+          <div className="flex flex-col items-center mb-2">
+            <h2 className="font-[family-name:var(--font-outfit)] font-extrabold text-[32px] md:text-[48px] lg:text-[64px] text-[#404040] leading-tight tracking-tight">
+              A new stylish
+            </h2>
+            <div className="flex items-center gap-3 md:gap-4 lg:gap-6">
+              <div className="relative w-[30px] h-[30px] md:w-[45px] md:h-[45px] lg:w-[60px] lg:h-[60px] rotate-[-15deg]">
+                <Image
+                  src="/assets/hero/cookie.png"
+                  alt="Cookie"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <h2 className="font-[family-name:var(--font-outfit)] font-extrabold text-[32px] md:text-[48px] lg:text-[64px] text-[#404040] leading-tight tracking-tight">
+                way of
+              </h2>
+              <div className="relative w-[30px] h-[30px] md:w-[45px] md:h-[45px] lg:w-[60px] lg:h-[60px] rotate-[15deg]">
+                <Image
+                  src="/assets/hero/strawberry.png"
+                  alt="Strawberry"
+                  fill
+                  className="object-contain"
+                />
+              </div>
             </div>
           </div>
+
+          {/* "Connecting!" Main Heading */}
+          <h1 className="font-[family-name:var(--font-funnel-display)] font-black text-[80px] md:text-[140px] lg:text-[180px] text-[#23B349] leading-[0.85] tracking-[-0.04em] mb-8">
+            {t("connecting")}
+          </h1>
+
+          {/* Subtitle */}
+          <p className="max-w-[600px] font-[family-name:var(--font-outfit)] font-medium text-[16px] md:text-[20px] text-[#404040] leading-relaxed mb-10 px-4">
+            {t("description")}
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap justify-center gap-4 md:gap-6">
+            <Link
+              href="/products"
+              className="bg-[#23B349] text-white flex items-center gap-3 px-8 py-4 rounded-full font-[family-name:var(--font-funnel-display)] font-bold text-[18px] md:text-[24px] transition-all hover:scale-105 active:scale-95 shadow-lg shadow-[#23B349]/20"
+            >
+              {t("ourProducts")}
+              <span className="text-[20px] md:text-[28px]">→</span>
+            </Link>
+            <Link
+              href="/about"
+              className="border-2 border-[#23B349] text-[#404040] flex items-center px-8 py-4 rounded-full font-[family-name:var(--font-funnel-display)] font-bold text-[18px] md:text-[24px] transition-all hover:bg-[#23B349]/5 active:scale-95"
+            >
+              {t("whyVita")}
+            </Link>
+          </div>
         </div>
       </div>
 
-      {/* ── Hero Text Container (1024px centered) ── */}
-      <div 
-        className="relative z-20 mx-auto flex flex-col items-center gap-[48px]"
-        style={{ width: '1024px', maxWidth: '90vw' }}
-      >
+      {/* ── THE HILL (Transition Section) ── */}
+      <div className="relative w-full h-[400px] md:h-[600px] lg:h-[700px] mt-[-100px] md:mt-[-150px] lg:mt-[-200px]">
+        
+        {/* Large Green Arc (The Hill) */}
+        <div 
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[200%] md:w-[150%] lg:w-[120%] h-full bg-[#23B349] rounded-t-[100%] z-0"
+        />
 
-        {/* Doctor Duck - Sitting on Semicircle Left */}
-        <div className="absolute left-[-60px] top-[180px] w-[160px] h-[160px] z-10 lg:left-[-80px] lg:top-[200px] lg:w-[200px] lg:h-[200px]">
+        {/* Duck Doctor - Positioned on the Hill */}
+        <div className="absolute left-[5%] md:left-[10%] lg:left-[15%] bottom-[10%] md:bottom-[15%] lg:bottom-[20%] w-[180px] h-[180px] md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px] z-10 animate-float">
           <Image
             src="/assets/hero/doctor-duck.png"
             alt="Doctor Duck"
@@ -79,8 +96,8 @@ export default function HeroSection() {
           />
         </div>
 
-        {/* Biscuit Stack - Sitting on Semicircle Right */}
-        <div className="absolute right-[-60px] top-[160px] w-[140px] h-[140px] z-10 lg:right-[-80px] lg:top-[180px] lg:w-[180px] lg:h-[180px]">
+        {/* Biscuit Stack - Positioned on the Hill */}
+        <div className="absolute right-[5%] md:right-[10%] lg:right-[15%] bottom-[15%] md:bottom-[20%] lg:bottom-[25%] w-[150px] h-[150px] md:w-[250px] md:h-[250px] lg:w-[350px] lg:h-[350px] z-10 animate-float-delayed">
           <Image
             src="/assets/hero/biscuit-stack.png"
             alt="Biscuit Stack"
@@ -89,298 +106,119 @@ export default function HeroSection() {
             priority
           />
         </div>
+      </div>
 
-        {/* Blurred Yellow/Orange Circle - Top Left */}
-        <div className="absolute left-[20px] top-[80px] w-[50px] h-[50px] bg-[#FFEC19] rounded-full opacity-25 blur-xl z-5 lg:left-[30px] lg:top-[100px] lg:w-[70px] lg:h-[70px]" />
+      {/* ── QUOTE SECTION (Green Background) ── */}
+      <div className="relative w-full bg-[#23B349] pb-[100px] z-0">
+        <div className="max-w-[1200px] mx-auto px-6 text-center">
+          <h3 className="font-[family-name:var(--font-funnel-display)] font-semibold text-[24px] md:text-[42px] lg:text-[56px] text-white leading-[1.15] mb-12 max-w-[1000px] mx-auto">
+            {t("secondaryQuote")}
+          </h3>
 
+          {/* Client Avatars */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+            <div className="flex -space-x-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className={`relative w-12 h-12 md:w-16 md:h-16 rounded-full border-4 border-white bg-gray-200 overflow-hidden z-${40 - i * 10}`}>
+                  <Image
+                    src={`/assets/hero/client-${i}.png`}
+                    alt="Client"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+              <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-4 border-white bg-[#BDBDBD] flex items-center justify-center text-white font-bold text-sm md:text-lg z-0">
+                +3
+              </div>
+            </div>
+            <span className="font-[family-name:var(--font-funnel-display)] font-bold text-white text-[18px] md:text-[20px] tracking-wide">
+              {t("ourClients")}
+            </span>
+          </div>
+        </div>
+      </div>
 
-        {/* Main Heading Group */}
-        <div className="flex flex-col items-center text-center relative w-full" style={{ height: '326.885px' }}>
-
-          {/* "A new stylish way of" heading */}
-          <div className="absolute left-1/2 top-0 -translate-x-1/2 font-[family-name:var(--font-outfit)] font-extrabold text-[96px] text-[#404040] text-center leading-[0.88] tracking-[-0.384px] whitespace-nowrap">
-            <p className="mb-0 leading-[0.88] whitespace-pre">A new stylish </p>
-            <p className="leading-[0.88] whitespace-pre">way of</p>
+      {/* ── BOTTOM VIDEO SECTION ── */}
+      <div className="relative w-full bg-[#23B349] pt-[50px] pb-[150px]">
+        <div className="max-w-[1400px] mx-auto px-4 relative">
+          
+          {/* Yellow Tape Behind Video */}
+          <div className="absolute top-[35%] left-[-10%] w-[120%] h-[120px] md:h-[180px] bg-[#FFEC19] rotate-[-4deg] z-0 flex items-center overflow-hidden shadow-2xl">
+            <div className="flex whitespace-nowrap animate-marquee">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <span key={i} className="font-[family-name:var(--font-funnel-display)] font-black text-[40px] md:text-[80px] text-[#23B349] mx-10 uppercase italic">
+                  Connecting!
+                </span>
+              ))}
+            </div>
           </div>
 
-          {/* "Connecting!" main text */}
-          <div className="absolute left-1/2 top-[157.89px] -translate-x-1/2 w-[1024px]" style={{ height: '169px' }}>
-            <p className="font-[family-name:var(--font-outfit)] font-extrabold text-[192px] text-[#23b349] text-center leading-[0.88] tracking-[-5.76px] whitespace-nowrap">
-              Connecting!
-            </p>
-          </div>
-
-          {/* Strawberry - right */}
-          <div className="absolute left-[708.48px] top-[84.25px] w-[81.73px] h-[81.73px]">
+          {/* Video Container */}
+          <div className="relative z-10 mx-auto max-w-[1200px] aspect-video rounded-[32px] md:rounded-[64px] border-[6px] md:border-[12px] border-white overflow-hidden shadow-2xl">
             <Image
-              src="/assets/hero/strawberry.png"
-              alt="Strawberry"
+              src="/assets/hero/video-family.png"
+              alt="Family enjoying Vita"
               fill
               className="object-cover"
               priority
             />
-          </div>
-
-          {/* Cookie - left */}
-          <div className="absolute left-[224.6px] top-[86.42px] w-[108px] h-[108px] flex items-center justify-center">
-            <div className="flex-none rotate-[18.96deg]">
-              <div className="relative w-[84.994px] h-[84.994px]">
-                <Image
-                  src="/assets/hero/cookie.png"
-                  alt="Cookie"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Subtitle */}
-        <div className="max-w-[400px] sm:max-w-[500px] md:max-w-[600px] text-center mt-6 sm:mt-8">
-          <p className="font-[family-name:var(--font-funnel-display)] font-medium text-[20px] text-[#404040] text-center leading-[normal] tracking-[-0.08px] whitespace-nowrap">
-            <p className="leading-[normal] mb-0 whitespace-pre">From everyday baking to special treats, Vita brings </p>
-            <p className="leading-[normal] whitespace-pre">joy, taste, and quality to your table.</p>
-          </p>
-        </div>
-
-        {/* CTA Buttons */}
-        <div className="flex gap-[24px] items-center">
-
-          {/* Primary — filled green */}
-          <Link
-            href="/products"
-            className="bg-[#23b349] text-white flex gap-[16px] items-center justify-center px-[32px] py-[16px] rounded-[999px] h-[56px] whitespace-nowrap"
-          >
-            <span className="font-[family-name:var(--font-funnel-display)] font-medium text-[24px] tracking-[-0.096px]">
-              Our Products
-            </span>
-            <span className="font-[family-name:var(--font-outfit)] font-normal text-[20px] tracking-[-0.08px]">
-              →
-            </span>
-          </Link>
-
-          {/* Secondary — white with green border */}
-          <Link
-            href="/about"
-            className="border border-[#1fd650] border-solid flex gap-[16px] items-center justify-center px-[32px] py-[16px] rounded-[999px] h-[56px] whitespace-nowrap"
-          >
-            <span className="font-[family-name:var(--font-funnel-display)] font-medium text-[24px] text-[#000000] tracking-[-0.096px]">
-              <span className="text-[24px]">Why Vita</span>
-              <span className="font-['Outfit'] font-normal text-[20px] tracking-[-0.08px]">®</span>
-            </span>
-          </Link>
-        </div>
-      </div>
-
-      {/* ── Green Middle Section ── */}
-      <div className="relative w-full z-30 bg-[#23b349] px-4 py-16">
-        {/* Flat Rectangle Background */}
-        <div className="absolute inset-0 bg-[#23b349] size-full" />
-        
-        <div className="relative max-w-[1000px] mx-auto flex flex-col items-center gap-8">
-          {/* Quote */}
-          <h3 className="font-[family-name:var(--font-outfit)] font-semibold text-[32px] md:text-[42px] lg:text-[52px] text-white leading-[1.1] tracking-[-0.01em] max-w-[900px] text-center">
-            "As a modern multi-category food complex, Vita balances industrial excellence with deep emotional connection by housing a diverse portfolio of brands tailored to every moments."
-          </h3>
-
-          {/* Client Avatars */}
-          <div className="flex items-center gap-6">
-            <div className="flex -space-x-4">
-              <div className="relative w-12 h-12 rounded-full border-3 border-white bg-[#BDBDBD] overflow-hidden z-30">
-                <Image src="/assets/hero/client-1.png" alt="Client" fill className="object-cover" />
-              </div>
-              <div className="relative w-12 h-12 rounded-full border-3 border-white overflow-hidden z-20" style={{ background: "#b0b0b0" }}>
-                <Image src="/assets/hero/client-2.png" alt="Client" fill className="object-cover object-top" />
-              </div>
-              <div className="relative w-12 h-12 rounded-full border-3 border-white overflow-hidden z-10" style={{ background: "#c0c0c0" }}>
-                <Image src="/assets/hero/client-3.png" alt="Client" fill className="object-cover object-top" />
-              </div>
-              <div className="w-12 h-12 rounded-full border-3 border-white bg-[#BDBDBD] flex items-center justify-center text-white font-[family-name:var(--font-outfit)] font-semibold text-[14px] z-0">
-                +3
-              </div>
-            </div>
-            <span className="font-[family-name:var(--font-outfit)] font-semibold text-white text-[16px] tracking-wide">
-              Our Clients
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Bottom Video Section ── */}
-      <div className="relative w-full bg-white px-4 py-16">
-        {/* Rectangle Background Behind Video */}
-        <div className="absolute left-1/2 -translate-x-1/2 h-[600px] top-[100px] w-full max-w-[1400px] bg-[#23b349] z-0" />
-        
-        <div className="max-w-[1400px] mx-auto relative">
-          
-          {/* Diagonal Background Layers */}
-          {/* Dark Grey Background Layer */}
-          <div className="absolute left-1/2 -translate-x-1/2 flex h-[322.73px] items-center justify-center top-[148.3px] w-full max-w-[2052.554px] z-0">
-            <div className="flex-none rotate-[-6.1deg] w-full h-[105.185px] bg-[#404040] shadow-xl" />
-          </div>
-          
-          {/* Yellow Text Tape Layer with Animation */}
-          <div className="absolute left-1/2 -translate-x-1/2 flex h-[290.888px] items-center justify-center top-[161.1px] w-full max-w-[2054.879px] z-0">
-            <div className="flex-none rotate-[-5.02deg] w-full h-[111.526px] bg-[#FFEC19] overflow-hidden shadow-xl animate-pulse">
-              <div className="relative h-full w-full">
-                {/* Animated Marquee Text */}
-                <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-                  <div className="flex whitespace-nowrap animate-marquee">
-                    <div className="font-[family-name:var(--font-funnel-display)] font-extrabold text-[96px] text-[#DB4426] leading-[0.88] tracking-[-0.384px] whitespace-nowrap px-8">
-                      A new stylish way of Connecting!
-                    </div>
-                    <div className="font-[family-name:var(--font-funnel-display)] font-extrabold text-[96px] text-[#DB4426] leading-[0.88] tracking-[-0.384px] whitespace-nowrap px-8">
-                      A new stylish way of Connecting!
-                    </div>
-                    <div className="font-[family-name:var(--font-funnel-display)] font-extrabold text-[96px] text-[#DB4426] leading-[0.88] tracking-[-0.384px] whitespace-nowrap px-8">
-                      A new stylish way of Connecting!
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Static positioned text from Figma */}
-                <div className="absolute font-[family-name:var(--font-funnel-display)] font-extrabold text-[96px] text-[#DB4426] leading-[0.88] tracking-[-0.384px] whitespace-nowrap">
-                  <p className="absolute left-[643.46px] top-[calc(50%-51.4px)] -translate-x-1/2">
-                    A new stylish way of Connecting!
-                  </p>
-                  <p className="absolute left-[1325.75px] top-[calc(50%-47.63px)] -translate-x-1/2">
-                    A new stylish way of Connecting!
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Main Video Frame */}
-          <div className="relative left-1/2 -translate-x-1/2 border-4 border-white border-solid h-[647px] rounded-[48px] top-0 w-full max-w-[1380px] overflow-hidden z-10">
-            {/* Video Background with Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#74E648] via-[#4ADE80] to-[#1FD650]" />
             
-            {/* Family Video Image */}
-            <div className="absolute left-1/2 -translate-x-1/2 h-[768px] top-[-64.5px] w-full max-w-[1408px]">
-              <Image
-                src="/assets/hero/video-family.png"
-                alt="Family enjoying Vita products"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-            
-            {/* Sound Mute Icon */}
-            <div className="absolute left-[calc(50%-631.5px)] top-[calc(50%-262px)] w-[63px] h-[63px] z-20">
+            {/* Mute Icon */}
+            <div className="absolute top-6 left-6 md:top-10 md:left-10 w-10 h-10 md:w-16 md:h-16 opacity-80 cursor-pointer hover:opacity-100 transition-opacity">
               <Image
                 src="/assets/hero/sound-mute-video.svg"
                 alt="Mute"
                 fill
-                className="object-contain"
               />
+            </div>
+
+            {/* Play Overlay (optional, for aesthetics) */}
+            <div className="absolute inset-0 flex items-center justify-center bg-black/10 hover:bg-black/0 transition-colors cursor-pointer group">
+               {/* Could add a play button here if needed */}
             </div>
           </div>
 
-          {/* Complex VITA Badge */}
-          <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-[#FFEC19] flex items-center justify-center shadow-2xl rotate-12 border-4 border-white overflow-hidden">
-            <div className="relative w-full h-full">
-              {/* Background Layer */}
-              <div className="absolute inset-0 rounded-full bg-[#FFEC19]" />
-              
-              {/* Complex Badge Layers from Figma */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative w-[80%] h-[80%]">
-                  {/* Layer 1 */}
-                  <div className="absolute inset-[14.21%_15.42%_13.32%_15.41%]">
-                    <Image
-                      src="/assets/hero/badge-layer1.svg"
-                      alt="Badge Layer 1"
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                  
-                  {/* Layer 2 */}
-                  <div className="absolute inset-[0_6.76%_79.9%_6.08%]">
-                    <Image
-                      src="/assets/hero/badge-layer2.svg"
-                      alt="Badge Layer 2"
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                  
-                  {/* Layer 3 */}
-                  <div className="absolute inset-[75.03%_9.07%_0_9.35%]">
-                    <Image
-                      src="/assets/hero/badge-layer3.svg"
-                      alt="Badge Layer 3"
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                  
-                  {/* Layer 4 */}
-                  <div className="absolute inset-[51.54%_0.57%_27.98%_0.57%]">
-                    <Image
-                      src="/assets/hero/badge-layer4.svg"
-                      alt="Badge Layer 4"
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                  
-                  {/* Union Layer */}
-                  <div className="absolute inset-[23.9%_25.4%_24.41%_25.91%]">
-                    <Image
-                      src="/assets/hero/badge-union.svg"
-                      alt="Badge Union"
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-              </div>
-              
-              {/* VITA Text */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative text-[#DB4426] font-[family-name:var(--font-funnel-display)] font-extrabold text-[20px] lg:text-[24px] uppercase tracking-tight z-10">
-                  VITA
-                </div>
-              </div>
-            </div>
+          {/* Flower Badge */}
+          <div className="absolute -top-[40px] right-[5%] md:right-[10%] w-[100px] h-[100px] md:w-[160px] md:h-[160px] z-20 animate-pulse-slow">
+            <Image
+              src="/assets/hero/badge.svg"
+              alt="Quality Badge"
+              fill
+              className="object-contain"
+            />
           </div>
         </div>
       </div>
 
+      {/* ── STYLE HOOKS ── */}
+      <style jsx>{`
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+          animation: float 8s ease-in-out infinite;
+        }
+        .animate-marquee {
+          animation: marquee 20s linear infinite;
+        }
+        .animate-pulse-slow {
+          animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.9; transform: scale(1.05); }
+        }
+      `}</style>
     </section>
   );
 }
-
-{/* Animation Styles */}
-<style jsx>{`
-  @keyframes marquee {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-33.333%);
-    }
-  }
-  
-  @keyframes pulse {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.9;
-    }
-  }
-  
-  .animate-marquee {
-    animation: marquee 15s linear infinite;
-  }
-  
-  .animate-pulse {
-    animation: pulse 3s ease-in-out infinite;
-  }
-`}</style>
