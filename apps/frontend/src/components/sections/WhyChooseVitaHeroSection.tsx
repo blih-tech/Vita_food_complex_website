@@ -13,10 +13,10 @@ export default function WhyChooseVitaHeroSection() {
   const t = useTranslations("WhyChooseVita");
 
   return (
-    <div className="contents relative size-full h-screen overflow-hidden" data-node-id="486:2896" data-name="Hero section">
+    <div className="contents relative size-full min-h-[1400px]" data-node-id="486:2896" data-name="Hero section">
       {/* Main background image - Node 364:3163 */}
       <div 
-        className="absolute h-full left-0 top-0 w-full" 
+        className="absolute h-[934px] left-0 top-0 w-[1920px]" 
         data-node-id="364:3163" 
         data-name="steptodown.com263483_upscayl_4x_realesrgan-x4plus 1"
       />
@@ -79,13 +79,13 @@ export default function WhyChooseVitaHeroSection() {
 
       {/* Hero image section - Node 364:3367 */}
       <div 
-        className="absolute h-[60vh] left-1/2 top-1/2 w-[90vw] -translate-x-1/2 -translate-y-1/2" 
+        className="absolute h-[647px] left-[-61px] top-[737px] w-[2057.723px]" 
         data-node-id="364:3367" 
         data-name="Hero image"
       >
         {/* Tagline background - Node 364:3368 */}
         <div 
-          className="-translate-x-1/2 absolute flex h-[50%] items-center justify-center left-1/2 top-[20%] w-full"
+          className="-translate-x-1/2 absolute flex h-[322.73px] items-center justify-center left-[calc(50%+2.06px)] top-[148.3px] w-[2052.554px]"
         >
           <div className="flex-none rotate-[-6.1deg]">
             <div 
@@ -98,7 +98,7 @@ export default function WhyChooseVitaHeroSection() {
 
         {/* Tagline text - Node 364:3369 */}
         <div 
-          className="-translate-x-1/2 absolute flex h-[40%] items-center justify-center left-1/2 top-[25%] w-full"
+          className="-translate-x-1/2 absolute flex h-[290.888px] items-center justify-center left-[calc(50%+1.42px)] top-[161.1px] w-[2054.879px]"
         >
           <div className="flex-none rotate-[-5.02deg]">
             <div 
@@ -124,7 +124,7 @@ export default function WhyChooseVitaHeroSection() {
 
         {/* Main image container with gradient border - Node 364:3372 */}
         <div 
-          className="-translate-x-1/2 absolute border-4 border-white border-solid h-full left-1/2 rounded-[52px] top-0 w-full" 
+          className="-translate-x-1/2 absolute border-4 border-white border-solid h-[647px] left-[calc(50%+3px)] rounded-[52px] top-[4px] w-[1380px]" 
           data-node-id="364:3372" 
           data-name="Container"
           style={{ 
@@ -134,7 +134,7 @@ export default function WhyChooseVitaHeroSection() {
 
         {/* Main image container - Node 364:3373 */}
         <div 
-          className="-translate-x-1/2 absolute border-4 border-white border-solid h-full left-1/2 overflow-clip rounded-[48px] top-0 w-full" 
+          className="-translate-x-1/2 absolute border-4 border-white border-solid h-[647px] left-1/2 overflow-clip rounded-[48px] top-0 w-[1380px]" 
           data-node-id="364:3373" 
           data-name="Container"
           style={{ 
@@ -143,20 +143,20 @@ export default function WhyChooseVitaHeroSection() {
         >
           {/* Main hero image - Node 364:3374 */}
           <div 
-            className="absolute inset-0" 
+            className="-translate-x-1/2 absolute h-[768px] left-1/2 top-[-64.5px] w-[1408px]" 
             data-node-id="364:3374" 
             data-name="Gemini_Generated_Image_tz1t8tz1t8tz1t8t 1"
           >
             <img 
               alt="" 
-              className="absolute inset-0 object-cover pointer-events-none size-full" 
+              className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" 
               src={imgGeminiGeneratedImageTz1T8Tz1T8Tz1T8T1} 
             />
           </div>
 
           {/* Sound icon - Node 364:3375 */}
           <div 
-            className="absolute right-4 top-4 size-[63px]" 
+            className="-translate-x-1/2 -translate-y-1/2 absolute left-[calc(50%-631.5px)] size-[63px] top-[calc(50%-262px)]" 
             data-node-id="364:3375" 
             data-name="sound_mute_light"
           >
@@ -171,7 +171,7 @@ export default function WhyChooseVitaHeroSection() {
 
       {/* Header text content - Node 364:3313 */}
       <div 
-        className="-translate-x-1/2 absolute content-stretch flex flex-col gap-[48px] items-center left-[calc(50%-2.5px)] top-[20vh] w-[899px] lg:w-[700px] md:w-[600px] sm:w-[90%]" 
+        className="-translate-x-1/2 absolute content-stretch flex flex-col gap-[48px] items-center left-[calc(50%-2.5px)] top-[304px] w-[899px]" 
         data-node-id="364:3313" 
         data-name="hearder text"
       >
