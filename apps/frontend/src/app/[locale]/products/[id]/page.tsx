@@ -1,5 +1,4 @@
-import { use } from "react";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@frontend/navigation";
 import { products, Product } from "../data";
 import ProductTestimonials from "@frontend/components/products/ProductTestimonials";
@@ -25,7 +24,7 @@ export default async function ProductDetailPage({
   params,
 }: ProductDetailPageProps) {
   const { id } = await params;
-  const t = useTranslations("ProductsPage");
+  const t = await getTranslations("ProductsPage");
 
   if (!id) {
     return null;
