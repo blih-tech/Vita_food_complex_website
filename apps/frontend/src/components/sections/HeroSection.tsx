@@ -91,18 +91,18 @@ export default function HeroSection() {
       </div>
 
       {/* ── THE HILL (Transition Section) ── */}
-      <div className="relative w-full h-[300px] md:h-[450px] lg:h-[550px] mt-[-40px] md:mt-[-60px] lg:mt-[-80px] flex justify-center">
+      <div className="relative w-full h-[400px] md:h-[550px] lg:h-[650px] mt-[-60px] md:mt-[-100px] lg:mt-[-120px] flex justify-center">
         
-        {/* Gentle CSS Arc (Flattened "Hill") */}
+        {/* Elegant CSS Arc (The "Hill") */}
         <div 
-          className="absolute bottom-0 w-[400%] md:w-[300%] lg:w-[220%] h-[100%] bg-[#23B349] rounded-t-[100%] z-0"
+          className="absolute bottom-0 w-[300%] md:w-[220%] lg:w-[160%] h-[140%] bg-[#23B349] rounded-t-[100%] z-0"
           style={{
-            boxShadow: '0 -20px 60px rgba(35, 179, 73, 0.12)'
+            boxShadow: '0 -20px 60px rgba(35, 179, 73, 0.15)'
           }}
         />
 
-        {/* Duck Doctor - Grounded on the gentler peak */}
-        <div className="absolute left-[8%] md:left-[12%] lg:left-[18%] bottom-[5%] md:bottom-[10%] lg:bottom-[12%] w-[160px] h-[160px] md:w-[280px] md:h-[280px] lg:w-[380px] lg:h-[380px] z-10 animate-float">
+        {/* Duck Doctor - Positioned on the left slope */}
+        <div className="absolute left-[2%] md:left-[5%] lg:left-[10%] bottom-[8%] md:bottom-[12%] lg:bottom-[15%] w-[160px] h-[160px] md:w-[280px] md:h-[280px] lg:w-[380px] lg:h-[380px] z-10 animate-float">
           <div className="relative w-full h-full">
             <Image
               src="/assets/hero/doctor-duck.png"
@@ -116,8 +116,8 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Biscuit Stack - Grounded on the gentler peak */}
-        <div className="absolute right-[8%] md:right-[12%] lg:right-[18%] bottom-[10%] md:bottom-[15%] lg:bottom-[18%] w-[130px] h-[130px] md:w-[230px] md:h-[230px] lg:w-[320px] lg:h-[320px] z-10 animate-float-delayed">
+        {/* Biscuit Stack - Positioned on the right slope */}
+        <div className="absolute right-[2%] md:right-[5%] lg:right-[10%] bottom-[15%] md:bottom-[20%] lg:bottom-[25%] w-[130px] h-[130px] md:w-[230px] md:h-[230px] lg:w-[320px] lg:h-[320px] z-10 animate-float-delayed">
           <div className="relative w-full h-full">
             <Image
               src="/assets/hero/biscuit-stack.png"
@@ -139,13 +139,13 @@ export default function HeroSection() {
            <Image src="/assets/hero/hero-bg-element.svg" alt="" fill className="object-contain rotate-180" />
         </div>
 
-        <div className="max-w-[1200px] mx-auto px-6 text-center relative z-10">
-          <h3 className="font-[family-name:var(--font-funnel-display)] font-semibold text-[22px] md:text-[38px] lg:text-[52px] text-white leading-[1.2] mb-12 max-w-[950px] mx-auto">
+        <div className="max-w-[1200px] mx-auto px-6 text-left relative z-10">
+          <h3 className="font-[family-name:var(--font-funnel-display)] font-semibold text-[22px] md:text-[38px] lg:text-[52px] text-white leading-[1.2] mb-12 max-w-[950px] text-left">
             {t("secondaryQuote")}
           </h3>
 
-          {/* Client Avatars */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+          {/* Client Avatars - Left Aligned */}
+          <div className="flex flex-row items-center justify-start gap-6">
             <div className="flex -space-x-4">
               {[1, 2, 3].map((i) => (
                 <div key={i} className={`relative w-12 h-12 md:w-16 md:h-16 rounded-full border-[3px] md:border-[4px] border-white bg-gray-200 overflow-hidden shadow-lg z-${40 - i * 10}`}>
