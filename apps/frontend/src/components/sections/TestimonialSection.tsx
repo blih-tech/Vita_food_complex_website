@@ -37,7 +37,7 @@ export default function TestimonialSection() {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ background: "#1E4620", paddingTop: 80, paddingBottom: 80 }} // Updated background to dark green
+      style={{ background: "#232323", paddingTop: 80, paddingBottom: 80 }}
     >
       {/* Blurred green bg — same pattern as WhoAreWe, Figma fill_W0K03X */}
       <div className="absolute inset-0 z-0 overflow-hidden">
