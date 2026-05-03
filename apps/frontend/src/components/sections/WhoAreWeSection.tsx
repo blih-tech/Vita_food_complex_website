@@ -17,7 +17,7 @@ export default function WhoAreWeSection() {
   ];
 
   return (
-    <section className="relative bg-[#23B349] py-20 lg:py-32 px-4 overflow-hidden">
+    <section className="relative bg-[#23B349] pt-20 lg:pt-32 pb-10 lg:pb-16 px-4 overflow-hidden">
       {/* Decorative Circles */}
       <div className="absolute top-10 right-10 w-24 h-24 border-[1px] border-white/20 rounded-full flex items-center justify-center">
         <div className="w-20 h-20 border-[1px] border-white/30 rounded-full" />

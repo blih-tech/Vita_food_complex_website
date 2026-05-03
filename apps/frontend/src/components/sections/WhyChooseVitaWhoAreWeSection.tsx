@@ -13,7 +13,7 @@ export default function WhyChooseVitaWhoAreWeSection() {
   const t = useTranslations("WhyChooseVita");
 
   return (
-    <div className="content-stretch flex flex-col items-center relative w-full lg:gap-[120px] md:gap-[80px] sm:gap-[60px] lg:px-[128px] md:px-[64px] sm:px-[32px] lg:py-[96px] md:py-[64px] sm:py-[48px]" data-node-id="486:2897" data-name="Who we are section">
+    <div className="content-stretch flex flex-col items-center relative w-full lg:gap-[120px] md:gap-[80px] sm:gap-[60px] lg:px-[128px] md:px-[64px] sm:px-[32px] lg:pt-[96px] md:pt-[64px] sm:pt-[48px] lg:pb-[48px] md:pb-[32px] sm:pb-[24px]" data-node-id="486:2897" data-name="Who we are section">
       {/* Who we are text content - Responsive */}
       <div className="content-stretch flex flex-col gap-[32px] items-center relative shrink-0 w-full lg:max-w-[1296px] md:max-w-[900px] sm:max-w-[100%]" data-node-id="364:3320" data-name="Who we are text">
         {/* Section header - Responsive */}
