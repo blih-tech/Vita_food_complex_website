@@ -163,28 +163,30 @@ export default function HeroSection() {
               </div>
 
               {/* Video Container */}
-              <div className="relative z-10 aspect-video rounded-[35px] md:rounded-[55px] lg:rounded-[70px] border-[8px] md:border-[15px] border-white overflow-hidden shadow-[0_30px_60px_-10px_rgba(0,0,0,0.25)] group cursor-pointer">
-                <Image
-                  src="/assets/hero/video-family.png"
-                  alt="Family enjoying Vita"
-                  fill
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                  priority
-                />
-                
-                {/* Overlay Play Indicator Area */}
-                <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500 flex items-center justify-center">
-                   <div className="absolute top-6 left-6 md:top-12 md:left-12 w-10 h-10 md:w-20 md:h-20 opacity-90 transition-all hover:scale-110 active:scale-90">
-                    <Image
-                      src="/assets/hero/sound-mute-video.svg"
-                      alt="Mute"
-                      fill
-                    />
+              <div className="relative z-10">
+                <div className="aspect-video rounded-[35px] md:rounded-[55px] lg:rounded-[70px] border-[8px] md:border-[15px] border-white overflow-hidden shadow-[0_30px_60px_-10px_rgba(0,0,0,0.25)] group cursor-pointer">
+                  <Image
+                    src="/assets/hero/video-family.png"
+                    alt="Family enjoying Vita"
+                    fill
+                    className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                    priority
+                  />
+                  
+                  {/* Overlay Play Indicator Area */}
+                  <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500 flex items-center justify-center">
+                    <div className="absolute top-6 left-6 md:top-12 md:left-12 w-10 h-10 md:w-20 md:h-20 opacity-90 transition-all hover:scale-110 active:scale-90">
+                      <Image
+                        src="/assets/hero/sound-mute-video.svg"
+                        alt="Mute"
+                        fill
+                      />
+                    </div>
                   </div>
                 </div>
 
-                {/* Quality Badge - Top Right Corner */}
-                <div className="absolute -top-[10%] -right-[5%] md:-top-[15%] md:-right-[4%] w-[100px] h-[100px] md:w-[180px] md:h-[180px] lg:w-[240px] lg:h-[240px] z-20 drop-shadow-2xl transition-transform hover:rotate-12 duration-700">
+                {/* Quality Badge - Top Right Corner (Outside overflow-hidden) */}
+                <div className="absolute -top-[10%] -right-[5%] md:-top-[12%] md:-right-[4%] w-[100px] h-[100px] md:w-[180px] md:h-[180px] lg:w-[240px] lg:h-[240px] z-20 drop-shadow-2xl transition-transform hover:rotate-12 duration-700">
                   <Image
                     src="/assets/hero/badge.svg"
                     alt="Quality Badge"
