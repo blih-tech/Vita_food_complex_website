@@ -151,7 +151,25 @@
     "whoWeAre": {
       "title": "Who We Are & What We Stand For",
       "description": "We are a proudly Ethiopian food manufacturing company committed to delivering quality, innovation, and everyday nourishment. We combine modern production standards with deep local understanding to create products people love and trust.",
-      "cta": "Learn More About Us"
+      "cta": "Learn More About Us",
+      "products": {
+        "quality": {
+          "title": "Quality Excellence",
+          "description": "We maintain the highest standards of quality in every product, from sourcing to production."
+        },
+        "local": {
+          "title": "Local Sourcing",
+          "description": "We partner with Ethiopian farmers to source the finest local ingredients."
+        },
+        "community": {
+          "title": "Community Impact",
+          "description": "We create jobs and support local communities through our operations."
+        },
+        "innovation": {
+          "title": "Innovation Focus",
+          "description": "We use modern technology and innovative processes to deliver superior products."
+        }
+      }
     },
     "sisterCompanies": {
       "title": "Our Sister Companies",

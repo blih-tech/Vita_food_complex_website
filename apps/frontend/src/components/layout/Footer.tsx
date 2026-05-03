@@ -1,7 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { Link } from "@frontend/navigation";
 
 /* ─────────────────────────────────────────────
    Types
@@ -84,24 +84,30 @@ const footerLinks = {
 const mapLinks = (arr: string[], href: string): FooterLink[] =>
   arr.map((label) => ({ label, href }));
 
+const Link = ({ children, href, className }: { children: React.ReactNode; href: string; className?: string }) => (
+  <a href={href} className={className}>{children}</a>
+);
+
 /* ─────────────────────────────────────────────
    Component
    ───────────────────────────────────────────── */
 
 export default function Footer() {
+  const t = useTranslations("Footer");
+
   return (
     <footer className="relative w-full bg-white flex flex-col pt-16 lg:pt-24">
       {/* CTA + Newsletter */}
-      <div className="relative px-4 sm:px-6 lg:px-12 pt-16 z-20 pointer-events-none">
-        <div className="w-full max-w-[1500px] mx-auto flex flex-col rounded-[40px] shadow-[0px_20px_40px_rgba(0,0,0,0.06)] pointer-events-auto">
-          {/* CTA */}
-          <div className="relative bg-[#90D152] rounded-t-[40px] pt-10 lg:pt-[50px] pb-10 lg:pb-[50px] px-8 lg:px-16 flex flex-col lg:flex-row items-center justify-between">
-            <div className="flex flex-col gap-3 max-w-[550px] z-10">
-              <h2 className="font-['Outfit'] font-black text-[#404040] text-[40px] sm:text-[56px] lg:text-[76px] leading-[0.9] tracking-[-0.02em]">
+      <div className="relative px-4 sm:px-6 lg:px-12 pt-16 z-20">
+        <div className="w-full max-w-[1500px] mx-auto flex flex-col rounded-[40px] shadow-[0px_20px_40px_rgba(0,0,0,0.06)] overflow-hidden">
+          {/* CTA Section — Green background with Elephant */}
+          <div className="relative bg-[#90D152] py-16 px-8 lg:px-16 flex flex-col lg:flex-row items-center justify-between">
+            <div className="flex flex-col gap-6 max-w-[650px] z-10 text-left">
+              <h2 className="font-[family-name:var(--font-outfit)] font-black text-[#404040] text-[40px] md:text-[60px] lg:text-[76px] leading-[0.9] tracking-tighter">
                 Let&apos;s Work Together
               </h2>
 
-              <p className="font-['Funnel_Display'] text-[#404040] text-[15px] lg:text-[18px] opacity-90">
+              <p className="font-[family-name:var(--font-funnel-display)] font-medium text-[#404040]/80 text-[16px] md:text-[20px] lg:text-[22px] leading-relaxed">
                 Question, business inquiry, or partnership idea?
                 <br />
                 Our team is ready to connect and support you
@@ -109,41 +115,38 @@ export default function Footer() {
 
               <Link
                 href="/contact"
-                className="group inline-flex items-center gap-2 bg-white px-6 py-3 rounded-full hover:scale-[1.02] transition"
+                className="inline-flex items-center gap-4 bg-white px-10 py-4 rounded-full font-bold text-[#23B349] hover:scale-105 transition-transform w-fit shadow-lg"
               >
-                <span className="text-[#23B349] text-[14px]">
-                  Connect with us
-                </span>
-                <span className="text-[#23B349] group-hover:translate-x-1 transition">
-                  →
-                </span>
+                <span>Connect with us</span>
+                <span className="text-[20px]">→</span>
               </Link>
             </div>
 
-            <div className="hidden lg:block absolute right-0 bottom-0 w-[420px] h-[480px] xl:w-[480px] xl:h-[520px] pointer-events-none">
+            {/* Elephant Character */}
+            <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] mt-12 lg:mt-0">
               <Image
                 src="/assets/footer/cta-person.png"
-                alt="Fun characters"
+                alt="Vita Elephant"
                 fill
-                sizes="(max-width: 1024px) 100vw, 480px"
-                className="object-contain object-bottom"
+                className="object-contain"
+                priority
               />
             </div>
           </div>
 
-          {/* Newsletter */}
-          <div className="bg-white rounded-b-[40px] py-8 px-8 lg:px-16 flex flex-col md:flex-row items-center justify-between gap-6">
-            <h3 className="font-['Outfit'] font-black text-[#23B349] text-[28px] lg:text-[52px]">
+          {/* Newsletter Section */}
+          <div className="bg-white py-10 px-8 lg:px-16 flex flex-col xl:flex-row items-center justify-between gap-8">
+            <h3 className="font-[family-name:var(--font-outfit)] font-black text-[#23B349] text-[28px] md:text-[40px] lg:text-[48px] leading-tight">
               Get the Latest News & Updates...
             </h3>
 
-            <div className="flex items-center gap-4 w-full md:w-auto">
+            <div className="flex items-center gap-4 w-full max-w-[600px]">
               <input
                 type="email"
                 placeholder="Email Address"
-                className="flex-1 border border-gray-300 rounded-full px-6 h-[56px] outline-none"
+                className="flex-1 bg-gray-50 border border-gray-200 rounded-full px-8 h-[64px] outline-none font-medium focus:border-[#23B349] transition-colors"
               />
-              <button className="w-[56px] h-[56px] rounded-full bg-[#23B349] text-white hover:scale-105 transition">
+              <button className="w-[64px] h-[64px] rounded-full bg-[#23B349] text-white flex items-center justify-center text-[24px] hover:scale-105 transition-transform shadow-lg">
                 →
               </button>
             </div>
@@ -151,25 +154,24 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Dark Section */}
-      <div className="bg-[#404040] lg:-mt-[160px] rounded-t-[120px] flex flex-col items-center">
-        {/* Links */}
-        <div className="w-full max-w-[1400px] px-4 lg:px-20 pt-[120px] lg:pt-[240px] pb-12 flex flex-col lg:flex-row gap-16">
-          {/* Contact */}
-          <div className="flex flex-col gap-8 lg:w-[350px]">
+      {/* Dark Footer Section */}
+      <div className="bg-[#404040] -mt-[180px] pt-[240px] pb-12 rounded-t-[100px] flex flex-col items-center">
+        <div className="w-full max-w-[1400px] px-8 lg:px-20 flex flex-col lg:flex-row gap-20">
+          {/* Brand Info */}
+          <div className="flex flex-col gap-10 lg:w-[350px]">
             <Image
               src="/assets/footer/vita-logo-white.svg"
               alt="Vita Food Complex"
-              width={120}
-              height={120}
-              className="w-auto h-auto"
+              width={140}
+              height={60}
+              className="object-contain"
             />
 
-            <div className="text-white/90 text-[13px]">
+            <div className="text-white/70 font-[family-name:var(--font-outfit)] space-y-2 text-[15px]">
               <p>+251 911 123 456</p>
               <p>info@vitafoodcomplex.com</p>
-              <p>
-                Lideta SC, Woreda 02 <br />
+              <p className="whitespace-pre-line">
+                Lideta SC, Woreda 02{"\n"}
                 Addis Ababa, Ethiopia
               </p>
             </div>
@@ -177,84 +179,30 @@ export default function Footer() {
             <Image
               src="/assets/footer/social-icons.svg"
               alt="Social Media"
-              width={280}
+              width={250}
               height={40}
-              className="w-auto h-auto"
+              className="object-contain"
             />
           </div>
 
-          {/* Navigation */}
-          <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-10">
-            <FooterColumn
-              title="Biscuits"
-              links={mapLinks(footerLinks.biscuits, "/products")}
-            />
-            <FooterColumn
-              title="Flour"
-              links={mapLinks(footerLinks.flour, "/products")}
-            />
+          {/* Nav Links */}
+          <div className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-12">
+            <FooterColumn title="Biscuits" links={mapLinks(footerLinks.biscuits, "/products")} />
+            <FooterColumn title="Flour" links={mapLinks(footerLinks.flour, "/products")} />
             <FooterColumn title="Company" links={footerLinks.company} />
             <FooterColumn title="Resources" links={footerLinks.resources} />
           </div>
         </div>
 
-        {/* Giant Vita Background Logo */}
-        <div className="w-full flex justify-center mt-10 lg:mt-4 relative z-0 pointer-events-none ">
+        {/* Giant Logo Watermark */}
+        <div className="w-full mt-20 opacity-10 pointer-events-none">
           <Image
             src="/assets/footer/vita-footer.png"
-            alt="Vita Background Logo"
-            width={1200}
-            height={500}
-            className="w-full  h-auto object-contain"
-            priority
+            alt="Vita"
+            width={1600}
+            height={400}
+            className="w-full h-auto grayscale brightness-200"
           />
-        </div>
-
-        {/* Bottom */}
-        <div className="relative w-full flex flex-col items-center -mt-16 lg:-mt-32 overflow-x-clip z-10">
-          {/* Wave Graphic */}
-          <div
-            className="w-[2270.59px] h-[171.02px] shrink-0 bg-[url('/assets/footer/footer-wave-bg.png')] bg-[length:100%_100%] bg-center bg-no-repeat translate-x-[15.4px]"
-            style={{
-              filter: "drop-shadow(0px -14px 47px rgba(0, 71, 21, 0.2))",
-            }}
-          ></div>
-
-          {/* White Bottom Strip */}
-          <div className="w-full bg-white relative z-10 -mt-1">
-            <div className="max-w-[1400px] mx-auto px-4 lg:px-20 pb-10 pt-2">
-              {/* Divider */}
-              <div className="w-full h-[1px] bg-[#23B349] opacity-40 mb-6"></div>
-
-              {/* Links & Copy */}
-              <div className="flex flex-col md:flex-row justify-between items-center text-[13px] font-['Outfit'] text-[#404040]">
-                <div className="flex flex-wrap justify-center md:justify-start gap-8 mb-4 md:mb-0">
-                  <Link
-                    href="#"
-                    className="hover:text-[#23B349] transition-colors"
-                  >
-                    Terms and Conditions
-                  </Link>
-                  <Link
-                    href="#"
-                    className="hover:text-[#23B349] transition-colors"
-                  >
-                    Privacy Policy
-                  </Link>
-                  <Link
-                    href="#"
-                    className="hover:text-[#23B349] transition-colors"
-                  >
-                    Legal Notice
-                  </Link>
-                </div>
-                <p>
-                  © {new Date().getFullYear()} Vita Food Complex. All rights
-                  reserved.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </footer>

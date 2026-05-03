@@ -1,26 +1,13 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ABOUT_ASSETS } from "@frontend/constants/aboutAssets";
-
 import { Target, Eye, Heart, Compass, Users } from "lucide-react";
 
 export default function WhoAreWeSection() {
   const t = useTranslations("About");
   const tMv = useTranslations("About.mv");
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setIsVisible(true); },
-      { threshold: 0.05 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => { if (sectionRef.current) observer.unobserve(sectionRef.current); };
-  }, []);
 
   const cards = [
     { key: "mission", label: tMv("mission.label"), desc: tMv("mission.desc"), icon: Target },
@@ -30,208 +17,71 @@ export default function WhoAreWeSection() {
   ];
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative overflow-hidden"
-      style={{ background: "#0d3b1f" }}
-    >
-      {/* Blurred green glow — same pattern as hero */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div
-          className="absolute left-1/2 top-0 h-full w-[140%]"
-          style={{ transform: "translateX(-50%)", opacity: 0.65, filter: "blur(80px)" }}
-        >
-          <div className="relative w-full h-full">
-            <Image src={ABOUT_ASSETS.hero.backgroundFrame} alt="" fill className="object-cover" />
-          </div>
-        </div>
-        <div className="absolute inset-0" style={{ background: "rgba(35, 179, 73, 0.12)" }} />
+    <section className="relative bg-[#23B349] py-20 lg:py-32 px-4 overflow-hidden">
+      {/* Decorative Circles */}
+      <div className="absolute top-10 right-10 w-24 h-24 border-[1px] border-white/20 rounded-full flex items-center justify-center">
+        <div className="w-20 h-20 border-[1px] border-white/30 rounded-full" />
       </div>
 
-      <div
-        className="relative z-10 mx-auto px-4 sm:px-6 lg:px-[128px]"
-        style={{ maxWidth: 1664, paddingTop: 120, paddingBottom: 120 }}
-      >
-        {/* ── "Who — Are We" typography ── */}
-        <div
-          className="flex items-center justify-center flex-wrap"
-          style={{ gap: "0 24px", marginBottom: 48 }}
-        >
-          <span
-            style={{
-              fontFamily: "'Funnel Display', sans-serif",
-              fontWeight: 700,
-              fontSize: "clamp(48px, 8vw, 140px)",
-              lineHeight: "1.1em",
-              letterSpacing: "-2.8px",
-              color: "#E6E6E6",
-            }}
-          >
+      <div className="mx-auto max-w-[1400px] flex flex-col items-center">
+        {/* Giant Headline */}
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-12">
+          <h2 className="font-[family-name:var(--font-funnel-display)] font-bold text-[60px] md:text-[100px] lg:text-[140px] text-white/40 leading-none tracking-tighter">
             Who
-          </span>
-
-          <div className="hidden md:block" style={{ width: 124, height: 2, background: "#E6E6E6", flexShrink: 0 }} />
-
-          <span
-            style={{
-              fontFamily: "'Funnel Display', sans-serif",
-              fontWeight: 800,
-              fontSize: "clamp(48px, 9vw, 150px)",
-              lineHeight: "0.9em",
-              letterSpacing: "-3px",
-              color: "#FFFFFF",
-            }}
-          >
+          </h2>
+          <div className="w-[80px] md:w-[150px] h-[4px] bg-white/30 rounded-full" />
+          <h2 className="font-[family-name:var(--font-funnel-display)] font-extrabold text-[60px] md:text-[100px] lg:text-[140px] text-white leading-none tracking-tighter">
             Are We
-          </span>
+          </h2>
         </div>
 
         {/* Description */}
-        <p
-          className="mx-auto"
-          style={{
-            fontFamily: "'Outfit', sans-serif",
-            fontWeight: 400,
-            fontSize: "clamp(18px, 2.5vw, 32px)",
-            lineHeight: "1.26em",
-            letterSpacing: "-0.128px",
-            color: "#E8E8E8",
-            maxWidth: 1291,
-            textAlign: "center",
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? "translateY(0)" : "translateY(20px)",
-            transition: "all 0.8s ease-out 0.15s",
-            marginBottom: 80,
-          }}
-        >
+        <p className="font-[family-name:var(--font-outfit)] font-medium text-[16px] md:text-[20px] lg:text-[24px] text-white/90 text-center max-w-[1000px] mb-20 leading-relaxed">
           {t("whoWeAre.description")}
         </p>
 
-        {/* ── Card Grid ── */}
-        <div
-          className="flex flex-col lg:flex-row gap-8"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? "translateY(0)" : "translateY(30px)",
-            transition: "all 0.8s ease-out 0.3s",
-          }}
-        >
-          {/* ── Left large card ── */}
-          <div
-            className="relative rounded-[32px] overflow-hidden flex-shrink-0"
-            style={{
-              background: "#FFFFFF",
-              width: "100%",
-              maxWidth: 821,
-              minHeight: 620,
-              boxShadow: "0 12px 48px rgba(0,0,0,0.2)",
-            }}
-          >
-            <div className="relative z-10 p-10 md:p-14" style={{ maxWidth: 500 }}>
-              <div
-                className="flex items-center justify-center rounded-2xl mb-8"
-                style={{ width: 64, height: 64, background: "#23B349" }}
-              >
-                <Users size={32} color="white" />
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full">
+          {/* Left Large Card */}
+          <div className="lg:col-span-7 bg-white rounded-[40px] p-8 md:p-12 flex flex-col relative overflow-hidden min-h-[500px] md:min-h-[700px]">
+            <div className="relative z-10 max-w-[450px]">
+              <div className="w-12 h-12 bg-[#23B349] rounded-2xl flex items-center justify-center mb-6">
+                 <Users className="text-white w-6 h-6" />
               </div>
-
-              <h3
-                className="mb-4"
-                style={{
-                  fontFamily: "'Funnel Display', sans-serif",
-                  fontWeight: 700,
-                  fontSize: "clamp(28px, 3vw, 40px)",
-                  lineHeight: "1.1em",
-                  letterSpacing: "-0.112px",
-                  color: "#23B349",
-                }}
-              >
+              <h3 className="font-[family-name:var(--font-funnel-display)] font-bold text-[28px] md:text-[36px] text-[#23B349] mb-4 leading-tight">
                 {tMv("newGen.title")}
               </h3>
-
-              <p
-                style={{
-                  fontFamily: "'Outfit', sans-serif",
-                  fontWeight: 400,
-                  fontSize: "clamp(18px, 1.5vw, 24px)",
-                  lineHeight: "1.4em",
-                  letterSpacing: "-0.08px",
-                  color: "#4A4A4A",
-                }}
-              >
+              <p className="font-[family-name:var(--font-outfit)] text-[16px] md:text-[18px] text-[#404040]/70">
                 {tMv("newGen.desc")}
               </p>
             </div>
-
-            <div
-              className="absolute bottom-0 right-0 w-[85%] h-[60%] md:w-[75%] md:h-[65%]"
-              style={{
-                borderRadius: "32px 0px 0px 0px",
-                overflow: "hidden",
-              }}
-            >
-              <Image
-                src={ABOUT_ASSETS.content.storyImage}
-                alt="A New Generation of Food"
-                fill
-                className="object-cover"
-              />
+            
+            {/* Girl Image — Positioned at bottom center/right */}
+            <div className="absolute bottom-0 right-0 w-[80%] h-[55%] md:w-[70%] md:h-[60%]">
+               <Image
+                 src={ABOUT_ASSETS.content.storyImage}
+                 alt="New Generation"
+                 fill
+                 className="object-contain object-bottom"
+               />
             </div>
           </div>
 
-          {/* ── Right 2×2 grid ── */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 flex-1">
-            {cards.map((card, i) => {
-              const Icon = card.icon;
-              return (
-                <div
-                  key={card.key}
-                  className="rounded-[32px] flex flex-col p-10"
-                  style={{
-                    background: "rgba(255, 255, 255, 0.05)",
-                    border: "1px solid rgba(255, 255, 255, 0.1)",
-                    backdropFilter: "blur(10px)",
-                    minHeight: 280,
-                    gap: 20,
-                    opacity: isVisible ? 1 : 0,
-                    transform: isVisible ? "translateY(0)" : "translateY(20px)",
-                    transition: `all 0.8s ease-out ${0.1 * (i + 2)}s`,
-                  }}
-                >
-                  <div
-                    className="flex items-center justify-center rounded-2xl"
-                    style={{ width: 56, height: 56, background: "#23B349" }}
-                  >
-                    <Icon size={28} color="white" />
-                  </div>
-
-                  <h4
-                    style={{
-                      fontFamily: "'Funnel Display', sans-serif",
-                      fontWeight: 700,
-                      fontSize: "clamp(24px, 2vw, 32px)",
-                      lineHeight: "1em",
-                      letterSpacing: "-0.112px",
-                      color: "#FFFFFF",
-                    }}
-                  >
-                    {card.label}
-                  </h4>
-
-                  <p
-                    style={{
-                      fontFamily: "'Outfit', sans-serif",
-                      fontWeight: 400,
-                      fontSize: "clamp(16px, 1.2vw, 18px)",
-                      lineHeight: "1.5em",
-                      color: "rgba(255, 255, 255, 0.7)",
-                    }}
-                  >
-                    {card.desc}
-                  </p>
+          {/* Right Cards Grid */}
+          <div className="lg:col-span-5 grid grid-cols-1 md:grid-cols-2 gap-6">
+            {cards.map((card) => (
+              <div key={card.key} className="bg-white rounded-[32px] p-8 flex flex-col hover:shadow-xl transition-shadow border border-white/10">
+                <div className="w-10 h-10 bg-[#23B349]/10 rounded-xl flex items-center justify-center mb-6">
+                  <card.icon className="text-[#23B349] w-5 h-5" />
                 </div>
-              );
-            })}
+                <h4 className="font-[family-name:var(--font-funnel-display)] font-bold text-[20px] md:text-[24px] text-[#23B349] mb-3">
+                  {card.label}
+                </h4>
+                <p className="font-[family-name:var(--font-outfit)] text-[14px] md:text-[16px] text-[#404040]/60 leading-relaxed">
+                  {card.desc}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

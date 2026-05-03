@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import WhyChooseVitaHeroSection from "@frontend/components/sections/WhyChooseVitaHeroSection";
-import WhoWeAreSection from "@frontend/components/sections/WhoWeAreSection";
+import WhoWeAreSection from "@frontend/components/sections/WhyChooseVitaWhoAreWeSection";
 import SisterCompanySection from "@frontend/components/sections/SisterCompanySection";
 import QualityAssuranceSection from "@frontend/components/sections/QualityAssuranceSection";
 import OurProductSection from "@frontend/components/sections/OurProductSection";
