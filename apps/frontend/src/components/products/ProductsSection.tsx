@@ -4,17 +4,24 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from "@frontend/navigation";
 import { products } from "@frontend/app/[locale]/products/data";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 export default function ProductsSection() {
   const t = useTranslations("Products");
+  const [emblaRef] = useEmblaCarousel(
+    { align: "start", loop: true },
+    [Autoplay({ delay: 4000, stopOnInteraction: false })]
+  );
 
   return (
-    <section id="products" className="relative w-full flex flex-row overflow-x-auto snap-x snap-mandatory hide-scrollbar">
-      {products.map((product, index) => (
-        <div
-          key={product.id}
-          className="relative min-w-full h-[500px] lg:h-[700px] overflow-hidden flex flex-col items-center justify-center snap-center shrink-0"
-        >
+    <section id="products" className="relative w-full overflow-hidden" ref={emblaRef}>
+      <div className="flex flex-row cursor-grab active:cursor-grabbing">
+        {products.map((product, index) => (
+          <div
+            key={product.id}
+            className="relative min-w-full h-[500px] lg:h-[700px] overflow-hidden flex flex-col items-center justify-center shrink-0"
+          >
           {/* Background Gradient */}
           <div 
             className="absolute inset-0 z-0" 
@@ -91,6 +98,7 @@ export default function ProductsSection() {
           </div>
         </div>
       ))}
+      </div>
     </section>
   );
 }
