@@ -34,80 +34,66 @@ export default function QuickFactSection() {
         />
       </div>
 
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Mobile-first responsive grid layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-6 lg:gap-8 relative">
+      <div className="relative z-20 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 relative">
+          
+          {/* Row 1 */}
           {/* Fact 1 - Unique SKUs */}
-          <div className="lg:col-span-3 bg-[#F3F3F3] rounded-3xl p-6 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center min-h-[220px] md:min-h-[260px]">
-            <div className="text-center lg:text-left">
-              <div className="font-['Outfit'] font-extrabold text-6xl md:text-7xl lg:text-[128px] text-[#23B349] leading-none tracking-tighter mb-3 group-hover:scale-105 transition-transform">
-                +11
-              </div>
-              <p className="font-['Funnel_Display'] font-medium text-lg md:text-xl text-[#404040] leading-tight">
-                Unique SKUs for Everyone
-              </p>
-              <div className="mt-6 text-5xl md:text-6xl font-bold text-[#E6B720]">2tn</div>
-              <p className="text-sm md:text-base text-[#404040]/70">Biscuits/Hour</p>
-            </div>
+          <div className="md:col-span-3 bg-[#F3F3F3] rounded-[2rem] p-6 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center items-center text-center">
+            <div className="font-['Outfit'] font-extrabold text-6xl md:text-[90px] lg:text-[110px] text-[#23B349] leading-none tracking-tighter mb-2 md:mb-4 group-hover:scale-105 transition-transform">+11</div>
+            <p className="font-['Funnel_Display'] font-medium text-base md:text-lg text-[#404040]">Unique SKUs for Everyone.</p>
           </div>
 
           {/* Fact 2 - Flour Production */}
-          <div className="lg:col-span-4 bg-[#F3F3F3] rounded-3xl p-6 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center min-h-[180px] md:min-h-[220px]">
-            <div className="text-center">
-              <div className="font-['Outfit'] font-extrabold text-6xl md:text-7xl text-[#23B349] leading-none tracking-tighter mb-4 group-hover:scale-105 transition-transform">
-                60tn
-              </div>
-              <p className="font-['Funnel_Display'] font-medium text-base md:text-lg text-[#404040]">
-                Tons of Flour Production/Day
-              </p>
-            </div>
+          <div className="md:col-span-5 bg-[#F3F3F3] rounded-[2rem] p-6 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center items-center text-center">
+            <div className="font-['Outfit'] font-extrabold text-6xl md:text-[90px] lg:text-[110px] text-[#23B349] leading-none tracking-tighter mb-2 md:mb-4 group-hover:scale-105 transition-transform">60tn</div>
+            <p className="font-['Funnel_Display'] font-medium text-base md:text-lg text-[#404040]">Tones of Flour Production/Day</p>
           </div>
 
           {/* Fact 3 - Jobs Created */}
-          <div className="lg:col-span-5 bg-[#F3F3F3] rounded-3xl p-6 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center min-h-[180px] md:min-h-[220px]">
-            <div className="text-center">
-              <div className="font-['Outfit'] font-extrabold text-6xl md:text-7xl text-[#23B349] leading-none tracking-tighter mb-4 group-hover:scale-105 transition-transform">
-                +200
+          <div className="md:col-span-4 bg-[#F3F3F3] rounded-[2rem] p-6 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center items-center text-center">
+            <div className="font-['Outfit'] font-extrabold text-6xl md:text-[90px] lg:text-[110px] text-[#23B349] leading-none tracking-tighter mb-2 md:mb-4 group-hover:scale-105 transition-transform">+200</div>
+            <p className="font-['Funnel_Display'] font-medium text-base md:text-lg text-[#404040]">Jobs Created</p>
+          </div>
+
+          {/* Row 2 */}
+          {/* Fact 4 - Biscuits/Hour */}
+          <div className="md:col-span-2 bg-[#F3F3F3] rounded-[2rem] p-6 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center items-center text-center min-h-[160px]">
+            <div className="font-['Outfit'] font-extrabold text-5xl md:text-[70px] lg:text-[80px] text-[#E6B720] leading-none tracking-tighter mb-2 md:mb-3 group-hover:scale-105 transition-transform">2tn</div>
+            <p className="font-['Funnel_Display'] font-medium text-sm md:text-base text-[#404040]">Biscuits/Hour</p>
+          </div>
+
+          {/* Central "Quick Fact" Badge - Positioned in the empty grid space */}
+          <div className="md:col-span-3 relative flex justify-center items-center z-30 py-6 md:py-0 pointer-events-none">
+            <div className="bg-[#23B349] rounded-2xl md:rounded-[2rem] px-8 py-4 md:px-10 md:py-6 flex items-center justify-center ring-[8px] md:ring-[16px] ring-white md:absolute pointer-events-auto shadow-2xl hover:scale-105 transition-transform">
+              <h2 className="font-['Outfit'] font-extrabold text-4xl md:text-5xl lg:text-[64px] text-white leading-none tracking-[-0.02em] whitespace-nowrap">
+                Quick Fact
+              </h2>
+            </div>
+          </div>
+
+          {/* Fact 5 - Investment (Spans 2 rows to overlap visually) */}
+          <div className="md:col-span-7 md:row-span-2 bg-[#F3F3F3] rounded-[2rem] p-8 md:p-10 lg:p-12 group hover:scale-[1.02] transition-all duration-500 shadow-sm relative flex flex-col justify-center items-center min-h-[250px] md:min-h-full">
+            <div className="md:absolute md:top-8 md:left-10 lg:top-12 lg:left-12 font-['Outfit'] font-extrabold text-5xl md:text-[60px] lg:text-[80px] text-[#E6B720] tracking-tighter text-center md:text-left mb-6 md:mb-0 group-hover:scale-105 transition-transform origin-top-left">
+              $1.4M
+            </div>
+            <div className="flex flex-col items-center justify-center w-full mt-0 md:mt-12 lg:mt-16">
+              <div className="font-['Outfit'] font-extrabold text-6xl md:text-[100px] lg:text-[130px] text-[#23B349] leading-none tracking-tighter mb-2 group-hover:scale-105 transition-transform">
+                Br210M
               </div>
-              <p className="font-['Funnel_Display'] font-medium text-base md:text-lg text-[#404040]">
-                Jobs Created
+              <p className="font-['Funnel_Display'] font-medium text-lg md:text-xl text-[#404040]">
+                Total Investment
               </p>
             </div>
           </div>
 
-          {/* Central "Quick Fact" Badge - Responsive positioning */}
-          <div className="lg:col-span-5 lg:col-start-4 bg-[#23B349] rounded-3xl p-8 md:p-10 flex items-center justify-center shadow-[0_0_0_12px_#ffffff,0_25px_50px_-12px_rgb(35,179,73)] z-30 hover:scale-105 transition-transform min-h-[110px] md:min-h-[130px]">
-            <h2 className="font-['Outfit'] font-extrabold text-5xl md:text-6xl lg:text-[80px] text-white leading-none tracking-[-0.02em] text-center">
-              Quick Fact
-            </h2>
+          {/* Row 3 */}
+          {/* Fact 6 - Factory Size */}
+          <div className="md:col-span-5 bg-[#F3F3F3] rounded-[2rem] p-6 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center items-center text-center">
+            <div className="font-['Outfit'] font-extrabold text-6xl md:text-[90px] lg:text-[110px] text-[#23B349] leading-none tracking-tighter mb-2 md:mb-4 group-hover:scale-105 transition-transform">22Km²</div>
+            <p className="font-['Funnel_Display'] font-medium text-base md:text-lg text-[#404040]">Factory Size in Square Killometer</p>
           </div>
 
-          {/* Fact 4 - Factory Size */}
-          <div className="lg:col-span-4 bg-[#F3F3F3] rounded-3xl p-6 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center min-h-[200px]">
-            <div className="text-center">
-              <div className="font-['Outfit'] font-extrabold text-6xl md:text-7xl text-[#23B349] leading-none tracking-tighter mb-4 group-hover:scale-105 transition-transform">
-                22Km²
-              </div>
-              <p className="font-['Funnel_Display'] font-medium text-base md:text-lg text-[#404040]">
-                Factory Size
-              </p>
-            </div>
-          </div>
-
-          {/* Fact 5 - Investment */}
-          <div className="lg:col-span-8 bg-[#F3F3F3] rounded-3xl p-6 md:p-10 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center min-h-[200px] md:min-h-[240px]">
-            <div className="flex flex-col md:flex-row items-center justify-center gap-8 text-center">
-              <div>
-                <div className="font-['Outfit'] font-extrabold text-5xl md:text-6xl text-[#E6B720] tracking-tighter">$1.4M</div>
-              </div>
-              <div>
-                <div className="font-['Outfit'] font-extrabold text-6xl md:text-7xl text-[#23B349] tracking-tighter">Br210M</div>
-                <p className="font-['Funnel_Display'] font-medium text-base md:text-lg text-[#404040] mt-2">
-                  Total Investment
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
