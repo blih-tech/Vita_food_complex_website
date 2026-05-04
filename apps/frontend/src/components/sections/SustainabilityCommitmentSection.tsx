@@ -1,135 +1,475 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { CheckCircle2 } from "lucide-react";
-import Image from "next/image";
+import { useState, useEffect, useRef } from "react";
 
 export default function SustainabilityCommitmentSection() {
   const t = useTranslations("Sustainability");
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold: 0.1 },
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, []);
 
   const commitments = [
     {
-      title: "Local Sourcing",
+      key: "localSourcing",
       items: [
-        "Partnering with local farmers",
-        "Supporting Ethiopian agriculture",
-        "Strengthening rural economies",
-        "24/7 Property Support",
+        "localSourcing.items.0",
+        "localSourcing.items.1",
+        "localSourcing.items.2",
       ],
     },
     {
-      title: "Community Impact",
+      key: "communityImpact",
       items: [
-        "150–200 jobs created",
-        "Skills development opportunities",
-        "Local economic growth",
-        "24/7 Property Support",
+        "communityImpact.items.0",
+        "communityImpact.items.1",
+        "communityImpact.items.2",
       ],
     },
     {
-      title: "Responsible Production",
+      key: "responsibleProduction",
       items: [
-        "Efficient manufacturing processes",
-        "Waste reduction systems",
-        "By-products reused for livestock feed",
-        "24/7 Property Support",
+        "responsibleProduction.items.0",
+        "responsibleProduction.items.1",
+        "responsibleProduction.items.2",
       ],
     },
   ];
 
+  const stats = [
+    { value: t("stats.skus.value"), label: t("stats.skus.label"), dark: true },
+    {
+      value: t("stats.biscuits.value"),
+      label: t("stats.biscuits.label"),
+      dark: true,
+    },
+    {
+      value: t("stats.flour.value"),
+      label: t("stats.flour.label"),
+      dark: true,
+    },
+    { value: t("stats.quickFact"), label: "", dark: true },
+    { value: t("stats.jobs.value"), label: t("stats.jobs.label"), dark: true },
+    {
+      value: t("stats.factory.value"),
+      label: t("stats.factory.label"),
+      dark: false,
+    },
+    {
+      value: t("stats.investment.value"),
+      label: t("stats.investment.label"),
+      dark: false,
+    },
+    {
+      value: t("stats.export.value"),
+      label: t("stats.export.label"),
+      dark: true,
+    },
+  ];
+
   return (
-    <section className="bg-white py-16 md:py-24 px-4">
-      <div className="mx-auto max-w-[1400px]">
-        {/* ── HEADING ── */}
-        <div className="text-center mb-16">
-          <h2 className="font-[family-name:var(--font-outfit)] font-bold text-[32px] md:text-[48px] lg:text-[64px] text-[#23B349] mb-6">
-            Our Commitment
+    <section
+      ref={sectionRef}
+      style={{ background: "#FFFFFF" }}
+    >
+      <div style={{ paddingLeft: "128px", paddingRight: "128px", paddingTop: "80px", paddingBottom: "80px" }}>
+        {/* Commitment text — Figma node 274:5239 */}
+        <div style={{ maxWidth: 1386, marginBottom: "80px" }}>
+          {/* "Our Commitment" — Outfit Bold 64px, lh 61.44px, ls -1.28px, #23B349 */}
+          <h2
+            style={{
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 700,
+              fontSize: "64px",
+              lineHeight: "0.96",
+              letterSpacing: "-1.28px",
+              color: "#23B349",
+              maxWidth: 498,
+              marginBottom: "48px"
+            }}
+          >
+            {t("commitment.title")}
           </h2>
-          <p className="font-[family-name:var(--font-funnel-display)] font-medium text-[16px] md:text-[20px] lg:text-[24px] text-[#404040]/70 max-w-[1100px] mx-auto leading-relaxed">
-            We believe sustainability is not a choice — it&apos;s a responsibility. From sourcing local wheat to
-            minimizing waste, every step of our process is designed to create long-term value for people,
-            communities, and the environment
+
+          {/* Large body text — Funnel Display Regular 32px, lh 40px, ls -0.128px, #545854 */}
+          <p
+            style={{
+              fontFamily: "'Funnel Display', sans-serif",
+              fontWeight: 400,
+              fontSize: "clamp(20px, 3vw, 32px)",
+              lineHeight: "40px",
+              letterSpacing: "-0.128px",
+              color: "#545854",
+            }}
+          >
+            {t("commitment.description")}
           </p>
         </div>
 
-        {/* ── COMMITMENT CARDS ── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 md:mb-32">
+        {/* 3 Commitment Cards — Figma node 274:5242, each card 544 x 558.7 */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {commitments.map((c, i) => (
-            <div key={i} className="bg-gradient-to-br from-[#E9F7ED] to-[#23B349]/10 rounded-[32px] p-8 md:p-10 border border-[#23B349]/10">
-              <h3 className="font-[family-name:var(--font-outfit)] font-bold text-[24px] md:text-[28px] text-[#23B349] mb-8">
-                {c.title}
+            <div
+              key={c.key}
+              className="rounded-[24px] p-8 md:p-10"
+              style={{
+                background: "#F5F5F5",
+                minHeight: 400,
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? "translateY(0)" : "translateY(20px)",
+                transition: `all 0.8s ease-out ${i * 0.1}s`,
+              }}
+            >
+              {/* Card title — Funnel Display Bold 32px, lh 32px, ls -0.32px */}
+              <h3
+                className="mb-6"
+                style={{
+                  fontFamily: "'Funnel Display', sans-serif",
+                  fontWeight: 700,
+                  fontSize: 32,
+                  lineHeight: "32px",
+                  letterSpacing: "-0.32px",
+                  color:
+                    c.key === "responsibleProduction" ? "#23B349" : "#197F34",
+                }}
+              >
+                {t(`commitment.${c.key}.title`)}
               </h3>
-              <div className="space-y-4">
-                {c.items.map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-3 bg-white/60 p-3 rounded-xl border border-[#23B349]/5 shadow-sm">
-                    <CheckCircle2 className="text-[#23B349] w-5 h-5 flex-shrink-0" />
-                    <span className="font-[family-name:var(--font-funnel-display)] text-[14px] md:text-[16px] text-[#404040]">
-                      {item}
+
+              {/* Items — Outfit Regular 24px, lh 24-30px, #333733 */}
+              <ul className="space-y-4">
+                {c.items.map((item, j) => (
+                  <li key={j} className="flex items-start gap-3">
+                    <div
+                      className="w-2 h-2 rounded-full mt-3 flex-shrink-0"
+                      style={{ background: "#23B349" }}
+                    />
+                    <span
+                      style={{
+                        fontFamily: "'Outfit', sans-serif",
+                        fontWeight: 400,
+                        fontSize: 20,
+                        lineHeight: "25.2px",
+                        letterSpacing: "-0.08px",
+                        color: "#333733",
+                      }}
+                    >
+                      {t(item)}
                     </span>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           ))}
         </div>
 
-        {/* ── QUICK FACT SECTION ── */}
-        <div className="relative w-full rounded-[40px] md:rounded-[60px] overflow-hidden shadow-2xl">
-          {/* Background — Using a placeholder green texture or image */}
-          <div className="absolute inset-0 bg-[#23B349]">
-             <Image src="/assets/about/wheat-farming.png" alt="" fill className="object-cover opacity-20" />
-             <div className="absolute inset-0 bg-gradient-to-br from-[#23B349]/80 to-[#0D3B1F]/90" />
+        {/* Quick Fact Stats — Figma node 274:5315 - Exact positioning layout */}
+        <div
+          style={{
+            position: "relative",
+            height: "815px",
+            width: "100%",
+            background: "#F5F5F5",
+            borderRadius: "32px",
+            overflow: "hidden"
+          }}
+        >
+          {/* +11 SKUs - positioned at left: 106.67px, top: 104.8px */}
+          <div
+            style={{
+              position: "absolute",
+              left: "106.67px",
+              top: "104.8px",
+              width: "381.667px",
+              height: "281.667px",
+              border: "2.5px solid #FFFFFF",
+              borderRadius: "20px",
+              background: "rgba(171,255,152,0.5)",
+              backdropFilter: "blur(10px)"
+            }}
+          >
+            <div style={{
+              position: "absolute",
+              left: "-2.5px",
+              right: "-2.5px",
+              top: "47.39px",
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 800,
+              fontSize: "160px",
+              lineHeight: "0.88",
+              letterSpacing: "-4.8px",
+              color: "#000000",
+              textAlign: "center"
+            }}>
+              +11
+            </div>
+            <div style={{
+              position: "absolute",
+              left: "-2.5px",
+              right: "-2.5px",
+              top: "209.05px",
+              fontFamily: "'Funnel Display', sans-serif",
+              fontWeight: 500,
+              fontSize: "20px",
+              lineHeight: "20px",
+              letterSpacing: "-0.08px",
+              color: "#404040",
+              textAlign: "center"
+            }}>
+              Product SKUs
+            </div>
           </div>
 
-          <div className="relative z-10 p-8 md:p-16 lg:p-24 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
-            
-            {/* Left Column Stats */}
-            <div className="md:col-span-4 flex flex-col gap-12">
-               <div>
-                 <span className="font-[family-name:var(--font-outfit)] font-black text-[60px] md:text-[80px] lg:text-[100px] text-white leading-none tracking-tighter">+11</span>
-                 <p className="font-[family-name:var(--font-funnel-display)] text-white/70 text-[16px] md:text-[18px]">Unique SKUs for Everyone.</p>
-               </div>
-               <div>
-                 <span className="font-[family-name:var(--font-outfit)] font-black text-[60px] md:text-[80px] lg:text-[100px] text-white leading-none tracking-tighter text-outline">2tn</span>
-                 <p className="font-[family-name:var(--font-funnel-display)] text-white/70 text-[16px] md:text-[18px]">Biscuits/Hour</p>
-               </div>
+          {/* 60tn Flour - positioned at left: 403.33px, top: 104.8px */}
+          <div
+            style={{
+              position: "absolute",
+              left: "403.33px",
+              top: "104.8px",
+              width: "480px",
+              height: "281.667px",
+              border: "2.5px solid #FFFFFF",
+              borderRadius: "20px",
+              background: "rgba(171,255,152,0.5)",
+              backdropFilter: "blur(10px)"
+            }}
+          >
+            <div style={{
+              position: "absolute",
+              left: "-2.5px",
+              right: "-2.5px",
+              top: "47.39px",
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 800,
+              fontSize: "160px",
+              lineHeight: "0.88",
+              letterSpacing: "-4.8px",
+              color: "#000000",
+              textAlign: "center"
+            }}>
+              60tn
             </div>
-
-            {/* Middle Column Stats */}
-            <div className="md:col-span-4 flex flex-col items-center text-center gap-12 md:gap-20">
-               <div>
-                 <span className="font-[family-name:var(--font-outfit)] font-black text-[60px] md:text-[80px] lg:text-[100px] text-white leading-none tracking-tighter">60tn</span>
-                 <p className="font-[family-name:var(--font-funnel-display)] text-white/70 text-[16px] md:text-[18px]">Tones of Flour Production/Day</p>
-               </div>
-               
-               <div className="bg-white/10 backdrop-blur-md px-10 py-4 rounded-2xl border border-white/20">
-                  <h4 className="font-[family-name:var(--font-outfit)] font-bold text-[32px] md:text-[40px] lg:text-[50px] text-white leading-none">Quick Fact</h4>
-               </div>
-
-               <div>
-                 <span className="font-[family-name:var(--font-outfit)] font-black text-[60px] md:text-[80px] lg:text-[120px] text-white leading-none tracking-tighter">22Km²</span>
-                 <p className="font-[family-name:var(--font-funnel-display)] text-white/70 text-[16px] md:text-[18px]">Factory Size in Square Kilometer</p>
-               </div>
+            <div style={{
+              position: "absolute",
+              left: "-2.5px",
+              right: "-2.5px",
+              top: "209.05px",
+              fontFamily: "'Funnel Display', sans-serif",
+              fontWeight: 500,
+              fontSize: "20px",
+              lineHeight: "20px",
+              letterSpacing: "-0.08px",
+              color: "#404040",
+              textAlign: "center"
+            }}>
+              Tones of Flour Production/Day
             </div>
+          </div>
 
-            {/* Right Column Stats */}
-            <div className="md:col-span-4 flex flex-col gap-12 text-right items-end">
-               <div>
-                 <span className="font-[family-name:var(--font-outfit)] font-black text-[60px] md:text-[80px] lg:text-[100px] text-white leading-none tracking-tighter">+200</span>
-                 <p className="font-[family-name:var(--font-funnel-display)] text-white/70 text-[16px] md:text-[18px]">Jobs Created</p>
-               </div>
-               <div>
-                 <span className="font-[family-name:var(--font-outfit)] font-black text-[50px] md:text-[70px] lg:text-[80px] text-white leading-none tracking-tighter">$1.4M</span>
-                 <div className="w-[120px] h-[60px] relative mt-2 opacity-50 ml-auto">
-                    <Image src="/assets/hero/badge.svg" alt="" fill className="object-contain" />
-                 </div>
-               </div>
-               <div>
-                 <span className="font-[family-name:var(--font-outfit)] font-black text-[60px] md:text-[80px] lg:text-[100px] text-white leading-none tracking-tighter">Br210M</span>
-                 <p className="font-[family-name:var(--font-funnel-display)] text-white/70 text-[16px] md:text-[18px]">Total Investment</p>
-               </div>
+          {/* Quick Fact label - positioned at left: 403.33px, top: 406.46px */}
+          <div
+            style={{
+              position: "absolute",
+              left: "403.33px",
+              top: "406.46px",
+              width: "381.667px",
+              height: "128.333px",
+              border: "2.5px solid #FFFFFF",
+              borderRadius: "20px",
+              background: "rgba(171,255,152,0.5)",
+              backdropFilter: "blur(10px)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            <div style={{
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 800,
+              fontSize: "66.667px",
+              lineHeight: "0.9",
+              letterSpacing: "-1.3333px",
+              color: "#404040",
+              textAlign: "center"
+            }}>
+              Quick Fact
             </div>
+          </div>
 
+          {/* +200 Jobs - positioned at left: 1013.33px, top: 104.8px */}
+          <div
+            style={{
+              position: "absolute",
+              left: "1013.33px",
+              top: "104.8px",
+              width: "480px",
+              height: "281.667px",
+              border: "2.5px solid #FFFFFF",
+              borderRadius: "20px",
+              background: "rgba(171,255,152,0.5)",
+              backdropFilter: "blur(10px)"
+            }}
+          >
+            <div style={{
+              position: "absolute",
+              left: "-2.5px",
+              right: "-2.5px",
+              top: "47.5px",
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 800,
+              fontSize: "160px",
+              lineHeight: "0.88",
+              letterSpacing: "-4.8px",
+              color: "#000000",
+              textAlign: "center"
+            }}>
+              +200
+            </div>
+            <div style={{
+              position: "absolute",
+              left: "-2.5px",
+              right: "-2.5px",
+              top: "209.17px",
+              fontFamily: "'Funnel Display', sans-serif",
+              fontWeight: 500,
+              fontSize: "20px",
+              lineHeight: "20px",
+              letterSpacing: "-0.08px",
+              color: "#404040",
+              textAlign: "center"
+            }}>
+              Jobs Created
+            </div>
+          </div>
+
+          {/* 22Km² Factory - positioned at left: 106.67px, top: 553.13px */}
+          <div
+            style={{
+              position: "absolute",
+              left: "106.67px",
+              top: "553.13px",
+              width: "610.833px",
+              height: "285.833px",
+              border: "2.5px solid #FFFFFF",
+              borderRadius: "20px",
+              background: "rgba(171,255,152,0.5)",
+              backdropFilter: "blur(10px)"
+            }}
+          >
+            <div style={{
+              position: "absolute",
+              bottom: "237.5px",
+              left: "-2.5px",
+              right: "-2.5px",
+              fontFamily: "'Outfit', sans-serif",
+              fontWeight: 800,
+              fontSize: "160px",
+              lineHeight: "0.88",
+              letterSpacing: "-4.8px",
+              color: "#FFFFFF",
+              textAlign: "center",
+              transform: "translateY(100%)"
+            }}>
+              <span style={{ fontSize: "160px" }}>22Km</span>
+              <span style={{ fontSize: "96.21px", verticalAlign: "top" }}>2</span>
+            </div>
+            <div style={{
+              position: "absolute",
+              bottom: "75.83px",
+              left: "-2.5px",
+              right: "-2.5px",
+              fontFamily: "'Funnel Display', sans-serif",
+              fontWeight: 500,
+              fontSize: "20px",
+              lineHeight: "20px",
+              letterSpacing: "-0.08px",
+              color: "#FFFFFF",
+              textAlign: "center",
+              transform: "translateY(100%)"
+            }}>
+              Factory Size in Square Killometer
+            </div>
+          </div>
+
+          {/* Investment stats - positioned at left: 737.5px, top: 404.17px */}
+          <div
+            style={{
+              position: "absolute",
+              left: "737.5px",
+              top: "404.17px",
+              width: "755.833px",
+              height: "435px",
+            }}
+          >
+            <div style={{
+              position: "absolute",
+              bottom: "0.2px",
+              width: "755.833px",
+              height: "435px",
+              borderRadius: "20px",
+              overflow: "hidden",
+              background: "linear-gradient(135deg, #23B349 0%, #0F4B1F 100%)"
+            }}>
+              <div style={{
+                position: "absolute",
+                bottom: "239.58px",
+                left: 0,
+                right: 0,
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 800,
+                fontSize: "160px",
+                lineHeight: "0.88",
+                letterSpacing: "-4.8px",
+                color: "#FFFFFF",
+                textAlign: "center",
+                transform: "translateY(100%)"
+              }}>
+                Br210M
+              </div>
+              <div style={{
+                position: "absolute",
+                bottom: "77.92px",
+                left: 0,
+                right: 0,
+                fontFamily: "'Funnel Display', sans-serif",
+                fontWeight: 500,
+                fontSize: "20px",
+                lineHeight: "20px",
+                letterSpacing: "-0.08px",
+                color: "#FFFFFF",
+                textAlign: "center",
+                transform: "translateY(100%)"
+              }}>
+                Total Investment
+              </div>
+              <div style={{
+                position: "absolute",
+                bottom: "390.42px",
+                left: "109.64px",
+                right: 0,
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 800,
+                fontSize: "80px",
+                lineHeight: "0.88",
+                letterSpacing: "-2.4px",
+                color: "#404040",
+                transform: "translateY(100%)"
+              }}>
+                $1.4M
+              </div>
+            </div>
           </div>
         </div>
       </div>
