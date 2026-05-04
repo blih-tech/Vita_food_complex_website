@@ -13,15 +13,15 @@ export default function AboutHeroSection() {
 
   return (
     <section className="relative w-full overflow-hidden" style={{ background: HERO_RADIAL }}>
-      <div className="relative z-10 mx-auto flex max-w-[1920px] flex-col items-center px-8 pb-0 pt-[120px] text-center md:px-16 md:pt-[160px] lg:px-[128px]">
+      <div className="relative z-10 mx-auto flex max-w-[1920px] flex-col items-center px-8 pb-0 pt-[clamp(80px,10vw,160px)] text-center md:px-16 lg:px-[128px]">
         <h1
-          className="mb-8 max-w-[824px] font-[family-name:var(--font-outfit)] text-[40px] font-extrabold leading-[0.9] tracking-[-0.02em] text-white md:text-[64px] lg:text-[80px]"
+          className="mb-8 max-w-[1000px] font-[family-name:var(--font-outfit)] text-[clamp(36px,6vw,80px)] font-extrabold leading-[1] tracking-[-0.02em] text-white"
         >
           {t("hero.headline")}
         </h1>
 
         <p
-          className="mb-16 max-w-[824px] font-[family-name:var(--font-funnel-display)] text-[16px] font-medium leading-normal tracking-[-0.004em] text-[#E8E8E8] md:text-[20px] lg:text-[24px]"
+          className="mb-16 max-w-[824px] font-[family-name:var(--font-funnel-display)] text-[clamp(16px,1.8vw,24px)] font-medium leading-normal tracking-[-0.004em] text-[#E8E8E8]"
         >
           {t("hero.subtitle")}
         </p>

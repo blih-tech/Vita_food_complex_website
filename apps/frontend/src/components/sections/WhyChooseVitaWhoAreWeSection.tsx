@@ -33,29 +33,29 @@ export default function WhyChooseVitaWhoAreWeSection() {
 
   return (
     <section className="flex w-full flex-col items-center bg-white px-4 py-12 sm:px-6 sm:py-16 md:px-8 md:py-20 lg:px-8 lg:py-24 xl:px-[128px]">
-      <div className="flex w-full max-w-[1664px] flex-col items-center gap-[60px] lg:gap-[120px]">
+      <div className="flex w-full max-w-[1664px] flex-col items-center gap-[clamp(40px,8vw,120px)]">
         {/* Who we are text — layout_2KGSD9: gap 32, max 1296 */}
         <div className="flex w-full max-w-[1296px] flex-col items-center gap-8">
           {/* Section Header — layout_A5LGL9 */}
-          <div className="flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-8 md:gap-12 lg:gap-[123.81px]">
+          <div className="flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-8 md:gap-12 lg:gap-[clamp(40px,8vw,123.81px)]">
             <span
-              className={`${bricolageGrotesque.className} text-center text-[48px] font-bold leading-none tracking-[-0.02em] text-[#404040] sm:text-[72px] md:text-[110px] lg:text-[150px]`}
+              className={`${bricolageGrotesque.className} text-center text-[clamp(40px,8vw,150px)] font-bold leading-none tracking-[-0.02em] text-[#404040]`}
             >
               {t("headlineWho")}
             </span>
             {/* Line 1 — layout_9NSMKE: 123.81×0, stroke 10px #333733 */}
             <div
-              className="h-[10px] w-16 shrink-0 rounded-none bg-[#333733] sm:w-20 md:w-24 lg:w-[123.81px]"
+              className="h-[clamp(6px,0.8vw,10px)] w-[clamp(40px,8vw,123.81px)] shrink-0 rounded-none bg-[#333733]"
               aria-hidden
             />
-            <span className="text-center font-[family-name:var(--font-funnel-display)] text-[48px] font-extrabold leading-[90%] tracking-[-0.02em] text-[#23B349] sm:text-[72px] md:text-[110px] lg:text-[150px]">
+            <span className="text-center font-[family-name:var(--font-funnel-display)] text-[clamp(40px,8vw,150px)] font-extrabold leading-[90%] tracking-[-0.02em] text-[#23B349]">
               {t("headlineAreWe")}
             </span>
           </div>
 
           {/* Section Description — layout_3MMBXZ: gap 78 */}
-          <div className="flex w-full flex-col items-center gap-[48px] md:gap-[64px] lg:gap-[78px]">
-            <p className="w-full text-center font-[family-name:var(--font-outfit)] text-[18px] font-normal leading-normal tracking-[-0.004em] text-[rgba(16,15,15,0.9)] sm:text-[22px] md:text-[26px] lg:text-[32px]">
+          <div className="flex w-full flex-col items-center gap-[clamp(32px,6vw,78px)]">
+            <p className="w-full text-center font-[family-name:var(--font-outfit)] text-[clamp(18px,2.2vw,32px)] font-normal leading-normal tracking-[-0.004em] text-[rgba(16,15,15,0.9)]">
               {t("fmcgIntro")}
             </p>
 

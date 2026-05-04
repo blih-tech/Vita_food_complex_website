@@ -137,7 +137,7 @@ export default function SisterCompaniesSection() {
       >
         <div
           className="flex h-full w-max flex-row items-center px-4 py-6 md:px-6"
-          style={{ gap: SCROLL_GAP_PX }}
+          style={{ gap: "clamp(40px, 15vw, 200px)" }}
         >
           {extendedSlots.map((slot, index) =>
             slot.kind === "longTeaCard" ? (

@@ -51,32 +51,32 @@ export default function WhoAreWeSection() {
         aria-hidden
       />
 
-      <div className="relative z-[2] mx-auto flex max-w-[1664px] flex-col items-center pt-[clamp(6rem,12vw,10rem)]">
-        <div className="mb-12 flex w-full max-w-[min(100%,1200px)] flex-row flex-wrap items-center justify-center gap-4 md:gap-5 lg:max-w-[1400px] lg:justify-between lg:gap-8 xl:max-w-[1540px]">
-          <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:gap-4">
-            <h2 className="w-[min(100%,344px)] text-center font-[family-name:var(--font-funnel-display)] text-[56px] font-bold leading-none tracking-[-0.02em] text-[#E6E6E6] md:text-[100px] lg:text-[140px]">
+      <div className="relative z-[2] mx-auto flex w-full max-w-[1664px] flex-col items-center pt-[clamp(6rem,12vw,10rem)]">
+        <div className="mb-12 flex w-full max-w-[1540px] flex-row flex-wrap items-center justify-center gap-4 md:gap-5 lg:justify-between lg:gap-8">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:gap-4 lg:flex-nowrap">
+            <h2 className="text-center font-[family-name:var(--font-funnel-display)] text-[clamp(40px,8vw,140px)] font-bold leading-none tracking-[-0.02em] text-[#E6E6E6]">
               Who
             </h2>
             <div
-              className="hidden h-[10px] w-[123.81px] shrink-0 rounded-full bg-[#E6E6E6] sm:block"
+              className="hidden h-[clamp(4px,0.7vw,10px)] w-[clamp(40px,8vw,123.81px)] shrink-0 rounded-full bg-[#E6E6E6] sm:block"
               aria-hidden
             />
-            <h2 className="max-w-[518px] text-center font-[family-name:var(--font-funnel-display)] text-[60px] font-extrabold leading-[0.9] tracking-[-0.02em] text-white md:text-[110px] lg:text-[150px]">
+            <h2 className="text-center font-[family-name:var(--font-funnel-display)] text-[clamp(45px,9vw,150px)] font-extrabold leading-[0.9] tracking-[-0.02em] text-white">
               Are We
             </h2>
           </div>
-          <div className="relative h-[100px] w-[100px] shrink-0 sm:h-[110px] sm:w-[110px] lg:h-[120px] lg:w-[120px]" aria-hidden>
+          <div className="relative h-[clamp(80px,8vw,120px)] w-[clamp(80px,8vw,120px)] shrink-0" aria-hidden>
             <Image
               src={whoWe.qualityBadge}
               alt=""
               fill
               className="object-contain"
-              sizes="120px"
+              sizes="(max-width: 768px) 80px, 120px"
             />
           </div>
         </div>
 
-        <p className="mb-16 max-w-[1291px] text-center font-[family-name:var(--font-outfit)] text-[18px] font-normal leading-normal tracking-[-0.004em] text-white md:text-[26px] lg:text-[32px]">
+        <p className="mb-16 max-w-[1291px] text-center font-[family-name:var(--font-outfit)] text-[clamp(18px,2.2vw,32px)] font-normal leading-normal tracking-[-0.004em] text-white">
           {t("whoWeAre.description")}
         </p>
 
