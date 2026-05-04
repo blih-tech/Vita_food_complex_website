@@ -1,112 +1,174 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { ArrowRight, Play } from "lucide-react";
 
-const FloatingAssets = () => (
-  <div className="relative max-w-[1400px] mx-auto h-[350px] md:h-[500px] lg:h-[650px] z-10 pointer-events-none">
-    <div className="absolute left-[2%] md:left-[6%] lg:left-[10%] bottom-[12%] md:bottom-[15%] lg:bottom-[20%] w-[180px] h-[180px] md:w-[320px] md:h-[320px] lg:w-[480px] lg:h-[480px] animate-float">
-      <Image src="/assets/hero/doctor-duck.png" alt="Doctor Duck" fill className="object-contain" priority />
-    </div>
-    <div className="absolute right-[2%] md:right-[5%] lg:right-[8%] bottom-[18%] md:bottom-[22%] lg:bottom-[28%] w-[150px] h-[150px] md:w-[260px] md:h-[260px] lg:w-[400px] lg:h-[400px] animate-float-delayed">
-      <Image src="/assets/hero/biscuit-stack.png" alt="Biscuit Stack" fill className="object-contain" priority />
-    </div>
-  </div>
-);
+const clients = [1, 2, 3];
+const marqueeItems = Array.from({ length: 8 });
 
-const VideoMarqueeSection = ({ t }: { t: any }) => (
-  <div className="relative bg-[#23B349] pt-12 pb-[100px] md:pb-[160px] z-10">
-    <div className="max-w-[1200px] mx-auto px-6">
-      
-      {/* Quote and Clients */}
-      <div className="mb-24 md:mb-36">
-        <h3 className="font-[family-name:var(--font-funnel-display)] font-bold text-[24px] md:text-[38px] lg:text-[52px] text-white leading-[1.15] mb-12 max-w-[1050px]">
-          {t("secondaryQuote")}
-        </h3>
-        <div className="flex flex-row items-center gap-6">
-          <div className="flex -space-x-4">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="relative w-12 h-12 md:w-16 md:h-16 rounded-full border-[3px] border-white bg-gray-100 overflow-hidden shadow-lg">
-                <Image src={`/assets/hero/client-${i}.png`} alt="Client" fill className="object-cover" />
-              </div>
-            ))}
-            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full border-[3px] border-white bg-[#404040] flex items-center justify-center text-white font-bold text-sm md:text-lg shadow-lg">
-              +3
-            </div>
+function ClientAvatars() {
+  return (
+    <div className="flex items-center gap-4">
+      <div className="flex -space-x-4">
+        {clients.map((client) => (
+          <div
+            key={client}
+            className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-white shadow-md md:h-12 md:w-12"
+          >
+            <Image
+              src={`/assets/hero/client-${client}.png`}
+              alt={`Client ${client}`}
+              fill
+              className="object-cover"
+            />
           </div>
-          <span className="font-[family-name:var(--font-funnel-display)] font-bold text-white text-[18px] md:text-[20px] tracking-wide">
-            {t("ourClients")}
-          </span>
+        ))}
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-neutral-400 text-xs font-bold text-white shadow-md md:h-12 md:w-12 md:text-sm">
+          +3
         </div>
       </div>
+    </div>
+  );
+}
 
-      {/* Video & Marquee */}
-      <div className="relative max-w-[1150px] mx-auto">
-        <div className="absolute top-[42%] left-[-10%] w-[120%] h-20 md:h-32 lg:h-44 bg-[#FFEC19] rotate-[-2.5deg] z-0 flex items-center overflow-hidden shadow-xl">
-          <div className="flex whitespace-nowrap animate-marquee">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <span key={i} className="font-[family-name:var(--font-funnel-display)] font-black text-[30px] md:text-[60px] lg:text-[90px] text-[#23B349] mx-10 uppercase italic tracking-tighter">
-                {t("connecting")}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="relative z-10">
-          <div className="aspect-video rounded-[35px] md:rounded-[55px] lg:rounded-[70px] border-[8px] md:border-[15px] border-white overflow-hidden shadow-[0_30px_60px_-10px_rgba(0,0,0,0.25)] group cursor-pointer">
-            <Image src="/assets/hero/video-family.png" alt="Family enjoying Vita" fill className="object-cover transition-transform duration-1000 group-hover:scale-105" priority />
-            <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500 flex items-center justify-center">
-              <div className="absolute top-6 left-6 md:top-12 md:left-12 w-10 h-10 md:w-20 md:h-20 opacity-90 transition-all hover:scale-110 active:scale-90">
-                <Image src="/assets/hero/sound-mute-video.svg" alt="Mute" fill />
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute -top-[10%] -right-[5%] md:-top-[12%] md:-right-[4%] w-[100px] h-[100px] md:w-[180px] md:h-[180px] lg:w-[240px] lg:h-[240px] z-20 drop-shadow-2xl transition-transform hover:rotate-12 duration-700">
-            <Image src="/assets/hero/badge.svg" alt="Quality Badge" fill className="object-contain" />
-          </div>
+function MarqueeBanner({ t }: { t: ReturnType<typeof useTranslations> }) {
+  return (
+    <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-16 w-[220vw] -translate-x-1/2 -translate-y-1/2 rotate-[-5deg] bg-[#FFEC19] border-b-[6px] border-[#404040] shadow-2xl md:h-24 md:border-b-[10px] lg:h-28 lg:border-b-[12px]">
+      <div className="relative flex h-full items-center overflow-hidden whitespace-nowrap">
+        <div className="animate-marquee flex whitespace-nowrap">
+          {marqueeItems.map((_, index) => (
+            <span
+              key={index}
+              className="mx-10 font-['Funnel_Display'] text-3xl font-extrabold italic tracking-tight text-[#DB4426] md:text-5xl lg:text-7xl"
+            >
+              A new stylish way of {t("connecting")}!
+            </span>
+          ))}
         </div>
       </div>
-
     </div>
-  </div>
-);
+  );
+}
 
 export default function HeroVideoSection() {
   const t = useTranslations("Hero");
 
   return (
-    <section id="hero-video" className="relative w-full overflow-hidden bg-white">
-      <div className="relative w-full">
-        {/* The Arc/Hill Shape */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[180%] md:w-[150%] lg:w-[130%] aspect-[6/1] bg-[#23B349] rounded-t-[100%] translate-y-[5%] z-0" />
-        
-        <FloatingAssets />
-        <VideoMarqueeSection t={t} />
+    <section id="hero-video" className="relative overflow-x-clip" aria-label="Hero section">
+      {/* Background Layers */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[url('/landing-hero.svg')] bg-cover bg-top bg-no-repeat" />
+      </div>
+
+      {/* Floating Decorative Assets */}
+      <div className="pointer-events-none absolute inset-0 z-10">
+        <div className="absolute left-0 -top-80 h-[280px] w-[280px] md:h-[420px] md:w-[420px] lg:h-[540px] lg:w-[540px]">
+          <Image
+            src="/assets/hero/doctor-duck.png"
+            alt="Doctor Duck"
+            fill
+            priority
+            className="object-contain drop-shadow-2xl"
+          />
+        </div>
+
+        <div className="absolute right-0 -top-60 h-[220px] w-[220px] md:h-[360px] md:w-[360px] lg:h-[500px] lg:w-[500px]">
+          <Image
+            src="/assets/hero/biscuit-stack.png"
+            alt="Biscuit Stack"
+            fill
+            priority
+            className="object-contain drop-shadow-2xl"
+          />
+        </div>
+      </div>
+
+      <div className="relative z-20 mx-auto flex max-w-[1440px] flex-col px-6 pb-24 pt-28 md:px-10 md:pb-36 md:pt-40 lg:px-16 lg:pb-44 lg:pt-52">
+        {/* Secondary Quote Section */}
+        <div className="flex max-w-6xl flex-col items-start text-left">
+          <blockquote className="max-w-5xl font-['Outfit'] text-3xl font-bold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl">
+            “{t("secondaryQuote")}”
+          </blockquote>
+
+          <div className="mt-10 flex items-center gap-5">
+            <ClientAvatars />
+            <span className="font-['Outfit'] text-lg font-semibold text-white md:text-xl">
+              {t("ourClients")}
+            </span>
+          </div>
+        </div>
+
+        {/* Video Showcase */}
+        <div className="relative mt-24 w-full md:mt-32">
+          <MarqueeBanner t={t} />
+
+          <div className="relative z-10 mx-auto max-w-[1380px]">
+            <div className="group relative aspect-video overflow-hidden rounded-[32px] border-4 border-white bg-[#404040] shadow-[0_30px_80px_rgba(0,0,0,0.35)] md:rounded-[48px] lg:rounded-[52px]">
+              <Image
+                src="/assets/hero/video-family.png"
+                alt="Family enjoying Vita"
+                fill
+                priority
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
+
+              <div className="absolute inset-0 bg-black/10 transition-all duration-500 group-hover:bg-black/0" />
+
+              {/* Mute Button */}
+              <button
+                aria-label="Mute video"
+                className="absolute left-4 top-4 flex h-12 w-12 items-center justify-center rounded-full bg-black/30 backdrop-blur-md transition-transform duration-300 hover:scale-110 md:left-8 md:top-8 md:h-16 md:w-16"
+              >
+                <Image
+                  src="/assets/hero/sound-mute-video.svg"
+                  alt="Mute"
+                  fill
+                  className="p-3"
+                />
+              </button>
+
+              {/* Play Button */}
+              <button
+                aria-label="Play video"
+                className="absolute inset-0 m-auto flex h-20 w-20 items-center justify-center rounded-full bg-white/20 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-white/30 md:h-24 md:w-24"
+              >
+                <Play className="h-10 w-10 text-white fill-white ml-1" />
+              </button>
+            </div>
+
+            {/* Floating Badge */}
+            <div className="absolute -right-4 -top-12 z-30 h-24 w-24 rotate-[10deg] drop-shadow-2xl transition-transform duration-700 hover:rotate-[20deg] md:-right-10 md:-top-16 md:h-40 md:w-40 lg:h-[215px] lg:w-[215px]">
+              <Image
+                src="/assets/hero/badge.svg"
+                alt="Quality Badge"
+                fill
+                className="object-contain"
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
       <style jsx>{`
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        .animate-float-delayed {
-          animation: float-delayed 8s ease-in-out infinite;
-        }
         .animate-marquee {
-          animation: marquee 20s linear infinite;
+          animation: marquee 22s linear infinite;
         }
 
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-15px); }
-        }
-        @keyframes float-delayed {
-          0%, 100% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(3deg); }
-        }
         @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .animate-marquee {
+            animation: none;
+          }
         }
       `}</style>
     </section>

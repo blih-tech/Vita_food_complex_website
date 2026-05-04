@@ -5,11 +5,12 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 const MERCH_ITEMS = [
-  { id: 1, image: '/assets/merchandise/merch-1.png', title: 'Vita Necklace', desc: 'Elegant and simple.' },
-  { id: 2, image: '/assets/merchandise/merch-2.png', title: 'Classic Cap', desc: 'Everyday comfortable wear.' },
-  { id: 3, image: '/assets/merchandise/merch-3.png', title: 'Vita T-Shirt', desc: 'Premium cotton blend.' },
-  { id: 4, image: '/assets/merchandise/merch-4.png', title: 'Full-Sleeve Sweeter', desc: 'Bite Share Enjoy moto embroidery made with silk and cotton.' },
-  { id: 5, image: '/assets/merchandise/merch-5.png', title: 'Signature Cap', desc: 'Wear the brand.' },
+  { id: 1, image: '/assets/merchandise/merch-1.png', title: 'Vita Necklace', desc: 'Elegant and simple.', bg: '#23B349' },
+  { id: 2, image: '/assets/merchandise/merch-2.png', title: 'Classic Cap', desc: 'Everyday comfortable wear.', bg: '#23B349' },
+  { id: 3, image: '/assets/merchandise/merch-3.png', title: 'Vita T-Shirt', desc: 'Premium cotton blend.', bg: '#23B349' },
+  { id: 4, image: '/assets/merchandise/merch-4.png', title: 'Full-Sleeve Sweeter', desc: 'Bite Share Enjoy moto embroidery made with silk and cotton.', bg: '#23B349' },
+  { id: 5, image: '/assets/merchandise/merch-5.png', title: 'Signature Cap', desc: 'Wear the brand.', bg: '#23B349' },
+  { id: 6, image: '/assets/merchandise/merch-red.png', title: 'A Badge of Cherish!', desc: 'Uplift yourself with our modern looking outfits and merchandises!', bg: '#FF0707', isSpecial: true },
 ];
 
 export default function MerchandiseSection() {
@@ -55,24 +56,35 @@ export default function MerchandiseSection() {
           {MERCH_ITEMS.map((item) => (
             <div 
               key={item.id}
-              className="flex-shrink-0 relative rounded-[24px] overflow-hidden select-none bg-[#F3F3F3] group w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[740px] lg:h-[740px] snap-center"
+              className={`flex-shrink-0 relative rounded-[24px] overflow-hidden select-none group w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[740px] lg:h-[740px] snap-center ${item.isSpecial ? 'bg-[#FF0707]' : 'bg-[#F3F3F3]'}`}
             >
               <Image
                 src={item.image}
                 alt={item.title}
                 fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className={`object-cover transition-transform duration-700 group-hover:scale-105 ${item.isSpecial ? 'mix-blend-soft-light' : ''}`}
               />
               
               {/* Product Info Area */}
-              <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8 bg-[#23B349]">
-                <h3 className="font-['Outfit'] font-bold text-[32px] lg:text-[40px] xl:text-[48px] text-white leading-tight tracking-[-0.02em] mb-2">
-                  {item.title}
-                </h3>
-                <p className="font-['Outfit'] font-medium text-[14px] lg:text-[16px] text-white/90">
-                  {item.desc}
-                </p>
-              </div>
+              {item.isSpecial ? (
+                <div className="absolute inset-0 flex flex-col justify-end p-8 sm:p-12 z-10 bg-gradient-to-t from-[#FF0707]/90 to-transparent">
+                  <h3 className="font-['Funnel_Display'] font-medium text-[20px] sm:text-[24px] text-[#FFEC19] leading-none mb-4">
+                    {item.title}
+                  </h3>
+                  <p className="font-['Outfit'] font-bold text-[32px] sm:text-[48px] lg:text-[64px] text-white leading-[0.96] tracking-[-0.02em] max-w-[600px]">
+                    {item.desc}
+                  </p>
+                </div>
+              ) : (
+                <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8" style={{ backgroundColor: item.bg }}>
+                  <h3 className="font-['Outfit'] font-bold text-[32px] lg:text-[40px] xl:text-[48px] text-white leading-tight tracking-[-0.02em] mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="font-['Outfit'] font-medium text-[14px] lg:text-[16px] text-white/90">
+                    {item.desc}
+                  </p>
+                </div>
+              )}
             </div>
           ))}
         </div>
