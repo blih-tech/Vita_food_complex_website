@@ -40,23 +40,21 @@ export default function WhyJoinSection() {
   return (
     <section
       className="px-4 sm:px-6 lg:px-[128px]"
-      style={{ background: "#FFFFFF", paddingTop: 80, paddingBottom: 80 }}
+      style={{ background: "#FFFFFF", paddingTop: "clamp(60px, 8vw, 120px)", paddingBottom: "clamp(60px, 8vw, 120px)" }}
     >
       {/* Two-column layout: heading left (520px), buttons right (730px), gap ~180px */}
       <div
-        className="mx-auto flex flex-col lg:flex-row"
+        className="mx-auto flex flex-col lg:flex-row lg:items-start"
         style={{ maxWidth: 1664, gap: "clamp(40px, 10vw, 180px)" }}
       >
         {/* Left — "Why Join Vita Food Complex": Headline (179:449) Outfit 800, 80px, 0.9em lh, -2% ls, #23B349 */}
-        <div style={{ flex: "0 0 520px", maxWidth: 520 }}>
+        <div className="w-full lg:w-[520px] lg:shrink-0">
           <h2
+            className="font-[family-name:var(--font-outfit)] font-extrabold text-[#23B349]"
             style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 800,
-              fontSize: "clamp(40px, 5.5vw, 80px)",
+              fontSize: "clamp(36px, 5.5vw, 80px)",
               lineHeight: "0.9em",
-              letterSpacing: "-1.6px",
-              color: "#23B349",
+              letterSpacing: "-0.02em",
             }}
           >
             {t("whyJoin.title")}
@@ -66,34 +64,32 @@ export default function WhyJoinSection() {
         {/* Right — layout_UAYX5G: column, gap:14.67px */}
         {/* Each Button — layout_QOB0YA: row, center, gap:35.55px, padding-left:35.55px, w:730px, h:105.17px, radius:23.7px */}
         <div
-          className="flex flex-col"
-          style={{ gap: 14.67, flex: "0 0 730px", maxWidth: 730 }}
+          className="flex w-full flex-col"
+          style={{ gap: 14.67, maxWidth: 730 }}
         >
           {BENEFITS.map((b) => (
             <div
               key={b.key}
-              className="flex flex-row items-center"
+              className="flex flex-row items-center transition-all hover:translate-x-2"
               style={{
-                gap: 35.55,
-                paddingLeft: 35.55,
-                height: 105,
+                gap: "clamp(16px, 3vw, 35.55px)",
+                paddingLeft: "clamp(16px, 3vw, 35.55px)",
+                minHeight: "clamp(80px, 10vw, 105px)",
                 borderRadius: 23.7,
                 background: "#F5F5F5",
               }}
             >
               {/* Icon — layout_ENUIGI: 47.4×47.4px SVG */}
-              <div style={{ flexShrink: 0, width: 47.4, height: 47.4 }}>
+              <div className="shrink-0" style={{ width: "clamp(32px, 4vw, 47.4px)", height: "clamp(32px, 4vw, 47.4px)" }}>
                 <BenefitIcon />
               </div>
 
               {/* Text — style_768L80: Outfit 400, 36.87px, 1.567em lh (~57.77px), #333733 */}
               <span
+                className="font-[family-name:var(--font-outfit)] font-normal text-[#333733]"
                 style={{
-                  fontFamily: "'Outfit', sans-serif",
-                  fontWeight: 400,
-                  fontSize: "clamp(20px, 2.8vw, 36.87px)",
-                  lineHeight: "1.567em",
-                  color: "#333733",
+                  fontSize: "clamp(18px, 2.5vw, 36.87px)",
+                  lineHeight: "1.2",
                 }}
               >
                 {t(`whyJoin.benefits.${b.key}`)}
