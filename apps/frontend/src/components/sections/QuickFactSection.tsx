@@ -7,120 +7,106 @@ export default function QuickFactSection() {
   const t = useTranslations("QuickFact");
 
   return (
-    <section className="relative w-full bg-white py-24 overflow-hidden">
-      {/* Decorative repeating pattern top border */}
-      <div className="absolute top-0 left-0 w-full h-[76px] pointer-events-none overflow-hidden z-10">
+    <section className="relative w-full bg-white py-12 md:py-20 lg:py-24 overflow-hidden">
+      {/* Decorative repeating pattern top border - responsive height */}
+      <div className="absolute top-0 left-0 w-full h-12 md:h-[60px] lg:h-[76px] pointer-events-none overflow-hidden z-10">
         <div
           className="absolute inset-0"
           style={{
             backgroundImage: "url('/quick-fact-frame.svg')",
             backgroundRepeat: "repeat-x",
-            backgroundSize: "auto 76px",
+            backgroundSize: "auto 100%",
             backgroundPosition: "top center",
           }}
         />
       </div>
 
       {/* Decorative repeating pattern bottom border */}
-      <div className="absolute bottom-0 left-0 w-full h-[76px] pointer-events-none overflow-hidden z-10 scale-y-[-1]">
+      <div className="absolute bottom-0 left-0 w-full h-12 md:h-[60px] lg:h-[76px] pointer-events-none overflow-hidden z-10 scale-y-[-1]">
         <div
           className="absolute inset-0"
           style={{
             backgroundImage: "url('/quick-fact-frame.svg')",
             backgroundRepeat: "repeat-x",
-            backgroundSize: "auto 76px",
+            backgroundSize: "auto 100%",
             backgroundPosition: "bottom center",
           }}
         />
       </div>
 
-      <div
-        className="relative z-20 w-full max-w-[1920px] mx-auto overflow-x-auto overflow-y-hidden"
-        style={{ minWidth: "1280px" }}
-      >
-        <div className="relative w-full aspect-[1920/1132] mx-auto">
-          {/* Box 1 */}
-          <div
-            className="absolute bg-[#F3F3F3] rounded-[24px] group shadow-sm transition-transform duration-500 hover:scale-[1.01]"
-            style={{ left: "6.66%", top: "11.13%", width: "24.16%", height: "45.58%" }}
-          >
-            <span className="absolute w-full text-center font-['Outfit'] font-extrabold text-[128px] text-[#23B349] leading-[88%] tracking-[-0.03em] group-hover:scale-105 transition-transform duration-500" style={{ top: "17.03%" }}>
-              +11
-            </span>
-            <p className="absolute w-full text-center font-['Funnel_Display'] font-medium text-[24px] text-[#404040] leading-[100%] tracking-[-0.004em]" style={{ top: "44.94%" }}>
-              Unique SKUs for Everyone.
-            </p>
-            <span className="absolute font-['Outfit'] font-extrabold text-[96px] text-[#E6B720] leading-[88%] tracking-[-0.03em] group-hover:scale-105 transition-transform duration-500" style={{ left: "17.28%", top: "67.03%" }}>
-              2tn
-            </span>
-            <p className="absolute font-['Funnel_Display'] font-medium text-[24px] text-[#404040] leading-[100%] tracking-[-0.004em]" style={{ left: "17.49%", top: "87.57%" }}>
-              Biscuits/Hour
-            </p>
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Mobile-first responsive grid layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 md:gap-6 lg:gap-8 relative">
+          {/* Fact 1 - Unique SKUs */}
+          <div className="lg:col-span-3 bg-[#F3F3F3] rounded-3xl p-6 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center min-h-[220px] md:min-h-[260px]">
+            <div className="text-center lg:text-left">
+              <div className="font-['Outfit'] font-extrabold text-6xl md:text-7xl lg:text-[128px] text-[#23B349] leading-none tracking-tighter mb-3 group-hover:scale-105 transition-transform">
+                +11
+              </div>
+              <p className="font-['Funnel_Display'] font-medium text-lg md:text-xl text-[#404040] leading-tight">
+                Unique SKUs for Everyone
+              </p>
+              <div className="mt-6 text-5xl md:text-6xl font-bold text-[#E6B720]">2tn</div>
+              <p className="text-sm md:text-base text-[#404040]/70">Biscuits/Hour</p>
+            </div>
           </div>
 
-          {/* Box 2 */}
-          <div
-            className="absolute bg-[#F3F3F3] rounded-[24px] group shadow-sm transition-transform duration-500 hover:scale-[1.01]"
-            style={{ left: "32.08%", top: "11.10%", width: "30%", height: "29.85%" }}
-          >
-            <span className="absolute w-full text-center font-['Outfit'] font-extrabold text-[128px] text-[#23B349] leading-[88%] tracking-[-0.03em] group-hover:scale-105 transition-transform duration-500" style={{ top: "26.58%" }}>
-              60tn
-            </span>
-            <p className="absolute w-full text-center font-['Funnel_Display'] font-medium text-[24px] text-[#404040] leading-[100%] tracking-[-0.004em]" style={{ top: "69.18%" }}>
-              Tones of Flour Production/Day
-            </p>
+          {/* Fact 2 - Flour Production */}
+          <div className="lg:col-span-4 bg-[#F3F3F3] rounded-3xl p-6 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center min-h-[180px] md:min-h-[220px]">
+            <div className="text-center">
+              <div className="font-['Outfit'] font-extrabold text-6xl md:text-7xl text-[#23B349] leading-none tracking-tighter mb-4 group-hover:scale-105 transition-transform">
+                60tn
+              </div>
+              <p className="font-['Funnel_Display'] font-medium text-base md:text-lg text-[#404040]">
+                Tons of Flour Production/Day
+              </p>
+            </div>
           </div>
 
-          {/* Box 3 */}
-          <div
-            className="absolute bg-[#F3F3F3] rounded-[24px] group shadow-sm transition-transform duration-500 hover:scale-[1.01]"
-            style={{ left: "63.33%", top: "11.10%", width: "30%", height: "29.85%" }}
-          >
-            <span className="absolute w-full text-center font-['Outfit'] font-extrabold text-[128px] text-[#23B349] leading-[88%] tracking-[-0.03em] group-hover:scale-105 transition-transform duration-500" style={{ top: "26.62%" }}>
-              +200
-            </span>
-            <p className="absolute w-full text-center font-['Funnel_Display'] font-medium text-[24px] text-[#404040] leading-[100%] tracking-[-0.004em]" style={{ top: "69.23%" }}>
-              Jobs Created
-            </p>
+          {/* Fact 3 - Jobs Created */}
+          <div className="lg:col-span-5 bg-[#F3F3F3] rounded-3xl p-6 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center min-h-[180px] md:min-h-[220px]">
+            <div className="text-center">
+              <div className="font-['Outfit'] font-extrabold text-6xl md:text-7xl text-[#23B349] leading-none tracking-tighter mb-4 group-hover:scale-105 transition-transform">
+                +200
+              </div>
+              <p className="font-['Funnel_Display'] font-medium text-base md:text-lg text-[#404040]">
+                Jobs Created
+              </p>
+            </div>
           </div>
 
-          {/* Box 4: Quick Fact */}
-          <div
-            className="absolute bg-[#23B349] rounded-[24px] flex items-center justify-center shadow-[0_0_0_18px_#ffffff] z-30 transform transition-transform hover:scale-[1.02]"
-            style={{ left: "25.20%", top: "43.08%", width: "23.85%", height: "13.60%" }}
-          >
-            <h2 className="font-['Outfit'] font-extrabold text-[80px] text-white leading-[90%] tracking-[-0.02em]">
+          {/* Central "Quick Fact" Badge - Responsive positioning */}
+          <div className="lg:col-span-5 lg:col-start-4 bg-[#23B349] rounded-3xl p-8 md:p-10 flex items-center justify-center shadow-[0_0_0_12px_#ffffff,0_25px_50px_-12px_rgb(35,179,73)] z-30 hover:scale-105 transition-transform min-h-[110px] md:min-h-[130px]">
+            <h2 className="font-['Outfit'] font-extrabold text-5xl md:text-6xl lg:text-[80px] text-white leading-none tracking-[-0.02em] text-center">
               Quick Fact
             </h2>
           </div>
 
-          {/* Box 5 */}
-          <div
-            className="absolute bg-[#F3F3F3] rounded-[24px] group shadow-sm transition-transform duration-500 hover:scale-[1.01]"
-            style={{ left: "6.66%", top: "58.63%", width: "38.17%", height: "30.30%" }}
-          >
-            <span className="absolute w-full text-center font-['Outfit'] font-extrabold text-[128px] text-[#23B349] leading-[88%] tracking-[-0.03em] group-hover:scale-105 transition-transform duration-500" style={{ top: "24.78%" }}>
-              22Km²
-            </span>
-            <p className="absolute w-full text-center font-['Funnel_Display'] font-medium text-[24px] text-[#404040] leading-[100%] tracking-[-0.004em]" style={{ top: "66.76%" }}>
-              Factory Size in Square Killometer
-            </p>
+          {/* Fact 4 - Factory Size */}
+          <div className="lg:col-span-4 bg-[#F3F3F3] rounded-3xl p-6 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center min-h-[200px]">
+            <div className="text-center">
+              <div className="font-['Outfit'] font-extrabold text-6xl md:text-7xl text-[#23B349] leading-none tracking-tighter mb-4 group-hover:scale-105 transition-transform">
+                22Km²
+              </div>
+              <p className="font-['Funnel_Display'] font-medium text-base md:text-lg text-[#404040]">
+                Factory Size
+              </p>
+            </div>
           </div>
 
-          {/* Box 6 */}
-          <div
-            className="absolute bg-[#F3F3F3] rounded-[24px] group shadow-sm transition-transform duration-500 hover:scale-[1.01]"
-            style={{ left: "46.09%", top: "42.84%", width: "47.23%", height: "46.11%" }}
-          >
-            <span className="absolute font-['Outfit'] font-extrabold text-[96px] text-[#E6B720] leading-[88%] tracking-[-0.03em] group-hover:scale-105 transition-transform duration-500" style={{ left: "24.42%", top: "10.19%" }}>
-              $1.4M
-            </span>
-            <span className="absolute w-full text-center font-['Outfit'] font-extrabold text-[128px] text-[#23B349] leading-[88%] tracking-[-0.03em] group-hover:scale-105 transition-transform duration-500" style={{ top: "50.62%" }}>
-              Br210M
-            </span>
-            <p className="absolute w-full text-center font-['Funnel_Display'] font-medium text-[24px] text-[#404040] leading-[100%] tracking-[-0.004em]" style={{ top: "78.20%" }}>
-              Total Investment
-            </p>
+          {/* Fact 5 - Investment */}
+          <div className="lg:col-span-8 bg-[#F3F3F3] rounded-3xl p-6 md:p-10 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center min-h-[200px] md:min-h-[240px]">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8 text-center">
+              <div>
+                <div className="font-['Outfit'] font-extrabold text-5xl md:text-6xl text-[#E6B720] tracking-tighter">$1.4M</div>
+              </div>
+              <div>
+                <div className="font-['Outfit'] font-extrabold text-6xl md:text-7xl text-[#23B349] tracking-tighter">Br210M</div>
+                <p className="font-['Funnel_Display'] font-medium text-base md:text-lg text-[#404040] mt-2">
+                  Total Investment
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

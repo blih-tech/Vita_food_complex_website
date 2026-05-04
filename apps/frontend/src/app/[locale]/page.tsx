@@ -10,7 +10,7 @@ import PartnerSection from "@frontend/components/sections/PartnerSection";
 
 export default function Home() {
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col min-h-screen bg-white overflow-x-hidden">
       <HeroSection />
       <HeroVideoSection />
       <ProductsSection />

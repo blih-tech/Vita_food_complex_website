@@ -56,27 +56,27 @@ export default function RecipesSection() {
   };
 
   return (
-    <section id="recipes" className="relative w-full bg-white py-24 sm:py-32 overflow-hidden">
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24 mb-16 sm:mb-20 flex flex-col items-center text-center">
-        <p className="font-['Funnel_Display'] font-semibold text-[18px] sm:text-[20px] text-[#23B349] tracking-wider uppercase mb-4">
+    <section id="recipes" className="relative w-full bg-white py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden">
+      <div className="max-w-[1440px] mx-auto px-5 sm:px-6 md:px-12 lg:px-24 mb-12 sm:mb-16 md:mb-20 flex flex-col items-center text-center">
+        <p className="font-['Funnel_Display'] font-semibold text-base sm:text-[18px] md:text-[20px] text-[#23B349] tracking-widest uppercase mb-3 sm:mb-4">
           Our Recipes Made Simple
         </p>
-        <h2 className="font-['Outfit'] font-black text-[48px] sm:text-[64px] lg:text-[80px] text-[#404040] leading-tight tracking-tight">
+        <h2 className="font-['Outfit'] font-black text-4xl sm:text-5xl md:text-[64px] lg:text-[80px] text-[#404040] leading-[1.05] tracking-[-0.02em] px-4">
           Mix. Match. <span className="text-[#23B349]">Enjoy</span>
         </h2>
       </div>
 
-      {/* Horizontal Scroll Area */}
+      {/* Horizontal Scroll Area - Improved mobile padding and card sizing */}
       <div className="relative w-full">
         <div 
           ref={scrollRef}
           onScroll={handleScroll}
-          className="flex gap-6 sm:gap-8 overflow-x-auto pb-12 px-6 sm:px-12 lg:px-24 scrollbar-hide snap-x snap-mandatory"
+          className="flex gap-4 sm:gap-6 md:gap-8 overflow-x-auto pb-12 px-5 sm:px-6 md:px-12 lg:px-24 scrollbar-hide snap-x snap-mandatory -mx-1"
         >
           {recipes.map((recipe) => (
             <div 
               key={recipe.id}
-              className="relative shrink-0 w-[300px] sm:w-[400px] lg:w-[480px] h-[450px] sm:h-[550px] lg:h-[600px] rounded-[32px] sm:rounded-[40px] overflow-hidden snap-center group cursor-pointer shadow-xl flex flex-col transition-transform duration-500 hover:scale-[1.02]"
+              className="relative shrink-0 w-[280px] sm:w-[320px] md:w-[380px] lg:w-[480px] h-[420px] sm:h-[480px] md:h-[520px] lg:h-[600px] rounded-3xl sm:rounded-[32px] md:rounded-[40px] overflow-hidden snap-center group cursor-pointer shadow-2xl flex flex-col transition-all duration-500 hover:scale-[1.02] active:scale-[0.98]"
             >
               {/* Top Half: Product Image Area */}
               <div className="relative w-full h-[60%] bg-gradient-to-b from-gray-700 to-gray-900 flex items-center justify-center p-8">
