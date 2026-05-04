@@ -478,7 +478,7 @@ export default function Navbar() {
                       Community
                     </h4>
                     <p className="text-gray-500 text-[14px] mt-0.5">
-                      Explore all our biscuit products
+                      Empowering local communities together
                     </p>
                   </Link>
                   <Link
@@ -490,7 +490,7 @@ export default function Navbar() {
                       Innovation
                     </h4>
                     <p className="text-gray-500 text-[14px] mt-0.5">
-                      Explore all our biscuit products
+                      Sustainable solutions for the future
                     </p>
                   </Link>
                   <Link
@@ -502,7 +502,7 @@ export default function Navbar() {
                       We Care for All®
                     </h4>
                     <p className="text-gray-500 text-[14px] mt-0.5">
-                      Explore all our biscuit products
+                      Our social responsibility commitment
                     </p>
                   </Link>
                 </div>
@@ -518,7 +518,7 @@ export default function Navbar() {
                       Terms
                     </h4>
                     <p className="text-gray-500 text-[14px] mt-0.5">
-                      Explore all our biscuit products
+                      Legal guidelines and policies
                     </p>
                   </Link>
                 </div>
