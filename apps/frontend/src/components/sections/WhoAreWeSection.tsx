@@ -5,7 +5,8 @@ import Image from "next/image";
 import { ABOUT_ASSETS } from "@frontend/constants/aboutAssets";
 import { Target, Eye, Heart, Compass, UserCheck } from "lucide-react";
 
-/** Figma 2080:3549 + 2080:3630: Who style_HP5ZJI 140 #E6E6E6; line 123.81×10 #E6E6E6; Are We style_B94LVJ 150/90% white; body style_L2HN6I 32px center max 1291; cards ~399×399 radius 24; icons ~47.67 in 44.7 padding */
+/** Figma 2080:3549 + 2080:3630: Who style_HP5ZJI 140 #E6E6E6; line 123.81×10 #E6E6E6; Are We style_B94LVJ 150/90% white; body style_L2HN6I 32px center max 1291; cards ~399×399 radius 24; icons ~47.67 in 44.7 padding
+ *  Ellipse 46 / white cap between Sister companies and this section (curved top edge). */
 export default function WhoAreWeSection() {
   const t = useTranslations("About");
   const tMv = useTranslations("About.mv");
@@ -18,8 +19,16 @@ export default function WhoAreWeSection() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-[#23B349] px-8 pb-16 pt-20 md:px-16 md:pb-24 md:pt-28 lg:px-[128px] lg:pb-32 lg:pt-32">
-      <div className="mx-auto flex max-w-[1664px] flex-col items-center">
+    <section className="relative z-0 -mt-[clamp(40px,7vw,80px)] isolate overflow-x-hidden bg-[#23B349] px-8 pb-16 md:px-16 md:pb-24 lg:px-[128px] lg:pb-32">
+      {/* White ellipse (Figma Ellipse 46): huge circle translated up so only bottom arc shows — curved seam from white sister block into green */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-[clamp(72px,11vw,132px)]"
+        aria-hidden
+      >
+        <div className="absolute left-1/2 top-0 aspect-square w-[min(260vw,5600px)] max-w-[5600px] -translate-x-1/2 -translate-y-[89%] rounded-full bg-white" />
+      </div>
+
+      <div className="relative z-[2] mx-auto flex max-w-[1664px] flex-col items-center pt-[clamp(4.5rem,9vw,7.75rem)] md:pt-[clamp(5rem,10vw,8.25rem)] lg:pt-[clamp(5.5rem,10vw,8.75rem)]">
         <div className="mb-12 flex flex-row flex-wrap items-center justify-center gap-3 md:gap-4">
           <h2 className="w-[min(100%,344px)] text-center font-[family-name:var(--font-funnel-display)] text-[56px] font-bold leading-none tracking-[-0.02em] text-[#E6E6E6] md:text-[100px] lg:text-[140px]">
             Who

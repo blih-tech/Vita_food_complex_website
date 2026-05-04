@@ -62,6 +62,19 @@
       "title": "Different Experiences",
       "description": "Through our diverse sister companies, we deliver value across every touchpoint of everyday life.",
       "cta": "See more",
+      "visitSite": "Visit site",
+      "longTeaCard": {
+        "blurb": "Crafting high-quality tea products with a focus on purity, taste, and everyday enjoyment."
+      },
+      "brands": {
+        "belayabGroup": "YAB Feed and Agro industry",
+        "motors": "Belayab Motors",
+        "cables": "Belayab Cables",
+        "goldenTulip": "Golden Tulip",
+        "lewis": "Lewis Retails supermarket",
+        "foods": "Belayab Foods",
+        "limestone": "Limestone"
+      },
       "companies": {
         "belayabFoods": "Belayab foods",
         "anadiaCoffee": "Anadia Coffee",
@@ -201,8 +214,75 @@
       }
     },
     "sisterCompanies": {
-      "title": "Our Sister Companies",
-      "description": "Through our diverse sister companies, we deliver value across every touchpoint of everyday life."
+      "title": "Meet Our Sister Company\u2019s",
+      "seeMore": "See more",
+      "companies": {
+        "longTea": {
+          "name": "Long Tea",
+          "category": "Food & Beverage",
+          "description": "Crafting high-quality tea products with a focus on purity, taste."
+        },
+        "belayabMotors": {
+          "name": "Belayab Motors",
+          "category": "Automotive",
+          "description": "Reliable vehicles and mobility solutions for transport"
+        },
+        "belayabCable": {
+          "name": "Belayab Cabel",
+          "category": "Manufacturing",
+          "description": "Making durable, high-performance industrial electrical cables"
+        },
+        "belayabFoods": {
+          "name": "Belayab Foods",
+          "category": "Food Production",
+          "description": "Creating nutritious, high-quality food for daily use"
+        },
+        "goldenTulip": {
+          "name": "Golden Tulip",
+          "category": "Hospitality",
+          "description": "Offering comfort and premium hospitality for travelers"
+        },
+        "belayabDelivery": {
+          "name": "Belayab Delivery",
+          "category": "Logistics",
+          "description": "Supplying rich, authentic coffee crafted for flavor"
+        },
+        "aradaCoffee": {
+          "name": "Arada Coffee",
+          "category": "Coffee & Beverage",
+          "description": "Supplying rich, authentic coffee crafted for flavor"
+        },
+        "lionstone": {
+          "name": "Lionstone",
+          "category": "Distribution",
+          "description": "Efficient solutions ensuring seamless product distribution"
+        },
+        "belayabPharmaceuticals": {
+          "name": "Belayab Pharmaceuticals",
+          "category": "Healthcare",
+          "description": "Trusted healthcare products focused on safety and quality"
+        },
+        "huajiaInternationalTrade": {
+          "name": "Huajia International Trade",
+          "category": "International Trade",
+          "description": "Providing quality poultry and nutritious feed"
+        },
+        "belayabPoultryAndFeed": {
+          "name": "Belayab Poultry and Feed",
+          "category": "Agriculture",
+          "description": "Providing quality poultry and nutritious feed"
+        },
+        "belayabGeepas": {
+          "name": "Belayab Geepas",
+          "category": "Electronics",
+          "description": "Creating reliable, innovative electronic appliances for daily use"
+        },
+        "lewisRetailsSupermarket": {
+          "name": "Lewis Retails Supermarket",
+          "category": "Retail",
+          "description": "Offering daily essentials with convenience and quality"
+        }
+      }
     },
     "qualityAssurance": {
       "subtitle": "Quality Assurance",

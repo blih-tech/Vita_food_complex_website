@@ -2,7 +2,10 @@
 
 import { useTranslations, useMessages } from "next-intl";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
+
+const AUTO_MS = 5000;
+const LG_PX = 1024;
 
 type TestimonialItem = {
   quote: string;
@@ -21,12 +24,39 @@ export default function TestimonialSection() {
   const titleAccent = t("titleAccent");
 
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const desktopScrollerRef = useRef<HTMLDivElement>(null);
   const count = items.length || 1;
 
-  const prev = () => setActive((i) => (i === 0 ? count - 1 : i - 1));
-  const next = () => setActive((i) => (i + 1) % count);
+  const prev = useCallback(() => setActive((i) => (i === 0 ? count - 1 : i - 1)), [count]);
+  const next = useCallback(() => setActive((i) => (i + 1) % count), [count]);
 
   const current = items[active] ?? items[0];
+
+  useEffect(() => {
+    if (count < 2 || paused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const tick = () => {
+      if (window.innerWidth >= LG_PX) {
+        const el = desktopScrollerRef.current;
+        if (!el) return;
+        const max = el.scrollWidth - el.clientWidth;
+        if (max <= 1) return;
+        const step = Math.min(el.clientWidth * 0.65, 520);
+        if (el.scrollLeft >= max - 2) {
+          el.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          el.scrollTo({ left: el.scrollLeft + step, behavior: "smooth" });
+        }
+      } else {
+        next();
+      }
+    };
+
+    const id = window.setInterval(tick, AUTO_MS);
+    return () => window.clearInterval(id);
+  }, [count, paused, next]);
 
   return (
     <section
@@ -45,7 +75,11 @@ export default function TestimonialSection() {
         }}
       />
 
-      <div className="relative mx-auto flex max-w-[1981px] flex-col items-center">
+      <div
+        className="relative mx-auto flex max-w-[1981px] flex-col items-center"
+        onPointerEnter={() => setPaused(true)}
+        onPointerLeave={() => setPaused(false)}
+      >
         <div className="mb-8 flex justify-center rounded-[48px] px-4 py-2">
           <span className="text-center font-[family-name:var(--font-funnel-display)] text-[18px] font-medium tracking-[-0.004em] text-white md:text-[20px]">
             {t("label")}
@@ -65,7 +99,10 @@ export default function TestimonialSection() {
           </span>
         </h2>
 
-        <div className="hidden w-full max-w-[1664px] flex-row flex-nowrap justify-start gap-8 overflow-x-auto pb-4 pt-2 lg:flex lg:gap-16 xl:gap-[clamp(4rem,12vw,16rem)]">
+        <div
+          ref={desktopScrollerRef}
+          className="hidden w-full max-w-[1664px] flex-row flex-nowrap justify-start gap-8 overflow-x-auto scroll-smooth pb-4 pt-2 lg:flex lg:gap-16 xl:gap-[clamp(4rem,12vw,16rem)]"
+        >
           {items.map((item, idx) => (
             <article
               key={`${item.author}-${idx}`}

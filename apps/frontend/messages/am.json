@@ -179,7 +179,20 @@
       "label": "የእህት ኩባንያዎች",
       "title": "የተለያዩ ልምዶች",
       "description": "በተለያዩ የእህት ኩባንያዎቻችን አማካኝነት በእያንዳንዱ የዕለት ተዕለት ኑሮ ውስጥ እሴት እናቀርባለን።",
-      "cta": "ተጨማሪ ይመልከቱ"
+      "cta": "ተጨማሪ ይመልከቱ",
+      "visitSite": "ጣቢያ ይጎብኙ",
+      "longTeaCard": {
+        "blurb": "ከፍተኛ ጥራት ያላቸውን የሻይ ምርቶች በንጽረኛነት፣ በጣዕም እና በዕለት ተዕለት ደስታ ላይ በመመርኮት።"
+      },
+      "brands": {
+        "belayabGroup": "YAB ፊድ እና አግሮ ኢንዱስትሪ",
+        "motors": "በላያብ ሞተርስ",
+        "cables": "በላያብ ኬብሎች",
+        "goldenTulip": "ጎልደን ቱሊፕ",
+        "lewis": "ሉዊስ ሪቴይልስ ሱፐርማርኬት",
+        "foods": "በላያብ ፉድስ",
+        "limestone": "ሊምስቶን"
+      }
     },
     "whoWeAre": {
       "description": "ቪታ ፎድ ኮምፕሌክስ በኢትዮጵያ የዕለት ተዕለት ምግብ ወደፊት ለመምራት የተገነባ ዘመናዊ የFMCG ኩባንያ ነው። ለተለያዩ የተጠቃሚ ጊዜያት — ከህፃናት ስናክ እና ወጣት የኑሮ ዘይቤ ምርጆች እስከ ቤተሰብ ሻይ ጊዜ እና ሙያዊ ጋጋሪ ፍላጎቶች ድረስ — በጥንቃቄ የተዘጋጁ ቢስኩት እና ዱቄት ምርቶችን እናመርታለን። በጥራት፣ በፈጠራ፣ በገበያ ተዛማጅነት እና በሚስፋፋ ስርጭት ላይ ጠንካራ ትኩረት በማድረግ ቪታ በአገር አቀፍ ደረጃ የታመነ የቤት ውስጥ ብራንድ ለመሆን የተገነባ ነው።"
@@ -284,6 +297,83 @@
           "description": "የገዘተኛና ቴክኖሎጂና የፈጠራ ሂደቶችን በመጠቀም የገጠራ ምርቶችን እንሰጥለን።"
         }
       }
+    },
+    "sisterCompanies": {
+      "title": "የእኛን አጋር ኩባንያዎች ይወቁ",
+      "seeMore": "ተጨማሪ ይመልከቱ",
+      "companies": {
+        "longTea": {
+          "name": "Long Tea",
+          "category": "ምግብ እና መጠጥ",
+          "description": "ከፍተኛ ጥራት ያላቸውን የሻይ ምርቶች በንጽረኛነት እና በጣዕም ትኩረት በመስራት።"
+        },
+        "belayabMotors": {
+          "name": "Belayab Motors",
+          "category": "አውቶሞቲቭ",
+          "description": "ለትራንስፖርት አስተማማኝ ተሽከርካሪዎች እና የእንቅስቃሴ መፍትሄዎች።"
+        },
+        "belayabCable": {
+          "name": "Belayab Cabel",
+          "category": "ማምረቻ",
+          "description": "የሚቆዩ እና ከፍተኛ አፈጻጸም ያላቸውን የኢንዱስትሪ ኤሌክትሪክ ገመዶች ማምረት።"
+        },
+        "belayabFoods": {
+          "name": "Belayab Foods",
+          "category": "ምግብ ማምረቻ",
+          "description": "ለዕለት ተዕለት አጠቃቀም ምክንያታዊ እና ከፍተኛ ጥራት ያለው ምግብ መፍጠር።"
+        },
+        "goldenTulip": {
+          "name": "Golden Tulip",
+          "category": "መስተንግዶ",
+          "description": "ለመንገደኞች ምቹ እና ከፍተኛ የመስተንግዶ አገልግሎት መስጠት።"
+        },
+        "belayabDelivery": {
+          "name": "Belayab Delivery",
+          "category": "ሎጂስቲክስ",
+          "description": "ለጣዕም የተዘጋጁ ሀብራዊ እና ትክክለኛ የቡና አቅርቦት።"
+        },
+        "aradaCoffee": {
+          "name": "Arada Coffee",
+          "category": "ቡና እና መጠጥ",
+          "description": "ለጣዕም የተዘጋጁ ሀብራዊ እና ትክክለኛ የቡና አቅርቦት።"
+        },
+        "lionstone": {
+          "name": "Lionstone",
+          "category": "አከፋፈል",
+          "description": "ያልቋረጠ የምርት አከፋፈልን የሚያረጋግጡ ቀልጣፋ መፍትሄዎች።"
+        },
+        "belayabPharmaceuticals": {
+          "name": "Belayab Pharmaceuticals",
+          "category": "ጤና ጥበቃ",
+          "description": "ደህንነት እና ጥራት ላይ ትኩረት የሰጡ የታመኑ የጤና ጥበቃ ምርቶች።"
+        },
+        "huajiaInternationalTrade": {
+          "name": "Huajia International Trade",
+          "category": "አለም አቀፍ ንግድ",
+          "description": "ጥራት ያለው ዶሮ እና ምክንያታዊ መኖ ማቅረብ።"
+        },
+        "belayabPoultryAndFeed": {
+          "name": "Belayab Poultry and Feed",
+          "category": "ግብርና",
+          "description": "ጥራት ያለው ዶሮ እና ምክንያታዊ መኖ ማቅረብ።"
+        },
+        "belayabGeepas": {
+          "name": "Belayab Geepas",
+          "category": "ኤሌክትሮኒክስ",
+          "description": "ለዕለት ተዕለት አጠቃቀም አስተማማኝ እና ፈጠራ የተሞሉ የኤሌክትሪክ መሳሪያዎች መፍጠር።"
+        },
+        "lewisRetailsSupermarket": {
+          "name": "Lewis Retails Supermarket",
+          "category": "ችርቻሮ",
+          "description": "ዕለታዊ አስፈላጊ ነገሮችን በምቹነት እና በጥራት ማቅረብ።"
+        }
+      }
+    },
+    "qualityAssurance": {
+      "subtitle": "የጥራት ማረጋገጫ",
+      "title": "በእያንዳንዱ ምርት የተረጋገጠ ልዑል ጥራት",
+      "description": "ለጥራት ቁርጠኝነታችን በአለም አቀፍ ደረጃ የሚታወቁ የምስክር ወረቀቶች እና በጥብቅ ደንቦች ይደገፋል።",
+      "cta": "ምስክር ወረቀቶቻችንን ይመልከቱ"
     },
     "products": {
       "title": "ምርቶቻችን",
