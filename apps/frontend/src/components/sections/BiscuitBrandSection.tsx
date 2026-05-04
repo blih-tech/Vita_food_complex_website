@@ -3,49 +3,38 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { Link } from "@frontend/navigation";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+
+const tagIcons = [
+  "bora.png",
+  "chewata.png",
+  "cream.png",
+  "digestive.png",
+  "glucose.png",
+  "marie.png",
+  "oreo.png",
+  "sina.png",
+  "tafach.png",
+  "tea.png",
+  "zoo.png",
+];
 
 export default function BiscuitBrandSection() {
   const t = useTranslations("BiscuitBrand");
+  const [emblaRef] = useEmblaCarousel(
+    { align: "center", dragFree: true, containScroll: false, loop: true },
+    [Autoplay({ delay: 3000, stopOnInteraction: false })]
+  );
 
   return (
     <section
       id="biscuit-brand"
-      className="relative w-full bg-white py-24 lg:py-32 overflow-hidden min-h-[900px] flex flex-col items-center"
+      className="relative w-full bg-white pt-24 pb-48 lg:pt-32 lg:pb-[250px] overflow-hidden min-h-[900px] flex flex-col items-center"
     >
-      {/* Background decoration */}
-      <div className="absolute left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] sm:w-[1000px] sm:h-[1000px] lg:w-[1200px] lg:h-[1200px] opacity-[0.2] pointer-events-none z-0">
-        <Image
-          src="/assets/products/items/related-vector.png"
-          alt=""
-          fill
-          className="object-contain"
-        />
-      </div>
-
-      {/* Floating Elements relative to the SECTION (Viewport edges) */}
-
-      {/* Left Item: Orange Ring (Zoo/Bora) */}
-      <div className="absolute left-[-80px] sm:left-[-100px] lg:left-[-150px] xl:left-[-100px] top-[40%] sm:top-[45%] w-[250px] h-[250px] sm:w-[350px] sm:h-[350px] lg:w-[450px] lg:h-[450px] z-10 pointer-events-none drop-shadow-xl">
-        <Image
-          src="/assets/products/items/zoo-orange-1.png"
-          alt="Orange Biscuit"
-          fill
-          className="object-contain object-right"
-        />
-      </div>
-
-      {/* Right Item: Chewata Logo */}
-      <div className="absolute right-[-40px] sm:right-[-60px] lg:right-[-80px] xl:right-[-50px] top-[45%] w-[180px] h-[180px] sm:w-[250px] sm:h-[250px] lg:w-[320px] lg:h-[320px] z-10 pointer-events-none drop-shadow-xl">
-        <Image
-          src="/assets/products/tag_icons/chewata.png"
-          alt="Chewata"
-          fill
-          className="object-contain object-left"
-        />
-      </div>
 
       {/* Bottom Left: Oreo (blurred) */}
-      <div className="absolute -bottom-[50px] sm:-bottom-[100px] left-[-20px] sm:left-[5%] lg:left-[10%] w-[200px] h-[200px] sm:w-[350px] sm:h-[350px] lg:w-[500px] lg:h-[500px] z-30 blur-[8px] sm:blur-[12px] opacity-95 -rotate-[15deg] hover:blur-none transition-all duration-500">
+      <div className="absolute bottom-[-50px] sm:bottom-0 lg:bottom-[20px] left-[-50px] sm:left-[-50px] lg:left-[-50px] w-[200px] h-[200px] sm:w-[350px] sm:h-[350px] lg:w-[450px] lg:h-[450px] z-30 blur-[8px] sm:blur-[12px] opacity-95 -rotate-[15deg] hover:blur-none transition-all duration-500 pointer-events-none">
         <Image
           src="/assets/products/biscuts/biscut-5.png"
           alt="Oreo"
@@ -55,7 +44,7 @@ export default function BiscuitBrandSection() {
       </div>
 
       {/* Bottom Right: Chocolate Chip Cookie (blurred) */}
-      <div className="absolute -bottom-[50px] sm:-bottom-[100px] right-[-20px] sm:right-[5%] lg:right-[10%] w-[200px] h-[200px] sm:w-[350px] sm:h-[350px] lg:w-[500px] lg:h-[500px] z-30 blur-[8px] sm:blur-[12px] opacity-95 rotate-[15deg] hover:blur-none transition-all duration-500">
+      <div className="absolute bottom-[-50px] sm:bottom-0 lg:bottom-[20px] right-[-50px] sm:right-[-50px] lg:right-[-50px] w-[200px] h-[200px] sm:w-[350px] sm:h-[350px] lg:w-[450px] lg:h-[450px] z-30 blur-[8px] sm:blur-[12px] opacity-95 rotate-[15deg] hover:blur-none transition-all duration-500 pointer-events-none">
         <Image
           src="/assets/products/biscuts/biscut-1.png"
           alt="Cookie"
@@ -64,9 +53,9 @@ export default function BiscuitBrandSection() {
         />
       </div>
 
-      <div className="relative z-20 max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24 flex flex-col items-center w-full">
+      <div className="relative z-20 w-full flex flex-col items-center">
         {/* Text content */}
-        <div className="flex flex-col items-center gap-4 text-center mb-12 lg:mb-20">
+        <div className="flex flex-col items-center gap-4 text-center mb-12 lg:mb-16 px-6">
           <p className="font-['Funnel_Display'] font-semibold text-[14px] sm:text-[16px] text-[#404040]/60 tracking-[0.15em] uppercase">
             Brand Biscuit Products
           </p>
@@ -77,20 +66,48 @@ export default function BiscuitBrandSection() {
           </h2>
         </div>
 
-        {/* Center Main Logo */}
-        <div className="relative w-full max-w-[1000px] h-[250px] sm:h-[350px] lg:h-[450px] flex items-center justify-center my-8">
-          <div className="relative w-[320px] h-[200px] sm:w-[500px] sm:h-[300px] lg:w-[650px] lg:h-[400px] z-20 transition-transform duration-700 hover:scale-105">
-            <Image
-              src="/digestive.png"
-              alt="Digestive Logo"
-              fill
-              className="object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.8)]"
-            />
+        {/* Scrollable Tag Icons */}
+        <div className="relative w-full my-20 lg:my-32 z-20 flex items-center justify-center">
+          {/* Background decoration specifically for the Tag Icons */}
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] sm:w-[550px] sm:h-[550px] lg:w-[700px] lg:h-[700px] pointer-events-none z-0"
+            style={{
+              backgroundColor: "#282828",
+              maskImage: `url('/product-vector.svg')`,
+              WebkitMaskImage: `url('/product-vector.svg')`,
+              maskSize: "contain",
+              WebkitMaskSize: "contain",
+              maskPosition: "center",
+              WebkitMaskPosition: "center",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+            }}
+          />
+          {/* Embla Viewport */}
+          <div className="relative z-10 w-full overflow-hidden" ref={emblaRef}>
+            {/* Embla Container */}
+            <div className="flex flex-row items-center gap-12 sm:gap-20 lg:gap-32 px-[10vw] sm:px-[20vw] lg:px-[30vw] py-12 cursor-grab active:cursor-grabbing">
+              {tagIcons.map((icon, index) => (
+                <div
+                  key={icon}
+                  className="relative shrink-0 min-w-[280px] h-[200px] sm:min-w-[400px] sm:h-[280px] lg:min-w-[550px] lg:h-[350px] transition-all duration-500 hover:scale-105"
+                >
+                  <Image
+                    src={`/assets/products/tag_icons/${icon}`}
+                    alt={icon.replace(".png", "")}
+                    fill
+                    className="object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.8)] pointer-events-none select-none"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={index < 3}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Bottom Text and CTA */}
-        <div className="flex flex-col items-center gap-8 mt-16 sm:mt-24 lg:mt-32 relative z-20">
+        <div className="flex flex-col items-center gap-8 mt-12 sm:mt-16 lg:mt-20 relative z-20 px-6">
           <p className="font-['Funnel_Display'] font-medium text-[14px] sm:text-[16px] lg:text-[18px] text-[#404040]/80 text-center max-w-xl leading-relaxed">
             From everyday baking to special treats, Vita brings
             <br className="hidden sm:block" />
