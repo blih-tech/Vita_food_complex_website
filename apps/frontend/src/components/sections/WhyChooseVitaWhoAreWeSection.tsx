@@ -37,31 +37,31 @@ export default function WhyChooseVitaWhoAreWeSection() {
         {/* Who we are text — layout_2KGSD9: gap 32, max 1296 */}
         <div className="flex w-full max-w-[1296px] flex-col items-center gap-8">
           {/* Section Header — layout_A5LGL9 */}
-          <div className="flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-8 md:gap-12 lg:gap-[clamp(40px,8vw,123.81px)]">
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-8 md:gap-12 lg:gap-[clamp(40px,8vw,123.81px)]">
             <span
-              className={`${bricolageGrotesque.className} text-center text-[clamp(40px,8vw,150px)] font-bold leading-none tracking-[-0.02em] text-[#404040]`}
+              className={`${bricolageGrotesque.className} text-center text-[clamp(32px,8vw,150px)] font-bold leading-none tracking-[-0.02em] text-[#404040]`}
             >
               {t("headlineWho")}
             </span>
             {/* Line 1 — layout_9NSMKE: 123.81×0, stroke 10px #333733 */}
             <div
-              className="h-[clamp(6px,0.8vw,10px)] w-[clamp(40px,8vw,123.81px)] shrink-0 rounded-none bg-[#333733]"
+              className="h-[4px] sm:h-[clamp(6px,0.8vw,10px)] w-[60px] sm:w-[clamp(40px,8vw,123.81px)] shrink-0 rounded-none bg-[#333733]"
               aria-hidden
             />
-            <span className="text-center font-[family-name:var(--font-funnel-display)] text-[clamp(40px,8vw,150px)] font-extrabold leading-[90%] tracking-[-0.02em] text-[#23B349]">
+            <span className="text-center font-[family-name:var(--font-funnel-display)] text-[clamp(32px,8vw,150px)] font-extrabold leading-[90%] tracking-[-0.02em] text-[#23B349]">
               {t("headlineAreWe")}
             </span>
           </div>
 
           {/* Section Description — layout_3MMBXZ: gap 78 */}
-          <div className="flex w-full flex-col items-center gap-[clamp(32px,6vw,78px)]">
-            <p className="w-full text-center font-[family-name:var(--font-outfit)] text-[clamp(18px,2.2vw,32px)] font-normal leading-normal tracking-[-0.004em] text-[rgba(16,15,15,0.9)]">
+          <div className="flex w-full flex-col items-center gap-8 sm:gap-[clamp(32px,6vw,78px)]">
+            <p className="w-full text-center font-[family-name:var(--font-outfit)] text-[clamp(16px,2.2vw,32px)] font-normal leading-relaxed sm:leading-normal tracking-[-0.004em] text-[rgba(16,15,15,0.9)] px-2">
               {t("fmcgIntro")}
             </p>
 
             <Link
               href="/about"
-              className="inline-flex h-14 min-h-[56px] items-center justify-center gap-4 rounded-full bg-[#23B349] px-8 py-4 font-[family-name:var(--font-funnel-display)] text-[18px] font-medium tracking-[-0.004em] text-white transition-colors hover:bg-[#1fa041] sm:text-[20px] lg:text-[24px]"
+              className="inline-flex h-12 sm:h-14 min-h-[48px] sm:min-h-[56px] items-center justify-center gap-4 rounded-full bg-[#23B349] px-6 sm:px-8 py-3 sm:py-4 font-[family-name:var(--font-funnel-display)] text-[16px] sm:text-[18px] font-medium tracking-[-0.004em] text-white transition-colors hover:bg-[#1fa041] sm:text-[20px] lg:text-[24px]"
             >
               {t("moreAboutCta")}
             </Link>
