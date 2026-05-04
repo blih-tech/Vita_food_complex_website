@@ -48,22 +48,23 @@ export default function SustainabilityGiveBackSection() {
   return (
     <section
       ref={sectionRef}
-      style={{ background: "#FFFFFF", paddingTop: "80px", paddingBottom: "80px" }}
+      className="px-4 sm:px-6 lg:px-[128px]"
+      style={{ background: "#FFFFFF", paddingTop: 80, paddingBottom: 80 }}
     >
-      <div style={{ paddingLeft: "128px", paddingRight: "128px" }}>
+      <div className="mx-auto" style={{ maxWidth: 1664 }}>
         {/* Header — Figma node 274:5213 */}
         <div className="mb-12" style={{ maxWidth: 1062 }}>
           {/* "How We Give Back" — Outfit Bold 64px, lh 61.44px, ls -1.28px, #23B349 */}
           <h2
+            className="mb-6"
             style={{
               fontFamily: "'Outfit', sans-serif",
               fontWeight: 700,
-              fontSize: "64px",
-              lineHeight: "0.96",
+              fontSize: "clamp(40px, 5vw, 64px)",
+              lineHeight: "61.44px",
               letterSpacing: "-1.28px",
               color: "#23B349",
               maxWidth: 528,
-              marginBottom: "48px"
             }}
           >
             {t("giveBack.title")}
@@ -96,18 +97,31 @@ export default function SustainabilityGiveBackSection() {
                 marginTop: i * 60,
               }}
             >
-              {/* Give Back images from Figma */}
+              {/* Image area — rounded 24px, gradient bg */}
               <div
                 className="rounded-[24px] overflow-hidden mb-6"
                 style={{
-                  height: "400px",
+                  minHeight: 400,
+                  background: `linear-gradient(${135 + i * 30}deg, #E9F7ED 0%, ${i === 1 ? "#F0F9F4" : "#F5F5F5"} 100%)`,
                 }}
               >
-                <img
-                  src={`/assets/images/sustainability/giveback-${i + 1}.jpg`}
-                  alt={card.heading}
-                  className="w-full h-full object-cover"
-                />
+                <div className="w-full h-full flex items-center justify-center p-8">
+                  <div
+                    className="w-full rounded-[16px] flex items-center justify-center"
+                    style={{
+                      aspectRatio: "3/4",
+                      background: "rgba(255,255,255,0.7)",
+                    }}
+                  >
+                    <span className="text-[#23B349] text-5xl font-bold opacity-20">
+                      {card.key === "farmers"
+                        ? "🌾"
+                        : card.key === "employment"
+                          ? "👥"
+                          : "🍞"}
+                    </span>
+                  </div>
+                </div>
               </div>
 
               {/* Heading — Funnel Display Bold 24px, lh 24px, ls -0.096px, #000000 */}
