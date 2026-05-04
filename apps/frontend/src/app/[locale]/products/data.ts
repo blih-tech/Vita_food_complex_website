@@ -353,7 +353,7 @@ export const products: Product[] = [
   },
   {
     id: "burger-flour",
-    name: "Burgur Flour",
+    name: "Burger",
     category: "Flour",
     media: {
       image: "/assets/products/items/burger-flour-1.png",
@@ -368,7 +368,7 @@ export const products: Product[] = [
   },
   {
     id: "all-purpose",
-    name: "All purpose",
+    name: "All Purpose",
     category: "Flour",
     media: {
       image: "/assets/products/items/burger-flour-1.png",
@@ -379,6 +379,38 @@ export const products: Product[] = [
       nameColor: "#000000",
     },
     relatedProducts: ["burger-flour", "cream", "high-energy", "tafach-mango"],
+    content: getDefaultContent(),
+  },
+  {
+    id: "marie-cream",
+    name: "Marie Cream",
+    category: "Biscuit",
+    media: {
+      image: "/assets/products/items/marie-cream-1.png",
+      tagIcon: "/assets/products/tag_icons/marie.png",
+    },
+    ui: {
+      bgColor: "linear-gradient(135deg, #FFB6C1 0%, #FF69B4 100%)",
+      textColor: "#FFFFFF",
+      nameColor: "#FFFFFF",
+    },
+    relatedProducts: ["marie", "cream", "zoo", "oreo"],
+    content: getDefaultContent(),
+  },
+  {
+    id: "tea-biscuit",
+    name: "Tea Biscuit",
+    category: "Biscuit",
+    media: {
+      image: "/assets/products/items/tea-cracker.png",
+      tagIcon: "/assets/products/tag_icons/tea.png",
+    },
+    ui: {
+      bgColor: "linear-gradient(135deg, #D4A574 0%, #8B6914 100%)",
+      textColor: "#FFFFFF",
+      nameColor: "#FFFFFF",
+    },
+    relatedProducts: ["tea", "digestive", "marie", "sina"],
     content: getDefaultContent(),
   },
 ];

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Link } from "@frontend/navigation";
+import { products } from "@frontend/app/[locale]/products/data";
 
 /* ─────────────────────────────────────────────
    Types
@@ -83,6 +84,28 @@ const footerLinks = {
 
 const mapLinks = (arr: string[], href: string): FooterLink[] =>
   arr.map((label) => ({ label, href }));
+
+// Create product name to ID mapping for detail page navigation
+const getProductIdByName = (productName: string): string | null => {
+  const normalizedSearch = productName.toLowerCase().trim();
+  
+  const product = products.find(p => {
+    const normalizedName = p.name.toLowerCase().trim();
+    return normalizedName === normalizedSearch;
+  });
+  
+  return product?.id || null;
+};
+
+const mapProductLinks = (arr: string[]): FooterLink[] => {
+  return arr.map((label) => {
+    const productId = getProductIdByName(label);
+    return {
+      label,
+      href: productId ? `/products/${productId}` : "/products"
+    };
+  });
+};
 
 /* ─────────────────────────────────────────────
    Component
@@ -187,11 +210,11 @@ export default function Footer() {
           <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-10">
             <FooterColumn
               title="Biscuits"
-              links={mapLinks(footerLinks.biscuits, "/products")}
+              links={mapProductLinks(footerLinks.biscuits)}
             />
             <FooterColumn
               title="Flour"
-              links={mapLinks(footerLinks.flour, "/products")}
+              links={mapProductLinks(footerLinks.flour)}
             />
             <FooterColumn title="Company" links={footerLinks.company} />
             <FooterColumn title="Resources" links={footerLinks.resources} />
