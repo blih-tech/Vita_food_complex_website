@@ -4,56 +4,45 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { ABOUT_ASSETS } from "@frontend/constants/aboutAssets";
 
+/** Figma About (277:8084): Header hero fill_JQM9DP; headline Headline (179:449); subtitle style_8R6JGC; image 277:8195 824×586, radius 16px */
+const HERO_RADIAL =
+  "radial-gradient(circle at 2% 163%, rgb(31, 214, 80) 0%, rgb(35, 179, 73) 60%, rgb(116, 255, 56) 100%)";
+
 export default function AboutHeroSection() {
   const t = useTranslations("About");
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#23B349]">
-      {/* ── BACKGROUND DECORATIONS ── */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Soft Glow */}
-        <div className="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] bg-white/10 blur-[120px] rounded-full" />
-        
-        {/* Dotted Pattern (Approximated) */}
-        <div className="absolute top-[20%] left-[5%] opacity-20">
-          <div className="grid grid-cols-6 gap-3">
-            {[...Array(24)].map((_, i) => (
-              <div key={i} className="w-1.5 h-1.5 bg-white rounded-full" />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="relative z-10 mx-auto px-4 pt-[100px] md:pt-[140px] lg:pt-[160px] flex flex-col items-center text-center max-w-[1200px]">
-        {/* Headline — Outfit 800, white */}
+    <section className="relative w-full overflow-hidden" style={{ background: HERO_RADIAL }}>
+      <div className="relative z-10 mx-auto flex max-w-[1920px] flex-col items-center px-8 pb-0 pt-[120px] text-center md:px-16 md:pt-[160px] lg:px-[128px]">
         <h1
-          className="font-[family-name:var(--font-outfit)] font-extrabold text-[40px] md:text-[64px] lg:text-[80px] text-white leading-[1.1] tracking-tight mb-8"
+          className="mb-8 max-w-[824px] font-[family-name:var(--font-outfit)] text-[40px] font-extrabold leading-[0.9] tracking-[-0.02em] text-white md:text-[64px] lg:text-[80px]"
         >
           {t("hero.headline")}
         </h1>
 
-        {/* Subtitle — Funnel Display 500, #E8E8E8 */}
         <p
-          className="font-[family-name:var(--font-funnel-display)] font-medium text-[16px] md:text-[20px] lg:text-[24px] text-white/90 max-w-[850px] leading-relaxed mb-16"
+          className="mb-16 max-w-[824px] font-[family-name:var(--font-funnel-display)] text-[16px] font-medium leading-normal tracking-[-0.004em] text-[#E8E8E8] md:text-[20px] lg:text-[24px]"
         >
           {t("hero.subtitle")}
         </p>
 
-        {/* Story Image (The Boy) — Large rounded frame */}
-        <div className="relative w-full max-w-[800px] aspect-[4/3] rounded-[40px] md:rounded-[60px] overflow-hidden border-[12px] md:border-[20px] border-white/10 shadow-2xl">
+        <div
+          className="relative w-full max-w-[824px] overflow-hidden rounded-[16px]"
+          style={{ aspectRatio: "824 / 586" }}
+        >
           <Image
             src={ABOUT_ASSETS.hero.storyImage}
-            alt="Vita Story"
+            alt={t("hero.headline")}
             fill
             className="object-cover"
             priority
+            sizes="(max-width: 900px) 100vw, 824px"
           />
         </div>
       </div>
 
-      {/* Bottom Transition (Curve) */}
-      <div className="relative w-full h-[100px] md:h-[150px] lg:h-[200px] mt-[-50px] md:mt-[-80px] lg:mt-[-100px]">
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[150%] aspect-[4/1] bg-white rounded-t-[100%] shadow-[0_-20px_50px_rgba(35,179,73,0.1)]" />
+      <div className="relative mt-[-48px] h-[100px] w-full md:mt-[-64px] md:h-[140px] lg:mt-[-80px] lg:h-[180px]">
+        <div className="absolute bottom-0 left-1/2 aspect-[4/1] w-[150%] -translate-x-1/2 rounded-t-[100%] bg-white" />
       </div>
     </section>
   );
