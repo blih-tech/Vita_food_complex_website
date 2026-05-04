@@ -26,22 +26,22 @@ export default function MakeImpact() {
           </h2>
         </div>
 
-        {/* Image Gallery Row */}
+        {/* Image Gallery Row — Figma nodes 408:5963 to 408:5967 */}
         <div className="flex flex-nowrap overflow-x-auto lg:overflow-hidden gap-2 sm:gap-2 pb-8 lg:pb-0 mb-16 no-scrollbar snap-x snap-mandatory lg:justify-center">
           {[
-            "/assets/donation/image.png",
-            "/assets/donation/image-1.png",
-            "/assets/donation/image-2.png",
-            "/assets/donation/image-3.png",
-            "/assets/donation/image-4.png",
-          ].map((src) => (
+            "/assets/community/impact-gallery-1.png",
+            "/assets/community/impact-gallery-2.png",
+            "/assets/community/impact-gallery-3.png",
+            "/assets/community/impact-gallery-4.png",
+            "/assets/community/impact-gallery-5.png",
+          ].map((src, index) => (
             <div
               key={src}
               className="relative shrink-0 w-[280px] sm:w-[320px] md:w-[400px] lg:w-[24%] aspect-4/5 sm:aspect-square md:aspect-4/5 rounded-[24px] overflow-hidden snap-center"
             >
               <Image
-                src={src} // Add real images here
-                alt="Impact Image"
+                src={src}
+                alt={`Impact Image ${index + 1}`}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
