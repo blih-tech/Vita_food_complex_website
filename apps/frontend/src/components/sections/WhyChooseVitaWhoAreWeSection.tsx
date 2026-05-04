@@ -2,158 +2,86 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "@frontend/navigation";
-
-// Figma assets - pixel-perfect local copies from node 486-2897
-const imgACleanModernVectorIllustrationOfAnElegant1 = "/assets/images/why-choose-vita/card-image-1.jpg";
-const imgACleanModernVectorIllustrationOfAnElegant2 = "/assets/images/why-choose-vita/card-image-2.jpg";
-const imgACleanModernVectorIllustrationOfAnElegant3 = "/assets/images/why-choose-vita/card-image-3.jpg";
-const imgLine1 = "/assets/images/why-choose-vita/section-line.png";
+import Image from "next/image";
 
 export default function WhyChooseVitaWhoAreWeSection() {
   const t = useTranslations("WhyChooseVita");
 
-  return (
-    <div className="content-stretch flex flex-col items-center relative w-full lg:gap-[120px] md:gap-[80px] sm:gap-[60px] lg:px-[128px] md:px-[64px] sm:px-[32px] lg:pt-[96px] md:pt-[64px] sm:pt-[48px] lg:pb-[48px] md:pb-[32px] sm:pb-[24px]" data-node-id="486:2897" data-name="Who we are section">
-      {/* Who we are text content - Responsive */}
-      <div className="content-stretch flex flex-col gap-[32px] items-center relative shrink-0 w-full lg:max-w-[1296px] md:max-w-[900px] sm:max-w-[100%]" data-node-id="364:3320" data-name="Who we are text">
-        {/* Section header - Responsive */}
-        <div className="content-stretch flex items-center justify-center relative shrink-0 w-full lg:flex-row md:flex-col sm:flex-col lg:gap-[123.809px] md:gap-[60px] sm:gap-[40px]" data-node-id="364:3321" data-name="Section Header">
-          {/* "Who" text - Responsive */}
-          <p 
-            className="font-bold not-italic relative shrink-0 lg:block md:block sm:hidden"
-            style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 700,
-              lineHeight: '0.96',
-              fontSize: '64px',
-              color: '#1a1a1a',
-              letterSpacing: '-2px',
-            }}
-            data-node-id="364:3322"
-          >
-            Who
-          </p>
-          
-          {/* Line separator - Responsive */}
-          <div className="lg:w-[123.809px] md:w-[60px] sm:w-[40px] lg:h-px md:h-px sm:h-px bg-[#23b349]" />
+  const features = [
+    {
+      title: "Quality You Can Trust",
+      desc: "Produced with strict standards to ensure consistency, freshness, and satisfaction",
+      image: "/assets/about/baking-biscuits.png"
+    },
+    {
+      title: "Reliable Supply",
+      desc: "Strong manufacturing and distribution systems that keep products available",
+      image: "/assets/company/snack-bag.png"
+    },
+    {
+      title: "Innovation Driven",
+      desc: "Modern packaging, new product ideas, and evolving solutions for future markets",
+      image: "/assets/about/wheat-farming.png" // Approximation
+    },
+    {
+      title: "Community Impact",
+      desc: "Creating jobs, supporting farmers, and contributing to national growth",
+      image: "/assets/images/why-choose-vita/card-image-2.jpg" // Approximation from previous code
+    }
+  ];
 
-          {/* "We Are" text - Responsive */}
-          <p 
-            className="font-bold not-italic relative shrink-0"
-            style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 700,
-              lineHeight: '0.96',
-              fontSize: '64px',
-              color: '#1a1a1a',
-              letterSpacing: '-2px',
-            }}
-            data-node-id="364:3323"
-          >
-            <span className="lg:inline md:inline sm:block">We Are</span>
-            <span className="lg:inline md:inline sm:block"> & What We Stand For</span>
-          </p>
+  return (
+    <section className="bg-white py-16 md:py-24 lg:py-32 px-4">
+      <div className="mx-auto max-w-[1400px] flex flex-col items-center">
+        
+        {/* Giant Headline — "Who — Are We" */}
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-8">
+          <h2 className="font-[family-name:var(--font-funnel-display)] font-bold text-[60px] md:text-[100px] lg:text-[140px] text-[#404040]/30 leading-none tracking-tighter">
+            Who
+          </h2>
+          <div className="w-[80px] md:w-[150px] h-[4px] bg-[#23B349] rounded-full" />
+          <h2 className="font-[family-name:var(--font-funnel-display)] font-extrabold text-[60px] md:text-[100px] lg:text-[140px] text-[#23B349] leading-none tracking-tighter">
+            Are We
+          </h2>
         </div>
 
-        {/* Description text - Responsive */}
-        <p 
-          className="font-['Funnel_Display'] font-medium leading-[1.5] not-italic relative shrink-0 text-center lg:text-[24px] lg:tracking-[-0.4px] md:text-[20px] md:tracking-[-0.32px] sm:text-[16px] sm:tracking-[-0.24px] lg:px-0 md:px-4 sm:px-2"
-          style={{
-            color: '#404040',
-          }}
-          data-node-id="364:3324"
-        >
+        {/* Description */}
+        <p className="font-[family-name:var(--font-outfit)] font-medium text-[16px] md:text-[20px] lg:text-[24px] text-[#404040]/70 text-center max-w-[1000px] mb-12 leading-relaxed">
           {t("whoWeAre.description")}
         </p>
 
-        {/* CTA Button - Responsive */}
+        {/* Button */}
         <Link
           href="/about"
-          className="inline-flex items-center justify-center gap-[16px] bg-[#23b349] text-white rounded-[999px] font-['Funnel_Display'] font-medium hover:bg-[#1a9a3a] transition-colors lg:px-[32px] lg:py-[16px] lg:text-[20px] lg:tracking-[-0.4px] md:px-[24px] md:py-[12px] md:text-[18px] md:tracking-[-0.36px] sm:px-[20px] sm:py-[10px] sm:text-[16px] sm:tracking-[-0.32px]"
-          data-node-id="364:3325"
+          className="bg-[#23B349] text-white px-8 py-3 rounded-full font-bold text-[16px] mb-24 hover:scale-105 transition-transform"
         >
-          {t("whoWeAre.cta")}
+          More About Vita
         </Link>
-      </div>
 
-      {/* Cards Grid - Responsive */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 relative w-full lg:max-w-[1296px] md:max-w-[900px] sm:max-w-[100%]">
-        {/* Card 1 - Top left */}
-        <div className="bg-white rounded-[24px] shadow-lg overflow-hidden">
-          <div className="relative lg:h-[354px] md:h-[280px] sm:h-[200px] overflow-hidden">
-            <img
-              alt="Quality Innovation"
-              className="w-full h-full object-cover"
-              src={imgACleanModernVectorIllustrationOfAnElegant1}
-            />
-          </div>
-          <div className="p-6 lg:p-8 md:p-6 sm:p-4">
-            <h3 className="font-['Funnel_Display'] font-bold text-[20px] leading-[1.2] text-[#1a1a1a] mb-4 lg:text-[20px] md:text-[18px] sm:text-[16px]">
-              {t("whoWeAre.products.quality.title")}
-            </h3>
-            <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
-              {t("whoWeAre.products.quality.description")}
-            </p>
-          </div>
-        </div>
-
-        {/* Card 2 - Top right */}
-        <div className="bg-white rounded-[24px] shadow-lg overflow-hidden">
-          <div className="relative lg:h-[354px] md:h-[280px] sm:h-[200px] overflow-hidden">
-            <img
-              alt="Local Sourcing"
-              className="w-full h-full object-cover"
-              src={imgACleanModernVectorIllustrationOfAnElegant2}
-            />
-          </div>
-          <div className="p-6 lg:p-8 md:p-6 sm:p-4">
-            <h3 className="font-['Funnel_Display'] font-bold text-[20px] leading-[1.2] text-[#1a1a1a] mb-4 lg:text-[20px] md:text-[18px] sm:text-[16px]">
-              {t("whoWeAre.products.local.title")}
-            </h3>
-            <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
-              {t("whoWeAre.products.local.description")}
-            </p>
-          </div>
-        </div>
-
-        {/* Card 3 - Bottom left */}
-        <div className="bg-white rounded-[24px] shadow-lg overflow-hidden">
-          <div className="relative lg:h-[354px] md:h-[280px] sm:h-[200px] overflow-hidden">
-            <img
-              alt="Sustainability Focus"
-              className="w-full h-full object-cover"
-              src={imgACleanModernVectorIllustrationOfAnElegant3}
-            />
-          </div>
-          <div className="p-6 lg:p-8 md:p-6 sm:p-4">
-            <h3 className="font-['Funnel_Display'] font-bold text-[20px] leading-[1.2] text-[#1a1a1a] mb-4 lg:text-[20px] md:text-[18px] sm:text-[16px]">
-              {t("whoWeAre.products.community.title")}
-            </h3>
-            <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
-              {t("whoWeAre.products.community.description")}
-            </p>
-          </div>
-        </div>
-
-        {/* Card 4 - Bottom right */}
-        <div className="bg-white rounded-[24px] shadow-lg overflow-hidden">
-          <div className="relative lg:h-[354px] md:h-[280px] sm:h-[200px] overflow-hidden">
-            <img
-              alt="Community Impact"
-              className="w-full h-full object-cover"
-              src={imgACleanModernVectorIllustrationOfAnElegant1}
-            />
-          </div>
-          <div className="p-6 lg:p-8 md:p-6 sm:p-4">
-            <h3 className="font-['Funnel_Display'] font-bold text-[20px] leading-[1.2] text-[#1a1a1a] mb-4 lg:text-[20px] md:text-[18px] sm:text-[16px]">
-              {t("whoWeAre.products.innovation.title")}
-            </h3>
-            <p className="font-['Funnel_Display'] font-medium text-[16px] leading-[1.5] text-[#666] lg:text-[16px] md:text-[14px] sm:text-[12px]">
-              {t("whoWeAre.products.innovation.description")}
-            </p>
-          </div>
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+          {features.map((f, i) => (
+            <div key={i} className="bg-white rounded-[32px] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] border border-gray-100 flex flex-col items-center text-center group hover:shadow-xl transition-all">
+              <div className="relative w-full aspect-[4/3] overflow-hidden">
+                <Image
+                  src={f.image}
+                  alt={f.title}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
+                />
+              </div>
+              <div className="p-8 flex flex-col items-center">
+                <h4 className="font-[family-name:var(--font-outfit)] font-bold text-[20px] md:text-[22px] text-[#404040] mb-3">
+                  {f.title}
+                </h4>
+                <p className="font-[family-name:var(--font-funnel-display)] text-[14px] md:text-[16px] text-[#404040]/60 leading-relaxed">
+                  {f.desc}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

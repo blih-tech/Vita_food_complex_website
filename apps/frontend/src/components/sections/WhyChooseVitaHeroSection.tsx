@@ -2,248 +2,85 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "@frontend/navigation";
-
-// Figma assets from MCP - Latest design
-const imgRectangle = "https://www.figma.com/api/mcp/asset/3ab30e72-c4b6-4e14-9eca-d03a5a07abdf";
-const imgRectangle1 = "https://www.figma.com/api/mcp/asset/063801fe-55ad-4519-9c7f-50c50285f7c8";
-const imgGeminiGeneratedImageTz1T8Tz1T8Tz1T8T1 = "https://www.figma.com/api/mcp/asset/e15993ec-e16e-4e94-bcfb-56372328909d";
-const imgSoundMuteLight = "https://www.figma.com/api/mcp/asset/620f837a-7ad0-4d78-8ff8-068a3c342435";
+import Image from "next/image";
 
 export default function WhyChooseVitaHeroSection() {
   const t = useTranslations("WhyChooseVita");
 
   return (
-    <div className="contents relative size-full min-h-[1400px]" data-node-id="486:2896" data-name="Hero section">
-      {/* Main background image - Node 364:3163 */}
-      <div 
-        className="absolute h-[934px] left-0 top-0 w-[1920px]" 
-        data-node-id="364:3163" 
-        data-name="steptodown.com263483_upscayl_4x_realesrgan-x4plus 1"
-      />
-
-      {/* Hero background composition - Node 486:2898 */}
-      <div 
-        className="absolute contents left-[-11px] top-[-47px]" 
-        data-node-id="486:2898" 
-        data-name="Hero background"
-      >
-        {/* Background pattern element - Node 364:3310 */}
-        <div 
-          className="absolute flex h-[1180.918px] items-center justify-center left-[calc(58.33%+98.21px)] top-[-47px] w-[723.803px]"
+    <section className="relative w-full overflow-hidden bg-white pt-[100px] md:pt-[140px] lg:pt-[180px]">
+      {/* ── TOP CONTENT ── */}
+      <div className="relative z-10 mx-auto px-4 flex flex-col items-center text-center max-w-[1200px]">
+        {/* Headline — Outfit 800, Brand Green */}
+        <h1
+          className="font-[family-name:var(--font-outfit)] font-extrabold text-[40px] md:text-[64px] lg:text-[80px] text-[#23B349] leading-[1.1] tracking-tight mb-6"
         >
-          <div className="flex-none rotate-180">
-            <div 
-              className="h-[1180.918px] relative w-[723.803px]" 
-              data-node-id="364:3310" 
-              data-name="Rectangle"
-            >
-              <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <img
-                  alt=""
-                  className="absolute h-[-201.14%] left-[59.07%] max-w-none top-[158.67%] w-[-332.86%]"
-                  src={imgRectangle}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+          A Better Choice <br className="hidden md:block" /> for Every Table
+        </h1>
 
-        {/* Background overlay with effects - Node 364:3311 */}
-        <div 
-          className="absolute flex h-[1125.277px] items-center justify-center left-[-11px] top-[8.64px] w-[425.017px]"
+        {/* Subtitle — Funnel Display 500 */}
+        <p
+          className="font-[family-name:var(--font-funnel-display)] font-medium text-[16px] md:text-[20px] lg:text-[24px] text-[#404040]/70 max-w-[850px] leading-relaxed mb-12"
         >
-          <div className="-scale-y-100 flex-none">
-            <div 
-              className="blur-[13.55px] h-[1125.277px] relative w-[425.017px]" 
-              data-node-id="364:3311" 
-              data-name="Rectangle"
-            >
-              <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0 overflow-hidden">
-                  <img
-                    alt=""
-                    className="absolute h-[202.84%] left-[-45.74%] max-w-none top-[-21.68%] w-[230.77%]"
-                    src={imgRectangle1}
-                  />
-                </div>
-                <div className="absolute bg-[#23b349] inset-0 mix-blend-screen" />
-                <div 
-                  className="absolute inset-0" 
-                  style={{ backgroundImage: "linear-gradient(73.61234608838203deg, rgba(255, 255, 255, 0) 31.925%, rgb(255, 255, 255) 73.82%)" }} 
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+          {t("hero.description")}
+        </p>
 
-      {/* Hero image section - Node 364:3367 */}
-      <div 
-        className="absolute h-[647px] left-[-61px] top-[737px] w-[2057.723px]" 
-        data-node-id="364:3367" 
-        data-name="Hero image"
-      >
-        {/* Tagline background - Node 364:3368 */}
-        <div 
-          className="-translate-x-1/2 absolute flex h-[322.73px] items-center justify-center left-[calc(50%+2.06px)] top-[148.3px] w-[2052.554px]"
-        >
-          <div className="flex-none rotate-[-6.1deg]">
-            <div 
-              className="bg-[#404040] h-[105.185px] relative w-[2053px]" 
-              data-node-id="364:3368" 
-              data-name="Tagline Container" 
-            />
-          </div>
-        </div>
-
-        {/* Tagline text - Node 364:3369 */}
-        <div 
-          className="-translate-x-1/2 absolute flex h-[290.888px] items-center justify-center left-[calc(50%+1.42px)] top-[161.1px] w-[2054.879px]"
-        >
-          <div className="flex-none rotate-[-5.02deg]">
-            <div 
-              className="bg-[#ffec19] font-['Funnel_Display'] font-extrabold h-[111.526px] leading-[0.88] not-italic overflow-clip relative text-[96px] text-[#db4426] text-center tracking-[-0.384px] w-[2053px] whitespace-nowrap" 
-              data-node-id="364:3369" 
-              data-name="Tagline Container"
-            >
-              <p 
-                className="-translate-x-1/2 absolute left-[643.46px] top-[calc(50%-51.4px)]" 
-                data-node-id="364:3370"
-              >
-                A new stylish way of Connecting!
-              </p>
-              <p 
-                className="-translate-x-1/2 absolute left-[1325.75px] top-[calc(50%-47.63px)]" 
-                data-node-id="364:3371"
-              >
-                A new stylish way of Connecting!
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Main image container with gradient border - Node 364:3372 */}
-        <div 
-          className="-translate-x-1/2 absolute border-4 border-white border-solid h-[647px] left-[calc(50%+3px)] rounded-[52px] top-[4px] w-[1380px]" 
-          data-node-id="364:3372" 
-          data-name="Container"
-          style={{ 
-            backgroundImage: "linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%), url('data:image/svg+xml;utf8,<svg viewBox=\\'0 0 1380 647\\' xmlns=\\'http://www.w3.org/2000/svg\\' preserveAspectRatio=\\'none\\'><rect x=\\'0\\' y=\\'0\\' height=\\'100%\\' width=\\'100%\\' fill=\\'url(%23grad)\\' opacity=\\'1\\'/><defs><radialGradient id=\\'grad\\' gradientUnits=\\'userSpaceOnUse\\' cx=\\'0\\' cy=\\'0\\' r=\\'10\\' gradientTransform=\\'matrix(97.581 0 0 52.368 138 582.3)\\'><stop stop-color=\\'rgba(116,255,56,1)\\' offset=\\'0\\'/><stop stop-color=\\'rgba(103,247,62,1)\\' offset=\\'0.2\\'/><stop stop-color=\\'rgba(89,238,68,1)\\' offset=\\'0.4\\'/><stop stop-color=\\'rgba(74,230,72,1)\\' offset=\\'0.6\\'/><stop stop-color=\\'rgba(56,222,76,1)\\' offset=\\'0.8\\'/><stop stop-color=\\'rgba(31,214,80,1)\\' offset=\\'1\\'/></radialGradient></defs></svg>')" 
-          }} 
-        />
-
-        {/* Main image container - Node 364:3373 */}
-        <div 
-          className="-translate-x-1/2 absolute border-4 border-white border-solid h-[647px] left-1/2 overflow-clip rounded-[48px] top-0 w-[1380px]" 
-          data-node-id="364:3373" 
-          data-name="Container"
-          style={{ 
-            backgroundImage: "linear-gradient(90deg, rgb(64, 64, 64) 0%, rgb(64, 64, 64) 100%), url('data:image/svg+xml;utf8,<svg viewBox=\\'0 0 1380 647\\' xmlns=\\'http://www.w3.org/2000/svg\\' preserveAspectRatio=\\'none\\'><rect x=\\'0\\' y=\\'0\\' height=\\'100%\\' width=\\'100%\\' fill=\\'url(%23grad)\\' opacity=\\'1\\'/><defs><radialGradient id=\\'grad\\' gradientUnits=\\'userSpaceOnUse\\' cx=\\'0\\' cy=\\'0\\' r=\\'10\\' gradientTransform=\\'matrix(97.581 0 0 52.368 138 582.3)\\'><stop stop-color=\\'rgba(116,255,56,1)\\' offset=\\'0\\'/><stop stop-color=\\'rgba(103,247,62,1)\\' offset=\\'0.2\\'/><stop stop-color=\\'rgba(89,238,68,1)\\' offset=\\'0.4\\'/><stop stop-color=\\'rgba(74,230,72,1)\\' offset=\\'0.6\\'/><stop stop-color=\\'rgba(56,222,76,1)\\' offset=\\'0.8\\'/><stop stop-color=\\'rgba(31,214,80,1)\\' offset=\\'1\\'/></radialGradient></defs></svg>')" 
-          }}
-        >
-          {/* Main hero image - Node 364:3374 */}
-          <div 
-            className="-translate-x-1/2 absolute h-[768px] left-1/2 top-[-64.5px] w-[1408px]" 
-            data-node-id="364:3374" 
-            data-name="Gemini_Generated_Image_tz1t8tz1t8tz1t8t 1"
-          >
-            <img 
-              alt="" 
-              className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" 
-              src={imgGeminiGeneratedImageTz1T8Tz1T8Tz1T8T1} 
-            />
-          </div>
-
-          {/* Sound icon - Node 364:3375 */}
-          <div 
-            className="-translate-x-1/2 -translate-y-1/2 absolute left-[calc(50%-631.5px)] size-[63px] top-[calc(50%-262px)]" 
-            data-node-id="364:3375" 
-            data-name="sound_mute_light"
-          >
-            <img 
-              alt="" 
-              className="absolute block inset-0 max-w-none size-full" 
-              src={imgSoundMuteLight} 
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Header text content - Node 364:3313 */}
-      <div 
-        className="-translate-x-1/2 absolute content-stretch flex flex-col gap-[48px] items-center left-[calc(50%-2.5px)] top-[304px] w-[899px]" 
-        data-node-id="364:3313" 
-        data-name="hearder text"
-      >
-        {/* Text container - Node 364:3314 */}
-        <div 
-          className="content-stretch flex flex-col gap-[32px] items-center relative shrink-0 text-center w-full" 
-          data-node-id="364:3314" 
-          data-name="Container"
-        >
-          {/* Headline - Node 364:3315 */}
-          <p 
-            className="font-['Outfit'] font-extrabold h-[142px] leading-[0.9] relative shrink-0 text-[80px] tracking-[-1.6px] w-[624px]" 
-            style={{ color: "#23b349" }}
-            data-node-id="364:3315"
-          >
-            A Better Choice for Every Table
-          </p>
-
-          {/* Subtitle - Node 364:3316 */}
-          <div 
-            className="flex flex-col font-['Funnel_Display'] font-medium justify-center leading-[0] not-italic relative shrink-0 text-[24px] tracking-[-0.096px] w-[894px]" 
-            style={{ color: "#404040" }}
-            data-node-id="364:3316"
-          >
-            <p className="leading-none whitespace-pre-wrap">
-              {t("hero.subtitle")}
-            </p>
-          </div>
-        </div>
-
-        {/* Button row - Node 364:3317 */}
-        <div 
-          className="content-stretch flex gap-[24px] items-center relative shrink-0" 
-          data-node-id="364:3317" 
-          data-name="Button Row"
-        >
-          {/* Primary button - Node 364:3318 */}
+        {/* CTA Buttons */}
+        <div className="flex flex-wrap justify-center gap-4 mb-16 md:mb-24">
           <Link
             href="/products"
-            className="bg-[#23b349] content-stretch flex gap-[16px] h-[56px] items-center justify-center px-[32px] py-[16px] relative rounded-[999px] shrink-0 text-white whitespace-nowrap" 
-            data-node-id="364:3318"
+            className="bg-[#23B349] text-white px-8 py-4 rounded-full font-bold text-[18px] transition-transform hover:scale-105"
           >
-            <p 
-              className="font-['Funnel_Display'] font-medium leading-[normal] not-italic relative shrink-0 text-[24px] tracking-[-0.096px]" 
-              data-node-id="I364:3318;18:1725"
-            >
-              {t("hero.primaryCta")}
-            </p>
-            <div 
-              className="flex flex-col font-['Outfit'] font-normal justify-center leading-[0] relative shrink-0 text-[20px] tracking-[-0.08px]" 
-              data-node-id="I364:3318;19:1779"
-            >
-              <p className="leading-[normal]">→</p>
-            </div>
+            Explore products →
           </Link>
-
-          {/* Secondary button - Node 364:3319 */}
           <Link
-            href="/about"
-            className="border border-[#1fd650] border-solid content-stretch flex gap-[16px] h-[56px] items-center justify-center px-[32px] py-[16px] relative rounded-[999px] shrink-0 whitespace-nowrap" 
-            data-node-id="364:3319"
+            href="/contact"
+            className="border-[2px] border-[#404040]/20 text-[#404040] px-8 py-4 rounded-full font-bold text-[18px] transition-transform hover:bg-[#404040]/5"
           >
-            <p 
-              className="font-['Funnel_Display'] font-medium leading-[normal] not-italic relative shrink-0 text-[24px] tracking-[-0.096px]" 
-              style={{ color: "black" }}
-              data-node-id="I364:3319;18:1725"
-            >
-              {t("hero.secondaryCta")}
-            </p>
+            Contact US
           </Link>
         </div>
+
+        {/* ── VIDEO/IMAGE FRAME WITH MARQUEE ── */}
+        <div className="relative w-full max-w-[1100px] mx-auto mb-20 md:mb-32">
+          
+          {/* Marquee Tape Behind */}
+          <div className="absolute top-[40%] left-[-15%] w-[130%] h-20 md:h-32 bg-[#FFEC19] rotate-[-2.5deg] z-0 flex items-center overflow-hidden shadow-lg">
+            <div className="flex whitespace-nowrap animate-marquee">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <span key={i} className="font-[family-name:var(--font-funnel-display)] font-black text-[30px] md:text-[60px] text-[#23B349] mx-10 uppercase italic tracking-tighter">
+                  Connecting!
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Video Container */}
+          <div className="relative z-10 aspect-video rounded-[30px] md:rounded-[60px] border-[8px] md:border-[15px] border-white overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.2)] group">
+            <Image
+              src="/assets/hero/video-family.png"
+              alt="Family enjoying Vita"
+              fill
+              className="object-cover transition-transform duration-1000 group-hover:scale-105"
+              priority
+            />
+            {/* Sound Icon */}
+            <div className="absolute top-4 left-4 md:top-8 md:left-8 w-10 h-10 md:w-16 md:h-16 opacity-80">
+               <Image src="/assets/hero/sound-mute-video.svg" alt="Mute" fill />
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <style jsx>{`
+        .animate-marquee {
+          animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
+    </section>
   );
 }
