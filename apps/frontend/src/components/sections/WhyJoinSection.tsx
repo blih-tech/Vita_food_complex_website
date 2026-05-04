@@ -2,37 +2,23 @@
 
 import { useTranslations } from "next-intl";
 
-const BENEFITS = [
-  { key: "growth", label: "Growth & Learning Opportunities" },
-  { key: "culture", label: "Supportive Team Culture" },
-  { key: "environment", label: "Modern Work Environment" },
-  { key: "impact", label: "Real Community Impact" },
-  { key: "innovation", label: "Innovation-Driven Company" },
-  { key: "balance", label: "Work-Life Balance" },
-];
+import { 
+  GraduationCap, 
+  Users, 
+  Monitor, 
+  Globe, 
+  Lightbulb, 
+  Clock 
+} from "lucide-react";
 
-/* SVG icon used for each benefit button — 47.4×47.4px per Figma node 2546:10662 */
-function BenefitIcon() {
-  return (
-    <svg
-      width="47"
-      height="47"
-      viewBox="0 0 47 47"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <circle cx="23.5" cy="23.5" r="23.5" fill="#23B349" />
-      <path
-        d="M14 23.5L20.5 30L33 17"
-        stroke="#FFFFFF"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+const BENEFITS = [
+  { key: "growth", label: "Growth & Learning Opportunities", icon: GraduationCap },
+  { key: "culture", label: "Supportive Team Culture", icon: Users },
+  { key: "environment", label: "Modern Work Environment", icon: Monitor },
+  { key: "impact", label: "Real Community Impact", icon: Globe },
+  { key: "innovation", label: "Innovation-Driven Company", icon: Lightbulb },
+  { key: "balance", label: "Work-Life Balance", icon: Clock },
+];
 
 export default function WhyJoinSection() {
   const t = useTranslations("Careers");
@@ -70,7 +56,7 @@ export default function WhyJoinSection() {
           {BENEFITS.map((b) => (
             <div
               key={b.key}
-              className="flex flex-row items-center transition-all hover:translate-x-2"
+              className="flex flex-row items-center transition-all hover:translate-x-2 group"
               style={{
                 gap: "clamp(16px, 3vw, 35.55px)",
                 paddingLeft: "clamp(16px, 3vw, 35.55px)",
@@ -79,9 +65,12 @@ export default function WhyJoinSection() {
                 background: "#F5F5F5",
               }}
             >
-              {/* Icon — layout_ENUIGI: 47.4×47.4px SVG */}
-              <div className="shrink-0" style={{ width: "clamp(32px, 4vw, 47.4px)", height: "clamp(32px, 4vw, 47.4px)" }}>
-                <BenefitIcon />
+              {/* Icon Container — layout_ENUIGI: 47.4×47.4px */}
+              <div 
+                className="shrink-0 flex items-center justify-center bg-[#23B349] rounded-full text-white transition-transform group-hover:scale-110" 
+                style={{ width: "clamp(32px, 4vw, 47.4px)", height: "clamp(32px, 4vw, 47.4px)" }}
+              >
+                <b.icon className="w-[60%] h-[60%]" strokeWidth={2.5} />
               </div>
 
               {/* Text — style_768L80: Outfit 400, 36.87px, 1.567em lh (~57.77px), #333733 */}

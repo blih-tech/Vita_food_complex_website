@@ -10,14 +10,25 @@ export default function CareersHeroSection() {
       className="relative w-full overflow-hidden px-4 sm:px-6 lg:px-[128px]"
       style={{ background: "#FFFFFF", paddingTop: "clamp(100px, 12vw, 152px)", paddingBottom: 80 }}
     >
-      {/* Background Image — Figma node 2542:10273 */}
-      <div className="absolute inset-0 z-0 h-full w-full">
-        <Image
-          src="/assets/careers/career-hero-bg.png"
-          alt=""
-          fill
-          className="object-cover object-center opacity-40"
-          priority
+      {/* Background Shapes — Figma nodes 2546:10637 & 2546:10638 */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Left Shape */}
+        <div 
+          className="absolute left-[-10%] top-[10%] w-[60%] h-[80%] opacity-60 blur-[27px]"
+          style={{
+            background: "linear-gradient(79deg, rgba(35, 179, 73, 0) 31%, rgba(35, 179, 73, 0.8) 95%)",
+            borderRadius: "50%",
+            transform: "rotate(-15deg)"
+          }}
+        />
+        {/* Right Shape */}
+        <div 
+          className="absolute right-[-10%] bottom-[10%] w-[60%] h-[80%] opacity-60 blur-[27px]"
+          style={{
+            background: "linear-gradient(79deg, rgba(35, 179, 73, 0) 31%, rgba(35, 179, 73, 0.8) 95%)",
+            borderRadius: "50%",
+            transform: "rotate(165deg)"
+          }}
         />
       </div>
 
