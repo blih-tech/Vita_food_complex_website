@@ -2,6 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import { cn } from "@frontend/lib/utils";
 
 export default function SustainabilityProcessSection() {
   const t = useTranslations("Sustainability");
@@ -21,132 +23,117 @@ export default function SustainabilityProcessSection() {
     };
   }, []);
 
-  /* Figma structure (node 274:5187):
-     Each process step is 360px wide, staggered vertically:
-     - Farmers: y=0
-     - Processing: y=100
-     - Distribution: y=200
-     - Reuse: y=300
-     Each card: heading (64px) + image area (540/500/460/410px) + description
-  */
-
   const steps = [
     {
       key: "farmers",
       heading: t("process.farmers.heading"),
       desc: t("process.farmers.desc"),
-      imageHeight: 540,
+      image: "/assets/images/sustainability/process-farmers.jpg",
+      imageHeight: 324,
     },
     {
       key: "processing",
       heading: t("process.processing.heading"),
       desc: t("process.processing.desc"),
-      imageHeight: 500,
+      image: "/assets/images/sustainability/process-processing.jpg",
+      imageHeight: 300,
     },
     {
       key: "distribution",
       heading: t("process.distribution.heading"),
       desc: t("process.distribution.desc"),
-      imageHeight: 460,
+      image: "/assets/images/sustainability/process-distribution.jpg",
+      imageHeight: 276,
     },
     {
       key: "reuse",
       heading: t("process.reuse.heading"),
       desc: t("process.reuse.desc"),
-      imageHeight: 410,
+      image: "/assets/images/sustainability/process-reuse.jpg",
+      imageHeight: 246,
     },
   ];
 
   return (
     <section
       ref={sectionRef}
-      className="py-[48px] sm:py-[64px] md:py-[80px]"
-      style={{ background: "#FFFFFF" }}
+      className="px-4 sm:px-6 lg:px-8 xl:px-[128px] py-[80px] sm:py-[100px] md:py-[120px] bg-white overflow-hidden"
+      data-node-id="274:5187"
     >
-      <div className="px-4 sm:px-6 md:px-8 lg:px-[128px]">
+      <div className="mx-auto max-w-[1656px]">
         {/* Process text — Figma node 2080:3766 */}
-        <div className="mb-8 sm:mb-12 max-w-[871px]">
-          {/* "From farm to table..." — Funnel Display Medium 24px, lh 24px, ls -0.096px, #333733 */}
-          <span
-            className="block mb-4 text-[16px] sm:text-[20px] md:text-[24px]"
+        <div className="mb-[clamp(32px,6vw,64px)] max-w-[871px]" data-node-id="2080:3766">
+          <span className="block mb-4 font-[family-name:var(--font-funnel-display)] font-medium leading-none text-[#333733]"
             style={{
-              fontFamily: "'Funnel Display', sans-serif",
-              fontWeight: 500,
-              lineHeight: "1.2",
-              letterSpacing: "-0.096px",
-              color: "#333733",
+              fontSize: "clamp(18px, 2.2vw, 24px)",
+              letterSpacing: "-0.004em",
             }}
           >
             {t("process.sublabel")}
           </span>
 
-          {/* "Our Sustainable Process" — Outfit ExtraBold 80px, lh 72px, ls -1.6px, #23B349 */}
           <h2
-            className="text-[32px] sm:text-[48px] md:text-[64px] lg:text-[80px]"
+            className="font-[family-name:var(--font-outfit)] font-extrabold text-[#23B349] leading-[0.9]"
             style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 800,
-              lineHeight: "0.9",
-              letterSpacing: "-1.6px",
-              color: "#23B349",
+              fontSize: "clamp(36px, 7vw, 80px)",
+              letterSpacing: "-0.02em",
+              fontFeatureSettings: "'liga' 0",
             }}
           >
             {t("process.title")}
           </h2>
         </div>
 
-        {/* Process Steps — Figma node 274:5191, responsive grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        {/* Process Steps — 4 columns staggered */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[clamp(24px,3vw,32px)]">
           {steps.map((step, i) => (
             <div
               key={step.key}
-              className={`${i > 0 ? "sm:mt-[30px] lg:mt-[60px]" : ""}`}
+              className={cn(
+                "flex flex-col group",
+                i === 1 && "lg:mt-[clamp(30px,5vw,60px)]",
+                i === 2 && "lg:mt-[clamp(60px,10vw,120px)]",
+                i === 3 && "lg:mt-[clamp(90px,15vw,180px)]"
+              )}
               style={{
                 opacity: isVisible ? 1 : 0,
-                transform: isVisible ? "translateY(0)" : "translateY(30px)",
-                transition: `all 0.8s ease-out ${i * 0.15}s`,
+                transform: isVisible ? "translateY(0)" : "translateY(40px)",
+                transition: `all 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.15}s`,
               }}
             >
-              {/* Heading — Outfit Bold 64px (Reuse is Funnel Display Bold 40px), lh 61.44px, ls -1.28px, #333733 */}
+              {/* Heading — Outfit Bold 64px, lh 61.44px, ls -1.28px, #333733 */}
               <h3
-                className="mb-3 sm:mb-4 text-[20px] sm:text-[24px] md:text-[32px] lg:text-[48px]"
+                className="mb-8 font-bold leading-[0.96] text-[#333733]"
                 style={{
-                  fontFamily:
-                    step.key === "reuse"
-                      ? "'Funnel Display', sans-serif"
-                      : "'Outfit', sans-serif",
-                  fontWeight: 700,
-                  lineHeight: step.key === "reuse" ? "1.2" : "1.2",
-                  letterSpacing: "-0.8px",
-                  color: "#333733",
+                  fontFamily: step.key === "reuse" ? "var(--font-funnel-display)" : "var(--font-outfit)",
+                  fontSize: step.key === "reuse" ? "clamp(28px, 4vw, 40px)" : "clamp(32px, 5.5vw, 64px)",
+                  letterSpacing: "-0.02em",
+                  fontFeatureSettings: "'liga' 0"
                 }}
               >
                 {step.heading}
               </h3>
 
-              {/* Process images from Figma */}
+              {/* Image Area */}
               <div
-                className="rounded-[12px] sm:rounded-[16px] lg:rounded-[20px] overflow-hidden mb-3 sm:mb-4"
-                style={{
-                  height: `${Math.min(step.imageHeight * 0.3, 200)}px`,
-                }}
+                className="relative w-full rounded-[24px] overflow-hidden mb-6 shadow-sm group-hover:shadow-md transition-shadow duration-500"
+                style={{ height: "clamp(200px, 30vw, 324px)", background: "#F5F5F5" }}
               >
-                <img
-                  src={`/assets/images/sustainability/process-${step.key}.jpg`}
+                <Image
+                  src={step.image}
                   alt={step.heading}
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+                <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-500" />
               </div>
 
               {/* Description — Funnel Display Medium 20px, lh 25px, ls -0.08px */}
-              <p
-                className="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]"
+              <p className="font-[family-name:var(--font-funnel-display)] font-medium leading-[1.25] text-[#333733]"
                 style={{
-                  fontFamily: "'Funnel Display', sans-serif",
-                  fontWeight: 500,
-                  lineHeight: "1.4",
-                  letterSpacing: "-0.06px",
-                  color: i === 1 || i === 3 ? "#545854" : "#404040",
+                  fontSize: "clamp(16px, 1.8vw, 20px)",
+                  letterSpacing: "-0.004em",
                 }}
               >
                 {step.desc}

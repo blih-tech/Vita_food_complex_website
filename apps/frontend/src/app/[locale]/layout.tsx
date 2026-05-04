@@ -38,6 +38,7 @@ const funnelDisplay = Funnel_Display({
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
 });
 
 export const metadata: Metadata = {

@@ -24,14 +24,14 @@ export default function QualityAssuranceSection() {
         </span>
 
         {/* Headline */}
-        <h2 className="font-[family-name:var(--font-outfit)] font-bold text-[32px] md:text-[48px] lg:text-[64px] text-[#23B349] text-center mb-16">
+        <h2 className="font-[family-name:var(--font-outfit)] font-bold text-[28px] sm:text-[32px] md:text-[48px] lg:text-[64px] text-[#23B349] text-center mb-8 md:mb-16">
           Quality is Built Around Us!
         </h2>
 
         {/* Certifications Row */}
-        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 lg:gap-20">
+        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-16 lg:gap-20">
           {certs.map((cert, i) => (
-            <div key={i} className="relative w-[120px] md:w-[160px] lg:w-[200px] h-[80px] md:h-[120px] grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+            <div key={i} className="relative w-[100px] sm:w-[120px] md:w-[160px] lg:w-[200px] h-[60px] sm:h-[80px] md:h-[120px] grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
                <Image
                  src={cert.src}
                  alt={cert.name}

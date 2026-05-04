@@ -2,6 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import { cn } from "@frontend/lib/utils";
 
 export default function SustainabilityGiveBackSection() {
   const t = useTranslations("Sustainability");
@@ -21,119 +23,104 @@ export default function SustainabilityGiveBackSection() {
     };
   }, []);
 
-  /* Figma structure (node 274:5212):
-     "How We Give Back" heading + description
-     3 cards staggered (y offsets: 0, 60, 120), each 544px wide
-     Card: image area (575/575/575px) + text below
-  */
-
   const cards = [
     {
       key: "farmers",
       heading: t("giveBack.farmers.heading"),
       desc: t("giveBack.farmers.desc"),
+      image: "/assets/images/sustainability/giveback-1.jpg",
     },
     {
       key: "employment",
       heading: t("giveBack.employment.heading"),
       desc: t("giveBack.employment.desc"),
+      image: "/assets/images/sustainability/giveback-2.jpg",
     },
     {
       key: "accessibility",
       heading: t("giveBack.accessibility.heading"),
       desc: t("giveBack.accessibility.desc"),
+      image: "/assets/images/sustainability/giveback-3.jpg",
     },
   ];
 
   return (
     <section
       ref={sectionRef}
-      className="py-[48px] sm:py-[64px] md:py-[80px]"
-      style={{ background: "#FFFFFF" }}
+      className="px-4 sm:px-6 lg:px-8 xl:px-[128px] py-[80px] sm:py-[100px] md:py-[120px] bg-white overflow-hidden"
+      data-node-id="274:5212"
     >
-      <div className="px-4 sm:px-6 md:px-8 lg:px-[128px]">
+      <div className="mx-auto max-w-[1664px]">
         {/* Header — Figma node 274:5213 */}
-        <div className="mb-8 sm:mb-12 max-w-[1062px]">
-          {/* "How We Give Back" — Outfit Bold 64px, lh 61.44px, ls -1.28px, #23B349 */}
+        <div className="mb-[clamp(48px,10vw,80px)] max-w-[1062px]" data-node-id="274:5213">
           <h2
-            className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[64px] mb-4 sm:mb-6"
+            className="mb-6 font-[family-name:var(--font-outfit)] font-bold leading-[0.96] text-[#23B349] max-w-[528px]"
             style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 700,
-              lineHeight: "0.96",
-              letterSpacing: "-1.28px",
-              color: "#23B349",
-              maxWidth: 528,
+              fontSize: "clamp(36px, 6vw, 64px)",
+              letterSpacing: "-0.02em",
+              fontFeatureSettings: "'liga' 0",
             }}
           >
             {t("giveBack.title")}
           </h2>
 
-          {/* Description — Funnel Display Medium 20px, lh 25px, ls -0.08px, #333733 */}
-          <p
-            className="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px]"
+          <p className="font-[family-name:var(--font-funnel-display)] font-medium leading-[1.25] text-[#333733] max-w-[900px]"
             style={{
-              fontFamily: "'Funnel Display', sans-serif",
-              fontWeight: 500,
-              lineHeight: "1.4",
-              letterSpacing: "-0.08px",
-              color: "#333733",
+              fontSize: "clamp(16px, 2vw, 20px)",
+              letterSpacing: "-0.004em",
             }}
           >
             {t("giveBack.description")}
           </p>
         </div>
 
-        {/* 3 Cards — responsive grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        {/* 3 Cards — staggered layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[clamp(24px,4vw,48px)]">
           {cards.map((card, i) => (
             <div
               key={card.key}
-              className={`${i > 0 ? "md:mt-[20px] lg:mt-[40px]" : ""}`}
+              className={cn(
+                "flex flex-col group",
+                i === 1 && "xl:mt-[clamp(30px,5vw,60px)]",
+                i === 2 && "xl:mt-[clamp(60px,10vw,120px)]"
+              )}
               style={{
                 opacity: isVisible ? 1 : 0,
-                transform: isVisible ? "translateY(0)" : "translateY(30px)",
-                transition: `all 0.8s ease-out ${i * 0.15}s`,
+                transform: isVisible ? "translateY(0)" : "translateY(40px)",
+                transition: `all 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.15}s`,
               }}
             >
-              {/* Give Back images from Figma */}
+              {/* Image area — rounded 24px, 544x575px in Figma */}
               <div
-                className="rounded-[12px] sm:rounded-[16px] lg:rounded-[20px] overflow-hidden mb-3 sm:mb-4"
-                style={{
-                  height: "180px",
-                }}
+                className="relative w-full aspect-[544/575] rounded-[24px] overflow-hidden mb-8 shadow-sm group-hover:shadow-md transition-shadow duration-500"
+                style={{ background: "#F5F5F5" }}
               >
-                <img
-                  src={`/assets/images/sustainability/giveback-${i + 1}.jpg`}
+                <Image
+                  src={card.image}
                   alt={card.heading}
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  priority={i === 0}
                 />
+                <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-500" />
               </div>
 
-              {/* Heading — Funnel Display Bold 24px, lh 24px, ls -0.096px, #000000 */}
               <h3
-                className="mb-2 sm:mb-3 text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px]"
+                className="mb-4 font-[family-name:var(--font-funnel-display)] font-bold text-black"
                 style={{
-                  fontFamily: "'Funnel Display', sans-serif",
-                  fontWeight: 700,
-                  lineHeight: "1.2",
-                  letterSpacing:
-                    card.key === "accessibility" ? "0px" : "-0.08px",
-                  color: "#000000",
+                  fontSize: "clamp(20px, 2.5vw, 24px)",
+                  lineHeight: "1",
+                  letterSpacing: card.key === "accessibility" ? "0px" : "-0.004em",
                 }}
               >
                 {card.heading}
               </h3>
 
-              {/* Description — Outfit Regular 20px, lh 25.2px, ls -0.08px */}
-              <p
-                className="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]"
+              <p className="font-[family-name:var(--font-outfit)] font-normal leading-[1.26] text-[#333733]"
                 style={{
-                  fontFamily: "'Outfit', sans-serif",
-                  fontWeight: 400,
-                  lineHeight: "1.4",
-                  letterSpacing: "-0.06px",
-                  color: card.key === "farmers" ? "#404040" : "#333733",
+                  fontSize: "clamp(16px, 2vw, 20px)",
+                  letterSpacing: "-0.004em",
                 }}
               >
                 {card.desc}

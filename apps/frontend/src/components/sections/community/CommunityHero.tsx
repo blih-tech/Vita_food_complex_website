@@ -1,9 +1,21 @@
 import { Link } from "@frontend/navigation";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export default function CommunityHero() {
   return (
     <section className="relative w-full min-h-[80vh] flex items-center justify-center overflow-hidden bg-white pt-20">
+      {/* Background Image — Figma node 2057:1518 */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/assets/community/charity-7.png"
+          alt="Community Hero"
+          fill
+          className="object-cover opacity-20"
+          priority
+        />
+      </div>
+
       {/* Background gradients */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[60%] bg-[#74FF38]/20 blur-[120px] rounded-full" />

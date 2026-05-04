@@ -3,17 +3,12 @@
 import { useTranslations } from "next-intl";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { ABOUT_ASSETS } from "@frontend/constants/aboutAssets";
 
-interface ProcessData {
-  number: string;
-  label: string;
-  captionLabel: string;
-  captionDesc: string;
-  heading: string;
-  description: string;
-  image: string;
-}
+const STEPS = ["01", "02", "03"] as const;
+
+/** Figma 2080:3663: Page width 1664, row gap 24px; image 726.44×570.07 r24; overlay fill_EGQIFS; caption fill_PO08N8 + blur(90px) r16; numbers style_V1HZTM rgba(114,99,0,0.14) */
+const PROCESS_IMAGE_OVERLAY =
+  "linear-gradient(180deg, rgba(255, 246, 177, 1) 0%, rgba(255, 222, 86, 1) 100%)";
 
 export default function ProcessSections() {
   const t = useTranslations("About.process");
@@ -27,184 +22,106 @@ export default function ProcessSections() {
       },
       { threshold: 0.05 },
     );
-    if (sectionRef.current) observer.observe(sectionRef.current);
+    const el = sectionRef.current;
+    if (el) observer.observe(el);
     return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current);
+      if (el) observer.unobserve(el);
     };
   }, []);
-
-  /* Figma (node 2080:3663): 3 SectionContainer frames, each row space-between
-     Left: SectionTextContainer (686w) + LabelContainer (number + label)
-     Right: ImageContainer (726.44 × 570.07) with caption overlay
-     Caption bg: rgba(35,179,73,0.5) + backdrop-blur(90px), radius 16px
-     Section number: Funnel Display 400, 225px, fill_1AXTC2: rgba(114,99,0,0.14) */
-
-  const processes: ProcessData[] = [
-    {
-      number: "01",
-      label: "Sourcing",
-      captionLabel: "NATURE'S FOUNDATION",
-      captionDesc: "Our story begins in Ethiopia's farmlands, where quality is nurtured from the ground up.",
-      heading: "From rich soil, a powerful beginning",
-      description: "In Ethiopia's fertile highlands, every grain begins its journey in the hands of dedicated farmers who understand the land.",
-      image: "/assets/about/wheat-farming.png",
-    },
-    {
-      number: "02",
-      label: "Crafting",
-      captionLabel: "HANDS BEHIND THE QUALITY",
-      captionDesc: "Crafted by skilled professionals committed to delivering trusted food for every moment.",
-      heading: "Hands that shape nourishment",
-      description: "Behind every Vita product are skilled individuals who transform raw ingredients into trusted food essentials.",
-      image: "/assets/about/baking-biscuits.png",
-    },
-    {
-      number: "03",
-      label: "Production",
-      captionLabel: "THE ART OF PRECISION",
-      captionDesc: "Where technology, quality control, and innovation come together to create Vita products.",
-      heading: "Refined with purpose, delivered",
-      description: "Inside our modern production facilities, innovation meets discipline. Using advanced technology and rigorous quality control, we ensure every product meets the highest standards.",
-      image: "/assets/quality/quality-1.png",
-    },
-  ];
 
   return (
     <section
       ref={sectionRef}
-      className="px-4 sm:px-6 lg:px-[128px]"
-      style={{ background: "#FFFFFF", paddingTop: 80, paddingBottom: 80 }}
+      className="bg-white px-8 py-16 md:px-16 md:py-24 lg:px-[128px] lg:py-32"
     >
-      <div className="mx-auto flex flex-col gap-16" style={{ maxWidth: 1664 }}>
-        {processes.map((p, i) => (
+      <div className="mx-auto flex max-w-[1664px] flex-col gap-[clamp(48px,8vw,96px)]">
+        {STEPS.map((id, i) => (
           <div
-            key={p.number}
-            className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12"
+            key={id}
+            className="flex flex-col items-center gap-12 lg:flex-row lg:justify-between lg:gap-16"
             style={{
               opacity: isVisible ? 1 : 0,
-              transform: isVisible ? "translateY(0)" : "translateY(30px)",
-              transition: `all 0.8s ease-out ${i * 0.15}s`,
+              transform: isVisible ? "translateY(0)" : "translateY(24px)",
+              transition: `opacity 0.7s ease-out ${i * 0.12}s, transform 0.7s ease-out ${i * 0.12}s`,
             }}
           >
-            {/* Left Content — layout_G0BXEC: 686w × 571h */}
-            <div className="flex-shrink-0 w-full lg:w-auto" style={{ maxWidth: 686 }}>
-              {/* Section Text Container — layout_UHQ2TV: column, gap:24px */}
-              <div className="mb-8" style={{ gap: 24 }}>
-                {/* Heading — Display: Outfit 700, 64px, 0.96em lh, -2% ls, #23B349 */}
+            <div className="w-full shrink-0 lg:max-w-[686px]">
+              <div className="flex flex-col gap-6 pt-0 lg:pt-9">
                 <h3
-                  className="mb-6"
-                  style={{
-                    fontFamily: "'Outfit', sans-serif",
-                    fontWeight: 700,
-                    fontSize: "clamp(32px, 4vw, 64px)",
-                    lineHeight: "0.96em",
-                    letterSpacing: "-1.28px",
-                    color: "#23B349",
-                  }}
+                  className="max-w-[682px] font-[family-name:var(--font-outfit)] font-bold leading-[0.96] tracking-[-0.02em] text-[#23B349]"
+                  style={{ fontSize: "clamp(32px, 5.5vw, 64px)" }}
                 >
-                  {p.heading}
+                  {t(`${id}.heading`)}
                 </h3>
-
-                {/* Description — style_8X9JNH: Outfit 400, 20px, 1.26em lh, -0.4% ls, #404040, w=538 */}
                 <p
-                  style={{
-                    fontFamily: "'Outfit', sans-serif",
-                    fontWeight: 400,
-                    fontSize: 20,
-                    lineHeight: "1.26em",
-                    letterSpacing: "-0.08px",
-                    color: "#404040",
-                    maxWidth: 538,
-                  }}
+                  className="max-w-[538px] font-[family-name:var(--font-outfit)] font-normal leading-normal tracking-[-0.004em] text-[#404040]"
+                  style={{ fontSize: "clamp(18px, 2vw, 20px)" }}
                 >
-                  {p.description}
+                  {t(`${id}.desc`)}
                 </p>
               </div>
 
-              {/* Label Container — layout_JAVRGZ: at y=342, w=277, h=229 */}
-              <div className="relative" style={{ height: 180 }}>
-                {/* Section Number — style_ITZKC9: Funnel Display 400, 225px, fill rgba(114,99,0,0.14) */}
+              <div className="relative mt-8 h-[clamp(140px,18vw,229px)] w-full max-w-[277px] lg:mt-10">
                 <span
-                  className="absolute bottom-0 left-0 leading-none select-none"
-                  style={{
-                    fontFamily: "'Funnel Display', sans-serif",
-                    fontWeight: 400,
-                    fontSize: "clamp(120px, 16vw, 225px)",
+                  className="absolute bottom-0 left-0 select-none font-[family-name:var(--font-funnel-display)] font-normal leading-none"
+                  style={{ 
                     color: "rgba(114, 99, 0, 0.14)",
-                    lineHeight: 1,
+                    fontSize: "clamp(120px, 15vw, 225px)"
                   }}
+                  aria-hidden
                 >
-                  {p.number}
+                  {id}
                 </span>
-
-                {/* Label — style_C6D040: Funnel Display 700, 32px, 1em lh, -0.4% ls, #000 */}
-                <span
-                  className="absolute bottom-3 left-3"
-                  style={{
-                    fontFamily: "'Funnel Display', sans-serif",
-                    fontWeight: 700,
-                    fontSize: 32,
-                    lineHeight: "1em",
-                    letterSpacing: "-0.128px",
-                    color: "#000000",
-                  }}
+                <span className="absolute bottom-3 left-3 font-[family-name:var(--font-funnel-display)] font-bold leading-none tracking-[-0.004em] text-black"
+                  style={{ fontSize: "clamp(24px, 3vw, 32px)" }}
                 >
-                  {p.label}
+                  {t(`${id}.label`)}
                 </span>
               </div>
             </div>
 
-            {/* Right Image — layout_JPM41M: 726.44 × 570.07 */}
-            <div className="flex-1 w-full">
+            <div className="relative w-full max-w-[726px] lg:flex-1">
               <div
-                className="relative rounded-[24px] overflow-hidden"
-                style={{ paddingBottom: "78.5%" /* 570/726 */ }}
+                className="relative w-full overflow-hidden rounded-[24px]"
+                style={{ aspectRatio: "726.44 / 570.07" }}
               >
                 <Image
-                  src={p.image}
-                  alt={p.label}
+                  src={
+                    id === "01"
+                      ? "/assets/about/wheat-farming.png"
+                      : id === "02"
+                        ? "/assets/about/baking-biscuits.png"
+                        : "/assets/quality/quality-1.png"
+                  }
+                  alt=""
                   fill
                   className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 726px"
                 />
-
-                {/* Caption Container — layout_UQBDFO: x=22.45, y=426.54, w=682, h=123, radius 16px */}
-                {/* fill_SINNNE: rgba(35,179,73,0.5) + backdropFilter blur(90px) */}
                 <div
-                  className="absolute bottom-6 left-6 right-6 p-4"
+                  className="pointer-events-none absolute inset-0 rounded-[24px] mix-blend-multiply"
+                  style={{
+                    background: PROCESS_IMAGE_OVERLAY,
+                    opacity: 0.35,
+                  }}
+                />
+                <div
+                  className="absolute bottom-5 left-5 right-5 max-h-[140px] rounded-[16px] p-4 md:bottom-6 md:left-6 md:right-6 lg:p-6"
                   style={{
                     background: "rgba(35, 179, 73, 0.5)",
-                    borderRadius: 16,
                     backdropFilter: "blur(90px)",
                     WebkitBackdropFilter: "blur(90px)",
                   }}
                 >
-                  {/* Caption Heading — style_U46CFA: Funnel Display 700, 32px, 1em, #FFFFFF */}
-                  <p
-                    className="mb-1"
-                    style={{
-                      fontFamily: "'Funnel Display', sans-serif",
-                      fontWeight: 700,
-                      fontSize: "clamp(18px, 2vw, 32px)",
-                      lineHeight: "1em",
-                      letterSpacing: "-0.32px",
-                      color: "#FFFFFF",
-                    }}
+                  <p className="mb-1 font-[family-name:var(--font-funnel-display)] font-bold leading-none tracking-[-0.01em] text-white"
+                    style={{ fontSize: "clamp(22px, 2.8vw, 32px)" }}
                   >
-                    {p.captionLabel}
+                    {t(`${id}.captionTitle`)}
                   </p>
-
-                  {/* Caption Body — Subtitle 2: Funnel Display 500, 20px, 1.25em, #E8E8E8 */}
-                  <p
-                    style={{
-                      fontFamily: "'Funnel Display', sans-serif",
-                      fontWeight: 500,
-                      fontSize: 20,
-                      lineHeight: "1.25em",
-                      letterSpacing: "-0.08px",
-                      color: "#E8E8E8",
-                    }}
+                  <p className="font-[family-name:var(--font-funnel-display)] font-medium leading-tight tracking-[-0.004em] text-[#E8E8E8]"
+                    style={{ fontSize: "clamp(14px, 1.8vw, 20px)" }}
                   >
-                    {p.captionDesc}
+                    {t(`${id}.captionDesc`)}
                   </p>
                 </div>
               </div>
