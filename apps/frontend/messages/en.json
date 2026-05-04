@@ -194,6 +194,28 @@
       "title": "Who We Are & What We Stand For",
       "description": "We are a proudly Ethiopian food manufacturing company committed to delivering quality, innovation, and everyday nourishment. We combine modern production standards with deep local understanding to create products people love and trust.",
       "cta": "Learn More About Us",
+      "headlineWho": "Who",
+      "headlineAreWe": "Are We",
+      "fmcgIntro": "Vita Food Complex is a modern FMCG company built to lead the future of everyday food in Ethiopia. We produce strategically designed biscuit and flour products tailored to multiple consumer moments—from children\u2019s snacks and youth lifestyle choices to family tea-time and professional bakery needs",
+      "moreAboutCta": "More About Vita",
+      "featureCards": {
+        "trust": {
+          "title": "Quality You Can Trust",
+          "description": "Produced with strict standards to ensure consistency, freshness, and satisfaction"
+        },
+        "supply": {
+          "title": "Reliable Supply",
+          "description": "Strong manufacturing and distribution systems that keep products available"
+        },
+        "innovation": {
+          "title": "Innovation Driven",
+          "description": "Modern packaging, new product ideas, and evolving solutions for future markets"
+        },
+        "community": {
+          "title": "Community Impact",
+          "description": "Creating jobs, supporting farmers, and contributing to national growth"
+        }
+      },
       "products": {
         "quality": {
           "title": "Quality Excellence",

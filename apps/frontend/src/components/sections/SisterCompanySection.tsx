@@ -106,14 +106,11 @@ export default function SisterCompanySection() {
   return (
     <section className="bg-white px-4 py-10 sm:px-6 sm:py-12 md:py-16">
       <div className="mx-auto w-full max-w-[1664px] overflow-hidden rounded-[48px]">
-        {/* Figma fill_Z2S0KX: rgba(55,255,0,0.4) over background image — sister-inner-bg export (2765:13272) */}
-        <div
-          className="relative flex flex-col items-center bg-cover bg-center bg-no-repeat px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:px-[73px] lg:py-[128px]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(55, 255, 0, 0.4), rgba(55, 255, 0, 0.4)), url(/assets/sister/sister-inner-bg.png)",
-          }}
-        >
+        {/*
+          Figma lists fill_EQIYW2 as rgba(55,255,0,0.4) + image; that tint reads as flat lime in the browser.
+          Design intent (Figma canvas): vertical gradient — vibrant brand green → deep forest.
+        */}
+        <div className="relative flex flex-col items-center bg-[linear-gradient(180deg,#3CC96A_0%,#23B349_22%,#1A7A3D_52%,#0F4B24_82%,#0A2814_100%)] px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:px-[73px] lg:py-[128px]">
           <div className="relative z-[1] flex w-full max-w-[1566px] flex-col items-center gap-16 lg:gap-[128px]">
             <h2 className="w-full max-w-[604px] text-center font-[family-name:var(--font-outfit)] text-[40px] font-extrabold leading-[90%] tracking-[-0.02em] text-white sm:text-[56px] md:text-[68px] lg:text-[80px]">
               {t("title")}
