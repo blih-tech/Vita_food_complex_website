@@ -32,18 +32,16 @@ export default function SustainabilityHeroSection() {
           transform: "translate(-50%, -50%)",
           maxWidth: "961px",
           width: "100%",
-          gap: "16px",
+          gap: "clamp(12px, 2vw, 16px)",
         }}
       >
         {/* "Sourced with Care, Shared with Purpose" — Outfit ExtraBold 80px, lh 72px, ls -1.6px, #FFFFFF */}
         <h1
-          className="text-[32px] sm:text-[48px] md:text-[64px] lg:text-[80px]"
+          className="font-[family-name:var(--font-outfit)] font-extrabold text-white"
           style={{
-            fontFamily: "'Outfit', sans-serif",
-            fontWeight: 800,
+            fontSize: "clamp(32px, 7vw, 80px)",
             lineHeight: "0.9",
-            letterSpacing: "-1.6px",
-            color: "#FFFFFF",
+            letterSpacing: "-0.02em",
           }}
         >
           {t("hero.headline")}
@@ -51,13 +49,11 @@ export default function SustainabilityHeroSection() {
 
         {/* "We are committed to nourishing communities..." — Funnel Display Medium 24px, lh 24px, ls -0.096px, #FFFFFF */}
         <p
-          className="text-[16px] sm:text-[20px] md:text-[24px] max-w-[662px]"
+          className="font-[family-name:var(--font-funnel-display)] font-medium text-white max-w-[662px]"
           style={{
-            fontFamily: "'Funnel Display', sans-serif",
-            fontWeight: 500,
+            fontSize: "clamp(16px, 2.2vw, 24px)",
             lineHeight: "1.2",
-            letterSpacing: "-0.096px",
-            color: "#FFFFFF",
+            letterSpacing: "-0.004em",
           }}
         >
           {t("hero.subtitle")}

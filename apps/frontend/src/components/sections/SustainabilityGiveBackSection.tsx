@@ -52,28 +52,37 @@ export default function SustainabilityGiveBackSection() {
     >
       <div className="mx-auto max-w-[1664px]">
         {/* Header — Figma node 274:5213 */}
-        <div className="mb-[48px] md:mb-[80px] max-w-[1062px]" data-node-id="274:5213">
+        <div className="mb-[clamp(48px,10vw,80px)] max-w-[1062px]" data-node-id="274:5213">
           <h2
-            className="mb-6 font-['Outfit'] font-bold text-[40px] md:text-[56px] lg:text-[64px] leading-[0.96] tracking-[-1.28px] text-[#23B349] max-w-[528px]"
-            style={{ fontFeatureSettings: "'liga' 0" }}
+            className="mb-6 font-[family-name:var(--font-outfit)] font-bold leading-[0.96] text-[#23B349] max-w-[528px]"
+            style={{
+              fontSize: "clamp(36px, 6vw, 64px)",
+              letterSpacing: "-0.02em",
+              fontFeatureSettings: "'liga' 0",
+            }}
           >
             {t("giveBack.title")}
           </h2>
 
-          <p className="font-['Funnel_Display'] font-medium text-[18px] md:text-[20px] leading-[1.25] tracking-[-0.08px] text-[#333733] max-w-[900px]">
+          <p className="font-[family-name:var(--font-funnel-display)] font-medium leading-[1.25] text-[#333733] max-w-[900px]"
+            style={{
+              fontSize: "clamp(16px, 2vw, 20px)",
+              letterSpacing: "-0.004em",
+            }}
+          >
             {t("giveBack.description")}
           </p>
         </div>
 
         {/* 3 Cards — staggered layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[32px] md:gap-[48px] xl:gap-[24px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[clamp(24px,4vw,48px)]">
           {cards.map((card, i) => (
             <div
               key={card.key}
               className={cn(
                 "flex flex-col group",
-                i === 1 && "xl:mt-[60px]",
-                i === 2 && "xl:mt-[120px]"
+                i === 1 && "xl:mt-[clamp(30px,5vw,60px)]",
+                i === 2 && "xl:mt-[clamp(60px,10vw,120px)]"
               )}
               style={{
                 opacity: isVisible ? 1 : 0,
@@ -98,15 +107,22 @@ export default function SustainabilityGiveBackSection() {
               </div>
 
               <h3
-                className="mb-4 font-['Funnel_Display'] font-bold text-[24px] leading-[1] text-black"
+                className="mb-4 font-[family-name:var(--font-funnel-display)] font-bold text-black"
                 style={{
-                  letterSpacing: card.key === "accessibility" ? "0px" : "-0.096px",
+                  fontSize: "clamp(20px, 2.5vw, 24px)",
+                  lineHeight: "1",
+                  letterSpacing: card.key === "accessibility" ? "0px" : "-0.004em",
                 }}
               >
                 {card.heading}
               </h3>
 
-              <p className="font-['Outfit'] font-normal text-[18px] md:text-[20px] leading-[1.26] tracking-[-0.08px] text-[#333733]">
+              <p className="font-[family-name:var(--font-outfit)] font-normal leading-[1.26] text-[#333733]"
+                style={{
+                  fontSize: "clamp(16px, 2vw, 20px)",
+                  letterSpacing: "-0.004em",
+                }}
+              >
                 {card.desc}
               </p>
             </div>

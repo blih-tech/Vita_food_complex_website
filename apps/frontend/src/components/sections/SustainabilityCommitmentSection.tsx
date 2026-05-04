@@ -94,7 +94,11 @@ export default function SustainabilityCommitmentSection() {
             data-name="Commitment text"
           >
             <p
-              className="font-['Funnel_Display'] font-normal text-[18px] sm:text-[24px] md:text-[28px] lg:text-[32px] leading-normal tracking-[-0.128px] text-[#545854] max-w-[1386px] mx-auto mb-[24px] sm:mb-[48px]"
+              className="font-[family-name:var(--font-funnel-display)] font-normal leading-normal text-[#545854] max-w-[1386px] mx-auto mb-[clamp(24px,6vw,48px)]"
+              style={{
+                fontSize: "clamp(18px, 2.8vw, 32px)",
+                letterSpacing: "-0.004em",
+              }}
               data-node-id="274:5240"
             >
               We believe sustainability is not a choice — it's a responsibility.
@@ -103,9 +107,13 @@ export default function SustainabilityCommitmentSection() {
               communities, and the environment
             </p>
             <h2
-              className="font-['Outfit'] font-bold text-[40px] sm:text-[48px] md:text-[56px] lg:text-[64px] leading-[0.96] tracking-[-1.28px] text-[#23b349]"
+              className="font-[family-name:var(--font-outfit)] font-bold leading-[0.96] text-[#23b349]"
+              style={{
+                fontSize: "clamp(32px, 6vw, 64px)",
+                letterSpacing: "-0.02em",
+                fontFeatureSettings: "'liga' 0",
+              }}
               data-node-id="274:5241"
-              style={{ fontFeatureSettings: "'liga' 0" }}
             >
               Our Commitment
             </h2>
@@ -113,14 +121,14 @@ export default function SustainabilityCommitmentSection() {
 
           {/* Commitment cards - Grid layout for all screen sizes */}
           <div
-            className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-[24px] w-full"
+            className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-[clamp(16px,2.5vw,24px)] w-full"
             data-node-id="274:5242"
             data-name="Commitment card"
           >
             {commitments.map((commitment, index) => (
               <div
                 key={commitment.key}
-                className="flex gap-[23.524px] h-[450px] sm:h-[500px] lg:h-[558.703px] items-center justify-center px-[24px] sm:px-[40px] lg:px-[67.632px] py-[23.524px] rounded-[24px] w-full relative group transition-all duration-300"
+                className="flex gap-[23.524px] min-h-[450px] sm:min-h-[500px] lg:min-h-[558.703px] items-center justify-center px-[clamp(16px,4vw,67.632px)] py-[23.524px] rounded-[24px] w-full relative group transition-all duration-300"
                 data-node-id={`274:${5243 + index}`}
                 data-name="card"
                 style={{
@@ -144,7 +152,7 @@ export default function SustainabilityCommitmentSection() {
                     data-node-id={`274:${5245 + index}`}
                   />
                   <div
-                    className="absolute h-[320px] sm:h-[400px] lg:h-[430.789px] left-1/2 top-[60px] sm:top-[80px] lg:top-[127.91px] w-[90%] sm:w-[95%] lg:w-[544px] -translate-x-1/2"
+                    className="absolute h-[clamp(280px,60%,430.789px)] left-1/2 top-[clamp(40px,15%,127.91px)] w-[90%] sm:w-[95%] lg:w-[544px] -translate-x-1/2"
                     data-node-id={`274:${5246 + index}`}
                     data-name="Frame"
                   >
@@ -158,11 +166,11 @@ export default function SustainabilityCommitmentSection() {
 
                 {/* Card content */}
                 <div
-                  className="bg-[#e9f7ed] border-[2px] sm:border-[2.941px] border-[#9adcab] border-solid flex flex-col h-[320px] sm:h-[350px] lg:h-[373.449px] items-center justify-center px-[16px] sm:px-[20px] lg:px-[29.405px] py-[16px] sm:py-[17.643px] rounded-[22.054px] relative w-full"
+                  className="bg-[#e9f7ed] border-[2px] sm:border-[2.941px] border-[#9adcab] border-solid flex flex-col min-h-[320px] sm:min-h-[350px] lg:min-h-[373.449px] items-center justify-center px-[clamp(12px,2vw,29.405px)] py-[clamp(12px,1.5vw,17.643px)] rounded-[22.054px] relative w-full"
                   data-node-id={`274:${5250 + index}`}
                 >
                   <div
-                    className="flex flex-col gap-[12px] sm:gap-[16px] lg:gap-[23.524px] items-center justify-center w-full"
+                    className="flex flex-col gap-[clamp(8px,1.5vw,23.524px)] items-center justify-center w-full"
                     data-node-id={`274:${5251 + index}`}
                   >
                     {/* Card title */}
@@ -171,7 +179,11 @@ export default function SustainabilityCommitmentSection() {
                       data-node-id={`274:${5252 + index}`}
                     >
                       <h3
-                        className="font-['Funnel_Display'] font-bold text-[20px] sm:text-[28px] lg:text-[32px] leading-none tracking-[-0.32px] text-[#197f34]"
+                        className="font-[family-name:var(--font-funnel-display)] font-bold leading-none text-[#197f34]"
+                        style={{
+                          fontSize: "clamp(20px, 2.8vw, 32px)",
+                          letterSpacing: "-0.01em",
+                        }}
                         data-node-id={`274:${5253 + index}`}
                       >
                         {commitment.title}
@@ -180,18 +192,18 @@ export default function SustainabilityCommitmentSection() {
 
                     {/* Card items */}
                     <div
-                      className="flex flex-col gap-[6px] sm:gap-[10px] lg:gap-[11.762px] items-start w-full"
+                      className="flex flex-col gap-[clamp(4px,1vw,11.762px)] items-start w-full"
                       data-node-id={`274:${5254 + index}`}
                     >
                       {commitment.items.map((item, itemIndex) => (
                         <div
                           key={itemIndex}
-                          className="bg-[rgba(255,249,242,0.74)] flex gap-[6px] sm:gap-[10px] lg:gap-[11.762px] items-center p-[6px] sm:p-[10px] lg:p-[11.762px] rounded-[8.822px] w-full"
+                          className="bg-[rgba(255,249,242,0.74)] flex gap-[clamp(4px,1vw,11.762px)] items-center p-[clamp(4px,1vw,11.762px)] rounded-[8.822px] w-full"
                           data-node-id={`274:${5255 + index * 4 + itemIndex}`}
                         >
                           {/* Vector icon */}
                           <div
-                            className="relative w-[16px] h-[16px] sm:w-[20px] sm:h-[20px] lg:w-[23.524px] lg:h-[23.524px] flex-shrink-0"
+                            className="relative w-[clamp(14px,2vw,23.524px)] h-[clamp(14px,2vw,23.524px)] flex-shrink-0"
                             data-node-id={`274:${5256 + index * 4 + itemIndex}`}
                             data-name="Vector"
                           >
@@ -202,7 +214,11 @@ export default function SustainabilityCommitmentSection() {
                             />
                           </div>
                           <p
-                            className="font-['Outfit'] font-normal text-[14px] sm:text-[18px] lg:text-[24px] leading-normal tracking-[-0.096px] text-[#333733]"
+                            className="font-[family-name:var(--font-outfit)] font-normal leading-normal text-[#333733]"
+                            style={{
+                              fontSize: "clamp(14px, 2vw, 24px)",
+                              letterSpacing: "-0.004em",
+                            }}
                             data-node-id={`274:${5257 + index * 4 + itemIndex}`}
                           >
                             {item}

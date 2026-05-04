@@ -62,29 +62,38 @@ export default function SustainabilityProcessSection() {
     >
       <div className="mx-auto max-w-[1656px]">
         {/* Process text — Figma node 2080:3766 */}
-        <div className="mb-[48px] md:mb-[64px] max-w-[871px]" data-node-id="2080:3766">
-          <span className="block mb-4 font-['Funnel_Display'] font-medium text-[20px] md:text-[24px] leading-none tracking-[-0.096px] text-[#333733]">
+        <div className="mb-[clamp(32px,6vw,64px)] max-w-[871px]" data-node-id="2080:3766">
+          <span className="block mb-4 font-[family-name:var(--font-funnel-display)] font-medium leading-none text-[#333733]"
+            style={{
+              fontSize: "clamp(18px, 2.2vw, 24px)",
+              letterSpacing: "-0.004em",
+            }}
+          >
             {t("process.sublabel")}
           </span>
 
           <h2
-            className="font-['Outfit'] font-extrabold text-[40px] md:text-[64px] lg:text-[80px] leading-[0.9] tracking-[-1.6px] text-[#23B349]"
-            style={{ fontFeatureSettings: "'liga' 0" }}
+            className="font-[family-name:var(--font-outfit)] font-extrabold text-[#23B349] leading-[0.9]"
+            style={{
+              fontSize: "clamp(36px, 7vw, 80px)",
+              letterSpacing: "-0.02em",
+              fontFeatureSettings: "'liga' 0",
+            }}
           >
             {t("process.title")}
           </h2>
         </div>
 
         {/* Process Steps — 4 columns staggered */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[24px] md:gap-[32px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[clamp(24px,3vw,32px)]">
           {steps.map((step, i) => (
             <div
               key={step.key}
               className={cn(
                 "flex flex-col group",
-                i === 1 && "lg:mt-[60px]",
-                i === 2 && "lg:mt-[120px]",
-                i === 3 && "lg:mt-[180px]"
+                i === 1 && "lg:mt-[clamp(30px,5vw,60px)]",
+                i === 2 && "lg:mt-[clamp(60px,10vw,120px)]",
+                i === 3 && "lg:mt-[clamp(90px,15vw,180px)]"
               )}
               style={{
                 opacity: isVisible ? 1 : 0,
@@ -94,10 +103,11 @@ export default function SustainabilityProcessSection() {
             >
               {/* Heading — Outfit Bold 64px, lh 61.44px, ls -1.28px, #333733 */}
               <h3
-                className="mb-8 font-['Outfit'] font-bold text-[32px] md:text-[48px] lg:text-[64px] leading-[0.96] tracking-[-1.28px] text-[#333733]"
+                className="mb-8 font-bold leading-[0.96] text-[#333733]"
                 style={{
-                  fontFamily: step.key === "reuse" ? "'Funnel Display', sans-serif" : "'Outfit', sans-serif",
-                  fontSize: step.key === "reuse" ? "40px" : undefined,
+                  fontFamily: step.key === "reuse" ? "var(--font-funnel-display)" : "var(--font-outfit)",
+                  fontSize: step.key === "reuse" ? "clamp(28px, 4vw, 40px)" : "clamp(32px, 5.5vw, 64px)",
+                  letterSpacing: "-0.02em",
                   fontFeatureSettings: "'liga' 0"
                 }}
               >
@@ -107,7 +117,7 @@ export default function SustainabilityProcessSection() {
               {/* Image Area */}
               <div
                 className="relative w-full rounded-[24px] overflow-hidden mb-6 shadow-sm group-hover:shadow-md transition-shadow duration-500"
-                style={{ height: step.imageHeight, background: "#F5F5F5" }}
+                style={{ height: "clamp(200px, 30vw, 324px)", background: "#F5F5F5" }}
               >
                 <Image
                   src={step.image}
@@ -120,7 +130,12 @@ export default function SustainabilityProcessSection() {
               </div>
 
               {/* Description — Funnel Display Medium 20px, lh 25px, ls -0.08px */}
-              <p className="font-['Funnel_Display'] font-medium text-[18px] md:text-[20px] leading-[1.25] tracking-[-0.08px] text-[#333733]">
+              <p className="font-[family-name:var(--font-funnel-display)] font-medium leading-[1.25] text-[#333733]"
+                style={{
+                  fontSize: "clamp(16px, 1.8vw, 20px)",
+                  letterSpacing: "-0.004em",
+                }}
+              >
                 {step.desc}
               </p>
             </div>
