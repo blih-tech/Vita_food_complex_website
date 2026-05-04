@@ -142,22 +142,6 @@ export default function SocialWallSection() {
 
       </div>
 
-      <style jsx global>{`
-        @keyframes scroll-up {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(-50%); }
-        }
-        @keyframes scroll-down {
-          0% { transform: translateY(-50%); }
-          100% { transform: translateY(0); }
-        }
-        .animate-scroll-up {
-          animation: scroll-up linear infinite;
-        }
-        .animate-scroll-down {
-          animation: scroll-down linear infinite;
-        }
-      `}</style>
     </section>
   );
 }

@@ -733,6 +733,47 @@ body {
   animation-play-state: paused;
 }
 
+/* Scrollbar Hide Utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Vertical Scroll Animations (Social Wall) */
+@keyframes scroll-up {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+@keyframes scroll-down {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+.animate-scroll-up {
+  animation: scroll-up linear infinite;
+}
+.animate-scroll-down {
+  animation: scroll-down linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-scroll-up,
+  .animate-scroll-down {
+    animation: none;
+  }
+}
+
 /* Desktop: Full HD & Beyond (1920px+) */
 @media (min-width: 1920px) {
   body {

@@ -8,7 +8,8 @@ const recipes = [
   {
     id: 1,
     title: "Creamy Delights",
-    description: "Experience the rich, velvety texture of our signature cream biscuits.",
+    description:
+      "Experience the rich, velvety texture of our signature cream biscuits.",
     image: "/assets/recipes/recipe-1.png",
     color: "#2976CA",
   },
@@ -39,7 +40,7 @@ const recipes = [
     description: "The secret ingredient to all your favorite home recipes.",
     image: "/assets/recipes/recipe-5.png",
     color: "#A099B5",
-  }
+  },
 ];
 
 export default function RecipesSection() {
@@ -56,54 +57,75 @@ export default function RecipesSection() {
   };
 
   return (
-    <section id="recipes" className="relative w-full bg-white py-16 sm:py-20 md:py-24 lg:py-32 overflow-hidden">
-      <div className="max-w-[1440px] mx-auto px-5 sm:px-6 md:px-12 lg:px-24 mb-12 sm:mb-16 md:mb-20 flex flex-col items-center text-center">
-        <p className="font-['Funnel_Display'] font-semibold text-base sm:text-[18px] md:text-[20px] text-[#23B349] tracking-widest uppercase mb-3 sm:mb-4">
+    <section
+      id="recipes"
+      className="relative w-full bg-white py-12 sm:py-16 md:py-24 lg:py-32 overflow-hidden"
+    >
+      {/* Header */}
+      <div className="max-w-[1440px] mx-auto px-5 sm:px-6 md:px-12 lg:px-24 mb-10 sm:mb-14 md:mb-20 flex flex-col items-center text-center">
+        <p className="font-['Funnel_Display'] font-semibold text-base sm:text-lg md:text-[20px] text-[#23B349] tracking-widest uppercase mb-3">
           Our Recipes Made Simple
         </p>
-        <h2 className="font-['Outfit'] font-black text-4xl sm:text-5xl md:text-[64px] lg:text-[80px] text-[#404040] leading-[1.05] tracking-[-0.02em] px-4">
+        <h2 className="font-['Outfit'] font-black text-[42px] sm:text-5xl md:text-[64px] lg:text-[80px] text-[#404040] leading-[1.05] tracking-[-0.02em] px-2">
           Mix. Match. <span className="text-[#23B349]">Enjoy</span>
         </h2>
       </div>
 
-      {/* Horizontal Scroll Area - Improved mobile padding and card sizing */}
+      {/* Horizontal Scroll Area */}
       <div className="relative w-full">
-        <div 
+        <div
           ref={scrollRef}
           onScroll={handleScroll}
-          className="flex gap-4 sm:gap-6 md:gap-8 overflow-x-auto pb-12 px-5 sm:px-6 md:px-12 lg:px-24 scrollbar-hide snap-x snap-mandatory -mx-1"
+          className="flex gap-4 sm:gap-6 md:gap-8 overflow-x-auto pb-12 px-5 sm:px-6 md:px-12 lg:px-24 scrollbar-hide snap-x snap-mandatory -mx-1 scroll-smooth"
         >
           {recipes.map((recipe) => (
-            <div 
+            <div
               key={recipe.id}
-              className="relative shrink-0 w-[280px] sm:w-[320px] md:w-[380px] lg:w-[480px] h-[420px] sm:h-[480px] md:h-[520px] lg:h-[600px] rounded-3xl sm:rounded-[32px] md:rounded-[40px] overflow-hidden snap-center group cursor-pointer shadow-2xl flex flex-col transition-all duration-500 hover:scale-[1.02] active:scale-[0.98]"
+              className="relative shrink-0 w-[260px] sm:w-[300px] md:w-[360px] lg:w-[480px] 
+                         h-[380px] sm:h-[460px] md:h-[520px] lg:h-[600px] 
+                         rounded-3xl sm:rounded-[32px] md:rounded-[40px] overflow-hidden 
+                         snap-center group cursor-pointer shadow-2xl flex flex-col 
+                         transition-all duration-500 hover:scale-[1.02] active:scale-[0.97]"
             >
-              {/* Top Half: Product Image Area */}
-              <div className="relative w-full h-[60%] bg-gradient-to-b from-gray-700 to-gray-900 flex items-center justify-center p-8">
-                 <Image 
-                  src={recipe.image} 
-                  alt={recipe.title} 
-                  fill 
-                  className="object-contain p-6 group-hover:scale-110 transition-transform duration-700"
+              {/* Image Area */}
+              <div className="relative w-full h-[58%] bg-gradient-to-b from-gray-700 to-gray-900 flex items-center justify-center p-4 sm:p-6 md:p-8">
+                <Image
+                  src={recipe.image}
+                  alt={recipe.title}
+                  fill
+                  className="object-contain p-4 sm:p-6 group-hover:scale-110 transition-transform duration-700"
                 />
               </div>
 
-              {/* Bottom Half: Solid Color Text Area */}
-              <div 
-                className="relative w-full h-[40%] p-6 sm:p-8 flex flex-col justify-center gap-2 sm:gap-3"
+              {/* Content Area */}
+              <div
+                className="relative w-full h-[42%] p-5 sm:p-7 md:p-8 flex flex-col justify-center gap-2 sm:gap-3"
                 style={{ backgroundColor: recipe.color }}
               >
-                {/* Overlapping Arrow Indicator */}
-                <div className="absolute -top-6 right-6 w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={recipe.color} strokeWidth="3" className="translate-x-[1px] -translate-y-[1px]">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17" />
+                {/* Floating Arrow */}
+                <div className="absolute -top-5 right-5 w-11 h-11 sm:w-12 sm:h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke={recipe.color}
+                    strokeWidth="3.5"
+                    className="translate-x-[1px]"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M7 17L17 7M17 7H7M17 7V17"
+                    />
                   </svg>
                 </div>
 
-                <h3 className="font-['Funnel_Display'] font-bold text-[24px] sm:text-[32px] lg:text-[36px] text-white leading-tight">
+                <h3 className="font-['Funnel_Display'] font-bold text-[22px] sm:text-[26px] md:text-[32px] lg:text-[36px] text-white leading-tight pr-10">
                   {recipe.title}
                 </h3>
-                <p className="font-['Outfit'] font-normal text-[14px] sm:text-[16px] text-white/90 leading-relaxed line-clamp-3">
+
+                <p className="font-['Outfit'] font-normal text-[13px] sm:text-[15px] md:text-[16px] text-white/90 leading-relaxed line-clamp-3">
                   {recipe.description}
                 </p>
               </div>
@@ -111,26 +133,17 @@ export default function RecipesSection() {
           ))}
         </div>
 
-        {/* Progress Bar Container */}
-        <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-24 mt-12">
+        {/* Scroll Progress Bar */}
+        <div className="max-w-[1440px] mx-auto px-5 sm:px-6 md:px-12 lg:px-24 mt-6 sm:mt-8">
           <div className="relative w-full h-2 bg-gray-100 rounded-full overflow-hidden">
-            <div 
+            <div
               className="absolute top-0 left-0 h-full bg-[#23B349] rounded-full transition-all duration-300 ease-out"
-              style={{ width: `${Math.max(10, scrollProgress)}%` }}
+              style={{ width: `${Math.max(8, scrollProgress)}%` }}
             />
           </div>
         </div>
       </div>
 
-      <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </section>
   );
 }
