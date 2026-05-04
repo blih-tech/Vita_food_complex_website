@@ -8,7 +8,7 @@ export default function CommunityHero() {
       {/* Background Image — Figma node 2057:1518 */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/assets/community/community-hero-main.png"
+          src="/assets/community/charity-7.png"
           alt="Community Hero"
           fill
           className="object-cover opacity-20"

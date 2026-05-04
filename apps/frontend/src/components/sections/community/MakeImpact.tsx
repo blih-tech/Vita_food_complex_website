@@ -29,11 +29,11 @@ export default function MakeImpact() {
         {/* Image Gallery Row — Figma nodes 408:5963 to 408:5967 */}
         <div className="flex flex-nowrap overflow-x-auto lg:overflow-hidden gap-2 sm:gap-2 pb-8 lg:pb-0 mb-16 no-scrollbar snap-x snap-mandatory lg:justify-center">
           {[
-            "/assets/community/impact-gallery-1.png",
-            "/assets/community/impact-gallery-2.png",
-            "/assets/community/impact-gallery-3.png",
-            "/assets/community/impact-gallery-4.png",
-            "/assets/community/impact-gallery-5.png",
+            "/assets/community/charity-1.png",
+            "/assets/community/charity-2.png",
+            "/assets/community/charity-3.png",
+            "/assets/community/charity-4.png",
+            "/assets/community/charity-5.png",
           ].map((src, index) => (
             <div
               key={src}

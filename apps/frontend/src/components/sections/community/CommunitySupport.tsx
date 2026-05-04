@@ -28,7 +28,7 @@ export default function CommunitySupport() {
           {/* Left Large Image — Figma node 408:5824 */}
           <div className="w-full lg:w-[40%] rounded-[32px] overflow-hidden relative aspect-[3/4] lg:aspect-auto">
             <Image
-              src="/assets/community/community-impact-main.png"
+              src="/assets/community/charity-6.png"
               alt="Agricultural Support"
               fill
               className="object-cover"
