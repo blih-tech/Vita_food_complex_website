@@ -11,19 +11,18 @@ export default function HeroSection() {
     <section id="hero" className="relative w-full overflow-hidden bg-white">
       {/* ── BACKGROUND ARTISTIC ELEMENTS (Top White Area) ── */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Top Left Blurred Cookie - Premium "Expensive" Look */}
-        <div className="absolute top-[8%] left-[-5%] w-[300px] h-[300px] opacity-[0.12] blur-[40px] rotate-[-15deg]">
+        {/* Top Left Blurred Cookie - Matching the "expensive" look in target design */}
+        <div className="absolute top-[5%] left-[-8%] w-[350px] h-[350px] opacity-[0.15] blur-[50px] rotate-[-15deg] transition-all duration-1000">
            <Image src="/assets/hero/cookie.png" alt="" fill className="object-contain" />
         </div>
         
-        {/* Soft Radial Brand Glows */}
-        <div className="absolute top-[10%] right-[5%] w-[600px] h-[600px] bg-[#23B349]/5 blur-[130px] rounded-full" />
-        <div className="absolute top-[15%] left-[12%] w-[400px] h-[400px] bg-[#FFEC19]/5 blur-[110px] rounded-full" />
+        {/* Soft Radial Green Glows */}
+        <div className="absolute top-[10%] right-[10%] w-[500px] h-[500px] bg-[#23B349]/5 blur-[120px] rounded-full" />
+        <div className="absolute top-[20%] left-[15%] w-[300px] h-[300px] bg-[#FFEC19]/5 blur-[100px] rounded-full" />
       </div>
 
       {/* ── HERO TOP CONTENT ── */}
-      {/* Increased padding-top to clear the fixed navbar (approx 100-120px) */}
-      <div className="relative pt-[140px] pb-[40px] md:pt-[180px] md:pb-[50px] lg:pt-[220px] lg:pb-[60px] flex flex-col items-center z-10">
+      <div className="relative pt-[100px] pb-[40px] md:pt-[130px] md:pb-[50px] lg:pt-[150px] lg:pb-[60px] flex flex-col items-center z-10">
         
         <div className="relative flex flex-col items-center text-center px-4 max-w-[1200px] mx-auto">
           
@@ -55,7 +54,7 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* "Connecting!" Main Heading */}
+          {/* "Connecting!" Main Heading - Using predefined global class */}
           <h1 className="font-[family-name:var(--font-funnel-display)] font-black text-[72px] md:text-[130px] lg:text-[180px] text-[#23B349] leading-[0.85] tracking-[-0.05em] mb-10 md:mb-12">
             {t("connecting")}
           </h1>
@@ -87,13 +86,13 @@ export default function HeroSection() {
       {/* ── GREEN TRANSITION AREA (The Hill) ── */}
       <div className="relative w-full">
         
-        {/* The Arc/Hill Shape - Shallower, wider, and positioned lower */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[180%] md:w-[150%] lg:w-[130%] aspect-[6/1] bg-[#23B349] rounded-t-[100%] translate-y-[5%] z-0" />
+        {/* The Arc/Hill Shape - Shallower and lower than before */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[160%] md:w-[130%] lg:w-[115%] aspect-[5/1] bg-[#23B349] rounded-t-[100%] -translate-y-[15%] z-0" />
 
-        {/* Floating Assets Container */}
-        <div className="relative max-w-[1400px] mx-auto h-[350px] md:h-[500px] lg:h-[650px] z-10 pointer-events-none">
-          {/* Doctor Duck - Bridging white/green perfectly */}
-          <div className="absolute left-[2%] md:left-[6%] lg:left-[10%] bottom-[12%] md:bottom-[15%] lg:bottom-[20%] w-[180px] h-[180px] md:w-[320px] md:h-[320px] lg:w-[480px] lg:h-[480px] animate-float">
+        {/* Floating Assets Container - Bridges white and green */}
+        <div className="relative max-w-[1400px] mx-auto h-[350px] md:h-[500px] lg:h-[600px] z-10 pointer-events-none">
+          {/* Doctor Duck */}
+          <div className="absolute left-[2%] md:left-[6%] lg:left-[10%] bottom-[15%] md:bottom-[18%] lg:bottom-[22%] w-[180px] h-[180px] md:w-[320px] md:h-[320px] lg:w-[450px] lg:h-[450px] animate-float">
             <Image
               src="/assets/hero/doctor-duck.png"
               alt="Doctor Duck"
@@ -104,7 +103,7 @@ export default function HeroSection() {
           </div>
 
           {/* Biscuit Stack */}
-          <div className="absolute right-[2%] md:right-[5%] lg:right-[8%] bottom-[18%] md:bottom-[22%] lg:bottom-[28%] w-[150px] h-[150px] md:w-[260px] md:h-[260px] lg:w-[400px] lg:h-[400px] animate-float-delayed">
+          <div className="absolute right-[2%] md:right-[5%] lg:right-[8%] bottom-[20%] md:bottom-[25%] lg:bottom-[30%] w-[150px] h-[150px] md:w-[260px] md:h-[260px] lg:w-[380px] lg:h-[380px] animate-float-delayed">
             <Image
               src="/assets/hero/biscuit-stack.png"
               alt="Biscuit Stack"
@@ -116,12 +115,12 @@ export default function HeroSection() {
         </div>
 
         {/* ── GREEN SECTION CONTENT ── */}
-        <div className="relative bg-[#23B349] pt-12 pb-[100px] md:pb-[160px] z-10">
+        <div className="relative bg-[#23B349] pt-4 pb-[80px] md:pb-[140px] z-10">
           
           <div className="max-w-[1200px] mx-auto px-6">
             
             {/* Quote and Clients Avatars */}
-            <div className="mb-24 md:mb-36">
+            <div className="mb-24 md:mb-32">
               <h3 className="font-[family-name:var(--font-funnel-display)] font-bold text-[24px] md:text-[38px] lg:text-[52px] text-white leading-[1.15] mb-12 max-w-[1050px]">
                 {t("secondaryQuote")}
               </h3>
@@ -163,30 +162,29 @@ export default function HeroSection() {
               </div>
 
               {/* Video Container */}
-              <div className="relative z-10">
-                <div className="aspect-video rounded-[35px] md:rounded-[55px] lg:rounded-[70px] border-[8px] md:border-[15px] border-white overflow-hidden shadow-[0_30px_60px_-10px_rgba(0,0,0,0.25)] group cursor-pointer">
-                  <Image
-                    src="/assets/hero/video-family.png"
-                    alt="Family enjoying Vita"
-                    fill
-                    className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                    priority
-                  />
-                  
-                  {/* Overlay Play Indicator Area */}
-                  <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500 flex items-center justify-center">
-                    <div className="absolute top-6 left-6 md:top-12 md:left-12 w-10 h-10 md:w-20 md:h-20 opacity-90 transition-all hover:scale-110 active:scale-90">
-                      <Image
-                        src="/assets/hero/sound-mute-video.svg"
-                        alt="Mute"
-                        fill
-                      />
-                    </div>
+              <div className="relative z-10 aspect-video rounded-[35px] md:rounded-[55px] lg:rounded-[70px] border-[8px] md:border-[15px] border-white overflow-hidden shadow-[0_30px_60px_-10px_rgba(0,0,0,0.25)] group cursor-pointer">
+                <Image
+                  src="/assets/hero/video-family.png"
+                  alt="Family enjoying Vita"
+                  fill
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                  priority
+                />
+                
+                {/* Overlay Play Indicator Area */}
+                <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500 flex items-center justify-center">
+                   {/* Sound icon or play icon could go here as in target design */}
+                   <div className="absolute top-6 left-6 md:top-12 md:left-12 w-10 h-10 md:w-20 md:h-20 opacity-90 transition-all hover:scale-110 active:scale-90">
+                    <Image
+                      src="/assets/hero/sound-mute-video.svg"
+                      alt="Mute"
+                      fill
+                    />
                   </div>
                 </div>
 
-                {/* Quality Badge - Top Right Corner (Outside overflow-hidden) */}
-                <div className="absolute -top-[10%] -right-[5%] md:-top-[12%] md:-right-[4%] w-[100px] h-[100px] md:w-[180px] md:h-[180px] lg:w-[240px] lg:h-[240px] z-20 drop-shadow-2xl transition-transform hover:rotate-12 duration-700">
+                {/* Quality Badge - Top Right Corner */}
+                <div className="absolute -top-[10%] -right-[5%] md:-top-[15%] md:-right-[4%] w-[100px] h-[100px] md:w-[180px] md:h-[180px] lg:w-[240px] lg:h-[240px] z-20 drop-shadow-2xl transition-transform hover:rotate-12 duration-700">
                   <Image
                     src="/assets/hero/badge.svg"
                     alt="Quality Badge"

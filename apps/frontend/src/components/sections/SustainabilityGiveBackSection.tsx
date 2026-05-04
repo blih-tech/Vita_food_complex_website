@@ -1,141 +1,58 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 export default function SustainabilityGiveBackSection() {
   const t = useTranslations("Sustainability");
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
-      },
-      { threshold: 0.1 },
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current);
-    };
-  }, []);
-
-  /* Figma structure (node 274:5212):
-     "How We Give Back" heading + description
-     3 cards staggered (y offsets: 0, 60, 120), each 544px wide
-     Card: image area (575/575/575px) + text below
-  */
 
   const cards = [
     {
-      key: "farmers",
-      heading: t("giveBack.farmers.heading"),
-      desc: t("giveBack.farmers.desc"),
+      title: "Supporting Local Farmers",
+      desc: "We source wheat directly from local farmers, creating stable demand and helping strengthen Ethiopia's agricultural backbone",
+      image: "/assets/images/sustainability/giveback-1.jpg" // Placeholder image
     },
     {
-      key: "employment",
-      heading: t("giveBack.employment.heading"),
-      desc: t("giveBack.employment.desc"),
+      title: "Creating Employment",
+      desc: "Our facility provides jobs for over 150–200 individuals, supporting families and contributing to local economic growth",
+      image: "/assets/images/sustainability/giveback-2.jpg" // Placeholder image
     },
     {
-      key: "accessibility",
-      heading: t("giveBack.accessibility.heading"),
-      desc: t("giveBack.accessibility.desc"),
-    },
+      title: "Food Accessibility",
+      desc: "We aim to deliver high-quality, affordable food products that reach more communities across the country",
+      image: "/assets/images/sustainability/giveback-3.jpg" // Placeholder image
+    }
   ];
 
   return (
-    <section
-      ref={sectionRef}
-      className="py-[48px] sm:py-[64px] md:py-[80px]"
-      style={{ background: "#FFFFFF" }}
-    >
-      <div className="px-4 sm:px-6 md:px-8 lg:px-[128px]">
-        {/* Header — Figma node 274:5213 */}
-        <div className="mb-8 sm:mb-12 max-w-[1062px]">
-          {/* "How We Give Back" — Outfit Bold 64px, lh 61.44px, ls -1.28px, #23B349 */}
-          <h2
-            className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[64px] mb-4 sm:mb-6"
-            style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 700,
-              lineHeight: "0.96",
-              letterSpacing: "-1.28px",
-              color: "#23B349",
-              maxWidth: 528,
-            }}
-          >
-            {t("giveBack.title")}
+    <section className="bg-white py-16 md:py-24 px-4">
+      <div className="mx-auto max-w-[1400px]">
+        {/* ── HEADING ── */}
+        <div className="text-center mb-16 md:mb-24">
+          <span className="font-[family-name:var(--font-funnel-display)] font-medium text-[14px] md:text-[18px] text-[#404040]/50 block mb-4">
+            We believe that business growth should benefit everyone. Through our operations and values, we actively support communities, empower local partners, and promote sustainable practices that create long-term impact.
+          </span>
+          <h2 className="font-[family-name:var(--font-outfit)] font-bold text-[32px] md:text-[48px] lg:text-[64px] text-[#23B349]">
+            How We Give Back
           </h2>
-
-          {/* Description — Funnel Display Medium 20px, lh 25px, ls -0.08px, #333733 */}
-          <p
-            className="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px]"
-            style={{
-              fontFamily: "'Funnel Display', sans-serif",
-              fontWeight: 500,
-              lineHeight: "1.4",
-              letterSpacing: "-0.08px",
-              color: "#333733",
-            }}
-          >
-            {t("giveBack.description")}
-          </p>
         </div>
 
-        {/* 3 Cards — responsive grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        {/* ── CARDS GRID ── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {cards.map((card, i) => (
-            <div
-              key={card.key}
-              className={`${i > 0 ? "md:mt-[20px] lg:mt-[40px]" : ""}`}
-              style={{
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? "translateY(0)" : "translateY(30px)",
-                transition: `all 0.8s ease-out ${i * 0.15}s`,
-              }}
-            >
-              {/* Give Back images from Figma */}
-              <div
-                className="rounded-[12px] sm:rounded-[16px] lg:rounded-[20px] overflow-hidden mb-3 sm:mb-4"
-                style={{
-                  height: "180px",
-                }}
-              >
-                <img
-                  src={`/assets/images/sustainability/giveback-${i + 1}.jpg`}
-                  alt={card.heading}
-                  className="w-full h-full object-cover"
+            <div key={i} className="flex flex-col items-center text-center">
+              <div className="relative w-full aspect-[4/3] rounded-[32px] overflow-hidden mb-6 shadow-lg">
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  className="object-cover"
                 />
               </div>
-
-              {/* Heading — Funnel Display Bold 24px, lh 24px, ls -0.096px, #000000 */}
-              <h3
-                className="mb-2 sm:mb-3 text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px]"
-                style={{
-                  fontFamily: "'Funnel Display', sans-serif",
-                  fontWeight: 700,
-                  lineHeight: "1.2",
-                  letterSpacing:
-                    card.key === "accessibility" ? "0px" : "-0.08px",
-                  color: "#000000",
-                }}
-              >
-                {card.heading}
+              <h3 className="font-[family-name:var(--font-outfit)] font-bold text-[28px] md:text-[36px] text-[#404040] mb-4">
+                {card.title}
               </h3>
-
-              {/* Description — Outfit Regular 20px, lh 25.2px, ls -0.08px */}
-              <p
-                className="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]"
-                style={{
-                  fontFamily: "'Outfit', sans-serif",
-                  fontWeight: 400,
-                  lineHeight: "1.4",
-                  letterSpacing: "-0.06px",
-                  color: card.key === "farmers" ? "#404040" : "#333733",
-                }}
-              >
+              <p className="font-[family-name:var(--font-funnel-display)] text-[16px] md:text-[18px] text-[#404040]/70 leading-relaxed">
                 {card.desc}
               </p>
             </div>
