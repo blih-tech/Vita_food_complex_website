@@ -184,51 +184,6 @@ export default function SisterCompaniesSection() {
           )}
         </div>
       </div>
-          {SCROLL_SLOTS.map((slot, index) =>
-            slot.kind === "longTeaCard" ? (
-              <article
-                key="long-tea-card"
-                className="flex w-[min(400px,85vw)] shrink-0 snap-start flex-col gap-3 rounded-[20px] border border-[#E8E8E8] bg-white p-5 shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
-              >
-                <div className="relative mx-auto h-[74px] w-full max-w-[320px]">
-                  <Image
-                    src="/assets/sister/long-tea-logo.png"
-                    alt={tCompanies("longTea")}
-                    fill
-                    className="object-contain"
-                    sizes="320px"
-                  />
-                </div>
-                <p className="text-center font-[family-name:var(--font-outfit)] text-[11px] font-normal leading-snug tracking-[-0.004em] text-[#404040] md:text-[12px]">
-                  {t("longTeaCard.blurb")}
-                </p>
-                <Link
-                  href="/contact"
-                  className="mx-auto mt-1 inline-flex h-8 items-center justify-center rounded-full bg-[#23B349] px-5 font-[family-name:var(--font-funnel-display)] text-[12px] font-medium tracking-[-0.004em] text-white transition-colors hover:bg-[#1fa041] md:text-[13px]"
-                >
-                  {t("visitSite")}
-                </Link>
-              </article>
-            ) : (
-              <div key={`${slot.src}-${index}`} className={slot.boxClass}>
-                <Image
-                  src={slot.src}
-                  alt={tBrands(slot.altKey)}
-                  fill
-                  className="object-contain object-center"
-                  sizes={
-                    slot.altKey === "belayabGroup"
-                      ? "600px"
-                      : slot.altKey === "limestone"
-                        ? "205px"
-                        : "240px"
-                  }
-                />
-              </div>
-            ),
-          )}
-        </div>
-      </div>
 
       <div className="mx-auto mt-8 flex w-full max-w-[681px] flex-col items-center gap-8 text-center">
         <p className="max-w-[365px] font-[family-name:var(--font-funnel-display)] text-[13.3px] font-medium leading-relaxed tracking-[-0.004em] text-[#404040]">
