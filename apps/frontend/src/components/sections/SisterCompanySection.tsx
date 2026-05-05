@@ -116,7 +116,7 @@ export default function SisterCompanySection() {
               {t("title")}
             </h2>
 
-            <div className="flex w-full flex-col items-center gap-[72px]">
+            <div className="flex w-full flex-col items-center gap-8 sm:gap-12 lg:gap-[72px]">
               {SISTER_COMPANY_ROWS.map((row, rowIndex) => (
                 <div
                   key={`row-${rowIndex}`}
@@ -164,7 +164,7 @@ function SisterCompanyCard({
       href={company.href}
       className="mx-auto flex w-full max-w-[490px] shrink-0 flex-col rounded-[24.5px] bg-white px-6 py-8 sm:px-[47.65px] sm:pt-[47.65px] sm:pb-0 outline-none transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-[#23B349] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
     >
-      <div className="flex flex-col gap-6 sm:gap-[35.737918854px]">
+      <div className="flex flex-col gap-5 sm:gap-8 lg:gap-[35.737918854px]">
         {/* Figma layout_X0W1NV — logo well */}
         <div className="relative mx-auto box-border h-[180px] sm:h-[238.25px] w-full max-w-[394.7px] overflow-hidden rounded-[12.25px] border border-[#E8E8E8] bg-white px-6 py-6 sm:py-[35.737895966px] md:px-[119.126304626px]">
           <Image
@@ -176,7 +176,7 @@ function SisterCompanyCard({
           />
         </div>
 
-        <div className="flex min-w-0 flex-col gap-4 sm:gap-[35.737918854px] sm:pb-[47.65px]">
+        <div className="flex min-w-0 flex-col gap-3 sm:gap-6 lg:gap-[35.737918854px] pb-4 sm:pb-6 lg:pb-[47.65px]">
           <span className="inline-flex w-fit items-center justify-center rounded-[74.454px] bg-[#F3F3F3] px-[12px] py-[6px] font-[family-name:var(--font-inter)] text-[14px] sm:text-[20.8471px] font-semibold leading-tight sm:leading-[29.78px] text-[#23B349]">
             {category}
           </span>

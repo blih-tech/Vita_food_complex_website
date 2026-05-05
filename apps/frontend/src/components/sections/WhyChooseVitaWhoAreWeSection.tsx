@@ -83,7 +83,7 @@ export default function WhyChooseVitaWhoAreWeSection() {
           </div>
         </div>
 
-        <div className="flex w-full max-w-[404px] flex-col gap-6 lg:hidden">
+        <div className="grid w-full grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:hidden">
           {FEATURE_KEYS.map((key, index) => (
             <WhoWeAreCard
               key={key}
@@ -152,8 +152,8 @@ function WhoWeAreCard({
   }
 
   return (
-    <article className="relative mx-auto flex min-h-[520px] w-full max-w-[404px] flex-col overflow-hidden rounded-[24px] bg-[#F3F3F3] pb-8 backdrop-blur-[16.57px]">
-      <div className="relative mx-4 mt-[18px] h-[240px] w-[calc(100%-32px)] shrink-0 overflow-hidden rounded-2xl sm:h-[280px] md:h-[320px]">
+    <article className="relative mx-auto flex w-full flex-col overflow-hidden rounded-[24px] bg-[#F3F3F3] pb-8 backdrop-blur-[16.57px]">
+      <div className="relative mx-4 mt-[18px] h-[220px] w-[calc(100%-32px)] shrink-0 overflow-hidden rounded-2xl sm:h-[240px] md:h-[300px]">
         <Image
           src={imageSrc}
           alt={title}
