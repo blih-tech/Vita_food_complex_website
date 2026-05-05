@@ -21,7 +21,7 @@ export default function ResearchProblemFramingSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full lg:w-[55%] lg:max-w-[745px]">
           
           {/* Card 1: Who */}
-          <div className="bg-[#23B349] border border-[#E4DDCB] rounded-[24px] p-8 md:p-10 flex flex-col h-[260px] md:h-[290px]">
+          <div className="bg-[#23B349] border border-[#E4DDCB] rounded-[24px] p-8 md:p-10 flex flex-col min-h-[220px] sm:min-h-[260px] md:min-h-[290px]">
             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mb-auto">
               <Users className="w-6 h-6 text-[#23B349]" />
             </div>
@@ -34,7 +34,7 @@ export default function ResearchProblemFramingSection() {
           </div>
 
           {/* Card 2: What */}
-          <div className="bg-white border border-[#E4DDCB] rounded-[24px] p-8 md:p-10 flex flex-col h-[260px] md:h-[290px]">
+          <div className="bg-white border border-[#E4DDCB] rounded-[24px] p-8 md:p-10 flex flex-col min-h-[220px] sm:min-h-[260px] md:min-h-[290px]">
             <div className="w-12 h-12 bg-[#23B349] rounded-full flex items-center justify-center mb-auto">
               <HelpCircle className="w-6 h-6 text-white" />
             </div>
@@ -47,7 +47,7 @@ export default function ResearchProblemFramingSection() {
           </div>
 
           {/* Card 3: When */}
-          <div className="bg-white border border-[#E4DDCB] rounded-[24px] p-8 md:p-10 flex flex-col h-[260px] md:h-[290px]">
+          <div className="bg-white border border-[#E4DDCB] rounded-[24px] p-8 md:p-10 flex flex-col min-h-[220px] sm:min-h-[260px] md:min-h-[290px]">
             <div className="w-12 h-12 bg-[#23B349] rounded-full flex items-center justify-center mb-auto">
               <Clock className="w-6 h-6 text-[#FFEC19]" />
             </div>
@@ -60,7 +60,7 @@ export default function ResearchProblemFramingSection() {
           </div>
 
           {/* Card 4: Why */}
-          <div className="bg-white border border-[#E4DDCB] rounded-[24px] p-8 md:p-10 flex flex-col h-[260px] md:h-[290px]">
+          <div className="bg-white border border-[#E4DDCB] rounded-[24px] p-8 md:p-10 flex flex-col min-h-[220px] sm:min-h-[260px] md:min-h-[290px]">
             <div className="w-12 h-12 bg-[#23B349] rounded-full flex items-center justify-center mb-auto">
               <Target className="w-6 h-6 text-white" />
             </div>

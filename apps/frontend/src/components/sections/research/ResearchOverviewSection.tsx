@@ -84,13 +84,13 @@ export default function ResearchOverviewSection() {
           </div>
 
           {/* Bar Chart Area */}
-          <div className="relative w-full h-[300px] md:h-[400px] mt-4 flex flex-row items-end justify-between pt-10 px-4 md:px-10 pb-[40px] border-b border-dashed border-[#8A8C8A]">
+          <div className="relative w-full h-[300px] md:h-[400px] mt-4 ml-0 sm:ml-16 flex flex-row items-end justify-between pt-10 px-2 sm:px-4 md:px-10 pb-[40px] border-b border-dashed border-[#8A8C8A]">
             
             {/* Grid lines (Y-axis markers) */}
             <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-between pb-[40px] z-0 pointer-events-none">
               {[100, 75, 50, 25, 0].map((tick) => (
                 <div key={tick} className="flex flex-row items-center w-full gap-4 relative">
-                  <span className="font-['Funnel_Display'] font-medium text-[16px] md:text-[24px] text-black w-12 text-right absolute -left-16">
+                  <span className="hidden sm:block font-['Funnel_Display'] font-medium text-[16px] md:text-[24px] text-black w-12 text-right absolute -left-16">
                     {tick}%
                   </span>
                   <div className="w-full border-t border-dashed border-black/20"></div>

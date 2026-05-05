@@ -40,8 +40,7 @@ export default function ResearchHeroSection() {
         />
         {/* Placeholder for Product Images from Figma */}
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-full max-w-[1000px] h-[300px] flex justify-center items-end opacity-80 pointer-events-none">
-            {/* The real implementation would place precise product images here. Using a representative block for now as exact product image paths are not verified. */}
-            <div className="w-[800px] h-[250px] bg-[url('/assets/images/products-group-placeholder.png')] bg-contain bg-no-repeat bg-bottom opacity-50" />
+            <div className="w-full max-w-[800px] h-[250px] bg-[url('/assets/images/products-group-placeholder.png')] bg-contain bg-no-repeat bg-bottom opacity-50" />
         </div>
       </div>
     </section>
