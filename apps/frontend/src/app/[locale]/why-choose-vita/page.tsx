@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import WhyChooseVitaHeroSection from "@frontend/components/sections/WhyChooseVitaHeroSection";
-import HeroVideoSection from "@frontend/components/sections/HeroVideoSection";
+import VideoShowcaseSection from "@frontend/components/sections/VideoShowcaseSection";
 import WhoWeAreSection from "@frontend/components/sections/WhyChooseVitaWhoAreWeSection";
 import SisterCompanySection from "@frontend/components/sections/SisterCompanySection";
 import QualityAssuranceSection from "@frontend/components/sections/QualityAssuranceSection";
@@ -16,7 +16,7 @@ export default function WhyChooseVitaPage() {
     <main className="flex flex-col scroll-smooth">
       {/* Page sections */}
       <WhyChooseVitaHeroSection />
-      <HeroVideoSection />
+      <VideoShowcaseSection />
       <WhoWeAreSection />
       <SisterCompanySection />
       <QualityAssuranceSection />
