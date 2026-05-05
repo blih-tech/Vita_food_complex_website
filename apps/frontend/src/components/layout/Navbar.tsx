@@ -195,19 +195,27 @@ export default function Navbar() {
                   {/* Simple mobile sub-menu implementation */}
                   {link.hasDropdown && activeDropdown === link.key && (
                     <div className="px-6 py-2 flex flex-col gap-2 pl-10 bg-black/5 rounded-[12px] mb-2 mx-2">
-                      <Link
-                        href={
-                          link.key === "resources"
-                            ? "/research"
-                            : link.key === "whats-new"
-                              ? "/news"
-                              : link.href
-                        }
-                        onClick={() => setMobileOpen(false)}
-                        className="text-white/90 py-2 text-[16px]"
-                      >
-                        Overview
-                      </Link>
+                      {link.key === "people-planet" ? (
+                        <>
+                          <Link href="/people-planet" onClick={() => setMobileOpen(false)} className="text-white/90 py-2 text-[16px]">Community</Link>
+                          <Link href="/research" onClick={() => setMobileOpen(false)} className="text-white/90 py-2 text-[16px]">Innovation</Link>
+                          <Link href="/sustainability" onClick={() => setMobileOpen(false)} className="text-white/90 py-2 text-[16px]">We Care for All®</Link>
+                        </>
+                      ) : (
+                        <Link
+                          href={
+                            link.key === "resources"
+                              ? "/research"
+                              : link.key === "whats-new"
+                                ? "/news"
+                                : link.href
+                          }
+                          onClick={() => setMobileOpen(false)}
+                          className="text-white/90 py-2 text-[16px]"
+                        >
+                          Overview
+                        </Link>
+                      )}
                     </div>
                   )}
                 </div>
@@ -482,7 +490,7 @@ export default function Navbar() {
                     </p>
                   </Link>
                   <Link
-                    href="/people-planet"
+                    href="/research"
                     onClick={() => setActiveDropdown(null)}
                     className="flex flex-col group"
                   >
@@ -494,7 +502,7 @@ export default function Navbar() {
                     </p>
                   </Link>
                   <Link
-                    href="/people-planet"
+                    href="/sustainability"
                     onClick={() => setActiveDropdown(null)}
                     className="flex flex-col group"
                   >
