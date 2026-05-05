@@ -111,16 +111,12 @@ export default function ContactDistributionSection() {
   return (
     <section
       id="contact-form"
-      className="w-full bg-white scroll-mt-20"
-      style={{ padding: "80px 0" }}
+      className="w-full bg-white scroll-mt-20 py-12 lg:py-20"
     >
-      <div
-        className="mx-auto"
-        style={{ maxWidth: 1114, padding: "0 24px" }}
-      >
+      <div className="mx-auto max-w-[1114px] px-4 sm:px-6">
         {/* Card container */}
         <div
-          className="relative overflow-hidden rounded-[48px]"
+          className="relative overflow-hidden rounded-[32px] sm:rounded-[48px]"
           style={{
             background: "#FDFDFD",
             border: "1px solid #23B349",
@@ -130,14 +126,10 @@ export default function ContactDistributionSection() {
           <div className="flex flex-col lg:flex-row">
             {/* Left green panel */}
             <div
-              className="relative flex flex-col items-start justify-center gap-6 overflow-hidden"
+              className="relative flex flex-col items-start justify-center gap-6 overflow-hidden w-full lg:min-w-[457px] p-8 sm:p-10 lg:p-[64px_40px] min-h-[260px] sm:min-h-[320px] lg:min-h-[500px]"
               style={{
                 background:
                   "linear-gradient(170.79deg, #23B349 46.23%, rgba(35, 179, 73, 0.37) 101.23%)",
-                borderRadius: 48,
-                padding: "64px 40px",
-                minWidth: 457,
-                minHeight: 500,
               }}
             >
               {/* Dot pattern overlay */}
@@ -157,7 +149,7 @@ export default function ContactDistributionSection() {
                   fontFamily:
                     "var(--font-funnel-display), 'Funnel Display', sans-serif",
                   fontWeight: 400,
-                  fontSize: "clamp(32px, 3.5vw, 48px)",
+                  fontSize: "clamp(28px, 3.5vw, 48px)",
                   lineHeight: "1",
                   letterSpacing: "-0.01em",
                   color: "#FFFFFF",
@@ -174,7 +166,7 @@ export default function ContactDistributionSection() {
                   fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
                   fontWeight: 400,
                   fontSize: "clamp(16px, 1.5vw, 24px)",
-                  lineHeight: "1",
+                  lineHeight: "1.5",
                   letterSpacing: "-0.004em",
                   color: "#E8E8E8",
                   maxWidth: 400,
@@ -185,10 +177,7 @@ export default function ContactDistributionSection() {
             </div>
 
             {/* Right contact list */}
-            <div
-              className="flex flex-col justify-center gap-8"
-              style={{ padding: "48px 40px", flex: 1 }}
-            >
+            <div className="flex flex-col justify-center gap-6 lg:gap-8 p-6 sm:p-8 lg:p-[48px_40px] flex-1">
               {offices.map((office, idx) => (
                 <OfficeContactCard key={idx} {...office} />
               ))}

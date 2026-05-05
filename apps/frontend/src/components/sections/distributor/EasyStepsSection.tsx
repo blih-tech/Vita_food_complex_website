@@ -12,13 +12,11 @@ interface StepProps {
 
 function StepCard({ icon, title, description }: StepProps) {
   return (
-    <div className="flex flex-col items-center gap-[30px]" style={{ maxWidth: 484 }}>
+    <div className="flex flex-col items-center gap-6 lg:gap-[30px] w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[484px]">
       {/* Neumorphic circle */}
       <div
-        className="flex items-center justify-center rounded-full"
+        className="flex items-center justify-center rounded-full w-[120px] h-[120px] sm:w-[152px] sm:h-[152px]"
         style={{
-          width: 152,
-          height: 152,
           background: "#FFFFFF",
           border: "1.52px solid #FFFFFF",
           boxShadow:
@@ -35,7 +33,7 @@ function StepCard({ icon, title, description }: StepProps) {
           style={{
             fontFamily: "var(--font-funnel-display), 'Funnel Display', sans-serif",
             fontWeight: 500,
-            fontSize: 24,
+            fontSize: "clamp(20px, 2vw, 24px)",
             lineHeight: "1",
             letterSpacing: "-0.004em",
             color: "#23B349",
@@ -48,7 +46,7 @@ function StepCard({ icon, title, description }: StepProps) {
           style={{
             fontFamily: "var(--font-funnel-display), 'Funnel Display', sans-serif",
             fontWeight: 500,
-            fontSize: 20,
+            fontSize: "clamp(16px, 1.5vw, 20px)",
             lineHeight: "25px",
             letterSpacing: "-0.004em",
             color: "#423D3D",
@@ -83,11 +81,8 @@ export default function EasyStepsSection() {
   ];
 
   return (
-    <section className="w-full bg-white" style={{ padding: "80px 0" }}>
-      <div
-        className="mx-auto flex flex-col items-center gap-16"
-        style={{ maxWidth: 1920, padding: "0 128px" }}
-      >
+    <section className="w-full bg-white py-12 lg:py-20">
+      <div className="mx-auto flex flex-col items-center gap-12 lg:gap-16 max-w-[1920px] px-4 sm:px-6 lg:px-[128px]">
         {/* Title block */}
         <div className="flex flex-col items-center gap-2">
           <h2
@@ -108,8 +103,8 @@ export default function EasyStepsSection() {
             style={{
               fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
               fontWeight: 400,
-              fontSize: "clamp(20px, 2.5vw, 32px)",
-              lineHeight: "55px",
+              fontSize: "clamp(18px, 2vw, 32px)",
+              lineHeight: "1.5",
               color: "#333733",
             }}
           >
@@ -118,11 +113,11 @@ export default function EasyStepsSection() {
         </div>
 
         {/* Steps row with dashed arcs */}
-        <div className="relative flex flex-col md:flex-row items-start md:items-start justify-between gap-10 w-full" style={{ maxWidth: 1664 }}>
-          {/* Dashed arc connectors - visible on md+ */}
+        <div className="relative flex flex-col md:flex-row items-center md:items-start justify-between gap-12 md:gap-6 lg:gap-10 w-full max-w-[1664px]">
+          {/* Dashed arc connectors - visible only on lg+ where there's enough space */}
           {/* Arc 1: from step 1 to step 2 */}
           <svg
-            className="hidden md:block absolute"
+            className="hidden lg:block absolute"
             style={{ left: "22%", top: 0, width: 377, height: 42 }}
             viewBox="0 0 377 42"
             fill="none"
@@ -138,7 +133,7 @@ export default function EasyStepsSection() {
 
           {/* Arc 2: from step 2 to step 3 (inverted) */}
           <svg
-            className="hidden md:block absolute"
+            className="hidden lg:block absolute"
             style={{ left: "56%", top: 72, width: 377, height: 42 }}
             viewBox="0 0 377 42"
             fill="none"

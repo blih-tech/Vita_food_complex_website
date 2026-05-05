@@ -8,7 +8,7 @@ export default function DistributorHeroSection() {
   const t = useTranslations("Distributor");
 
   return (
-    <section className="relative w-full overflow-hidden" style={{ minHeight: 800 }}>
+    <section className="relative w-full overflow-hidden min-h-[500px] sm:min-h-[650px] lg:min-h-[800px]">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -31,21 +31,17 @@ export default function DistributorHeroSection() {
       />
 
       {/* Hero Content */}
-      <div
-        className="relative z-20 mx-auto flex flex-col items-start justify-center px-4 sm:px-6 lg:px-[128px]"
-        style={{ paddingTop: 200, paddingBottom: 120, maxWidth: 1920 }}
-      >
+      <div className="relative z-20 mx-auto flex flex-col items-start justify-center px-4 sm:px-6 lg:px-[128px] max-w-[1920px] pt-[100px] sm:pt-[150px] lg:pt-[200px] pb-[60px] sm:pb-[90px] lg:pb-[120px]">
         {/* Glassmorphic content card */}
         <div
-          className="flex flex-col items-start gap-6 rounded-[48px] p-7 sm:p-12 lg:p-[82px_28px]"
+          className="flex flex-col items-start gap-6 rounded-[24px] sm:rounded-[48px] p-6 sm:p-10 lg:p-[82px_28px] w-full max-w-[705px]"
           style={{
             background: "rgba(255, 255, 255, 0.1)",
             backdropFilter: "blur(4px)",
-            maxWidth: 705,
           }}
         >
           {/* Inner text group */}
-          <div className="flex flex-col items-start gap-4" style={{ maxWidth: 649 }}>
+          <div className="flex flex-col items-start gap-4 w-full max-w-[649px]">
             {/* Sub-label */}
             <span
               style={{
@@ -63,17 +59,15 @@ export default function DistributorHeroSection() {
 
             {/* Headline */}
             <h1
+              className="text-[40px] sm:text-[56px] lg:text-[80px]"
               style={{
                 fontFamily: "var(--font-funnel-display), 'Funnel Display', sans-serif",
                 fontWeight: 500,
-                fontSize: "clamp(40px, 6vw, 24px)",
                 lineHeight: "1",
                 letterSpacing: "-0.004em",
                 color: "#FFFFFF",
                 textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                maxWidth: 675,
               }}
-              className="text-[40px] sm:text-[56px] lg:text-[80px]"
             >
               {t("hero.headline")}
             </h1>
@@ -88,7 +82,6 @@ export default function DistributorHeroSection() {
                 letterSpacing: "-0.004em",
                 color: "#FFFFFF",
                 textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-                maxWidth: 580,
               }}
             >
               {t("hero.subtitle")}
@@ -98,19 +91,13 @@ export default function DistributorHeroSection() {
           {/* CTA Button */}
           <Link
             href="#contact-form"
-            className="inline-flex items-center justify-center rounded-full transition-transform hover:scale-105 active:scale-95"
-            style={{
-              background: "#23B349",
-              gap: 16,
-              padding: "16px 32px",
-              height: 56,
-            }}
+            className="inline-flex items-center justify-center rounded-full bg-[#23B349] gap-3 sm:gap-4 px-6 sm:px-8 py-3 sm:py-4 transition-transform hover:scale-105 active:scale-95"
           >
             <span
+              className="text-[18px] sm:text-[24px]"
               style={{
                 fontFamily: "var(--font-funnel-display), 'Funnel Display', sans-serif",
                 fontWeight: 500,
-                fontSize: 24,
                 lineHeight: "30px",
                 letterSpacing: "-0.004em",
                 color: "#FFFFFF",
@@ -119,11 +106,10 @@ export default function DistributorHeroSection() {
               {t("hero.cta")}
             </span>
             <span
+              className="text-[16px] sm:text-[20px]"
               style={{
                 fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
                 fontWeight: 400,
-                fontSize: 20,
-                lineHeight: "25px",
                 color: "#FFFFFF",
               }}
             >

@@ -18,11 +18,8 @@ interface BenefitCardProps {
 function BenefitCard({ icon, label, isHighlighted = false }: BenefitCardProps) {
   return (
     <div
-      className="relative flex flex-col items-center justify-between rounded-[24px] transition-transform hover:scale-105"
+      className="relative flex flex-col items-center justify-between rounded-[24px] transition-transform hover:scale-105 w-full sm:w-[215px] sm:h-[240px] p-5"
       style={{
-        width: 215,
-        height: 240,
-        padding: "20px",
         background: isHighlighted ? "#23B349" : "#FFFFFF",
         border: isHighlighted ? "none" : "1.26px solid #E8E8E8",
       }}
@@ -43,7 +40,7 @@ function BenefitCard({ icon, label, isHighlighted = false }: BenefitCardProps) {
 
       {/* Label */}
       <p
-        className="text-center"
+        className="text-center mt-4 sm:mt-0"
         style={{
           fontFamily: "var(--font-funnel-display), 'Funnel Display', sans-serif",
           fontWeight: 500,
@@ -51,7 +48,6 @@ function BenefitCard({ icon, label, isHighlighted = false }: BenefitCardProps) {
           lineHeight: "25px",
           letterSpacing: "-0.004em",
           color: isHighlighted ? "#FFFFFF" : "#404040",
-          maxWidth: 173,
         }}
       >
         {label}
@@ -87,16 +83,10 @@ export default function WhyWorkWithVitaSection() {
   ];
 
   return (
-    <section
-      className="w-full bg-white"
-      style={{ padding: "80px 0" }}
-    >
-      <div
-        className="mx-auto flex flex-col lg:flex-row items-start lg:items-center gap-14"
-        style={{ maxWidth: 1920, padding: "0 128px" }}
-      >
+    <section className="w-full bg-white py-12 lg:py-20">
+      <div className="mx-auto flex flex-col lg:flex-row items-start lg:items-center gap-10 lg:gap-14 max-w-[1920px] px-4 sm:px-6 lg:px-[128px]">
         {/* Left text group */}
-        <div className="flex flex-col items-start gap-8" style={{ maxWidth: 700 }}>
+        <div className="flex flex-col items-start gap-8 w-full lg:max-w-[700px]">
           {/* Headline */}
           <h2
             style={{
@@ -120,7 +110,6 @@ export default function WhyWorkWithVitaSection() {
               lineHeight: "30px",
               letterSpacing: "-0.004em",
               color: "#000000",
-              maxWidth: 700,
             }}
           >
             {t("whyWork.description")}
@@ -128,7 +117,7 @@ export default function WhyWorkWithVitaSection() {
         </div>
 
         {/* Right cards grid */}
-        <div className="flex flex-row flex-wrap items-center gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:flex lg:flex-row lg:flex-wrap items-center gap-4 w-full lg:w-auto">
           {benefits.map((benefit, idx) => (
             <BenefitCard
               key={idx}

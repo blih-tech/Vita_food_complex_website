@@ -15,13 +15,11 @@ export default function WhoCanDistributeSection() {
   ];
 
   return (
-    <section className="w-full bg-white" style={{ padding: "80px 0" }}>
-      <div
-        className="mx-auto flex flex-col gap-9"
-        style={{ maxWidth: 1920, padding: "0 128px" }}
-      >
+    <section className="w-full bg-white py-12 lg:py-20">
+      <div className="mx-auto flex flex-col gap-9 max-w-[1920px] px-4 sm:px-6 lg:px-[128px]">
         {/* Section heading */}
         <h2
+          className="max-w-[768px]"
           style={{
             fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
             fontWeight: 800,
@@ -29,7 +27,6 @@ export default function WhoCanDistributeSection() {
             lineHeight: "0.9",
             letterSpacing: "-0.02em",
             color: "#23B349",
-            maxWidth: 768,
           }}
         >
           {t("whoCanPartner.sectionTitle")}
@@ -38,10 +35,7 @@ export default function WhoCanDistributeSection() {
         {/* Content row */}
         <div className="flex flex-col lg:flex-row items-stretch gap-4">
           {/* Van image */}
-          <div
-            className="relative rounded-[48px] overflow-hidden flex-shrink-0"
-            style={{ width: "100%", maxWidth: 964, height: 548 }}
-          >
+          <div className="relative rounded-[24px] sm:rounded-[48px] overflow-hidden flex-shrink-0 w-full max-w-[964px] h-[260px] sm:h-[380px] lg:h-[548px]">
             <Image
               src="/assets/distributor/delivery-van.png"
               alt="Vita delivery van"
@@ -51,10 +45,7 @@ export default function WhoCanDistributeSection() {
           </div>
 
           {/* Right content */}
-          <div
-            className="flex flex-col items-start gap-16"
-            style={{ maxWidth: 651 }}
-          >
+          <div className="flex flex-col items-start gap-8 lg:gap-16 w-full lg:max-w-[651px]">
             {/* Sub-heading + description */}
             <div className="flex flex-col gap-4">
               <h3
@@ -78,7 +69,6 @@ export default function WhoCanDistributeSection() {
                   lineHeight: "25px",
                   letterSpacing: "-0.004em",
                   color: "#000000",
-                  maxWidth: 633,
                 }}
               >
                 {t("whoCanPartner.description")}
@@ -88,7 +78,7 @@ export default function WhoCanDistributeSection() {
             {/* Numbered criteria list */}
             <div className="flex flex-row gap-5">
               {/* Numbers column */}
-              <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-5 lg:gap-8">
                 {criteria.map((_, idx) => (
                   <span
                     key={idx}
@@ -96,7 +86,7 @@ export default function WhoCanDistributeSection() {
                       fontFamily:
                         "var(--font-funnel-display), 'Funnel Display', sans-serif",
                       fontWeight: 700,
-                      fontSize: 32,
+                      fontSize: "clamp(24px, 2.5vw, 32px)",
                       lineHeight: "1",
                       letterSpacing: "-0.01em",
                       color: "#E6B720",
@@ -108,14 +98,14 @@ export default function WhoCanDistributeSection() {
               </div>
 
               {/* Criteria text column */}
-              <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-5 lg:gap-8">
                 {criteria.map((item, idx) => (
                   <span
                     key={idx}
                     style={{
                       fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
                       fontWeight: 300,
-                      fontSize: "clamp(18px, 2vw, 32px)",
+                      fontSize: "clamp(16px, 2vw, 32px)",
                       lineHeight: "1",
                       letterSpacing: "-0.01em",
                       color: "#000000",
