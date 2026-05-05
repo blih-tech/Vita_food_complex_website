@@ -5,22 +5,34 @@ import Image from "next/image";
 export default function CommunityHero() {
   return (
     <section className="relative w-full min-h-[80vh] flex items-center justify-center overflow-hidden bg-white pt-20">
-      {/* Background Image — Figma node 2057:1518 */}
-      <div className="absolute inset-0 z-0">
+      {/* Left decorative image — Figma node 408:5780 */}
+      <div className="absolute left-0 bottom-0 w-[28%] h-[85%] z-0 overflow-hidden pointer-events-none">
         <Image
-          src="/assets/community/charity-7.png"
-          alt="Community Hero"
+          src="/assets/community/community-hero-left.png"
+          alt=""
           fill
-          className="object-cover opacity-20"
+          className="object-cover blur-[8px] scale-105"
           priority
         />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#23B349]/30 via-white/60 to-white" />
+      </div>
+
+      {/* Right decorative image — Figma node 408:5779 */}
+      <div className="absolute right-0 top-0 w-[38%] h-full z-0 overflow-hidden pointer-events-none">
+        <Image
+          src="/assets/community/community-hero-right.png"
+          alt=""
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-white/50 to-white" />
       </div>
 
       {/* Background gradients */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[60%] bg-[#74FF38]/20 blur-[120px] rounded-full" />
-        <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[60%] bg-[#23B349]/20 blur-[120px] rounded-full" />
-        <div className="absolute top-[20%] left-[20%] right-[20%] h-[40%] bg-[#1FD650]/10 blur-[100px] rounded-full" />
+        <div className="absolute top-[-10%] left-[10%] w-[50%] h-[60%] bg-[#74FF38]/15 blur-[120px] rounded-full" />
+        <div className="absolute top-[20%] left-[20%] right-[20%] h-[40%] bg-[#1FD650]/08 blur-[100px] rounded-full" />
       </div>
 
       <div className="pt-14 relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center mt-12 mb-24">

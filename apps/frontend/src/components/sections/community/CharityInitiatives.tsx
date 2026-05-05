@@ -35,19 +35,19 @@ const initiatives = [
   {
     title: "Women & Youth Empowerment",
     description: "Creating opportunities for growth, skills, and independence.",
-    image: "/assets/community/charity-6.png",
+    image: "/assets/community/community-support.png",
     isFeatured: false,
   },
   {
     title: "Rural Development Projects",
     description: "Supporting long-term development in underserved areas.",
-    image: "/assets/community/charity-7.png",
+    image: "/assets/community/community-main.png",
     isFeatured: false,
   },
   {
     title: "Local Partnerships",
     description: "Working with organizations to maximize community impact.",
-    image: "/assets/community/charity-8.png",
+    image: "/assets/community/community-hero-right.png",
     isFeatured: false,
   },
 ];
