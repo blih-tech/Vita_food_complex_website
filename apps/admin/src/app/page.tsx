@@ -93,8 +93,8 @@ export default function DashboardPage() {
 
   return (
     <>
-      {/* ── Header ── */}
-      <header className="h-[68px] bg-white border-b border-gray-100 px-8 flex items-center justify-between sticky top-0 z-10 font-['Outfit']">
+      {/* ── Desktop header (hidden on mobile — DashboardLayout renders mobile bar) ── */}
+      <header className="hidden lg:flex h-[68px] bg-white border-b border-gray-100 px-8 items-center justify-between sticky top-0 z-10 font-['Outfit']">
         <div>
           <h1 className="font-['Funnel_Display'] text-lg font-bold text-[#333733] leading-none">
             Overview
@@ -103,13 +103,11 @@ export default function DashboardPage() {
         </div>
 
         <div className="flex items-center gap-3">
-          {/* Notification bell */}
           <button className="relative w-9 h-9 rounded-[10px] bg-gray-50 hover:bg-gray-100 flex items-center justify-center transition-colors">
             <Bell size={16} className="text-gray-500" />
             <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#23B349] rounded-full" />
           </button>
 
-          {/* User */}
           <div className="flex items-center gap-2.5 pl-3 border-l border-gray-100">
             <div className="text-right">
               <p className="text-sm font-semibold text-[#333733] leading-none">{user?.name}</p>
@@ -130,25 +128,24 @@ export default function DashboardPage() {
       </header>
 
       {/* ── Page body ── */}
-      <div className="p-8 font-['Outfit']">
+      <div className="p-4 sm:p-6 lg:p-8 font-['Outfit']">
 
         {/* Welcome banner */}
         <div
-          className="rounded-[24px] p-8 mb-8 relative overflow-hidden"
+          className="rounded-[20px] lg:rounded-[24px] p-5 sm:p-6 lg:p-8 mb-6 lg:mb-8 relative overflow-hidden"
           style={{
             background:
               'radial-gradient(ellipse at 25px 143px, rgba(31,214,80,1) 0%, rgba(35,179,73,1) 60%, rgba(75,217,64,1) 80%, rgba(116,255,56,1) 100%)',
           }}
         >
-          {/* Decorative circles */}
           <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-white/10 pointer-events-none" />
           <div className="absolute bottom-0 right-24 w-28 h-28 rounded-full bg-white/10 pointer-events-none" />
           <div className="absolute top-4 right-48 w-14 h-14 rounded-full bg-white/10 pointer-events-none" />
 
-          <div className="relative z-10 flex items-center justify-between flex-wrap gap-6">
+          <div className="relative z-10 flex items-center justify-between flex-wrap gap-4">
             <div>
               <p className="text-white/75 text-sm font-medium mb-1">{greeting},</p>
-              <h2 className="font-['Funnel_Display'] text-white font-bold text-3xl xl:text-4xl mb-2">
+              <h2 className="font-['Funnel_Display'] text-white font-bold text-2xl sm:text-3xl xl:text-4xl mb-2">
                 {user?.name} 👋
               </h2>
               <p className="text-white/75 text-sm leading-relaxed max-w-sm">
@@ -158,7 +155,7 @@ export default function DashboardPage() {
 
             <Link
               href="/pages"
-              className="inline-flex items-center gap-2 bg-white text-[#23B349] font-['Funnel_Display'] font-bold text-sm px-5 py-3 rounded-[999px] hover:shadow-md transition-all group shrink-0"
+              className="inline-flex items-center gap-2 bg-white text-[#23B349] font-['Funnel_Display'] font-bold text-sm px-4 py-2.5 lg:px-5 lg:py-3 rounded-[999px] hover:shadow-md transition-all group shrink-0"
             >
               Manage Content
               <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -167,19 +164,19 @@ export default function DashboardPage() {
         </div>
 
         {/* ── Stats grid ── */}
-        <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 lg:gap-4 mb-6 lg:mb-8">
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="bg-white rounded-[18px] p-5 border border-gray-100 hover:border-[#23B349]/25 hover:shadow-sm transition-all"
+              className="bg-white rounded-[16px] lg:rounded-[18px] p-4 lg:p-5 border border-gray-100 hover:border-[#23B349]/25 hover:shadow-sm transition-all"
             >
-              <div className="flex items-start justify-between mb-5">
-                <div className={`w-10 h-10 rounded-[12px] flex items-center justify-center ${stat.iconBg}`}>
-                  <stat.icon size={18} className={stat.iconColor} />
+              <div className="flex items-start justify-between mb-3 lg:mb-5">
+                <div className={`w-9 h-9 lg:w-10 lg:h-10 rounded-[10px] lg:rounded-[12px] flex items-center justify-center ${stat.iconBg}`}>
+                  <stat.icon size={16} className={stat.iconColor} />
                 </div>
                 <ArrowUpRight size={14} className="text-[#23B349] mt-0.5" />
               </div>
-              <p className="font-['Funnel_Display'] text-[#333733] font-bold text-3xl leading-none">
+              <p className="font-['Funnel_Display'] text-[#333733] font-bold text-2xl lg:text-3xl leading-none">
                 {stat.value}
               </p>
               <p className="text-xs text-gray-400 mt-1">{stat.label}</p>
@@ -190,26 +187,26 @@ export default function DashboardPage() {
 
         {/* ── Quick actions ── */}
         <div>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-['Funnel_Display'] text-[#333733] font-bold text-lg">
+          <div className="flex items-center justify-between mb-3 lg:mb-4">
+            <h3 className="font-['Funnel_Display'] text-[#333733] font-bold text-base lg:text-lg">
               Quick Actions
             </h3>
             <span className="text-xs text-gray-400 font-medium">All modules</span>
           </div>
 
-          <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 lg:gap-4">
             {quickActions.map((action) => (
               <Link
                 key={action.label}
                 href={action.href}
-                className="bg-white rounded-[18px] p-5 border border-gray-100 hover:border-[#23B349]/30 hover:shadow-md transition-all group"
+                className="bg-white rounded-[16px] lg:rounded-[18px] p-4 lg:p-5 border border-gray-100 hover:border-[#23B349]/30 hover:shadow-md transition-all group"
               >
                 <div
-                  className={`w-11 h-11 rounded-[13px] flex items-center justify-center mb-4 ${action.iconBg} group-hover:scale-105 transition-transform`}
+                  className={`w-10 h-10 lg:w-11 lg:h-11 rounded-[11px] lg:rounded-[13px] flex items-center justify-center mb-3 lg:mb-4 ${action.iconBg} group-hover:scale-105 transition-transform`}
                 >
-                  <action.icon size={19} className={action.iconColor} />
+                  <action.icon size={18} className={action.iconColor} />
                 </div>
-                <p className="font-['Funnel_Display'] font-bold text-[#333733] text-base group-hover:text-[#23B349] transition-colors leading-tight">
+                <p className="font-['Funnel_Display'] font-bold text-[#333733] text-sm lg:text-base group-hover:text-[#23B349] transition-colors leading-tight">
                   {action.label}
                 </p>
                 <p className="text-xs text-gray-400 mt-1">{action.desc}</p>
@@ -219,11 +216,11 @@ export default function DashboardPage() {
         </div>
 
         {/* ── CMS notice ── */}
-        <div className="mt-8 rounded-[18px] border border-[#23B349]/20 bg-[#23B349]/5 px-6 py-5 flex items-center gap-4">
-          <div className="w-10 h-10 rounded-[12px] bg-[#23B349]/15 flex items-center justify-center shrink-0">
-            <FileText size={18} className="text-[#23B349]" />
+        <div className="mt-6 lg:mt-8 rounded-[16px] lg:rounded-[18px] border border-[#23B349]/20 bg-[#23B349]/5 px-4 lg:px-6 py-4 lg:py-5 flex items-center gap-3 lg:gap-4">
+          <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-[10px] lg:rounded-[12px] bg-[#23B349]/15 flex items-center justify-center shrink-0">
+            <FileText size={17} className="text-[#23B349]" />
           </div>
-          <div>
+          <div className="min-w-0 flex-1">
             <p className="text-sm font-semibold text-[#333733]">100% CMS Managed</p>
             <p className="text-xs text-gray-500 mt-0.5">
               Every page and all content on the public website is controlled from this dashboard.
@@ -231,7 +228,7 @@ export default function DashboardPage() {
           </div>
           <Link
             href="/pages"
-            className="ml-auto shrink-0 text-xs font-bold text-[#23B349] hover:underline"
+            className="shrink-0 text-xs font-bold text-[#23B349] hover:underline whitespace-nowrap"
           >
             Go to Pages →
           </Link>

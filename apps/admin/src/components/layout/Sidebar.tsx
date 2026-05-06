@@ -2,7 +2,7 @@
 
 import {
   LayoutDashboard, FileText, ShoppingBag, Briefcase,
-  MessageSquare, Users, Settings, LogOut, ChevronRight,
+  MessageSquare, Users, Settings, LogOut, ChevronRight, X,
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -39,7 +39,12 @@ const navSections = [
   },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+  open?: boolean;
+  onClose?: () => void;
+}
+
+export default function Sidebar({ open = false, onClose }: SidebarProps) {
   const pathname = usePathname();
   const { user, logout } = useAuth();
 
@@ -47,11 +52,25 @@ export default function Sidebar() {
     href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
-    <aside className="w-64 bg-white border-r border-gray-100 flex flex-col fixed inset-y-0 z-20 font-['Outfit']">
-
+    <aside
+      className={[
+        'w-64 bg-white border-r border-gray-100 flex flex-col fixed inset-y-0 z-20',
+        'font-[\'Outfit\'] transition-transform duration-300 ease-in-out',
+        open ? 'translate-x-0' : '-translate-x-full',
+        'lg:translate-x-0',
+      ].join(' ')}
+    >
       {/* ── Logo ── */}
       <div className="px-5 pt-5 pb-4 border-b border-gray-100">
         <div className="flex items-center gap-3">
+          {/* Close button — mobile only */}
+          <button
+            onClick={onClose}
+            className="lg:hidden ml-auto order-last w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+          >
+            <X size={15} className="text-gray-500" />
+          </button>
+
           <div
             className="w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0 shadow-sm"
             style={{
@@ -114,16 +133,10 @@ export default function Sidebar() {
                           : 'text-gray-400 group-hover:text-[#23B349] transition-colors'
                       }
                     />
-                    <span
-                      className={`text-sm font-medium flex-1 ${
-                        active ? 'text-white' : ''
-                      }`}
-                    >
+                    <span className={`text-sm font-medium flex-1 ${active ? 'text-white' : ''}`}>
                       {item.label}
                     </span>
-                    {active && (
-                      <ChevronRight size={13} className="text-white/70" />
-                    )}
+                    {active && <ChevronRight size={13} className="text-white/70" />}
                   </Link>
                 );
               })}
@@ -158,10 +171,7 @@ export default function Sidebar() {
           onClick={logout}
           className="flex items-center gap-3 w-full px-3 py-2.5 text-gray-500 hover:bg-red-50 hover:text-red-500 rounded-[12px] transition-all group text-sm font-medium"
         >
-          <LogOut
-            size={15}
-            className="group-hover:translate-x-0.5 transition-transform"
-          />
+          <LogOut size={15} className="group-hover:translate-x-0.5 transition-transform" />
           Sign out
         </button>
       </div>
