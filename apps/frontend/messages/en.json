@@ -196,7 +196,7 @@
       "cta": "Learn More About Us",
       "headlineWho": "Who",
       "headlineAreWe": "Are We",
-      "fmcgIntro": "Vita Food Complex is a modern FMCG company built to lead the future of everyday food in Ethiopia. We produce strategically designed biscuit and flour products tailored to multiple consumer moments—from children\u2019s snacks and youth lifestyle choices to family tea-time and professional bakery needs",
+      "fmcgIntro": "Vita Food Complex is a modern FMCG company built to lead the future of everyday food in Ethiopia. We produce strategically designed biscuit and flour products tailored to multiple consumer moments—from children’s snacks and youth lifestyle choices to family tea-time and professional bakery needs",
       "moreAboutCta": "More About Vita",
       "featureCards": {
         "trust": {
@@ -236,7 +236,7 @@
       }
     },
     "sisterCompanies": {
-      "title": "Meet Our Sister Company\u2019s",
+      "title": "Meet Our Sister Company’s",
       "seeMore": "See more",
       "companies": {
         "longTea": {
@@ -751,6 +751,43 @@
           "coverage": "Nationwide coordination and support"
         }
       ]
+    }
+  },
+  "Innovation": {
+    "hero": {
+      "headline": "Shaping the Future of Food\\nThrough Innovation",
+      "subtitle": "From product creation to community impact, we innovate to nourish better, smarter, and more sustainably."
+    },
+    "approach": {
+      "label": "OUR APPROACH",
+      "textPart1": "At Vita, innovation is at the heart of everything we do. ",
+      "bold1": "From developing high-quality food products to creating",
+      "textPart2": " meaningful consumer experiences, we continuously ",
+      "bold2": "push",
+      "textPart3": " boundaries to meet the ",
+      "bold3": "evolving needs of our communities.",
+      "cta": "Download Logo"
+    },
+    "diverse": {
+      "title": "Our Diverse Business Ecosystem",
+      "description": "Over the past two decades, Vita food complex Group has ventured into a spectrum of ventures, upholding a strong innovative vision since its establishment.",
+      "cards": {
+        "products": {
+          "title": "Next-Generation Food Products",
+          "desc": "Developing diverse, high-quality products tailored to different lifestyles and needs.",
+          "cta": "Learn More"
+        },
+        "packaging": {
+          "title": "Smart & Modern Packaging",
+          "desc": "Designing visually engaging, functional, and sustainable packaging that connects with consumers.",
+          "cta": "Learn More"
+        },
+        "experience": {
+          "title": "Consumer Experience",
+          "desc": "Creating engaging brand experiences through campaigns, activations, and digital interaction.",
+          "cta": "Learn More"
+        }
+      }
     }
   }
 }

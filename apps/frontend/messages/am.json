@@ -429,7 +429,11 @@
       },
       "communityImpact": {
         "title": "የማህበረሰብ ተጽእኖ",
-        "items": ["150–200 ስራዎች ተፈጥረዋል", "የክህሎት ልማት ዕድሎች", "የአካባቢው ኢኮኖሚያዊ እድገት"]
+        "items": [
+          "150–200 ስራዎች ተፈጥረዋል",
+          "የክህሎት ልማት ዕድሎች",
+          "የአካባቢው ኢኮኖሚያዊ እድገት"
+        ]
       },
       "responsibleProduction": {
         "title": "ኃላፊነት ያለው ምርት",
@@ -663,6 +667,43 @@
           "coverage": "አገር አቀፍ ማስተባበር እና ድጋፍ"
         }
       ]
+    }
+  },
+  "Innovation": {
+    "hero": {
+      "headline": "Shaping the Future of Food\\nThrough Innovation",
+      "subtitle": "From product creation to community impact, we innovate to nourish better, smarter, and more sustainably."
+    },
+    "approach": {
+      "label": "OUR APPROACH",
+      "textPart1": "At Vita, innovation is at the heart of everything we do. ",
+      "bold1": "From developing high-quality food products to creating",
+      "textPart2": " meaningful consumer experiences, we continuously ",
+      "bold2": "push",
+      "textPart3": " boundaries to meet the ",
+      "bold3": "evolving needs of our communities.",
+      "cta": "Download Logo"
+    },
+    "diverse": {
+      "title": "Our Diverse Business Ecosystem",
+      "description": "Over the past two decades, Vita food complex Group has ventured into a spectrum of ventures, upholding a strong innovative vision since its establishment.",
+      "cards": {
+        "products": {
+          "title": "Next-Generation Food Products",
+          "desc": "Developing diverse, high-quality products tailored to different lifestyles and needs.",
+          "cta": "Learn More"
+        },
+        "packaging": {
+          "title": "Smart & Modern Packaging",
+          "desc": "Designing visually engaging, functional, and sustainable packaging that connects with consumers.",
+          "cta": "Learn More"
+        },
+        "experience": {
+          "title": "Consumer Experience",
+          "desc": "Creating engaging brand experiences through campaigns, activations, and digital interaction.",
+          "cta": "Learn More"
+        }
+      }
     }
   }
 }
