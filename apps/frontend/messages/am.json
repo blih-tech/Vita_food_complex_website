@@ -705,5 +705,78 @@
         }
       }
     }
+  },
+  "WeCare": {
+    "hero": {
+      "label": "WE CARE FOR ALL",
+      "title": "Nourishing Communities\\nBeyond Every Bite",
+      "subtitle": "Supporting Lives, Building Stronger Communities"
+    },
+    "heart": {
+      "title": "The Heart Behind Vita Care",
+      "desc": "At Vita, we believe food is more than nourishment — it’s a connection that brings people together. Through our initiatives, we support families, empower communities, and create meaningful impact across Ethiopia."
+    },
+    "driven": {
+      "title": "Driven by Care\\nGuided by Purpose",
+      "desc": "Everything we do at Vita is rooted in care for people, communities, and the future. Our values guide how we nourish lives, support growth, and create meaningful impact every day.",
+      "commitment": {
+        "label": "Our Commitment",
+        "desc": "We are dedicated to improving lives by making nutritious food accessible while supporting communities through meaningful initiatives."
+      },
+      "vision": {
+        "label": "Our Vision",
+        "desc": "To create a future where every community has access to nourishment, opportunity, and support."
+      },
+      "adapted": {
+        "label": "Adapted",
+        "community": {
+          "title": "Community First",
+          "desc": "We prioritize people by supporting families and strengthening local communities."
+        },
+        "nourishment": {
+          "title": "Nourishment for All",
+          "desc": "We are committed to providing accessible, quality food for everyday life."
+        },
+        "sustainability": {
+          "title": "Sustainability",
+          "desc": "We take responsibility for protecting the environment through conscious practices."
+        },
+        "empowerment": {
+          "title": "Empowerment",
+          "desc": "We create opportunities for youth, partners, and small businesses to grow."
+        },
+        "sharedCare": {
+          "title": "Shared Care",
+          "desc": "We believe in kindness, connection, and uplifting one another through every action."
+        }
+      }
+    },
+    "difference": {
+      "title": "How We Make a\\nDifference",
+      "cards": {
+        "education": {
+          "title": "Supporting Education",
+          "desc": "Providing food and engagement programs for students"
+        },
+        "outreach": {
+          "title": "Community Outreach",
+          "desc": "Reaching families through impactful initiatives."
+        },
+        "sustainable": {
+          "title": "Sustainable Practices",
+          "desc": "Reducing environmental impact responsibly."
+        },
+        "inclusive": {
+          "title": "Inclusive Support",
+          "desc": "Ensuring no one is left behind."
+        }
+      }
+    },
+    "banner": {
+      "title": "Ready to Make an\\nImpact?",
+      "desc": "Join us in our mission to nourish lives and build stronger communities.",
+      "cta1": "Make an Impact",
+      "cta2": "Get Involved"
+    }
   }
 }
