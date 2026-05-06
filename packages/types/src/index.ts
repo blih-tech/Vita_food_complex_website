@@ -1,5 +1,10 @@
 // Shared TypeScript interfaces — used by frontend, admin, and backend
 
+export interface LocalizedString {
+  en: string;
+  am: string;
+}
+
 export interface User {
   _id: string
   name: string

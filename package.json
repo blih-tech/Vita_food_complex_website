@@ -25,6 +25,7 @@
       "@nestjs/core",
       "@parcel/watcher",
       "@swc/core",
+      "bcrypt",
       "sharp",
       "unrs-resolver"
     ]

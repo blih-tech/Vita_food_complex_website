@@ -1,3 +1,7 @@
+"use client";
+
+import { use } from "react";
+import { usePage } from "@/hooks/usePage";
 import HeroSection from "@frontend/components/sections/HeroSection";
 import HeroVideoSection from "@frontend/components/sections/HeroVideoSection";
 import ProductsSection from "@frontend/components/products/ProductsSection";
@@ -8,18 +12,52 @@ import QuickFactSection from "@frontend/components/sections/QuickFactSection";
 import SocialWallSection from "@frontend/components/sections/SocialWallSection";
 import PartnerSection from "@frontend/components/sections/PartnerSection";
 
-export default function Home() {
+const SECTION_COMPONENTS: Record<string, any> = {
+  HeroSection,
+  HeroVideoSection,
+  ProductsSection,
+  BiscuitBrandSection,
+  RecipesSection,
+  MerchandiseSection,
+  QuickFactSection,
+  SocialWallSection,
+  PartnerSection,
+};
+
+export default function Home({ params: paramsPromise }: { params: Promise<{ locale: string }> }) {
+  const params = use(paramsPromise);
+  const { locale } = params;
+  const { page, loading } = usePage('home');
+
+  // If loading or no dynamic page content, render the static version as fallback
+  if (loading || !page || !page.sections || page.sections.length === 0) {
+    return (
+      <main className="flex flex-col min-h-screen bg-white overflow-x-hidden">
+        <HeroSection />
+        <HeroVideoSection />
+        <ProductsSection />
+        <BiscuitBrandSection />
+        <RecipesSection />
+        <QuickFactSection />
+        <MerchandiseSection />
+        <SocialWallSection />
+        <PartnerSection />
+      </main>
+    );
+  }
+
   return (
     <main className="flex flex-col min-h-screen bg-white overflow-x-hidden">
-      <HeroSection />
-      <HeroVideoSection />
-      <ProductsSection />
-      <BiscuitBrandSection />
-      <RecipesSection />
-      <QuickFactSection />
-      <MerchandiseSection />
-      <SocialWallSection />
-      <PartnerSection />
+      {page.sections.map((section: any, index: number) => {
+        const Component = SECTION_COMPONENTS[section.type];
+        if (!Component) return null;
+        
+        return (
+          <div key={section.id} style={{ zIndex: 100 - index }} className="relative">
+            <Component content={section.content} locale={locale} />
+          </div>
+        );
+      })}
     </main>
   );
 }
