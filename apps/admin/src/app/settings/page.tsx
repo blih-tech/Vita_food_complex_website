@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import {
   Settings, User, Globe, Link2, BarChart3,
   Save, Loader2, Check, Eye, EyeOff,
-  Facebook, Instagram, Linkedin, Twitter,
+  Facebook, Instagram, Linkedin, X,
   KeyRound, Mail, Bell,
 } from 'lucide-react';
 import api from '@/lib/api';
@@ -169,7 +169,7 @@ function SiteSettingsTab() {
           </Field>
           <Field label="Twitter / X">
             <div className="relative">
-              <Twitter size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sky-500" />
+              <X size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sky-500" />
               <input
                 className={`${inputCls} pl-9`}
                 value={form.socialLinks.twitter ?? ''}
