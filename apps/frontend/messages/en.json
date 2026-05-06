@@ -206,7 +206,7 @@
     "contactInfo": {
       "phone": "+251 911 123 456",
       "email": "info@vitafoodcomplex.com",
-      "address": "Lideta SC, Woreda 02 <br /> Addis Ababa, Ethiopia"
+      "address": "Lideta SC, Woreda 02 <br/> Addis Ababa, Ethiopia"
     }
   },
   "News": {
@@ -1156,7 +1156,7 @@
       "locationName": "Vita Food Complex"
     },
     "feedback": {
-      "heading": "Give US Your <br /> Feed back",
+      "heading": "Give US Your <br/> Feed back",
       "description": "Share your feedback on our distribution, products, and more to help us improve your experience!"
     }
   },
@@ -1422,8 +1422,8 @@
   },
   "BiscuitBrand": {
     "label": "Our Brands",
-    "title": "A World of <br /> Flavor",
-    "description": "Discover our range of delicious biscuits <br /> made with love.",
+    "title": "A World of <br/> Flavor",
+    "description": "Discover our range of delicious biscuits <br/> made with love.",
     "cta": "Explore Products"
   },
   "QuickFact": {

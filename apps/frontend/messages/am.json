@@ -206,7 +206,7 @@
     "contactInfo": {
       "phone": "+251 911 123 456",
       "email": "info@vitafoodcomplex.com",
-      "address": "ልደታ ኤስ.ሲ፣ ወረዳ 02 <br /> አዲስ አበባ፣ ኢትዮጵያ"
+      "address": "ልደታ ኤስ.ሲ፣ ወረዳ 02 <br/> አዲስ አበባ፣ ኢትዮጵያ"
     }
   },
   "News": {
@@ -1156,7 +1156,7 @@
       "locationName": "ቪታ ፉድ ኮምፕሌክስ"
     },
     "feedback": {
-      "heading": "አስተያየትዎን <br /> ይስጡን",
+      "heading": "አስተያየትዎን <br/> ይስጡን",
       "description": "የእርስዎን ተሞክሮ ለማሻሻል እንዲረዳን ስለ ስርጭታችን፣ ምርቶቻችን och ሌሎችም አስተያየትዎን ያካፍሉን!"
     }
   },
@@ -1422,8 +1422,8 @@
   },
   "BiscuitBrand": {
     "label": "ብራንዶቻችን",
-    "title": "የጣዕም <br /> ዓለም",
-    "description": "በፍቅር የተሰሩ ጣፋጭ ቢስኩቶቻችንን <br /> ያስሱ።",
+    "title": "የጣዕም <br/> ዓለም",
+    "description": "በፍቅር የተሰሩ ጣፋጭ ቢስኩቶቻችንን <br/> ያስሱ።",
     "cta": "ምርቶችን ያስሱ"
   },
   "QuickFact": {
