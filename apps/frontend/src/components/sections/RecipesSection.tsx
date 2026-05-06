@@ -45,6 +45,7 @@ const recipes = [
 
 export default function RecipesSection() {
   const t = useTranslations("Recipes");
+  const t_items = t.raw("items") as { title: string; description: string }[];
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -64,10 +65,12 @@ export default function RecipesSection() {
       {/* Header */}
       <div className="max-w-[1440px] mx-auto px-5 sm:px-6 md:px-12 lg:px-24 mb-10 sm:mb-14 md:mb-20 flex flex-col items-center text-center">
         <p className="font-['Funnel_Display'] font-semibold text-base sm:text-lg md:text-[20px] text-[#23B349] tracking-widest uppercase mb-3">
-          Our Recipes Made Simple
+          {t("header.label")}
         </p>
         <h2 className="font-['Outfit'] font-black text-[42px] sm:text-5xl md:text-[64px] lg:text-[80px] text-[#404040] leading-[1.05] tracking-[-0.02em] px-2">
-          Mix. Match. <span className="text-[#23B349]">Enjoy</span>
+          {t.rich("header.heading", {
+            enjoy: (chunks) => <span className="text-[#23B349]">{chunks}</span>,
+          })}
         </h2>
       </div>
 
@@ -78,7 +81,7 @@ export default function RecipesSection() {
           onScroll={handleScroll}
           className="flex gap-4 sm:gap-6 md:gap-8 overflow-x-auto pb-12 px-5 sm:px-6 md:px-12 lg:px-24 scrollbar-hide snap-x snap-mandatory -mx-1 scroll-smooth"
         >
-          {recipes.map((recipe) => (
+          {recipes.map((recipe, index) => (
             <div
               key={recipe.id}
               className="relative shrink-0 w-[260px] sm:w-[300px] md:w-[360px] lg:w-[480px] 
@@ -91,7 +94,7 @@ export default function RecipesSection() {
               <div className="relative w-full h-[58%] bg-gradient-to-b from-gray-700 to-gray-900 flex items-center justify-center p-4 sm:p-6 md:p-8">
                 <Image
                   src={recipe.image}
-                  alt={recipe.title}
+                  alt={t_items[index]?.title || recipe.title}
                   fill
                   className="object-contain p-4 sm:p-6 group-hover:scale-110 transition-transform duration-700"
                 />
@@ -122,11 +125,11 @@ export default function RecipesSection() {
                 </div>
 
                 <h3 className="font-['Funnel_Display'] font-bold text-[22px] sm:text-[26px] md:text-[32px] lg:text-[36px] text-white leading-tight pr-10">
-                  {recipe.title}
+                  {t_items[index]?.title || recipe.title}
                 </h3>
 
                 <p className="font-['Outfit'] font-normal text-[13px] sm:text-[15px] md:text-[16px] text-white/90 leading-relaxed line-clamp-3">
-                  {recipe.description}
+                  {t_items[index]?.description || recipe.description}
                 </p>
               </div>
             </div>

@@ -2,25 +2,28 @@
 
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
-
-const TESTIMONIALS = [
-  {
-    id: 1,
-    quote: "Partnering with Vita Food Complex Distributor made our corporate gala effortless and smooth. Their meticulous planning and perfect execution went beyond what we hoped for. Highly recommended!",
-    name: "Mulugeta Bekele",
-    title: "CEO, EthioTech Solutions",
-    image: "https://picsum.photos/314/340?random=31",
-  },
-  {
-    id: 2,
-    quote: "The Standard Event made our corporate gala seamless and stress-free. Their attention to detail and flawless execution exceeded our expectations. I can't recommend them enough!",
-    name: "Helen Tadesse",
-    title: "Director, Green Events",
-    image: "https://picsum.photos/314/340?random=32",
-  }
-];
+import { useTranslations } from "next-intl";
 
 export default function PartnerTestimonialSection() {
+  const t = useTranslations("Gallery.partnerTestimonial");
+
+  const items = [
+    {
+      id: 1,
+      quote: t("items.0.quote"),
+      author: t("items.0.author"),
+      title: t("items.0.title"),
+      image: "https://picsum.photos/314/340?random=31",
+    },
+    {
+      id: 2,
+      quote: t("items.1.quote"),
+      author: t("items.1.author"),
+      title: t("items.1.title"),
+      image: "https://picsum.photos/314/340?random=32",
+    }
+  ];
+
   return (
     <section className="relative w-full py-24 lg:py-32 overflow-hidden flex justify-center items-center">
       {/* Background with Green Overlay and Blur */}
@@ -42,19 +45,19 @@ export default function PartnerTestimonialSection() {
         <div className="relative w-full flex flex-col items-center justify-center mb-16">
           <div className="border border-white/40 px-6 py-1 rounded-full mb-4 backdrop-blur-sm">
             <span className="font-['Funnel_Display'] font-medium text-white text-[20px] tracking-[-0.004em]">
-              Partner Testimonials
+              {t("heading")}
             </span>
           </div>
           
           <h2 className="font-['Funnel_Display'] font-bold text-white text-[80px] md:text-[140px] lg:text-[183px] leading-[1] tracking-[-0.02em] text-center w-full uppercase opacity-90 drop-shadow-lg">
-            Our client
+            {t("subheading")}
           </h2>
         </div>
 
         {/* Testimonials Slider */}
         <div className="w-full flex overflow-x-auto snap-x snap-mandatory gap-8 pb-12 scrollbar-hide" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-          {TESTIMONIALS.map((testimonial) => (
-            <div 
+          {items.map((testimonial) => (
+            <article
               key={testimonial.id} 
               className="flex flex-col md:flex-row items-center gap-8 md:gap-12 w-[90vw] md:w-[1040px] shrink-0 snap-center mx-auto"
             >
@@ -62,7 +65,7 @@ export default function PartnerTestimonialSection() {
               <div className="relative w-[280px] h-[300px] md:w-[314px] md:h-[340px] rounded-[48px] overflow-hidden shrink-0 shadow-2xl">
                 <Image 
                   src={testimonial.image} 
-                  alt={testimonial.name} 
+                  alt={testimonial.author} 
                   fill 
                   className="object-cover"
                   unoptimized
@@ -80,7 +83,7 @@ export default function PartnerTestimonialSection() {
                 <div className="flex justify-between items-start md:items-center w-full">
                   <div className="flex flex-col">
                     <span className="font-['Outfit'] text-[#EAEAEA] text-[18px] leading-[1.2]">
-                      {testimonial.name}
+                      {testimonial.author}
                     </span>
                     <span className="font-['Outfit'] text-[#EAEAEA] text-[16px] opacity-80">
                       {testimonial.title}
@@ -103,7 +106,7 @@ export default function PartnerTestimonialSection() {
                   </button>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
 

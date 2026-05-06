@@ -3,12 +3,14 @@
 import { memo, useState, useEffect } from "react";
 import Image from "next/image";
 import { products } from "@frontend/app/[locale]/products/data";
+import { useTranslations } from "next-intl";
 
 interface ProductsHeroProps {
   title: string;
 }
 
 export const ProductsHeroSection = memo(({ title }: ProductsHeroProps) => {
+  const t = useTranslations("ProductsPage");
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -59,7 +61,7 @@ export const ProductsHeroSection = memo(({ title }: ProductsHeroProps) => {
         </h1>
         <div className="hidden md:block text-right">
           <p className="font-['Outfit'] font-bold text-sm text-white/90 tracking-wider uppercase drop-shadow-sm">
-            Brand Biscuit Products
+            {t("hero.subtitle")}
           </p>
         </div>
       </div>

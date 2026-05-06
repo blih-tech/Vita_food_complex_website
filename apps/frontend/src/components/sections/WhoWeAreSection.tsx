@@ -31,7 +31,7 @@ export default function WhoWeAreSection() {
             }}
             data-node-id="364:3322"
           >
-            Who
+            {t("whoAreWe.headlineWho")}
           </p>
           
           {/* Line separator - Responsive */}
@@ -50,8 +50,8 @@ export default function WhoWeAreSection() {
             }}
             data-node-id="364:3323"
           >
-            <span className="lg:inline md:inline sm:block">We Are</span>
-            <span className="lg:inline md:inline sm:block"> & What We Stand For</span>
+            <span className="lg:inline md:inline sm:block">{t("whoAreWe.headlineAreWe")}</span>
+            <span className="lg:inline md:inline sm:block">{t("whoAreWe.standFor")}</span>
           </p>
         </div>
 

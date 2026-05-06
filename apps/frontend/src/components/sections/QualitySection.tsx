@@ -1,15 +1,17 @@
 import React from 'react';
 import Image from 'next/image';
+import { useTranslations } from "next-intl";
 
 export function QualitySection() {
+  const t = useTranslations("WhyChooseVita.qa");
   return (
     <section className="w-full bg-white px-6 lg:px-24 pt-8 pb-32">
       <div className="max-w-7xl mx-auto flex flex-col items-center text-center">
         <p className="font-['Outfit'] font-medium text-sm text-gray-600 mb-2">
-          Uplifting Every Daily Food Moment.
+          {t("caption")}
         </p>
         <h2 className="font-['Funnel_Display'] font-black text-4xl md:text-5xl text-[#23B349] mb-16">
-          Quality is Built Around Us!
+          {t("title")}
         </h2>
         
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16 w-full">

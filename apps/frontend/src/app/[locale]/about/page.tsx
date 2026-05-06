@@ -7,6 +7,7 @@ import WhoAreWeSection from "@frontend/components/sections/WhoAreWeSection";
 import ProcessSections from "@frontend/components/sections/ProcessSections";
 import TestimonialSection from "@frontend/components/sections/TestimonialSection";
 import BackToTop from "@frontend/components/ui/BackToTop";
+import { useTranslations } from "next-intl";
 
 /* Figma About page (277:8084) section order:
    1. Hero (2376:9999) — headline + subtitle + story image with white frame
@@ -18,6 +19,8 @@ import BackToTop from "@frontend/components/ui/BackToTop";
 */
 
 export default function AboutPage() {
+  const t = useTranslations("About");
+
   return (
     <main className="flex flex-col scroll-smooth">
       <AboutHeroSection />

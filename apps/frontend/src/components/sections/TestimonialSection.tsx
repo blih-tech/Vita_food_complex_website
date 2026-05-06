@@ -148,10 +148,10 @@ export default function TestimonialSection() {
               </div>
               <div className="text-left">
                 <p className="mb-4 font-[family-name:var(--font-funnel-display)] text-[24px] font-normal leading-tight tracking-[-0.004em] text-white">
-                  {current.quote}
+                  {t("quote")}
                 </p>
                 <div className="mb-4 h-px w-full bg-[#777777]/80" />
-                <p className="font-[family-name:var(--font-outfit)] text-[16px] text-[#EAEAEA]">
+                <p className="font-['Outfit'] text-[16px] text-[#EAEAEA]">
                   <span className="font-semibold text-white">{current.author}</span>
                   <br />
                   {current.role}

@@ -1,583 +1,626 @@
 {
-  "Index": {
-    "title": "Vita Hydro Agro-Processing PLC",
-    "hero": {
-      "headline": "Bold, Modern, Playful, Food-Forward.",
-      "subheadline": "Quality Biscuits and Wheat Flour from Debre Sina, Ethiopia."
-    }
-  },
-  "home": {
-    "company": {
-      "label": "Something About us",
-      "heading": "Our Company",
-      "body": "Vita Hydro Agro-Processing PLC is a modern food manufacturer based in Debre Sina, Ethiopia, specializing in biscuits and flour products. We partner with local farmers, create employment opportunities, and produce trusted, high-quality food essentials for families, bakers, and communities. Our mission is simple: to nourish everyday life while supporting sustainable growth and progress across Ethiopia.",
-      "cta": "About"
-    },
-    "products": {
-      "label": "About",
-      "heading": "Our Products",
-      "viewProduct": "View Product"
+  "Products": {
+    "items": {
+      "zoo": {
+        "name": "Zoo",
+        "description": "Delicious chocolate biscuits filled with smooth, creamy goodness made for everyday enjoyment."
+      },
+      "cream": {
+        "name": "Cream",
+        "description": "Rich and creamy biscuits that melt in your mouth."
+      },
+      "oreo": {
+        "name": "Oreo",
+        "description": "The classic chocolate sandwich biscuit with a sweet cream filling."
+      },
+      "high-energy": {
+        "name": "High Energy",
+        "description": "Packed with nutrients to keep you going throughout the day."
+      },
+      "tea": {
+        "name": "Tea",
+        "description": "The perfect companion for your morning or evening tea."
+      },
+      "glucose": {
+        "name": "Glucose",
+        "description": "Instant energy in every bite, perfect for kids and adults alike."
+      },
+      "chewata": {
+        "name": "Chewata",
+        "description": "Fun and tasty biscuits for your snack time."
+      },
+      "digestive": {
+        "name": "Digestive",
+        "description": "Wholesome and fiber-rich biscuits for a healthy lifestyle."
+      },
+      "marie": {
+        "name": "Marie",
+        "description": "Light and crispy biscuits, a timeless favorite."
+      },
+      "sina": {
+        "name": "Sina",
+        "description": "Premium quality biscuits with a unique flavor profile."
+      },
+      "bora": {
+        "name": "Bora",
+        "description": "Crunchy and satisfying, perfect for any occasion."
+      },
+      "tafach-vanilla": {
+        "name": "Tafach Vanilla",
+        "description": "Sweet vanilla flavor in every crunchy bite."
+      },
+      "tafach-mango": {
+        "name": "Tafach Mango",
+        "description": "Exotic mango flavor for a tropical snack experience."
+      },
+      "tafach-straw": {
+        "name": "Tafach Strawberry",
+        "description": "Delightful strawberry flavor that everyone loves."
+      },
+      "burger-flour": {
+        "name": "Burger Flour",
+        "description": "Premium flour for making the perfect burger buns."
+      },
+      "all-purpose": {
+        "name": "All Purpose Flour",
+        "description": "Versatile flour for all your baking and cooking needs."
+      },
+      "marie-cream": {
+        "name": "Marie Cream",
+        "description": "The classic Marie biscuit with a delicious cream layer."
+      },
+      "tea-biscuit": {
+        "name": "Tea Biscuit",
+        "description": "Crispy and light, perfect for dipping in tea."
+      }
     }
   },
   "Navbar": {
     "links": {
-      "products": "Our Products",
+      "products": "Products",
       "company": "Company",
       "people-planet": "People & Planet",
       "resources": "Resources",
       "whats-new": "What's New"
     },
-    "cta": "Contact us"
-  },
-  "Hero": {
-    "headline1": "Biscuits",
-    "headline2": "Flour You",
-    "badge": "100% Natural",
-    "description": "From everyday baking to special treats, Vita brings joy, taste, and quality to your table.",
-    "stylishWay": "A new stylish way of",
-    "connecting": "Connecting!",
-    "secondaryQuote": "“As a modern multi-category food complex, Vita balances industrial excellence with deep emotional connection by housing a diverse portfolio of brands tailored to every moments.”",
-    "ourClients": "Our Clients",
-    "ourProducts": "Our Products",
-    "whyVita": "Why Vita®"
-  },
-  "Company": {
-    "label": "Learn More About Us",
-    "heading": "Our Company",
-    "body": "Vita Hydro Agro-Processing PLC is a leading food manufacturing company based in Debre Sina, Ethiopia. We specialize in producing high-quality biscuits and wheat flour using state-of-the-art technology and the finest local ingredients.",
-    "cta": "About"
-  },
-  "About": {
-    "hero": {
-      "headline": "Built for Today. Trusted for Tomorrow",
-      "subtitle": "Vita is more than a food company — we are a growing force dedicated to delivering trusted food products while creating meaningful impact across communities."
-    },
-    "company": {
-      "title": "Our Story",
-      "badge": "Made in Ethiopia",
-      "description": "Vita Food Complex is a proudly Ethiopian food manufacturing company committed to delivering quality, innovation, and everyday nourishment. We combine modern production standards with deep local understanding to create products people love and trust. From delicious biscuits for family moments to high-performance flour for homes and businesses, Vita exists to uplift daily food experiences through quality, affordability, and consistency. We are not just producing food. We are building a stronger future for communities, families, retailers, and partners across Ethiopia."
-    },
-    "sisterCompanies": {
-      "label": "Sister Companies",
-      "title": "Different Experiences",
-      "description": "Through our diverse sister companies, we deliver value across every touchpoint of everyday life.",
-      "cta": "See more",
-      "visitSite": "Visit site",
-      "longTeaCard": {
-        "blurb": "Crafting high-quality tea products with a focus on purity, taste, and everyday enjoyment."
-      },
-      "brands": {
-        "belayabGroup": "YAB Feed and Agro industry",
-        "motors": "Belayab Motors",
-        "cables": "Belayab Cables",
-        "goldenTulip": "Golden Tulip",
-        "lewis": "Lewis Retails supermarket",
-        "foods": "Belayab Foods",
-        "limestone": "Limestone"
-      },
-      "companies": {
-        "belayabFoods": "Belayab foods",
-        "anadiaCoffee": "Anadia Coffee",
-        "longTea": "Long Tea",
-        "belayabMotors": "Belayab Motors",
-        "belayabDelivery": "Belayab Delivery",
-        "goldenTulip": "Golden Tulip",
-        "belayabPoultry": "Belayab Poultry and feed",
-        "belayabGorges": "Belayab Gorges",
-        "belayabGlobal": "Belayab Global",
-        "lionstoneDistribution": "Lionstone Distribution",
-        "huaRaInternational": "HUA.RA International trade",
-        "lewiHotels": "Lewi Hotels"
-      }
-    },
-    "whoWeAre": {
-      "description": "Vita Food Complex is a modern FMCG company built to lead the future of everyday food in Ethiopia.We produce strategically designed biscuit and flour products tailored to multiple consumer moments—from children's snacks and youth lifestyle choices to family tea-time and professional bakery needs With a strong focus on quality, innovation, market relevance, and scalable distribution, Vita is built to become a nationally trusted household brand",
-      "cta": "Learn More About Us",
+    "cta": "Contact Us",
+    "dropdowns": {
       "products": {
-        "foods": {
-          "title": "Belayab foods",
-          "description": "Premium quality food products made from the finest local ingredients."
+        "biscuits": {
+          "label": "Biscuits",
+          "desc": "Crunchy & Delicious"
         },
-        "coffee": {
-          "title": "Belayab coffee",
-          "description": "Rich, aromatic coffee beans sourced from Ethiopia's best highlands."
+        "flour": {
+          "label": "Flour",
+          "desc": "Premium Quality"
         },
-        "juice": {
-          "title": "Belayab juice",
-          "description": "Fresh, natural fruit juices packed with vitamins and flavor."
+        "recipes": {
+          "label": "Recipes",
+          "desc": "Simple & Tasty"
         },
-        "water": {
-          "title": "Belayab water",
-          "description": "Pure, refreshing water for healthy hydration."
+        "viewAll": "View All",
+        "specialEdition": "Special Edition",
+        "latestUpdates": "Latest Updates"
+      },
+      "company": {
+        "about": {
+          "label": "About Us",
+          "desc": "Our Story"
+        },
+        "whyChoose": {
+          "label": "Why Choose Vita",
+          "desc": "Our Difference"
+        },
+        "careers": {
+          "label": "Careers",
+          "desc": "Join Our Team"
+        },
+        "sustainability": {
+          "label": "Sustainability",
+          "desc": "Our Commitment"
         }
-      }
-    },
-    "mv": {
-      "newGen": {
-        "title": "A New Generation of Food",
-        "desc": "We build products that are reliable and meaningful to users daily."
       },
-      "mission": {
-        "label": "Our Mission",
-        "desc": "To deliver trusted food products that nourish everyday life and support communities"
-      },
-      "vision": {
-        "label": "Our Vision",
-        "desc": "To become a leading and trusted food brand known for quality and innovation"
-      },
-      "purpose": {
-        "label": "Our Purpose",
-        "desc": "To make everyday moments better through food that brings people together"
-      },
-      "values": {
-        "label": "Our Values",
-        "desc": "Trust and quality lead the way. We build a strong community. Innovation drives our progress."
-      }
-    },
-    "process": {
-      "01": {
-        "heading": "From rich soil, a powerful beginning",
-        "desc": "In Ethiopia's fertile highlands, every grain begins its journey in the hands of dedicated farmers. With deep knowledge of the land and generations of experience, they cultivate wheat that meets the highest standards of quality and care.",
-        "label": "Sourcing",
-        "captionTitle": "NATURE'S FOUNDATION",
-        "captionDesc": "Our story begins in Ethiopia's farmlands, where quality is nurtured from the ground up."
-      },
-      "02": {
-        "heading": "Hands that shape nourishment",
-        "desc": "Behind every Vita product are skilled individuals who transform raw ingredients into trusted food essentials. From sourcing to preparation, every step is guided by precision, hygiene, and a commitment to excellence.",
-        "label": "Crafting",
-        "captionTitle": "HANDS BEHIND THE QUALITY",
-        "captionDesc": "Crafted by skilled professionals committed to delivering trusted food for every home"
-      },
-      "03": {
-        "heading": "Refined with purpose, delivered",
-        "desc": "Inside our modern production facilities, innovation meets discipline. Using advanced technology and strict quality control, Vita transforms locally sourced ingredients into products that meet global standards.",
-        "label": "Production",
-        "captionTitle": "THE ART OF PRECISION",
-        "captionDesc": "Where technology, quality control, and innovation come together to create Vita products."
-      }
-    },
-    "testimonials": {
-      "label": "Partner Testimonials",
-      "titleLead": "Our",
-      "titleAccent": "client",
-      "prev": "Previous testimonial",
-      "next": "Next testimonial",
-      "items": [
-        {
-          "quote": "Partnering with Vita Food Complex Distributor made our corporate gala effortless and smooth. Their meticulous planning and perfect execution went beyond what we hoped for. Highly recommended!",
-          "author": "Mulugeta Bekele",
-          "role": "CEO, EthioTech Solutions",
-          "image": "/assets/about/owner-2.png"
-        },
-        {
-          "quote": "Partnering with Vita Food Complex Distributor made our corporate gala effortless and smooth. Their meticulous planning and perfect execution went beyond what we hoped for. Highly recommended!",
-          "author": "Mulugeta Bekele",
-          "role": "CEO, EthioTech Solutions",
-          "image": "/assets/about/owner-2.png"
-        },
-        {
-          "quote": "The Standard Event made our corporate gala seamless and stress-free. Their attention to detail and flawless execution exceeded our expectations. I can't recommend them enough!",
-          "author": "Selamawit Tadesse",
-          "role": "Director, Addis Business Group",
-          "image": "/assets/about/owner-3.png"
-        }
-      ]
-    }
-  },
-  "WhyChooseVita": {
-    "hero": {
-      "headline": "A Better Choice for Every Table",
-      "description": "Vita delivers reliable, modern food products designed to nourish everyday life from families to future generations."
-    },
-    "whoWeAre": {
-      "title": "Who We Are & What We Stand For",
-      "description": "We are a proudly Ethiopian food manufacturing company committed to delivering quality, innovation, and everyday nourishment. We combine modern production standards with deep local understanding to create products people love and trust.",
-      "cta": "Learn More About Us",
-      "headlineWho": "Who",
-      "headlineAreWe": "Are We",
-      "fmcgIntro": "Vita Food Complex is a modern FMCG company built to lead the future of everyday food in Ethiopia. We produce strategically designed biscuit and flour products tailored to multiple consumer moments—from children’s snacks and youth lifestyle choices to family tea-time and professional bakery needs",
-      "moreAboutCta": "More About Vita",
-      "featureCards": {
-        "trust": {
-          "title": "Quality You Can Trust",
-          "description": "Produced with strict standards to ensure consistency, freshness, and satisfaction"
-        },
-        "supply": {
-          "title": "Reliable Supply",
-          "description": "Strong manufacturing and distribution systems that keep products available"
+      "peoplePlanet": {
+        "community": {
+          "label": "Community",
+          "desc": "Supporting Families"
         },
         "innovation": {
-          "title": "Innovation Driven",
-          "description": "Modern packaging, new product ideas, and evolving solutions for future markets"
+          "label": "Innovation",
+          "desc": "Smart Solutions"
         },
-        "community": {
-          "title": "Community Impact",
-          "description": "Creating jobs, supporting farmers, and contributing to national growth"
-        }
+        "weCare": {
+          "label": "We Care",
+          "desc": "Our Impact"
+        },
+        "terms": {
+          "label": "Terms & Conditions",
+          "desc": "Legal Information"
+        },
+        "experiences": "Experiences",
+        "communityInitiatives": "Community Initiatives",
+        "seeAll": "See All"
       },
-      "products": {
-        "quality": {
-          "title": "Quality Excellence",
-          "description": "We maintain the highest standards of quality in every product, from sourcing to production."
+      "resources": {
+        "distributor": {
+          "label": "Become a Distributor",
+          "desc": "Grow With Us"
         },
-        "local": {
-          "title": "Local Sourcing",
-          "description": "We partner with Ethiopian farmers to source the finest local ingredients."
+        "research": {
+          "label": "Research",
+          "desc": "Market Insights"
         },
-        "community": {
-          "title": "Community Impact",
-          "description": "We create jobs and support local communities through our operations."
+        "faqs": {
+          "label": "FAQs",
+          "desc": "Common Questions"
         },
-        "innovation": {
-          "title": "Innovation Focus",
-          "description": "We use modern technology and innovative processes to deliver superior products."
-        }
-      }
-    },
-    "sisterCompanies": {
-      "title": "Meet Our Sister Company’s",
-      "seeMore": "See more",
-      "companies": {
-        "longTea": {
-          "name": "Long Tea",
-          "category": "Food & Beverage",
-          "description": "Crafting high-quality tea products with a focus on purity, taste."
-        },
-        "belayabMotors": {
-          "name": "Belayab Motors",
-          "category": "Automotive",
-          "description": "Reliable vehicles and mobility solutions for transport"
-        },
-        "belayabCable": {
-          "name": "Belayab Cabel",
-          "category": "Manufacturing",
-          "description": "Making durable, high-performance industrial electrical cables"
-        },
-        "belayabFoods": {
-          "name": "Belayab Foods",
-          "category": "Food Production",
-          "description": "Creating nutritious, high-quality food for daily use"
-        },
-        "goldenTulip": {
-          "name": "Golden Tulip",
-          "category": "Hospitality",
-          "description": "Offering comfort and premium hospitality for travelers"
-        },
-        "belayabDelivery": {
-          "name": "Belayab Delivery",
-          "category": "Logistics",
-          "description": "Supplying rich, authentic coffee crafted for flavor"
-        },
-        "aradaCoffee": {
-          "name": "Arada Coffee",
-          "category": "Coffee & Beverage",
-          "description": "Supplying rich, authentic coffee crafted for flavor"
-        },
-        "lionstone": {
-          "name": "Lionstone",
-          "category": "Distribution",
-          "description": "Efficient solutions ensuring seamless product distribution"
-        },
-        "belayabPharmaceuticals": {
-          "name": "Belayab Pharmaceuticals",
-          "category": "Healthcare",
-          "description": "Trusted healthcare products focused on safety and quality"
-        },
-        "huajiaInternationalTrade": {
-          "name": "Huajia International Trade",
-          "category": "International Trade",
-          "description": "Providing quality poultry and nutritious feed"
-        },
-        "belayabPoultryAndFeed": {
-          "name": "Belayab Poultry and Feed",
-          "category": "Agriculture",
-          "description": "Providing quality poultry and nutritious feed"
-        },
-        "belayabGeepas": {
-          "name": "Belayab Geepas",
-          "category": "Electronics",
-          "description": "Creating reliable, innovative electronic appliances for daily use"
-        },
-        "lewisRetailsSupermarket": {
-          "name": "Lewis Retails Supermarket",
-          "category": "Retail",
-          "description": "Offering daily essentials with convenience and quality"
-        }
-      }
-    },
-    "qualityAssurance": {
-      "subtitle": "Quality Assurance",
-      "title": "Certified Excellence in Every Product",
-      "description": "Our commitment to quality is backed by internationally recognized certifications and rigorous standards.",
-      "cta": "View Our Certificates"
-    },
-    "products": {
-      "title": "Our Products",
-      "biscuits": {
-        "title": "Premium Biscuits Collection",
-        "description": "Discover our extensive range of delicious biscuits crafted with the finest ingredients. From classic favorites to innovative new flavors, each biscuit delivers perfect taste and quality.",
-        "cta": "Explore Biscuits"
+        "more": "More",
+        "exploreBiscuit": "Explore Biscuit",
+        "creativeLibrary": "Creative Library"
       },
-      "flour": {
-        "title": "High-Quality Flour Products",
-        "description": "Our premium flour products are milled to perfection, ensuring consistent quality for all your baking needs. From all-purpose to specialty flours, we provide the foundation for perfect results every time.",
-        "cta": "Explore Flours"
+      "whatsNew": {
+        "news": {
+          "label": "News",
+          "desc": "Latest Stories"
+        },
+        "updates": {
+          "label": "Updates",
+          "desc": "Company News"
+        },
+        "latestNews": "Latest News",
+        "newsTitle": "Vita Food Complex",
+        "daysAgo": "{days} days ago",
+        "recentUpdates": "Recent Updates"
+      },
+      "mobile": {
+        "selectLanguage": "Select Language"
       }
     }
-  },
-  "Products": {
-    "label": "Products",
-    "heading": "Our Products",
-    "counter": "1/11",
-    "cta": "View Product",
-    "items": {
-      "bora": {
-        "name": "Bora-Chocolate",
-        "description": "Dark biscuit product with rich chocolate flavor."
-      }
-    }
-  },
-  "SocialWall": {
-    "label": "Social Wall",
-    "heading": "Moments with Vita",
-    "subtext": "Tag and share what you love about Vita products"
-  },
-  "Partner": {
-    "subtitle": "Uplifting Every Daily Food Moment.",
-    "heading": "Quality is Built Around Us!"
-  },
-  "Recipes": {
-    "label": "Vita Blog",
-    "heading": "Recipes Made Simple"
-  },
-  "Merchandise": {
-    "heading": "More Than Products",
-    "subtext": "Explore our exclusive Vita merchandise collection.",
-    "cta": "More"
-  },
-  "QuickFact": {
-    "label": "Quick Facts",
-    "heading": "Vita by the Numbers",
-    "stats": {
-      "investment": {
-        "value": "210M+",
-        "label": "Investment (ETB)"
-      },
-      "capacity": {
-        "value": "60T+",
-        "label": "Daily Production"
-      },
-      "jobs": {
-        "value": "350+",
-        "label": "Local Jobs Created"
-      },
-      "farmers": {
-        "value": "500+",
-        "label": "Farmers Supported"
-      }
-    }
-  },
-  "WhyChoose": {
-    "heading": "Why Choose Our Products?",
-    "cards": {
-      "quality": {
-        "heading": "Quality You Can Trust",
-        "body": "We maintain the highest standards of quality in every product we manufacture."
-      },
-      "natural": {
-        "heading": "100% Natural Ingredients",
-        "body": "Our products are made from the finest natural ingredients sourced locally."
-      },
-      "innovation": {
-        "heading": "Innovative Processing",
-        "body": "We use modern technology to ensure the best taste and nutritional value."
-      }
-    }
-  },
-  "CTA": {
-    "heading": "Let's Work Together",
-    "subtext": "Become a distributor or contact us for partnership opportunities.",
-    "cta": "Contact With Us"
   },
   "Footer": {
-    "cta": {
-      "heading": "Let's Work Together",
-      "subtext": "Question, business inquiry, or partnership idea?\nOur team is ready to connect and support you",
-      "button": "Connect with us",
-      "newsletter": {
-        "heading": "Get the Latest News & Updates...",
-        "placeholder": "Email Address"
-      }
-    },
-    "contact": {
-      "phone": "+251 911 123 456",
-      "email": "info@vitafoodcomplex.com",
-      "address": "Lideta SC, Woreda 02\nAddis Ababa, AA, Ethiopia"
+    "ctaHeading": "Ready to Join the Vita Family?",
+    "ctaSubtext": "Whether you're a customer, partner, or future team member, we'd love to connect with you.",
+    "ctaButton": "Get in Touch",
+    "newsletterHeading": "Stay Updated",
+    "emailPlaceholder": "Enter your email",
+    "links": {
+      "investors": "Investors",
+      "aboutUs": "About Us",
+      "whyChooseUs": "Why Choose Vita",
+      "research": "Research",
+      "mediaKit": "Media Kit",
+      "faqs": "FAQs"
     },
     "columns": {
       "biscuits": "Biscuits",
       "flour": "Flour",
-      "peoplePlanet": "People & Planet",
       "company": "Company",
-      "resources": "Resources",
-      "whatsNew": "What's New"
+      "resources": "Resources"
     },
     "legal": {
-      "terms": "Terms and Conditions",
+      "terms": "Terms & Conditions",
       "privacy": "Privacy Policy",
       "legalNotice": "Legal Notice",
-      "copyright": "© 2026 Vita Food Complex.   All rights reserved."
-    }
-  },
-  "ProductsPage": {
-    "categories": {
-      "all": "All products",
-      "biscuit": "Biscuit",
-      "flour": "Flour"
+      "copyright": "© 2026 Vita Food Complex. All rights reserved."
     },
-    "heading": "Our Products",
-    "subtext": "Discover our delicious range of biscuits and flour products, crafted with care for every moment.",
-    "ctaHeading": "Let's Work Together",
-    "ctaSubtext": "Question, business inquiry, or partnership idea? Our team is ready to connect and support you",
-    "ctaButton": "Connect with us",
-    "newsletterHeading": "Get the Latest News & Updates",
-    "newsletterSubtext": "Subscribe to our newsletter for exclusive offers and updates",
-    "emailPlaceholder": "Email Address",
-    "backToProducts": "Back to Products",
-    "orderNow": "Order Now",
-    "downloadBrochure": "Download Brochure",
-    "productFeatures": "Product Features",
-    "featureNatural": "100% Natural",
-    "featureNaturalDesc": "Made with finest natural ingredients",
-    "featureQuality": "Premium Quality",
-    "featureQualityDesc": "ISO 9001 certified production",
-    "featureHeart": "Heart Friendly",
-    "featureHeartDesc": "Carefully formulated for you",
-    "nutritionInfo": "Nutrition Information",
-    "servingSize": "Serving Size",
-    "calories": "Calories",
-    "protein": "Protein",
-    "fat": "Fat",
-    "carbs": "Carbs",
-    "sugar": "Sugar",
-    "sodium": "Sodium",
-    "fiber": "Fiber",
-    "relatedProducts": "You May Also Like",
-    "productDescription": {
-      "oreo": "Delicious chocolate cream sandwich cookie",
-      "zoo": "Crispy orange flavored biscuit",
-      "cream": "Smooth vanilla cream biscuit",
-      "chewata": "Soft and chewy biscuit",
-      "marie": "Classic Marie biscuit",
-      "bora": "Rich chocolate biscuit"
+    "contactInfo": {
+      "phone": "+251 911 123 456",
+      "email": "info@vitafoodcomplex.com",
+      "address": "Lideta SC, Woreda 02 <br /> Addis Ababa, Ethiopia"
     }
   },
-  "Contact": {
-    "title": "Contact us",
-    "heading": "Let's Talk",
-    "description": "We'd love to hear from you. Whether you have a question, feedback, or a partnership idea, our team is here to help",
-    "form": {
+  "News": {
+    "header": {
+      "date": "Tuesday, October 29, 2024",
+      "title": "The News*",
+      "categories": {
+        "allNews": "All News",
+        "news": "News",
+        "updates": "Updates",
+        "marketInsights": "Market Insights",
+        "companyNews": "Company News",
+        "productUpdates": "Product Updates"
+      },
+      "featuredArticle": {
+        "updateTag": "Updates",
+        "title": "Vita Officially Launches in Ethiopia’s FMCG Market",
+        "date": "Sep 9, 2024",
+        "readTime": "06 Minute",
+        "readMore": "Read Article"
+      }
+    },
+    "latestNews": {
+      "heading": "Latest News",
+      "featuredArticle": {
+        "title": "Vita Flour: Supporting Every Home Kitchen",
+        "category": "Updates",
+        "date": "Sep 6, 2024"
+      },
+      "horizontalArticles": [
+        {
+          "title": "The Rise of Modern Snacking Culture in Ethiopia",
+          "category": "Updates",
+          "date": "Feb 9, 2026"
+        },
+        {
+          "title": "The Rise of Modern Snacking Culture in Ethiopia",
+          "category": "Updates",
+          "date": "Feb 9, 2026"
+        }
+      ],
+      "gridArticles": [
+        {
+          "title": "The Rise of Modern Snacking Culture in Ethiopia",
+          "readTime": "20 mins read"
+        },
+        {
+          "title": "Vita Flour: Supporting Every Home Kitchen",
+          "readTime": "4 mins read"
+        },
+        {
+          "title": "Inside Vita's \"House of Brands\" Strategy",
+          "readTime": "4 mins read"
+        },
+        {
+          "title": "Vita Flour: Supporting Every Home Kitchen",
+          "readTime": "4 mins read"
+        },
+        {
+          "title": "The Rise of Modern Snacking Culture in Ethiopia",
+          "readTime": "20 mins read"
+        },
+        {
+          "title": "Inside Vita's \"House of Brands\" Strategy",
+          "readTime": "4 mins read"
+        }
+      ]
+    },
+    "updates": {
+      "heading": "Updates",
+      "viewAll": "View All",
+      "articles": [
+        {
+          "title": "The Rise of Modern Snacking Culture in Ethiopia",
+          "category": "Updates",
+          "date": "Feb 10, 2026"
+        },
+        {
+          "title": "Vita Flour: Supporting Every Home Kitchen",
+          "category": "Updates",
+          "date": "Feb 10, 2026"
+        },
+        {
+          "title": "The Rise of Modern Snacking Culture in Ethiopia",
+          "category": "Updates",
+          "date": "Feb 10, 2026"
+        },
+        {
+          "title": "Vita Flour: Supporting Every Home Kitchen",
+          "category": "Updates",
+          "date": "Feb 10, 2026"
+        }
+      ]
+    },
+    "newsGrid": {
+      "heading": "News",
+      "viewAll": "View All",
+      "articles": [
+        {
+          "title": "Sustainable Food Production",
+          "description": "Analyzing the impact of sustainable sourcing and waste reduction",
+          "readTime": "10 Minutes",
+          "category": "Market insight"
+        },
+        {
+          "title": "Sustainable Food Production",
+          "description": "Analyzing the impact of sustainable sourcing and waste reduction",
+          "readTime": "10 Minutes",
+          "category": "Market insight"
+        },
+        {
+          "title": "Sustainable Food Production",
+          "description": "Analyzing the impact of sustainable sourcing and waste reduction",
+          "readTime": "10 Minutes",
+          "category": "Market insight"
+        },
+        {
+          "title": "Sustainable Food Production",
+          "description": "Analyzing the impact of sustainable sourcing and waste reduction",
+          "readTime": "10 Minutes",
+          "category": "Market insight"
+        },
+        {
+          "title": "Sustainable Food Production",
+          "description": "Analyzing the impact of sustainable sourcing and waste reduction",
+          "readTime": "10 Minutes",
+          "category": "Market insight"
+        },
+        {
+          "title": "Sustainable Food Production",
+          "description": "Analyzing the impact of sustainable sourcing and waste reduction",
+          "readTime": "10 Minutes",
+          "category": "Market insight"
+        }
+      ]
+    }
+  },
+  "PeoplePlanet": {
+    "hero": {
+      "title": "Nourishing Communities.\nEmpowering Lives",
+      "description": "From cities to countryside, Vita is committed to supporting families, uplifting farmers, and building stronger communities across the nation",
+      "seeImpact": "See Our Impact",
+      "joinMission": "Join the Mission"
+    },
+    "commitment": {
+      "heading": "Our Commitment",
+      "text": "At Vita, we believe that real impact goes beyond <bold>products</bold>. We are dedicated to creating positive change by <bold>supporting communities</bold>, strengthening local livelihoods, and ensuring access to <bold>quality nutrition</bold> for all. Every step we take is guided by our responsibility to people and <bold>the future we share</bold>.",
+      "learnMore": "Learn More"
+    },
+    "communitySupport": {
+      "label": "Our Impact Areas",
+      "heading": "Community &\nAgricultural Support",
+      "description": "We work hand-in-hand with farmers and rural communities to create sustainable food systems, improve productivity, and enhance livelihoods across the country.",
+      "cards": {
+        "country": "For the Country Ethiopia 🇪🇹",
+        "countryDesc": "Driving national growth by creating jobs, supporting local production, and strengthening the economy.",
+        "countryside": "For the Countryside",
+        "villagers": "For Villagers",
+        "farmers": "For Farmers",
+        "families": "For Families",
+        "sustainability": "For Sustainability"
+      }
+    },
+    "charity": {
+      "heading": "Our Charity & Giving\nInitiatives",
+      "description": "Making a difference where it matters most",
+      "initiatives": [
+        {
+          "title": "Food Donation Programs",
+          "description": "Providing essential food support to families in need."
+        },
+        {
+          "title": "School Feeding Support",
+          "description": "Helping students stay nourished, focused, and ready to learn."
+        },
+        {
+          "title": "Emergency Relief Support",
+          "description": "Responding quickly to crises with food and essential aid."
+        },
+        {
+          "title": "Community Outreach Campaigns",
+          "description": "Engaging directly with communities through meaningful programs."
+        },
+        {
+          "title": "Health & Nutrition Awareness",
+          "description": "Educating families on better nutrition and healthy living."
+        },
+        {
+          "title": "Women & Youth Empowerment",
+          "description": "Creating opportunities for growth, skills, and independence."
+        },
+        {
+          "title": "Rural Development Projects",
+          "description": "Supporting long-term development in underserved areas."
+        },
+        {
+          "title": "Local Partnerships",
+          "description": "Working with organizations to maximize community impact."
+        }
+      ]
+    },
+    "impact": {
+      "label": "Take Action",
+      "heading": "Make an Impact Today",
+      "description": "Every contribution matters. Support communities through donations and help us reach more families, farmers, and those in need.",
+      "donateMoney": "Donate Money",
+      "donateInKind": "Donate In Kind"
+    },
+    "modal": {
+      "monetaryTitle": "Monetary Donation",
+      "inkindTitle": "In-Kind Donation",
+      "subtitle": "Your contribution makes a real difference",
+      "selectAmount": "Select Amount (ETB)",
+      "customAmount": "Or enter custom amount",
+      "amountPlaceholder": "Enter amount in ETB",
+      "selectItems": "Select Items to Donate",
+      "inKindItems": [
+        "Wheat Grains (bags)",
+        "Flour Products",
+        "Biscuits & Food Items",
+        "Student Equipments"
+      ],
+      "yourInfo": "Your Information",
       "fullName": "Full Name",
-      "fullNamePlaceholder": "John Doe",
-      "phone": "Phone number",
-      "phonePlaceholder": "+251 911 123 456",
+      "namePlaceholder": "Enter your name",
       "email": "Email Address",
-      "emailPlaceholder": "hello@example.com",
+      "emailPlaceholder": "your@email.com",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+251 XXX XXX XXX",
       "message": "Message",
-      "messagePlaceholder": "How can we help you?",
-      "agreeText": "I agree to the",
-      "terms": "terms & conditions",
-      "submit": "Send Message"
+      "messagePlaceholder": "Say something ...",
+      "cancel": "Cancel",
+      "donation": "Donation"
+    }
+  },
+  "Recipes": {
+    "hero": {
+      "title": "Delicious Ideas, Made Simple"
     },
-    "map": {
-      "locatedAt": "Located At",
-      "locationName": "Lideta, Alemali mall"
+    "header": {
+      "title": "Explore Recipes",
+      "description": "Simple, tasty, and made for everyday life",
+      "label": "Our Recipes Made Simple",
+      "heading": "Mix. Match. <enjoy>Enjoy</enjoy>"
+    },
+    "items": [
+      {
+        "title": "Creamy Delights",
+        "description": "Experience the rich, velvety texture of our signature cream biscuits."
+      },
+      {
+        "title": "Oreo Moments",
+        "description": "Perfectly balanced chocolate and cream for your tea time."
+      },
+      {
+        "title": "Sweet Bites",
+        "description": "Small, crunchy treats that bring big smiles to everyone."
+      },
+      {
+        "title": "Morning Fresh",
+        "description": "Start your day with our high-quality wheat flour bakes."
+      },
+      {
+        "title": "Baker's Secret",
+        "description": "The secret ingredient to all your favorite home recipes."
+      }
+    ]
+  },
+  "Research": {
+    "hero": {
+      "label": "Market and Consumer Research",
+      "title": "Smart Packaging,\nSmarter Sales",
+      "description": "Understanding how biscuit packaging influences purchasing behavior across age groups and drives sales performance in diverse retail environments in Ethiopia",
+      "callNow": "Call Now"
+    },
+    "overview": {
+      "heading": "Overview",
+      "text1": "This research explores how packaging affects consumer behavior across kids, parents, and youth, and how it impacts sales and merchandising in small shops, supermarkets, and Merkato",
+      "text2": "We also analyzed sustainable packaging trends and Ethiopia's evolving legal landscape including plastic regulations and their impact on packaging decisions",
+      "findingHeading": "Key Finding at a Glance",
+      "findingSubheading": "What matters most to different consumer segments?",
+      "legend": {
+        "kids": "Kids",
+        "parents": "Parents",
+        "youth": "Youth"
+      },
+      "chart": {
+        "taste": "Taste",
+        "packaging": "Packaging Design",
+        "nutrition": "Nutrition Info",
+        "trust": "Brand Trust",
+        "price": "Price"
+      },
+      "info": "Taste is the #1 factor across all groups. Parents value nutrition and trust more, while kids are highly influenced by packaging design."
+    },
+    "problemFraming": {
+      "heading": "Problem Framing",
+      "description": "Every good story starts with a WHY. Defining the right problem helps us find the right solution",
+      "cards": {
+        "who": {
+          "title": "Who",
+          "text": "Children, parents, youth, and retail stakeholders"
+        },
+        "what": {
+          "title": "What",
+          "text": "Packaging strongly influences buying decisions and brand perception"
+        },
+        "when": {
+          "title": "When",
+          "text": "At point-of-sale, during product discovery and purchase decisions"
+        },
+        "why": {
+          "title": "Why",
+          "text": "Visual appeal, trust, taste perception, and information drive purchases"
+        }
+      }
+    },
+    "userResearch": {
+      "heading": "User Research",
+      "description": "We collected data from key consumer segments",
+      "demographics": "Respondent Demographics",
+      "totalRespondents": "Total Respondents",
+      "peoples": "Peoples",
+      "legend": {
+        "kids": "Kids (33%)",
+        "parents": "Parents (33%)",
+        "youth": "Youth (34%)"
+      },
+      "cta": "Drop your Email to Get full Research and insight File",
+      "emailPlaceholder": "Email Address"
     }
   },
   "Sustainability": {
     "hero": {
-      "headline": "Sourced with Care, \nShared with Purpose",
-      "subtitle": "We are committed to nourishing communities while protecting the environment for future generations"
+      "headline": "Sourced with Care, Shared with Purpose",
+      "subtitle": "We are committed to nourishing communities and protecting our planet through sustainable practices and responsible sourcing."
     },
     "commitment": {
       "title": "Our Commitment",
-      "description": "We believe sustainability is not a choice — it's a responsibility. From sourcing local wheat to minimizing waste in production, every step is guided by our commitment to people and planet.",
+      "description": "At Vita, sustainability is at the heart of everything we do. We strive to create a positive impact on the environment and the communities we serve.",
       "localSourcing": {
         "title": "Local Sourcing",
         "items": [
-          "Partnering with local farmers",
-          "Supporting Ethiopian agriculture",
-          "Strengthening rural economies"
+          "Supporting local farmers",
+          "Reducing carbon footprint",
+          "Ensuring fresh ingredients"
         ]
       },
       "communityImpact": {
         "title": "Community Impact",
         "items": [
-          "150–200 jobs created",
-          "Skills development opportunities",
-          "Local economic growth"
+          "Job creation",
+          "Educational support",
+          "Health initiatives"
         ]
       },
       "responsibleProduction": {
         "title": "Responsible Production",
         "items": [
-          "Efficient manufacturing processes",
-          "Waste reduction systems",
-          "By-products reused for livestock feed"
+          "Waste reduction",
+          "Energy efficiency",
+          "Sustainable packaging"
         ]
       }
     },
     "process": {
-      "sublabel": "From farm to table, sustainability at every step",
-      "title": "Our Sustainable Process",
+      "sublabel": "Our Journey",
+      "title": "Sustainability Process",
       "farmers": {
         "heading": "Farmers",
-        "desc": "Partnering with local producers to secure quality inputs and strengthen agriculture"
+        "desc": "We work closely with local farmers to ensure sustainable agricultural practices."
       },
       "processing": {
         "heading": "Processing",
-        "desc": "Transforming raw materials with manufacturing systems focused on safety and scale"
+        "desc": "Our state-of-the-art facilities are designed for maximum efficiency and minimum waste."
       },
       "distribution": {
         "heading": "Distribution",
-        "desc": "Delivering products efficiently to retailers, wholesalers, and markets"
+        "desc": "We optimize our logistics to reduce emissions and ensure timely delivery."
       },
       "reuse": {
         "heading": "Reuse",
-        "desc": "Reducing waste with responsible recovery and value-maximizing operations"
+        "desc": "We encourage the reuse and recycling of our packaging materials."
       }
     },
     "giveBack": {
       "title": "How We Give Back",
-      "description": "We believe that business growth should benefit everyone. Through our operations and values, we actively support communities, empower local partners, and promote sustainable practices that create long-term impact.",
+      "description": "We believe in sharing our success with those who need it most.",
       "farmers": {
-        "heading": "Supporting Local Farmers",
-        "desc": "We source wheat directly from local farmers, creating stable demand and helping strengthen Ethiopia's agricultural backbone"
+        "heading": "Supporting Farmers",
+        "desc": "Providing tools and training to improve yields and livelihoods."
       },
       "employment": {
-        "heading": "Creating Employment",
-        "desc": "Our facility provides jobs for over 150–200 individuals, supporting families and contributing to local economic growth"
+        "heading": "Local Employment",
+        "desc": "Creating opportunities for growth within our communities."
       },
       "accessibility": {
-        "heading": "Food Accessibility",
-        "desc": "We aim to deliver high-quality, affordable food products that reach more communities across the country"
+        "heading": "Accessibility",
+        "desc": "Ensuring our products reach even the most remote areas."
       }
     },
     "stats": {
-      "quickFact": "Quick Fact",
       "skus": {
         "value": "+11",
         "label": "Unique SKUs for Everyone."
       },
       "biscuits": {
-        "value": "2tn",
-        "label": "Biscuits/Hour"
+        "value": "2tn"
       },
       "flour": {
         "value": "60tn",
         "label": "Tones of Flour Production/Day"
       },
+      "quickFact": "Quick Fact",
       "jobs": {
         "value": "+200",
         "label": "Jobs Created"
@@ -591,63 +634,451 @@
         "label": "Total Investment"
       },
       "export": {
-        "value": "$1.4M",
-        "label": ""
+        "value": "$1.4M"
       }
+    }
+  },
+  "Terms": {
+    "header": {
+      "label": "Legal / Documentation",
+      "title": "Terms & Conditions",
+      "lastUpdated": "Last updated: October 1, 2026"
+    },
+    "sidebar": {
+      "title": "ON THIS PAGE",
+      "items": {
+        "acceptance": "Acceptance of Terms",
+        "use": "Use of Website",
+        "content": "User Content",
+        "guidelines": "Community Guidelines",
+        "products": "Product Information",
+        "orders": "Orders and Purchases",
+        "ip": "Intellectual Property",
+        "privacy": "Privacy Policy",
+        "liability": "Limitation of Liability",
+        "contact": "Contact Us"
+      }
+    },
+    "content": {
+      "acceptance": {
+        "title": "1. Acceptance of Terms",
+        "p1": "Welcome to Vita Food Complex (\"we,\" \"our,\" or \"us\"). These Terms and Conditions govern your use of our website, products, and services. By accessing our site or purchasing our products, you agree to comply with these terms.",
+        "p2": "If you do not agree with any part of these terms, please do not use our services or purchase our products. We reserve the right to update or modify these terms at any time without prior notice.",
+        "notice": {
+          "title": "Important Notice",
+          "text": "By continuing to use our website after changes are posted, you accept the modified Terms and Conditions. We recommend reviewing this page periodically."
+        }
+      },
+      "use": {
+        "title": "2. Use of Website",
+        "p1": "You may use our website for lawful purposes only. You agree not to use our website in any way that could damage, disable, or impair the site, or interfere with any other party's use of the website.",
+        "list": [
+          "Do not attempt to gain unauthorized access to any portion of the website",
+          "Do not use automated systems to access the website without permission",
+          "Do not engage in any activity that disrupts or interferes with our services",
+          "Do not upload malicious code or viruses"
+        ]
+      },
+      "content": {
+        "title": "3. User Content",
+        "p1": "If you submit content to our community platform (such as recipes, reviews, or photos), you grant us a non-exclusive, worldwide, royalty-free license to use, reproduce, and display that content.",
+        "p2": "You represent that you own or have the necessary rights to any content you submit, and that it does not violate any third-party rights or applicable laws."
+      },
+      "guidelines": {
+        "title": "4. Community Guidelines",
+        "p1": "Our community is built on respect, collaboration, and positivity. When participating in our community features, you agree to:",
+        "list": [
+          "Be respectful and kind to other community members",
+          "Share authentic and honest content",
+          "Not post offensive, discriminatory, or inappropriate material",
+          "Not spam or post unauthorized commercial content",
+          "Not impersonate others or create fake accounts"
+        ],
+        "p2": "We reserve the right to remove any content or suspend accounts that violate these guidelines."
+      },
+      "products": {
+        "title": "5. Product Information",
+        "p1": "We strive to ensure that product descriptions, ingredients, and nutritional information on our website are accurate. However, recipes and packaging may change over time.",
+        "p2": "We recommend checking the physical packaging of the product upon delivery for the most current information. Product images are for illustration purposes and actual products may vary slightly.",
+        "allergen": {
+          "title": "Allergen Information",
+          "text": "If you have food allergies or dietary restrictions, always check the product packaging for detailed allergen information. While we provide general information online, we cannot guarantee it is always up to date."
+        }
+      },
+      "orders": {
+        "title": "6. Orders and Purchases",
+        "p1": "When placing an order through our platform, you agree to provide accurate contact and delivery information. We reserve the right to accept or decline any order for any reason, including but not limited to:",
+        "list": [
+          "Product availability",
+          "Pricing errors or system malfunctions",
+          "Delivery area restrictions",
+          "Suspected fraudulent activity"
+        ],
+        "p2": "All prices are listed in Ethiopian Birr (ETB) unless otherwise stated. Prices are subject to change without notice but will not affect orders already confirmed.",
+        "p3": "Payment must be completed at the time of order. We accept various payment methods as indicated at checkout."
+      },
+      "ip": {
+        "title": "7. Intellectual Property",
+        "p1": "All content on this website, including but not limited to logos, text, graphics, images, videos, and software, is the property of Vita Hydro-Agro Processing PLC and is protected by copyright and intellectual property laws.",
+        "p2": "You may not use, reproduce, distribute, or create derivative works from any content without our express written permission.",
+        "p3": "Trademarks, service marks, and trade names displayed on this website are registered and unregistered marks of Vita Food Complex and may not be used without permission."
+      },
+      "privacy": {
+        "title": "8. Privacy Policy",
+        "p1": "Your privacy is important to us. Information collected through order forms, newsletter signups, or community participation is securely stored and used exclusively for:",
+        "list": [
+          "Fulfilling and delivering your orders",
+          "Communicating with you about products and services",
+          "Improving our website and customer experience",
+          "Sending promotional materials (with your consent)"
+        ],
+        "p2": "We do not sell your personal data to third parties. For more detailed information about how we collect, use, and protect your data, please refer to our Privacy Policy page."
+      },
+      "liability": {
+        "title": "9. Limitation of Liability",
+        "p1": "To the fullest extent permitted by law, Vita Food Complex shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from:",
+        "list": [
+          "Your use or inability to use our website or products",
+          "Unauthorized access to or alteration of your data",
+          "Any content, conduct, or communication on our platform",
+          "Any errors or omissions in product information"
+        ],
+        "p2": "Our total liability for any claim arising out of these terms shall not exceed the amount you paid for the product or service in question.",
+        "safety": {
+          "title": "Product Safety",
+          "text": "While we maintain high quality standards, we are not liable for improper storage, handling, or consumption of products after delivery. Always follow storage instructions and check expiration dates."
+        }
+      },
+      "contact": {
+        "title": "10. Contact Us",
+        "p1": "If you have any questions about these Terms and Conditions, or need assistance with our products or services, please don't hesitate to contact us:",
+        "cta": "Get in Touch",
+        "button": "Send Message",
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Address",
+        "p2": "Our customer service team is available Monday to Friday, 9:00 AM to 6:00 PM (EAT). We typically respond to inquiries within 24-48 hours."
+      }
+    }
+  },
+  "Distributor": {
+    "hero": {
+      "label": "Grow Your Business",
+      "headline": "Become a Vita Distributor",
+      "subtitle": "Join our network and bring quality products to your community.",
+      "cta": "Apply Now"
+    },
+    "whyWork": {
+      "title": "Why Work With Vita?",
+      "description": "We offer a range of benefits to our distribution partners.",
+      "cards": {
+        "demand": "High Demand",
+        "supply": "Reliable Supply",
+        "brand": "Strong Brand",
+        "margins": "Great Margins"
+      }
+    },
+    "whoCanPartner": {
+      "sectionTitle": "Who Can Become a Distributor?",
+      "title": "Requirements",
+      "description": "We are looking for partners who meet the following criteria:",
+      "items": [
+        "Valid business license",
+        "Warehouse facility",
+        "Distribution vehicles",
+        "Financial stability",
+        "Commitment to quality"
+      ]
+    },
+    "steps": {
+      "title": "Start in 3 Easy Steps",
+      "subtitle": "Joining our network is simple and straightforward.",
+      "call": {
+        "title": "Call Us",
+        "description": "Contact our team to express your interest."
+      },
+      "discussion": {
+        "title": "Discussion",
+        "description": "We'll discuss the terms and requirements."
+      },
+      "started": {
+        "title": "Get Started",
+        "description": "Start distributing Vita products in your area."
+      }
+    },
+    "contact": {
+      "title": "Contact Our Distribution Team",
+      "description": "Reach out to our offices for more information.",
+      "offices": [
+        {
+          "name": "Addis Ababa Office",
+          "phone": "+251 911 123 456",
+          "address": "Lideta SC, Addis Ababa",
+          "coverage": "Central Region"
+        },
+        {
+          "name": "Adama Office",
+          "phone": "+251 922 123 456",
+          "address": "Main Road, Adama",
+          "coverage": "Eastern Region"
+        },
+        {
+          "name": "Hawassa Office",
+          "phone": "+251 933 123 456",
+          "address": "Lake Side, Hawassa",
+          "coverage": "Southern Region"
+        }
+      ]
+    }
+  },
+  "About": {
+    "hero": {
+      "headline": "Sourced with Care,\nShared with Purpose",
+      "subtitle": "We are committed to nourishing communities and protecting our planet through sustainable practices and responsible sourcing."
+    },
+    "company": {
+      "title": "Our Company",
+      "description": "Vita is a leading food manufacturing company dedicated to providing high-quality, nutritious products to families across Ethiopia."
+    },
+    "sisterCompanies": {
+      "label": "Our Network",
+      "title": "Sister Companies",
+      "description": "We are part of a diverse group of companies working together to drive growth and innovation.",
+      "cta": "View Gallery",
+      "visitSite": "Visit Site",
+      "longTeaCard": {
+        "blurb": "Premium tea products sourced from the finest gardens."
+      },
+      "brands": {
+        "belayabGroup": "Belayab Group",
+        "motors": "Motors",
+        "cables": "Cables",
+        "goldenTulip": "Golden Tulip",
+        "lewis": "Lewis",
+        "foods": "Foods",
+        "limestone": "Limestone"
+      },
+      "companies": {
+        "longTea": "Long Tea"
+      }
+    },
+    "whoWeAre": {
+      "who": "WHO",
+      "areWe": "ARE WE",
+      "description": "We are a team of passionate individuals dedicated to making a difference in the food industry."
+    },
+    "mv": {
+      "mission": {
+        "label": "Mission",
+        "desc": "To provide high-quality, nutritious food products that nourish families."
+      },
+      "vision": {
+        "label": "Vision",
+        "desc": "To be the leading food manufacturer in the region."
+      },
+      "values": {
+        "label": "Values",
+        "desc": "Integrity, Quality, Innovation, and Community."
+      },
+      "purpose": {
+        "label": "Purpose",
+        "desc": "To create a positive impact on people and the planet."
+      },
+      "newGen": {
+        "title": "New Generation",
+        "desc": "Empowering the next generation through nutrition and opportunity."
+      }
+    },
+    "process": {
+      "01": {
+        "heading": "Sourcing",
+        "desc": "We source the finest ingredients from local farmers.",
+        "label": "Step 01",
+        "captionTitle": "Quality Ingredients",
+        "captionDesc": "Only the best for our products."
+      },
+      "02": {
+        "heading": "Crafting",
+        "desc": "Our expert bakers craft each product with care.",
+        "label": "Step 02",
+        "captionTitle": "Expert Craftsmanship",
+        "captionDesc": "Tradition meets innovation."
+      },
+      "03": {
+        "heading": "Production",
+        "desc": "State-of-the-art production for consistent quality.",
+        "label": "Step 03",
+        "captionTitle": "Modern Production",
+        "captionDesc": "Efficiency and safety first."
+      }
+    },
+    "testimonials": {
+      "label": "Testimonials",
+      "titleLead": "What People",
+      "titleAccent": "Say",
+      "quote": "Vita has changed the way we think about snacking.",
+      "prev": "Previous",
+      "next": "Next",
+      "items": [
+        {
+          "quote": "The quality of Vita products is unmatched in the market.",
+          "author": "Abebe Kebede",
+          "role": "Retailer",
+          "image": "/assets/hero/client-1.png"
+        },
+        {
+          "quote": "My kids love the Zoo biscuits! They are healthy and tasty.",
+          "author": "Sara Tekle",
+          "role": "Parent",
+          "image": "/assets/hero/client-2.png"
+        }
+      ]
     }
   },
   "Careers": {
     "hero": {
       "headline": "Build Your Future with Vita",
-      "subtitle": "Join a growing team that is shaping the future of food in Ethiopia. We offer meaningful work, a supportive culture, and opportunities to grow your career.",
+      "subtitle": "Join a team dedicated to excellence and innovation in the food industry.",
       "cta": "View Open Positions"
     },
     "whyJoin": {
-      "title": "Why Join Vita?",
+      "title": "Why Join Vita Food Complex?",
       "benefits": {
         "growth": "Career Growth",
-        "culture": "Supportive Culture",
-        "environment": "Modern Workplace",
-        "impact": "Community Impact",
-        "innovation": "Innovation-Driven",
+        "culture": "Great Culture",
+        "environment": "Modern Environment",
+        "impact": "Global Impact",
+        "innovation": "Continuous Innovation",
         "balance": "Work-Life Balance"
       }
     },
     "openPositions": {
       "title": "Open Positions",
-      "applyNow": "Apply now"
+      "applyNow": "Apply Now"
+    },
+    "jobs": {
+      "production-manager": {
+        "title": "Production Manager",
+        "location": "Debre Sina, Ethiopia",
+        "type": "Full-time",
+        "department": "Operations",
+        "reportsTo": "Operations Director",
+        "summary": "We are looking for an experienced Production Manager to oversee daily manufacturing operations at our Debre Sina facility. You will ensure quality standards, optimize production workflows, and lead a team of dedicated professionals.",
+        "responsibilities": [
+          "Oversee daily production operations across all manufacturing lines",
+          "Ensure quality standards and compliance with food safety regulations",
+          "Manage and mentor production team members",
+          "Optimize production workflows and reduce waste",
+          "Coordinate with quality control and supply chain teams",
+          "Monitor production metrics and report on performance"
+        ],
+        "requirements": [
+          "Bachelor's degree in Engineering, Food Science, or related field",
+          "5+ years of experience in production management",
+          "Strong leadership and team management skills",
+          "Knowledge of food manufacturing processes",
+          "Excellent problem-solving and analytical abilities"
+        ],
+        "benefits": [
+          "Competitive salary and performance bonuses",
+          "Health insurance and wellness programs",
+          "Professional development opportunities",
+          "Collaborative and supportive work environment"
+        ]
+      },
+      "quality-control": {
+        "title": "Quality Control Specialist",
+        "location": "Debre Sina, Ethiopia",
+        "type": "Full-time",
+        "department": "Quality Assurance",
+        "reportsTo": "Quality Manager",
+        "summary": "We are seeking a detail-oriented Quality Control Specialist to monitor and maintain product quality standards across our manufacturing facility. You will play a critical role in ensuring every product meets our rigorous quality benchmarks.",
+        "responsibilities": [
+          "Conduct regular quality inspections of raw materials and finished products",
+          "Maintain documentation of quality control procedures and test results",
+          "Investigate and resolve quality-related issues and customer complaints",
+          "Ensure compliance with food safety regulations and industry standards",
+          "Collaborate with production teams to implement quality improvements",
+          "Calibrate and maintain quality testing equipment"
+        ],
+        "requirements": [
+          "Bachelor's degree in Food Science, Chemistry, or related field",
+          "3+ years of experience in quality control within food manufacturing",
+          "Knowledge of ISO 22000, HACCP, and other food safety standards",
+          "Strong analytical and problem-solving skills",
+          "Attention to detail and excellent documentation abilities"
+        ],
+        "benefits": [
+          "Competitive salary and benefits package",
+          "Health insurance and wellness programs",
+          "Ongoing training and certification support",
+          "Modern laboratory and testing facilities"
+        ]
+      },
+      "marketing-lead": {
+        "title": "Marketing Lead",
+        "location": "Addis Ababa, Ethiopia",
+        "type": "Full-time",
+        "department": "Marketing",
+        "reportsTo": "General Manager",
+        "summary": "We are looking for a creative and strategic Marketing Lead to drive brand awareness and market growth for Vita products. You will develop and execute comprehensive marketing strategies across multiple channels.",
+        "responsibilities": [
+          "Develop and implement comprehensive marketing strategies and campaigns",
+          "Manage brand positioning and messaging across all channels",
+          "Lead digital marketing initiatives including social media and content",
+          "Analyze market trends and competitor activities to identify opportunities",
+          "Collaborate with sales teams to align marketing with business goals",
+          "Manage marketing budget and measure campaign ROI"
+        ],
+        "requirements": [
+          "Bachelor's degree in Marketing, Business, or related field",
+          "5+ years of marketing experience, preferably in FMCG or food industry",
+          "Strong understanding of digital marketing and social media strategies",
+          "Excellent communication and leadership skills",
+          "Data-driven mindset with strong analytical capabilities"
+        ],
+        "benefits": [
+          "Competitive salary with performance-based incentives",
+          "Health insurance and wellness benefits",
+          "Creative freedom and professional growth opportunities",
+          "Dynamic and collaborative team environment"
+        ]
+      }
     },
     "details": {
+      "notFound": "Job not found",
       "tab": "Job Details",
-      "applyNow": "Apply now",
-      "summaryTitle": "Job Summary",
+      "summaryTitle": "About the Job",
       "responsibilitiesTitle": "Responsibilities",
       "requirementsTitle": "Requirements",
       "benefitsTitle": "Benefits",
-      "notFound": "Job not found"
+      "applyNow": "Apply Now",
+      "companyName": "Vita Food Complex",
+      "fullTime": "Full-time",
+      "onSite": "On-site"
     },
     "form": {
       "title": "Job Application Form",
-      "subtitle": "Fill out the form below to apply for this position. All fields are required unless otherwise noted.",
+      "subtitle": "Please fill out the form below to apply for this position.",
       "personal": {
         "title": "Personal Information",
-        "desc": "Tell us about yourself"
+        "desc": "Your basic contact details."
       },
       "professional": {
-        "title": "Professional Experience",
-        "desc": "Share your work background"
+        "title": "Professional Information",
+        "desc": "Your work experience and current role."
       },
       "education": {
         "title": "Education",
-        "desc": "Tell us about your academic background"
+        "desc": "Your academic background."
       },
       "resume": {
         "title": "Resume & Cover Letter",
-        "desc": "Upload your documents"
+        "desc": "Upload your CV and tell us why you're a good fit."
       },
       "additional": {
         "title": "Additional Information",
-        "desc": "Anything else you'd like us to know"
+        "desc": "Anything else you'd like to share."
       },
       "fields": {
         "firstName": "First Name",
@@ -655,107 +1086,131 @@
         "lastName": "Last Name",
         "lastNamePlaceholder": "Enter your last name",
         "email": "Email Address",
-        "emailPlaceholder": "you@example.com",
+        "emailPlaceholder": "your@email.com",
         "phone": "Phone Number",
-        "phonePlaceholder": "+251 911 123 456",
+        "phonePlaceholder": "+251 XXX XXX XXX",
         "address": "Address",
-        "addressPlaceholder": "Enter your full address",
+        "addressPlaceholder": "Enter your address",
         "currentRole": "Current Role",
-        "currentRolePlaceholder": "e.g. Production Supervisor",
+        "currentRolePlaceholder": "e.g. Marketing Manager",
         "yearsExperience": "Years of Experience",
         "yearsExperiencePlaceholder": "e.g. 5 years",
-        "skills": "Key Skills",
-        "skillsPlaceholder": "e.g. Team Leadership, Quality Control",
         "highestEducation": "Highest Education",
         "highestEducationPlaceholder": "e.g. Bachelor's Degree",
         "institution": "Institution",
         "institutionPlaceholder": "e.g. Addis Ababa University",
         "fieldOfStudy": "Field of Study",
-        "fieldOfStudyPlaceholder": "e.g. Food Science",
+        "fieldOfStudyPlaceholder": "e.g. Business Administration",
         "resume": "Resume/CV",
-        "coverLetter": "Cover Letter",
-        "coverLetterPlaceholder": "Tell us why you're a great fit for this role...",
-        "additionalInfo": "Additional Notes",
-        "additionalInfoPlaceholder": "Any other information you'd like to share...",
         "uploadLabel": "Click to upload or drag and drop",
-        "uploadHint": "PDF, DOC, DOCX (Max 10MB)"
+        "uploadHint": "PDF, DOC, DOCX (Max 5MB)",
+        "skills": "Skills",
+        "skillsPlaceholder": "List your key skills",
+        "coverLetter": "Cover Letter",
+        "coverLetterPlaceholder": "Tell us about yourself",
+        "additionalInfo": "Additional Information",
+        "additionalInfoPlaceholder": "Anything else?",
+        "submit": "Submit Application"
       },
       "submit": "Submit Application"
     }
   },
-  "Distributor": {
+  "NewsDetail": {
+    "categories": {
+      "companyNews": "Company news",
+      "productUpdates": "Product updates"
+    },
+    "article": {
+      "title": "Vita Food Complex: AI-Driven Food Solutions",
+      "subtitle": "Transforming Industries in 2026",
+      "description": "Discover how artificial intelligence is revolutionizing everything from healthcare to finance, and what this means for businesses and consumers alike in the coming years.",
+      "date": "January 15, 2024",
+      "readTime": "8 min read",
+      "lead": "Artificial Intelligence has moved from the realm of science fiction into our daily reality. As we navigate through 2024, the transformative power of AI is becoming increasingly evident across every sector of the economy.",
+      "section1": {
+        "title": "The Current State of AI Adoption",
+        "p1": "Organizations worldwide are rapidly integrating AI technologies into their operations. From automating routine tasks to providing sophisticated data analysis, AI is no longer a luxury but a necessity for staying competitive in today's market.",
+        "p2": "According to recent studies, over 85% of enterprises now use some form of AI in their business processes. This represents a dramatic increase from just 35% in 2020, highlighting the accelerated adoption driven by recent technological breakthroughs."
+      }
+    }
+  },
+  "Contact": {
+    "title": "Contact Us",
+    "heading": "Get in Touch",
+    "description": "We'd love to hear from you. Send us a message and we'll get back to you soon.",
+    "form": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "John Doe",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+251 XXX XXX XXX",
+      "email": "Email Address",
+      "emailPlaceholder": "your@email.com",
+      "message": "Message",
+      "messagePlaceholder": "Say something ...",
+      "agreeText": "I agree to the",
+      "terms": "Terms & Conditions",
+      "submit": "Send Message"
+    },
+    "map": {
+      "locatedAt": "Located At",
+      "locationName": "Vita Food Complex"
+    },
+    "feedback": {
+      "heading": "Give US Your <br /> Feed back",
+      "description": "Share your feedback on our distribution, products, and more to help us improve your experience!"
+    }
+  },
+  "FAQ": {
+    "heading": "Frequently Asked Questions",
+    "subtext": "Find answers to common questions about our products and services.",
+    "feedback": "Was this helpful?",
+    "items": [
+      {
+        "question": "Where can I buy Vita products?",
+        "answer": "Vita products are available in major supermarkets and shops across Ethiopia."
+      },
+      {
+        "question": "Are Vita products healthy?",
+        "answer": "Yes, our products are made with high-quality ingredients and are fortified with essential nutrients."
+      },
+      {
+        "question": "How can I become a distributor?",
+        "answer": "You can apply through our 'Become a Distributor' page or contact our sales team."
+      }
+    ]
+  },
+  "Gallery": {
     "hero": {
-      "label": "Partner With Vita",
-      "headline": "Grow Your Business with Vita",
-      "subtitle": "Join a fast-growing distribution network and bring trusted, high-quality food products to your market. Start today with a simple call — our team is ready to guide you every step of the way.",
-      "cta": "Call Now"
+      "headline": "Our Gallery",
+      "subtitle": "A glimpse into our world, community, and products.",
+      "altText": "Gallery Image"
     },
-    "whyWork": {
-      "title": "Why Work With Vita?",
-      "description": "We make it easier for you to grow. With strong demand, reliable supply, and continuous support, Vita gives you everything you need to succeed in your market.",
-      "cards": {
-        "demand": "High Market Demand",
-        "supply": "Reliable Supply Chain",
-        "brand": "Strong Brand Support",
-        "margins": "Attractive Margins"
-      }
+    "communityWall": {
+      "heading": "Community Wall",
+      "subtext": "Moments shared by our community.",
+      "altTextPrefix": "Community Moment",
+      "loadMore": "Load More"
     },
-    "whoCanPartner": {
-      "sectionTitle": "WHO CAN BECOME A DISTRIBUTOR",
-      "title": "Who Can Partner With Us?",
-      "description": "We're looking for driven partners who want to grow with a reliable and expanding brand.",
+    "partnerTestimonial": {
+      "heading": "Partners",
+      "subheading": "What They Say",
       "items": [
-        "Business owners and retailers",
-        "Distributors with local market knowledge",
-        "Ability to store and manage products",
-        "Strong commitment to growth",
-        "Long-term partnership mindset"
-      ]
-    },
-    "steps": {
-      "title": "Start in 3 Easy Steps",
-      "subtitle": "Simple Process",
-      "call": {
-        "title": "Call Our Team",
-        "description": "Reach out using one of the contact numbers below"
-      },
-      "discussion": {
-        "title": "Quick Discussion",
-        "description": "We understand your location and business"
-      },
-      "started": {
-        "title": "Get Started",
-        "description": "Receive guidance and begin distribution"
-      }
-    },
-    "contact": {
-      "title": "Contact Our Distribution Team",
-      "description": "Speak directly with our team and get started today. Choose the contact that matches your location.",
-      "offices": [
         {
-          "name": "Central Office",
-          "phone": "+251 XXX XXX XXX",
-          "address": "Addis Ababa, Ethiopia",
-          "coverage": "Nationwide coordination and support"
+          "quote": "Vita has been a great partner for our business.",
+          "author": "John Smith",
+          "title": "Retailer"
         },
         {
-          "name": "Central Office",
-          "phone": "+251 XXX XXX XXX",
-          "address": "Addis Ababa, Ethiopia",
-          "coverage": "Nationwide coordination and support"
-        },
-        {
-          "name": "Central Office",
-          "phone": "+251 XXX XXX XXX",
-          "address": "Addis Ababa, Ethiopia",
-          "coverage": "Nationwide coordination and support"
+          "quote": "We love the quality and consistency of Vita products.",
+          "author": "Jane Doe",
+          "title": "Distributor"
         }
       ]
     }
   },
   "Innovation": {
     "hero": {
-      "headline": "Shaping the Future of Food\\nThrough Innovation",
+      "headline": "Shaping the Future of Food\nThrough Innovation",
       "subtitle": "From product creation to community impact, we innovate to nourish better, smarter, and more sustainably."
     },
     "approach": {
@@ -793,7 +1248,7 @@
   "WeCare": {
     "hero": {
       "label": "WE CARE FOR ALL",
-      "title": "Nourishing Communities\\nBeyond Every Bite",
+      "title": "Nourishing Communities\nBeyond Every Bite",
       "subtitle": "Supporting Lives, Building Stronger Communities"
     },
     "heart": {
@@ -801,7 +1256,7 @@
       "desc": "At Vita, we believe food is more than nourishment — it’s a connection that brings people together. Through our initiatives, we support families, empower communities, and create meaningful impact across Ethiopia."
     },
     "driven": {
-      "title": "Driven by Care\\nGuided by Purpose",
+      "title": "Driven by Care\nGuided by Purpose",
       "desc": "Everything we do at Vita is rooted in care for people, communities, and the future. Our values guide how we nourish lives, support growth, and create meaningful impact every day.",
       "commitment": {
         "label": "Our Commitment",
@@ -836,7 +1291,7 @@
       }
     },
     "difference": {
-      "title": "How We Make a\\nDifference",
+      "title": "How We Make a\nDifference",
       "cards": {
         "education": {
           "title": "Supporting Education",
@@ -857,10 +1312,258 @@
       }
     },
     "banner": {
-      "title": "Ready to Make an\\nImpact?",
+      "title": "Ready to Make an\nImpact?",
       "desc": "Join us in our mission to nourish lives and build stronger communities.",
       "cta1": "Make an Impact",
       "cta2": "Get Involved"
     }
+  },
+  "ProductsPage": {
+    "categories": {
+      "all": "All Products",
+      "biscuits": "Biscuits",
+      "flour": "Flour"
+    },
+    "hero": {
+      "title": "Products",
+      "subtitle": "Brand Biscuit Products"
+    },
+    "backToProducts": "Back to Products",
+    "productNotFound": "Product not found",
+    "emptyState": "No products found"
+  },
+  "ProductTestimonials": {
+    "label": "Testimonials",
+    "heading": "What Our Customers Say",
+    "quote": "Vita products are simply the best!",
+    "role": "Loyal Customer",
+    "author1": "Yohannes T.",
+    "author2": "Abeba M."
+  },
+  "Nutrition": {
+    "title": "Nutrition Facts",
+    "details": "Details",
+    "dailyValue": "% Daily Value",
+    "calories": "Calories",
+    "ingredientsTitle": "Ingredients & Allergens",
+    "ingredients": "Ingredients",
+    "contains": "Contains",
+    "mayContain": "May Contain",
+    "servingSize": "Per 1 Piece (70 g)",
+    "items": {
+      "fat": "Fat",
+      "carbohydrate": "Carbohydrate",
+      "protein": "Protein",
+      "cholesterol": "Cholesterol",
+      "sodium": "Sodium",
+      "potassium": "Potassium",
+      "calcium": "Calcium",
+      "iron": "Iron"
+    },
+    "ingredientsList": {
+      "milk": "Milk",
+      "whole milk powder": "Whole milk powder",
+      "butter": "Butter",
+      "cream": "Cream",
+      "sugar": "Sugar",
+      "canola oil": "Canola oil",
+      "pistachio": "Pistachio",
+      "potassium sorbate": "Potassium sorbate",
+      "citric acid": "Citric acid",
+      "artificial flavours": "Artificial flavours",
+      "spices": "Spices",
+      "tree nuts (pistachio)": "Tree nuts (pistachio)",
+      "cashew": "Cashew",
+      "almonds": "Almonds",
+      "soy": "Soy",
+      "sesame": "Sesame",
+      "wheat": "Wheat",
+      "tree nuts": "Tree nuts"
+    }
+  },
+  "Merchandise": {
+    "label": "Merchandise",
+    "heading": "Vita Style",
+    "items": {
+      "necklace": {
+        "title": "Necklace",
+        "desc": "Stylish Vita Necklace"
+      },
+      "cap": {
+        "title": "Cap",
+        "desc": "Classic Vita Cap"
+      },
+      "tshirt": {
+        "title": "T-Shirt",
+        "desc": "Comfortable Vita T-Shirt"
+      },
+      "sweeter": {
+        "title": "Sweater",
+        "desc": "Warm Vita Sweater"
+      },
+      "signatureCap": {
+        "title": "Signature Cap",
+        "desc": "Premium Vita Cap"
+      },
+      "badge": {
+        "title": "Badge",
+        "desc": "Vita Special Badge"
+      }
+    }
+  },
+  "SocialWall": {
+    "label": "Social Wall",
+    "heading": "Join the Conversation",
+    "cta": "Explore More"
+  },
+  "Partner": {
+    "subtitle": "Our Partners",
+    "heading": "Trusted by Experts"
+  },
+  "BiscuitBrand": {
+    "label": "Our Brands",
+    "title": "A World of <br /> Flavor",
+    "description": "Discover our range of delicious biscuits <br /> made with love.",
+    "cta": "Explore Products"
+  },
+  "QuickFact": {
+    "label": "Quick Fact",
+    "skus": "Unique SKUs",
+    "flour": "Flour Production/Day",
+    "jobs": "Jobs Created",
+    "biscuits": "Biscuits/Hour",
+    "investment": "Total Investment",
+    "factorySize": "Factory Size"
+  },
+  "WhyChooseVita": {
+    "hero": {
+      "title": "A Better Choice\nfor Every Table",
+      "description": "Vita is committed to providing high-quality, nutritious food products that nourish families and support local communities.",
+      "exploreProducts": "Explore products",
+      "contactUs": "Contact US"
+    },
+    "whoAreWe": {
+      "headlineWho": "WHO",
+      "headlineAreWe": "ARE WE",
+      "standFor": " & What We Stand For",
+      "fmcgIntro": "Vita is a leading FMCG company in Ethiopia, dedicated to producing high-quality food products that meet the needs of our diverse consumers.",
+      "moreAboutCta": "More About Vita",
+      "featureCards": {
+        "trust": {
+          "title": "Built on Trust",
+          "description": "We have earned the trust of millions of families through our commitment to quality and safety."
+        },
+        "supply": {
+          "title": "Reliable Supply",
+          "description": "Our robust supply chain ensures that our products are always available when you need them."
+        },
+        "innovation": {
+          "title": "Continuous Innovation",
+          "description": "We are constantly innovating to bring you new and exciting food products."
+        },
+        "community": {
+          "title": "Community Focused",
+          "description": "We are dedicated to supporting the communities we serve through various social initiatives."
+        }
+      }
+    },
+    "sisterCompanies": {
+      "title": "Our Sister Companies",
+      "seeMore": "See More",
+      "companies": {
+        "longTea": {
+          "name": "Long Tea",
+          "category": "Beverages",
+          "description": "Premium tea products sourced from the finest tea gardens."
+        },
+        "belayabMotors": {
+          "name": "Belayab Motors",
+          "category": "Automotive",
+          "description": "Leading automotive distributor and assembler in Ethiopia."
+        },
+        "belayabCable": {
+          "name": "Belayab Cable",
+          "category": "Manufacturing",
+          "description": "High-quality electrical and telecommunication cables."
+        },
+        "belayabFoods": {
+          "name": "Belayab Foods",
+          "category": "Food & Beverage",
+          "description": "Diverse range of food products for the Ethiopian market."
+        },
+        "goldenTulip": {
+          "name": "Golden Tulip",
+          "category": "Hospitality",
+          "description": "World-class hospitality and hotel services."
+        },
+        "belayabDelivery": {
+          "name": "Belayab Delivery",
+          "category": "Logistics",
+          "description": "Efficient and reliable delivery services across the nation."
+        },
+        "aradaCoffee": {
+          "name": "Arada Coffee",
+          "category": "Beverages",
+          "description": "Authentic Ethiopian coffee experience."
+        },
+        "lionstone": {
+          "name": "Lionstone",
+          "category": "Real Estate",
+          "description": "Innovative real estate development projects."
+        },
+        "belayabPharmaceuticals": {
+          "name": "Belayab Pharmaceuticals",
+          "category": "Healthcare",
+          "description": "Essential pharmaceutical products and medical supplies."
+        },
+        "huajiaInternationalTrade": {
+          "name": "Huajia International Trade",
+          "category": "Trade",
+          "description": "Global trading and import-export services."
+        },
+        "belayabPoultryAndFeed": {
+          "name": "Belayab Poultry and Feed",
+          "category": "Agriculture",
+          "description": "Sustainable poultry farming and high-quality animal feed."
+        },
+        "belayabGeepas": {
+          "name": "Belayab Geepas",
+          "category": "Electronics",
+          "description": "Wide range of household electronics and appliances."
+        },
+        "lewisRetailsSupermarket": {
+          "name": "Lewis Retails Supermarket",
+          "category": "Retail",
+          "description": "Premium retail experience with a wide selection of products."
+        }
+      }
+    },
+    "qa": {
+      "caption": "Uplifting Every Daily Food Moment.",
+      "title": "Quality is Built Around Us!"
+    },
+    "ourProducts": {
+      "title": "Our Products",
+      "biscuits": {
+        "title": "Biscuits",
+        "description": "Delicious and crunchy biscuits for every occasion."
+      },
+      "flour": {
+        "title": "Flour",
+        "description": "Premium quality flour for all your baking needs."
+      }
+    }
+  },
+  "Hero": {
+    "connecting": "connecting",
+    "marqueeText": "A new stylish way of {connecting}!",
+    "videoAlt": "Family enjoying Vita",
+    "stylishWayPart1": "A new stylish way of",
+    "stylishWayPart2": "connecting",
+    "description": "Experience the perfect blend of nutrition and flavor with Vita's premium range of biscuits and flour products.",
+    "ourProducts": "Our Products",
+    "whyVita": "Why Vita?",
+    "secondaryQuote": "Nourishing families with every bite, bringing joy to every home.",
+    "ourClients": "Our Happy Clients"
   }
 }

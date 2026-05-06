@@ -24,6 +24,7 @@ const navLinks: { key: NavKey; href: string; hasDropdown?: boolean }[] = [
 
 export default function Navbar() {
   const t = useTranslations("Navbar");
+  const t_products = useTranslations("Products");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<NavKey | null>(null);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
@@ -192,9 +193,9 @@ export default function Navbar() {
                       {link.key === "products" && (
                         <div className="flex flex-col">
                           {[
-                            { label: "Biscuits", href: "/products?category=biscuits", desc: "Explore all biscuit products" },
-                            { label: "Flour", href: "/products?category=flour", desc: "Different purpose flour products" },
-                            { label: "Recipes", href: "/recipes", desc: "Enjoy our products even more" },
+                            { label: t("dropdowns.products.biscuits.label"), href: "/products?category=biscuits", desc: t("dropdowns.products.biscuits.desc") },
+                            { label: t("dropdowns.products.flour.label"), href: "/products?category=flour", desc: t("dropdowns.products.flour.desc") },
+                            { label: t("dropdowns.products.recipes.label"), href: "/recipes", desc: t("dropdowns.products.recipes.desc") },
                           ].map((item) => (
                             <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}
                               className="px-6 py-3 flex flex-col border-b border-white/10 last:border-0 hover:bg-white/10 transition-colors">
@@ -204,7 +205,7 @@ export default function Navbar() {
                           ))}
                           <Link href="/products" onClick={() => setMobileOpen(false)}
                             className="px-6 py-3 text-white/90 font-['Funnel_Display'] font-semibold text-[14px] flex items-center gap-2 hover:bg-white/10 transition-colors">
-                            View All Products <ArrowRight className="w-4 h-4" />
+                            {t("dropdowns.products.viewAll")} <ArrowRight className="w-4 h-4" />
                           </Link>
                         </div>
                       )}
@@ -212,10 +213,10 @@ export default function Navbar() {
                       {link.key === "company" && (
                         <div className="flex flex-col">
                           {[
-                            { label: "About Us", href: "/about", desc: "Read our story and growth" },
-                            { label: "Why Choose Vita®", href: "/why-choose-vita", desc: "What makes us special" },
-                            { label: "Careers", href: "/careers", desc: "Join our growing team" },
-                            { label: "Sustainability", href: "/sustainability", desc: "Our commitment to the planet" },
+                            { label: t("dropdowns.company.about.label"), href: "/about", desc: t("dropdowns.company.about.desc") },
+                            { label: t("dropdowns.company.whyChoose.label"), href: "/why-choose-vita", desc: t("dropdowns.company.whyChoose.desc") },
+                            { label: t("dropdowns.company.careers.label"), href: "/careers", desc: t("dropdowns.company.careers.desc") },
+                            { label: t("dropdowns.company.sustainability.label"), href: "/sustainability", desc: t("dropdowns.company.sustainability.desc") },
                           ].map((item) => (
                             <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}
                               className="px-6 py-3 flex flex-col border-b border-white/10 last:border-0 hover:bg-white/10 transition-colors">
@@ -229,9 +230,9 @@ export default function Navbar() {
                       {link.key === "people-planet" && (
                         <div className="flex flex-col">
                           {[
-                            { label: "Community", href: "/people-planet", desc: "Empowering local communities" },
-                            { label: "Innovation", href: "/research", desc: "Sustainable solutions for the future" },
-                            { label: "We Care for All®", href: "/sustainability", desc: "Our social responsibility commitment" },
+                            { label: t("dropdowns.peoplePlanet.community.label"), href: "/people-planet", desc: t("dropdowns.peoplePlanet.community.desc") },
+                            { label: t("dropdowns.peoplePlanet.innovation.label"), href: "/research", desc: t("dropdowns.peoplePlanet.innovation.desc") },
+                            { label: t("dropdowns.peoplePlanet.weCare.label"), href: "/sustainability", desc: t("dropdowns.peoplePlanet.weCare.desc") },
                           ].map((item) => (
                             <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}
                               className="px-6 py-3 flex flex-col border-b border-white/10 last:border-0 hover:bg-white/10 transition-colors">
@@ -245,9 +246,9 @@ export default function Navbar() {
                       {link.key === "resources" && (
                         <div className="flex flex-col">
                           {[
-                            { label: "Becoming Distributor", href: "/become-distributor", desc: "Become a distributor partner" },
-                            { label: "Research & Insights", href: "/research", desc: "Explore our research" },
-                            { label: "FAQs", href: "/faqs", desc: "Frequently asked questions" },
+                            { label: t("dropdowns.resources.distributor.label"), href: "/become-distributor", desc: t("dropdowns.resources.distributor.desc") },
+                            { label: t("dropdowns.resources.research.label"), href: "/research", desc: t("dropdowns.resources.research.desc") },
+                            { label: t("dropdowns.resources.faqs.label"), href: "/faqs", desc: t("dropdowns.resources.faqs.desc") },
                           ].map((item) => (
                             <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}
                               className="px-6 py-3 flex flex-col border-b border-white/10 last:border-0 hover:bg-white/10 transition-colors">
@@ -261,8 +262,8 @@ export default function Navbar() {
                       {link.key === "whats-new" && (
                         <div className="flex flex-col">
                           {[
-                            { label: "News & Articles", href: "/news", desc: "Latest news and updates" },
-                            { label: "Updates", href: "/news", desc: "Product and company updates" },
+                            { label: t("dropdowns.whatsNew.news.label"), href: "/news", desc: t("dropdowns.whatsNew.news.desc") },
+                            { label: t("dropdowns.whatsNew.updates.label"), href: "/news", desc: t("dropdowns.whatsNew.updates.desc") },
                           ].map((item) => (
                             <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)}
                               className="px-6 py-3 flex flex-col border-b border-white/10 last:border-0 hover:bg-white/10 transition-colors">
@@ -282,7 +283,7 @@ export default function Navbar() {
             <div className="px-6 py-4 border-t border-white/20 bg-black/5">
               <div className="space-y-4">
                 <div className="text-white/80 text-[14px] font-['Funnel_Display'] font-semibold uppercase tracking-wider">
-                  Select Language
+                  {t("mobile.selectLanguage")}
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   {/* English option */}
@@ -345,9 +346,9 @@ export default function Navbar() {
                 <div className="flex flex-col gap-4 xl:gap-6 w-full xl:flex-1 xl:max-w-[340px]">
                   <div className="flex flex-col gap-2 xl:gap-3">
                     {[
-                      { label: "Biscuits", desc: "Explore all our biscuit products", href: "/products?category=biscuits", img: "/assets/products/biscuit-scatter.png", bg: "bg-gray-100" },
-                      { label: "Flour", desc: "Different purpose flour products", href: "/products?category=flour", img: "https://picsum.photos/100/100?random=81", bg: "bg-[#FFF6E5]" },
-                      { label: "Recipes", desc: "Our products can always be better enjoyed", href: "/recipes", img: "https://picsum.photos/100/100?random=82", bg: "bg-[#FFF0F0]" },
+                      { label: t("dropdowns.products.biscuits.label"), desc: t("dropdowns.products.biscuits.desc"), href: "/products?category=biscuits", img: "/assets/products/biscuit-scatter.png", bg: "bg-gray-100" },
+                      { label: t("dropdowns.products.flour.label"), desc: t("dropdowns.products.flour.desc"), href: "/products?category=flour", img: "https://picsum.photos/100/100?random=81", bg: "bg-[#FFF6E5]" },
+                      { label: t("dropdowns.products.recipes.label"), desc: t("dropdowns.products.recipes.desc"), href: "/recipes", img: "https://picsum.photos/100/100?random=82", bg: "bg-[#FFF0F0]" },
                     ].map((item) => (
                       <Link key={item.href} href={item.href} onClick={() => setActiveDropdown(null)}
                         className="flex items-center justify-between p-3 xl:p-4 rounded-[14px] xl:rounded-[16px] border border-gray-200 hover:border-[#23B349] hover:bg-[#23B349]/5 transition-colors group">
@@ -363,25 +364,29 @@ export default function Navbar() {
                   </div>
                   <Link href="/products" onClick={() => setActiveDropdown(null)}
                     className="inline-flex items-center justify-center gap-2 bg-[#23B349] hover:bg-[#1A1A1A] text-white px-6 py-3 xl:py-4 rounded-[999px] font-['Funnel_Display'] text-[14px] xl:text-[16px] font-medium transition-colors w-full group">
-                    View All Products <ArrowRight className="w-4 h-4 xl:w-5 xl:h-5 group-hover:translate-x-1 transition-transform" />
+                    {t("dropdowns.products.viewAll")} <ArrowRight className="w-4 h-4 xl:w-5 xl:h-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
 
                 {/* Product name lists — hidden at lg, shown at xl */}
                 <div className="hidden xl:flex gap-16 flex-1 border-l border-gray-100 pl-12">
                   <ul className="flex flex-col gap-4">
-                    {["Zoo","Chewata","Oreo","Sina","Tafach","Marie","Marie Cream"].map((item) => (
-                      <li key={item}>
+                    {["zoo", "chewata", "oreo", "sina", "tafach-vanilla", "marie", "marie-cream"].map((id) => (
+                      <li key={id}>
                         <Link href="/products" onClick={() => setActiveDropdown(null)}
-                          className="text-gray-600 hover:text-[#23B349] text-[16px] font-medium transition-colors">{item}</Link>
+                          className="text-gray-600 hover:text-[#23B349] text-[16px] font-medium transition-colors">
+                          {t_products(`items.${id}.name`)}
+                        </Link>
                       </li>
                     ))}
                   </ul>
                   <ul className="flex flex-col gap-4">
-                    {["Bora","Cream","Glucose","Digestive","Tea Biscuit","High Energy"].map((item) => (
-                      <li key={item}>
+                    {["bora", "cream", "glucose", "digestive", "tea-biscuit", "high-energy"].map((id) => (
+                      <li key={id}>
                         <Link href="/products" onClick={() => setActiveDropdown(null)}
-                          className="text-gray-600 hover:text-[#23B349] text-[16px] font-medium transition-colors">{item}</Link>
+                          className="text-gray-600 hover:text-[#23B349] text-[16px] font-medium transition-colors">
+                          {t_products(`items.${id}.name`)}
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -396,9 +401,11 @@ export default function Navbar() {
                         className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="280px" />
                     </div>
                     <div>
-                      <p className="text-[#23B349] text-[14px] font-bold uppercase tracking-wider mb-1">Special Edition—</p>
-                      <h4 className="text-[#1A1A1A] font-['Funnel_Display'] text-[20px] font-bold group-hover:text-[#23B349] transition-colors">Sina Biscuit</h4>
-                      <p className="text-gray-500 text-[14px] mt-2">Latest product updates.</p>
+                      <p className="text-[#23B349] text-[14px] font-bold uppercase tracking-wider mb-1">{t("dropdowns.products.specialEdition")}</p>
+                      <h4 className="text-[#1A1A1A] font-['Funnel_Display'] text-[20px] font-bold group-hover:text-[#23B349] transition-colors">
+                        {t_products("items.sina.name")} {t_products("items.sina.name").toLowerCase().includes("biscuit") ? "" : "Biscuit"}
+                      </h4>
+                      <p className="text-gray-500 text-[14px] mt-2">{t("dropdowns.products.latestUpdates")}</p>
                     </div>
                   </Link>
                 </div>
@@ -413,12 +420,12 @@ export default function Navbar() {
                   <Image src="https://picsum.photos/400/300?random=55" fill className="object-cover" alt="Experiences" />
                   <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent" />
                   <div className="z-10 relative">
-                    <h3 className="font-['Funnel_Display'] text-[24px] font-bold text-[#1A1A1A]">Experiences</h3>
-                    <p className="text-gray-600 text-[14px] mt-1 font-medium">Explore all community initiatives</p>
+                    <h3 className="font-['Funnel_Display'] text-[24px] font-bold text-[#1A1A1A]">{t("dropdowns.peoplePlanet.experiences")}</h3>
+                    <p className="text-gray-600 text-[14px] mt-1 font-medium">{t("dropdowns.peoplePlanet.communityInitiatives")}</p>
                   </div>
                   <Link href="/people-planet" onClick={() => setActiveDropdown(null)}
                     className="bg-[#23B349] hover:bg-[#1A1A1A] transition-colors text-white px-6 py-2.5 rounded-full font-medium self-start z-10 flex items-center gap-2 mt-auto">
-                    See all <ArrowRight className="w-4 h-4" />
+                    {t("dropdowns.peoplePlanet.seeAll")} <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
 
@@ -426,9 +433,9 @@ export default function Navbar() {
                 <div className="flex flex-row xl:contents gap-12 flex-1">
                   <div className="flex flex-col gap-6 xl:gap-8 py-2 flex-1 xl:pl-4">
                     {[
-                      { label: "Community", desc: "Empowering local communities together", href: "/people-planet" },
-                      { label: "Innovation", desc: "Sustainable solutions for the future", href: "/research" },
-                      { label: "We Care for All®", desc: "Our social responsibility commitment", href: "/sustainability" },
+                      { label: t("dropdowns.peoplePlanet.community.label"), desc: t("dropdowns.peoplePlanet.community.desc"), href: "/people-planet" },
+                      { label: t("dropdowns.peoplePlanet.innovation.label"), desc: t("dropdowns.peoplePlanet.innovation.desc"), href: "/research" },
+                      { label: t("dropdowns.peoplePlanet.weCare.label"), desc: t("dropdowns.peoplePlanet.weCare.desc"), href: "/sustainability" },
                     ].map((item) => (
                       <Link key={item.href} href={item.href} onClick={() => setActiveDropdown(null)} className="flex flex-col group">
                         <h4 className="font-['Funnel_Display'] text-[16px] xl:text-[18px] font-bold text-[#1A1A1A] group-hover:text-[#23B349] transition-colors">{item.label}</h4>
@@ -438,8 +445,8 @@ export default function Navbar() {
                   </div>
                   <div className="flex flex-col gap-6 xl:gap-8 py-2 flex-1">
                     <Link href="/terms" onClick={() => setActiveDropdown(null)} className="flex flex-col group">
-                      <h4 className="font-['Funnel_Display'] text-[16px] xl:text-[18px] font-bold text-[#1A1A1A] group-hover:text-[#23B349] transition-colors">Terms</h4>
-                      <p className="text-gray-500 text-[13px] xl:text-[14px] mt-0.5">Legal guidelines and policies</p>
+                      <h4 className="font-['Funnel_Display'] text-[16px] xl:text-[18px] font-bold text-[#1A1A1A] group-hover:text-[#23B349] transition-colors">{t("dropdowns.peoplePlanet.terms.label")}</h4>
+                      <p className="text-gray-500 text-[13px] xl:text-[14px] mt-0.5">{t("dropdowns.peoplePlanet.terms.desc")}</p>
                     </Link>
                   </div>
                 </div>
@@ -450,10 +457,10 @@ export default function Navbar() {
             {activeDropdown === "company" && (
               <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-6 w-full xl:max-w-6xl xl:mx-auto">
                 {[
-                  { title: "About Us", desc: "Read our story and growth", href: "/about", active: true },
-                  { title: "Why Choose Vita®", desc: "What makes us special", href: "/why-choose-vita" },
-                  { title: "Careers", desc: "Join our growing and passionate team", href: "/careers" },
-                  { title: "Sustainability", desc: "Our commitment to the planet", href: "/sustainability" },
+                  { title: t("dropdowns.company.about.label"), desc: t("dropdowns.company.about.desc"), href: "/about", active: true },
+                  { title: t("dropdowns.company.whyChoose.label"), desc: t("dropdowns.company.whyChoose.desc"), href: "/why-choose-vita" },
+                  { title: t("dropdowns.company.careers.label"), desc: t("dropdowns.company.careers.desc"), href: "/careers" },
+                  { title: t("dropdowns.company.sustainability.label"), desc: t("dropdowns.company.sustainability.desc"), href: "/sustainability" },
                 ].map((item, idx) => (
                   <Link key={idx} href={item.href} onClick={() => setActiveDropdown(null)}
                     className={`flex flex-col p-4 xl:p-6 rounded-[14px] xl:rounded-[16px] hover:bg-gray-50 transition-colors group ${item.active ? "border-l-[4px] border-[#23B349] bg-gray-50" : "border-l-[4px] border-transparent"}`}>
@@ -470,9 +477,9 @@ export default function Navbar() {
                 {/* Primary links */}
                 <div className="flex flex-col gap-6 xl:gap-8 flex-1">
                   {[
-                    { label: "Becoming Distributor", desc: "Become a distributor partner", href: "/become-distributor" },
-                    { label: "Research & Insights", desc: "Explore our research insights", href: "/research" },
-                    { label: "FAQs", desc: "Frequently asked questions", href: "/faqs" },
+                    { label: t("dropdowns.resources.distributor.label"), desc: t("dropdowns.resources.distributor.desc"), href: "/become-distributor" },
+                    { label: t("dropdowns.resources.research.label"), desc: t("dropdowns.resources.research.desc"), href: "/research" },
+                    { label: t("dropdowns.resources.faqs.label"), desc: t("dropdowns.resources.faqs.desc"), href: "/faqs" },
                   ].map((item) => (
                     <Link key={item.href} href={item.href} onClick={() => setActiveDropdown(null)} className="flex flex-col group">
                       <h4 className="font-['Funnel_Display'] text-[16px] xl:text-[20px] font-bold text-[#1A1A1A] group-hover:text-[#23B349] transition-colors">{item.label}</h4>
@@ -483,10 +490,10 @@ export default function Navbar() {
 
                 {/* More pills — hidden at lg */}
                 <div className="hidden xl:flex flex-col gap-3 flex-1">
-                  <h4 className="font-['Funnel_Display'] text-[16px] font-bold text-[#1A1A1A] mb-2">More</h4>
+                  <h4 className="font-['Funnel_Display'] text-[16px] font-bold text-[#1A1A1A] mb-2">{t("dropdowns.resources.more")}</h4>
                   {[1, 2, 3].map((i) => (
                     <div key={i} className="bg-[#F5F5F5] rounded-[12px] px-5 py-3.5 flex items-center hover:bg-gray-200 transition-colors cursor-pointer">
-                      <span className="text-[14px] text-[#1A1A1A] font-medium">Explore all our biscuit products</span>
+                      <span className="text-[14px] text-[#1A1A1A] font-medium">{t("dropdowns.resources.exploreBiscuit")}</span>
                     </div>
                   ))}
                 </div>
@@ -499,8 +506,8 @@ export default function Navbar() {
                     <div className="absolute top-4 right-4 bg-white w-8 h-8 rounded-md flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
                       <ArrowRight className="w-4 h-4 text-[#FF8A00] -rotate-45" strokeWidth={3} />
                     </div>
-                    <h4 className="font-['Funnel_Display'] text-[24px] font-bold z-10 relative text-white">CreativeLibrary™</h4>
-                    <p className="text-white text-[14px] z-10 relative mt-1 font-medium">Explore all our biscuit products</p>
+                    <h4 className="font-['Funnel_Display'] text-[24px] font-bold z-10 relative text-white">{t("dropdowns.resources.creativeLibrary")}</h4>
+                    <p className="text-white text-[14px] z-10 relative mt-1 font-medium">{t("dropdowns.resources.exploreBiscuit")}</p>
                   </Link>
                 </div>
               </div>
@@ -512,8 +519,8 @@ export default function Navbar() {
                 {/* Primary links */}
                 <div className="flex flex-col gap-6 xl:gap-8 flex-1 xl:max-w-[280px]">
                   {[
-                    { label: "News & Articles", desc: "Latest news and announcements", href: "/news" },
-                    { label: "Updates", desc: "Product and company updates", href: "/news" },
+                    { label: t("dropdowns.whatsNew.news.label"), desc: t("dropdowns.whatsNew.news.desc"), href: "/news" },
+                    { label: t("dropdowns.whatsNew.updates.label"), desc: t("dropdowns.whatsNew.updates.desc"), href: "/news" },
                   ].map((item) => (
                     <Link key={item.label} href={item.href} onClick={() => setActiveDropdown(null)} className="flex flex-col group">
                       <h4 className="font-['Funnel_Display'] text-[16px] xl:text-[20px] font-bold text-[#1A1A1A] group-hover:text-[#23B349] transition-colors">{item.label}</h4>
@@ -524,7 +531,7 @@ export default function Navbar() {
 
                 {/* News cards — hidden at lg */}
                 <div className="hidden xl:flex flex-col gap-4 flex-1">
-                  <h4 className="font-['Funnel_Display'] text-[16px] font-bold text-[#1A1A1A] mb-2">Latest News</h4>
+                  <h4 className="font-['Funnel_Display'] text-[16px] font-bold text-[#1A1A1A] mb-2">{t("dropdowns.whatsNew.latestNews")}</h4>
                   {[1, 2].map((i) => (
                     <Link key={i} href="/news/vita-food-complex-ai-driven-food-solutions" onClick={() => setActiveDropdown(null)}
                       className="bg-[#F5F5F5] rounded-[16px] p-2 flex flex-col gap-3 group hover:bg-[#EBEBEB] transition-colors">
@@ -533,8 +540,8 @@ export default function Navbar() {
                           className="object-cover group-hover:scale-105 transition-transform duration-500" alt="News thumbnail" />
                       </div>
                       <div className="flex justify-between items-center px-2 pb-1">
-                        <h5 className="font-['Funnel_Display'] text-[14px] font-bold text-[#1A1A1A] group-hover:text-[#23B349] transition-colors">News & Articles Title</h5>
-                        <p className="text-gray-500 text-[12px]">6 Days</p>
+                        <h5 className="font-['Funnel_Display'] text-[14px] font-bold text-[#1A1A1A] group-hover:text-[#23B349] transition-colors">{t("dropdowns.whatsNew.newsTitle")}</h5>
+                        <p className="text-gray-500 text-[12px]">{t("dropdowns.whatsNew.daysAgo", { days: 6 })}</p>
                       </div>
                     </Link>
                   ))}
@@ -542,10 +549,10 @@ export default function Navbar() {
 
                 {/* Recent updates — hidden at lg */}
                 <div className="hidden xl:flex flex-col gap-3 flex-1">
-                  <h4 className="font-['Funnel_Display'] text-[16px] font-bold text-[#1A1A1A] mb-2">Recent Updates</h4>
+                  <h4 className="font-['Funnel_Display'] text-[16px] font-bold text-[#1A1A1A] mb-2">{t("dropdowns.whatsNew.recentUpdates")}</h4>
                   {[1, 2, 3].map((i) => (
                     <div key={i} className="bg-[#F5F5F5] rounded-[12px] px-5 py-3.5 flex items-center hover:bg-gray-200 transition-colors cursor-pointer">
-                      <span className="text-[14px] text-[#1A1A1A] font-medium">Explore all our biscuit products</span>
+                      <span className="text-[14px] text-[#1A1A1A] font-medium">{t("dropdowns.resources.exploreBiscuit")}</span>
                     </div>
                   ))}
                 </div>

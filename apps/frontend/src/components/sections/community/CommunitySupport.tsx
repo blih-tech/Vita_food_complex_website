@@ -1,7 +1,10 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function CommunitySupport() {
+  const t = useTranslations("PeoplePlanet.communitySupport");
+
   return (
     <section className="w-full bg-gradient-to-b from-[#2a9d4a] to-[#36B570] py-24 lg:py-32" id="impact">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1664px]">
@@ -9,16 +12,15 @@ export default function CommunitySupport() {
         <div className="flex flex-col lg:flex-row justify-between gap-12 mb-16">
           <div className="lg:w-1/2">
             <h4 className="text-white/80 font-['Outfit'] text-[16px] sm:text-[18px] uppercase tracking-wider mb-4">
-              Our Impact Areas
+              {t("label")}
             </h4>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] leading-[1.1] font-['Outfit'] text-white font-extrabold tracking-tight">
-              Community &<br />
-              Agricultural Support
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[72px] leading-[1.1] font-['Outfit'] text-white font-extrabold tracking-tight whitespace-pre-line">
+              {t("heading")}
             </h2>
           </div>
           <div className="lg:w-[45%] flex items-end">
             <p className="text-xl sm:text-2xl text-white/90 font-['Funnel_Display'] font-light leading-relaxed max-w-2xl">
-              We work hand-in-hand with farmers and rural communities to create sustainable food systems, improve productivity, and enhance livelihoods across the country.
+              {t("description")}
             </p>
           </div>
         </div>
@@ -43,10 +45,10 @@ export default function CommunitySupport() {
             <div className="bg-[#23B349] rounded-[24px] p-8 flex flex-col justify-between h-full min-h-[220px] group cursor-pointer hover:bg-[#1f9d40] transition-colors relative overflow-hidden">
               <div>
                 <h3 className="text-white font-['Funnel_Display'] text-2xl font-bold mb-4 flex items-center gap-2">
-                  For the Country Ethiopia 🇪🇹
+                  {t("cards.country")}
                 </h3>
                 <p className="text-white/90 font-['Outfit'] text-[16px] leading-relaxed max-w-sm">
-                  Driving national growth by creating jobs, supporting local production, and strengthening the economy.
+                  {t("cards.countryDesc")}
                 </p>
               </div>
               <div className="absolute bottom-6 right-6 w-10 h-10 bg-white rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -57,7 +59,7 @@ export default function CommunitySupport() {
             {/* Normal Cards */}
             <div className="bg-[#FFF8ED] rounded-[24px] p-8 flex flex-col justify-between min-h-[220px] group cursor-pointer hover:shadow-lg transition-all relative">
               <h3 className="text-[#23B349] font-['Funnel_Display'] text-2xl font-bold">
-                For the Countryside
+                {t("cards.countryside")}
               </h3>
               <div className="absolute bottom-6 right-6 w-10 h-10 bg-[#23B349] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                 <ArrowUpRight className="text-white w-5 h-5" />
@@ -66,7 +68,7 @@ export default function CommunitySupport() {
 
             <div className="bg-[#FFF8ED] rounded-[24px] p-8 flex flex-col justify-between min-h-[220px] group cursor-pointer hover:shadow-lg transition-all relative">
               <h3 className="text-[#23B349] font-['Funnel_Display'] text-2xl font-bold">
-                For Villagers
+                {t("cards.villagers")}
               </h3>
               <div className="absolute bottom-6 right-6 w-10 h-10 bg-[#23B349] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                 <ArrowUpRight className="text-white w-5 h-5" />
@@ -75,7 +77,7 @@ export default function CommunitySupport() {
 
             <div className="bg-[#FFF8ED] rounded-[24px] p-8 flex flex-col justify-between min-h-[220px] group cursor-pointer hover:shadow-lg transition-all relative">
               <h3 className="text-[#23B349] font-['Funnel_Display'] text-2xl font-bold">
-                For Farmers
+                {t("cards.farmers")}
               </h3>
               <div className="absolute bottom-6 right-6 w-10 h-10 bg-[#23B349] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                 <ArrowUpRight className="text-white w-5 h-5" />
@@ -84,7 +86,7 @@ export default function CommunitySupport() {
 
             <div className="bg-[#FFF8ED] rounded-[24px] p-8 flex flex-col justify-between min-h-[220px] group cursor-pointer hover:shadow-lg transition-all relative">
               <h3 className="text-[#23B349] font-['Funnel_Display'] text-2xl font-bold">
-                For Families
+                {t("cards.families")}
               </h3>
               <div className="absolute bottom-6 right-6 w-10 h-10 bg-[#23B349] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                 <ArrowUpRight className="text-white w-5 h-5" />
@@ -93,7 +95,7 @@ export default function CommunitySupport() {
 
             <div className="bg-[#FFF8ED] rounded-[24px] p-8 flex flex-col justify-between min-h-[220px] group cursor-pointer hover:shadow-lg transition-all relative">
               <h3 className="text-[#23B349] font-['Funnel_Display'] text-2xl font-bold">
-                For Sustainability
+                {t("cards.sustainability")}
               </h3>
               <div className="absolute bottom-6 right-6 w-10 h-10 bg-[#23B349] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                 <ArrowUpRight className="text-white w-5 h-5" />

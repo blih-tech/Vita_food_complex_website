@@ -4,9 +4,11 @@ import { useState } from "react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import DonationModal from "./DonationModal";
+import { useTranslations } from "next-intl";
 
 export default function MakeImpact() {
   const [modalType, setModalType] = useState<"money" | "inkind" | null>(null);
+  const t = useTranslations("PeoplePlanet.impact");
 
   return (
     <section
@@ -19,10 +21,10 @@ export default function MakeImpact() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1920px] relative z-10">
         <div className="flex flex-col items-center text-center mb-16">
           <h4 className="text-white/80 font-['Outfit'] text-[16px] sm:text-[18px] mb-4">
-            Take Action
+            {t("label")}
           </h4>
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-[80px] leading-[1.1] font-['Outfit'] font-extrabold tracking-tight text-white mb-12">
-            Make an Impact Today
+            {t("heading")}
           </h2>
         </div>
 
@@ -52,8 +54,7 @@ export default function MakeImpact() {
 
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
           <p className="text-lg sm:text-xl md:text-2xl text-white/90 font-['Funnel_Display'] font-light mb-10 leading-relaxed">
-            Every contribution matters. Support communities through donations
-            and help us reach more families, farmers, and those in need.
+            {t("description")}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center">
@@ -61,13 +62,13 @@ export default function MakeImpact() {
               onClick={() => setModalType("money")}
               className="flex items-center justify-center gap-2 bg-[#23B349] text-white px-8 py-4 rounded-[999px] font-['Funnel_Display'] text-[18px] sm:text-[20px] font-medium transition-all hover:bg-[#1f9d40] hover:scale-105"
             >
-              Donate Money <ArrowRight className="w-5 h-5" />
+              {t("donateMoney")} <ArrowRight className="w-5 h-5" />
             </button>
             <button
               onClick={() => setModalType("inkind")}
               className="flex items-center justify-center gap-2 bg-white text-[#23B349] px-8 py-4 rounded-[999px] font-['Funnel_Display'] text-[18px] sm:text-[20px] font-medium transition-all hover:bg-[#FFFBF6] hover:scale-105"
             >
-              Donate In Kind <ArrowRight className="w-5 h-5" />
+              {t("donateInKind")} <ArrowRight className="w-5 h-5" />
             </button>
           </div>
         </div>

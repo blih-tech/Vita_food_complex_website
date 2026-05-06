@@ -4,32 +4,33 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 
-const JOBS = [
-  {
-    id: "production-manager",
-    title: "Production Manager",
-    location: "Debre Sina",
-    type: "Full-time",
-    desc: "Oversee daily production operations and ensure quality standards",
-  },
-  {
-    id: "quality-control",
-    title: "Quality Control Specialist",
-    location: "Debre Sina",
-    type: "Full-time",
-    desc: "Monitor product quality and maintain compliance with standards",
-  },
-  {
-    id: "marketing-lead",
-    title: "Marketing Lead",
-    location: "Addis Ababa",
-    type: "Full-time",
-    desc: "Develop and execute marketing strategies for Vita brand growth",
-  },
-];
-
 export default function OpenPositionsSection() {
   const t = useTranslations("Careers");
+  
+  const JOBS = [
+    {
+      id: "production-manager",
+      title: t("jobs.production-manager.title"),
+      location: t("jobs.production-manager.location"),
+      type: t("jobs.production-manager.type"),
+      desc: t("jobs.production-manager.summary"),
+    },
+    {
+      id: "quality-control",
+      title: t("jobs.quality-control.title"),
+      location: t("jobs.quality-control.location"),
+      type: t("jobs.quality-control.type"),
+      desc: t("jobs.quality-control.summary"),
+    },
+    {
+      id: "marketing-lead",
+      title: t("jobs.marketing-lead.title"),
+      location: t("jobs.marketing-lead.location"),
+      type: t("jobs.marketing-lead.type"),
+      desc: t("jobs.marketing-lead.summary"),
+    },
+  ];
+
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 

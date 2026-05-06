@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Link } from "@frontend/navigation";
-import { products } from "@frontend/app/[locale]/products/data";
+import { useTranslations } from "next-intl";
 
 /* ─────────────────────────────────────────────
    Types
@@ -44,74 +44,42 @@ function FooterColumn({ title, links }: FooterColumnProps) {
 }
 
 /* ─────────────────────────────────────────────
-   Data
-   ───────────────────────────────────────────── */
-
-const footerLinks = {
-  biscuits: [
-    "Zoo",
-    "Chewata",
-    "Marie",
-    "Marie Cream",
-    "Tafach",
-    "Oreo",
-    "Bora",
-    "Cream",
-    "Digestive",
-    "Glucose",
-    "Tea Biscuit",
-  ],
-  flour: ["All Purpose", "Burger"],
-  company: [
-    { label: "Investors", href: "/about#investors" },
-    { label: "About Us", href: "/about" },
-    { label: "Why Choose Us", href: "/why-choose-vita" },
-  ],
-  resources: [
-    { label: "Research", href: "/research" },
-    { label: "Media Kit", href: "#" },
-    { label: "FAQs", href: "/faqs" },
-  ],
-  whatsNew: ["News & Articles", "Updates"],
-  peoplePlanet: [
-    "Experiences",
-    "Sustainability",
-    "Community",
-    "Innovation",
-    "We Care for All®",
-  ],
-};
-
-const mapLinks = (arr: string[], href: string): FooterLink[] =>
-  arr.map((label) => ({ label, href }));
-
-// Create product name to ID mapping for detail page navigation
-const getProductIdByName = (productName: string): string | null => {
-  const normalizedSearch = productName.toLowerCase().trim();
-  
-  const product = products.find(p => {
-    const normalizedName = p.name.toLowerCase().trim();
-    return normalizedName === normalizedSearch;
-  });
-  
-  return product?.id || null;
-};
-
-const mapProductLinks = (arr: string[]): FooterLink[] => {
-  return arr.map((label) => {
-    const productId = getProductIdByName(label);
-    return {
-      label,
-      href: productId ? `/products/${productId}` : "/products"
-    };
-  });
-};
-
-/* ─────────────────────────────────────────────
    Component
    ───────────────────────────────────────────── */
 
 export default function Footer() {
+  const t = useTranslations("Footer");
+  const tProducts = useTranslations("Products");
+
+  const footerLinks = {
+    biscuits: [
+      { label: tProducts("items.zoo.name"), id: "zoo" },
+      { label: tProducts("items.chewata.name"), id: "chewata" },
+      { label: tProducts("items.marie.name"), id: "marie" },
+      { label: tProducts("items.marie-cream.name"), id: "marie-cream" },
+      { label: tProducts("items.tafach-vanilla.name"), id: "tafach-vanilla" },
+      { label: tProducts("items.oreo.name"), id: "oreo" },
+      { label: tProducts("items.bora.name"), id: "bora" },
+      { label: tProducts("items.cream.name"), id: "cream" },
+      { label: tProducts("items.digestive.name"), id: "digestive" },
+      { label: tProducts("items.glucose.name"), id: "glucose" },
+      { label: tProducts("items.tea-biscuit.name"), id: "tea-biscuit" },
+    ],
+    flour: [
+      { label: tProducts("items.all-purpose.name"), id: "all-purpose" },
+      { label: tProducts("items.burger-flour.name"), id: "burger-flour" },
+    ],
+    company: [
+      { label: t("links.investors"), href: "/about#investors" },
+      { label: t("links.aboutUs"), href: "/about" },
+      { label: t("links.whyChooseUs"), href: "/why-choose-vita" },
+    ],
+    resources: [
+      { label: t("links.research"), href: "/research" },
+      { label: t("links.mediaKit"), href: "#" },
+      { label: t("links.faqs"), href: "/faqs" },
+    ],
+  };
   return (
     <footer className="relative w-full bg-white flex flex-col pt-16 lg:pt-24">
       {/* CTA + Newsletter */}
@@ -121,13 +89,11 @@ export default function Footer() {
           <div className="relative bg-[#90D152] rounded-t-[40px] pt-10 lg:pt-[50px] pb-10 lg:pb-[50px] px-8 lg:px-16 flex flex-col lg:flex-row items-center justify-between">
             <div className="flex flex-col gap-3 max-w-[550px] z-10">
               <h2 className="font-['Outfit'] font-black text-[#404040] text-[40px] sm:text-[56px] lg:text-[76px] leading-[0.9] tracking-[-0.02em]">
-                Let&apos;s Work Together
+                {t("ctaHeading")}
               </h2>
 
               <p className="font-['Funnel_Display'] text-[#404040] text-[15px] lg:text-[18px] opacity-90">
-                Question, business inquiry, or partnership idea?
-                <br />
-                Our team is ready to connect and support you
+                {t("ctaSubtext")}
               </p>
 
               <Link
@@ -135,7 +101,7 @@ export default function Footer() {
                 className="group inline-flex items-center gap-2 bg-white px-6 py-3 rounded-full hover:scale-[1.02] transition"
               >
                 <span className="text-[#23B349] text-[14px]">
-                  Connect with us
+                  {t("ctaButton")}
                 </span>
                 <span className="text-[#23B349] group-hover:translate-x-1 transition">
                   →
@@ -157,13 +123,13 @@ export default function Footer() {
           {/* Newsletter */}
           <div className="bg-white rounded-b-[40px] py-8 px-8 lg:px-16 flex flex-col md:flex-row items-center justify-between gap-6">
             <h3 className="font-['Outfit'] font-black text-[#23B349] text-[28px] lg:text-[52px]">
-              Get the Latest News & Updates...
+              {t("newsletterHeading")}
             </h3>
 
             <div className="flex items-center gap-4 w-full md:w-auto">
               <input
                 type="email"
-                placeholder="Email Address"
+                placeholder={t("emailPlaceholder")}
                 className="flex-1 border border-gray-300 rounded-full px-6 h-[56px] outline-none"
               />
               <button className="w-[56px] h-[56px] rounded-full bg-[#23B349] text-white hover:scale-105 transition">
@@ -189,11 +155,12 @@ export default function Footer() {
             />
 
             <div className="text-white/90 text-[13px]">
-              <p>+251 911 123 456</p>
-              <p>info@vitafoodcomplex.com</p>
+              <p>{t("contactInfo.phone")}</p>
+              <p>{t("contactInfo.email")}</p>
               <p>
-                Lideta SC, Woreda 02 <br />
-                Addis Ababa, Ethiopia
+                {t.rich("contactInfo.address", {
+                  br: () => <br />,
+                })}
               </p>
             </div>
 
@@ -209,15 +176,15 @@ export default function Footer() {
           {/* Navigation */}
           <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-10">
             <FooterColumn
-              title="Biscuits"
-              links={mapProductLinks(footerLinks.biscuits)}
+              title={t("columns.biscuits")}
+              links={footerLinks.biscuits.map(b => ({ label: b.label, href: `/products/${b.id}` }))}
             />
             <FooterColumn
-              title="Flour"
-              links={mapProductLinks(footerLinks.flour)}
+              title={t("columns.flour")}
+              links={footerLinks.flour.map(f => ({ label: f.label, href: `/products/${f.id}` }))}
             />
-            <FooterColumn title="Company" links={footerLinks.company} />
-            <FooterColumn title="Resources" links={footerLinks.resources} />
+            <FooterColumn title={t("columns.company")} links={footerLinks.company} />
+            <FooterColumn title={t("columns.resources")} links={footerLinks.resources} />
           </div>
         </div>
 
@@ -256,24 +223,23 @@ export default function Footer() {
                     href="#"
                     className="hover:text-[#23B349] transition-colors"
                   >
-                    Terms and Conditions
+                    {t("legal.terms")}
                   </Link>
                   <Link
                     href="#"
                     className="hover:text-[#23B349] transition-colors"
                   >
-                    Privacy Policy
+                    {t("legal.privacy")}
                   </Link>
                   <Link
                     href="#"
                     className="hover:text-[#23B349] transition-colors"
                   >
-                    Legal Notice
+                    {t("legal.legalNotice")}
                   </Link>
                 </div>
                 <p>
-                  © {new Date().getFullYear()} Vita Food Complex. All rights
-                  reserved.
+                  {t("legal.copyright")}
                 </p>
               </div>
             </div>

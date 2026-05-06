@@ -11,17 +11,17 @@ import {
   Clock 
 } from "lucide-react";
 
-const BENEFITS = [
-  { key: "growth", label: "Growth & Learning Opportunities", icon: GraduationCap },
-  { key: "culture", label: "Supportive Team Culture", icon: Users },
-  { key: "environment", label: "Modern Work Environment", icon: Monitor },
-  { key: "impact", label: "Real Community Impact", icon: Globe },
-  { key: "innovation", label: "Innovation-Driven Company", icon: Lightbulb },
-  { key: "balance", label: "Work-Life Balance", icon: Clock },
-];
-
 export default function WhyJoinSection() {
   const t = useTranslations("Careers");
+
+  const BENEFITS = [
+    { key: "growth", label: t("whyJoin.benefits.growth"), icon: GraduationCap },
+    { key: "culture", label: t("whyJoin.benefits.culture"), icon: Users },
+    { key: "environment", label: t("whyJoin.benefits.environment"), icon: Monitor },
+    { key: "impact", label: t("whyJoin.benefits.impact"), icon: Globe },
+    { key: "innovation", label: t("whyJoin.benefits.innovation"), icon: Lightbulb },
+    { key: "balance", label: t("whyJoin.benefits.balance"), icon: Clock },
+  ];
 
   return (
     <section

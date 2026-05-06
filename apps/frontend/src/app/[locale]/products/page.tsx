@@ -34,7 +34,7 @@ export default function ProductsPage() {
 
   return (
     <main className="flex flex-col min-h-screen bg-white">
-      <ProductsHeroSection title="Products" />
+      <ProductsHeroSection title={t("hero.title")} />
       <DecorativeCookiesSection />
       <ProductFilter
         categories={categories}

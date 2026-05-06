@@ -37,7 +37,7 @@ export default async function ProductDetailPage({
     return (
       <main className="flex flex-col min-h-screen items-center justify-center">
         <h1 className="font-['Funnel_Display'] text-3xl text-[#0f4b1f]">
-          Product not found
+          {t("productNotFound")}
         </h1>
         <Link href="/products" className="mt-4 text-[#23B349] hover:underline">
           {t("backToProducts")}

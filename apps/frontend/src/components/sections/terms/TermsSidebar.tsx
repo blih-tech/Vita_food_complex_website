@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import {
   FileText,
@@ -14,21 +15,22 @@ import {
   Mail,
 } from "lucide-react";
 
-const NAV_ITEMS = [
-  { id: "acceptance", label: "Acceptance of Terms", icon: FileText },
-  { id: "use", label: "Use of Website", icon: Globe },
-  { id: "content", label: "User Content", icon: User },
-  { id: "guidelines", label: "Community Guidelines", icon: Users },
-  { id: "products", label: "Products", icon: Package },
-  { id: "orders", label: "Orders", icon: ShoppingCart },
-  { id: "ip", label: "Intellectual Property", icon: Copyright },
-  { id: "privacy", label: "Privacy", icon: Lock },
-  { id: "liability", label: "Liability", icon: ShieldAlert },
-  { id: "contact", label: "Contact", icon: Mail },
-];
-
 export default function TermsSidebar() {
   const [activeItem, setActiveItem] = useState("acceptance");
+  const t = useTranslations("Terms.sidebar");
+
+  const NAV_ITEMS = [
+    { id: "acceptance", label: t("items.acceptance"), icon: FileText },
+    { id: "use", label: t("items.use"), icon: Globe },
+    { id: "content", label: t("items.content"), icon: User },
+    { id: "guidelines", label: t("items.guidelines"), icon: Users },
+    { id: "products", label: t("items.products"), icon: Package },
+    { id: "orders", label: t("items.orders"), icon: ShoppingCart },
+    { id: "ip", label: t("items.ip"), icon: Copyright },
+    { id: "privacy", label: t("items.privacy"), icon: Lock },
+    { id: "liability", label: t("items.liability"), icon: ShieldAlert },
+    { id: "contact", label: t("items.contact"), icon: Mail },
+  ];
 
   const scrollToSection = (id: string) => {
     setActiveItem(id);
@@ -43,7 +45,7 @@ export default function TermsSidebar() {
   return (
     <div className="bg-white rounded-[24px] p-6 lg:p-8 shadow-sm border border-gray-100 flex flex-col gap-6">
       <h3 className="font-['Funnel_Display'] font-bold text-[#1F2937] text-[18px]">
-        ON THIS PAGE
+        {t("title")}
       </h3>
       
       <nav className="flex flex-col gap-2">

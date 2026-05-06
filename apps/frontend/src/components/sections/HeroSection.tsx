@@ -28,7 +28,7 @@ const HeroContent = ({ t }: { t: any }) => (
       {/* Headline Group */}
       <div className="flex flex-col items-center mb-6 sm:mb-8 md:mb-10">
         <h2 className="font-[family-name:var(--font-outfit)] font-extrabold text-[26px] sm:text-[28px] md:text-[42px] lg:text-[56px] text-[#404040] leading-tight tracking-tight">
-          A new stylish
+          {t("stylishWayPart1")}
         </h2>
 
         <div className="flex items-center gap-3 sm:gap-4 md:gap-5 mt-[-4px] sm:mt-[-5px] md:mt-[-10px]">
@@ -41,7 +41,7 @@ const HeroContent = ({ t }: { t: any }) => (
             />
           </div>
           <h2 className="font-[family-name:var(--font-outfit)] font-extrabold text-[26px] sm:text-[28px] md:text-[42px] lg:text-[56px] text-[#404040] leading-tight tracking-tight">
-            way of
+            {t("stylishWayPart2")}
           </h2>
           <div className="relative w-10 h-10 sm:w-[42px] sm:h-[42px] md:w-[55px] md:h-[55px] lg:w-[75px] lg:h-[75px] rotate-[12deg] drop-shadow-lg transition-transform hover:scale-110 duration-300">
             <Image

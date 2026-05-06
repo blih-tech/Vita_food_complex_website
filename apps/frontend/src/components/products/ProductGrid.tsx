@@ -3,21 +3,24 @@ import Image from "next/image";
 import { Product } from "@frontend/app/[locale]/products/data";
 import { ProductCard } from "./ProductCard";
 
-const EmptyState = memo(() => (
-  <div className="w-full flex flex-col items-center justify-center py-20 text-center">
-    <div className="w-24 h-24 relative opacity-40 mb-6">
-      <Image
-        src="/assets/products/biscuts/biscut-1.png"
-        alt=""
-        fill
-        className="object-contain grayscale"
-      />
+const EmptyState = memo(() => {
+  const t = useTranslations("ProductsPage");
+  return (
+    <div className="w-full flex flex-col items-center justify-center py-20 text-center">
+      <div className="w-24 h-24 relative opacity-40 mb-6">
+        <Image
+          src="/assets/products/biscuts/biscut-1.png"
+          alt=""
+          fill
+          className="object-contain grayscale"
+        />
+      </div>
+      <h3 className="font-['Funnel_Display'] font-bold text-2xl text-gray-400 mb-2">
+        {t("emptyState")}
+      </h3>
     </div>
-    <h3 className="font-['Funnel_Display'] font-bold text-2xl text-gray-400 mb-2">
-      No products found
-    </h3>
-  </div>
-));
+  );
+});
 EmptyState.displayName = "EmptyState";
 
 export const ProductGrid = memo(({ items }: { items: Product[] }) => (

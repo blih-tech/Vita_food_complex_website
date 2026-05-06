@@ -1,8 +1,11 @@
 "use client";
 
 import { Users, HelpCircle, Clock, Target } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function ResearchProblemFramingSection() {
+  const t = useTranslations("Research.problemFraming");
+
   return (
     <section className="w-full bg-white px-4 md:px-12 lg:px-24 py-16 lg:py-32">
       <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row justify-between items-start gap-16 lg:gap-12">
@@ -10,10 +13,10 @@ export default function ResearchProblemFramingSection() {
         {/* Left Side: Text Content */}
         <div className="flex flex-col gap-6 lg:gap-8 lg:w-[45%] lg:sticky lg:top-32">
           <h2 className="font-['Outfit'] font-extrabold text-[48px] md:text-[60px] lg:text-[80px] leading-[90%] tracking-[-0.02em] text-[#23B349] uppercase">
-            Problem Framing
+            {t("heading")}
           </h2>
           <p className="font-['Funnel_Display'] font-medium text-[18px] md:text-[24px] leading-tight text-[#8A8C8A] tracking-[-0.004em] max-w-[600px]">
-            Every good story starts with a WHY. Defining the right problem helps us find the right solution
+            {t("description")}
           </p>
         </div>
 
@@ -26,10 +29,10 @@ export default function ResearchProblemFramingSection() {
               <Users className="w-6 h-6 text-[#23B349]" />
             </div>
             <h3 className="font-['Funnel_Display'] font-bold text-[28px] md:text-[32px] text-white leading-[120%] tracking-[-0.03em] mb-2 mt-4">
-              Who
+              {t("cards.who.title")}
             </h3>
             <p className="font-['Outfit'] font-normal text-[16px] md:text-[18px] text-white leading-[138%] tracking-[-0.01em]">
-              Children, parents, youth, and retail stakeholders
+              {t("cards.who.text")}
             </p>
           </div>
 
@@ -39,10 +42,10 @@ export default function ResearchProblemFramingSection() {
               <HelpCircle className="w-6 h-6 text-white" />
             </div>
             <h3 className="font-['Funnel_Display'] font-bold text-[28px] md:text-[32px] text-[#404040] leading-[120%] tracking-[-0.03em] mb-2 mt-4">
-              What
+              {t("cards.what.title")}
             </h3>
             <p className="font-['Outfit'] font-normal text-[16px] md:text-[18px] text-[#404040] leading-[138%] tracking-[-0.01em]">
-              Packaging strongly influences buying decisions and brand perception
+              {t("cards.what.text")}
             </p>
           </div>
 
@@ -52,10 +55,10 @@ export default function ResearchProblemFramingSection() {
               <Clock className="w-6 h-6 text-[#FFEC19]" />
             </div>
             <h3 className="font-['Funnel_Display'] font-bold text-[28px] md:text-[32px] text-[#404040] leading-[120%] tracking-[-0.03em] mb-2 mt-4">
-              When
+              {t("cards.when.title")}
             </h3>
             <p className="font-['Outfit'] font-normal text-[16px] md:text-[18px] text-[#404040] leading-[138%] tracking-[-0.01em]">
-              At point-of-sale, during product discovery and purchase decisions
+              {t("cards.when.text")}
             </p>
           </div>
 
@@ -65,10 +68,10 @@ export default function ResearchProblemFramingSection() {
               <Target className="w-6 h-6 text-white" />
             </div>
             <h3 className="font-['Funnel_Display'] font-bold text-[28px] md:text-[32px] text-[#404040] leading-[120%] tracking-[-0.03em] mb-2 mt-4">
-              Why
+              {t("cards.why.title")}
             </h3>
             <p className="font-['Outfit'] font-normal text-[16px] md:text-[18px] text-[#404040] leading-[138%] tracking-[-0.01em]">
-              Visual appeal, trust, taste perception, and information drive purchases
+              {t("cards.why.text")}
             </p>
           </div>
 

@@ -30,7 +30,7 @@ export default function PartnerSection() {
           {t("subtitle")}
         </p>
         <h2 className="font-['Outfit'] font-black text-[42px] sm:text-[52px] lg:text-[80px] text-[#23B349] leading-[0.92] sm:leading-[0.9] tracking-[-0.02em]">
-          Quality is Built Around Us!
+          {t("heading")}
         </h2>
       </div>
 

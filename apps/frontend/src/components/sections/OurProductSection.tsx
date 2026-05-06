@@ -10,14 +10,14 @@ export default function OurProductSection() {
 
   const products = [
     {
-      title: "Biscuit Products",
-      desc: "Reliable quality for everyday cooking",
+      title: t("ourProducts.biscuits.title"),
+      desc: t("ourProducts.biscuits.description"),
       image: "/assets/images/why-choose-vita/products-image-1.png",
       href: "/products#biscuits"
     },
     {
-      title: "Flour Products",
-      desc: "Reliable quality for everyday cooking",
+      title: t("ourProducts.flour.title"),
+      desc: t("ourProducts.flour.description"),
       image: "/assets/images/why-choose-vita/products-image-2.png",
       href: "/products#flour"
     }
@@ -28,7 +28,7 @@ export default function OurProductSection() {
       <div className="mx-auto max-w-[1400px]">
         {/* Headline */}
         <h2 className="font-[family-name:var(--font-outfit)] font-bold text-[28px] sm:text-[32px] md:text-[48px] lg:text-[64px] text-[#23B349] text-center mb-8 md:mb-16">
-          Our Products
+          {t("ourProducts.title")}
         </h2>
 
         {/* Product Cards Grid */}

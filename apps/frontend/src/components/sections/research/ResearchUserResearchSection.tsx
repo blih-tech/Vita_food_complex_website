@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function ResearchUserResearchSection() {
   const [email, setEmail] = useState("");
+  const t = useTranslations("Research.userResearch");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,10 +22,10 @@ export default function ResearchUserResearchSection() {
         {/* Header */}
         <div className="flex flex-col gap-4">
           <h2 className="font-['Funnel_Display'] font-bold text-[36px] md:text-[48px] leading-none text-[#23B349] tracking-[-0.01em]">
-            User Research
+            {t("heading")}
           </h2>
           <p className="font-['Funnel_Display'] font-medium text-[18px] md:text-[24px] text-[#8A8C8A] tracking-[-0.004em]">
-            We collected data from key consumer segments
+            {t("description")}
           </p>
         </div>
 
@@ -86,15 +88,15 @@ export default function ResearchUserResearchSection() {
             
             <div className="flex flex-col gap-6">
               <h3 className="font-['Outfit'] font-medium text-[36px] md:text-[48px] text-[#23B349] leading-tight tracking-[-0.004em]">
-                Respondent Democratics
+                {t("demographics")}
               </h3>
               
               <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
                 <span className="font-['Outfit'] font-medium text-[20px] md:text-[24px] text-[#404040]">
-                  Total Respondents
+                  {t("totalRespondents")}
                 </span>
                 <span className="font-['Funnel_Display'] font-bold text-[36px] md:text-[48px] text-[#23B349] leading-none">
-                  450+ <span className="text-[20px] md:text-[24px] font-medium text-[#404040]">Peoples</span>
+                  450+ <span className="text-[20px] md:text-[24px] font-medium text-[#404040]">{t("peoples")}</span>
                 </span>
               </div>
 
@@ -102,15 +104,15 @@ export default function ResearchUserResearchSection() {
               <div className="flex flex-col gap-8 mt-8">
                 <div className="flex items-center gap-6">
                   <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#90D152] rounded-[16px] md:rounded-[24px] shrink-0"></div>
-                  <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">Kids (33%)</span>
+                  <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">{t("legend.kids")}</span>
                 </div>
                 <div className="flex items-center gap-6">
                   <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#116D29] rounded-[16px] md:rounded-[24px] shrink-0"></div>
-                  <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">Parent&apos;s (33%)</span>
+                  <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">{t("legend.parents")}</span>
                 </div>
                 <div className="flex items-center gap-6">
                   <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#E8E8E8] rounded-[16px] md:rounded-[24px] shrink-0"></div>
-                  <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">Youth (34%)</span>
+                  <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">{t("legend.youth")}</span>
                 </div>
               </div>
             </div>
@@ -118,7 +120,7 @@ export default function ResearchUserResearchSection() {
             {/* Newsletter / File Download CTA */}
             <div className="flex flex-col gap-6 pt-8 border-t border-gray-100">
               <h4 className="font-['Funnel_Display'] font-medium text-[24px] md:text-[32px] text-[#000500] leading-tight tracking-[-0.004em] max-w-[400px]">
-                Drop your Email to Get full Research and insight File
+                {t("cta")}
               </h4>
               
               <form onSubmit={handleSubmit} className="flex items-center gap-3 sm:gap-4 w-full sm:max-w-[480px]">
@@ -126,7 +128,7 @@ export default function ResearchUserResearchSection() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email Address"
+                  placeholder={t("emailPlaceholder")}
                   required
                   className="flex-1 min-w-0 h-[48px] sm:h-[56px] px-4 sm:px-6 md:px-8 border border-[#404040] rounded-full font-['Funnel_Display'] font-medium text-[16px] sm:text-[18px] md:text-[24px] text-[#404040] placeholder:text-[#404040]/50 outline-none focus:border-[#23B349]"
                 />

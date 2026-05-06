@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Product } from "@frontend/app/[locale]/products/data";
+import { useTranslations } from "next-intl";
 
 interface ProductNutritionSectionProps {
   product: Product;
@@ -8,6 +9,7 @@ interface ProductNutritionSectionProps {
 export default function ProductNutritionSection({
   product,
 }: ProductNutritionSectionProps) {
+  const t = useTranslations("Nutrition");
   return (
     <section className="w-full bg-white px-4 md:px-8 lg:px-32 py-16 lg:py-24 z-10">
       <div className="max-w-[1664px] mx-auto flex flex-col gap-20">
@@ -19,7 +21,7 @@ export default function ProductNutritionSection({
             style={{ background: product.ui.bgColor }}
           >
             <h2 className="font-['Funnel_Display'] font-bold text-white text-3xl tracking-tight">
-              Nutritional Facts
+              {t("title")}
             </h2>
           </div>
 
@@ -31,17 +33,17 @@ export default function ProductNutritionSection({
               <div className="flex w-full pb-6 border-b border-[#E8E8E8] items-end min-w-[700px]">
                 <div className="w-5/12">
                   <span className="font-['Outfit'] font-bold text-xl md:text-3xl text-black whitespace-nowrap">
-                    Nutritional Details
+                    {t("details")}
                   </span>
                 </div>
                 <div className="w-1/3 text-right">
                   <span className="font-['Outfit'] font-normal text-lg md:text-3xl text-black tracking-tight whitespace-nowrap">
-                    {product.content?.nutrition?.servingSize}
+                    {t("servingSize")}
                   </span>
                 </div>
                 <div className="w-1/4 text-right">
                   <span className="font-['Outfit'] font-normal text-lg md:text-3xl text-black tracking-tight whitespace-nowrap">
-                    % Daily Value
+                    {t("dailyValue")}
                   </span>
                 </div>
               </div>
@@ -49,7 +51,7 @@ export default function ProductNutritionSection({
               {/* Calories Row */}
               <div className="flex w-full py-6 border-b border-[#E8E8E8] items-center min-w-[700px]">
                 <span className="font-['Outfit'] font-black text-2xl md:text-3xl uppercase text-black tracking-tighter whitespace-nowrap">
-                  CALORIES {product.content?.nutrition?.calories}
+                  {t("calories")} {product.content?.nutrition?.calories}
                 </span>
               </div>
 
@@ -61,7 +63,7 @@ export default function ProductNutritionSection({
                 >
                   <div className="w-5/12">
                     <span className="font-['Outfit'] font-medium text-lg md:text-2xl text-black whitespace-nowrap">
-                      {item.name}
+                      {t(`items.${item.name.toLowerCase()}`)}
                     </span>
                   </div>
                   <div className="w-1/3 text-right">
@@ -105,7 +107,7 @@ export default function ProductNutritionSection({
             style={{ background: product.ui.bgColor }}
           >
             <h2 className="font-['Funnel_Display'] font-bold text-white text-3xl tracking-tight">
-              Ingredients & Allergens
+              {t("ingredientsTitle")}
             </h2>
           </div>
 
@@ -113,9 +115,9 @@ export default function ProductNutritionSection({
           <div className="w-full rounded-b-3xl border-b border-l border-r border-[#E8E8E8] px-7 py-14 lg:px-7 lg:pb-28">
             <div className="flex flex-col gap-10 max-w-7xl">
               <p className="font-['Outfit'] font-normal text-xl md:text-3xl leading-snug tracking-tight text-black">
-                Ingredients:{" "}
+                {t("ingredients")}:{" "}
                 {product.content?.ingredients?.list
-                  .map((i) => i.name)
+                  .map((i) => t(`ingredientsList.${i.name.toLowerCase()}`))
                   .join(", ")}
                 .
               </p>
@@ -123,16 +125,22 @@ export default function ProductNutritionSection({
                 {product.content?.ingredients?.contains &&
                   product.content.ingredients.contains.length > 0 && (
                     <>
-                      Contains:{" "}
-                      {product.content.ingredients.contains.join(", ")}.
+                      {t("contains")}:{" "}
+                      {product.content.ingredients.contains
+                        .map((c) => t(`ingredientsList.${c.toLowerCase()}`))
+                        .join(", ")}
+                      .
                       <br />
                     </>
                   )}
                 {product.content?.ingredients?.mayContain &&
                   product.content.ingredients.mayContain.length > 0 && (
                     <>
-                      May Contain:{" "}
-                      {product.content.ingredients.mayContain.join(", ")}.
+                      {t("mayContain")}:{" "}
+                      {product.content.ingredients.mayContain
+                        .map((m) => t(`ingredientsList.${m.toLowerCase()}`))
+                        .join(", ")}
+                      .
                     </>
                   )}
               </p>

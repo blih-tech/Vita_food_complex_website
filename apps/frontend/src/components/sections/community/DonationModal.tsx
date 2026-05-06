@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { X, Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface DonationModalProps {
   isOpen: boolean;
@@ -13,6 +14,7 @@ export default function DonationModal({ isOpen, onClose, type }: DonationModalPr
   const [selectedAmount, setSelectedAmount] = useState<string | null>(null);
   const [customAmount, setCustomAmount] = useState<string>("");
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const t = useTranslations("PeoplePlanet.modal");
 
   if (!isOpen) return null;
 
@@ -23,12 +25,7 @@ export default function DonationModal({ isOpen, onClose, type }: DonationModalPr
   };
 
   const predefinedAmounts = ["500", "1,000", "2,500", "5,000", "10,000"];
-  const inKindItems = [
-    "Wheat Grains (bags)",
-    "Flour Products",
-    "Biscuits & Food Items",
-    "Student Equipments",
-  ];
+  const inKindItems: string[] = t.raw("inKindItems");
 
   const toggleItem = (item: string) => {
     setSelectedItems((prev) =>
@@ -46,10 +43,10 @@ export default function DonationModal({ isOpen, onClose, type }: DonationModalPr
         <div className="flex items-center justify-between px-8 py-6 border-b border-gray-200 sticky top-0 bg-white z-10">
           <div>
             <h2 className="font-['Funnel_Display'] text-[24px] font-semibold text-[#000500] leading-none mb-2">
-              {type === "money" ? "Monetary Donation" : "In-Kind Donation"}
+              {type === "money" ? t("monetaryTitle") : t("inkindTitle")}
             </h2>
             <p className="font-['Outfit'] text-[14px] text-[#333733]">
-              Your contribution makes a real difference
+              {t("subtitle")}
             </p>
           </div>
           <button
@@ -67,7 +64,7 @@ export default function DonationModal({ isOpen, onClose, type }: DonationModalPr
               {/* Select Amount */}
               <div className="flex flex-col gap-3">
                 <label className="font-['Funnel_Display'] text-[16px] font-medium text-[#000500]">
-                  Select Amount (ETB)
+                  {t("selectAmount")}
                 </label>
                 <div className="flex flex-wrap gap-4">
                   {predefinedAmounts.map((amount) => (
@@ -92,11 +89,11 @@ export default function DonationModal({ isOpen, onClose, type }: DonationModalPr
               {/* Custom Amount */}
               <div className="flex flex-col gap-2">
                 <label className="font-['Outfit'] text-[14px] text-[#333733]">
-                  Or enter custom amount
+                  {t("customAmount")}
                 </label>
                 <input
                   type="number"
-                  placeholder="Enter amount in ETB"
+                  placeholder={t("amountPlaceholder")}
                   value={customAmount}
                   onChange={(e) => {
                     setCustomAmount(e.target.value);
@@ -109,7 +106,7 @@ export default function DonationModal({ isOpen, onClose, type }: DonationModalPr
           ) : (
             <div className="flex flex-col gap-4">
               <label className="font-['Funnel_Display'] text-[16px] font-medium text-[#000500]">
-                Select Items to Donate
+                {t("selectItems")}
               </label>
               <div className="flex flex-col gap-3">
                 {inKindItems.map((item) => {
@@ -141,48 +138,48 @@ export default function DonationModal({ isOpen, onClose, type }: DonationModalPr
           {/* Information Form */}
           <div className="flex flex-col gap-5">
             <h3 className="font-['Funnel_Display'] text-[18px] font-bold text-[#000500]">
-              Your Information
+              {t("yourInfo")}
             </h3>
 
             <div className="flex flex-col gap-2">
               <label className="font-['Outfit'] text-[14px] text-[#000500]">
-                Full Name <span className="text-red-500">*</span>
+                {t("fullName")} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
-                placeholder="Enter your name"
+                placeholder={t("namePlaceholder")}
                 className="w-full border border-gray-300 rounded-md px-4 py-3 font-['Outfit'] text-[14px] focus:outline-none focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349] transition-all"
               />
             </div>
 
             <div className="flex flex-col gap-2">
               <label className="font-['Outfit'] text-[14px] text-[#000500]">
-                Email Address <span className="text-red-500">*</span>
+                {t("email")} <span className="text-red-500">*</span>
               </label>
               <input
                 type="email"
-                placeholder="your@email.com"
+                placeholder={t("emailPlaceholder")}
                 className="w-full border border-gray-300 rounded-md px-4 py-3 font-['Outfit'] text-[14px] focus:outline-none focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349] transition-all"
               />
             </div>
 
             <div className="flex flex-col gap-2">
               <label className="font-['Outfit'] text-[14px] text-[#000500]">
-                Phone Number <span className="text-red-500">*</span>
+                {t("phone")} <span className="text-red-500">*</span>
               </label>
               <input
                 type="tel"
-                placeholder="+251 XXX XXX XXX"
+                placeholder={t("phonePlaceholder")}
                 className="w-full border border-gray-300 rounded-md px-4 py-3 font-['Outfit'] text-[14px] focus:outline-none focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349] transition-all"
               />
             </div>
 
             <div className="flex flex-col gap-2">
               <label className="font-['Outfit'] text-[14px] text-[#000500]">
-                Message
+                {t("message")}
               </label>
               <textarea
-                placeholder="Say something ..."
+                placeholder={t("messagePlaceholder")}
                 rows={4}
                 className="w-full border border-gray-300 rounded-md px-4 py-3 font-['Outfit'] text-[14px] focus:outline-none focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349] transition-all resize-none"
               ></textarea>
@@ -196,10 +193,10 @@ export default function DonationModal({ isOpen, onClose, type }: DonationModalPr
             onClick={onClose}
             className="flex-1 py-4 bg-[#E6E6E6] text-[#000500] font-['Outfit'] text-[18px] rounded-full hover:bg-gray-300 transition-colors"
           >
-            Cancel
+            {t("cancel")}
           </button>
           <button className="flex-1 py-4 bg-[#23B349] text-white font-['Outfit'] text-[18px] rounded-full hover:bg-[#1f9d40] shadow-[0px_8px_12px_-2.4px_rgba(0,0,0,0.1)] transition-colors">
-            Donation
+            {t("donation")}
           </button>
         </div>
       </div>

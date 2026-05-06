@@ -1,16 +1,20 @@
 import React from 'react';
+import { useTranslations } from "next-intl";
 
 export function FeedbackSection() {
+  const t = useTranslations("Contact");
   return (
     <section className="w-full bg-white px-6 lg:px-24 py-16 pb-24 flex justify-center relative z-10">
       <div className="w-full max-w-[1100px] bg-[#23B349] rounded-[40px] p-8 md:p-12 lg:p-20 flex flex-col items-center text-center shadow-xl relative overflow-hidden">
         
         <h2 className="font-['Funnel_Display'] font-black text-6xl md:text-7xl lg:text-[100px] text-white mb-6 leading-[0.9] tracking-tighter drop-shadow-sm">
-          Give US Your <br /> Feed back
+          {t.rich("feedback.heading", {
+            br: () => <br />
+          })}
         </h2>
         
         <p className="font-['Outfit'] text-white md:text-xl lg:text-[22px] mb-12 max-w-4xl leading-snug drop-shadow-sm">
-          Share your feedback on our distribution, products, and more to help us improve your experience!
+          {t("feedback.description")}
         </p>
 
         <form className="w-full max-w-5xl flex flex-col gap-6">
@@ -18,18 +22,18 @@ export function FeedbackSection() {
             {/* Left Column */}
             <div className="flex flex-col gap-4 md:gap-6">
               <div className="bg-white rounded-[24px] p-5 md:p-6 text-left flex flex-col gap-1.5 shadow-sm">
-                <label className="font-['Outfit'] font-bold text-[#333333] text-[15px] md:text-[17px]">Full Name*</label>
+                <label className="font-['Outfit'] font-bold text-[#333333] text-[15px] md:text-[17px]">{t("form.fullName")}*</label>
                 <input 
                   type="text" 
-                  placeholder="John Doe" 
+                  placeholder={t("form.fullNamePlaceholder")} 
                   className="w-full font-['Outfit'] text-[15px] md:text-[17px] text-[#888888] bg-transparent focus:outline-none placeholder:text-[#BBBBBB]"
                 />
               </div>
               <div className="bg-white rounded-[24px] p-5 md:p-6 text-left flex flex-col gap-1.5 shadow-sm">
-                <label className="font-['Outfit'] font-bold text-[#333333] text-[15px] md:text-[17px]">Email Address*</label>
+                <label className="font-['Outfit'] font-bold text-[#333333] text-[15px] md:text-[17px]">{t("form.email")}*</label>
                 <input 
                   type="email" 
-                  placeholder="johndoe@example.com" 
+                  placeholder={t("form.emailPlaceholder")} 
                   className="w-full font-['Outfit'] text-[15px] md:text-[17px] text-[#888888] bg-transparent focus:outline-none placeholder:text-[#BBBBBB]"
                 />
               </div>
@@ -37,15 +41,16 @@ export function FeedbackSection() {
 
             {/* Right Column */}
             <div className="bg-white rounded-[24px] p-5 md:p-6 text-left flex flex-col gap-1.5 shadow-sm relative min-h-[200px] md:min-h-full">
-              <label className="font-['Outfit'] font-bold text-[#333333] text-[15px] md:text-[17px]">Message*</label>
+              <label className="font-['Outfit'] font-bold text-[#333333] text-[15px] md:text-[17px]">{t("form.message")}*</label>
               <textarea 
+                placeholder={t("form.messagePlaceholder")}
                 className="w-full h-full font-['Outfit'] text-[15px] md:text-[17px] text-[#888888] bg-transparent focus:outline-none resize-none pb-12"
               ></textarea>
               <button 
                 type="button" 
                 className="absolute bottom-4 right-4 md:bottom-6 md:right-6 bg-[#E5E5E5] text-[#888888] px-8 py-2.5 rounded-full font-['Outfit'] font-bold text-[15px] hover:bg-[#D5D5D5] transition-colors"
               >
-                Send
+                {t("form.submit")}
               </button>
             </div>
           </div>
@@ -59,7 +64,7 @@ export function FeedbackSection() {
               </svg>
             </div>
             <p className="font-['Outfit'] text-white text-[13px] md:text-[15px] leading-snug">
-              *Yes, I want to receive updates, promotions, and offers from Vita Food Complex. I know I can unsubscribe anytime.
+              {t("form.agreeText")} {t("form.terms")}
             </p>
           </div>
         </form>

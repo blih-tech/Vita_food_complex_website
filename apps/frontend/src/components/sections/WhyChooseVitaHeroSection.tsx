@@ -12,9 +12,9 @@ export default function WhyChooseVitaHeroSection() {
       <div className="relative z-10 mx-auto px-4 flex flex-col items-center text-center max-w-[1200px]">
         {/* Headline — Outfit 800, Brand Green */}
         <h1
-          className="font-[family-name:var(--font-outfit)] font-extrabold text-[32px] sm:text-[40px] md:text-[64px] lg:text-[80px] text-[#23B349] leading-[1.1] tracking-tight mb-6"
+          className="font-[family-name:var(--font-outfit)] font-extrabold text-[32px] sm:text-[40px] md:text-[64px] lg:text-[80px] text-[#23B349] leading-[1.1] tracking-tight mb-6 whitespace-pre-line"
         >
-          A Better Choice <br className="hidden sm:block" /> for Every Table
+          {t("hero.title")}
         </h1>
 
         {/* Subtitle — Funnel Display 500 */}
@@ -30,13 +30,13 @@ export default function WhyChooseVitaHeroSection() {
             href="/products"
             className="bg-[#23B349] text-white px-8 py-3 md:py-4 rounded-full font-bold text-[16px] md:text-[18px] transition-transform hover:scale-105 text-center"
           >
-            Explore products →
+            {t("hero.exploreProducts")} →
           </Link>
           <Link
             href="/contact"
             className="border-[2px] border-[#404040]/20 text-[#404040] px-8 py-3 md:py-4 rounded-full font-bold text-[16px] md:text-[18px] transition-transform hover:bg-[#404040]/5 text-center"
           >
-            Contact US
+            {t("hero.contactUs")}
           </Link>
         </div>
       </div>

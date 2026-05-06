@@ -20,12 +20,12 @@ export default function QualityAssuranceSection() {
         
         {/* Caption Label */}
         <span className="font-[family-name:var(--font-funnel-display)] font-medium text-[14px] md:text-[16px] text-[#404040]/50 mb-4 text-center">
-          Uplifting Every Daily Food Moment.
+          {t("qa.caption")}
         </span>
 
         {/* Headline */}
         <h2 className="font-[family-name:var(--font-outfit)] font-bold text-[28px] sm:text-[32px] md:text-[48px] lg:text-[64px] text-[#23B349] text-center mb-8 md:mb-16">
-          Quality is Built Around Us!
+          {t("qa.title")}
         </h2>
 
         {/* Certifications Row */}

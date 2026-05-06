@@ -2,52 +2,39 @@ import React from "react";
 import Image from "next/image";
 import { Link } from "@frontend/navigation";
 import { Play } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function LatestNewsSection() {
+  const t = useTranslations("News.latestNews");
+  const t_horizontal = t.raw("horizontalArticles") as { title: string; category: string; date: string }[];
+  const t_grid = t.raw("gridArticles") as { title: string; readTime: string }[];
+
   const horizontalArticles = [
     {
-      title: "The Rise of Modern Snacking Culture in Ethiopia",
-      category: "Updates",
-      date: "Feb 9, 2026",
       image: "https://picsum.photos/400/300?random=1",
     },
     {
-      title: "The Rise of Modern Snacking Culture in Ethiopia",
-      category: "Updates",
-      date: "Feb 9, 2026",
       image: "https://picsum.photos/400/300?random=2",
     },
   ];
 
   const gridArticles = [
     {
-      title: "The Rise of Modern Snacking Culture in Ethiopia",
-      readTime: "20 mins read",
       image: "https://picsum.photos/600/400?random=3",
     },
     {
-      title: "Vita Flour: Supporting Every Home Kitchen",
-      readTime: "4 mins read",
       image: "https://picsum.photos/600/400?random=4",
     },
     {
-      title: "Inside Vita's \"House of Brands\" Strategy",
-      readTime: "4 mins read",
       image: "https://picsum.photos/600/400?random=5",
     },
     {
-      title: "Vita Flour: Supporting Every Home Kitchen",
-      readTime: "4 mins read",
       image: "https://picsum.photos/600/400?random=6",
     },
     {
-      title: "The Rise of Modern Snacking Culture in Ethiopia",
-      readTime: "20 mins read",
       image: "https://picsum.photos/600/400?random=7",
     },
     {
-      title: "Inside Vita's \"House of Brands\" Strategy",
-      readTime: "4 mins read",
       image: "https://picsum.photos/600/400?random=8",
     },
   ];
@@ -57,7 +44,7 @@ export default function LatestNewsSection() {
       {/* Header */}
       <div className="flex flex-col w-full gap-4">
         <h2 className="font-funnel-display text-4xl md:text-[48px] leading-none text-[#202124]">
-          Latest News
+          {t("heading")}
         </h2>
         <div className="w-full h-0 border-t-[1.26px] border-[#202124]"></div>
       </div>
@@ -84,12 +71,12 @@ export default function LatestNewsSection() {
           {/* Info */}
           <div className="absolute bottom-8 left-8 flex flex-col gap-3">
             <h3 className="font-funnel-display font-medium text-2xl text-white underline decoration-1 underline-offset-4">
-              Vita Flour: Supporting Every Home Kitchen
+              {t("featuredArticle.title")}
             </h3>
             <div className="flex items-center gap-4 text-white/90">
-              <span className="font-outfit font-light text-base">Updates</span>
+              <span className="font-outfit font-light text-base">{t("featuredArticle.category")}</span>
               <div className="w-4 h-[1.26px] bg-white"></div>
-              <span className="font-outfit font-light text-base">Sep 6, 2024</span>
+              <span className="font-outfit font-light text-base">{t("featuredArticle.date")}</span>
             </div>
           </div>
         </Link>
@@ -100,18 +87,18 @@ export default function LatestNewsSection() {
             <Link key={idx} href="/news/vita-food-complex-ai-driven-food-solutions" className="group flex flex-col sm:flex-row items-center gap-6 w-full h-full sm:h-[290px]">
               <div className="flex flex-col gap-4 flex-1 py-4 sm:py-8">
                 <h3 className="font-funnel-display font-medium text-xl leading-snug text-[#27221B]/80 group-hover:text-[#23B349] transition-colors">
-                  {article.title}
+                  {t_horizontal[idx]?.title}
                 </h3>
                 <div className="flex items-center gap-4 text-[#202124]">
-                  <span className="font-outfit font-light text-base">{article.category}</span>
+                  <span className="font-outfit font-light text-base">{t_horizontal[idx]?.category}</span>
                   <div className="w-4 h-[1.26px] bg-[#202124]/50"></div>
-                  <span className="font-outfit font-light text-base">{article.date}</span>
+                  <span className="font-outfit font-light text-base">{t_horizontal[idx]?.date}</span>
                 </div>
               </div>
               <div className="relative w-full sm:w-[383px] aspect-[4/3] sm:h-full rounded-3xl overflow-hidden shrink-0">
                 <Image
                   src={article.image}
-                  alt={article.title}
+                  alt={t_horizontal[idx]?.title || ""}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 640px) 100vw, 383px"
@@ -129,7 +116,7 @@ export default function LatestNewsSection() {
             <div className="relative w-full aspect-[16/10] lg:h-[346px] rounded-2xl overflow-hidden">
               <Image
                 src={article.image}
-                alt={article.title}
+                alt={t_grid[idx]?.title || ""}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -138,11 +125,11 @@ export default function LatestNewsSection() {
             <div className="flex flex-col gap-2">
               <div className="flex justify-end">
                 <span className="font-outfit text-sm text-[#512727]/85 text-right">
-                  {article.readTime}
+                  {t_grid[idx]?.readTime}
                 </span>
               </div>
               <h3 className="font-funnel-display font-medium text-xl leading-tight text-[#27221B]/80 group-hover:text-[#23B349] transition-colors">
-                {article.title}
+                {t_grid[idx]?.title}
               </h3>
             </div>
           </Link>

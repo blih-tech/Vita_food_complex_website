@@ -9,6 +9,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 export default function ProductsSection() {
   const t = useTranslations("Products");
+  const t_page = useTranslations("ProductsPage");
   const [emblaRef] = useEmblaCarousel(
     { align: "start", loop: true },
     [Autoplay({ delay: 4000, stopOnInteraction: false })]
@@ -31,7 +32,7 @@ export default function ProductsSection() {
           {/* Background Large Text (Perfectly centered via flex) */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 mix-blend-overlay opacity-70 px-4">
             <h2 className="font-['Funnel_Display'] font-black text-[26vw] sm:text-[24vw] md:text-[22vw] text-white leading-none uppercase tracking-tight whitespace-nowrap drop-shadow-sm select-none">
-              {product.name}
+              {t(`items.${product.id}.name`)}
             </h2>
           </div>
 
@@ -40,7 +41,7 @@ export default function ProductsSection() {
             <div className="relative w-[90vw] max-w-[1200px] aspect-[16/8] md:aspect-[16/7] lg:aspect-[16/6] animate-product-float drop-shadow-2xl">
               <Image
                 src={product.media.image}
-                alt={`Vita ${product.name}`}
+                alt={`Vita ${t(`items.${product.id}.name`)}`}
                 fill
                 className={`object-contain ${index % 2 === 0 ? "rotate-[-2deg]" : "rotate-[15deg] lg:rotate-0"}`}
                 priority={index < 2}
@@ -83,7 +84,7 @@ export default function ProductsSection() {
                 className="font-['Funnel_Display'] font-semibold text-[28px] lg:text-[48px] leading-none flex items-center gap-2 transition-transform duration-300 group-hover:translate-x-2"
                 style={{ color: product.ui.textColor }}
               >
-                Vita {product.name}
+                Vita {t(`items.${product.id}.name`)}
                 <span className="text-[20px] lg:text-[48px] font-light" style={{ color: product.ui.textColor }}>
                   ↗
                 </span>
@@ -92,7 +93,7 @@ export default function ProductsSection() {
                 className="font-['Funnel_Display'] font-medium text-[14px] lg:text-[24px] tracking-tight mt-1"
                 style={{ color: product.ui.textColor }}
               >
-                {product.category}
+                {t_page(`categories.${product.category.toLowerCase()}`)}
               </p>
             </Link>
           </div>

@@ -41,7 +41,7 @@ export default function QuickFactSection() {
               +11
             </div>
             <p className="font-['Funnel_Display'] font-medium text-base sm:text-lg md:text-lg text-[#404040]">
-              Unique SKUs for Everyone.
+              {t("skus")}
             </p>
           </div>
 
@@ -51,7 +51,7 @@ export default function QuickFactSection() {
               60tn
             </div>
             <p className="font-['Funnel_Display'] font-medium text-base sm:text-lg md:text-lg text-[#404040]">
-              Tones of Flour Production/Day
+              {t("flour")}
             </p>
           </div>
 
@@ -61,7 +61,7 @@ export default function QuickFactSection() {
               +200
             </div>
             <p className="font-['Funnel_Display'] font-medium text-base sm:text-lg md:text-lg text-[#404040]">
-              Jobs Created
+              {t("jobs")}
             </p>
           </div>
 
@@ -72,7 +72,7 @@ export default function QuickFactSection() {
               2tn
             </div>
             <p className="font-['Funnel_Display'] font-medium text-sm sm:text-base md:text-base text-[#404040]">
-              Biscuits/Hour
+              {t("biscuits")}
             </p>
           </div>
 
@@ -80,7 +80,7 @@ export default function QuickFactSection() {
           <div className="md:col-span-3 relative flex justify-center items-center z-30 py-6 md:py-0 pointer-events-none">
             <div className="bg-[#23B349] rounded-[2rem] px-8 py-4 md:px-10 md:py-6 flex items-center justify-center ring-[8px] md:ring-[16px] ring-white md:absolute pointer-events-auto shadow-2xl hover:scale-105 transition-transform">
               <h2 className="font-['Outfit'] font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-[64px] text-white leading-none tracking-[-0.02em] whitespace-nowrap">
-                Quick Fact
+                {t("label")}
               </h2>
             </div>
           </div>
@@ -96,7 +96,7 @@ export default function QuickFactSection() {
                 Br210M
               </div>
               <p className="font-['Funnel_Display'] font-medium text-base sm:text-lg md:text-xl text-[#404040] text-center md:text-left">
-                Total Investment
+                {t("investment")}
               </p>
             </div>
           </div>
@@ -108,7 +108,7 @@ export default function QuickFactSection() {
               22Km²
             </div>
             <p className="font-['Funnel_Display'] font-medium text-base sm:text-lg md:text-lg text-[#404040]">
-              Factory Size in Square Kilometer
+              {t("factorySize")}
             </p>
           </div>
         </div>

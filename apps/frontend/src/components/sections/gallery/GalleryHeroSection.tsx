@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 
 const GALLERY_IMAGES = [
   "https://picsum.photos/444/373?random=1",
@@ -14,6 +15,7 @@ const GALLERY_IMAGES = [
 ];
 
 export default function GalleryHeroSection() {
+  const t = useTranslations("Gallery.hero");
   const scrollRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -21,11 +23,10 @@ export default function GalleryHeroSection() {
       {/* Text Content */}
       <div className="flex flex-col items-center gap-4 max-w-3xl mx-auto px-6 text-center z-10 relative">
         <h1 className="font-['Funnel_Display'] font-bold text-[#23B349] text-5xl md:text-[80px] leading-[1.2] tracking-[-0.03em]">
-          Together We Grow
+          {t("headline")}
         </h1>
         <p className="font-['Outfit'] text-[#333733] text-lg md:text-[24px] leading-relaxed max-w-xl">
-          Join us at our local events, activations, and see how the Vita Food
-          family celebrates life, togetherness, and good food.
+          {t("subtitle")}
         </p>
       </div>
 
@@ -64,7 +65,7 @@ export default function GalleryHeroSection() {
             >
               <Image
                 src={src}
-                alt={`Gallery Image ${i + 1}`}
+                alt={t("altText") + ` ${i + 1}`}
                 fill
                 className="object-cover"
                 unoptimized

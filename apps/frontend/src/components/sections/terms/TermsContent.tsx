@@ -1,6 +1,7 @@
 "use client";
 
 import { Info, AlertCircle, Shield, Mail, Phone, MapPin } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 function SectionCard({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
@@ -18,15 +19,17 @@ function SectionCard({ id, title, children }: { id: string; title: string; child
 }
 
 export default function TermsContent() {
+  const t = useTranslations("Terms.content");
+
   return (
     <div className="flex flex-col">
       {/* 1. Acceptance of Terms */}
-      <SectionCard id="acceptance" title="1. Acceptance of Terms">
+      <SectionCard id="acceptance" title={t("acceptance.title")}>
         <p>
-          Welcome to Vita Food Complex (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). These Terms and Conditions govern your use of our website, products, and services. By accessing our site or purchasing our products, you agree to comply with these terms.
+          {t("acceptance.p1")}
         </p>
         <p>
-          If you do not agree with any part of these terms, please do not use our services or purchase our products. We reserve the right to update or modify these terms at any time without prior notice.
+          {t("acceptance.p2")}
         </p>
         
         {/* Highlight Box */}
@@ -34,62 +37,59 @@ export default function TermsContent() {
           <Info className="w-6 h-6 text-[#F59E0B] shrink-0 mt-0.5" />
           <div className="flex flex-col gap-2">
             <h4 className="font-['Funnel_Display'] font-bold text-[#78350F] text-[14px] leading-tight">
-              Important Notice
+              {t("acceptance.notice.title")}
             </h4>
             <p className="font-['Outfit'] text-[#78350F] text-[14px] leading-relaxed">
-              By continuing to use our website after changes are posted, you accept the modified Terms and Conditions. We recommend reviewing this page periodically.
+              {t("acceptance.notice.text")}
             </p>
           </div>
         </div>
       </SectionCard>
 
       {/* 2. Use of Website */}
-      <SectionCard id="use" title="2. Use of Website">
+      <SectionCard id="use" title={t("use.title")}>
         <p>
-          You may use our website for lawful purposes only. You agree not to use our website in any way that could damage, disable, or impair the site, or interfere with any other party&apos;s use of the website.
+          {t("use.p1")}
         </p>
         <ul className="list-disc pl-6 flex flex-col gap-3">
-          <li>Do not attempt to gain unauthorized access to any portion of the website</li>
-          <li>Do not use automated systems to access the website without permission</li>
-          <li>Do not engage in any activity that disrupts or interferes with our services</li>
-          <li>Do not upload malicious code or viruses</li>
+          {(t.raw("use.list") as string[]).map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
         </ul>
       </SectionCard>
 
       {/* 3. User Content */}
-      <SectionCard id="content" title="3. User Content">
+      <SectionCard id="content" title={t("content.title")}>
         <p>
-          If you submit content to our community platform (such as recipes, reviews, or photos), you grant us a non-exclusive, worldwide, royalty-free license to use, reproduce, and display that content.
+          {t("content.p1")}
         </p>
         <p>
-          You represent that you own or have the necessary rights to any content you submit, and that it does not violate any third-party rights or applicable laws.
+          {t("content.p2")}
         </p>
       </SectionCard>
 
       {/* 4. Community Guidelines */}
-      <SectionCard id="guidelines" title="4. Community Guidelines">
+      <SectionCard id="guidelines" title={t("guidelines.title")}>
         <p>
-          Our community is built on respect, collaboration, and positivity. When participating in our community features, you agree to:
+          {t("guidelines.p1")}
         </p>
         <ul className="list-disc pl-6 flex flex-col gap-3">
-          <li>Be respectful and kind to other community members</li>
-          <li>Share authentic and honest content</li>
-          <li>Not post offensive, discriminatory, or inappropriate material</li>
-          <li>Not spam or post unauthorized commercial content</li>
-          <li>Not impersonate others or create fake accounts</li>
+          {(t.raw("guidelines.list") as string[]).map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
         </ul>
         <p>
-          We reserve the right to remove any content or suspend accounts that violate these guidelines.
+          {t("guidelines.p2")}
         </p>
       </SectionCard>
 
       {/* 5. Product Information */}
-      <SectionCard id="products" title="5. Product Information">
+      <SectionCard id="products" title={t("products.title")}>
         <p>
-          We strive to ensure that product descriptions, ingredients, and nutritional information on our website are accurate. However, recipes and packaging may change over time.
+          {t("products.p1")}
         </p>
         <p>
-          We recommend checking the physical packaging of the product upon delivery for the most current information. Product images are for illustration purposes and actual products may vary slightly.
+          {t("products.p2")}
         </p>
         
         {/* Highlight Box */}
@@ -97,76 +97,73 @@ export default function TermsContent() {
           <AlertCircle className="w-5 h-5 text-[#F59E0B] shrink-0 mt-0.5" />
           <div className="flex flex-col gap-2">
             <h4 className="font-['Funnel_Display'] font-bold text-[#78350F] text-[14px] leading-tight">
-              Allergen Information
+              {t("products.allergen.title")}
             </h4>
             <p className="font-['Inter'] text-[#78350F] text-[14px] leading-relaxed">
-              If you have food allergies or dietary restrictions, always check the product packaging for detailed allergen information. While we provide general information online, we cannot guarantee it is always up to date.
+              {t("products.allergen.text")}
             </p>
           </div>
         </div>
       </SectionCard>
 
       {/* 6. Orders and Purchases */}
-      <SectionCard id="orders" title="6. Orders and Purchases">
+      <SectionCard id="orders" title={t("orders.title")}>
         <p>
-          When placing an order through our platform, you agree to provide accurate contact and delivery information. We reserve the right to accept or decline any order for any reason, including but not limited to:
+          {t("orders.p1")}
         </p>
         <ul className="list-disc pl-6 flex flex-col gap-3">
-          <li>Product availability</li>
-          <li>Pricing errors or system malfunctions</li>
-          <li>Delivery area restrictions</li>
-          <li>Suspected fraudulent activity</li>
+          {(t.raw("orders.list") as string[]).map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
         </ul>
         <p>
-          All prices are listed in Ethiopian Birr (ETB) unless otherwise stated. Prices are subject to change without notice but will not affect orders already confirmed.
+          {t("orders.p2")}
         </p>
         <p>
-          Payment must be completed at the time of order. We accept various payment methods as indicated at checkout.
+          {t("orders.p3")}
         </p>
       </SectionCard>
 
       {/* 7. Intellectual Property */}
-      <SectionCard id="ip" title="7. Intellectual Property">
+      <SectionCard id="ip" title={t("ip.title")}>
         <p>
-          All content on this website, including but not limited to logos, text, graphics, images, videos, and software, is the property of Vita Hydro-Agro Processing PLC and is protected by copyright and intellectual property laws.
+          {t("ip.p1")}
         </p>
         <p>
-          You may not use, reproduce, distribute, or create derivative works from any content without our express written permission.
+          {t("ip.p2")}
         </p>
         <p>
-          Trademarks, service marks, and trade names displayed on this website are registered and unregistered marks of Vita Food Complex and may not be used without permission.
+          {t("ip.p3")}
         </p>
       </SectionCard>
 
       {/* 8. Privacy Policy */}
-      <SectionCard id="privacy" title="8. Privacy Policy">
+      <SectionCard id="privacy" title={t("privacy.title")}>
         <p>
-          Your privacy is important to us. Information collected through order forms, newsletter signups, or community participation is securely stored and used exclusively for:
+          {t("privacy.p1")}
         </p>
         <ul className="list-disc pl-6 flex flex-col gap-3">
-          <li>Fulfilling and delivering your orders</li>
-          <li>Communicating with you about products and services</li>
-          <li>Improving our website and customer experience</li>
-          <li>Sending promotional materials (with your consent)</li>
+          {(t.raw("privacy.list") as string[]).map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
         </ul>
         <p>
-          We do not sell your personal data to third parties. For more detailed information about how we collect, use, and protect your data, please refer to our Privacy Policy page.
+          {t("privacy.p2")}
         </p>
       </SectionCard>
 
       {/* 9. Limitation of Liability */}
-      <SectionCard id="liability" title="9. Limitation of Liability">
+      <SectionCard id="liability" title={t("liability.title")}>
         <p>
-          To the fullest extent permitted by law, Vita Food Complex shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from:
+          {t("liability.p1")}
         </p>
         <ul className="list-disc pl-6 flex flex-col gap-3">
-          <li>Your use or inability to use our website or products</li>
-          <li>Unauthorized access to or alteration of your data</li>
-          <li>Any content, conduct, or communication on our platform</li>
-          <li>Any errors or omissions in product information</li>
+          {(t.raw("liability.list") as string[]).map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
         </ul>
         <p>
-          Our total liability for any claim arising out of these terms shall not exceed the amount you paid for the product or service in question.
+          {t("liability.p2")}
         </p>
         
         {/* Highlight Box */}
@@ -174,29 +171,29 @@ export default function TermsContent() {
           <Shield className="w-6 h-6 text-[#F59E0B] shrink-0 mt-0.5" />
           <div className="flex flex-col gap-2">
             <h4 className="font-['Funnel_Display'] font-bold text-[#78350F] text-[14px] leading-tight">
-              Product Safety
+              {t("liability.safety.title")}
             </h4>
             <p className="font-['Outfit'] text-[#78350F] text-[14px] leading-relaxed">
-              While we maintain high quality standards, we are not liable for improper storage, handling, or consumption of products after delivery. Always follow storage instructions and check expiration dates.
+              {t("liability.safety.text")}
             </p>
           </div>
         </div>
       </SectionCard>
 
       {/* 10. Contact Us */}
-      <SectionCard id="contact" title="10. Contact Us">
+      <SectionCard id="contact" title={t("contact.title")}>
         <p>
-          If you have any questions about these Terms and Conditions, or need assistance with our products or services, please don&apos;t hesitate to contact us:
+          {t("contact.p1")}
         </p>
         
         {/* Contact Card */}
         <div className="bg-gradient-to-tr from-[#23B349] to-[#C5E047] rounded-[24px] p-8 lg:p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 mt-6 shadow-sm">
           <div className="flex flex-col gap-6 items-start">
             <h3 className="font-['Funnel_Display'] font-bold text-white text-[32px] leading-none">
-              Get in Touch
+              {t("contact.cta")}
             </h3>
             <button className="bg-white text-[#23B349] font-['Outfit'] font-medium text-[16px] px-8 py-3.5 rounded-full hover:scale-105 transition-transform flex items-center gap-2">
-              Send Message <span className="font-bold">→</span>
+              {t("contact.button")} <span className="font-bold">→</span>
             </button>
           </div>
 
@@ -207,7 +204,7 @@ export default function TermsContent() {
               </div>
               <div className="flex flex-col gap-1">
                 <span className="font-['Funnel_Display'] font-medium text-white text-[20px] leading-none">
-                  Email
+                  {t("contact.email")}
                 </span>
                 <span className="font-['Outfit'] font-medium text-[#E6E6E6] text-[16px] leading-tight">
                   legal@vitafoodcomplex.com
@@ -221,7 +218,7 @@ export default function TermsContent() {
               </div>
               <div className="flex flex-col gap-1">
                 <span className="font-['Funnel_Display'] font-medium text-white text-[20px] leading-none">
-                  Phone
+                  {t("contact.phone")}
                 </span>
                 <span className="font-['Outfit'] font-medium text-[#E6E6E6] text-[16px] leading-tight">
                   +251 911 123 456
@@ -235,7 +232,7 @@ export default function TermsContent() {
               </div>
               <div className="flex flex-col gap-1">
                 <span className="font-['Funnel_Display'] font-medium text-white text-[20px] leading-none">
-                  Address
+                  {t("contact.address")}
                 </span>
                 <span className="font-['Outfit'] font-medium text-[#E6E6E6] text-[16px] leading-tight">
                   Bole, Addis Ababa, Ethiopia
@@ -246,7 +243,7 @@ export default function TermsContent() {
         </div>
 
         <p className="text-[#545854] text-[14px] leading-[1.86] mt-4">
-          Our customer service team is available Monday to Friday, 9:00 AM to 6:00 PM (EAT). We typically respond to inquiries within 24-48 hours.
+          {t("contact.p2")}
         </p>
       </SectionCard>
     </div>

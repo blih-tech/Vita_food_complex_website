@@ -1,6 +1,8 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export default function ProductTestimonials() {
+  const t = useTranslations("ProductTestimonials");
   return (
     <section className="w-full bg-gradient-to-b from-[#1FA03B] to-[#126723] px-4 md:px-8 lg:px-32 py-24 pb-48 relative overflow-hidden">
       {/* Background decorative elements */}
@@ -11,10 +13,10 @@ export default function ProductTestimonials() {
 
       <div className="max-w-6xl mx-auto relative z-10 text-center">
         <p className="font-['Outfit'] text-white/80 text-sm tracking-widest uppercase mb-2">
-          Testimonials
+          {t("label")}
         </p>
         <h2 className="font-['Outfit'] font-black text-white text-5xl md:text-7xl mb-16">
-          Our client
+          {t("heading")}
         </h2>
 
         <div className="flex flex-col md:flex-row justify-center gap-8">
@@ -33,18 +35,16 @@ export default function ProductTestimonials() {
             </div>
             <div className="text-white">
               <p className="font-['Outfit'] text-lg italic mb-4 leading-relaxed">
-                &quot;I love the Vita products! They are my go-to snack every day.
-                The quality is consistently high and the taste is unparalleled.
-                My family enjoys them as much as I do.&quot;
+                &quot;{t("quote")}&quot;
               </p>
               <div className="flex items-center gap-2 mb-1">
                 <div className="flex text-yellow-400 text-lg">★★★★★</div>
               </div>
               <p className="font-['Outfit'] font-bold text-white">
-                Yohannes T.
+                {t("author1")}
               </p>
               <p className="font-['Outfit'] text-white/70 text-sm">
-                Loyal Customer
+                {t("role")}
               </p>
             </div>
           </div>
@@ -64,16 +64,14 @@ export default function ProductTestimonials() {
             </div>
             <div className="text-white">
               <p className="font-['Outfit'] text-lg italic mb-4 leading-relaxed">
-                &quot;I love the Vita products! They are my go-to snack every day.
-                The quality is consistently high and the taste is unparalleled.
-                My family enjoys them as much as I do.&quot;
+                &quot;{t("quote")}&quot;
               </p>
               <div className="flex items-center gap-2 mb-1">
                 <div className="flex text-yellow-400 text-lg">★★★★★</div>
               </div>
-              <p className="font-['Outfit'] font-bold text-white">Abeba M.</p>
+              <p className="font-['Outfit'] font-bold text-white">{t("author2")}</p>
               <p className="font-['Outfit'] text-white/70 text-sm">
-                Loyal Customer
+                {t("role")}
               </p>
             </div>
           </div>

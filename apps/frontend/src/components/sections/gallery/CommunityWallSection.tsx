@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const COMMUNITY_IMAGES = [
   "https://picsum.photos/516/369?random=11",
@@ -14,6 +15,8 @@ const COMMUNITY_IMAGES = [
 ];
 
 export default function CommunityWallSection() {
+  const t = useTranslations("Gallery.communityWall");
+
   return (
     <section className="relative w-full bg-[#23B349] pt-24 pb-32 overflow-hidden z-10 -mt-12">
       {/* Top curved mask to blend with previous section if needed */}
@@ -30,10 +33,10 @@ export default function CommunityWallSection() {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-16">
           <h2 className="font-['Outfit'] font-extrabold text-white text-[48px] md:text-[80px] leading-[0.9] tracking-[-0.02em]">
-            Community Wall
+            {t("heading")}
           </h2>
           <p className="font-['Funnel_Display'] font-medium text-white text-[20px] md:text-[24px] tracking-[-0.004em]">
-            Join thousands sharing their #VitaMoments
+            {t("subtext")}
           </p>
         </div>
 
@@ -47,7 +50,7 @@ export default function CommunityWallSection() {
               <div className="relative w-full rounded-xl overflow-hidden" style={{ aspectRatio: i % 2 === 0 ? '516/369' : '516/541' }}>
                 <Image
                   src={src}
-                  alt={`Community Moment ${i + 1}`}
+                  alt={t("altTextPrefix") + ` ${i + 1}`}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                   unoptimized
@@ -71,7 +74,7 @@ export default function CommunityWallSection() {
         <div className="flex justify-center mt-20">
           <button className="flex items-center gap-4 bg-[#23B349] border border-white px-8 py-4 rounded-full group hover:bg-white transition-colors">
             <span className="font-['Outfit'] text-[20px] text-white group-hover:text-[#23B349] transition-colors">
-              Load More
+              {t("loadMore")}
             </span>
             <ArrowRight className="w-5 h-5 text-white group-hover:text-[#23B349] transition-colors" />
           </button>

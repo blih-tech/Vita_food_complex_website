@@ -55,14 +55,14 @@ export default function WhoAreWeSection() {
         <div className="mb-12 flex w-full max-w-[1540px] flex-row flex-wrap items-center justify-center gap-4 md:gap-5 lg:justify-between lg:gap-8">
           <div className="flex flex-row flex-wrap items-center justify-center gap-3 md:gap-4 lg:flex-nowrap">
             <h2 className="text-center font-[family-name:var(--font-funnel-display)] text-[clamp(40px,8vw,140px)] font-bold leading-none tracking-[-0.02em] text-[#E6E6E6]">
-              Who
+              {t("whoWeAre.who")}
             </h2>
             <div
               className="hidden h-[clamp(4px,0.7vw,10px)] w-[clamp(40px,8vw,123.81px)] shrink-0 rounded-full bg-[#E6E6E6] sm:block"
               aria-hidden
             />
             <h2 className="text-center font-[family-name:var(--font-funnel-display)] text-[clamp(45px,9vw,150px)] font-extrabold leading-[0.9] tracking-[-0.02em] text-white">
-              Are We
+              {t("whoWeAre.areWe")}
             </h2>
           </div>
           <div className="relative h-[clamp(80px,8vw,120px)] w-[clamp(80px,8vw,120px)] shrink-0" aria-hidden>
@@ -106,7 +106,7 @@ export default function WhoAreWeSection() {
                 alt=""
                 fill
                 className="object-contain object-bottom"
-                sizes="(min-width: 1024px) 600px, 85vw"
+                sizes="(min-400px) 100vw, 85vw"
               />
             </div>
           </div>

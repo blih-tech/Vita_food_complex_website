@@ -1,50 +1,53 @@
 import React from "react";
 import Image from "next/image";
-import { Link } from "@frontend/navigation";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function NewsGridSection() {
+  const t = useTranslations("News.newsGrid");
+
   const articles = [
     {
-      title: "Sustainable Food Production",
-      description: "Analyzing the impact of sustainable sourcing and waste reduction",
-      readTime: "10 Minutes",
-      category: "Market insight",
+      title: t("articles.0.title"),
+      description: t("articles.0.description"),
+      readTime: t("articles.0.readTime"),
+      category: t("articles.0.category"),
       image: "https://picsum.photos/300/350?random=21",
     },
     {
-      title: "Sustainable Food Production",
-      description: "Analyzing the impact of sustainable sourcing and waste reduction",
-      readTime: "10 Minutes",
-      category: "Market insight",
+      title: t("articles.1.title"),
+      description: t("articles.1.description"),
+      readTime: t("articles.1.readTime"),
+      category: t("articles.1.category"),
       image: "https://picsum.photos/300/350?random=22",
     },
     {
-      title: "Sustainable Food Production",
-      description: "Analyzing the impact of sustainable sourcing and waste reduction",
-      readTime: "10 Minutes",
-      category: "Market insight",
+      title: t("articles.2.title"),
+      description: t("articles.2.description"),
+      readTime: t("articles.2.readTime"),
+      category: t("articles.2.category"),
       image: "https://picsum.photos/300/350?random=23",
     },
     {
-      title: "Sustainable Food Production",
-      description: "Analyzing the impact of sustainable sourcing and waste reduction",
-      readTime: "10 Minutes",
-      category: "Market insight",
+      title: t("articles.3.title"),
+      description: t("articles.3.description"),
+      readTime: t("articles.3.readTime"),
+      category: t("articles.3.category"),
       image: "https://picsum.photos/300/350?random=24",
     },
     {
-      title: "Sustainable Food Production",
-      description: "Analyzing the impact of sustainable sourcing and waste reduction",
-      readTime: "10 Minutes",
-      category: "Market insight",
+      title: t("articles.4.title"),
+      description: t("articles.4.description"),
+      readTime: t("articles.4.readTime"),
+      category: t("articles.4.category"),
       image: "https://picsum.photos/300/350?random=25",
     },
     {
-      title: "Sustainable Food Production",
-      description: "Analyzing the impact of sustainable sourcing and waste reduction",
-      readTime: "10 Minutes",
-      category: "Market insight",
+      title: t("articles.5.title"),
+      description: t("articles.5.description"),
+      readTime: t("articles.5.readTime"),
+      category: t("articles.5.category"),
       image: "https://picsum.photos/300/350?random=26",
     },
   ];
@@ -55,10 +58,10 @@ export default function NewsGridSection() {
       <div className="flex flex-col w-full gap-4">
         <div className="flex justify-between items-end w-full">
           <h2 className="font-funnel-display text-4xl md:text-[48px] leading-none text-[#202124]">
-            News
+            {t("heading")}
           </h2>
           <Link href="/news/archive" className="flex items-center gap-2 group hover:opacity-70 transition-opacity pb-1">
-            <span className="font-funnel-display font-light text-xl text-[#202124]">View All</span>
+            <span className="font-funnel-display font-light text-xl text-[#202124]">{t("viewAll")}</span>
             <div className="w-6 h-6 rounded-full border-[1.26px] border-[#202124] flex items-center justify-center">
               <ArrowRight className="w-3 h-3 text-[#202124] -rotate-45 group-hover:rotate-0 transition-transform" />
             </div>

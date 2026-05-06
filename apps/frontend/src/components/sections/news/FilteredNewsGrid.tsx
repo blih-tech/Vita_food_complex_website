@@ -3,36 +3,37 @@ import Image from "next/image";
 import { Link } from "@frontend/navigation";
 
 export default function FilteredNewsGrid({ category }: { category: string }) {
-  // In a real app, you would fetch or filter articles based on the `category` prop
+  const t = useTranslations("News.latestNews"); // Assuming FilteredNewsGrid uses keys from latestNews for article structure
+
   const gridArticles = [
     {
-      title: "The Rise of Modern Snacking Culture in Ethiopia",
-      readTime: "20 mins read",
+      title: t("filteredGridArticle.title"),
+      readTime: t("filteredGridArticle.readTime"),
       image: "https://picsum.photos/600/400?random=31",
     },
     {
-      title: "Vita Flour: Supporting Every Home Kitchen",
-      readTime: "4 mins read",
+      title: t("filteredGridArticle2.title"),
+      readTime: t("filteredGridArticle2.readTime"),
       image: "https://picsum.photos/600/400?random=32",
     },
     {
-      title: "Inside Vita's \"House of Brands\" Strategy",
-      readTime: "4 mins read",
+      title: t("filteredGridArticle3.title"),
+      readTime: t("filteredGridArticle3.readTime"),
       image: "https://picsum.photos/600/400?random=33",
     },
     {
-      title: "Vita Flour: Supporting Every Home Kitchen",
-      readTime: "4 mins read",
+      title: t("filteredGridArticle2.title"), // Reusing translation keys
+      readTime: t("filteredGridArticle2.readTime"),
       image: "https://picsum.photos/600/400?random=34",
     },
     {
-      title: "The Rise of Modern Snacking Culture in Ethiopia",
-      readTime: "20 mins read",
+      title: t("filteredGridArticle.title"), // Reusing translation keys
+      readTime: t("filteredGridArticle.readTime"),
       image: "https://picsum.photos/600/400?random=35",
     },
     {
-      title: "Inside Vita's \"House of Brands\" Strategy",
-      readTime: "4 mins read",
+      title: t("filteredGridArticle3.title"), // Reusing translation keys
+      readTime: t("filteredGridArticle3.readTime"),
       image: "https://picsum.photos/600/400?random=36",
     },
   ];

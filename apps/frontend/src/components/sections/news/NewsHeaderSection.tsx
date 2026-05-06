@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Link } from "@frontend/navigation";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function NewsHeaderSection({
   activeCategory,
@@ -12,13 +13,15 @@ export default function NewsHeaderSection({
   activeCategory: string;
   setActiveCategory: (category: string) => void;
 }) {
+  const t = useTranslations("News.header");
+
   const categories = [
-    { label: "All News", slug: "all-news" },
-    { label: "News", slug: "news" },
-    { label: "Updates", slug: "updates" },
-    { label: "Market Insights", slug: "market-insights" },
-    { label: "Company News", slug: "company-news" },
-    { label: "Product Updates", slug: "product-updates" },
+    { label: t("categories.allNews"), slug: "all-news" },
+    { label: t("categories.news"), slug: "news" },
+    { label: t("categories.updates"), slug: "updates" },
+    { label: t("categories.marketInsights"), slug: "market-insights" },
+    { label: t("categories.companyNews"), slug: "company-news" },
+    { label: t("categories.productUpdates"), slug: "product-updates" },
   ];
 
   return (
@@ -32,7 +35,7 @@ export default function NewsHeaderSection({
             <path d="M11.5 2C15.5 2 15.5 21 11.5 21C7.5 21 7.5 2 11.5 2Z" stroke="#333733" strokeWidth="1.5"/>
           </svg>
           <span className="font-funnel-display font-medium text-[20px] text-[#333733]">
-            Tuesday, October 29, 2024
+            {t("date")}
           </span>
         </div>
         <button className="p-1 hover:opacity-70 transition-opacity">
@@ -45,7 +48,7 @@ export default function NewsHeaderSection({
 
       {/* Main Title */}
       <h1 className="text-[#23B349] font-funnel-display font-bold text-5xl md:text-[80px] leading-none tracking-tight text-center">
-        The News*
+        {t("title")}
       </h1>
 
       {/* Categories */}
@@ -85,7 +88,7 @@ export default function NewsHeaderSection({
               <div className="w-1.5 h-1.5 bg-white/50 rounded-full"></div>
             </div>
             <span className="font-outfit font-medium text-[15px] text-[#202124]">
-              Updates
+              {t("featuredArticle.updateTag")}
             </span>
           </div>
         </div>
@@ -95,25 +98,25 @@ export default function NewsHeaderSection({
           <div className="flex flex-col gap-4 max-w-4xl">
             <div className="flex flex-wrap gap-4">
               <span className="border-[1.26px] border-[#202124] rounded-2xl px-4 py-2 font-funnel-display font-light text-xl text-[#202124]">
-                Company news
+                {t("categories.companyNews")}
               </span>
               <span className="border-[1.26px] border-[#202124] rounded-2xl px-4 py-2 font-funnel-display font-light text-xl text-[#202124]">
-                Product updates
+                {t("categories.productUpdates")}
               </span>
             </div>
             <h2 className="font-funnel-display font-normal text-4xl md:text-[48px] leading-tight text-[#333733] tracking-tight">
-              Vita Officially Launches in Ethiopia&apos;s FMCG Market
+              {t("featuredArticle.title")}
             </h2>
           </div>
 
           <div className="flex flex-col items-end gap-8 pt-2">
             <div className="flex items-center gap-4">
-              <span className="font-outfit text-sm text-[#202124]">Sep 9, 2024</span>
+              <span className="font-outfit text-sm text-[#202124]">{t("featuredArticle.date")}</span>
               <div className="w-4 h-[1.26px] bg-[#404040]"></div>
-              <span className="font-outfit text-sm text-[#202124]">06 Minute</span>
+              <span className="font-outfit text-sm text-[#202124]">{t("featuredArticle.readTime")}</span>
             </div>
             <Link href="/news/vita-food-complex-ai-driven-food-solutions" className="flex items-center gap-2 group/link hover:opacity-70 transition-opacity">
-              <span className="font-funnel-display font-light text-xl text-[#000000]">Read Article</span>
+              <span className="font-funnel-display font-light text-xl text-[#000000]">{t("featuredArticle.readMore")}</span>
               <div className="w-6 h-6 rounded-full border-[1.26px] border-[#202124] flex items-center justify-center">
                 <ArrowRight className="w-3 h-3 text-[#202124] -rotate-45 group-hover/link:rotate-0 transition-transform" />
               </div>

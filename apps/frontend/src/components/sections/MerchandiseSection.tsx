@@ -4,19 +4,19 @@ import { useRef, useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
-const MERCH_ITEMS = [
-  { id: 1, image: '/assets/merchandise/merch-1.png', title: 'Vita Necklace', desc: 'Elegant and simple.', bg: '#23B349' },
-  { id: 2, image: '/assets/merchandise/merch-2.png', title: 'Classic Cap', desc: 'Everyday comfortable wear.', bg: '#23B349' },
-  { id: 3, image: '/assets/merchandise/merch-3.png', title: 'Vita T-Shirt', desc: 'Premium cotton blend.', bg: '#23B349' },
-  { id: 4, image: '/assets/merchandise/merch-4.png', title: 'Full-Sleeve Sweeter', desc: 'Bite Share Enjoy moto embroidery made with silk and cotton.', bg: '#23B349' },
-  { id: 5, image: '/assets/merchandise/merch-5.png', title: 'Signature Cap', desc: 'Wear the brand.', bg: '#23B349' },
-  { id: 6, image: '/assets/merchandise/merch-red.png', title: 'A Badge of Cherish!', desc: 'Uplift yourself with our modern looking outfits and merchandises!', bg: '#FF0707', isSpecial: true },
-];
-
 export default function MerchandiseSection() {
-  const t = useTranslations();
+  const t = useTranslations("Merchandise");
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  const MERCH_ITEMS = [
+    { id: 1, image: '/assets/merchandise/merch-1.png', title: t("items.necklace.title"), desc: t("items.necklace.desc"), bg: '#23B349' },
+    { id: 2, image: '/assets/merchandise/merch-2.png', title: t("items.cap.title"), desc: t("items.cap.desc"), bg: '#23B349' },
+    { id: 3, image: '/assets/merchandise/merch-3.png', title: t("items.tshirt.title"), desc: t("items.tshirt.desc"), bg: '#23B349' },
+    { id: 4, image: '/assets/merchandise/merch-4.png', title: t("items.sweeter.title"), desc: t("items.sweeter.desc"), bg: '#23B349' },
+    { id: 5, image: '/assets/merchandise/merch-5.png', title: t("items.signatureCap.title"), desc: t("items.signatureCap.desc"), bg: '#23B349' },
+    { id: 6, image: '/assets/merchandise/merch-red.png', title: t("items.badge.title"), desc: t("items.badge.desc"), bg: '#FF0707', isSpecial: true },
+  ];
 
   const handleScroll = () => {
     if (scrollRef.current) {
@@ -41,10 +41,10 @@ export default function MerchandiseSection() {
         {/* Header Column */}
         <div className="flex flex-col items-center text-center mb-16 lg:mb-20 gap-4">
           <p className="font-['Funnel_Display'] font-medium text-[20px] text-[#404040] leading-tight">
-            Discover exclusive merchandise and access unforgettable Vita events
+            {t("label")}
           </p>
           <h2 className="font-['Outfit'] font-black text-[50px] sm:text-[64px] lg:text-[80px] text-[#23B349] leading-[0.9] tracking-[-0.02em]">
-            Not Just Products, It's a Feeling
+            {t("heading")}
           </h2>
         </div>
 

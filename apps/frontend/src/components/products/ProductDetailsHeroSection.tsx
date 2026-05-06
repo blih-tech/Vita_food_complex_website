@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Product } from "@frontend/app/[locale]/products/data";
+import { useTranslations } from "next-intl";
 
 interface ProductHeroSectionProps {
   product: Product;
@@ -8,6 +9,7 @@ interface ProductHeroSectionProps {
 export default function ProductHeroSection({
   product,
 }: ProductHeroSectionProps) {
+  const t = useTranslations("Products");
   const netWtMatch = (product.content?.netWeight || "120g").match(
     /^(\d+)(.*)$/,
   );
@@ -37,8 +39,8 @@ export default function ProductHeroSection({
               className="font-['Funnel_Display'] font-black text-7xl md:text-[9rem] lg:text-[12rem] tracking-tight leading-none text-center whitespace-nowrap drop-shadow-md"
               style={{ color: product.ui.nameColor }}
             >
-              {product.name}
-              {product.name.toLowerCase() === "oreo" ? " Cream" : ""}
+              {t(`items.${product.id}.name`)}
+              {product.id === "oreo" ? " Cream" : ""}
             </h1>
           </div>
         </div>
@@ -71,8 +73,7 @@ export default function ProductHeroSection({
           className="relative font-['Outfit'] -mt-20 font-medium text-base md:text-xl lg:text-2xl max-w-2xl text-center mx-auto leading-tight  z-20"
           style={{ color: product.ui.nameColor }}
         >
-          {product.content?.description ||
-            "Delicious chocolate biscuits filled with smooth, creamy goodness made for everyday enjoyment"}
+          {t(`items.${product.id}.description`)}
         </p>
       </div>
     </section>

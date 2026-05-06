@@ -16,7 +16,16 @@ export default function JobDetailsContent({ jobId }: JobDetailsContentProps) {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  const job: Job | undefined = getJobById(jobId);
+  const job = {
+    title: t(`jobs.${jobId}.title`),
+    location: t(`jobs.${jobId}.location`),
+    type: t(`jobs.${jobId}.type`),
+    department: t(`jobs.${jobId}.department`),
+    summary: t(`jobs.${jobId}.summary`),
+    responsibilities: t.raw(`jobs.${jobId}.responsibilities`) as string[],
+    requirements: t.raw(`jobs.${jobId}.requirements`) as string[],
+    benefits: t.raw(`jobs.${jobId}.benefits`) as string[],
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -162,7 +171,7 @@ export default function JobDetailsContent({ jobId }: JobDetailsContentProps) {
                         color: "#4A5565",
                       }}
                     >
-                      Vita Food Complex
+                      {t("details.companyName")}
                     </p>
 
                     {/* Location/type — style_Q9CLFY: Inter 400, 24.70px, 1.43em lh, #4A5565 */}
@@ -198,7 +207,7 @@ export default function JobDetailsContent({ jobId }: JobDetailsContentProps) {
                       className="flex flex-row flex-wrap"
                       style={{ gap: 14.11, marginTop: 12 }}
                     >
-                      {["Full-time", "On-site"].map((badge) => (
+                      {[t("details.fullTime"), t("details.onSite")].map((badge) => (
                         <span
                           key={badge}
                           style={{

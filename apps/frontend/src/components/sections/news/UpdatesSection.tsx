@@ -2,31 +2,23 @@ import React from "react";
 import Image from "next/image";
 import { Link } from "@frontend/navigation";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function UpdatesSection() {
+  const t = useTranslations("News.updates");
+  const t_articles = t.raw("articles") as { title: string; category: string; date: string }[];
+
   const articles = [
     {
-      title: "The Rise of Modern Snacking Culture in Ethiopia",
-      category: "Updates",
-      date: "Feb 10, 2026",
       image: "https://picsum.photos/400/350?random=11",
     },
     {
-      title: "Vita Flour: Supporting Every Home Kitchen",
-      category: "Updates",
-      date: "Feb 10, 2026",
       image: "https://picsum.photos/400/350?random=12",
     },
     {
-      title: "The Rise of Modern Snacking Culture in Ethiopia",
-      category: "Updates",
-      date: "Feb 10, 2026",
       image: "https://picsum.photos/400/350?random=13",
     },
     {
-      title: "Vita Flour: Supporting Every Home Kitchen",
-      category: "Updates",
-      date: "Feb 10, 2026",
       image: "https://picsum.photos/400/350?random=14",
     },
   ];
@@ -37,10 +29,10 @@ export default function UpdatesSection() {
       <div className="flex flex-col w-full gap-4">
         <div className="flex justify-between items-end w-full">
           <h2 className="font-funnel-display text-4xl md:text-[48px] leading-none text-[#333733]">
-            Updates
+            {t("heading")}
           </h2>
           <Link href="/news/updates" className="flex items-center gap-2 group hover:opacity-70 transition-opacity pb-1">
-            <span className="font-funnel-display font-light text-xl text-[#333733]">View All</span>
+            <span className="font-funnel-display font-light text-xl text-[#333733]">{t("viewAll")}</span>
             <div className="w-6 h-6 rounded-full border-[1.26px] border-[#333733] flex items-center justify-center">
               <ArrowRight className="w-3 h-3 text-[#333733] -rotate-45 group-hover:rotate-0 transition-transform" />
             </div>
@@ -56,7 +48,7 @@ export default function UpdatesSection() {
             <div className="relative w-full aspect-[5/4] rounded-[16px] overflow-hidden">
               <Image
                 src={article.image}
-                alt={article.title}
+                alt={t_articles[idx]?.title || ""}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -65,15 +57,15 @@ export default function UpdatesSection() {
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-3">
                 <span className="font-outfit font-medium text-base text-[#333733]">
-                  {article.category}
+                  {t_articles[idx]?.category}
                 </span>
                 <div className="w-4 h-[1.26px] bg-[#333733]"></div>
                 <span className="font-outfit font-light text-base text-[#333733]">
-                  {article.date}
+                  {t_articles[idx]?.date}
                 </span>
               </div>
               <h3 className="font-funnel-display font-medium text-xl leading-tight text-[#333733] group-hover:text-[#23B349] transition-colors">
-                {article.title}
+                {t_articles[idx]?.title}
               </h3>
             </div>
           </Link>

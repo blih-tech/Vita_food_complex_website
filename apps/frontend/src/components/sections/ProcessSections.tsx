@@ -1,5 +1,7 @@
 "use client";
 
+"use client";
+
 import { useTranslations } from "next-intl";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
@@ -110,7 +112,7 @@ export default function ProcessSections() {
                   style={{
                     background: "rgba(35, 179, 73, 0.5)",
                     backdropFilter: "blur(90px)",
-                    WebkitBackdropFilter: "blur(90px)",
+                    WebkitBackdropFilter: "blur(9dpx)",
                   }}
                 >
                   <p className="mb-1 font-[family-name:var(--font-funnel-display)] font-bold leading-none tracking-[-0.01em] text-white"

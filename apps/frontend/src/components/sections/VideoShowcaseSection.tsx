@@ -16,7 +16,7 @@ function MarqueeBanner({ t }: { t: ReturnType<typeof useTranslations> }) {
               key={index}
               className="mx-6 sm:mx-8 md:mx-10 font-['Funnel_Display'] text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-7xl font-extrabold italic tracking-tighter text-[#DB4426]"
             >
-              A new stylish way of {t("connecting")}!
+              {t("marqueeText").replace("{connecting}", t("connecting"))}
             </span>
           ))}
         </div>
@@ -38,7 +38,7 @@ export default function VideoShowcaseSection() {
           <div className="group relative aspect-video overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-[48px] lg:rounded-[52px] border-4 border-white bg-[#404040] shadow-[0_20px_50px_rgba(0,0,0,0.35)] md:shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
             <Image
               src="/assets/hero/video-family.png"
-              alt="Family enjoying Vita"
+              alt={t("videoAlt")}
               fill
               priority
               className="object-cover transition-transform duration-1000 group-hover:scale-105"
