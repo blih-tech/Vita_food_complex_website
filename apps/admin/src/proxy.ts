@@ -2,8 +2,21 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Defensive guard: never redirect static assets even if matcher lets them through
+  // (Turbopack-generated CSS filenames with ".." can confuse URL normalization)
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/assets') ||
+    /\.\w+$/.test(pathname)
+  ) {
+    return NextResponse.next();
+  }
+
   const token = request.cookies.get('admin_token');
-  const isLoginPage = request.nextUrl.pathname === '/login';
+  const isLoginPage = pathname === '/login';
 
   if (!token && !isLoginPage) {
     return NextResponse.redirect(new URL('/login', request.url));
@@ -17,5 +30,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const proxyConfig = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|assets).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon\\.ico|assets/).*)'],
 };

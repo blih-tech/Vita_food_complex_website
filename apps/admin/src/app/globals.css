@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Explicit content source for Tailwind v4 in monorepo layout */
+@source "../../**/*.{ts,tsx}";
+
 :root {
   --color-primary: #23b349;
   --color-primary-dark: #0f4b1f;
@@ -26,5 +29,12 @@ body {
   }
   .border-brand {
     border-color: var(--color-primary);
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
