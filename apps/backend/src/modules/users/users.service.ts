@@ -21,4 +21,9 @@ export class UsersService {
     const newUser = new this.userModel({ ...userData, password: hashedPassword });
     return newUser.save();
   }
+
+  async updatePassword(email: string, plainPassword: string): Promise<void> {
+    const hashedPassword = await bcrypt.hash(plainPassword, 10);
+    await this.userModel.updateOne({ email }, { password: hashedPassword }).exec();
+  }
 }

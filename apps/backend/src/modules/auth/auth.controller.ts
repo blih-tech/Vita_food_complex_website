@@ -16,13 +16,14 @@ export class AuthController {
     return this.authService.signIn(loginDto.email, loginDto.password);
   }
 
-  // One-time setup endpoint — creates admin if not exists
+  // One-time setup endpoint — creates or resets admin with fresh bcrypt hash
   @HttpCode(HttpStatus.OK)
   @Post('setup')
   async setup() {
     const existing = await this.usersService.findByEmail('admin@vitafoodcomplex.com');
     if (existing) {
-      return { message: 'Admin already exists' };
+      await this.usersService.updatePassword('admin@vitafoodcomplex.com', 'adminpassword');
+      return { message: 'Admin password reset with fresh hash' };
     }
     await this.usersService.create({
       name: 'Vita Admin',
