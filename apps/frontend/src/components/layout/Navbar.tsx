@@ -231,8 +231,8 @@ export default function Navbar() {
                         <div className="flex flex-col">
                           {[
                             { label: t("dropdowns.peoplePlanet.community.label"), href: "/people-planet", desc: t("dropdowns.peoplePlanet.community.desc") },
-                            { label: t("dropdowns.peoplePlanet.innovation.label"), href: "/research", desc: t("dropdowns.peoplePlanet.innovation.desc") },
-                            { label: t("dropdowns.peoplePlanet.weCare.label"), href: "/sustainability", desc: t("dropdowns.peoplePlanet.weCare.desc") },
+                            { label: t("dropdowns.peoplePlanet.innovation.label"), href: "/innovation", desc: t("dropdowns.peoplePlanet.innovation.desc") },
+                            { label: t("dropdowns.peoplePlanet.weCare.label"), href: "/we-care", desc: t("dropdowns.peoplePlanet.weCare.desc") },
                           ].map((item) => (
                             <Link key={item.href} href={item.href} onClick={() => setMobileOpen(false)}
                               className="px-6 py-3 flex flex-col border-b border-white/10 last:border-0 hover:bg-white/10 transition-colors">
@@ -434,8 +434,8 @@ export default function Navbar() {
                   <div className="flex flex-col gap-6 xl:gap-8 py-2 flex-1 xl:pl-4">
                     {[
                       { label: t("dropdowns.peoplePlanet.community.label"), desc: t("dropdowns.peoplePlanet.community.desc"), href: "/people-planet" },
-                      { label: t("dropdowns.peoplePlanet.innovation.label"), desc: t("dropdowns.peoplePlanet.innovation.desc"), href: "/research" },
-                      { label: t("dropdowns.peoplePlanet.weCare.label"), desc: t("dropdowns.peoplePlanet.weCare.desc"), href: "/sustainability" },
+                      { label: t("dropdowns.peoplePlanet.innovation.label"), desc: t("dropdowns.peoplePlanet.innovation.desc"), href: "/innovation" },
+                      { label: t("dropdowns.peoplePlanet.weCare.label"), desc: t("dropdowns.peoplePlanet.weCare.desc"), href: "/we-care" },
                     ].map((item) => (
                       <Link key={item.href} href={item.href} onClick={() => setActiveDropdown(null)} className="flex flex-col group">
                         <h4 className="font-['Funnel_Display'] text-[16px] xl:text-[18px] font-bold text-[#1A1A1A] group-hover:text-[#23B349] transition-colors">{item.label}</h4>
