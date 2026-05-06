@@ -1,56 +1,168 @@
 "use client";
 
-import { LayoutDashboard, FileText, ShoppingBag, Users, Settings, LogOut, Briefcase, MessageSquare } from 'lucide-react';
+import {
+  LayoutDashboard, FileText, ShoppingBag, Briefcase,
+  MessageSquare, Users, Settings, LogOut, ChevronRight,
+} from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 
+const navSections = [
+  {
+    label: 'Content',
+    items: [
+      { icon: LayoutDashboard, label: 'Overview', href: '/' },
+      { icon: FileText,         label: 'Pages',    href: '/pages' },
+    ],
+  },
+  {
+    label: 'Catalogue',
+    items: [
+      { icon: ShoppingBag, label: 'Products', href: '/products' },
+      { icon: Briefcase,   label: 'Careers',  href: '/careers' },
+    ],
+  },
+  {
+    label: 'Engagement',
+    items: [
+      { icon: MessageSquare, label: 'Messages', href: '/messages' },
+      { icon: Users,         label: 'Users',    href: '/users' },
+    ],
+  },
+  {
+    label: 'System',
+    items: [
+      { icon: Settings, label: 'Settings', href: '/settings' },
+    ],
+  },
+];
+
 export default function Sidebar() {
   const pathname = usePathname();
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
 
-  const navItems = [
-    { icon: LayoutDashboard, label: 'Overview', href: '/' },
-    { icon: FileText, label: 'Pages', href: '/pages' },
-    { icon: ShoppingBag, label: 'Products', href: '/products' },
-    { icon: Briefcase, label: 'Careers', href: '/careers' },
-    { icon: MessageSquare, label: 'Contact Messages', href: '/messages' },
-    { icon: Users, label: 'Users', href: '/users' },
-    { icon: Settings, label: 'Settings', href: '/settings' },
-  ];
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
-    <aside className="w-64 bg-white border-r border-gray-200 flex flex-col fixed inset-y-0 z-20">
-      <div className="p-6 border-b border-gray-100 flex items-center gap-3">
-        <div className="w-8 h-8 bg-[#23B349] rounded-lg flex items-center justify-center text-white font-bold">V</div>
-        <span className="font-bold text-xl text-[#404040]">Vita Admin</span>
+    <aside className="w-64 bg-white border-r border-gray-100 flex flex-col fixed inset-y-0 z-20 font-['Outfit']">
+
+      {/* ── Logo ── */}
+      <div className="px-5 pt-5 pb-4 border-b border-gray-100">
+        <div className="flex items-center gap-3">
+          <div
+            className="w-9 h-9 rounded-[10px] flex items-center justify-center shrink-0 shadow-sm"
+            style={{
+              background:
+                'radial-gradient(ellipse at 8px 18px, rgba(31,214,80,1) 0%, rgba(35,179,73,1) 60%, rgba(116,255,56,1) 100%)',
+            }}
+          >
+            <div className="relative w-5 h-5">
+              <Image
+                src="/assets/brand/vita-logo.svg"
+                alt="Vita"
+                fill
+                className="object-contain"
+              />
+            </div>
+          </div>
+          <div>
+            <p className="font-['Funnel_Display'] font-bold text-[#333733] text-[15px] leading-none">
+              Vita Admin
+            </p>
+            <p className="text-[11px] text-gray-400 mt-0.5">Content Dashboard</p>
+          </div>
+        </div>
       </div>
-      <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
-        {navItems.map((item) => {
-          const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href));
-          return (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${
-                isActive 
-                  ? 'bg-[#23B349] text-white shadow-lg shadow-[#23B349]/20' 
-                  : 'text-gray-600 hover:bg-[#23B349]/5 hover:text-[#23B349]'
-              }`}
-            >
-              <item.icon size={20} className={`${isActive ? '' : 'group-hover:scale-110'} transition-transform`} />
-              <span className="font-medium">{item.label}</span>
-            </Link>
-          );
-        })}
+
+      {/* ── Navigation ── */}
+      <nav className="flex-1 px-3 py-4 overflow-y-auto space-y-4 scrollbar-hide">
+        {navSections.map((section) => (
+          <div key={section.label}>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 px-3 mb-1.5">
+              {section.label}
+            </p>
+            <div className="space-y-0.5">
+              {section.items.map((item) => {
+                const active = isActive(item.href);
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-[12px] transition-all group ${
+                      active
+                        ? 'text-white shadow-sm'
+                        : 'text-gray-500 hover:text-[#23B349] hover:bg-[#23B349]/10'
+                    }`}
+                    style={
+                      active
+                        ? {
+                            background:
+                              'radial-gradient(ellipse at 10px 20px, rgba(31,214,80,1) 0%, rgba(35,179,73,1) 60%, rgba(116,255,56,1) 100%)',
+                            boxShadow: '0 2px 10px rgba(35,179,73,0.3)',
+                          }
+                        : {}
+                    }
+                  >
+                    <item.icon
+                      size={16}
+                      className={
+                        active
+                          ? 'text-white'
+                          : 'text-gray-400 group-hover:text-[#23B349] transition-colors'
+                      }
+                    />
+                    <span
+                      className={`text-sm font-medium flex-1 ${
+                        active ? 'text-white' : ''
+                      }`}
+                    >
+                      {item.label}
+                    </span>
+                    {active && (
+                      <ChevronRight size={13} className="text-white/70" />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </nav>
-      <div className="p-4 border-t border-gray-100">
+
+      {/* ── User & Logout ── */}
+      <div className="border-t border-gray-100 p-3 space-y-1">
+        {user && (
+          <div className="flex items-center gap-3 px-3 py-2.5 rounded-[12px] bg-gray-50 mb-2">
+            <div
+              className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0 shadow-sm"
+              style={{
+                background:
+                  'radial-gradient(ellipse, rgba(31,214,80,1) 0%, rgba(35,179,73,1) 60%, rgba(116,255,56,1) 100%)',
+              }}
+            >
+              {user.name?.charAt(0).toUpperCase()}
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-semibold text-[#333733] truncate leading-none mb-0.5">
+                {user.name}
+              </p>
+              <p className="text-[11px] text-gray-400 capitalize">{user.role}</p>
+            </div>
+          </div>
+        )}
+
         <button
           onClick={logout}
-          className="flex items-center gap-3 w-full px-4 py-3 text-red-500 hover:bg-red-50 rounded-xl transition-all group"
+          className="flex items-center gap-3 w-full px-3 py-2.5 text-gray-500 hover:bg-red-50 hover:text-red-500 rounded-[12px] transition-all group text-sm font-medium"
         >
-          <LogOut size={20} className="group-hover:translate-x-1 transition-transform" />
-          <span className="font-medium">Logout</span>
+          <LogOut
+            size={15}
+            className="group-hover:translate-x-0.5 transition-transform"
+          />
+          Sign out
         </button>
       </div>
     </aside>
