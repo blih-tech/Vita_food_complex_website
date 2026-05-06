@@ -22,7 +22,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const userCookie = Cookies.get('admin_user');
     if (userCookie) {
-      setUser(JSON.parse(userCookie));
+      try {
+        setUser(JSON.parse(userCookie));
+      } catch (e) {
+        console.error('Failed to parse user cookie:', e);
+        Cookies.remove('admin_user');
+      }
     }
     setLoading(false);
   }, []);

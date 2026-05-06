@@ -22,8 +22,25 @@ export class UsersService {
     return newUser.save();
   }
 
+  async findAll(): Promise<UserDocument[]> {
+    return this.userModel.find().select('-password').sort({ createdAt: -1 }).exec();
+  }
+
+  async update(id: string, data: { name?: string; email?: string; role?: string }): Promise<UserDocument | null> {
+    return this.userModel.findByIdAndUpdate(id, data, { new: true }).select('-password').exec();
+  }
+
+  async remove(id: string): Promise<void> {
+    await this.userModel.findByIdAndDelete(id).exec();
+  }
+
   async updatePassword(email: string, plainPassword: string): Promise<void> {
     const hashedPassword = await bcrypt.hash(plainPassword, 10);
     await this.userModel.updateOne({ email }, { password: hashedPassword }).exec();
+  }
+
+  async updatePasswordById(id: string, plainPassword: string): Promise<void> {
+    const hashedPassword = await bcrypt.hash(plainPassword, 10);
+    await this.userModel.findByIdAndUpdate(id, { password: hashedPassword }).exec();
   }
 }
