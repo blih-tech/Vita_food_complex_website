@@ -2,6 +2,7 @@ import { memo } from "react";
 import Image from "next/image";
 import { Product } from "@frontend/app/[locale]/products/data";
 import { ProductCard } from "./ProductCard";
+import { useTranslations } from "next-intl";
 
 const EmptyState = memo(() => {
   const t = useTranslations("ProductsPage");

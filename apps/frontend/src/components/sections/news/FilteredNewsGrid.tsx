@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Link } from "@frontend/navigation";
+import { useTranslations } from "next-intl";
 
 export default function FilteredNewsGrid({ category }: { category: string }) {
   const t = useTranslations("News.latestNews"); // Assuming FilteredNewsGrid uses keys from latestNews for article structure
