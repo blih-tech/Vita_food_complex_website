@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import {
   Settings, User, Globe, Link2, BarChart3,
   Save, Loader2, Check, Eye, EyeOff,
-  Facebook, Instagram, Linkedin, X,
+  Share2,
   KeyRound, Mail, Bell,
 } from 'lucide-react';
 import api from '@/lib/api';
@@ -134,50 +134,24 @@ function SiteSettingsTab() {
       {/* Social Links */}
       <SectionCard title="Social Links" icon={Link2}>
         <div className="grid sm:grid-cols-2 gap-4">
-          <Field label="Facebook">
-            <div className="relative">
-              <Facebook size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-blue-500" />
-              <input
-                className={`${inputCls} pl-9`}
-                value={form.socialLinks.facebook ?? ''}
-                onChange={(e) => set('socialLinks.facebook', e.target.value)}
-                placeholder="https://facebook.com/…"
-              />
-            </div>
-          </Field>
-          <Field label="Instagram">
-            <div className="relative">
-              <Instagram size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-pink-500" />
-              <input
-                className={`${inputCls} pl-9`}
-                value={form.socialLinks.instagram ?? ''}
-                onChange={(e) => set('socialLinks.instagram', e.target.value)}
-                placeholder="https://instagram.com/…"
-              />
-            </div>
-          </Field>
-          <Field label="LinkedIn">
-            <div className="relative">
-              <Linkedin size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-blue-600" />
-              <input
-                className={`${inputCls} pl-9`}
-                value={form.socialLinks.linkedin ?? ''}
-                onChange={(e) => set('socialLinks.linkedin', e.target.value)}
-                placeholder="https://linkedin.com/…"
-              />
-            </div>
-          </Field>
-          <Field label="Twitter / X">
-            <div className="relative">
-              <X size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sky-500" />
-              <input
-                className={`${inputCls} pl-9`}
-                value={form.socialLinks.twitter ?? ''}
-                onChange={(e) => set('socialLinks.twitter', e.target.value)}
-                placeholder="https://x.com/…"
-              />
-            </div>
-          </Field>
+          {[
+            { key: 'facebook', label: 'Facebook', placeholder: 'https://facebook.com/…', color: 'text-blue-500' },
+            { key: 'instagram', label: 'Instagram', placeholder: 'https://instagram.com/…', color: 'text-pink-500' },
+            { key: 'linkedin', label: 'LinkedIn', placeholder: 'https://linkedin.com/…', color: 'text-blue-600' },
+            { key: 'twitter', label: 'Twitter / X', placeholder: 'https://x.com/…', color: 'text-sky-500' },
+          ].map(({ key, label, placeholder, color }) => (
+            <Field key={key} label={label}>
+              <div className="relative">
+                <Share2 size={15} className={`absolute left-3.5 top-1/2 -translate-y-1/2 ${color}`} />
+                <input
+                  className={`${inputCls} pl-9`}
+                  value={(form.socialLinks as any)[key] ?? ''}
+                  onChange={(e) => set(`socialLinks.${key}`, e.target.value)}
+                  placeholder={placeholder}
+                />
+              </div>
+            </Field>
+          ))}
         </div>
       </SectionCard>
 
