@@ -504,7 +504,7 @@
     },
     "problemFraming": {
       "heading": "የችግር አቀራረብ",
-      "description": "እያንዳንዱ ጥሩ ታሪክ በ'ለምን' ይጀምራል። ትክክለኛውን ችግር መግለጽ ትክክለኛውን መፍትሄ ለማግኘት ይረዳል",
+      "description": "እያንዳንዱ ጥሩ ታሪክ በ'ለምን' ይጀምራል። ትክክለኛውን ችግር መግለጽ ትክክленную መፍትሄ ለማግኘት ይረዳል",
       "cards": {
         "who": {
           "title": "ማን",
@@ -541,370 +541,1017 @@
   },
   "Sustainability": {
     "hero": {
-      "headline": "በእንክብካቤ የተገኘ፣ \nበዓላማ የተጋራ",
-      "subtitle": "ማህበረሰቦችን ለመመገብ እና ለወደፊት ትውልዶች አካባቢን ለመጠበቅ ቁርጠኞች ነን"
+      "headline": "በጥንቃቄ የተገኘ፣ በዓላማ የተጋራ",
+      "subtitle": "በዘላቂ አሰራር እና በኃላፊነት ስሜት ግብዓቶችን በማቅረብ ማህበረሰቦችን ለመመገብ እና ፕላኔታችንን ለመጠበቅ ቆርጠን ተነስተናል።"
     },
     "commitment": {
-      "title": "ቁርጠኝነታችን",
-      "description": "ዘላቂነት ምርጥ አይደለም — ኃላፊነት ነው። ከአካባቢው ስንዴ ማምጣት እስከ በምርት ውስጥ ቆሻሻን መቀነስ ድረስ እያንዳንዱ ደረጃ ለሰዎች እና ለፕላኔት ባለን ቁርጠኝነት የሚመራ ነው።",
+      "title": "የእኛ ቁርጠኝነት",
+      "description": "በቪታ፣ ዘላቂነት በምናደርገው ነገር ሁሉ እምብርት ነው። በአካባቢው እና በምናገለግላቸው ማህበረሰቦች ላይ አዎንታዊ ተፅእኖ ለመፍጠር እንጥራለን።",
       "localSourcing": {
-        "title": "የአካባቢ ምንጭ",
+        "title": "የአካባቢ ግብዓት አቅርቦት",
         "items": [
-          "ከአካባቢው አርሶ አደሮች ጋር አጋርነት",
-          "የኢትዮጵያ ግብርናን መደገፍ",
-          "የገጠር ኢኮኖሚን ማጠናከር"
+          "የአካባቢ አርሶ አደሮችን መደገፍ",
+          "የካርቦን አሻራን መቀነስ",
+          "ትኩስ ግብዓቶችን ማረጋገጥ"
         ]
       },
       "communityImpact": {
-        "title": "የማህበረሰብ ተጽእኖ",
+        "title": "የማህበረሰብ ተፅእኖ",
         "items": [
-          "150–200 ስራዎች ተፈጥረዋል",
-          "የክህሎት ልማት ዕድሎች",
-          "የአካባቢው ኢኮኖሚያዊ እድገት"
+          "የስራ እድል ፈጠራ",
+          "የትምህርት ድጋፍ",
+          "የጤና ተነሳሽነቶች"
         ]
       },
       "responsibleProduction": {
-        "title": "ኃላፊነት ያለው ምርት",
+        "title": "ኃላፊነት የተሞላበት ምርት",
         "items": [
-          "ቀልጣፋ የማምረት ሂደቶች",
-          "የቆሻሻ ቅነሳ ስርዓቶች",
-          "ትርፍ ምርቶች ለእንስሳት መኖ ዳግም ጥቅም ላይ ይውላሉ"
+          "የብክነት መቀነስ",
+          "የኢነርጂ ውጤታማነት",
+          "ዘላቂ ማሸጊያ"
         ]
       }
     },
     "process": {
-      "sublabel": "ከእርሻ እስከ ጣራ፣ ዘላቂነት በእያንዳንዱ ደረጃ",
-      "title": "ዘላቂ ሂደታችን",
+      "sublabel": "የእኛ ጉዞ",
+      "title": "የዘላቂነት ሂደት",
       "farmers": {
         "heading": "አርሶ አደሮች",
-        "desc": "ጥራት ያላቸው ግብዓቶችን ለማስጠበቅ እና ግብርናን ለማጠናከር ከአካባቢው አምራቾች ጋር አጋርነት"
+        "desc": "ዘላቂ የግብርና አሰራሮችን ለማረጋገጥ ከአካባቢው አርሶ አደሮች ጋር በቅርበት እንሰራለን።"
       },
       "processing": {
         "heading": "ማቀነባበር",
-        "desc": "ጥሬ ዕቃዎችን በደህንነት እና በስፋት ላይ ያተኮሩ የማምረት ስርዓቶች መቀየር"
+        "desc": "የእኛ ዘመናዊ ፋሲሊቲዎች ለከፍተኛ ውጤታማነት እና ለአነስተኛ ብክነት ተዘጋጅተዋል።"
       },
       "distribution": {
         "heading": "ስርጭት",
-        "desc": "ምርቶችን በብቃት ለደላሎች፣ ለጅምላ ገዢዎች እና ለገበያዎች ማቅረብ"
+        "desc": "ልቀትን ለመቀነስ እና ወቅታዊ አቅርቦትን ለማረጋገጥ ሎጂስቲክሳችንን እናሻሽላለን።"
       },
       "reuse": {
-        "heading": "ዳግም ጥቅም",
-        "desc": "በኃላፊነት ያለው ወደነበረበት መመለስ እና ዋጋን ከፍ የሚያደርጉ ክወናዎች ቆሻሻን መቀነስ"
+        "heading": "እንደገና መጠቀም",
+        "desc": "የማሸጊያ ቁሳቁሶቻችንን እንደገና መጠቀምን እና መልሶ ጥቅም ላይ ማዋልን እናበረታታለን።"
       }
     },
     "giveBack": {
-      "title": "እንዴት እንመልሳለን",
-      "description": "የንግድ እድገት ለሁሉም ጥቅም ማምጣት አለበት ብለን እናምናለን። በክወናዎቻችን እና እሴቶቻችን አማካኝነት ማህበረሰቦችን በንቃት እንደግፋለን፣ የአካባቢውን አጋሮች እናበረታታለን፣ ረጅም ጊዜ ተጽእኖ የሚፈጥሩ ዘላቂ ልምዶችን እናራመዳለን።",
+      "title": "እንዴት መልሰን እንሰጣለን",
+      "description": "ስኬታችንን በጣም ለሚያስፈልጋቸው ሰዎች ማካፈል እንዳለብን እናምናለን።",
       "farmers": {
-        "heading": "የአካባቢውን አርሶ አደሮች መደገፍ",
-        "desc": "ስንዴን በቀጥታ ከአካባቢው አርሶ አደሮች እናመጣለን፣ የተረጋጋ ፍላጎት እንፈጥራለን እና የኢትዮጵያን የግብርና ዋና አንድ በማጠናከር ላይ እንገኛለን"
+        "heading": "አርሶ አደሮችን መደገፍ",
+        "desc": "ምርታማነትን እና ኑሮን ለማሻሻል መሳሪያዎችን እና ስልጠናዎችን መስጠት።"
       },
       "employment": {
-        "heading": "ስራ መፍጠር",
-        "desc": "ፋብሪካችን ለ150–200 ሰዎች ስራ ይሰጣል፣ ቤተሰቦችን ይደግፋል እና ለአካባቢው ኢኮኖሚያዊ እድገት አስተዋጽኦ ያደርጋል"
+        "heading": "የአካባቢ የስራ እድል",
+        "desc": "በማህበረሰባችን ውስጥ ለእድገት እድሎችን መፍጠር።"
       },
       "accessibility": {
-        "heading": "የምግብ ተደራሽነት",
-        "desc": "ከፍተኛ ጥራት ያላቸውን ተመጣጣኝ የምግብ ምርቶችን በአገሪቱ ውስጥ ባሉ ተጨማሪ ማህበረሰቦች እናደርሳለን"
+        "heading": "ተደራሽነት",
+        "desc": "ምርቶቻችን በጣም ርቀው የሚገኙ አካባቢዎች እንኳን መድረሳቸውን ማረጋገጥ።"
       }
     },
     "stats": {
-      "quickFact": "ፈጣን መረጃ",
       "skus": {
         "value": "+11",
-        "label": "ለሁሉም ልዩ ምርቶች"
+        "label": "ለሁሉም ሰው የሚሆኑ ልዩ ምርቶች።"
       },
       "biscuits": {
-        "value": "2ቶ",
-        "label": "ቢስኩት/ሰዓት"
+        "value": "2tn"
       },
       "flour": {
-        "value": "60ቶ",
-        "label": "የዱቄት ምርት/ቀን"
+        "value": "60tn",
+        "label": "በቀን የሚመረት የዱቄት መጠን"
       },
+      "quickFact": "ፈጣን እውነታ",
       "jobs": {
         "value": "+200",
-        "label": "የተፈጠሩ ስራዎች"
+        "label": "የተፈጠሩ የስራ እድሎች"
       },
       "factory": {
-        "value": "22ኪ.ሜ²",
-        "label": "የፋብሪካ ስፋት"
+        "value": "22Km²",
+        "label": "የፋብሪካው ስፋት በካሬ ኪሎሜትር"
       },
       "investment": {
-        "value": "ብር210ሚ",
+        "value": "Br210M",
         "label": "ጠቅላላ ኢንቨስትመንት"
       },
       "export": {
-        "value": "$1.4ሚ",
-        "label": ""
+        "value": "$1.4M"
       }
     }
   },
-  "Careers": {
-    "hero": {
-      "headline": "የእርስዎን ወደፊት ከቪታ ጋር ይገንቡ",
-      "subtitle": "በኢትዮጵያ የምግብ ወደፊት በማቅረጽ ላይ ያለ ቡድን ይቀላቀሉ። ትርጉም ያለው ስራ፣ ደጋፊ ባህል och ሙያዊ እድገት እናቀርባለን።",
-      "cta": "ክፍት ስራዎችን ይመልከቱ"
+  "Terms": {
+    "header": {
+      "label": "ህጋዊ / ሰነዶች",
+      "title": "ውሎች እና ሁኔታዎች",
+      "lastUpdated": "ለመጨረሻ ጊዜ የተሻሻለው፡ ጥቅምት 1፣ 2026"
     },
-    "whyJoin": {
-      "title": "ለምን ቪታን ይቀላቀሉ?",
-      "benefits": {
-        "growth": "ሙያዊ እድገት",
-        "culture": "ደጋፊ ባህል",
-        "environment": "ዘመናዊ የስራ አካባቢ",
-        "impact": "የማህበረሰብ ተጽእኖ",
-        "innovation": "ፈጠራ-ተኮር",
-        "balance": "የስራ-ህይወት ሚዛን"
+    "sidebar": {
+      "title": "በዚህ ገጽ ላይ",
+      "items": {
+        "acceptance": "ውሎችን መቀበል",
+        "use": "የድረ-ገጽ አጠቃቀም",
+        "content": "የተጠቃሚ ይዘት",
+        "guidelines": "የማህበረሰብ መመሪያዎች",
+        "products": "የምርት መረጃ",
+        "orders": "ትዕዛዞች och ግዢዎች",
+        "ip": "የአእምሮ ንብረት",
+        "privacy": "የግላዊነት ፖሊሲ",
+        "liability": "የተጠያቂነት ገደብ",
+        "contact": "ያግኙን"
       }
     },
-    "openPositions": {
-      "title": "ክፍት ስራዎች",
-      "applyNow": "አሁን ያመልክቱ"
-    },
-    "details": {
-      "tab": "የስራ ዝርዝር",
-      "applyNow": "አሁን ያመልክቱ",
-      "summaryTitle": "የስራ ማጠቃለያ",
-      "responsibilitiesTitle": "የስራ ኃላፊነቶች",
-      "requirementsTitle": "መስፈርቶች",
-      "benefitsTitle": "ጥቅማ ጥቅሞች",
-      "notFound": "ስራው አልተገኘም"
-    },
-    "form": {
-      "title": "የስራ ማመልከቻ ቅጽ",
-      "subtitle": "ለዚህ ስራ ለማመልከት ከዚህ በታች ያለውን ቅጽ ይሙሉ። ሌላ ካልተገለጸ በስተቀር ሁሉም መስኮች የግድ ናቸው።",
-      "personal": {
-        "title": "የግል መረጃ",
-        "desc": "ስለ እርስዎ ይንገሩን"
+    "content": {
+      "acceptance": {
+        "title": "1. ውሎችን መቀበል",
+        "p1": "ወደ ቪታ ፉድ ኮምፕሌክስ (\"እኛ\"፣ \"የእኛ\" ወይም \"እኛን\") እንኳን ደህና መጡ። እነዚህ ውሎች እና ሁኔታዎች የእኛን ድረ-ገጽ፣ ምርቶች እና አገልግሎቶች አጠቃቀምዎን ይገዛሉ። የእኛን ጣቢያ በመጎብኘት ወይም ምርቶቻችንን በመግዛት በእነዚህ ውሎች ለመገዛት ተስማምተዋል።",
+        "p2": "ከእነዚህ ውሎች ውስጥ በማንኛውም አካል ካልተስማሙ፣ እባክዎ አገልግሎቶቻችንን አይጠቀሙ ወይም ምርቶቻችንን አይግዙ። እነዚህን ውሎች በማንኛውም ጊዜ ያለቅድመ ማስጠንቀቂያ የማሻሻል ወይም የመለወጥ መብታችን የተጠበቀ ነው።",
+        "notice": {
+          "title": "አስፈላጊ ማሳሰቢያ",
+          "text": "ለውጦች ከተለጠፉ በኋላ ድረ-ገጻችንን መጠቀሙን በመቀጠል፣ የተሻሻሉትን ውሎች እና ሁኔታዎች ይቀበላሉ። ይህንን ገጽ በየጊዜው እንዲገመግሙ እንመክራለን።"
+        }
       },
-      "professional": {
-        "title": "ሙያዊ ልምድ",
-        "desc": "የስራ ዳራዎን ያጋሩ"
+      "use": {
+        "title": "2. የድረ-ገጽ አጠቃቀም",
+        "p1": "ድረ-ገጻችንን ለህጋዊ ዓላማዎች ብቻ መጠቀም ይችላሉ። ድረ-ገጻችንን ሊጎዳ፣ ሊያሰናክል ወይም ሊያዳክም በሚችል በማንኛውም መንገድ ወይም በማንኛውም ሌላ ወገን የድረ-ገጽ አጠቃቀም ላይ ጣልቃ በሚገባ መንገድ ላለመጠቀም ተስማምተዋል።",
+        "list": [
+          "የድረ-ገጹን ማንኛውንም ክፍል ያለፈቃድ ለመድረስ አይሞክሩ",
+          "ያለፈቃድ ድረ-ገጹን ለመድረስ አውቶማቲክ ስርዓቶችን አይጠቀሙ",
+          "አገልግሎቶቻችንን የሚያውኩ ወይም ጣልቃ የሚገቡ ማናቸውንም ተግባራት ላይ አይሳተፉ",
+          "ተንኮል አዘል ኮድ ወይም ቫይረሶችን አይጫኑ"
+        ]
       },
-      "education": {
-        "title": "ትምህርት",
-        "desc": "ስለ የትምህርት ዳራዎ ይንገሩን"
+      "content": {
+        "title": "3. የተጠቃሚ ይዘት",
+        "p1": "ወደ ማህበረሰባችን ፕላትፎርም ይዘት ካስገቡ (እንደ የምግብ አዘገጃጀት መመሪያዎች፣ ግምገማዎች ወይም ፎቶዎች)፣ ያንን ይዘት ለመጠቀም፣ ለማባዛት እና ለማሳየት ብቸኛ ያልሆነ፣ ዓለም አቀፋዊ፣ ከሮያሊቲ ነፃ የሆነ ፈቃድ ይሰጡናል።",
+        "p2": "የሚያስገቡት ማንኛውም ይዘት ባለቤት መሆንዎን ወይም አስፈላጊው መብት እንዳለዎት እና የማንኛውንም ሶስተኛ ወገን መብቶች ወይም ተፈጻሚነት ያላቸውን ህጎች የማይጥስ መሆኑን ያረጋግጣሉ።"
       },
-      "resume": {
-        "title": "ሪዙሜ እና ሽፋን ደብዳቤ",
-        "desc": "ሰነዶችዎን ይስቀሉ"
+      "guidelines": {
+        "title": "4. የማህበረሰብ መመሪያዎች",
+        "p1": "ማህበረሰባችን የተገነባው በአክብሮት፣ በትብብር እና በአዎንታዊነት ላይ ነው። በማህበረሰብ ባህሪያቶቻችን ውስጥ ሲሳተፉ፣ ለሚከተሉት ተስማምተዋል፡",
+        "list": [
+          "ለሌሎች የማህበረሰብ አባላት አክባሪ እና ደግ መሆን",
+          "ትክክለኛ እና ታማኝ ይዘት ማጋራት",
+          "አፀያፊ፣ አድሎአዊ ወይም ተገቢ ያልሆኑ ጽሑፎችን አለመለጠፍ",
+          "ያልተፈቀዱ የንግድ ይዘቶችን ወይም ስፓም አለመለጠፍ",
+          "ሌሎችን አለመምሰል ወይም የሐሰት አካውንቶችን አለመፍጠር"
+        ],
+        "p2": "እነዚህን መመሪያዎች የሚጥሱ ማናቸውንም ይዘቶች የማስወገድ ወይም አካውንቶችን የማገድ መብታችን የተጠበቀ ነው።"
       },
-      "additional": {
-        "title": "ተጨማሪ መረጃ",
-        "desc": "እንድናውቅ የሚፈልጉት ሌላ ነገር"
+      "products": {
+        "title": "5. የምርት መረጃ",
+        "p1": "በድረ-ገጻችን ላይ ያሉ የምርት መግለጫዎች፣ ግብዓቶች እና የአመጋገብ መረጃዎች ትክክለኛ መሆናቸውን ለማረጋገጥ እንጥራለን። ሆኖም፣ የምግብ አዘገጃጀት መመሪያዎች och ማሸጊያዎች በጊዜ ሂደት ሊለወጡ ይችላሉ።",
+        "p2": "በጣም ወቅታዊ መረጃ ለማግኘት ምርቱ ሲደርስዎ አካላዊ ማሸጊያውን እንዲያዩ እንመክራለን። የምርት ምስሎች ለምሳሌ ያህል የቀረቡ ናቸው och ትክክለኛ ምርቶች በትንሹ ሊለያዩ ይችላሉ።",
+        "allergen": {
+          "title": "የአለርጂ መረጃ",
+          "text": "የምግብ አለርጂ ወይም የአመጋገብ ገደቦች ካሉዎት፣ ሁልጊዜ ዝርዝር የአለርጂ መረጃ ለማግኘት የምርት ማሸጊያውን ያረጋግጡ። አጠቃላይ መረጃ በድረ-ገጽ ላይ ብንሰጥም፣ ሁልጊዜ ወቅታዊ መሆኑን ማረጋገጥ አንችልም።"
+        }
       },
-      "fields": {
-        "firstName": "ስም",
-        "firstNamePlaceholder": "ስምዎን ያስገቡ",
-        "lastName": "የአያት ስም",
-        "lastNamePlaceholder": "የአያት ስምዎን ያስገቡ",
-        "email": "የኢሜይል አድራሻ",
-        "emailPlaceholder": "you@example.com",
-        "phone": "ስልክ ቁጥር",
-        "phonePlaceholder": "+251 911 123 456",
+      "orders": {
+        "title": "6. ትዕዛዞች እና ግዢዎች",
+        "p1": "በእኛ ፕላትፎርም በኩል ትዕዛዝ ሲሰጡ፣ ትክክለኛ የግንኙነት እና የመላኪያ መረጃ ለመስጠት ተስማምተዋል። በማንኛውም ምክንያት ማንኛውንም ትዕዛዝ የመቀበል ወይም የመቃወም መብታችን የተጠበቀ ነው፣ ይህም የሚከተሉትን ጨምሮ ግን ሳይገደብ፡",
+        "list": [
+          "የምርት አቅርቦት",
+          "የዋጋ ስህተቶች ወይም የስርዓት ብልሽቶች",
+          "የመላኪያ አካባቢ ገደቦች",
+          "የተጠረጠረ የማጭበርበር ተግባር"
+        ],
+        "p2": "ሁሉም ዋጋዎች በሌላ መልኩ ካልተገለጸ በስተቀር በኢትዮጵያ ብር (ETB) ተዘርዝረዋል። ዋጋዎች ያለቅድመ ማስታወቂያ ሊለወጡ ይችላሉ ነገር ግን ቀድሞ የተረጋገጡ ትዕዛዞችን አይነኩም።",
+        "p3": "ክፍያ ትዕዛዝ በሚሰጥበት ጊዜ መጠናቀቅ አለበት። በክፍያ ገጹ ላይ የተገለጹ የተለያዩ የክፍያ ዘዴዎችን እንቀበላለን።"
+      },
+      "ip": {
+        "title": "7. የአእምሮ ንብረት",
+        "p1": "በዚህ ድረ-ገጽ ላይ ያሉ ሁሉም ይዘቶች፣ አርማዎችን፣ ጽሑፎችን፣ ግራፊክስን፣ ምስሎችን፣ ቪዲዮዎችን እና ሶፍትዌሮችን ጨምሮ የቪታ ሃይድሮ-አግሮ ፕሮሰሲንግ ኃ.የተ.የግ.ማ ንብረት ናቸው እና በቅጂ መብት እና በአእምሮ ንብረት ህጎች የተጠበቁ ናቸው።",
+        "p2": "ያለእኛ ግልጽ የጽሁፍ ፈቃድ ማንኛውንም ይዘት መጠቀም፣ ማባዛት፣ ማሰራጨት ወይም ተዋጽኦ ስራዎችን መፍጠር አይችሉም።",
+        "p3": "በዚህ ድረ-ገጽ ላይ የሚታዩ የንግድ ምልክቶች፣ የአገልግሎት ምልክቶች እና የንግድ ስሞች የቪታ ፉድ ኮምፕሌክስ የተመዘገቡ እና ያልተመዘገቡ ምልክቶች ናቸው እና ያለፈቃድ ጥቅም ላይ መዋል አይችሉም።"
+      },
+      "privacy": {
+        "title": "8. የግላዊነት ፖሊሲ",
+        "p1": "የእርስዎ ግላዊነት ለእኛ አስፈላጊ ነው። በትዕዛዝ ቅጾች፣ በዜና መጽሄት ምዝገባዎች ወይም በማህበረሰብ ተሳትፎ በኩል የሚሰበሰቡ መረጃዎች ደህንነታቸው በተጠበቀ ሁኔታ ተቀምጠው ለሚከተሉት ብቻ ጥቅም ላይ ይውላሉ፡",
+        "list": [
+          "ትዕዛዞችዎን ማሟላት እና ማድረስ",
+          "ስለ ምርቶች እና አገልግሎቶች ከእርስዎ ጋር መገናኘት",
+          "ድረ-ገጻችንን እና የደንበኛ ተሞክሮን ማሻሻል",
+          "የማስተዋወቂያ ቁሳቁሶችን መላክ (በእርስዎ ፈቃድ)"
+        ],
+        "p2": "የእርስዎን የግል መረጃ ለሶስተኛ ወገኖች አንሸጥም። መረጃዎን እንዴት እንደምንሰበስብ፣ እንደምንጠቀም እና እንደምንጠብቅ የበለጠ ዝርዝር መረጃ ለማግኘት እባክዎ የግላዊነት ፖሊሲ ገጻችንን ይመልከቱ።"
+      },
+      "liability": {
+        "title": "9. የተጠያቂነት ገደብ",
+        "p1": "በህግ በተፈቀደው ከፍተኛ መጠን፣ ቪታ ፉድ ኮምፕሌክስ ከሚከተሉት ለሚመጡ ማናቸውም ቀጥተኛ ያልሆኑ፣ ድንገተኛ፣ ልዩ ወይም ቅጣት ለሚያስከትሉ ጉዳቶች ተጠያቂ አይሆንም፡",
+        "list": [
+          "የእኛን ድረ-ገጽ ወይም ምርቶች መጠቀም ወይም መጠቀም አለመቻል",
+          "የመረጃዎ ያልተፈቀደ መዳረሻ ወይም መለወጥ",
+          "በእኛ ፕላትፎርም ላይ ያለ ማንኛውም ይዘት፣ ባህሪ ወይም ግንኙነት",
+          "በምርት መረጃ ላይ ያሉ ማናቸውም ስህተቶች ወይም ግድፈቶች"
+        ],
+        "p2": "ከእነዚህ ውሎች ለሚነሳ ለማንኛውም የይገባኛል ጥያቄ የእኛ አጠቃላይ ተጠያቂነት ለምርቱ ወይም ለአገልግሎቱ ከከፈሉት መጠን መብለጥ የለበትም።",
+        "safety": {
+          "title": "የምርት ደህንነት",
+          "text": "ከከፍተኛ የጥራት ደረጃዎችን ብንጠብቅም፣ ምርቶቹ ከደረሱ በኋላ ተገቢ ባልሆነ አያያዝ፣ አቀማመጥ ወይም አጠቃቀም ለሚመጡ ጉዳቶች ተጠያቂ አይደለንም። ሁልጊዜ የማከማቻ መመሪያዎችን ይከተሉ እና የማለቂያ ቀናትን ያረጋግጡ።"
+        }
+      },
+      "contact": {
+        "title": "10. ያግኙን",
+        "p1": "ስለእነዚህ ውሎች እና ሁኔታዎች ማንኛውም ጥያቄ ካለዎት ወይም ስለ ምርቶቻችን ወይም አገልግሎቶቻችን እርዳታ ከፈለጉ እባክዎን እኛን ለማነጋገር አያመንቱ፡",
+        "cta": "ይገናኙን",
+        "button": "መልዕክት ይላኩ",
+        "email": "ኢሜል",
+        "phone": "ስልክ",
         "address": "አድራሻ",
-        "addressPlaceholder": "ሙሉ አድራሻዎን ያስገቡ",
-        "currentRole": "የአሁን ስራ",
-        "currentRolePlaceholder": "ለም. የምርት ተቆጣጣሪ",
-        "yearsExperience": "የልምድ ዓመታት",
-        "yearsExperiencePlaceholder": "ለም. 5 ዓመት",
-        "skills": "ቁልፍ ክህሎቶች",
-        "skillsPlaceholder": "ለም. የቡድን አመራር፣ የጥራት ቁጥጥር",
-        "highestEducation": "ከፍተኛ ትምህርት",
-        "highestEducationPlaceholder": "ለም. ባችለር ዲግሪ",
-        "institution": "ተቋም",
-        "institutionPlaceholder": "ለም. አዲስ አበባ ዩኒቨርሲቲ",
-        "fieldOfStudy": "የትምህርት ዘርፍ",
-        "fieldOfStudyPlaceholder": "ለም. የምግብ ሳይንስ",
-        "resume": "ሪዙሜ/ሲቪ",
-        "coverLetter": "ሽፋን ደብዳቤ",
-        "coverLetterPlaceholder": "ለዚህ ስራ ለምን ተስማሚ እንደሆኑ ይንገሩን...",
-        "additionalInfo": "ተጨማሪ ማስታወሻዎች",
-        "additionalInfoPlaceholder": "ሌላ ማጋራት የሚፈልጉት መረጃ...",
-        "uploadLabel": "ለመስቀል ይጫኑ ወይም ይጎትቱ",
-        "uploadHint": "PDF, DOC, DOCX (ከፍ. 10MB)"
-      },
-      "submit": "ማመልከቻ ያስገቡ"
+        "p2": "የደንበኞች አገልግሎት ቡድናችን ከሰኞ እስከ አርብ፣ ከጠዋቱ 3፡00 እስከ ምሽቱ 12፡00 (በኢትዮጵያ ሰዓት አቆጣጠር) ይገኛል። ብዙውን ጊዜ ለጥያቄዎች በ24-48 ሰዓታት ውስጥ ምላሽ እንሰጣለን።"
+      }
     }
   },
   "Distributor": {
     "hero": {
-      "label": "ከቪታ ጋር ይተባበሩ",
-      "headline": "ንግድዎን ከቪታ ጋር ያሳድጉ",
-      "subtitle": "ፈጣን እየደገ ያለ የስርጭት አውታረ መረብ ይቀላቀሉ እና አስተማማኝ፣ ከፍተኛ ጥራት ያላቸውን የምግብ ምርቶች ወደ ገበያዎ ያምጡ። ዛሬ በቀላል ጥሪ ይጀምሩ — ቡድናችን በእያንዳንዱ ደረጃ ለመምራት ዝግጁ ነው።",
-      "cta": "አሁን ይደውሉ"
+      "label": "ንግድዎን ያሳድጉ",
+      "headline": "የቪታ አከፋፋይ ይሁኑ",
+      "subtitle": "ቡድናችንን ይቀላቀሉ እና ጥራት ያላቸውን ምርቶች ለማህበረሰብዎ ያቅርቡ።",
+      "cta": "አሁኑኑ ያመልክቱ"
     },
     "whyWork": {
-      "title": "ለምን ከቪታ ጋር ይሰሩ?",
-      "description": "ለእርስዎ ማደግ ቀላል እናደርጋለን። ጠንካራ ፍላጎት፣ አስተማማኝ አቅርቦት och ቀጣይ ድጋፍ ያለው ቪታ በገበያዎ ለመሳካት የሚያስፈልግዎትን ሁሉ ይሰጣል።",
+      "title": "ለምን ከቪታ ጋር ይሰራሉ?",
+      "description": "ለአከፋፋይ አጋሮቻችን የተለያዩ ጥቅማጥቅሞችን እናቀርባለን።",
       "cards": {
-        "demand": "ከፍተኛ የገበያ ፍላጎት",
-        "supply": "አስተማማኝ የአቅርቦት ሰንሰለት",
-        "brand": "ጠንካራ የብራንድ ድጋፍ",
-        "margins": "ማራኪ ትርፍ ድርሻ"
+        "demand": "ከፍተኛ ፍላጎት",
+        "supply": "አስተማማኝ አቅርቦት",
+        "brand": "ጠንካራ ብራንድ",
+        "margins": "ጥሩ ትርፍ"
       }
     },
     "whoCanPartner": {
-      "sectionTitle": "ማን አከፋፋይ ሊሆን ይችላል",
-      "title": "ማን ከእኛ ጋር ሊተባበር ይችላል?",
-      "description": "ከአስተማማኝ och እየተስፋፋ ካለው ብራንድ ጋር ማደግ ለሚፈልጉ ቁርጥ ያላቸው አጋሮች እንፈልጋለን።",
+      "sectionTitle": "ማን አከፋፋይ መሆን ይችላል?",
+      "title": "መስፈርቶች",
+      "description": "የሚከተሉትን መስፈርቶች የሚያሟሉ አጋሮችን እንፈልጋለን፡",
       "items": [
-        "የንግድ ባለቤቶች እና ችርቻሮ ነጋዴዎች",
-        "የአካባቢ የገበያ ዕውቀት ያላቸው አከፋፋዮች",
-        "ምርቶችን ማከማቸት እና ማስተዳደር የሚችሉ",
-        "ጠንካራ ለእድገት ቁርጠኝነት",
-        "የረጅም ጊዜ ሽርክና አስተሳሰብ"
+        "ህጋዊ የንግድ ፈቃድ",
+        "የመጋዘን አገልግሎት",
+        "የማከፋፈያ ተሽከርካሪዎች",
+        "የፋይናንስ መረጋጋት",
+        "ለጥራት ያለው ቁርጠኝነት"
       ]
     },
     "steps": {
-      "title": "በ3 ቀላል ደረጃዎች ይጀምሩ",
-      "subtitle": "ቀላል ሂደት",
+      "title": "በ 3 ቀላል ደረጃዎች ይጀምሩ",
+      "subtitle": "ቡድናችንን መቀላቀል ቀላል እና ግልጽ ነው።",
       "call": {
-        "title": "ቡድናችንን ያግኙ",
-        "description": "ከዚህ በታች ካሉት የስልክ ቁጥሮች በአንዱ ይደውሉ"
+        "title": "ይደውሉልን",
+        "description": "ፍላጎትዎን ለመግለጽ ቡድናችንን ያነጋግሩ።"
       },
       "discussion": {
-        "title": "ፈጣን ውይይት",
-        "description": "የእርስዎን አካባቢ እና ንግድ እንረዳለን"
+        "title": "ውይይት",
+        "description": "ስለ ውሎች እና መስፈርቶች እንወያያለን።"
       },
       "started": {
         "title": "ይጀምሩ",
-        "description": "መመሪያ ያግኙ እና ስርጭት ይጀምሩ"
+        "description": "በአካባቢዎ የቪታ ምርቶችን ማከፋፈል ይጀምሩ።"
       }
     },
     "contact": {
-      "title": "የስርጭት ቡድናችንን ያግኙ",
-      "description": "ከቡድናችን ጋር በቀጥታ ያናግሩ እና ዛሬ ይጀምሩ። ከአካባቢዎ ጋር የሚዛመደውን ግንኙነት ይምረጡ።",
+      "title": "የማከፋፈያ ቡድናችንን ያነጋግሩ",
+      "description": "ለበለጠ መረጃ ቢሮዎቻችንን ያነጋግሩ።",
       "offices": [
         {
-          "name": "ማዕከላዊ ቢሮ",
-          "phone": "+251 XXX XXX XXX",
-          "address": "አዲስ አበባ፣ ኢትዮጵያ",
-          "coverage": "አገር አቀፍ ማስተባበር እና ድጋፍ"
+          "name": "የአዲስ አበባ ቢሮ",
+          "phone": "+251 911 123 456",
+          "address": "ልደታ ኤስ.ሲ፣ አዲስ አበባ",
+          "coverage": "መካከለኛው ክልል"
         },
         {
-          "name": "ማዕከላዊ ቢሮ",
-          "phone": "+251 XXX XXX XXX",
-          "address": "አዲስ አበባ፣ ኢትዮጵያ",
-          "coverage": "አገር አቀፍ ማስተባበር እና ድጋፍ"
+          "name": "የአዳማ ቢሮ",
+          "phone": "+251 922 123 456",
+          "address": "ዋናው መንገድ፣ አዳማ",
+          "coverage": "ምስራቃዊ ክልል"
         },
         {
-          "name": "ማዕከላዊ ቢሮ",
-          "phone": "+251 XXX XXX XXX",
-          "address": "አዲስ አበባ፣ ኢትዮጵያ",
-          "coverage": "አገር አቀፍ ማስተባበር እና ድጋፍ"
+          "name": "የሀዋሳ ቢሮ",
+          "phone": "+251 933 123 456",
+          "address": "ሐይቅ ዳር፣ ሀዋሳ",
+          "coverage": "ደቡባዊ ክልል"
+        }
+      ]
+    }
+  },
+  "About": {
+    "hero": {
+      "headline": "በጥንቃቄ የተገኘ፣\nበዓላማ የተጋራ",
+      "subtitle": "በዘላቂ አሰራር och በኃላፊነት ስሜት ግብዓቶችን በማቅረብ ማህበረሰቦችን ለመመገብ och ፕላኔታችንን ለመጠበቅ ቆርጠን ተነስተናል።"
+    },
+    "company": {
+      "title": "ድርጅታችን",
+      "description": "ቪታ በኢትዮጵያ ውስጥ ለሚገኙ ቤተሰቦች ከፍተኛ ጥራት ያላቸውን እና የተመጣጠነ ምርቶችን ለማቅረብ የተቋቋመ ግንባር ቀደም የምግብ አምራች ድርጅት ነው።"
+    },
+    "sisterCompanies": {
+      "label": "አውታረ መረባችን",
+      "title": "እህት ኩባንያዎች",
+      "description": "እድገትን እና ፈጠራን ለማምጣት አብረን የምንሰራ የተለያዩ ኩባንያዎች ስብስብ አካል ነን።",
+      "cta": "ጋለሪውን ይመልከቱ",
+      "visitSite": "ድረ-ገጹን ይጎብኙ",
+      "longTeaCard": {
+        "blurb": "ከምርጥ የአትክልት ስፍራዎች የተገኙ ምርጥ የሻይ ምርቶች።"
+      },
+      "brands": {
+        "belayabGroup": "በላይአብ ግሩፕ",
+        "motors": "ሞተርስ",
+        "cables": "ኬብሎች",
+        "goldenTulip": "ጎልደን ቱሊፕ",
+        "lewis": "ሌዊስ",
+        "foods": "ፉድስ",
+        "limestone": "ላይምስቶን"
+      },
+      "companies": {
+        "longTea": "ሎንግ ቲ"
+      }
+    },
+    "whoWeAre": {
+      "who": "እኛ",
+      "areWe": "ማን ነን",
+      "description": "በምግብ ኢንዱስትሪ ውስጥ ለውጥ ለማምጣት የቆረጥን ጥልቅ ስሜት ያለን ባለሙያዎች ቡድን ነን።"
+    },
+    "mv": {
+      "mission": {
+        "label": "ተልዕኮ",
+        "desc": "ቤተሰቦችን የሚመግቡ ከፍተኛ ጥራት ያላቸውን እና የተመጣጠነ የምግብ ምርቶችን ማቅረብ።"
+      },
+      "vision": {
+        "label": "ራዕይ",
+        "desc": "በቀጣናው ግንባር ቀደም የምግብ አምራች መሆን።"
+      },
+      "values": {
+        "label": "እሴቶች",
+        "desc": "ታማኝነት፣ ጥራት፣ ፈጠራ እና ማህበረሰብ።"
+      },
+      "purpose": {
+        "label": "ዓላማ",
+        "desc": "በሰዎች እና በፕላኔታችን ላይ አዎንታዊ ተፅእኖ መፍጠር።"
+      },
+      "newGen": {
+        "title": "አዲሱ ትውልድ",
+        "desc": "በአመጋገብ እና በዕድል አዲሱን ትውልድ ማብቃት።"
+      }
+    },
+    "process": {
+      "01": {
+        "heading": "ምንጭ",
+        "desc": "ከአካባቢው አርሶ አደሮች ምርጥ ግብዓቶችን እናገኛለን።",
+        "label": "ደረጃ 01",
+        "captionTitle": "ጥራት ያላቸው ግብዓቶች",
+        "captionDesc": "ለጥራት ምርቶቻችን ምርጥ የሆኑት ብቻ።"
+      },
+      "02": {
+        "heading": "አዘገጃጀት",
+        "desc": "ባለሙያ ጋጋሪዎቻችን እያንዳንዱን ምርት በጥንቃቄ ያዘጋጃሉ።",
+        "label": "ደረጃ 02",
+        "captionTitle": "የባለሙያ ጥበብ",
+        "captionDesc": "ባህል ከፈጠራ ጋር ይገናኛል።"
+      },
+      "03": {
+        "heading": "ምርት",
+        "desc": "ለተከታታይ ጥራት ዘመናዊ የምርት ሂደት።",
+        "label": "ደረጃ 03",
+        "captionTitle": "ዘመናዊ ምርት",
+        "captionDesc": "ውጤታማነት እና ደህንነት ቅድሚያ ይሰጣቸዋል።"
+      }
+    },
+    "testimonials": {
+      "label": "ምስክርነቶች",
+      "titleLead": "ሰዎች",
+      "titleAccent": "የሚሉት",
+      "quote": "ቪታ ስለ መክሰስ ያለንን አመለካከት ቀይሮታል።",
+      "prev": "ቀዳሚ",
+      "next": "ቀጣይ",
+      "items": [
+        {
+          "quote": "የቪታ ምርቶች ጥራት በገበያው ውስጥ ተወዳዳሪ የለውም።",
+          "author": "አበበ ከበደ",
+          "role": "ቸርቻሪ",
+          "image": "/assets/hero/client-1.png"
+        },
+        {
+          "quote": "ልጆቼ የዙ ቢስኩቶችን ይወዳሉ! ጤናማ እና ጣፋጭ ናቸው።",
+          "author": "ሳራ ተክሌ",
+          "role": "ወላጅ",
+          "image": "/assets/hero/client-2.png"
+        }
+      ]
+    }
+  },
+  "Careers": {
+    "hero": {
+      "headline": "የወደፊት ህይወትዎን ከቪታ ጋር ይገንቡ",
+      "subtitle": "በምግብ ኢንዱስትሪ ውስጥ ለላቀ ውጤት እና ለፈጠራ የቆረጠ ቡድንን ይቀላቀሉ።",
+      "cta": "ክፍት የስራ ቦታዎችን ይመልከቱ"
+    },
+    "whyJoin": {
+      "title": "ለምን ቪታ ፉድ ኮምፕሌክን ይቀላቀላሉ?",
+      "benefits": {
+        "growth": "የስራ እድገት",
+        "culture": "ጥሩ ባህል",
+        "environment": "ዘመናዊ አካባቢ",
+        "impact": "ዓለም አቀፋዊ ተፅእኖ",
+        "innovation": "ቀጣይነት ያለው ፈጠራ",
+        "balance": "የስራ och የህይወት ሚዛን"
+      }
+    },
+    "openPositions": {
+      "title": "ክፍት የሥራ ቦታዎች",
+      "applyNow": "አሁኑኑ ያመልክቱ"
+    },
+    "jobs": {
+      "production-manager": {
+        "title": "የምርት ሥራ አስኪያጅ",
+        "location": "ደብረ ሲና, ኢትዮጵያ",
+        "type": "ሙሉ ጊዜ",
+        "department": "ኦፕሬሽንስ",
+        "reportsTo": "የኦፕሬሽን ዳይሬክተር",
+        "summary": "በደብረ ሲና በሚገኘው ፋብሪካችን ውስጥ የዕለት ተዕለት የማምረቻ ሥራዎችን የሚቆጣጠር ልምድ ያለው የምርት ሥራ አስኪያጅ እንፈልጋለን። የጥራት ደረጃዎችን ማረጋገጥ፣ የምርት የስራ ሂደቶችን ማመቻቸት እና የወሰኑ ባለሙያዎችን ቡድን መምራት ይኖርብዎታል።",
+        "responsibilities": [
+          "በሁሉም የማምረቻ መስመሮች ላይ የዕለት ተዕለት የምርት ሥራዎችን መቆጣጠር",
+          "የጥራት ደረጃዎችን och የምግብ ደህንነት ደንቦችን መከበራቸውን ማረጋገጥ",
+          "የምርት ቡድን አባላትን ማስተዳደር och ማሰልጠን",
+          "የምርት የስራ ሂደቶችን ማመቻቸት och ብክነትን መቀነስ",
+          "ከጥራት ቁጥጥር och የአቅርቦት ሰንሰለት ቡድኖች ጋር ማስተባበር",
+          "የምርት መለኪያዎችን መከታተል och በአፈፃፀም ላይ ሪፖርት ማድረግ"
+        ],
+        "requirements": [
+          "በምህንድስና፣ በምግብ ሳይንስ ወይም ተዛማጅ መስክ የመጀመሪያ ዲግሪ",
+          "በምርት አስተዳደር ውስጥ 5+ ዓመታት ልምድ",
+          "ጠንካራ የአመራር och የቡድን አስተዳደር ችሎታዎች",
+          "ስለ ምግብ ማምረቻ ሂደቶች እውቀት",
+          "በጣም ጥሩ ችግር የመፍታት och የመተንተን ችሎታዎች"
+        ],
+        "benefits": [
+          "ተወዳዳሪ ደመወዝ och የአፈፃፀም ጉርሻዎች",
+          "የጤና መድን och የደህንነት ፕሮግራሞች",
+          "የሙያ እድገት ዕድሎች",
+          "የትብብር och ደጋፊ የሥራ አካባቢ"
+        ]
+      },
+      "quality-control": {
+        "title": "የጥራት ቁጥጥር ባለሙያ",
+        "location": "ደብረ ሲና, ኢትዮጵያ",
+        "type": "ሙሉ ጊዜ",
+        "department": "የጥራት ማረጋገጫ",
+        "reportsTo": "የጥራት ሥራ አስኪያጅ",
+        "summary": "በማምረቻ ፋብሪካችን ውስጥ የምርት ጥራት ደረጃዎችን የሚከታተል och የሚጠብቅ ለዝርዝር ትኩረት የሚሰጥ የጥራት ቁጥጥር ባለሙያ እንፈልጋለን። እያንዳንዱ ምርት የእኛን ጥብቅ የጥራት መስፈርቶች ማሟላቱን ለማረጋገጥ ወሳኝ ሚና ይጫወታሉ።",
+        "responsibilities": [
+          "ጥሬ ዕቃዎችን och የተጠናቀቁ ምርቶችን መደበኛ የጥራት ምርመራ ማካሄድ",
+          "የጥራት ቁጥጥር ሂደቶችን och የፈተና ውጤቶችን ሰነዶች መያዝ",
+          "ከጥራት ጋር የተያያዙ ጉዳዮችን och የደንበኞችን ቅሬታዎች መመርመር och መፍታት",
+          "የምግብ ደህንነት ደንቦችን och የኢንዱስትሪ ደረጃዎችን መከበራቸውን ማረጋገጥ",
+          "የጥራት ማሻሻያዎችን ተግባራዊ ለማድረግ ከምርት ቡድኖች ጋር መተባበር",
+          "የጥራት መፈተሻ መሳሪያዎችን ማስተካከል och መጠበቅ"
+        ],
+        "requirements": [
+          "በምግብ ሳይንስ፣ በኬሚስትሪ ወይም ተዛማጅ መስክ የመጀመሪያ ዲግሪ",
+          "በምግብ ማምረቻ ውስጥ በጥራት ቁጥጥር ውስጥ 3+ ዓመታት ልምድ",
+          "ስለ ISO 22000፣ HACCP och ሌሎች የምግብ ደህንነት ደረጃዎች እውቀት",
+          "ጠንካራ የመተንተን och የችግር መፍታት ችሎታዎች",
+          "ለዝርዝር ትኩረት och በጣም ጥሩ የሰነድ ችሎታዎች"
+        ],
+        "benefits": [
+          "ተወዳዳሪ ደመወዝ och የጥቅማጥቅሞች ጥቅል",
+          "የጤና መድን och የደህንነት ፕሮግራሞች",
+          "ቀጣይነት ያለው ስልጠና och የምስክር ወረቀት ድጋፍ",
+          "ዘመናዊ የላቦራቶሪ och የሙከራ ተቋማት"
+        ]
+      },
+      "marketing-lead": {
+        "title": "የግብይት መሪ",
+        "location": "አዲስ አበባ, ኢትዮጵያ",
+        "type": "ሙሉ ጊዜ",
+        "department": "ማርኬቲንግ",
+        "reportsTo": "ጠቅላላ ስራ አስኪያጅ",
+        "summary": "ለቪታ ምርቶች የምርት ስም ግንዛቤን och የገበያ እድገትን የሚመራ የፈጠራ och ስልታዊ የግብይት መሪ እንፈልጋለን። በተለያዩ ቻናሎች ላይ አጠቃላይ የግብይት ስልቶችን ያዘጋጃሉ och ይተገብራሉ።",
+        "responsibilities": [
+          "አጠቃላይ የግብይት ስልቶችን och ዘመቻዎችን ማዘጋጀት och መተግበር",
+          "በሁሉም ቻናሎች ላይ የምርት ስም አቀማመጥን och መልዕክቶችን ማስተዳደር",
+          "ማህበራዊ ሚዲያ och ይዘትን ጨምሮ የዲጂታል ግብይት ተነሳሽነቶችን መምራት",
+          "ዕድሎችን ለመለየት የገበያ አዝማሚያዎችን och የተወዳዳሪዎችን እንቅስቃሴ መተንተን",
+          "የግብይት ስራዎችን ከንግድ ግቦች ጋር ለማጣጣም ከሽያጭ ቡድኖች ጋር መተባበር",
+          "የግብይት በጀትን ማስተዳደር och የዘመቻ ውጤታማነትን መለካት"
+        ],
+        "requirements": [
+          "በማርኬቲንግ፣ በቢዝነስ ወይም ተዛማጅ መስክ የመጀመሪያ ዲግሪ",
+          "በተለይም በኤፍኤምሲጂ (FMCG) ወይም በምግብ ኢንዱስትሪ ውስጥ 5+ ዓመታት የግብይት ልምድ",
+          "ስለ ዲጂታል ግብይት och ማህበራዊ ሚዲያ ስልቶች ጠንካራ ግንዛቤ",
+          "በጣም ጥሩ የግንኙነት och የአመራር ችሎታዎች",
+          "ጠንካራ የመተንተን ችሎታ ያለው በመረጃ ላይ የተመሰረተ አስተሳሰብ"
+        ],
+        "benefits": [
+          "በአፈፃፀም ላይ የተመሰረቱ ማበረታቻዎች ያሉት ተወዳዳሪ ደመወዝ",
+          "የጤና መድን och የደህንነት ጥቅማጥቅሞች",
+          "የፈጠራ ነፃነት och የሙያ እድገት ዕድሎች",
+          "ተለዋዋጭ och የትብብር ቡድን አካባቢ"
+        ]
+      }
+    },
+    "details": {
+      "notFound": "ስራው አልተገኘም",
+      "tab": "የስራ ዝርዝሮች",
+      "summaryTitle": "ስለ ስራው",
+      "responsibilitiesTitle": "ኃላፊነቶች",
+      "requirementsTitle": "መስፈርቶች",
+      "benefitsTitle": "ጥቅማጥቅሞች",
+      "applyNow": "አሁኑኑ ያመልክቱ",
+      "companyName": "ቪታ ፉድ ኮምፕሌክስ",
+      "fullTime": "ሙሉ ጊዜ",
+      "onSite": "በቦታው"
+    },
+    "form": {
+      "title": "የስራ ማመልከቻ ቅጽ",
+      "subtitle": "እባክዎን ለዚህ ስራ ለማመልከት ከዚህ በታች ያለውን ቅጽ ይሙሉ::",
+      "personal": {
+        "title": "የግል መረጃ",
+        "desc": "የእርስዎ መሰረታዊ የግንኙነት ዝርዝሮች::"
+      },
+      "professional": {
+        "title": "የሙያ መረጃ",
+        "desc": "የእርስዎ የስራ ልምድ och የአሁኑ ሚና::"
+      },
+      "education": {
+        "title": "ትምህርት",
+        "desc": "የእርስዎ የትምህርት ታሪክ::"
+      },
+      "resume": {
+        "title": "ሲቪ och የሽፋን ደብዳቤ",
+        "desc": "ሲቪዎን ይጫኑ och ለምን ለዚህ ስራ ተስማሚ እንደሆኑ ይንገሩን::"
+      },
+      "additional": {
+        "title": "ተጨማሪ መረጃ",
+        "desc": "ሊያጋሩት የሚፈልጉት ሌላ ማንኛውም ነገር::"
+      },
+      "fields": {
+        "firstName": "ስም",
+        "firstNamePlaceholder": "ስምዎን ያስገቡ",
+        "lastName": "የአባት ስም",
+        "lastNamePlaceholder": "የአባት ስምዎን ያስገቡ",
+        "email": "የኢሜል አድራሻ",
+        "emailPlaceholder": "your@email.com",
+        "phone": "ስልክ ቁጥር",
+        "phonePlaceholder": "+251 XXX XXX XXX",
+        "address": "አድራሻ",
+        "addressPlaceholder": "አድራሻዎን ያስገቡ",
+        "currentRole": "የአሁኑ ሚና",
+        "currentRolePlaceholder": "ለምሳሌ: የማርኬቲንግ ስራ አስኪያጅ",
+        "yearsExperience": "የስራ ልምድ (በዓመት)",
+        "yearsExperiencePlaceholder": "ለምሳሌ: 5 ዓመት",
+        "highestEducation": "ከፍተኛ የትምህርት ደረጃ",
+        "highestEducationPlaceholder": "ለምሳሌ: የመጀመሪያ ዲግሪ",
+        "institution": "የትምህርት ተቋም",
+        "institutionPlaceholder": "ለምሳሌ: አዲስ አበባ ዩኒቨርሲቲ",
+        "fieldOfStudy": "የጥናት መስክ",
+        "fieldOfStudyPlaceholder": "ለምሳሌ: ቢዝነስ አድሚኒስትሬሽን",
+        "resume": "ሲቪ/CV",
+        "uploadLabel": "ለመጫን እዚህ ይጫኑ ወይም ይጎትቱ",
+        "uploadHint": "PDF, DOC, DOCX (ቢበዛ 5MB)",
+        "skills": "ክህሎቶች",
+        "skillsPlaceholder": "ቁልፍ ክህሎቶችዎን ይዘርዝሩ",
+        "coverLetter": "የሽፋን ደብዳቤ",
+        "coverLetterPlaceholder": "ስለራስዎ ይንገሩን",
+        "additionalInfo": "ተጨማሪ መረጃ",
+        "additionalInfoPlaceholder": "ሌላ ማንኛውም ነገር?",
+        "submit": "ማመልከቻውን ይላኩ"
+      },
+      "submit": "ማመልከቻውን ይላኩ"
+    }
+  },
+  "NewsDetail": {
+    "categories": {
+      "companyNews": "የድርጅት ዜና",
+      "productUpdates": "የምርት ማሳወቂያዎች"
+    },
+    "article": {
+      "title": "ቪታ ፉድ ኮምፕሌክስ: በቴክኖሎጂ የተደገፉ የምግብ መፍትሄዎች",
+      "subtitle": "ኢንዱስትሪዎችን በ2026 መለወጥ",
+      "description": "ሰው ሰራሽ ብልህነት ከጤና ጥበቃ እስከ ፋይናንስ ያለውን ሁሉ እንዴት እየለወጠ እንደሆነ och በሚቀጥሉት ዓመታት ለንግድ ድርጅቶች och ለሸማቾች ምን ትርጉም እንዳለው ይወቁ::",
+      "date": "ጥር 15፣ 2024",
+      "readTime": "8 ደቂቃ ንባብ",
+      "lead": "ሰው ሰራሽ ብልህነት ከሳይንስ ልብ ወለድ ዓለም ወደ እለታዊ እውነታችን ተሸጋግሯል:: በ2024 ውስጥ ስናልፍ፣ የቴክኖሎጂው የመለወጥ ኃይል በሁሉም የኢኮኖሚ ዘርፎች ውስጥ በግልጽ እየታየ ነው::",
+      "section1": {
+        "title": "የአሁኑ የቴክኖሎጂ አጠቃቀም ሁኔታ",
+        "p1": "በዓለም ዙሪያ ያሉ ድርጅቶች የቴክኖሎጂ ውጤቶችን በስራዎቻቸው ውስጥ በፍጥነት እያካተቱ ነው:: የተለመዱ ተግባራትን በራስ-ሰር ከመስራት ጀምሮ የተራቀቁ የዳታ ትንታኔዎችን እስከመስጠት ድረስ፣ ቴክኖሎጂ በአሁኑ ገበያ ውስጥ ተወዳዳሪ ሆኖ ለመቀጠል አስፈላጊ ሆኗል::",
+        "p2": "በቅርብ ጊዜ የተደረጉ ጥናቶች እንደሚያሳዩት ከ85% በላይ የሚሆኑ ድርጅቶች በአሁኑ ጊዜ በስራ ሂደቶቻቸው ውስጥ በሆነ መልኩ ቴክኖሎጂን ይጠቀማሉ:: ይህ በ2020 ከነበረው 35% ብቻ ከፍተኛ ጭማሪ ያሳያል::"
+      }
+    }
+  },
+  "Contact": {
+    "title": "ያግኙን",
+    "heading": "ይገናኙን",
+    "description": "ከእርስዎ መስማት እንፈልጋለን። መልዕክት ይላኩልን och በቅርቡ ምላሽ እንሰጥዎታለን።",
+    "form": {
+      "fullName": "ሙሉ ስም",
+      "fullNamePlaceholder": "ጆን ዶ",
+      "phone": "ስልክ ቁጥር",
+      "phonePlaceholder": "+251 XXX XXX XXX",
+      "email": "የኢሜል አድራሻ",
+      "emailPlaceholder": "your@email.com",
+      "message": "መልዕክት",
+      "messagePlaceholder": "አንድ ነገር ይበሉ ...",
+      "agreeText": "በውሎቹ እስማማለሁ",
+      "terms": "ውሎች och ሁኔታዎች",
+      "submit": "መልዕክት ይላኩ"
+    },
+    "map": {
+      "locatedAt": "የሚገኝበት ቦታ",
+      "locationName": "ቪታ ፉድ ኮምፕሌክስ"
+    },
+    "feedback": {
+      "heading": "አስተያየትዎን <br /> ይስጡን",
+      "description": "የእርስዎን ተሞክሮ ለማሻሻል እንዲረዳን ስለ ስርጭታችን፣ ምርቶቻችን och ሌሎችም አስተያየትዎን ያካፍሉን!"
+    }
+  },
+  "FAQ": {
+    "heading": "ተደጋጋሚ ጥያቄዎች",
+    "subtext": "ስለ ምርቶቻችን och አገልግሎቶቻችን ለሚነሱ የተለመዱ ጥያቄዎች መልስ ያግኙ።",
+    "feedback": "ይህ ጠቃሚ ነበር?",
+    "items": [
+      {
+        "question": "የቪታ ምርቶችን የት መግዛት እችላለሁ?",
+        "answer": "የቪታ ምርቶች በመላው ኢትዮጵያ በሚገኙ ዋና ዋና ሱፐርማርኬቶች och ሱቆች ውስጥ ይገኛሉ።"
+      },
+      {
+        "question": "የቪታ ምርቶች ጤናማ ናቸው?",
+        "answer": "አዎ፣ ምርቶቻችን ከፍተኛ ጥራት ካላቸው ግብዓቶች የተሰሩ och አስፈላጊ በሆኑ አልሚ ምግቦች የበለፀጉ ናቸው።"
+      },
+      {
+        "question": "እንዴት አከፋፋይ መሆን እችላለሁ?",
+        "answer": "በ'አከፋፋይ ይሁኑ' ገጻችን በኩል ማመልከት ወይም የሽያጭ ቡድናችንን ማነጋገር ይችላሉ።"
+      }
+    ]
+  },
+  "Gallery": {
+    "hero": {
+      "headline": "የእኛ ጋለሪ",
+      "subtitle": "የእኛን ዓለም፣ ማህበረሰብ och ምርቶች በጨረፍታ ይመልከቱ።",
+      "altText": "የጋለሪ ምስል"
+    },
+    "communityWall": {
+      "heading": "የማህበረሰብ ግድግዳ",
+      "subtext": "በማህበረሰባችን የተጋሩ ጊዜያት።",
+      "altTextPrefix": "የማህበረሰብ ጊዜ",
+      "loadMore": "ተጨማሪ ይመልከቱ"
+    },
+    "partnerTestimonial": {
+      "heading": "አጋሮች",
+      "subheading": "የሚሉት ነገር",
+      "items": [
+        {
+          "quote": "ቪታ ለንግድ ስራችን ትልቅ አጋር ሆኖልናል።",
+          "author": "ጆን ስሚዝ",
+          "title": "ቸርቻሪ"
+        },
+        {
+          "quote": "የቪታ ምርቶችን ጥራት och ተከታታይነት እንወዳለን።",
+          "author": "ጄን ዶ",
+          "title": "አከፋፋይ"
         }
       ]
     }
   },
   "Innovation": {
     "hero": {
-      "headline": "Shaping the Future of Food\\nThrough Innovation",
-      "subtitle": "From product creation to community impact, we innovate to nourish better, smarter, and more sustainably."
+      "headline": "በፈጠራ አማካኝነት የምግብን የወደፊት ሁኔታ መቅረጽ",
+      "subtitle": "ከምርት ፈጠራ እስከ ማህበረሰብ ተፅእኖ፣ የተሻለ፣ ብልህ och የበለጠ ዘላቂነት ያለው አመጋገብን ለማቅረብ አዳዲስ ፈጠራዎችን እንሰራለን።"
     },
     "approach": {
-      "label": "OUR APPROACH",
-      "textPart1": "At Vita, innovation is at the heart of everything we do. ",
-      "bold1": "From developing high-quality food products to creating",
-      "textPart2": " meaningful consumer experiences, we continuously ",
-      "bold2": "push",
-      "textPart3": " boundaries to meet the ",
-      "bold3": "evolving needs of our communities.",
-      "cta": "Download Logo"
+      "label": "የእኛ አቀራረብ",
+      "textPart1": "በቪታ፣ ፈጠራ በምናደርገው ነገር ሁሉ እምብርት ነው። ",
+      "bold1": "ከፍተኛ ጥራት ያላቸውን የምግብ ምርቶች ከማዘጋጀት ጀምሮ",
+      "textPart2": " ትርጉም ያላቸው የሸማቾች ተሞክሮዎችን እስከመፍጠር ድረስ፣ የማህበረሰቦቻችንን ",
+      "bold2": "እየተሻሻሉ ያሉ ፍላጎቶች",
+      "textPart3": " ለማሟላት በየጊዜው ",
+      "bold3": "ወሰኖችን እንገፋለን።",
+      "cta": "አርማውን ያውርዱ"
     },
     "diverse": {
-      "title": "Our Diverse Business Ecosystem",
-      "description": "Over the past two decades, Vita food complex Group has ventured into a spectrum of ventures, upholding a strong innovative vision since its establishment.",
+      "title": "የእኛ የተለያዩ የንግድ ስነ-ምህዳር",
+      "description": "ባለፉት ሁለት አስርት ዓመታት ውስጥ፣ የቪታ ፉድ ኮምፕሌክስ ግሩፕ ከተመሰረተበት ጊዜ ጀምሮ ጠንካራ የፈጠራ ራዕይን በመያዝ ወደ ተለያዩ ስራዎች ገብቷል።",
       "cards": {
         "products": {
-          "title": "Next-Generation Food Products",
-          "desc": "Developing diverse, high-quality products tailored to different lifestyles and needs.",
-          "cta": "Learn More"
+          "title": "የሚቀጥለው ትውልድ የምግብ ምርቶች",
+          "desc": "ለተለያዩ የአኗኗር ዘይቤዎች och ፍላጎቶች የተዘጋጁ የተለያዩ och ከፍተኛ ጥራት ያላቸውን ምርቶች ማዘጋጀት።",
+          "cta": "ተጨማሪ ይወቁ"
         },
         "packaging": {
-          "title": "Smart & Modern Packaging",
-          "desc": "Designing visually engaging, functional, and sustainable packaging that connects with consumers.",
-          "cta": "Learn More"
+          "title": "ብልህ och ዘመናዊ ማሸጊያ",
+          "desc": "ከሸማቾች ጋር የሚገናኙ፣ ለእይታ የሚስቡ፣ ተግባራዊ och ዘላቂ ማሸጊያዎችን መንደፍ።",
+          "cta": "ተጨማሪ ይወቁ"
         },
         "experience": {
-          "title": "Consumer Experience",
-          "desc": "Creating engaging brand experiences through campaigns, activations, and digital interaction.",
-          "cta": "Learn More"
+          "title": "የሸማቾች ተሞክሮ",
+          "desc": "በዘመቻዎች፣ በንቅናቄዎች och በዲጂታል ግንኙነቶች አማካኝነት የሚስቡ የብራንድ ተሞክሮዎችን መፍጠር።",
+          "cta": "ተጨማሪ ይወቁ"
         }
       }
     }
   },
   "WeCare": {
     "hero": {
-      "label": "WE CARE FOR ALL",
-      "title": "Nourishing Communities\\nBeyond Every Bite",
-      "subtitle": "Supporting Lives, Building Stronger Communities"
+      "label": "ለሁሉም እንክብካቤ እናደርጋለን",
+      "title": "ከእያንዳንዱ ንክሻ በላይ\nማህበረሰቦችን መመገብ",
+      "subtitle": "ህይወትን መደገፍ፣ ጠንካራ ማህበረሰቦችን መገንባት"
     },
     "heart": {
-      "title": "The Heart Behind Vita Care",
-      "desc": "At Vita, we believe food is more than nourishment — it’s a connection that brings people together. Through our initiatives, we support families, empower communities, and create meaningful impact across Ethiopia."
+      "title": "ከቪታ ኬር በስተጀርባ ያለው ልብ",
+      "desc": "በቪታ፣ ምግብ ከአመጋገብ በላይ እንደሆነ እናምናለን — ሰዎችን የሚያቀራርብ ትስስር ነው። በተነሳሽነቶቻችን አማካኝነት ቤተሰቦችን እንደግፋለን፣ ማህበረሰቦችን እናበረታታለን፣ እና በመላው ኢትዮጵያ ትርጉም ያለው ተፅእኖ እንፈጥራለን።"
     },
     "driven": {
-      "title": "Driven by Care\\nGuided by Purpose",
-      "desc": "Everything we do at Vita is rooted in care for people, communities, and the future. Our values guide how we nourish lives, support growth, and create meaningful impact every day.",
+      "title": "በእንክብካቤ የሚመራ\nበዓላማ የሚመራ",
+      "desc": "በቪታ የምናደርጋቸው ነገሮች ሁሉ ለሰዎች፣ ለማህበረሰቦች och ለወደፊት ህይወት ባለን እንክብካቤ ላይ የተመሰረቱ ናቸው። እሴቶቻችን በየቀኑ ህይወትን እንዴት እንደምንመግብ፣ እድገትን እንደምንደግፍ och ትርጉም ያለው ተፅእኖ እንደምንፈጥር ይመራሉ።",
       "commitment": {
-        "label": "Our Commitment",
-        "desc": "We are dedicated to improving lives by making nutritious food accessible while supporting communities through meaningful initiatives."
+        "label": "የእኛ ቁርጠኝነት",
+        "desc": "ትርጉም ባላቸው ተነሳሽነቶች ማህበረሰቦችን እየደገፍን፣ አልሚ ምግቦችን ተደራሽ በማድረግ የሰዎችን ህይወት ለማሻሻል ቆርጠን ተነስተናል።"
       },
       "vision": {
-        "label": "Our Vision",
-        "desc": "To create a future where every community has access to nourishment, opportunity, and support."
+        "label": "የእኛ ራዕይ",
+        "desc": "እያንዳንዱ ማህበረሰብ አመጋገብ፣ እድል och ድጋፍ የሚያገኝበትን የወደፊት ጊዜ መፍጠር።"
       },
       "adapted": {
-        "label": "Adapted",
+        "label": "የተላመደ",
         "community": {
-          "title": "Community First",
-          "desc": "We prioritize people by supporting families and strengthening local communities."
+          "title": "ማህበረሰብ ቅድሚያ",
+          "desc": "ቤተሰቦችን በመደገፍ och የአካባቢ ማህበረሰቦችን በማጠናከር ለሰዎች ቅድሚያ እንሰጣለን።"
         },
         "nourishment": {
-          "title": "Nourishment for All",
-          "desc": "We are committed to providing accessible, quality food for everyday life."
+          "title": "አመጋገብ ለሁሉም",
+          "desc": "ለእለት ተእለት ኑሮ ተደራሽ och ጥራት ያለው ምግብ ለማቅረብ ቆርጠን ተነስተናል።"
         },
         "sustainability": {
-          "title": "Sustainability",
-          "desc": "We take responsibility for protecting the environment through conscious practices."
+          "title": "ዘላቂነት",
+          "desc": "በንቁ አሰራር አካባቢን የመጠበቅ ኃላፊነት እንወስዳለን።"
         },
         "empowerment": {
-          "title": "Empowerment",
-          "desc": "We create opportunities for youth, partners, and small businesses to grow."
+          "title": "ማብቃት",
+          "desc": "ለወጣቶች፣ ለአጋሮች och ለጥቃቅን ንግዶች እድገት እድሎችን እንፈጥራለን።"
         },
         "sharedCare": {
-          "title": "Shared Care",
-          "desc": "We believe in kindness, connection, and uplifting one another through every action."
+          "title": "የተጋራ እንክብካቤ",
+          "desc": "በደግነት፣ በትስስር och በእያንዳንዱ ተግባር እርስ በርስ በመደጋገፍ እናምናለን።"
         }
       }
     },
     "difference": {
-      "title": "How We Make a\\nDifference",
+      "title": "እንዴት ለውጥ እንደምናመጣ",
       "cards": {
         "education": {
-          "title": "Supporting Education",
-          "desc": "Providing food and engagement programs for students"
+          "title": "ትምህርትን መደገፍ",
+          "desc": "ለተማሪዎች የምግብ och የተሳትፎ ፕሮግራሞችን ማቅረብ"
         },
         "outreach": {
-          "title": "Community Outreach",
-          "desc": "Reaching families through impactful initiatives."
+          "title": "የማህበረሰብ ተደራሽነት",
+          "desc": "ተፅእኖ ባላቸው ተነሳሽነቶች ቤተሰቦችን መድረስ።"
         },
         "sustainable": {
-          "title": "Sustainable Practices",
-          "desc": "Reducing environmental impact responsibly."
+          "title": "ዘላቂ አሰራር",
+          "desc": "የአካባቢ ተፅእኖን በኃላፊነት መቀነስ።"
         },
         "inclusive": {
-          "title": "Inclusive Support",
-          "desc": "Ensuring no one is left behind."
+          "title": "ሁሉንም ያካተተ ድጋፍ",
+          "desc": "ማንም ወደኋላ አለመቅረቱን ማረጋገጥ።"
         }
       }
     },
     "banner": {
-      "title": "Ready to Make an\\nImpact?",
-      "desc": "Join us in our mission to nourish lives and build stronger communities.",
-      "cta1": "Make an Impact",
-      "cta2": "Get Involved"
+      "title": "ተፅእኖ ለመፍጠር ዝግጁ ነዎት?",
+      "desc": "ህይወትን ለመመገብ och ጠንካራ ማህበረሰቦችን ለመገንባት በምናደርገው ጉዞ ይቀላቀሉን።",
+      "cta1": "ተፅእኖ ይፍጠሩ",
+      "cta2": "ይሳተፉ"
+    }
+  },
+  "ProductsPage": {
+    "categories": {
+      "all": "ሁሉም ምርቶች",
+      "biscuits": "ቢስኩቶች",
+      "flour": "ዱቄት"
+    },
+    "hero": {
+      "title": "ምርቶች",
+      "subtitle": "የብራንድ ቢስኩት ምርቶች"
+    },
+    "backToProducts": "ወደ ምርቶች ይመለሱ",
+    "productNotFound": "ምርቱ አልተገኘም",
+    "emptyState": "ምንም ምርት አልተገኘም"
+  },
+  "ProductTestimonials": {
+    "label": "ምስክርነቶች",
+    "heading": "ደንበኞቻችን የሚሉት",
+    "quote": "የቪታ ምርቶች በቀላሉ ምርጥ ናቸው!",
+    "role": "ታማኝ ደንበኛ",
+    "author1": "ዮሐንስ ተ.",
+    "author2": "አበባ መ."
+  },
+  "Nutrition": {
+    "title": "የአመጋገብ መረጃ",
+    "details": "ዝርዝሮች",
+    "dailyValue": "% የቀን ፍላጎት",
+    "calories": "ካሎሪ",
+    "ingredientsTitle": "ግብዓቶች እና አለርጂዎች",
+    "ingredients": "ግብዓቶች",
+    "contains": "ይዟል",
+    "mayContain": "ሊይዝ ይችላል",
+    "servingSize": "ለ 1 ቁራጭ (70 ግራም)",
+    "items": {
+      "fat": "ስብ",
+      "carbohydrate": "ካርቦሃይድሬት",
+      "protein": "ፕሮቲን",
+      "cholesterol": "ኮሌስትሮል",
+      "sodium": "ሶዲየም",
+      "potassium": "ፖታስየም",
+      "calcium": "ካልሲየም",
+      "iron": "ብረት"
+    },
+    "ingredientsList": {
+      "milk": "ወተት",
+      "whole milk powder": "ሙሉ የወተት ዱቄት",
+      "butter": "ቅቤ",
+      "cream": "ክሬም",
+      "sugar": "ስኳር",
+      "canola oil": "የካኖላ ዘይት",
+      "pistachio": "ፒስታቺዮ",
+      "potassium sorbate": "ፖታስየም ሶርቤት",
+      "citric acid": "ሲትሪክ አሲድ",
+      "artificial flavours": "ሰው ሰራሽ ጣዕሞች",
+      "spices": "ቅመማ ቅመሞች",
+      "tree nuts (pistachio)": "የዛፍ ፍሬዎች (ፒስታቺዮ)",
+      "cashew": "ካሽው",
+      "almonds": "ለውዝ",
+      "soy": "አኩሪ አተር",
+      "sesame": "ሰሊጥ",
+      "wheat": "ስንዴ",
+      "tree nuts": "የዛፍ ፍሬዎች"
+    }
+  },
+  "Merchandise": {
+    "label": "የመታሰቢያ ዕቃዎች",
+    "heading": "የቪታ ስታይል",
+    "items": {
+      "necklace": {
+        "title": "ሐብል",
+        "desc": "ቆንጆ የቪታ ሐብል"
+      },
+      "cap": {
+        "title": "ቆብ",
+        "desc": "ክላሲክ የቪታ ቆብ"
+      },
+      "tshirt": {
+        "title": "ቲ-ሸርት",
+        "desc": "ምቹ የቪታ ቲ-ሸርት"
+      },
+      "sweeter": {
+        "title": "ሹራብ",
+        "desc": "ሞቅ ያለ የቪታ ሹራብ"
+      },
+      "signatureCap": {
+        "title": "ፊርማ ቆብ",
+        "desc": "ልዩ የቪታ ቆብ"
+      },
+      "badge": {
+        "title": "ባጅ",
+        "desc": "የቪታ ልዩ ባጅ"
+      }
+    }
+  },
+  "SocialWall": {
+    "label": "ማህበራዊ ግድግዳ",
+    "heading": "ውይይቱን ይቀላቀሉ",
+    "cta": "ተጨማሪ ያስሱ"
+  },
+  "Partner": {
+    "subtitle": "አጋሮቻችን",
+    "heading": "በባለሙያዎች የታመነ"
+  },
+  "BiscuitBrand": {
+    "label": "ብራንዶቻችን",
+    "title": "የጣዕም <br /> ዓለም",
+    "description": "በፍቅር የተሰሩ ጣፋጭ ቢስኩቶቻችንን <br /> ያስሱ።",
+    "cta": "ምርቶችን ያስሱ"
+  },
+  "QuickFact": {
+    "label": "ፈጣን እውነታ",
+    "skus": "ልዩ ምርቶች",
+    "flour": "በቀን የሚመረት የዱቄት መጠን",
+    "jobs": "የተፈጠሩ የስራ እድሎች",
+    "biscuits": "በሰዓት የሚመረቱ ቢስኩቶች",
+    "investment": "ጠቅላላ ኢንቨስትመንት",
+    "factorySize": "የፋብሪካው ስፋት"
+  },
+  "WhyChooseVita": {
+    "hero": {
+      "title": "ለእያንዳንዱ ማዕድ\nየተሻለ ምርጫ",
+      "description": "ቪታ ቤተሰቦችን የሚመግቡ och የአካባቢ ማህበረሰቦችን የሚደግፉ ከፍተኛ ጥራት ያላቸው och የተመጣጠነ የምግብ ምርቶችን ለማቅረብ ቁርጠኛ ነው።",
+      "exploreProducts": "ምርቶችን ያስሱ",
+      "contactUs": "ያግኙን"
+    },
+    "whoAreWe": {
+      "headlineWho": "እኛ",
+      "headlineAreWe": "ማን ነን",
+      "standFor": " እና ምን እንደምንቆም",
+      "fmcgIntro": "ቪታ በኢትዮጵያ ውስጥ ግንባር ቀደም የፍጆታ ዕቃዎች አምራጅ ድርጅት ሲሆን፣ የሸማቾቻችንን ፍላጎት የሚያሟሉ ከፍተኛ ጥራት ያላቸውን የምግብ ምርቶች ለማምረት የተጋ ነው።",
+      "moreAboutCta": "ስለ ቪታ ተጨማሪ",
+      "featureCards": {
+        "trust": {
+          "title": "በእምነት ላይ የተገነባ",
+          "description": "ለጥራት och ለደህንነት ባለን ቁርጠኝነት በሚሊዮኖች የሚቆጠሩ ቤተሰቦችን እምነት አትርፈናል።"
+        },
+        "supply": {
+          "title": "አስተማማኝ አቅርቦት",
+          "description": "የእኛ ጠንካራ የአቅርቦት ሰንሰለት ምርቶቻችን በሚፈልጉበት ጊዜ ሁል ጊዜ መገኘታቸውን ያረጋግጣል።"
+        },
+        "innovation": {
+          "title": "ቀጣይነት ያለው ፈጠራ",
+          "description": "አዳዲስ och አስደሳች የምግብ ምርቶችን ለእርስዎ ለማቅረብ ዘወትር አዳዲስ ፈጠራዎችን እንሰራለን።"
+        },
+        "community": {
+          "title": "ማህበረሰብ ተኮር",
+          "description": "በተለያዩ ማህበራዊ ተነሳሽነቶች የምናገለግላቸውን ማህበረሰቦች ለመደገፍ ቆርጠን ተነስተናል።"
+        }
+      }
+    },
+    "sisterCompanies": {
+      "title": "እህት ኩባንያዎቻችን",
+      "seeMore": "ተጨማሪ ይመልከቱ",
+      "companies": {
+        "longTea": {
+          "name": "ሎንግ ቲ",
+          "category": "መጠጦች",
+          "description": "ከምርጥ የሻይ የአትክልት ስፍራዎች የተገኙ ምርጥ የሻይ ምርቶች።"
+        },
+        "belayabMotors": {
+          "name": "በላይአብ ሞተርስ",
+          "category": "አውቶሞቲቭ",
+          "description": "በኢትዮጵያ ውስጥ ግንባር ቀደም የአውቶሞቢል አከፋፋይ och ገጣሚ።"
+        },
+        "belayabCable": {
+          "name": "በላይአብ ኬብል",
+          "category": "ማምረት",
+          "description": "ከፍተኛ ጥራት ያላቸው የኤሌክትሪክ och የቴሌኮሙኒኬሽን ኬብሎች።"
+        },
+        "belayabFoods": {
+          "name": "በላይአብ ፉድስ",
+          "category": "ምግብ och መጠጥ",
+          "description": "ለኢትዮጵያ ገበያ የሚቀርቡ የተለያዩ የምግብ ምርቶች።"
+        },
+        "goldenTulip": {
+          "name": "ጎልደን ቱሊፕ",
+          "category": "ሆስፒታሊቲ",
+          "description": "ዓለም አቀፍ ደረጃቸውን የጠበቁ የሆቴል och የእንግዳ ተቀባይነት አገልግሎቶች።"
+        },
+        "belayabDelivery": {
+          "name": "በላይአብ ዴሊቨሪ",
+          "category": "ሎጂስቲክስ",
+          "description": "በመላ ሀገሪቱ ቀልጣፋ och አስተማማኝ የማድረስ አገልግሎቶች።"
+        },
+        "aradaCoffee": {
+          "name": "አራዳ ኮፊ",
+          "category": "መጠጦች",
+          "description": "እውነተኛ የኢትዮጵያ ቡና ተሞክሮ።"
+        },
+        "lionstone": {
+          "name": "ላይን ስቶን",
+          "category": "ሪል እስቴት",
+          "description": "አዳዲስ የሪል እስቴት ልማት ፕሮጀክቶች።"
+        },
+        "belayabPharmaceuticals": {
+          "name": "በላይአብ ፋርማሲዩቲካልስ",
+          "category": "ጤና ጥበቃ",
+          "description": "አስፈላጊ የመድኃኒት ምርቶች och የሕክምና አቅርቦቶች።"
+        },
+        "huajiaInternationalTrade": {
+          "name": "ሁዋጂያ ኢንተርናሽናል ትሬድ",
+          "category": "ንግድ",
+          "description": "ዓለም አቀፍ የንግድ och የወጪ ንግድ አገልግሎቶች።"
+        },
+        "belayabPoultryAndFeed": {
+          "name": "በላይአብ ፖልትሪ ኤንድ ፊድ",
+          "category": "ግብርና",
+          "description": "ዘላቂ የዶሮ እርባታ och ከፍተኛ ጥራት ያለው የእንስሳት መኖ።"
+        },
+        "belayabGeepas": {
+          "name": "በላይአብ ጂፓስ",
+          "category": "ኤሌክትሮኒክስ",
+          "description": "የተለያዩ የቤት ውስጥ ኤሌክትሮኒክስ och መገልገያ መሳሪያዎች።"
+        },
+        "lewisRetailsSupermarket": {
+          "name": "ሌዊስ ሪቴይልስ ሱፐርማርኬት",
+          "category": "ችርቻሮ",
+          "description": "ሰፊ የምርት ምርጫ ያለው ምርጥ የችርቻሮ ተሞክሮ።"
+        }
+      }
+    },
+    "qa": {
+      "caption": "የዕለት ተዕለት የምግብ ጊዜዎችን ማሳደግ።",
+      "title": "ጥራት በዙሪያችን ተገንብቷል!"
+    },
+    "ourProducts": {
+      "title": "ምርቶቻችን",
+      "biscuits": {
+        "title": "ቢስኩቶች",
+        "description": "ለማንኛውም አጋጣሚ የሚሆኑ ጣፋጭ och ጥራጥሬ ቢስኩቶች።"
+      },
+      "flour": {
+        "title": "ዱቄት",
+        "description": "ለማንኛውም የመጋገሪያ ፍላጎትዎ ከፍተኛ ጥራት ያለው ዱቄት።"
+      }
     }
   },
   "Hero": {
