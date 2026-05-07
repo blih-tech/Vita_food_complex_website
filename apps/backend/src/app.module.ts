@@ -16,6 +16,7 @@ import { ContactMessagesModule } from './modules/contact-messages/contact-messag
 import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
 import { ApplicationsModule } from './modules/applications/applications.module';
 import { DonationsModule } from './modules/donations/donations.module';
+import { FAQsModule } from './modules/faqs/faqs.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { DonationsModule } from './modules/donations/donations.module';
     CloudinaryModule,
     ApplicationsModule,
     DonationsModule,
+    FAQsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

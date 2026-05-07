@@ -2,7 +2,7 @@
 
 import {
   LayoutDashboard, FileText, ShoppingBag, Briefcase,
-  MessageSquare, Users, Settings, LogOut, ChevronRight, X, Newspaper, Heart,
+  MessageSquare, Users, Settings, LogOut, ChevronRight, X, Newspaper, Heart, HelpCircle,
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -29,6 +29,7 @@ const navSections = [
     items: [
       { icon: Newspaper,    label: 'News',      href: '/news' },
       { icon: Heart,        label: 'Donations', href: '/donations' },
+      { icon: HelpCircle,   label: 'FAQs',      href: '/faqs' },
       { icon: MessageSquare, label: 'Messages', href: '/messages' },
       { icon: Users,         label: 'Users',    href: '/users' },
     ],
