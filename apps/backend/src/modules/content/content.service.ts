@@ -33,17 +33,29 @@ export class ContentService {
   }
 
   async updateSection(slug: string, sectionId: string, content: any): Promise<PageDocument> {
-    const page = await this.pageModel.findOne({ slug }).exec();
-    if (!page) throw new NotFoundException(`Page ${slug} not found`);
-    const idx = page.sections.findIndex((s: any) => s.id === sectionId);
-    if (idx === -1) throw new NotFoundException(`Section ${sectionId} not found`);
-    page.sections[idx].content = content;
-    page.markModified('sections');
-    return page.save();
+    // First verify the page + section exist
+    const exists = await this.pageModel.findOne({ slug, 'sections.id': sectionId }).exec();
+    if (!exists) {
+      const page = await this.pageModel.findOne({ slug }).exec();
+      if (!page) throw new NotFoundException(`Page '${slug}' not found`);
+      throw new NotFoundException(`Section '${sectionId}' not found in page '${slug}'`);
+    }
+    // Use positional $ operator + $set to avoid Mixed-type subdocument mutation issues
+    const updated = await this.pageModel.findOneAndUpdate(
+      { slug, 'sections.id': sectionId },
+      { $set: { 'sections.$.content': content } },
+      { new: true },
+    ).exec();
+    return updated!;
   }
 
   async upsert(slug: string, pageData: any): Promise<PageDocument> {
-    return this.pageModel.findOneAndUpdate({ slug }, pageData, { new: true, upsert: true }).exec() as Promise<PageDocument>;
+    const { _id, ...data } = pageData;
+    return this.pageModel.findOneAndUpdate(
+      { slug },
+      { $set: { title: data.title, sections: data.sections } },
+      { new: true, upsert: true },
+    ).exec() as Promise<PageDocument>;
   }
 
   async delete(slug: string): Promise<any> {
