@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { Newspaper, Plus, Pencil, Trash2, X, Upload, Loader2 } from "lucide-react";
 import { NewsCategory, NewsItem, NewsPayload, newsApi } from "@/lib/newsApi";
 import api from "@/lib/api";
+import RichTextEditor from "@/components/RichTextEditor";
 
 const inputCls =
   "w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#23B349]/35";
@@ -159,7 +160,7 @@ export default function NewsPage() {
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/40" onClick={() => setOpen(false)} />
-          <div className="relative w-full max-w-3xl rounded-2xl bg-white p-6 z-10">
+          <div className="relative w-full max-w-3xl rounded-2xl bg-white p-6 z-10 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-['Funnel_Display'] text-lg font-bold text-[#333733]">{editing ? "Edit News" : "Add News"}</h3>
               <button onClick={() => setOpen(false)} className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><X size={14} /></button>
@@ -194,8 +195,22 @@ export default function NewsPage() {
                 <input type="checkbox" checked={form.isPublished ?? false} onChange={(e) => setForm({ ...form, isPublished: e.target.checked })} />
                 Published
               </label>
-              <textarea className={inputCls + " md:col-span-2 min-h-20"} placeholder="Content (EN)" value={form.content.en} onChange={(e) => setForm({ ...form, content: { ...form.content, en: e.target.value } })} />
-              <textarea className={inputCls + " md:col-span-2 min-h-20"} placeholder="Content (AM)" value={form.content.am} onChange={(e) => setForm({ ...form, content: { ...form.content, am: e.target.value } })} />
+              <div className="md:col-span-2">
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Content (English)</p>
+                <RichTextEditor
+                  value={form.content.en}
+                  onChange={(html) => setForm(f => ({ ...f, content: { ...f.content, en: html } }))}
+                  placeholder="Write the full article content in English…"
+                />
+              </div>
+              <div className="md:col-span-2">
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Content (Amharic)</p>
+                <RichTextEditor
+                  value={form.content.am}
+                  onChange={(html) => setForm(f => ({ ...f, content: { ...f.content, am: html } }))}
+                  placeholder="ሙሉ የጽሑፉን ይዘት በአማርኛ ይፃፉ…"
+                />
+              </div>
             </div>
             <div className="flex justify-end gap-2 mt-5">
               <button onClick={() => setOpen(false)} className="px-4 py-2.5 rounded-xl border border-gray-200 text-sm">Cancel</button>
