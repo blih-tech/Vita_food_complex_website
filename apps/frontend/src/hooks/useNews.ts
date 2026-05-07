@@ -16,16 +16,13 @@ export interface NewsArticle {
   isPublished: boolean;
 }
 
-let cache: NewsArticle[] | null = null;
-
 export function useNews(category?: string) {
-  const [news, setNews] = useState<NewsArticle[]>(cache ?? []);
-  const [loading, setLoading] = useState(!cache);
+  const [news, setNews] = useState<NewsArticle[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (cache) { setNews(cache); setLoading(false); return; }
     api.get<NewsArticle[]>('/news')
-      .then(res => { cache = res.data; setNews(res.data); })
+      .then(res => setNews(res.data))
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
