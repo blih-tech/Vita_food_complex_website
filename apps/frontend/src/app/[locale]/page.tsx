@@ -13,6 +13,17 @@ import SocialWallSection from "@frontend/components/sections/SocialWallSection";
 import PartnerSection from "@frontend/components/sections/PartnerSection";
 
 const SECTION_COMPONENTS: Record<string, any> = {
+  // kebab-case keys matching DB section types
+  'hero': HeroSection,
+  'hero-video': HeroVideoSection,
+  'products': ProductsSection,
+  'biscuit-brand': BiscuitBrandSection,
+  'recipes': RecipesSection,
+  'quick-facts': QuickFactSection,
+  'merchandise': MerchandiseSection,
+  'social-wall': SocialWallSection,
+  'partners': PartnerSection,
+  // PascalCase fallback keys
   HeroSection,
   HeroVideoSection,
   ProductsSection,
