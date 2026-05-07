@@ -2,6 +2,7 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
+  BadRequestException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
@@ -28,6 +29,38 @@ export class ProductsService {
     @InjectModel(Product.name) private productModel: Model<ProductDocument>,
   ) {}
 
+  private async ensureRelatedProductsExist(
+    relatedProducts: string[] | undefined,
+    currentProductId?: Types.ObjectId,
+  ): Promise<void> {
+    if (!relatedProducts || relatedProducts.length === 0) return;
+
+    const uniqueIds = Array.from(new Set(relatedProducts));
+    if (!uniqueIds.every(isMongoObjectIdString)) {
+      throw new BadRequestException(
+        'relatedProducts must contain valid product ids',
+      );
+    }
+
+    if (
+      currentProductId &&
+      uniqueIds.includes(currentProductId.toHexString())
+    ) {
+      throw new BadRequestException('A product cannot be related to itself');
+    }
+
+    const count = await this.productModel
+      .countDocuments({
+        _id: { $in: uniqueIds.map((id) => new Types.ObjectId(id)) },
+      })
+      .exec();
+    if (count !== uniqueIds.length) {
+      throw new BadRequestException(
+        'One or more related product ids were not found',
+      );
+    }
+  }
+
   async findAll(): Promise<ProductDocument[]> {
     return this.productModel.find().exec();
   }
@@ -44,6 +77,7 @@ export class ProductsService {
 
   async create(productData: CreateProductDto): Promise<ProductDocument> {
     try {
+      await this.ensureRelatedProductsExist(productData.relatedProducts);
       const newProduct = new this.productModel({
         ...productData,
         available: productData.available ?? true,
@@ -68,12 +102,26 @@ export class ProductsService {
     updateData: UpdateProductDto,
   ): Promise<ProductDocument> {
     try {
-      const product = await this.productModel
-        .findOneAndUpdate(resolveFilter(param), updateData, { new: true })
+      const existing = await this.productModel
+        .findOne(resolveFilter(param))
         .exec();
-      if (!product) {
+      if (!existing) {
         throw new NotFoundException(`Product not found`);
       }
+
+      if (updateData.relatedProducts) {
+        await this.ensureRelatedProductsExist(
+          updateData.relatedProducts,
+          existing._id,
+        );
+      }
+
+      const product = await this.productModel
+        .findOneAndUpdate(resolveFilter(param), updateData, {
+          returnDocument: 'after',
+        })
+        .exec();
+      if (!product) throw new NotFoundException(`Product not found`);
       return product;
     } catch (err: unknown) {
       const code =

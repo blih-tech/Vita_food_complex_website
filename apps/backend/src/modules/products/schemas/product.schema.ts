@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 import type { LocalizedString } from '@repo/types';
 
 export type ProductDocument = Product & Document;
@@ -121,8 +121,8 @@ export class Product {
   @Prop({ type: ProductContentSchema, required: true })
   content: ProductContentSchema;
 
-  @Prop({ type: [String], default: [] })
-  relatedProducts?: string[];
+  @Prop({ type: [{ type: Types.ObjectId, ref: Product.name }], default: [] })
+  relatedProducts?: Types.ObjectId[];
 
   @Prop({ default: true })
   available: boolean;

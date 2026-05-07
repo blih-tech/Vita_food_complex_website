@@ -3,6 +3,7 @@ import {
   IsArray,
   IsBoolean,
   IsEnum,
+  IsMongoId,
   IsNumber,
   IsOptional,
   IsString,
@@ -157,7 +158,7 @@ export class CreateProductDto {
 
   @IsOptional()
   @IsArray()
-  @IsString({ each: true })
+  @IsMongoId({ each: true })
   relatedProducts?: string[];
 
   @IsOptional()

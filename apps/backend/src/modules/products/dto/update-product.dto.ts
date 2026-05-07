@@ -3,6 +3,7 @@ import {
   IsArray,
   IsBoolean,
   IsEnum,
+  IsMongoId,
   IsNumber,
   IsOptional,
   IsString,
@@ -180,7 +181,7 @@ export class UpdateProductDto {
 
   @IsOptional()
   @IsArray()
-  @IsString({ each: true })
+  @IsMongoId({ each: true })
   relatedProducts?: string[];
 
   @IsOptional()

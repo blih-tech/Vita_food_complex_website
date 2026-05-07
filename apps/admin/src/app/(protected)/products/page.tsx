@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Package, Plus, Pencil, Trash2, X } from "lucide-react";
 import {
-  Certification,
   Ingredient,
   IngredientType,
   NutritionItem,
@@ -38,6 +37,8 @@ type TabId =
   | "certs"
   | "related";
 
+type ProductWithLegacy = ProductItem & { id?: string };
+
 function emptyForm(): ProductPayload {
   return {
     slug: "",
@@ -58,7 +59,7 @@ function emptyForm(): ProductPayload {
 }
 
 function itemToForm(item: ProductItem): ProductPayload {
-  const legacy = item as ProductItem & { id?: string };
+  const legacy = item as ProductWithLegacy;
   const slug = item.slug || legacy.id || "";
   return {
     slug,
@@ -87,17 +88,6 @@ function itemToForm(item: ProductItem): ProductPayload {
     relatedProducts: item.relatedProducts ?? [],
     available: item.available ?? true,
   };
-}
-
-function relatedFromString(s: string): string[] {
-  return s
-    .split(/[\s,]+/)
-    .map((x) => x.trim())
-    .filter(Boolean);
-}
-
-function relatedToString(arr: string[] | undefined): string {
-  return (arr ?? []).join(", ");
 }
 
 function containsToString(arr: string[] | undefined): string {
@@ -135,6 +125,7 @@ function ProductModal({
   title,
   value,
   files,
+  productOptions,
   onChange,
   onFilesChange,
   onClose,
@@ -144,6 +135,7 @@ function ProductModal({
   title: string;
   value: ProductPayload;
   files: ProductUploadFiles;
+  productOptions: Array<{ id: string; label: string }>;
   onChange: (next: ProductPayload) => void;
   onFilesChange: (next: ProductUploadFiles) => void;
   onClose: () => void;
@@ -700,16 +692,28 @@ function ProductModal({
           {tab === "related" && (
             <div>
               <label className="block text-xs font-semibold text-[#333733] mb-1">
-                Related product slugs (comma or space separated)
+                Related products
               </label>
-              <textarea
-                className={`${inputCls} min-h-[100px]`}
-                placeholder="cream, oreo, high-energy"
-                value={relatedToString(value.relatedProducts)}
-                onChange={(e) =>
-                  onChange({ ...value, relatedProducts: relatedFromString(e.target.value) })
-                }
-              />
+              <select
+                multiple
+                className={`${inputCls} min-h-[150px]`}
+                value={value.relatedProducts ?? []}
+                onChange={(e) => {
+                  const selected = Array.from(e.target.selectedOptions).map(
+                    (option) => option.value,
+                  );
+                  onChange({ ...value, relatedProducts: selected });
+                }}
+              >
+                {productOptions.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <p className="text-xs text-gray-500 mt-1">
+                Hold Ctrl/Cmd to select multiple products.
+              </p>
             </div>
           )}
         </div>
@@ -733,8 +737,12 @@ function ProductModal({
 }
 
 function resolveItemKey(item: ProductItem): string {
-  const legacy = item as ProductItem & { id?: string };
+  const legacy = item as ProductWithLegacy;
   return item.slug || legacy.id || item._id;
+}
+
+function resolveProductId(item: ProductItem): string {
+  return item._id;
 }
 
 export default function ProductsPage() {
@@ -748,6 +756,12 @@ export default function ProductsPage() {
   );
   const [editing, setEditing] = useState<ProductItem | null>(null);
   const [open, setOpen] = useState(false);
+  const productOptions = items
+    .map((item) => ({
+      id: resolveProductId(item),
+      label: `${item.name.en} (${item.slug})`,
+    }))
+    .filter((option) => option.id !== editing?._id);
 
   const load = async () => {
     setLoading(true);
@@ -966,6 +980,7 @@ export default function ProductsPage() {
           title={editing ? "Edit Product" : "Add Product"}
           value={form}
           files={uploadFiles}
+          productOptions={productOptions}
           onChange={setForm}
           onFilesChange={setUploadFiles}
           onClose={() => setOpen(false)}

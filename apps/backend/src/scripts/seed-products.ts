@@ -146,6 +146,7 @@ async function bootstrap() {
 
   const frontendProducts = await loadFrontendProducts();
   let upserted = 0;
+  const slugToId = new Map<string, string>();
 
   for (const product of frontendProducts) {
     const imageUrl = await uploadLocalAsset(
@@ -169,7 +170,7 @@ async function bootstrap() {
         ...(tagIconUrl ? { tagIcon: tagIconUrl } : {}),
       },
       ui: product.ui,
-      relatedProducts: product.relatedProducts ?? [],
+      relatedProducts: [],
       content: {
         description: toLocalized(content.description),
         ...(content.netWeight ? { netWeight: content.netWeight } : {}),
@@ -182,15 +183,31 @@ async function bootstrap() {
       available: true,
     };
 
-    await productModel
+    const saved = await productModel
       .findOneAndUpdate({ slug: payload.slug }, payload, {
         upsert: true,
         returnDocument: 'after',
         setDefaultsOnInsert: true,
       })
       .exec();
+    if (saved?._id) {
+      slugToId.set(product.id, String(saved._id));
+    }
 
     upserted += 1;
+  }
+
+  for (const product of frontendProducts) {
+    const relatedIds = (product.relatedProducts ?? [])
+      .map((slug) => slugToId.get(slug))
+      .filter((id): id is string => Boolean(id));
+    await productModel
+      .findOneAndUpdate(
+        { slug: product.id },
+        { relatedProducts: Array.from(new Set(relatedIds)) },
+        { returnDocument: 'after' },
+      )
+      .exec();
   }
 
   console.log(`Product seeding completed. Upserted ${upserted} products.`);
