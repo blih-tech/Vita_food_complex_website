@@ -74,8 +74,8 @@ export default function PagesListPage() {
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
-                      <Link 
-                        href={`/pages/${page.slug}`}
+                      <Link
+                        href={page.slug === 'home' ? '/home' : `/pages/${page.slug}`}
                         className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
                         title="Edit Page"
                       >
