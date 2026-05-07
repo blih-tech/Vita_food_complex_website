@@ -149,7 +149,10 @@ export default function Sidebar({ open = false, onClose }: SidebarProps) {
       {/* ── User & Logout ── */}
       <div className="border-t border-gray-100 p-3 space-y-1">
         {user && (
-          <div className="flex items-center gap-3 px-3 py-2.5 rounded-[12px] bg-gray-50 mb-2">
+          <Link
+            href="/settings?tab=profile"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-[12px] bg-gray-50 hover:bg-[#23B349]/10 hover:border-[#23B349]/20 border border-transparent transition-all mb-2 group"
+          >
             <div
               className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0 shadow-sm"
               style={{
@@ -160,12 +163,12 @@ export default function Sidebar({ open = false, onClose }: SidebarProps) {
               {user.name?.charAt(0).toUpperCase()}
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold text-[#333733] truncate leading-none mb-0.5">
+              <p className="text-sm font-semibold text-[#333733] group-hover:text-[#23B349] truncate leading-none mb-0.5 transition-colors">
                 {user.name}
               </p>
               <p className="text-[11px] text-gray-400 capitalize">{user.role}</p>
             </div>
-          </div>
+          </Link>
         )}
 
         <button
