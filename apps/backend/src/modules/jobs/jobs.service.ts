@@ -2,6 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Job, JobDocument } from './schemas/job.schema';
+import { CreateJobDto } from './dto/create-job.dto';
+import { UpdateJobDto } from './dto/update-job.dto';
 
 @Injectable()
 export class JobsService {
@@ -19,12 +21,12 @@ export class JobsService {
     return job;
   }
 
-  async create(jobData: any): Promise<JobDocument> {
+  async create(jobData: CreateJobDto): Promise<JobDocument> {
     const newJob = new this.jobModel(jobData);
     return newJob.save();
   }
 
-  async update(id: string, updateData: any): Promise<JobDocument> {
+  async update(id: string, updateData: UpdateJobDto): Promise<JobDocument> {
     const job = await this.jobModel.findOneAndUpdate({ id }, updateData, { new: true }).exec();
     if (!job) {
       throw new NotFoundException(`Job with id ${id} not found`);
@@ -32,7 +34,7 @@ export class JobsService {
     return job;
   }
 
-  async delete(id: string): Promise<any> {
+  async delete(id: string): Promise<{ deletedCount?: number }> {
     const result = await this.jobModel.deleteOne({ id }).exec();
     if (result.deletedCount === 0) {
       throw new NotFoundException(`Job with id ${id} not found`);

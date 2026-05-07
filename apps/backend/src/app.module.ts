@@ -11,6 +11,8 @@ import { ProductsModule } from './modules/products/products.module';
 import { JobsModule } from './modules/jobs/jobs.module';
 import { ContactModule } from './modules/contact/contact.module';
 import { OrdersModule } from './modules/orders/orders.module';
+import { NewsModule } from './modules/news/news.module';
+import { ContactMessagesModule } from './modules/contact-messages/contact-messages.module';
 
 @Module({
   imports: [
@@ -32,6 +34,8 @@ import { OrdersModule } from './modules/orders/orders.module';
     JobsModule,
     ContactModule,
     OrdersModule,
+    NewsModule,
+    ContactMessagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

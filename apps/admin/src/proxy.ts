@@ -17,10 +17,14 @@ export function proxy(request: NextRequest) {
 
   const token = request.cookies.get('admin_token');
   const isLoginPage = pathname === '/login';
-  const protectedRoutes = ['/', '/pages', '/users', '/settings'];
+  const protectedRoutes = ['/', '/pages', '/users', '/settings', '/products', '/careers', '/news', '/messages'];
   const isProtectedRoute =
     protectedRoutes.includes(pathname) ||
-    pathname.startsWith('/pages/');
+    pathname.startsWith('/pages/') ||
+    pathname.startsWith('/products/') ||
+    pathname.startsWith('/careers/') ||
+    pathname.startsWith('/news/') ||
+    pathname.startsWith('/messages/');
 
   if (!token && isProtectedRoute) {
     return NextResponse.redirect(new URL('/login', request.url));
