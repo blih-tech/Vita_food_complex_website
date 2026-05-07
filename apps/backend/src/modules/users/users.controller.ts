@@ -15,13 +15,13 @@ export class UsersController {
   // ── Current user ──────────────────────────────────────────────────
   @Get('me')
   async getMe(@Request() req: any) {
-    const user = await this.usersService.findById(req.user.sub);
+    const user = await this.usersService.findById(req.user.userId);
     return user;
   }
 
   @Put('me')
   async updateMe(@Request() req: any, @Body() body: { name?: string }) {
-    return this.usersService.update(req.user.sub, { name: body.name });
+    return this.usersService.update(req.user.userId, { name: body.name });
   }
 
   @Put('me/password')
@@ -30,7 +30,7 @@ export class UsersController {
     @Request() req: any,
     @Body() body: { password: string },
   ) {
-    await this.usersService.updatePasswordById(req.user.sub, body.password);
+    await this.usersService.updatePasswordById(req.user.userId, body.password);
     return { message: 'Password updated' };
   }
 
