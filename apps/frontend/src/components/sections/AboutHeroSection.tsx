@@ -8,8 +8,9 @@ import { ABOUT_ASSETS } from "@frontend/constants/aboutAssets";
 const HERO_RADIAL =
   "radial-gradient(circle at 2% 163%, rgb(31, 214, 80) 0%, rgb(35, 179, 73) 60%, rgb(116, 255, 56) 100%)";
 
-export default function AboutHeroSection() {
+export default function AboutHeroSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("About");
+  const c = content?.[locale as string] || content?.en;
 
   return (
     <section className="relative w-full overflow-hidden" style={{ background: HERO_RADIAL }}>
@@ -17,13 +18,13 @@ export default function AboutHeroSection() {
         <h1
           className="mb-8 max-w-[1000px] font-[family-name:var(--font-outfit)] text-[clamp(36px,6vw,80px)] font-extrabold leading-[1] tracking-[-0.02em] text-white"
         >
-          {t("hero.headline")}
+          {c?.headline || t("hero.headline")}
         </h1>
 
         <p
           className="mb-16 max-w-[824px] font-[family-name:var(--font-funnel-display)] text-[clamp(16px,1.8vw,24px)] font-medium leading-normal tracking-[-0.004em] text-[#E8E8E8]"
         >
-          {t("hero.subtitle")}
+          {c?.subtitle || t("hero.subtitle")}
         </p>
 
         <div
@@ -31,8 +32,8 @@ export default function AboutHeroSection() {
           style={{ aspectRatio: "824 / 586" }}
         >
           <Image
-            src={ABOUT_ASSETS.hero.storyImage}
-            alt={t("hero.headline")}
+            src={c?.heroImage || ABOUT_ASSETS.hero.storyImage}
+            alt={c?.headline || t("hero.headline")}
             fill
             className="object-cover"
             priority

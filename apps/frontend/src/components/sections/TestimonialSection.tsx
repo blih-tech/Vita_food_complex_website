@@ -15,13 +15,16 @@ type TestimonialItem = {
 };
 
 /** Figma 2120:1668: background fill_LMQ1JB + blur; title style_DLD472; pill Subtitle 2; cards layout_95L917 1039.75×339.72, gap 256px; image 314.56×339.72 r48; quote style_K7H3IO */
-export default function TestimonialSection() {
+export default function TestimonialSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("About.testimonials");
   const messages = useMessages() as {
     About?: { testimonials?: { items?: TestimonialItem[] } };
   };
-  const items = messages.About?.testimonials?.items ?? [];
-  const titleAccent = t("titleAccent");
+  const c = content?.[locale as string] || content?.en;
+  const items: TestimonialItem[] =
+    (c?.items && c.items.length > 0 ? c.items : null) ??
+    messages.About?.testimonials?.items ?? [];
+  const titleAccent = c?.titleAccent || t("titleAccent");
 
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -82,7 +85,7 @@ export default function TestimonialSection() {
       >
         <div className="mb-8 flex justify-center rounded-[48px] px-4 py-2">
           <span className="text-center font-[family-name:var(--font-funnel-display)] text-[18px] font-medium tracking-[-0.004em] text-white md:text-[20px]">
-            {t("label")}
+            {c?.label || t("label")}
           </span>
         </div>
 
@@ -90,11 +93,11 @@ export default function TestimonialSection() {
           <span className="block text-[clamp(3.5rem,10vw,11.4375rem)]">
             {titleAccent.trim() ? (
               <>
-                <span className="font-bold">{t("titleLead")}</span>{" "}
+                <span className="font-bold">{c?.titleLead || t("titleLead")}</span>{" "}
                 <span className="font-extrabold">{titleAccent}</span>
               </>
             ) : (
-              <span className="font-extrabold">{t("titleLead")}</span>
+              <span className="font-extrabold">{c?.titleLead || t("titleLead")}</span>
             )}
           </span>
         </h2>

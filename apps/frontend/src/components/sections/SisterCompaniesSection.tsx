@@ -79,10 +79,16 @@ const SCROLL_SLOTS: (LogoSlot | { kind: "longTeaCard" })[] = [
   },
 ];
 
-export default function SisterCompaniesSection() {
+export default function SisterCompaniesSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("About.sisterCompanies");
   const tBrands = useTranslations("About.sisterCompanies.brands");
   const tCompanies = useTranslations("About.sisterCompanies.companies");
+  const c = content?.[locale as string] || content?.en;
+
+  // CMS logos indexed by SCROLL_SLOTS position; index 3 = longTea card logo
+  const cmsLogos: Array<{ src?: string } | null> = c?.logos || [];
+  const getLogoSrc = (slotIdx: number, fallback: string) =>
+    cmsLogos[slotIdx % SCROLL_SLOTS.length]?.src || fallback;
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
@@ -121,10 +127,10 @@ export default function SisterCompaniesSection() {
     <section className="relative z-10 flex flex-col items-center bg-white px-8 py-16 md:px-16 md:py-24 lg:px-[128px]">
       <div className="mx-auto flex w-full max-w-[681px] flex-col items-center gap-8 text-center">
         <span className="font-[family-name:var(--font-funnel-display)] text-[13.3px] font-medium leading-none tracking-[-0.004em] text-[#404040]">
-          {t("label")}
+          {c?.label || t("label")}
         </span>
         <h2 className="font-[family-name:var(--font-outfit)] text-[32px] font-extrabold leading-[0.9] tracking-[-0.02em] text-[#23B349] md:text-[44px] lg:text-[53.2px]">
-          {t("title")}
+          {c?.title || t("title")}
         </h2>
       </div>
 
@@ -147,7 +153,7 @@ export default function SisterCompaniesSection() {
               >
                 <div className="relative mx-auto h-[74px] w-full max-w-[320px]">
                   <Image
-                    src="/assets/sister/long-tea-logo.png"
+                    src={getLogoSrc(3, "/assets/sister/long-tea-logo.png")}
                     alt={tCompanies("longTea")}
                     fill
                     className="object-contain"
@@ -155,19 +161,19 @@ export default function SisterCompaniesSection() {
                   />
                 </div>
                 <p className="text-center font-[family-name:var(--font-outfit)] text-[11px] font-normal leading-snug tracking-[-0.004em] text-[#404040] md:text-[12px]">
-                  {t("longTeaCard.blurb")}
+                  {c?.longTeaBlurb || t("longTeaCard.blurb")}
                 </p>
                 <Link
                   href="/contact"
                   className="mx-auto mt-1 inline-flex h-8 items-center justify-center rounded-full bg-[#23B349] px-5 font-[family-name:var(--font-funnel-display)] text-[12px] font-medium tracking-[-0.004em] text-white transition-colors hover:bg-[#1fa041] md:text-[13px]"
                 >
-                  {t("visitSite")}
+                  {c?.visitSite || t("visitSite")}
                 </Link>
               </article>
             ) : (
               <div key={`${slot.src}-${index}`} className={slot.boxClass}>
                 <Image
-                  src={slot.src}
+                  src={getLogoSrc(index, slot.src)}
                   alt={tBrands(slot.altKey)}
                   fill
                   className="object-contain object-center"
@@ -187,13 +193,13 @@ export default function SisterCompaniesSection() {
 
       <div className="mx-auto mt-8 flex w-full max-w-[681px] flex-col items-center gap-8 text-center">
         <p className="max-w-[365px] font-[family-name:var(--font-funnel-display)] text-[13.3px] font-medium leading-relaxed tracking-[-0.004em] text-[#404040]">
-          {t("description")}
+          {c?.description || t("description")}
         </p>
         <Link
           href="/gallery"
           className="inline-flex h-[37px] items-center justify-center gap-[10.64px] rounded-full bg-[#23B349] px-[21px] py-[10.64px] font-[family-name:var(--font-funnel-display)] text-[15.96px] font-medium tracking-[-0.004em] text-white transition-colors hover:bg-[#1fa041]"
         >
-          <span>{t("cta")}</span>
+          <span>{c?.cta || t("cta")}</span>
           <span className="font-[family-name:var(--font-outfit)] text-[13.3px] font-normal leading-none tracking-[-0.004em]">
             →
           </span>

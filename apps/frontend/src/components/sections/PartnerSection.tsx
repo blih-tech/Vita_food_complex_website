@@ -3,7 +3,9 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-const DEFAULT_LOGOS = [
+interface CertLogo { alt: string; src: string; width: number; }
+
+const DEFAULT_LOGOS: CertLogo[] = [
   { alt: "Fortified Food", src: "/assets/quality/figma/cert_1.png",    width: 150 },
   { alt: "EFDA",           src: "/assets/quality/figma/cert_efda.png", width: 280 },
   { alt: "LRQA",           src: "/assets/quality/figma/cert_lrqa.png", width: 150 },
@@ -14,7 +16,7 @@ const DEFAULT_LOGOS = [
 export default function PartnerSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Partner");
   const c = content?.[locale as string] || content?.en;
-  const certLogos = (c?.logos && c.logos.length > 0)
+  const certLogos: CertLogo[] = (c?.logos && c.logos.length > 0)
     ? c.logos.map((l: any, i: number) => ({ alt: l.alt, src: l.url, width: DEFAULT_LOGOS[i]?.width || 150 }))
     : DEFAULT_LOGOS;
 

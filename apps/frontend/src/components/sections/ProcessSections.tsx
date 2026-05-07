@@ -12,8 +12,15 @@ const STEPS = ["01", "02", "03"] as const;
 const PROCESS_IMAGE_OVERLAY =
   "linear-gradient(180deg, rgba(255, 246, 177, 1) 0%, rgba(255, 222, 86, 1) 100%)";
 
-export default function ProcessSections() {
+const DEFAULT_IMAGES = [
+  "/assets/about/wheat-farming.png",
+  "/assets/about/baking-biscuits.png",
+  "/assets/quality/quality-1.png",
+];
+
+export default function ProcessSections({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("About.process");
+  const c = content?.[locale as string] || content?.en;
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -37,7 +44,9 @@ export default function ProcessSections() {
       className="bg-white px-8 py-16 md:px-16 md:py-24 lg:px-[128px] lg:py-32"
     >
       <div className="mx-auto flex max-w-[1664px] flex-col gap-[clamp(48px,8vw,96px)]">
-        {STEPS.map((id, i) => (
+        {STEPS.map((id, i) => {
+          const step = c?.steps?.[i];
+          return (
           <div
             key={id}
             className="flex flex-col items-center gap-12 lg:flex-row lg:justify-between lg:gap-16"
@@ -53,20 +62,20 @@ export default function ProcessSections() {
                   className="max-w-[682px] font-[family-name:var(--font-outfit)] font-bold leading-[0.96] tracking-[-0.02em] text-[#23B349]"
                   style={{ fontSize: "clamp(32px, 5.5vw, 64px)" }}
                 >
-                  {t(`${id}.heading`)}
+                  {step?.heading || t(`${id}.heading`)}
                 </h3>
                 <p
                   className="max-w-[538px] font-[family-name:var(--font-outfit)] font-normal leading-normal tracking-[-0.004em] text-[#404040]"
                   style={{ fontSize: "clamp(18px, 2vw, 20px)" }}
                 >
-                  {t(`${id}.desc`)}
+                  {step?.desc || t(`${id}.desc`)}
                 </p>
               </div>
 
               <div className="relative mt-8 h-[clamp(140px,18vw,229px)] w-full max-w-[277px] lg:mt-10">
                 <span
                   className="absolute bottom-0 left-0 select-none font-[family-name:var(--font-funnel-display)] font-normal leading-none"
-                  style={{ 
+                  style={{
                     color: "rgba(114, 99, 0, 0.14)",
                     fontSize: "clamp(120px, 15vw, 225px)"
                   }}
@@ -77,7 +86,7 @@ export default function ProcessSections() {
                 <span className="absolute bottom-3 left-3 font-[family-name:var(--font-funnel-display)] font-bold leading-none tracking-[-0.004em] text-black"
                   style={{ fontSize: "clamp(24px, 3vw, 32px)" }}
                 >
-                  {t(`${id}.label`)}
+                  {step?.label || t(`${id}.label`)}
                 </span>
               </div>
             </div>
@@ -88,13 +97,7 @@ export default function ProcessSections() {
                 style={{ aspectRatio: "726.44 / 570.07" }}
               >
                 <Image
-                  src={
-                    id === "01"
-                      ? "/assets/about/wheat-farming.png"
-                      : id === "02"
-                        ? "/assets/about/baking-biscuits.png"
-                        : "/assets/quality/quality-1.png"
-                  }
+                  src={step?.image || DEFAULT_IMAGES[i]}
                   alt=""
                   fill
                   className="object-cover"
@@ -118,18 +121,19 @@ export default function ProcessSections() {
                   <p className="mb-1 font-[family-name:var(--font-funnel-display)] font-bold leading-none tracking-[-0.01em] text-white"
                     style={{ fontSize: "clamp(22px, 2.8vw, 32px)" }}
                   >
-                    {t(`${id}.captionTitle`)}
+                    {step?.captionTitle || t(`${id}.captionTitle`)}
                   </p>
                   <p className="font-[family-name:var(--font-funnel-display)] font-medium leading-tight tracking-[-0.004em] text-[#E8E8E8]"
                     style={{ fontSize: "clamp(14px, 1.8vw, 20px)" }}
                   >
-                    {t(`${id}.captionDesc`)}
+                    {step?.captionDesc || t(`${id}.captionDesc`)}
                   </p>
                 </div>
               </div>
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
