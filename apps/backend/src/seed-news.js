@@ -1,6 +1,7 @@
+require('/root/Vita_food_complex_website/node_modules/.pnpm/dotenv@16.0.3/node_modules/dotenv').config({ path: require('path').join(__dirname, '../.env') });
 const mongoose = require('/root/Vita_food_complex_website/node_modules/.pnpm/mongoose@9.3.3/node_modules/mongoose');
 
-const MONGODB_URI = 'mongodb://vita:R1iBvAPleIUw+vBjtANIao3GneuJfCR9@89.116.22.36:27018/vita-food?authSource=admin';
+const MONGODB_URI = process.env.MONGODB_URI;
 
 const LS = new mongoose.Schema({ en: String, am: String }, { _id: false });
 const NewsSchema = new mongoose.Schema({
