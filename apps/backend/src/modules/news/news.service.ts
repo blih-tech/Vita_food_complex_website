@@ -9,7 +9,12 @@ import { News, NewsDocument } from './schemas/news.schema';
 export class NewsService {
   constructor(@InjectModel(News.name) private newsModel: Model<NewsDocument>) {}
 
-  async findAll(): Promise<NewsDocument[]> {
+  async findAll(publishedOnly = true): Promise<NewsDocument[]> {
+    const filter = publishedOnly ? { isPublished: true } : {};
+    return this.newsModel.find(filter).sort({ publishedAt: -1, createdAt: -1 }).exec();
+  }
+
+  async findAllAdmin(): Promise<NewsDocument[]> {
     return this.newsModel.find().sort({ publishedAt: -1, createdAt: -1 }).exec();
   }
 

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, Query } from '@nestjs/common';
 import { Roles } from '../../common/decorators/roles.decorator';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../../common/guards/roles.guard';
@@ -12,7 +12,14 @@ export class NewsController {
 
   @Get()
   findAll() {
-    return this.newsService.findAll();
+    return this.newsService.findAll(true); // public: published only
+  }
+
+  @Get('admin/all')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
+  findAllAdmin() {
+    return this.newsService.findAllAdmin();
   }
 
   @Get(':slug')

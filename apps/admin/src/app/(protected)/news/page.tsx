@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Newspaper, Plus, Pencil, Trash2, X } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
+import { Newspaper, Plus, Pencil, Trash2, X, Upload, Loader2 } from "lucide-react";
 import { NewsCategory, NewsItem, NewsPayload, newsApi } from "@/lib/newsApi";
+import api from "@/lib/api";
 
 const inputCls =
   "w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#23B349]/35";
@@ -34,6 +35,8 @@ export default function NewsPage() {
   const [editing, setEditing] = useState<NewsItem | null>(null);
   const [form, setForm] = useState<NewsPayload>(defaultForm);
   const [submitting, setSubmitting] = useState(false);
+  const [uploadingImg, setUploadingImg] = useState(false);
+  const imgRef = useRef<HTMLInputElement>(null);
 
   const load = async () => {
     setLoading(true);
@@ -68,6 +71,18 @@ export default function NewsPage() {
       isPublished: item.isPublished,
     });
     setOpen(true);
+  };
+
+  const uploadImage = async (file: File) => {
+    setUploadingImg(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const { data } = await api.post('/applications/upload-cv', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
+      setForm(f => ({ ...f, coverImage: data.url }));
+    } finally {
+      setUploadingImg(false);
+    }
   };
 
   const submit = async () => {
@@ -158,7 +173,21 @@ export default function NewsPage() {
               <input className={inputCls} placeholder="Title (AM)" value={form.title.am} onChange={(e) => setForm({ ...form, title: { ...form.title, am: e.target.value } })} />
               <input className={inputCls} placeholder="Summary (EN)" value={form.summary.en} onChange={(e) => setForm({ ...form, summary: { ...form.summary, en: e.target.value } })} />
               <input className={inputCls} placeholder="Summary (AM)" value={form.summary.am} onChange={(e) => setForm({ ...form, summary: { ...form.summary, am: e.target.value } })} />
-              <input className={inputCls} placeholder="Cover Image URL" value={form.coverImage} onChange={(e) => setForm({ ...form, coverImage: e.target.value })} />
+              <div className="md:col-span-2 flex gap-2 items-center">
+                <input className={inputCls} placeholder="Cover Image URL" value={form.coverImage} onChange={(e) => setForm({ ...form, coverImage: e.target.value })} />
+                <button type="button" onClick={() => imgRef.current?.click()} disabled={uploadingImg}
+                  className="shrink-0 inline-flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-gray-100 text-gray-600 text-sm hover:bg-gray-200 disabled:opacity-60 transition-colors">
+                  {uploadingImg ? <Loader2 size={14} className="animate-spin" /> : <Upload size={14} />}
+                  {uploadingImg ? 'Uploading…' : 'Upload'}
+                </button>
+                <input ref={imgRef} type="file" accept="image/*" className="hidden" onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadImage(f); }} />
+              </div>
+              {form.coverImage && (
+                <div className="md:col-span-2 relative h-32 rounded-xl overflow-hidden border border-gray-100">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={form.coverImage} alt="cover preview" className="w-full h-full object-cover" />
+                </div>
+              )}
               <input className={inputCls} placeholder="Read Time" value={form.readTime} onChange={(e) => setForm({ ...form, readTime: e.target.value })} />
               <input className={inputCls} type="datetime-local" value={form.publishedAt.slice(0, 16)} onChange={(e) => setForm({ ...form, publishedAt: new Date(e.target.value).toISOString() })} />
               <label className="flex items-center gap-2 text-sm font-medium text-[#333733]">

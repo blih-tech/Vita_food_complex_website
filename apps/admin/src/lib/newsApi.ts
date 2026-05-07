@@ -32,7 +32,7 @@ export interface NewsItem extends Omit<NewsPayload, 'publishedAt'> {
 }
 
 export const newsApi = {
-  list: async () => (await api.get<NewsItem[]>('/news')).data,
+  list: async () => (await api.get<NewsItem[]>('/news/admin/all')).data,
   create: async (payload: NewsPayload) => (await api.post<NewsItem>('/news', payload)).data,
   update: async (id: string, payload: Partial<NewsPayload>) =>
     (await api.put<NewsItem>(`/news/${id}`, payload)).data,
