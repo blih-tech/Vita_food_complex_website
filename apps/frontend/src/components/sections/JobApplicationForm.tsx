@@ -87,6 +87,7 @@ export default function JobApplicationForm() {
       setStatus('success');
       setForm(EMPTY);
       setCvFile(null);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (err: any) {
       setUploading(false);
       setErrorMsg(err?.response?.data?.message ?? 'Submission failed. Please try again.');
