@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import api from "@/lib/api";
 
 export default function ContactFormSection() {
   const t = useTranslations("Contact");
@@ -14,11 +15,18 @@ export default function ContactFormSection() {
     message: "",
     agreeToTerms: false,
   });
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted", formData);
+    setStatus('sending');
+    try {
+      await api.post('/contact-messages', formData);
+      setStatus('success');
+      setFormData({ fullName: '', phoneNumber: '', email: '', message: '', agreeToTerms: false });
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -129,12 +137,33 @@ export default function ContactFormSection() {
                 </label>
               </div>
 
+              {/* Status feedback */}
+              {status === 'success' && (
+                <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-[12px] px-4 py-3">
+                  <CheckCircle className="w-5 h-5 text-[#23B349] shrink-0" />
+                  <p className="font-['Outfit'] text-[14px] text-green-800">Message sent! We'll get back to you soon.</p>
+                </div>
+              )}
+              {status === 'error' && (
+                <div className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-[12px] px-4 py-3">
+                  <AlertCircle className="w-5 h-5 text-red-500 shrink-0" />
+                  <p className="font-['Outfit'] text-[14px] text-red-700">Something went wrong. Please try again.</p>
+                </div>
+              )}
+
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-[#23B349] text-white py-4 rounded-full font-['Funnel_Display'] text-[18px] font-medium hover:bg-[#1f9d40] hover:shadow-lg hover:-translate-y-0.5 transition-all mt-2"
+                disabled={status === 'sending' || status === 'success'}
+                className="w-full bg-[#23B349] text-white py-4 rounded-full font-['Funnel_Display'] text-[18px] font-medium hover:bg-[#1f9d40] hover:shadow-lg hover:-translate-y-0.5 transition-all mt-2 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                {t("form.submit")}
+                {status === 'sending' ? (
+                  <><Loader2 className="w-5 h-5 animate-spin" /> Sending…</>
+                ) : status === 'success' ? (
+                  <><CheckCircle className="w-5 h-5" /> Sent!</>
+                ) : (
+                  t("form.submit")
+                )}
               </button>
             </form>
           </div>
