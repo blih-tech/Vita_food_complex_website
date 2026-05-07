@@ -3,21 +3,20 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-// Certification logos
-const certLogos = [
-  {
-    alt: "Fortified Food",
-    src: "/assets/quality/figma/cert_1.png",
-    width: 150,
-  },
-  { alt: "EFDA", src: "/assets/quality/figma/cert_efda.png", width: 280 },
-  { alt: "LRQA", src: "/assets/quality/figma/cert_lrqa.png", width: 150 },
-  { alt: "ISO 9001", src: "/assets/quality/figma/cert_iso.png", width: 150 },
-  { alt: "EAS", src: "/assets/quality/figma/cert_eas.png", width: 320 },
+const DEFAULT_LOGOS = [
+  { alt: "Fortified Food", src: "/assets/quality/figma/cert_1.png",    width: 150 },
+  { alt: "EFDA",           src: "/assets/quality/figma/cert_efda.png", width: 280 },
+  { alt: "LRQA",           src: "/assets/quality/figma/cert_lrqa.png", width: 150 },
+  { alt: "ISO 9001",       src: "/assets/quality/figma/cert_iso.png",  width: 150 },
+  { alt: "EAS",            src: "/assets/quality/figma/cert_eas.png",  width: 320 },
 ];
 
-export default function PartnerSection() {
+export default function PartnerSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Partner");
+  const c = content?.[locale as string] || content?.en;
+  const certLogos = (c?.logos && c.logos.length > 0)
+    ? c.logos.map((l: any, i: number) => ({ alt: l.alt, src: l.url, width: DEFAULT_LOGOS[i]?.width || 150 }))
+    : DEFAULT_LOGOS;
 
   return (
     <section
@@ -27,10 +26,10 @@ export default function PartnerSection() {
       {/* ── Header ── */}
       <div className="max-w-[1024px] mx-auto px-5 sm:px-6 lg:px-8 flex flex-col items-center text-center gap-4 mb-12 sm:mb-16">
         <p className="font-['Funnel_Display'] font-medium text-lg sm:text-[20px] text-[#404040] leading-tight">
-          {t("subtitle")}
+          {c?.subtitle || t("subtitle")}
         </p>
         <h2 className="font-['Outfit'] font-black text-[42px] sm:text-[52px] lg:text-[80px] text-[#23B349] leading-[0.92] sm:leading-[0.9] tracking-[-0.02em]">
-          {t("heading")}
+          {c?.heading || t("heading")}
         </h2>
       </div>
 

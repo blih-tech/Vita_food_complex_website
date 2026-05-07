@@ -4,19 +4,31 @@ import { useRef, useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
-export default function MerchandiseSection() {
+export default function MerchandiseSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Merchandise");
+  const c = content?.[locale as string] || content?.en;
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  const MERCH_ITEMS = [
-    { id: 1, image: '/assets/merchandise/merch-1.png', title: t("items.necklace.title"), desc: t("items.necklace.desc"), bg: '#23B349' },
-    { id: 2, image: '/assets/merchandise/merch-2.png', title: t("items.cap.title"), desc: t("items.cap.desc"), bg: '#23B349' },
-    { id: 3, image: '/assets/merchandise/merch-3.png', title: t("items.tshirt.title"), desc: t("items.tshirt.desc"), bg: '#23B349' },
-    { id: 4, image: '/assets/merchandise/merch-4.png', title: t("items.sweeter.title"), desc: t("items.sweeter.desc"), bg: '#23B349' },
-    { id: 5, image: '/assets/merchandise/merch-5.png', title: t("items.signatureCap.title"), desc: t("items.signatureCap.desc"), bg: '#23B349' },
-    { id: 6, image: '/assets/merchandise/merch-red.png', title: t("items.badge.title"), desc: t("items.badge.desc"), bg: '#FF0707', isSpecial: true },
+  const MERCH_KEYS = ['necklace', 'cap', 'tshirt', 'sweeter', 'signatureCap', 'badge'] as const;
+  const MERCH_IMAGES = [
+    '/assets/merchandise/merch-1.png',
+    '/assets/merchandise/merch-2.png',
+    '/assets/merchandise/merch-3.png',
+    '/assets/merchandise/merch-4.png',
+    '/assets/merchandise/merch-5.png',
+    '/assets/merchandise/merch-red.png',
   ];
+  const MERCH_BGS = ['#23B349', '#23B349', '#23B349', '#23B349', '#23B349', '#FF0707'];
+
+  const MERCH_ITEMS = MERCH_KEYS.map((key, i) => ({
+    id: i + 1,
+    image: c?.items?.[i]?.image || MERCH_IMAGES[i],
+    title: c?.items?.[i]?.title || t(`items.${key}.title`),
+    desc: c?.items?.[i]?.desc || t(`items.${key}.desc`),
+    bg: MERCH_BGS[i],
+    isSpecial: i === 5,
+  }));
 
   const handleScroll = () => {
     if (scrollRef.current) {
@@ -41,10 +53,10 @@ export default function MerchandiseSection() {
         {/* Header Column */}
         <div className="flex flex-col items-center text-center mb-16 lg:mb-20 gap-4">
           <p className="font-['Funnel_Display'] font-medium text-[20px] text-[#404040] leading-tight">
-            {t("label")}
+            {c?.label || t("label")}
           </p>
           <h2 className="font-['Outfit'] font-black text-[50px] sm:text-[64px] lg:text-[80px] text-[#23B349] leading-[0.9] tracking-[-0.02em]">
-            {t("heading")}
+            {c?.heading || t("heading")}
           </h2>
         </div>
 

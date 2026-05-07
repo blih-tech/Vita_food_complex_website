@@ -87,8 +87,16 @@ function ScrollingColumn({ images, direction, speed = '25s' }: ScrollingColumnPr
   );
 }
 
-export default function SocialWallSection() {
+const DEFAULT_IMAGES = [
+  '/assets/social/social-1.png', '/assets/social/social-2.png', '/assets/social/social-3.png',
+  '/assets/social/social-4.png', '/assets/social/social-5.png', '/assets/social/social-6.png',
+  '/assets/social/social-7.png', '/assets/social/social-8.png',
+];
+
+export default function SocialWallSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("SocialWall");
+  const c = content?.[locale as string] || content?.en;
+  const images: string[] = (c?.images && c.images.length > 0) ? c.images : DEFAULT_IMAGES;
 
   return (
     <section className="bg-white py-20 lg:py-32 relative overflow-hidden h-[1080px] flex items-center justify-center">
@@ -98,11 +106,11 @@ export default function SocialWallSection() {
         
         {/* Grid Columns */}
         <div className="flex gap-4 h-[200%] w-[120%] -ml-[10%] transform rotate-[0deg]">
-          <ScrollingColumn images={COLUMN_1_IMAGES} direction="up" speed="35s" />
-          <ScrollingColumn images={COLUMN_2_IMAGES} direction="down" speed="40s" />
-          <ScrollingColumn images={COLUMN_3_IMAGES} direction="up" speed="30s" />
-          <ScrollingColumn images={COLUMN_4_IMAGES} direction="down" speed="45s" />
-          <ScrollingColumn images={COLUMN_5_IMAGES} direction="up" speed="38s" />
+          <ScrollingColumn images={[images[0], images[1], images[2]].filter(Boolean)} direction="up" speed="35s" />
+          <ScrollingColumn images={[images[3], images[4], images[0]].filter(Boolean)} direction="down" speed="40s" />
+          <ScrollingColumn images={[images[5], images[6], images[7]].filter(Boolean)} direction="up" speed="30s" />
+          <ScrollingColumn images={[images[1], images[2], images[3]].filter(Boolean)} direction="down" speed="45s" />
+          <ScrollingColumn images={[images[4], images[5], images[6]].filter(Boolean)} direction="up" speed="38s" />
         </div>
 
         {/* Gradient Overlays to fade top and bottom */}
@@ -127,16 +135,16 @@ export default function SocialWallSection() {
         
         <div className="flex flex-col items-center gap-4">
           <p className="font-['Funnel_Display'] font-medium text-[20px] text-[#404040] leading-tight">
-            {t("label")}
+            {c?.label || t("label")}
           </p>
           <h2 className="font-['Outfit'] font-black text-[50px] sm:text-[64px] lg:text-[80px] text-[#23B349] leading-[0.9] tracking-[-0.02em]">
-            {t("heading")}
+            {c?.heading || t("heading")}
           </h2>
         </div>
 
         {/* Explore Button */}
         <button className="flex items-center justify-center gap-3 bg-[#23B349] text-white px-8 py-4 rounded-full font-['Funnel_Display'] font-medium text-[24px] leading-tight hover:bg-[#1a8e38] transition-colors group">
-          {t("cta")}
+          {c?.cta || t("cta")}
           <span className="font-['Outfit'] text-[20px] group-hover:translate-x-1 transition-transform">→</span>
         </button>
 

@@ -6,6 +6,16 @@ import { Link, useRouter, usePathname } from "@frontend/navigation";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { ChevronDown, Globe, X, Menu, ArrowRight } from "lucide-react";
+import api from "@/lib/api";
+
+interface NavNewsItem {
+  _id: string;
+  slug: string;
+  title: { en: string; am: string };
+  coverImage: string;
+  publishedAt: string;
+  category: string;
+}
 
 type NavKey =
   | "products"
@@ -32,6 +42,11 @@ export default function Navbar() {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
 
+  // What's New — live data
+  const [latestNews, setLatestNews] = useState<NavNewsItem[]>([]);
+  const [recentUpdates, setRecentUpdates] = useState<NavNewsItem[]>([]);
+  const [newsLoaded, setNewsLoaded] = useState(false);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(event.target as Node)) {
@@ -42,6 +57,22 @@ export default function Navbar() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Fetch news once when the What's New dropdown is first opened
+  useEffect(() => {
+    if (activeDropdown === "whats-new" && !newsLoaded) {
+      api.get<NavNewsItem[]>("/news")
+        .then((res) => {
+          const all = res.data;
+          setLatestNews(all.slice(0, 2));
+          setRecentUpdates(
+            all.filter((n) => n.category === "updates" || n.category === "company-news").slice(0, 3),
+          );
+          setNewsLoaded(true);
+        })
+        .catch(() => setNewsLoaded(true));
+    }
+  }, [activeDropdown, newsLoaded]);
 
   const toggleDropdown = (key: NavKey) => {
     setActiveDropdown((prev) => (prev === key ? null : key));
@@ -261,16 +292,27 @@ export default function Navbar() {
 
                       {link.key === "whats-new" && (
                         <div className="flex flex-col">
-                          {[
-                            { label: t("dropdowns.whatsNew.news.label"), href: "/news", desc: t("dropdowns.whatsNew.news.desc") },
-                            { label: t("dropdowns.whatsNew.updates.label"), href: "/news", desc: t("dropdowns.whatsNew.updates.desc") },
-                          ].map((item) => (
-                            <Link key={item.label} href={item.href} onClick={() => setMobileOpen(false)}
-                              className="px-6 py-3 flex flex-col border-b border-white/10 last:border-0 hover:bg-white/10 transition-colors">
-                              <span className="text-white font-['Funnel_Display'] font-semibold text-[15px]">{item.label}</span>
-                              <span className="text-white/70 text-[12px] mt-0.5">{item.desc}</span>
+                          <Link href="/news" onClick={() => setMobileOpen(false)}
+                            className="px-6 py-3 flex flex-col border-b border-white/10 hover:bg-white/10 transition-colors">
+                            <span className="text-white font-['Funnel_Display'] font-semibold text-[15px]">{t("dropdowns.whatsNew.news.label")}</span>
+                            <span className="text-white/70 text-[12px] mt-0.5">{t("dropdowns.whatsNew.news.desc")}</span>
+                          </Link>
+                          {latestNews.slice(0, 3).map((article) => {
+                            const title = article.title[locale as "en" | "am"] || article.title.en;
+                            return (
+                              <Link key={article._id} href={`/news/${article.slug}` as any} onClick={() => setMobileOpen(false)}
+                                className="px-6 py-3 flex flex-col border-b border-white/10 last:border-0 hover:bg-white/10 transition-colors">
+                                <span className="text-white font-['Funnel_Display'] font-semibold text-[14px] line-clamp-1">{title}</span>
+                              </Link>
+                            );
+                          })}
+                          {latestNews.length === 0 && (
+                            <Link href="/news" onClick={() => setMobileOpen(false)}
+                              className="px-6 py-3 flex flex-col last:border-0 hover:bg-white/10 transition-colors">
+                              <span className="text-white font-['Funnel_Display'] font-semibold text-[15px]">{t("dropdowns.whatsNew.updates.label")}</span>
+                              <span className="text-white/70 text-[12px] mt-0.5">{t("dropdowns.whatsNew.updates.desc")}</span>
                             </Link>
-                          ))}
+                          )}
                         </div>
                       )}
                     </div>
@@ -529,32 +571,74 @@ export default function Navbar() {
                   ))}
                 </div>
 
-                {/* News cards — hidden at lg */}
+                {/* Latest News cards — hidden at lg */}
                 <div className="hidden xl:flex flex-col gap-4 flex-1">
                   <h4 className="font-['Funnel_Display'] text-[16px] font-bold text-[#1A1A1A] mb-2">{t("dropdowns.whatsNew.latestNews")}</h4>
-                  {[1, 2].map((i) => (
-                    <Link key={i} href="/news/vita-food-complex-ai-driven-food-solutions" onClick={() => setActiveDropdown(null)}
-                      className="bg-[#F5F5F5] rounded-[16px] p-2 flex flex-col gap-3 group hover:bg-[#EBEBEB] transition-colors">
-                      <div className="w-full h-[110px] relative rounded-[12px] overflow-hidden shrink-0">
-                        <Image src="/assets/products/figma/figma_prod_12.png" fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500" alt="News thumbnail" />
+                  {!newsLoaded ? (
+                    // Skeleton while loading
+                    [1, 2].map((i) => (
+                      <div key={i} className="bg-[#F5F5F5] rounded-[16px] p-2 animate-pulse">
+                        <div className="w-full h-[110px] bg-gray-200 rounded-[12px]" />
+                        <div className="h-4 bg-gray-200 rounded mt-3 mx-2 mb-2 w-3/4" />
                       </div>
-                      <div className="flex justify-between items-center px-2 pb-1">
-                        <h5 className="font-['Funnel_Display'] text-[14px] font-bold text-[#1A1A1A] group-hover:text-[#23B349] transition-colors">{t("dropdowns.whatsNew.newsTitle")}</h5>
-                        <p className="text-gray-500 text-[12px]">{t("dropdowns.whatsNew.daysAgo", { days: 6 })}</p>
-                      </div>
-                    </Link>
-                  ))}
+                    ))
+                  ) : latestNews.length > 0 ? (
+                    latestNews.map((article) => {
+                      const daysAgo = Math.max(0, Math.floor((Date.now() - new Date(article.publishedAt).getTime()) / 86400000));
+                      const title = article.title[locale as "en" | "am"] || article.title.en;
+                      return (
+                        <Link key={article._id} href={`/news/${article.slug}` as any} onClick={() => setActiveDropdown(null)}
+                          className="bg-[#F5F5F5] rounded-[16px] p-2 flex flex-col gap-3 group hover:bg-[#EBEBEB] transition-colors">
+                          <div className="w-full h-[110px] relative rounded-[12px] overflow-hidden shrink-0 bg-gray-200">
+                            {article.coverImage && (
+                              <Image src={article.coverImage} fill
+                                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                alt={title} sizes="280px" />
+                            )}
+                          </div>
+                          <div className="flex justify-between items-start gap-2 px-2 pb-1">
+                            <h5 className="font-['Funnel_Display'] text-[14px] font-bold text-[#1A1A1A] group-hover:text-[#23B349] transition-colors line-clamp-2 flex-1">{title}</h5>
+                            <p className="text-gray-400 text-[11px] shrink-0 mt-0.5">{daysAgo === 0 ? "Today" : `${daysAgo}d ago`}</p>
+                          </div>
+                        </Link>
+                      );
+                    })
+                  ) : (
+                    <p className="text-gray-400 text-[13px]">No articles yet.</p>
+                  )}
                 </div>
 
                 {/* Recent updates — hidden at lg */}
                 <div className="hidden xl:flex flex-col gap-3 flex-1">
                   <h4 className="font-['Funnel_Display'] text-[16px] font-bold text-[#1A1A1A] mb-2">{t("dropdowns.whatsNew.recentUpdates")}</h4>
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="bg-[#F5F5F5] rounded-[12px] px-5 py-3.5 flex items-center hover:bg-gray-200 transition-colors cursor-pointer">
-                      <span className="text-[14px] text-[#1A1A1A] font-medium">{t("dropdowns.resources.exploreBiscuit")}</span>
-                    </div>
-                  ))}
+                  {!newsLoaded ? (
+                    [1, 2, 3].map((i) => (
+                      <div key={i} className="bg-[#F5F5F5] rounded-[12px] px-5 py-3.5 animate-pulse">
+                        <div className="h-4 bg-gray-200 rounded w-4/5" />
+                      </div>
+                    ))
+                  ) : recentUpdates.length > 0 ? (
+                    recentUpdates.map((article) => {
+                      const title = article.title[locale as "en" | "am"] || article.title.en;
+                      return (
+                        <Link key={article._id} href={`/news/${article.slug}` as any} onClick={() => setActiveDropdown(null)}
+                          className="bg-[#F5F5F5] rounded-[12px] px-5 py-3.5 flex items-center hover:bg-[#EBEBEB] transition-colors group">
+                          <span className="text-[14px] text-[#1A1A1A] font-medium group-hover:text-[#23B349] transition-colors line-clamp-1">{title}</span>
+                        </Link>
+                      );
+                    })
+                  ) : (
+                    // Fallback: show latest news as updates if no updates category found
+                    latestNews.concat(latestNews).slice(0, 3).map((article, i) => {
+                      const title = article.title[locale as "en" | "am"] || article.title.en;
+                      return (
+                        <Link key={`${article._id}-${i}`} href={`/news/${article.slug}` as any} onClick={() => setActiveDropdown(null)}
+                          className="bg-[#F5F5F5] rounded-[12px] px-5 py-3.5 flex items-center hover:bg-[#EBEBEB] transition-colors group">
+                          <span className="text-[14px] text-[#1A1A1A] font-medium group-hover:text-[#23B349] transition-colors line-clamp-1">{title}</span>
+                        </Link>
+                      );
+                    })
+                  )}
                 </div>
               </div>
             )}

@@ -50,8 +50,12 @@ function MarqueeBanner({ t }: { t: ReturnType<typeof useTranslations> }) {
   );
 }
 
-export default function HeroVideoSection() {
+export default function HeroVideoSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Hero");
+  const c = content?.[locale as string] || content?.en;
+  const secondaryQuote = c?.secondaryQuote || t("secondaryQuote");
+  const ourClients = c?.ourClients || t("ourClients");
+  const videoThumbnail = c?.videoThumbnail || "/assets/hero/video-family.png";
 
   return (
     <section
@@ -94,13 +98,13 @@ export default function HeroVideoSection() {
         {/* Secondary Quote Section */}
         <div className="flex max-w-6xl flex-col items-start text-left px-1 sm:px-0">
           <blockquote className="max-w-4xl font-['Outfit'] text-[26px] leading-[1.05] sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-[-0.02em] text-white">
-            “{t("secondaryQuote")}”
+            "{secondaryQuote}"
           </blockquote>
 
           <div className="mt-8 sm:mt-10 flex items-center gap-4 sm:gap-5">
             <ClientAvatars />
             <span className="font-['Outfit'] text-base sm:text-lg md:text-xl font-semibold text-white">
-              {t("ourClients")}
+              {ourClients}
             </span>
           </div>
         </div>
@@ -112,7 +116,7 @@ export default function HeroVideoSection() {
           <div className="relative z-10 mx-auto max-w-[1380px] px-1 sm:px-0">
             <div className="group relative aspect-video overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-[32px] border-4 border-white bg-[#404040] shadow-[0_20px_50px_rgba(0,0,0,0.35)] md:shadow-[0_30px_80px_rgba(0,0,0,0.35)] md:rounded-[48px] lg:rounded-[52px]">
               <Image
-                src="/assets/hero/video-family.png"
+                src={videoThumbnail}
                 alt="Family enjoying Vita"
                 fill
                 priority
