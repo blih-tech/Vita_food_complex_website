@@ -81,6 +81,7 @@ export default function CareersPage() {
   const [responsibilitiesText, setResponsibilitiesText] = useState("");
   const [requirementsText, setRequirementsText] = useState("");
   const [benefitsText, setBenefitsText] = useState("");
+  const [selectedJob, setSelectedJob] = useState<CareerItem | null>(null);
 
   // ── Applicants state
   const [apps, setApps] = useState<Application[]>([]);
@@ -136,6 +137,12 @@ export default function CareersPage() {
     setRequirementsText(stringifyLocalizedList(item.requirements));
     setBenefitsText(stringifyLocalizedList(item.benefits));
     setOpen(true);
+  };
+
+  const viewApplicantsForJob = (jobId: string) => {
+    setFilterJob(jobId);
+    setTab('applicants');
+    if (!apps.length) loadApps();
   };
 
   const submitJob = async () => {
@@ -207,50 +214,148 @@ export default function CareersPage() {
           loadingJobs ? (
             <div className="py-16 flex justify-center"><div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#23B349]" /></div>
           ) : (
-            <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-              <div className="flex items-center justify-between px-5 py-4 border-b border-gray-50 lg:hidden">
-                <span className="text-sm font-semibold text-[#333733]">{jobs.length} roles</span>
-                <button onClick={openCreate} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-white bg-[#23B349] text-xs font-semibold">
-                  <Plus size={12} /> Add Role
-                </button>
+            <div className={`flex gap-6 ${selectedJob ? 'h-[calc(100vh-160px)]' : ''}`}>
+              {/* Table */}
+              <div className={`flex flex-col gap-4 ${selectedJob ? 'hidden lg:flex lg:w-[520px] shrink-0' : 'w-full'}`}>
+                <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden flex-1 overflow-y-auto">
+                  <div className="flex items-center justify-between px-5 py-4 border-b border-gray-50 lg:hidden">
+                    <span className="text-sm font-semibold text-[#333733]">{jobs.length} roles</span>
+                    <button onClick={openCreate} className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-white bg-[#23B349] text-xs font-semibold">
+                      <Plus size={12} /> Add Role
+                    </button>
+                  </div>
+                  <table className="w-full">
+                    <thead className="border-b border-gray-100">
+                      <tr>{["Role", "Location", "Status", "Actions"].map((h) => (
+                        <th key={h} className="text-left text-xs uppercase tracking-wide text-gray-400 px-5 py-4">{h}</th>
+                      ))}</tr>
+                    </thead>
+                    <tbody>
+                      {jobs.length === 0 ? (
+                        <tr><td colSpan={4} className="text-center py-12 text-gray-400 text-sm">No job roles yet. Add one above.</td></tr>
+                      ) : jobs.map((item) => (
+                        <tr key={item._id}
+                          onClick={() => setSelectedJob(item)}
+                          className={`border-b border-gray-50 cursor-pointer hover:bg-gray-50/60 transition-colors ${selectedJob?.id === item.id ? 'bg-[#23B349]/5 border-l-2 border-l-[#23B349]' : ''}`}>
+                          <td className="px-5 py-4">
+                            <div className="flex items-center gap-3">
+                              <Briefcase size={16} className="text-[#23B349] shrink-0" />
+                              <div>
+                                <p className="text-sm font-semibold text-[#333733]">{item.title.en}</p>
+                                <p className="text-xs text-gray-400">{item.department.en} · {item.type.en}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-5 py-4 text-sm text-gray-500">{item.location.en}</td>
+                          <td className="px-5 py-4">
+                            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${item.active ? "bg-emerald-50 text-emerald-600" : "bg-gray-100 text-gray-500"}`}>
+                              {item.active ? "Active" : "Inactive"}
+                            </span>
+                          </td>
+                          <td className="px-5 py-4" onClick={(e) => e.stopPropagation()}>
+                            <div className="flex items-center gap-2">
+                              <button
+                                onClick={() => viewApplicantsForJob(item.id)}
+                                className="h-8 px-2.5 rounded-lg bg-blue-50 text-blue-600 flex items-center gap-1.5 text-xs font-medium hover:bg-blue-100 transition-colors"
+                                title="View applicants for this role">
+                                <Users size={13} /> Applicants
+                              </button>
+                              <button onClick={() => openEdit(item)} className="w-8 h-8 rounded-lg bg-gray-50 text-gray-500 flex items-center justify-center hover:bg-gray-100 transition-colors"><Pencil size={14} /></button>
+                              <button onClick={() => { removeJob(item.id); if (selectedJob?.id === item.id) setSelectedJob(null); }} className="w-8 h-8 rounded-lg bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-100 transition-colors"><Trash2 size={14} /></button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
-              <table className="w-full">
-                <thead className="border-b border-gray-100">
-                  <tr>{["Role", "Location", "Department", "Status", "Actions"].map((h) => (
-                    <th key={h} className="text-left text-xs uppercase tracking-wide text-gray-400 px-5 py-4">{h}</th>
-                  ))}</tr>
-                </thead>
-                <tbody>
-                  {jobs.length === 0 ? (
-                    <tr><td colSpan={5} className="text-center py-12 text-gray-400 text-sm">No job roles yet. Add one above.</td></tr>
-                  ) : jobs.map((item) => (
-                    <tr key={item._id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
-                      <td className="px-5 py-4">
-                        <div className="flex items-center gap-3">
-                          <Briefcase size={16} className="text-[#23B349] shrink-0" />
-                          <div>
-                            <p className="text-sm font-semibold text-[#333733]">{item.title.en}</p>
-                            <p className="text-xs text-gray-400">{item.id}</p>
-                          </div>
+
+              {/* Job detail panel */}
+              {selectedJob && (
+                <div className="flex-1 bg-white rounded-2xl border border-gray-100 overflow-y-auto flex flex-col">
+                  {/* Panel header */}
+                  <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 sticky top-0 bg-white z-10">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-[#23B349]/10 flex items-center justify-center text-[#23B349] shrink-0">
+                        <Briefcase size={18} />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-[#333733]">{selectedJob.title.en}</p>
+                        <p className="text-xs text-gray-400">{selectedJob.title.am}</p>
+                      </div>
+                    </div>
+                    <button onClick={() => setSelectedJob(null)} className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 hover:bg-gray-200 transition-colors">
+                      <X size={14} />
+                    </button>
+                  </div>
+
+                  <div className="p-6 flex flex-col gap-6">
+                    {/* Quick actions */}
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <button onClick={() => viewApplicantsForJob(selectedJob.id)}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-50 text-blue-600 text-sm font-medium hover:bg-blue-100 transition-colors">
+                        <Users size={14} /> View Applicants
+                      </button>
+                      <button onClick={() => openEdit(selectedJob)}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-100 text-gray-600 text-sm font-medium hover:bg-gray-200 transition-colors">
+                        <Pencil size={14} /> Edit Role
+                      </button>
+                      <button onClick={() => { removeJob(selectedJob.id); setSelectedJob(null); }}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-red-50 text-red-500 text-sm font-medium hover:bg-red-100 transition-colors ml-auto">
+                        <Trash2 size={14} /> Delete
+                      </button>
+                    </div>
+
+                    {/* Info chips */}
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        ['Status', selectedJob.active ? 'Active' : 'Inactive'],
+                        ['Location', selectedJob.location.en],
+                        ['Type', selectedJob.type.en],
+                        ['Department', selectedJob.department.en],
+                        ...(selectedJob.reportsTo?.en ? [['Reports To', selectedJob.reportsTo.en]] : []),
+                        ['Role ID', selectedJob.id],
+                      ].map(([label, value]) => (
+                        <div key={label} className="bg-gray-50 rounded-xl p-3">
+                          <p className="text-xs text-gray-400 mb-1">{label}</p>
+                          <p className={`text-sm font-medium ${label === 'Status' ? (selectedJob.active ? 'text-emerald-600' : 'text-gray-500') : 'text-[#333733]'}`}>{value}</p>
                         </div>
-                      </td>
-                      <td className="px-5 py-4 text-sm text-gray-500">{item.location.en}</td>
-                      <td className="px-5 py-4 text-sm text-gray-500">{item.department.en}</td>
-                      <td className="px-5 py-4">
-                        <span className={`px-2 py-1 rounded-full text-xs font-semibold ${item.active ? "bg-emerald-50 text-emerald-600" : "bg-gray-100 text-gray-500"}`}>
-                          {item.active ? "Active" : "Inactive"}
-                        </span>
-                      </td>
-                      <td className="px-5 py-4">
-                        <div className="flex items-center gap-2">
-                          <button onClick={() => openEdit(item)} className="w-8 h-8 rounded-lg bg-gray-50 text-gray-500 flex items-center justify-center hover:bg-gray-100 transition-colors"><Pencil size={14} /></button>
-                          <button onClick={() => removeJob(item.id)} className="w-8 h-8 rounded-lg bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-100 transition-colors"><Trash2 size={14} /></button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                      ))}
+                    </div>
+
+                    {/* Summary */}
+                    {selectedJob.summary.en && (
+                      <div>
+                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Summary</p>
+                        <div className="bg-gray-50 rounded-xl p-4 text-sm text-[#333733] leading-relaxed">{selectedJob.summary.en}</div>
+                        {selectedJob.summary.am && (
+                          <div className="bg-gray-50 rounded-xl p-4 text-sm text-[#333733] leading-relaxed mt-2 text-right" dir="auto">{selectedJob.summary.am}</div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Lists */}
+                    {([
+                      ['Responsibilities', selectedJob.responsibilities],
+                      ['Requirements', selectedJob.requirements],
+                      ['Benefits', selectedJob.benefits],
+                    ] as [string, LocalizedText[]][]).filter(([, v]) => v?.length).map(([label, items]) => (
+                      <div key={label}>
+                        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">{label}</p>
+                        <ul className="bg-gray-50 rounded-xl p-4 space-y-2">
+                          {items.map((item, i) => (
+                            <li key={i} className="flex gap-2 text-sm text-[#333733]">
+                              <span className="text-[#23B349] mt-1 shrink-0">•</span>
+                              <span>{item.en}{item.am ? <span className="text-gray-400"> / {item.am}</span> : null}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )
         )}
