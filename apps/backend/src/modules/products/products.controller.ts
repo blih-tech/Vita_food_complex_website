@@ -26,7 +26,7 @@ export class ProductsController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return this.productsService.findById(id);
+    return this.productsService.findBySlugOrId(id);
   }
 
   @Post()

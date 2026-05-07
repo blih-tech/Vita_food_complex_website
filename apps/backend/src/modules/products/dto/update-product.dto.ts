@@ -3,50 +3,156 @@ import {
   IsArray,
   IsBoolean,
   IsEnum,
+  IsNumber,
   IsOptional,
   IsString,
+  Matches,
   ValidateNested,
 } from 'class-validator';
 
 class LocalizedStringDto {
+  @IsOptional()
   @IsString()
-  en: string;
+  en?: string;
 
+  @IsOptional()
   @IsString()
-  am: string;
+  am?: string;
 }
 
 class ProductMediaDto {
+  @IsOptional()
   @IsString()
-  image: string;
+  image?: string;
+
+  @IsOptional()
+  @IsString()
+  tagIcon?: string;
+}
+
+class ProductUiDto {
+  @IsOptional()
+  @IsString()
+  bgColor?: string;
+
+  @IsOptional()
+  @IsString()
+  textColor?: string;
+
+  @IsOptional()
+  @IsString()
+  nameColor?: string;
+}
+
+const NUTRITION_UNITS = ['g', 'mg', 'kcal', '%'] as const;
+const INGREDIENT_TYPES = ['main', 'additive', 'allergen'] as const;
+
+class NutritionItemDto {
+  @IsOptional()
+  @IsString()
+  name?: string;
+
+  @IsOptional()
+  @IsNumber()
+  value?: number;
+
+  @IsOptional()
+  @IsEnum(NUTRITION_UNITS)
+  unit?: (typeof NUTRITION_UNITS)[number];
+
+  @IsOptional()
+  @IsNumber()
+  dailyValue?: number;
+}
+
+class NutritionDto {
+  @IsOptional()
+  @IsString()
+  servingSize?: string;
+
+  @IsOptional()
+  @IsNumber()
+  calories?: number;
+
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @Type(() => NutritionItemDto)
+  @IsArray()
+  items?: NutritionItemDto[];
+}
+
+class IngredientDto {
+  @IsOptional()
+  @IsString()
+  name?: string;
+
+  @IsOptional()
+  @IsEnum(INGREDIENT_TYPES)
+  type?: (typeof INGREDIENT_TYPES)[number];
+}
+
+class IngredientsDto {
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @Type(() => IngredientDto)
+  @IsArray()
+  list?: IngredientDto[];
 
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
-  gallery?: string[];
+  contains?: string[];
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  mayContain?: string[];
 }
 
-class ProductUiDto {
+class CertificationDto {
+  @IsOptional()
   @IsString()
-  bgColor: string;
+  name?: string;
 
+  @IsOptional()
   @IsString()
-  textColor: string;
-
-  @IsString()
-  nameColor: string;
+  image?: string;
 }
 
 class ProductContentDto {
+  @IsOptional()
   @ValidateNested()
   @Type(() => LocalizedStringDto)
-  description: LocalizedStringDto;
+  description?: LocalizedStringDto;
+
+  @IsOptional()
+  @IsString()
+  netWeight?: string;
+
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => NutritionDto)
+  nutrition?: NutritionDto;
+
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => IngredientsDto)
+  ingredients?: IngredientsDto;
+
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @Type(() => CertificationDto)
+  @IsArray()
+  certifications?: CertificationDto[];
 }
 
 export class UpdateProductDto {
   @IsOptional()
   @IsString()
-  id?: string;
+  @Matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/i, {
+    message: 'slug must be URL-safe (letters, numbers, hyphens)',
+  })
+  slug?: string;
 
   @IsOptional()
   @ValidateNested()
@@ -71,6 +177,11 @@ export class UpdateProductDto {
   @ValidateNested()
   @Type(() => ProductContentDto)
   content?: ProductContentDto;
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  relatedProducts?: string[];
 
   @IsOptional()
   @IsBoolean()

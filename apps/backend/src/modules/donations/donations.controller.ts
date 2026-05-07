@@ -1,12 +1,21 @@
 import {
-  Controller, Get, Post, Put, Delete,
-  Param, Body, Query, UseGuards, HttpCode, HttpStatus,
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Param,
+  Body,
+  Query,
+  UseGuards,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { DonationsService } from './donations.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../../common/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
-import { DonationStatus, DonationType } from './schemas/donation.schema';
+import type { DonationStatus, DonationType } from './schemas/donation.schema';
 
 @Controller('donations')
 export class DonationsController {

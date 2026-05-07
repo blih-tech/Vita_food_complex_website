@@ -3,8 +3,10 @@ import {
   IsArray,
   IsBoolean,
   IsEnum,
+  IsNumber,
   IsOptional,
   IsString,
+  Matches,
   ValidateNested,
 } from 'class-validator';
 
@@ -21,9 +23,8 @@ class ProductMediaDto {
   image: string;
 
   @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
-  gallery?: string[];
+  @IsString()
+  tagIcon?: string;
 }
 
 class ProductUiDto {
@@ -37,15 +38,103 @@ class ProductUiDto {
   nameColor: string;
 }
 
+const NUTRITION_UNITS = ['g', 'mg', 'kcal', '%'] as const;
+const INGREDIENT_TYPES = ['main', 'additive', 'allergen'] as const;
+
+class NutritionItemDto {
+  @IsString()
+  name: string;
+
+  @IsNumber()
+  value: number;
+
+  @IsEnum(NUTRITION_UNITS)
+  unit: (typeof NUTRITION_UNITS)[number];
+
+  @IsOptional()
+  @IsNumber()
+  dailyValue?: number;
+}
+
+class NutritionDto {
+  @IsString()
+  servingSize: string;
+
+  @IsNumber()
+  calories: number;
+
+  @ValidateNested({ each: true })
+  @Type(() => NutritionItemDto)
+  @IsArray()
+  items: NutritionItemDto[];
+}
+
+class IngredientDto {
+  @IsString()
+  name: string;
+
+  @IsOptional()
+  @IsEnum(INGREDIENT_TYPES)
+  type?: (typeof INGREDIENT_TYPES)[number];
+}
+
+class IngredientsDto {
+  @ValidateNested({ each: true })
+  @Type(() => IngredientDto)
+  @IsArray()
+  list: IngredientDto[];
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  contains?: string[];
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  mayContain?: string[];
+}
+
+class CertificationDto {
+  @IsString()
+  name: string;
+
+  @IsString()
+  image: string;
+}
+
 class ProductContentDto {
   @ValidateNested()
   @Type(() => LocalizedStringDto)
   description: LocalizedStringDto;
+
+  @IsOptional()
+  @IsString()
+  netWeight?: string;
+
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => NutritionDto)
+  nutrition?: NutritionDto;
+
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => IngredientsDto)
+  ingredients?: IngredientsDto;
+
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @Type(() => CertificationDto)
+  @IsArray()
+  certifications?: CertificationDto[];
 }
 
 export class CreateProductDto {
   @IsString()
-  id: string;
+  @Matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/i, {
+    message: 'slug must be URL-safe (letters, numbers, hyphens)',
+  })
+  slug: string;
 
   @ValidateNested()
   @Type(() => LocalizedStringDto)
@@ -65,6 +154,11 @@ export class CreateProductDto {
   @ValidateNested()
   @Type(() => ProductContentDto)
   content: ProductContentDto;
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  relatedProducts?: string[];
 
   @IsOptional()
   @IsBoolean()

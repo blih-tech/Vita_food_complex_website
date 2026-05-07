@@ -15,13 +15,20 @@ export class CloudinaryService {
 
   uploadBuffer(
     buffer: Buffer,
-    options: { folder?: string; resource_type?: 'auto' | 'image' | 'raw' | 'video' } = {},
+    options: {
+      folder?: string;
+      resource_type?: 'auto' | 'image' | 'raw' | 'video';
+    } = {},
   ): Promise<{ url: string; publicId: string }> {
     return new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream(
-        { folder: options.folder ?? 'vita', resource_type: options.resource_type ?? 'auto' },
+        {
+          folder: options.folder ?? 'vita',
+          resource_type: options.resource_type ?? 'auto',
+        },
         (error, result) => {
-          if (error || !result) return reject(error ?? new Error('Upload failed'));
+          if (error || !result)
+            return reject(error ?? new Error('Upload failed'));
           resolve({ url: result.secure_url, publicId: result.public_id });
         },
       );
@@ -29,7 +36,12 @@ export class CloudinaryService {
     });
   }
 
-  deleteFile(publicId: string, resourceType: 'image' | 'raw' | 'video' = 'raw') {
-    return cloudinary.uploader.destroy(publicId, { resource_type: resourceType });
+  deleteFile(
+    publicId: string,
+    resourceType: 'image' | 'raw' | 'video' = 'raw',
+  ) {
+    return cloudinary.uploader.destroy(publicId, {
+      resource_type: resourceType,
+    });
   }
 }
