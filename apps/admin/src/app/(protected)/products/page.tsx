@@ -37,8 +37,6 @@ type TabId =
   | "certs"
   | "related";
 
-type ProductWithLegacy = ProductItem & { id?: string };
-
 function emptyForm(): ProductPayload {
   return {
     slug: "",
@@ -59,10 +57,8 @@ function emptyForm(): ProductPayload {
 }
 
 function itemToForm(item: ProductItem): ProductPayload {
-  const legacy = item as ProductWithLegacy;
-  const slug = item.slug || legacy.id || "";
   return {
-    slug,
+    slug: item.slug,
     name: item.name,
     category: item.category,
     media: {
@@ -737,8 +733,7 @@ function ProductModal({
 }
 
 function resolveItemKey(item: ProductItem): string {
-  const legacy = item as ProductWithLegacy;
-  return item.slug || legacy.id || item._id;
+  return item.slug;
 }
 
 function resolveProductId(item: ProductItem): string {
@@ -747,6 +742,7 @@ function resolveProductId(item: ProductItem): string {
 
 export default function ProductsPage() {
   const [items, setItems] = useState<ProductItem[]>([]);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -767,7 +763,9 @@ export default function ProductsPage() {
     setLoading(true);
     setLoadError(null);
     try {
-      setItems(await productsApi.list());
+      const loaded = await productsApi.list();
+      setItems(loaded);
+      setSelectedIds((prev) => prev.filter((id) => loaded.some((item) => item._id === id)));
     } catch (error) {
       console.error(error);
       setLoadError("Failed to load products. Please try again.");
@@ -815,7 +813,7 @@ export default function ProductsPage() {
     setSubmitting(true);
     try {
       if (editing) {
-        await productsApi.update(resolveItemKey(editing), form, uploadFiles);
+        await productsApi.update(editing._id, form, uploadFiles);
       } else {
         await productsApi.create(form, uploadFiles);
       }
@@ -843,16 +841,59 @@ export default function ProductsPage() {
     }
   };
 
+  const toggleSelection = (id: string, checked: boolean) => {
+    setSelectedIds((prev) =>
+      checked ? Array.from(new Set([...prev, id])) : prev.filter((v) => v !== id),
+    );
+  };
+
+  const toggleSelectAll = (checked: boolean) => {
+    if (checked) {
+      setSelectedIds(items.map((item) => item._id));
+      return;
+    }
+    setSelectedIds([]);
+  };
+
+  const deleteSelected = async () => {
+    if (selectedIds.length === 0) return;
+    if (!window.confirm(`Delete ${selectedIds.length} selected products?`)) {
+      return;
+    }
+
+    try {
+      await Promise.all(
+        items
+          .filter((item) => selectedIds.includes(item._id))
+          .map((item) => productsApi.remove(item._id)),
+      );
+      setSelectedIds([]);
+      await load();
+    } catch (error) {
+      console.error(error);
+      window.alert("Failed to delete one or more selected products.");
+    }
+  };
+
   return (
     <>
       <header className="hidden lg:flex h-[68px] bg-white border-b border-gray-100 px-8 items-center justify-between sticky top-0 z-10">
         <h1 className="font-['Funnel_Display'] text-lg font-bold text-[#333733]">Products</h1>
-        <button
-          onClick={openCreate}
-          className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-white bg-[#23B349] text-sm font-semibold"
-        >
-          <Plus size={14} /> Add Product
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={deleteSelected}
+            disabled={selectedIds.length === 0}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold bg-red-50 text-red-600 disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            <Trash2 size={14} /> Delete Selected ({selectedIds.length})
+          </button>
+          <button
+            onClick={openCreate}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-white bg-[#23B349] text-sm font-semibold"
+          >
+            <Plus size={14} /> Add Product
+          </button>
+        </div>
       </header>
       <div className="p-4 sm:p-6 lg:p-8">
         {loading ? (
@@ -886,9 +927,15 @@ export default function ProductsPage() {
             <table className="w-full min-w-[980px]">
               <thead className="border-b border-gray-100">
                 <tr>
-                  {["Product", "Visual", "Category", "Details", "Status", "Updated", "Actions"].map((h) => (
+                  {["", "Product", "Visual", "Category", "Details", "Status", "Updated", "Actions"].map((h) => (
                     <th key={h} className="text-left text-xs uppercase tracking-wide text-gray-400 px-5 py-4">
-                      {h}
+                      {h || (
+                        <input
+                          type="checkbox"
+                          checked={items.length > 0 && selectedIds.length === items.length}
+                          onChange={(e) => toggleSelectAll(e.target.checked)}
+                        />
+                      )}
                     </th>
                   ))}
                 </tr>
@@ -896,6 +943,13 @@ export default function ProductsPage() {
               <tbody>
                 {items.map((item) => (
                   <tr key={item._id} className="border-b border-gray-50">
+                    <td className="px-5 py-4">
+                      <input
+                        type="checkbox"
+                        checked={selectedIds.includes(item._id)}
+                        onChange={(e) => toggleSelection(item._id, e.target.checked)}
+                      />
+                    </td>
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-lg border border-gray-100 overflow-hidden bg-gray-50 flex items-center justify-center">

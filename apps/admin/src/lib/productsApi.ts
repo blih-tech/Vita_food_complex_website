@@ -99,19 +99,19 @@ export const productsApi = {
       })
     ).data,
   update: async (
-    slugOrId: string,
+    productId: string,
     payload: Partial<ProductPayload>,
     files?: ProductUploadFiles,
   ) =>
     (
       await api.put<ProductItem>(
-        `/products/${encodeURIComponent(slugOrId)}`,
+        `/products/${encodeURIComponent(productId)}`,
         buildProductFormData(payload, files),
         {
           headers: { "Content-Type": "multipart/form-data" },
         },
       )
     ).data,
-  remove: async (slugOrId: string) =>
-    (await api.delete(`/products/${encodeURIComponent(slugOrId)}`)).data,
+  remove: async (productId: string) =>
+    (await api.delete(`/products/${encodeURIComponent(productId)}`)).data,
 };

@@ -184,11 +184,15 @@ async function bootstrap() {
     };
 
     const saved = await productModel
-      .findOneAndUpdate({ slug: payload.slug }, payload, {
-        upsert: true,
-        returnDocument: 'after',
-        setDefaultsOnInsert: true,
-      })
+      .findOneAndUpdate(
+        { slug: payload.slug },
+        { $set: payload, $unset: { id: '' } },
+        {
+          upsert: true,
+          returnDocument: 'after',
+          setDefaultsOnInsert: true,
+        },
+      )
       .exec();
     if (saved?._id) {
       slugToId.set(product.id, String(saved._id));

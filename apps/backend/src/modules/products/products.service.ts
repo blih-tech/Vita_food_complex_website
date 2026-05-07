@@ -9,6 +9,7 @@ import { Model, Types } from 'mongoose';
 import { Product, ProductDocument } from './schemas/product.schema';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 function isMongoObjectIdString(value: string): boolean {
   return (
@@ -23,11 +24,37 @@ function resolveFilter(param: string): Record<string, unknown> {
   return { slug: param };
 }
 
+function resolveObjectIdFilter(param: string): Record<string, unknown> {
+  if (!isMongoObjectIdString(param)) {
+    throw new BadRequestException('id must be a valid MongoDB ObjectId');
+  }
+  return { _id: new Types.ObjectId(param) };
+}
+
 @Injectable()
 export class ProductsService {
   constructor(
     @InjectModel(Product.name) private productModel: Model<ProductDocument>,
+    private readonly cloudinaryService: CloudinaryService,
   ) {}
+
+  private collectAssetUrls(product: ProductDocument | null): string[] {
+    if (!product) return [];
+    const urls: string[] = [];
+    if (product.media?.image) urls.push(product.media.image);
+    if (product.media?.tagIcon) urls.push(product.media.tagIcon);
+    for (const cert of product.content?.certifications ?? []) {
+      if (cert?.image) urls.push(cert.image);
+    }
+    return urls;
+  }
+
+  private async deleteAssetUrls(urls: string[]): Promise<void> {
+    const uniqueUrls = Array.from(new Set(urls.filter(Boolean)));
+    await Promise.allSettled(
+      uniqueUrls.map((url) => this.cloudinaryService.deleteByUrl(url, 'image')),
+    );
+  }
 
   private async ensureRelatedProductsExist(
     relatedProducts: string[] | undefined,
@@ -102,9 +129,8 @@ export class ProductsService {
     updateData: UpdateProductDto,
   ): Promise<ProductDocument> {
     try {
-      const existing = await this.productModel
-        .findOne(resolveFilter(param))
-        .exec();
+      const idFilter = resolveObjectIdFilter(param);
+      const existing = await this.productModel.findOne(idFilter).exec();
       if (!existing) {
         throw new NotFoundException(`Product not found`);
       }
@@ -116,12 +142,19 @@ export class ProductsService {
         );
       }
 
+      const oldUrls = this.collectAssetUrls(existing);
+
       const product = await this.productModel
-        .findOneAndUpdate(resolveFilter(param), updateData, {
+        .findOneAndUpdate(idFilter, updateData, {
           returnDocument: 'after',
         })
         .exec();
       if (!product) throw new NotFoundException(`Product not found`);
+
+      const newUrls = this.collectAssetUrls(product);
+      const urlsToDelete = oldUrls.filter((url) => !newUrls.includes(url));
+      await this.deleteAssetUrls(urlsToDelete);
+
       return product;
     } catch (err: unknown) {
       const code =
@@ -136,12 +169,18 @@ export class ProductsService {
   }
 
   async delete(param: string): Promise<{ deletedCount?: number }> {
-    const result = await this.productModel
-      .deleteOne(resolveFilter(param))
-      .exec();
-    if (result.deletedCount === 0) {
+    const idFilter = resolveObjectIdFilter(param);
+    const existing = await this.productModel.findOne(idFilter).exec();
+    if (!existing) {
       throw new NotFoundException(`Product not found`);
     }
+
+    const urlsToDelete = this.collectAssetUrls(existing);
+    const result = await this.productModel
+      .deleteOne({ _id: existing._id })
+      .exec();
+    await this.deleteAssetUrls(urlsToDelete);
+
     return result;
   }
 }
