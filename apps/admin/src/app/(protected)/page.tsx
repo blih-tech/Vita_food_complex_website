@@ -93,7 +93,6 @@ export default function DashboardPage() {
 
   return (
     <>
-      {/* ── Desktop header (hidden on mobile — DashboardLayout renders mobile bar) ── */}
       <header className="hidden lg:flex h-[68px] bg-white border-b border-gray-100 px-8 items-center justify-between sticky top-0 z-10 font-['Outfit']">
         <div>
           <h1 className="font-['Funnel_Display'] text-lg font-bold text-[#333733] leading-none">
@@ -127,10 +126,7 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      {/* ── Page body ── */}
       <div className="p-4 sm:p-6 lg:p-8 font-['Outfit']">
-
-        {/* Welcome banner */}
         <div
           className="rounded-[20px] lg:rounded-[24px] p-5 sm:p-6 lg:p-8 mb-6 lg:mb-8 relative overflow-hidden"
           style={{
@@ -163,7 +159,6 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* ── Stats grid ── */}
         <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 lg:gap-4 mb-6 lg:mb-8">
           {stats.map((stat) => (
             <div
@@ -185,7 +180,6 @@ export default function DashboardPage() {
           ))}
         </div>
 
-        {/* ── Quick actions ── */}
         <div>
           <div className="flex items-center justify-between mb-3 lg:mb-4">
             <h3 className="font-['Funnel_Display'] text-[#333733] font-bold text-base lg:text-lg">
@@ -215,7 +209,6 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* ── CMS notice ── */}
         <div className="mt-6 lg:mt-8 rounded-[16px] lg:rounded-[18px] border border-[#23B349]/20 bg-[#23B349]/5 px-4 lg:px-6 py-4 lg:py-5 flex items-center gap-3 lg:gap-4">
           <div className="w-9 h-9 lg:w-10 lg:h-10 rounded-[10px] lg:rounded-[12px] bg-[#23B349]/15 flex items-center justify-center shrink-0">
             <FileText size={17} className="text-[#23B349]" />

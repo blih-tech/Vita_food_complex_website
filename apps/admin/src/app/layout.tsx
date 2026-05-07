@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Outfit, Funnel_Display } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
-import DashboardLayout from "@/components/layout/DashboardLayout";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -27,12 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scribe-recorder-ready="true">
       <body className={`${outfit.variable} ${funnelDisplay.variable} antialiased`}>
         <AuthProvider>
-          <DashboardLayout>
-            {children}
-          </DashboardLayout>
+          {children}
         </AuthProvider>
       </body>
     </html>

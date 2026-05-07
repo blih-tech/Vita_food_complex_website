@@ -17,8 +17,12 @@ export function proxy(request: NextRequest) {
 
   const token = request.cookies.get('admin_token');
   const isLoginPage = pathname === '/login';
+  const protectedRoutes = ['/', '/pages', '/users', '/settings'];
+  const isProtectedRoute =
+    protectedRoutes.includes(pathname) ||
+    pathname.startsWith('/pages/');
 
-  if (!token && !isLoginPage) {
+  if (!token && isProtectedRoute) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 

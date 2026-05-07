@@ -14,19 +14,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    if (!loading && !user && pathname !== '/login') {
+    if (!loading && !user) {
       router.push('/login');
     }
-  }, [user, loading, router, pathname]);
+  }, [user, loading, router]);
 
   // Close drawer on every route change
   useEffect(() => {
     setSidebarOpen(false);
   }, [pathname]);
-
-  if (pathname === '/login') {
-    return <>{children}</>;
-  }
 
   if (loading || !user) {
     return (
@@ -50,7 +46,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       <main className="flex-1 lg:ml-64 min-w-0">
         {/* Mobile-only top bar */}
-        <header className="lg:hidden h-14 bg-white border-b border-gray-100 flex items-center justify-between px-4 sticky top-0 z-[5] font-['Outfit']">
+        <header className="lg:hidden h-14 bg-white border-b border-gray-100 flex items-center justify-between px-4 sticky top-0 z-5 font-['Outfit']">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setSidebarOpen(true)}
