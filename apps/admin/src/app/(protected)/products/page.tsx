@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Package, Plus, Pencil, Trash2, X } from "lucide-react";
 import {
   Certification,
@@ -119,6 +119,18 @@ function emptyUploadFiles(): ProductUploadFiles {
   };
 }
 
+function resolvePreviewUrl(file: File | null | undefined, fallback?: string): string {
+  if (file) return URL.createObjectURL(file);
+  return fallback ?? "";
+}
+
+function formatDate(value?: string): string {
+  if (!value) return "-";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "-";
+  return date.toLocaleDateString();
+}
+
 function ProductModal({
   title,
   value,
@@ -139,6 +151,14 @@ function ProductModal({
   submitting: boolean;
 }) {
   const [tab, setTab] = useState<TabId>("basic");
+  const imagePreview = useMemo(
+    () => resolvePreviewUrl(files.imageFile, value.media.image),
+    [files.imageFile, value.media.image],
+  );
+  const tagIconPreview = useMemo(
+    () => resolvePreviewUrl(files.tagIconFile, value.media.tagIcon),
+    [files.tagIconFile, value.media.tagIcon],
+  );
 
   const setContent = (patch: Partial<ProductPayload["content"]>) => {
     onChange({ ...value, content: { ...value.content, ...patch } });
@@ -283,8 +303,17 @@ function ProductModal({
                     })
                   }
                 />
-                {value.media.image ? (
-                  <p className="text-xs text-gray-400 mt-1">Current image is already set.</p>
+                {imagePreview ? (
+                  <div className="mt-2 flex items-center gap-3">
+                    <img
+                      src={imagePreview}
+                      alt="Product preview"
+                      className="w-16 h-16 rounded-lg object-cover border border-gray-200"
+                    />
+                    <p className="text-xs text-gray-500">
+                      {files.imageFile ? `Selected: ${files.imageFile.name}` : "Using current image"}
+                    </p>
+                  </div>
                 ) : null}
               </div>
               <div className="md:col-span-2">
@@ -302,6 +331,18 @@ function ProductModal({
                     })
                   }
                 />
+                {tagIconPreview ? (
+                  <div className="mt-2 flex items-center gap-3">
+                    <img
+                      src={tagIconPreview}
+                      alt="Tag icon preview"
+                      className="w-12 h-12 rounded-lg object-cover border border-gray-200"
+                    />
+                    <p className="text-xs text-gray-500">
+                      {files.tagIconFile ? `Selected: ${files.tagIconFile.name}` : "Using current tag icon"}
+                    </p>
+                  </div>
+                ) : null}
                 {value.media.tagIcon ? (
                   <button
                     type="button"
@@ -620,11 +661,20 @@ function ProductModal({
                       });
                     }}
                   />
-                  {row.image ? (
-                    <p className="w-full text-xs text-gray-400">
-                      Current certification image is already set.
-                    </p>
-                  ) : null}
+                  {(files.certificationFiles?.[idx] || row.image) && (
+                    <div className="w-full flex items-center gap-3">
+                      <img
+                        src={resolvePreviewUrl(files.certificationFiles?.[idx] ?? null, row.image)}
+                        alt={`${row.name || "Certification"} preview`}
+                        className="w-12 h-12 rounded-lg object-cover border border-gray-200"
+                      />
+                      <p className="text-xs text-gray-500">
+                        {files.certificationFiles?.[idx]
+                          ? `Selected: ${files.certificationFiles[idx]?.name ?? "image"}`
+                          : "Using current certification image"}
+                      </p>
+                    </div>
+                  )}
                   <button
                     type="button"
                     className="p-2 rounded-lg text-red-500 hover:bg-red-50"
@@ -691,6 +741,7 @@ export default function ProductsPage() {
   const [items, setItems] = useState<ProductItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [form, setForm] = useState<ProductPayload>(() => emptyForm());
   const [uploadFiles, setUploadFiles] = useState<ProductUploadFiles>(() =>
     emptyUploadFiles(),
@@ -700,8 +751,12 @@ export default function ProductsPage() {
 
   const load = async () => {
     setLoading(true);
+    setLoadError(null);
     try {
       setItems(await productsApi.list());
+    } catch (error) {
+      console.error(error);
+      setLoadError("Failed to load products. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -753,14 +808,25 @@ export default function ProductsPage() {
       setOpen(false);
       setUploadFiles(emptyUploadFiles());
       await load();
+    } catch (error) {
+      console.error(error);
+      window.alert("Failed to save product. Please check your input and try again.");
     } finally {
       setSubmitting(false);
     }
   };
 
   const remove = async (item: ProductItem) => {
-    await productsApi.remove(resolveItemKey(item));
-    await load();
+    if (!window.confirm(`Delete product "${item.name.en}"?`)) {
+      return;
+    }
+    try {
+      await productsApi.remove(resolveItemKey(item));
+      await load();
+    } catch (error) {
+      console.error(error);
+      window.alert("Failed to delete product.");
+    }
   };
 
   return (
@@ -779,12 +845,34 @@ export default function ProductsPage() {
           <div className="py-16 flex justify-center">
             <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#23B349]" />
           </div>
+        ) : loadError ? (
+          <div className="bg-red-50 border border-red-100 rounded-xl p-4 flex items-center justify-between">
+            <p className="text-sm text-red-700">{loadError}</p>
+            <button
+              onClick={load}
+              className="px-3 py-1.5 text-xs rounded-lg bg-white border border-red-200 text-red-700"
+            >
+              Retry
+            </button>
+          </div>
+        ) : items.length === 0 ? (
+          <div className="bg-white border border-gray-100 rounded-2xl p-10 text-center">
+            <Package className="mx-auto text-gray-300 mb-3" size={28} />
+            <h3 className="text-sm font-semibold text-[#333733]">No products yet</h3>
+            <p className="text-xs text-gray-500 mt-1">Create your first product to get started.</p>
+            <button
+              onClick={openCreate}
+              className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl text-white bg-[#23B349] text-sm font-semibold"
+            >
+              <Plus size={14} /> Add Product
+            </button>
+          </div>
         ) : (
           <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
-            <table className="w-full">
+            <table className="w-full min-w-[980px]">
               <thead className="border-b border-gray-100">
                 <tr>
-                  {["Product", "Category", "Status", "Actions"].map((h) => (
+                  {["Product", "Visual", "Category", "Details", "Status", "Updated", "Actions"].map((h) => (
                     <th key={h} className="text-left text-xs uppercase tracking-wide text-gray-400 px-5 py-4">
                       {h}
                     </th>
@@ -796,14 +884,47 @@ export default function ProductsPage() {
                   <tr key={item._id} className="border-b border-gray-50">
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-3">
-                        <Package size={16} className="text-[#23B349]" />
+                        <div className="w-9 h-9 rounded-lg border border-gray-100 overflow-hidden bg-gray-50 flex items-center justify-center">
+                          {item.media?.image ? (
+                            <img src={item.media.image} alt={item.name.en} className="w-full h-full object-cover" />
+                          ) : (
+                            <Package size={16} className="text-[#23B349]" />
+                          )}
+                        </div>
                         <div>
                           <p className="text-sm font-semibold text-[#333733]">{item.name.en}</p>
+                          <p className="text-xs text-gray-500">{item.name.am}</p>
                           <p className="text-xs text-gray-400">{resolveItemKey(item)}</p>
                         </div>
                       </div>
                     </td>
+                    <td className="px-5 py-4">
+                      <div className="flex items-center gap-2">
+                        <img
+                          src={item.media?.image || ""}
+                          alt={`${item.name.en} visual`}
+                          className="w-12 h-12 rounded-lg object-cover border border-gray-100"
+                        />
+                        {item.media?.tagIcon ? (
+                          <img
+                            src={item.media.tagIcon}
+                            alt={`${item.name.en} tag`}
+                            className="w-8 h-8 rounded-md object-cover border border-gray-100"
+                          />
+                        ) : (
+                          <span className="text-[11px] text-gray-400">No tag</span>
+                        )}
+                      </div>
+                    </td>
                     <td className="px-5 py-4 text-sm text-gray-500">{item.category}</td>
+                    <td className="px-5 py-4">
+                      <div className="space-y-1 text-xs text-gray-500">
+                        <p>Nutrition: {item.content?.nutrition?.items?.length ?? 0} items</p>
+                        <p>Ingredients: {item.content?.ingredients?.list?.length ?? 0} items</p>
+                        <p>Certs: {item.content?.certifications?.length ?? 0}</p>
+                        <p>Related: {item.relatedProducts?.length ?? 0}</p>
+                      </div>
+                    </td>
                     <td className="px-5 py-4 text-sm">
                       <span
                         className={`px-2 py-1 rounded-full text-xs font-semibold ${
@@ -815,6 +936,7 @@ export default function ProductsPage() {
                         {item.available ? "Available" : "Unavailable"}
                       </span>
                     </td>
+                    <td className="px-5 py-4 text-xs text-gray-500">{formatDate(item.updatedAt)}</td>
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-2">
                         <button
