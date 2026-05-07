@@ -1,42 +1,39 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
-import {
-  FileText,
-  Globe,
-  User,
-  Users,
-  Package,
-  ShoppingCart,
-  Copyright,
-  Lock,
-  ShieldAlert,
-  Mail,
-} from "lucide-react";
+import { FileText } from "lucide-react";
+import api from "@/lib/api";
+
+interface TermSection {
+  _id: string;
+  sectionId: string;
+  title: { en: string; am: string };
+  position: number;
+}
 
 export default function TermsSidebar() {
-  const [activeItem, setActiveItem] = useState("acceptance");
   const t = useTranslations("Terms.sidebar");
+  const params = useParams();
+  const lang = (params?.locale as string) === "am" ? "am" : "en";
+  const [sections, setSections] = useState<TermSection[]>([]);
+  const [activeItem, setActiveItem] = useState<string>("");
 
-  const NAV_ITEMS = [
-    { id: "acceptance", label: t("items.acceptance"), icon: FileText },
-    { id: "use", label: t("items.use"), icon: Globe },
-    { id: "content", label: t("items.content"), icon: User },
-    { id: "guidelines", label: t("items.guidelines"), icon: Users },
-    { id: "products", label: t("items.products"), icon: Package },
-    { id: "orders", label: t("items.orders"), icon: ShoppingCart },
-    { id: "ip", label: t("items.ip"), icon: Copyright },
-    { id: "privacy", label: t("items.privacy"), icon: Lock },
-    { id: "liability", label: t("items.liability"), icon: ShieldAlert },
-    { id: "contact", label: t("items.contact"), icon: Mail },
-  ];
+  useEffect(() => {
+    api.get<TermSection[]>("/terms")
+      .then((res) => {
+        setSections(res.data);
+        if (res.data.length > 0) setActiveItem(res.data[0].sectionId);
+      })
+      .catch(() => {});
+  }, []);
 
   const scrollToSection = (id: string) => {
     setActiveItem(id);
     const element = document.getElementById(id);
     if (element) {
-      const yOffset = -140; // Account for fixed header
+      const yOffset = -140;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
@@ -47,25 +44,24 @@ export default function TermsSidebar() {
       <h3 className="font-['Funnel_Display'] font-bold text-[#1F2937] text-[18px]">
         {t("title")}
       </h3>
-      
+
       <nav className="flex flex-col gap-2">
-        {NAV_ITEMS.map((item) => {
-          const isActive = activeItem === item.id;
+        {sections.map((section) => {
+          const isActive = activeItem === section.sectionId;
+          const label = section.title[lang] || section.title.en;
           return (
             <button
-              key={item.id}
-              onClick={() => scrollToSection(item.id)}
+              key={section._id}
+              onClick={() => scrollToSection(section.sectionId)}
               className={`flex items-center gap-4 px-4 py-3 rounded-[12px] transition-colors w-full text-left group ${
-                isActive 
-                  ? "bg-[#23B349] text-white" 
-                  : "hover:bg-gray-50 text-[#333733]"
+                isActive ? "bg-[#23B349] text-white" : "hover:bg-gray-50 text-[#333733]"
               }`}
             >
-              <item.icon 
-                className={`w-5 h-5 shrink-0 ${isActive ? "text-white" : "text-gray-500 group-hover:text-[#23B349] transition-colors"}`} 
+              <FileText
+                className={`w-5 h-5 shrink-0 ${isActive ? "text-white" : "text-gray-500 group-hover:text-[#23B349] transition-colors"}`}
               />
-              <span className={`font-['Outfit'] text-[16px] leading-none ${isActive ? "font-medium" : "font-normal"}`}>
-                {item.label}
+              <span className={`font-['Outfit'] text-[15px] leading-tight line-clamp-1 ${isActive ? "font-medium text-white" : "font-normal"}`}>
+                {label}
               </span>
             </button>
           );
