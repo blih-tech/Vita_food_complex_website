@@ -5,6 +5,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Menu, Bell } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import Sidebar from './Sidebar';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -75,8 +76,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <Bell size={16} className="text-gray-500" />
               <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#23B349] rounded-full" />
             </button>
-            <div
-              className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-sm"
+            <Link
+              href="/settings?tab=profile"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-sm hover:opacity-80 transition-opacity"
               style={{
                 background:
                   'radial-gradient(ellipse, rgba(31,214,80,1) 0%, rgba(35,179,73,1) 60%, rgba(116,255,56,1) 100%)',
@@ -84,7 +86,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               }}
             >
               {user?.name?.charAt(0).toUpperCase()}
-            </div>
+            </Link>
           </div>
         </header>
 

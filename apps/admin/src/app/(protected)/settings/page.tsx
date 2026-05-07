@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import {
   Settings, User, Globe, Link2, BarChart3,
   Save, Loader2, Check, Eye, EyeOff,
@@ -387,7 +388,10 @@ function ProfileTab() {
 // ── Page ───────────────────────────────────────────────────────────────────────
 
 export default function SettingsPage() {
-  const [tab, setTab] = useState<Tab>('site');
+  const searchParams = useSearchParams();
+  const [tab, setTab] = useState<Tab>(
+    searchParams.get('tab') === 'profile' ? 'profile' : 'site'
+  );
 
   const tabs: { key: Tab; label: string; icon: any }[] = [
     { key: 'site', label: 'Site Settings', icon: Globe },

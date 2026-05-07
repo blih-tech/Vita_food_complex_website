@@ -107,13 +107,13 @@ export default function DashboardPage() {
             <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#23B349] rounded-full" />
           </button>
 
-          <div className="flex items-center gap-2.5 pl-3 border-l border-gray-100">
+          <Link href="/settings?tab=profile" className="flex items-center gap-2.5 pl-3 border-l border-gray-100 group">
             <div className="text-right">
-              <p className="text-sm font-semibold text-[#333733] leading-none">{user?.name}</p>
+              <p className="text-sm font-semibold text-[#333733] group-hover:text-[#23B349] transition-colors leading-none">{user?.name}</p>
               <p className="text-[11px] text-gray-400 capitalize mt-0.5">{user?.role}</p>
             </div>
             <div
-              className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-sm"
+              className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-sm group-hover:opacity-80 transition-opacity"
               style={{
                 background:
                   'radial-gradient(ellipse, rgba(31,214,80,1) 0%, rgba(35,179,73,1) 60%, rgba(116,255,56,1) 100%)',
@@ -122,7 +122,7 @@ export default function DashboardPage() {
             >
               {user?.name?.charAt(0).toUpperCase()}
             </div>
-          </div>
+          </Link>
         </div>
       </header>
 
