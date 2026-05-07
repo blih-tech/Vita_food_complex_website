@@ -3,22 +3,20 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-// Certification logos
-const certLogos = [
-  {
-    alt: "Fortified Food",
-    src: "/assets/quality/figma/cert_1.png",
-    width: 150,
-  },
-  { alt: "EFDA", src: "/assets/quality/figma/cert_efda.png", width: 280 },
-  { alt: "LRQA", src: "/assets/quality/figma/cert_lrqa.png", width: 150 },
-  { alt: "ISO 9001", src: "/assets/quality/figma/cert_iso.png", width: 150 },
-  { alt: "EAS", src: "/assets/quality/figma/cert_eas.png", width: 320 },
+const DEFAULT_LOGOS = [
+  { alt: "Fortified Food", src: "/assets/quality/figma/cert_1.png",    width: 150 },
+  { alt: "EFDA",           src: "/assets/quality/figma/cert_efda.png", width: 280 },
+  { alt: "LRQA",           src: "/assets/quality/figma/cert_lrqa.png", width: 150 },
+  { alt: "ISO 9001",       src: "/assets/quality/figma/cert_iso.png",  width: 150 },
+  { alt: "EAS",            src: "/assets/quality/figma/cert_eas.png",  width: 320 },
 ];
 
 export default function PartnerSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Partner");
   const c = content?.[locale as string] || content?.en;
+  const certLogos = (c?.logos && c.logos.length > 0)
+    ? c.logos.map((l: any, i: number) => ({ alt: l.alt, src: l.url, width: DEFAULT_LOGOS[i]?.width || 150 }))
+    : DEFAULT_LOGOS;
 
   return (
     <section

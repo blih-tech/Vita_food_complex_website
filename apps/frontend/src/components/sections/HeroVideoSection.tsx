@@ -55,6 +55,7 @@ export default function HeroVideoSection({ content, locale }: { content?: any; l
   const c = content?.[locale as string] || content?.en;
   const secondaryQuote = c?.secondaryQuote || t("secondaryQuote");
   const ourClients = c?.ourClients || t("ourClients");
+  const videoThumbnail = c?.videoThumbnail || "/assets/hero/video-family.png";
 
   return (
     <section
@@ -115,7 +116,7 @@ export default function HeroVideoSection({ content, locale }: { content?: any; l
           <div className="relative z-10 mx-auto max-w-[1380px] px-1 sm:px-0">
             <div className="group relative aspect-video overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-[32px] border-4 border-white bg-[#404040] shadow-[0_20px_50px_rgba(0,0,0,0.35)] md:shadow-[0_30px_80px_rgba(0,0,0,0.35)] md:rounded-[48px] lg:rounded-[52px]">
               <Image
-                src="/assets/hero/video-family.png"
+                src={videoThumbnail}
                 alt="Family enjoying Vita"
                 fill
                 priority

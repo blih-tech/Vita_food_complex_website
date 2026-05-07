@@ -23,7 +23,7 @@ export default function MerchandiseSection({ content, locale }: { content?: any;
 
   const MERCH_ITEMS = MERCH_KEYS.map((key, i) => ({
     id: i + 1,
-    image: MERCH_IMAGES[i],
+    image: c?.items?.[i]?.image || MERCH_IMAGES[i],
     title: c?.items?.[i]?.title || t(`items.${key}.title`),
     desc: c?.items?.[i]?.desc || t(`items.${key}.desc`),
     bg: MERCH_BGS[i],

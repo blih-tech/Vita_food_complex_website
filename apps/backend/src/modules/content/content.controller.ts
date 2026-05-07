@@ -1,12 +1,21 @@
-import { Controller, Get, Post, Body, Param, Put, Patch, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller, Get, Post, Body, Param, Put, Patch, Delete,
+  UseGuards, UploadedFile, UseInterceptors,
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { memoryStorage } from 'multer';
 import { ContentService } from './content.service';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../../common/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
 
 @Controller('content')
 export class ContentController {
-  constructor(private readonly contentService: ContentService) {}
+  constructor(
+    private readonly contentService: ContentService,
+    private readonly cloudinaryService: CloudinaryService,
+  ) {}
 
   @Get('pages')
   async findAll() {
@@ -48,6 +57,18 @@ export class ContentController {
   @Roles('admin')
   async upsert(@Body() pageData: any) {
     return this.contentService.upsert(pageData.slug, pageData);
+  }
+
+  @Post('upload-image')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
+  @UseInterceptors(FileInterceptor('file', { storage: memoryStorage() }))
+  async uploadImage(@UploadedFile() file: Express.Multer.File) {
+    const result = await this.cloudinaryService.uploadBuffer(file.buffer, {
+      folder: 'vita/home',
+      resource_type: 'image',
+    });
+    return { url: result.url, publicId: result.publicId };
   }
 
   @Delete('pages/:slug')

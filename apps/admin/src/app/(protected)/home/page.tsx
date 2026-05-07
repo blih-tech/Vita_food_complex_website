@@ -5,7 +5,9 @@ import {
   Newspaper, Play, ShoppingBag, Cookie, UtensilsCrossed,
   BarChart3, ShoppingCart, Share2, Award, Edit3, CheckCircle,
   RefreshCw, AlertCircle, X, Globe, ChevronDown, ChevronUp,
+  ImagePlus, Loader2,
 } from "lucide-react";
+import Image from "next/image";
 import api from "@/lib/api";
 
 // ── Types ──────────────────────────────────────────────────────────────────
@@ -24,18 +26,18 @@ interface PageData {
 
 // ── Section metadata ───────────────────────────────────────────────────────
 const SECTION_META: Record<string, { name: string; icon: any; description: string; readOnly?: boolean }> = {
-  hero:          { name: "Hero Banner",      icon: Newspaper,      description: "Main headline and call-to-action buttons" },
-  "hero-video":  { name: "Video Showcase",   icon: Play,           description: "Secondary quote and video section" },
-  products:      { name: "Products Section", icon: ShoppingBag,    description: "Auto-populated from the Products catalogue", readOnly: true },
-  "biscuit-brand":{ name: "Biscuit Brands",  icon: Cookie,         description: "Brand carousel, tagline and CTA" },
-  recipes:       { name: "Recipes",          icon: UtensilsCrossed,description: "5 featured recipe cards with titles and descriptions" },
-  "quick-facts": { name: "Quick Facts",      icon: BarChart3,      description: "Key statistics and numbers" },
-  merchandise:   { name: "Merchandise",      icon: ShoppingCart,   description: "Vita merchandise items and heading" },
-  "social-wall": { name: "Social Wall",      icon: Share2,         description: "Social media section heading and CTA" },
-  partners:      { name: "Partners",         icon: Award,          description: "Certifications and partners section header" },
+  hero:           { name: "Hero Banner",      icon: Newspaper,      description: "Main headline and call-to-action buttons" },
+  "hero-video":   { name: "Video Showcase",   icon: Play,           description: "Secondary quote and video section" },
+  products:       { name: "Products Section", icon: ShoppingBag,    description: "Auto-populated from the Products catalogue", readOnly: true },
+  "biscuit-brand":{ name: "Biscuit Brands",   icon: Cookie,         description: "Brand carousel, tagline and CTA" },
+  recipes:        { name: "Recipes",          icon: UtensilsCrossed,description: "5 featured recipe cards with titles and descriptions" },
+  "quick-facts":  { name: "Quick Facts",      icon: BarChart3,      description: "Key statistics and numbers" },
+  merchandise:    { name: "Merchandise",      icon: ShoppingCart,   description: "Vita merchandise items and heading" },
+  "social-wall":  { name: "Social Wall",      icon: Share2,         description: "Social media section heading, CTA, and images" },
+  partners:       { name: "Partners",         icon: Award,          description: "Certifications and partners section header" },
 };
 
-// ── Default page data (for first-time initialization) ─────────────────────
+// ── Default page data ──────────────────────────────────────────────────────
 const DEFAULT_PAGE: PageData = {
   slug: "home",
   title: { en: "Home", am: "መነሻ" },
@@ -47,18 +49,64 @@ const DEFAULT_PAGE: PageData = {
     { id: "recipes",       type: "recipes",       content: { en: { label: "Our Recipes Made Simple", heading: "Mix. Match. Enjoy", items: [{ title: "Creamy Delights", description: "Experience the rich, velvety texture of our signature cream biscuits." }, { title: "Oreo Moments", description: "Perfectly balanced chocolate and cream for your tea time." }, { title: "Sweet Bites", description: "Small, crunchy treats that bring big smiles to everyone." }, { title: "Morning Fresh", description: "Start your day with our high-quality wheat flour bakes." }, { title: "Baker's Secret", description: "The secret ingredient to all your favorite home recipes." }] }, am: { label: "ምግብ አዘገጃጀቶቻችን በቀላሉ", heading: "ይቀላቅሉ:: ያዛምዱ:: ይደሰቱ", items: [{ title: "ክሬም ደስታ", description: "የእኛን ልዩ የክሬም ቢስኩቶች የበለፀገ እና ለስላሳ ይዘት ይለማመዱ::" }, { title: "የኦሪዮ ጊዜያት", description: "ለሻይ ሰዓትዎ ፍጹም የተመጣጠነ ቸኮሌት እና ክሬም::" }, { title: "ጣፋጭ ንክሻዎች", description: "ለሁሉም ሰው ትልቅ ፈገግታ የሚያመጡ ትናንሽ እና ጥራጥሬ ጣፋጮች::" }, { title: "የጠዋት ትኩስነት", description: "ቀንዎን በከፍተኛ ጥራት ባለው የስንዴ ዱቄት መጋገሪያዎቻችን ይጀምሩ::" }, { title: "የጋጋሪው ምስጢር", description: "ለሁሉም ተወዳጅ የቤት ውስጥ ምግብ አዘገጃጀቶችዎ ምስጢራዊ ግብዓት::" }] } } },
     { id: "quick-facts",   type: "quick-facts",   content: { en: { label: "Quick Fact", facts: [{ id: "skus", value: "+11", label: "Unique SKUs" }, { id: "flour", value: "60tn", label: "Flour Production/Day" }, { id: "jobs", value: "+200", label: "Jobs Created" }, { id: "biscuits", value: "2tn", label: "Biscuits/Hour" }, { id: "investment", value: "$1.4M", value2: "Br210M", label: "Total Investment" }, { id: "factorySize", value: "22Km²", label: "Factory Size" }] }, am: { label: "ፈጣን እውነታ", facts: [{ id: "skus", value: "+11", label: "ልዩ ምርቶች" }, { id: "flour", value: "60tn", label: "በቀን የሚመረት የዱቄት መጠን" }, { id: "jobs", value: "+200", label: "የተፈጠሩ የስራ እድሎች" }, { id: "biscuits", value: "2tn", label: "በሰዓት የሚመረቱ ቢስኩቶች" }, { id: "investment", value: "$1.4M", value2: "Br210M", label: "ጠቅላላ ኢንቨስትመንት" }, { id: "factorySize", value: "22Km²", label: "የፋብሪካው ስፋት" }] } } },
     { id: "merchandise",   type: "merchandise",   content: { en: { label: "Merchandise", heading: "Vita Style", items: [{ title: "Necklace", desc: "Stylish Vita Necklace" }, { title: "Cap", desc: "Classic Vita Cap" }, { title: "T-Shirt", desc: "Comfortable Vita T-Shirt" }, { title: "Sweater", desc: "Warm Vita Sweater" }, { title: "Signature Cap", desc: "Premium Vita Cap" }, { title: "Badge", desc: "Vita Special Badge" }] }, am: { label: "የመታሰቢያ ዕቃዎች", heading: "የቪታ ስታይል", items: [{ title: "ሐብል", desc: "ቆንጆ የቪታ ሐብል" }, { title: "ቆብ", desc: "ክላሲክ የቪታ ቆብ" }, { title: "ቲ-ሸርት", desc: "ምቹ የቪታ ቲ-ሸርት" }, { title: "ሹራብ", desc: "ሞቅ ያለ የቪታ ሹራብ" }, { title: "ፊርማ ቆብ", desc: "ልዩ የቪታ ቆብ" }, { title: "ባጅ", desc: "የቪታ ልዩ ባጅ" }] } } },
-    { id: "social-wall",   type: "social-wall",   content: { en: { label: "Social Wall", heading: "Join the Conversation", cta: "Explore More" }, am: { label: "ማህበራዊ ግድግዳ", heading: "ውይይቱን ይቀላቀሉ", cta: "ተጨማሪ ያስሱ" } } },
-    { id: "partners",      type: "partners",      content: { en: { subtitle: "Our Partners", heading: "Trusted by Experts" }, am: { subtitle: "አጋሮቻችን", heading: "በባለሙያዎች የታመነ" } } },
+    { id: "social-wall",   type: "social-wall",   content: { en: { label: "Social Wall", heading: "Join the Conversation", cta: "Explore More", images: [] }, am: { label: "ማህበራዊ ግድግዳ", heading: "ውይይቱን ይቀላቀሉ", cta: "ተጨማሪ ያስሱ", images: [] } } },
+    { id: "partners",      type: "partners",      content: { en: { subtitle: "Our Partners", heading: "Trusted by Experts", logos: [] }, am: { subtitle: "አጋሮቻችን", heading: "በባለሙያዎች የታመነ", logos: [] } } },
   ],
 };
 
-// ── Helper ─────────────────────────────────────────────────────────────────
+// ── Helpers ────────────────────────────────────────────────────────────────
 function getPreview(section: Section): string {
   if (!section.content) return "";
   const en = section.content.en || section.content;
   const fields = [en.heading, en.title, en.stylishWayPart1, en.secondaryQuote, en.label, en.subtitle];
   const text = fields.find(Boolean) || "";
   return text.length > 60 ? text.slice(0, 60) + "…" : text;
+}
+
+// ── ImageUploadField ───────────────────────────────────────────────────────
+function ImageUploadField({
+  uploadKey,
+  currentUrl,
+  uploading,
+  onFileSelected,
+}: {
+  uploadKey: string;
+  currentUrl: string;
+  uploading: boolean;
+  onFileSelected: (file: File) => void;
+}) {
+  return (
+    <div className="flex items-center gap-3 mt-2">
+      {currentUrl ? (
+        <div className="relative w-14 h-14 rounded-[10px] overflow-hidden border border-gray-200 shrink-0">
+          <Image src={currentUrl} alt="preview" fill className="object-cover" unoptimized />
+        </div>
+      ) : (
+        <div className="w-14 h-14 rounded-[10px] bg-gray-100 border border-dashed border-gray-300 flex items-center justify-center shrink-0">
+          <ImagePlus size={18} className="text-gray-400" />
+        </div>
+      )}
+      <div className="flex-1 min-w-0">
+        <label className="inline-flex items-center gap-2 px-3 py-2 rounded-[10px] text-xs font-semibold border border-gray-200 hover:bg-gray-50 transition-colors text-gray-600 cursor-pointer">
+          {uploading ? <Loader2 size={13} className="animate-spin" /> : <ImagePlus size={13} />}
+          {uploading ? "Uploading…" : "Change Image"}
+          <input
+            type="file"
+            accept="image/*"
+            className="hidden"
+            disabled={uploading}
+            onChange={e => {
+              const file = e.target.files?.[0];
+              if (file) onFileSelected(file);
+            }}
+          />
+        </label>
+        {currentUrl && (
+          <p className="text-[10px] text-gray-400 mt-1 truncate">{currentUrl.split("/").pop()}</p>
+        )}
+      </div>
+    </div>
+  );
 }
 
 // ── Edit Modal ─────────────────────────────────────────────────────────────
@@ -75,6 +123,7 @@ function EditModal({
 }) {
   const [lang, setLang] = useState<"en" | "am">("en");
   const [form, setForm] = useState<any>(() => JSON.parse(JSON.stringify(section.content || {})));
+  const [uploading, setUploading] = useState<string | null>(null);
 
   const set = (path: string[], value: string) => {
     setForm((prev: any) => {
@@ -89,16 +138,46 @@ function EditModal({
     });
   };
 
-  const meta = SECTION_META[section.type] || { name: section.type };
+  // Update a field in BOTH locales (for locale-agnostic images)
+  const setBoth = (enPath: string[], amPath: string[], value: string) => {
+    setForm((prev: any) => {
+      const next = JSON.parse(JSON.stringify(prev));
+      const setPath = (obj: any, path: string[]) => {
+        let cur = obj;
+        for (let i = 0; i < path.length - 1; i++) {
+          if (!cur[path[i]]) cur[path[i]] = {};
+          cur = cur[path[i]];
+        }
+        cur[path[path.length - 1]] = value;
+      };
+      setPath(next, enPath);
+      setPath(next, amPath);
+      return next;
+    });
+  };
 
+  const uploadImage = async (key: string, file: File, onUrl: (url: string) => void) => {
+    setUploading(key);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      const { data } = await api.post("/content/upload-image", fd, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      onUrl(data.url);
+    } finally {
+      setUploading(null);
+    }
+  };
+
+  const meta = SECTION_META[section.type] || { name: section.type };
   const inputCls = "w-full border border-gray-200 rounded-[10px] px-3 py-2 text-sm text-[#333733] focus:outline-none focus:ring-2 focus:ring-[#23B349]/30 focus:border-[#23B349] transition-colors";
   const textareaCls = inputCls + " resize-none";
   const labelCls = "block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide";
-
   const L = (label: string) => <label className={labelCls}>{label}</label>;
+  const l = lang;
 
   const renderFields = () => {
-    const l = lang;
     switch (section.type) {
       case "hero":
         return (
@@ -133,6 +212,15 @@ function EditModal({
               {L("Client Label")}
               <input className={inputCls} value={form[l]?.ourClients || ""} onChange={e => set([l, "ourClients"], e.target.value)} />
             </div>
+            <div className="border-t border-gray-100 pt-3">
+              {L("Video Thumbnail Image")}
+              <ImageUploadField
+                uploadKey="videoThumbnail"
+                currentUrl={form.en?.videoThumbnail || ""}
+                uploading={uploading === "videoThumbnail"}
+                onFileSelected={file => uploadImage("videoThumbnail", file, url => setBoth(["en", "videoThumbnail"], ["am", "videoThumbnail"], url))}
+              />
+            </div>
           </div>
         );
 
@@ -159,7 +247,18 @@ function EditModal({
         );
 
       case "recipes": {
-        const items = form[l]?.items || Array.from({ length: 5 }, () => ({ title: "", description: "" }));
+        const items = form[l]?.items || Array.from({ length: 5 }, () => ({ title: "", description: "", image: "" }));
+        const updateBothItems = (i: number, field: string, val: string) => {
+          setForm((prev: any) => {
+            const next = JSON.parse(JSON.stringify(prev));
+            (["en", "am"] as const).forEach(lng => {
+              if (!next[lng]) next[lng] = {};
+              if (!next[lng].items) next[lng].items = Array.from({ length: 5 }, () => ({}));
+              next[lng].items[i] = { ...(next[lng].items[i] || {}), [field]: val };
+            });
+            return next;
+          });
+        };
         return (
           <div className="space-y-4">
             <div>
@@ -180,6 +279,7 @@ function EditModal({
                     item={item}
                     inputCls={inputCls}
                     textareaCls={textareaCls}
+                    uploading={uploading === `recipe${i}`}
                     onChange={(field, val) => {
                       const newItems = JSON.parse(JSON.stringify(items));
                       newItems[i][field] = val;
@@ -190,6 +290,7 @@ function EditModal({
                         return next;
                       });
                     }}
+                    onImageUpload={file => uploadImage(`recipe${i}`, file, url => updateBothItems(i, "image", url))}
                   />
                 ))}
               </div>
@@ -233,8 +334,19 @@ function EditModal({
       }
 
       case "merchandise": {
-        const items = form[l]?.items || Array.from({ length: 6 }, () => ({ title: "", desc: "" }));
+        const items = form[l]?.items || Array.from({ length: 6 }, () => ({ title: "", desc: "", image: "" }));
         const labels = ["Necklace", "Cap", "T-Shirt", "Sweater", "Signature Cap", "Badge"];
+        const updateBothMerchItems = (i: number, field: string, val: string) => {
+          setForm((prev: any) => {
+            const next = JSON.parse(JSON.stringify(prev));
+            (["en", "am"] as const).forEach(lng => {
+              if (!next[lng]) next[lng] = {};
+              if (!next[lng].items) next[lng].items = Array.from({ length: 6 }, () => ({}));
+              next[lng].items[i] = { ...(next[lng].items[i] || {}), [field]: val };
+            });
+            return next;
+          });
+        };
         return (
           <div className="space-y-4">
             <div>
@@ -267,6 +379,15 @@ function EditModal({
                         setForm((prev: any) => { const next = JSON.parse(JSON.stringify(prev)); if (!next[l]) next[l] = {}; next[l].items = ni; return next; });
                       }} />
                     </div>
+                    <div>
+                      <label className="text-xs text-gray-500 mb-0.5 block">Image</label>
+                      <ImageUploadField
+                        uploadKey={`merch${i}`}
+                        currentUrl={form.en?.items?.[i]?.image || ""}
+                        uploading={uploading === `merch${i}`}
+                        onFileSelected={file => uploadImage(`merch${i}`, file, url => updateBothMerchItems(i, "image", url))}
+                      />
+                    </div>
                   </div>
                 ))}
               </div>
@@ -275,7 +396,8 @@ function EditModal({
         );
       }
 
-      case "social-wall":
+      case "social-wall": {
+        const images: string[] = form.en?.images || Array.from({ length: 8 }, () => "");
         return (
           <div className="space-y-4">
             <div>
@@ -290,10 +412,43 @@ function EditModal({
               {L("CTA Button")}
               <input className={inputCls} value={form[l]?.cta || ""} onChange={e => set([l, "cta"], e.target.value)} />
             </div>
+            <div className="border-t border-gray-100 pt-4">
+              <p className={labelCls}>Social Images (8 photos)</p>
+              <div className="space-y-2">
+                {images.map((img: string, i: number) => (
+                  <div key={i} className="flex items-center gap-3 bg-gray-50 rounded-[10px] px-3 py-2">
+                    <span className="text-xs font-semibold text-gray-400 w-16 shrink-0">Image {i + 1}</span>
+                    <div className="flex-1">
+                      <ImageUploadField
+                        uploadKey={`social${i}`}
+                        currentUrl={img || ""}
+                        uploading={uploading === `social${i}`}
+                        onFileSelected={file => uploadImage(`social${i}`, file, url => {
+                          setForm((prev: any) => {
+                            const next = JSON.parse(JSON.stringify(prev));
+                            (["en", "am"] as const).forEach(lng => {
+                              if (!next[lng]) next[lng] = {};
+                              if (!next[lng].images) next[lng].images = Array.from({ length: 8 }, () => "");
+                              next[lng].images[i] = url;
+                            });
+                            return next;
+                          });
+                        })}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         );
+      }
 
-      case "partners":
+      case "partners": {
+        const logos: { alt: string; url: string }[] = form.en?.logos && form.en.logos.length > 0
+          ? form.en.logos
+          : Array.from({ length: 5 }, () => ({ alt: "", url: "" }));
+        const logoNames = ["Fortified Food", "EFDA", "LRQA", "ISO 9001", "EAS"];
         return (
           <div className="space-y-4">
             <div>
@@ -304,8 +459,59 @@ function EditModal({
               {L("Heading")}
               <input className={inputCls} value={form[l]?.heading || ""} onChange={e => set([l, "heading"], e.target.value)} />
             </div>
+            <div className="border-t border-gray-100 pt-4">
+              <p className={labelCls}>Certification Logos</p>
+              <div className="space-y-3">
+                {logos.map((logo: any, i: number) => (
+                  <div key={i} className="bg-gray-50 rounded-[10px] p-3 space-y-2">
+                    <p className="text-xs font-bold text-gray-400 uppercase">{logoNames[i]}</p>
+                    <div>
+                      <label className="text-xs text-gray-500 mb-0.5 block">Alt Text</label>
+                      <input
+                        className={inputCls}
+                        value={logo.alt || ""}
+                        onChange={e => {
+                          const altVal = e.target.value;
+                          setForm((prev: any) => {
+                            const next = JSON.parse(JSON.stringify(prev));
+                            (["en", "am"] as const).forEach(lng => {
+                              if (!next[lng]) next[lng] = {};
+                              if (!next[lng].logos || next[lng].logos.length < 5)
+                                next[lng].logos = Array.from({ length: 5 }, (_, idx) => logos[idx] || { alt: "", url: "" });
+                              next[lng].logos[i] = { ...(next[lng].logos[i] || {}), alt: altVal };
+                            });
+                            return next;
+                          });
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs text-gray-500 mb-0.5 block">Logo Image</label>
+                      <ImageUploadField
+                        uploadKey={`logo${i}`}
+                        currentUrl={logo.url || ""}
+                        uploading={uploading === `logo${i}`}
+                        onFileSelected={file => uploadImage(`logo${i}`, file, url => {
+                          setForm((prev: any) => {
+                            const next = JSON.parse(JSON.stringify(prev));
+                            (["en", "am"] as const).forEach(lng => {
+                              if (!next[lng]) next[lng] = {};
+                              if (!next[lng].logos || next[lng].logos.length < 5)
+                                next[lng].logos = Array.from({ length: 5 }, (_, idx) => logos[idx] || { alt: "", url: "" });
+                              next[lng].logos[i] = { ...(next[lng].logos[i] || {}), url };
+                            });
+                            return next;
+                          });
+                        })}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         );
+      }
 
       default:
         return <p className="text-sm text-gray-400">No editable fields for this section.</p>;
@@ -330,18 +536,18 @@ function EditModal({
 
         {/* Language Tabs */}
         <div className="px-6 pt-4 flex gap-2">
-          {(["en", "am"] as const).map(l => (
+          {(["en", "am"] as const).map(tabLang => (
             <button
-              key={l}
-              onClick={() => setLang(l)}
+              key={tabLang}
+              onClick={() => setLang(tabLang)}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-[10px] text-sm font-semibold transition-colors ${
-                lang === l
+                lang === tabLang
                   ? "bg-[#23B349] text-white"
                   : "bg-gray-100 text-gray-500 hover:bg-gray-200"
               }`}
             >
               <Globe size={13} />
-              {l === "en" ? "English" : "አማርኛ"}
+              {tabLang === "en" ? "English" : "አማርኛ"}
             </button>
           ))}
         </div>
@@ -371,9 +577,16 @@ function EditModal({
 }
 
 // ── Sub-form components ────────────────────────────────────────────────────
-function RecipeItemField({ index, item, inputCls, textareaCls, onChange }: {
-  index: number; item: any; inputCls: string; textareaCls: string;
+function RecipeItemField({
+  index, item, inputCls, textareaCls, uploading, onChange, onImageUpload,
+}: {
+  index: number;
+  item: any;
+  inputCls: string;
+  textareaCls: string;
+  uploading: boolean;
   onChange: (field: string, val: string) => void;
+  onImageUpload: (file: File) => void;
 }) {
   const [open, setOpen] = useState(false);
   return (
@@ -392,6 +605,15 @@ function RecipeItemField({ index, item, inputCls, textareaCls, onChange }: {
             <label className="text-xs text-gray-500 mb-0.5 block">Description</label>
             <textarea rows={2} className={textareaCls} value={item.description || ""} onChange={e => onChange("description", e.target.value)} />
           </div>
+          <div>
+            <label className="text-xs text-gray-500 mb-0.5 block">Card Image</label>
+            <ImageUploadField
+              uploadKey={`recipe${index}`}
+              currentUrl={item.image || ""}
+              uploading={uploading}
+              onFileSelected={onImageUpload}
+            />
+          </div>
         </div>
       )}
     </div>
@@ -399,7 +621,8 @@ function RecipeItemField({ index, item, inputCls, textareaCls, onChange }: {
 }
 
 function FactField({ fact, inputCls, onChange }: {
-  fact: any; inputCls: string;
+  fact: any;
+  inputCls: string;
   onChange: (field: string, val: string) => void;
 }) {
   const FACT_NAMES: Record<string, string> = {
@@ -502,7 +725,7 @@ export default function HomeAdminPage() {
         <div className="flex items-start justify-between">
           <div>
             <h1 className="font-['Funnel_Display'] font-bold text-[28px] text-[#1F2937]">Home Page</h1>
-            <p className="text-sm text-gray-400 mt-1">Edit the text content for each section of the landing page.</p>
+            <p className="text-sm text-gray-400 mt-1">Edit text and images for each section of the landing page.</p>
           </div>
           {page && (
             <button
@@ -554,17 +777,12 @@ export default function HomeAdminPage() {
                 key={section.id}
                 className={`bg-white rounded-[16px] border border-gray-100 p-5 flex items-center gap-4 shadow-sm transition-shadow hover:shadow-md ${isReadOnly ? "opacity-60" : ""}`}
               >
-                {/* Order badge */}
                 <div className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-400 shrink-0">
                   {index + 1}
                 </div>
-
-                {/* Icon */}
                 <div className="w-10 h-10 rounded-[12px] bg-[#23B349]/10 flex items-center justify-center shrink-0">
                   <Icon size={18} className="text-[#23B349]" />
                 </div>
-
-                {/* Info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <p className="font-semibold text-[#1F2937] text-sm">{meta?.name || section.type}</p>
@@ -574,8 +792,6 @@ export default function HomeAdminPage() {
                   </div>
                   <p className="text-xs text-gray-400 mt-0.5 truncate">{preview || meta?.description}</p>
                 </div>
-
-                {/* Edit button */}
                 {!isReadOnly && (
                   <button
                     onClick={() => setEditSection(section)}

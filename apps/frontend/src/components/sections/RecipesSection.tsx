@@ -46,7 +46,7 @@ const recipes = [
 export default function RecipesSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Recipes");
   const c = content?.[locale as string] || content?.en;
-  const t_items = (c?.items || t.raw("items")) as { title: string; description: string }[];
+  const t_items = (c?.items || t.raw("items")) as { title: string; description: string; image?: string }[];
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -94,7 +94,7 @@ export default function RecipesSection({ content, locale }: { content?: any; loc
               {/* Image Area */}
               <div className="relative w-full h-[58%] bg-gradient-to-b from-gray-700 to-gray-900 flex items-center justify-center p-4 sm:p-6 md:p-8">
                 <Image
-                  src={recipe.image}
+                  src={t_items[index]?.image || recipe.image}
                   alt={t_items[index]?.title || recipe.title}
                   fill
                   className="object-contain p-4 sm:p-6 group-hover:scale-110 transition-transform duration-700"
