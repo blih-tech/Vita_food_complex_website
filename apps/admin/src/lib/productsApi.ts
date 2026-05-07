@@ -62,15 +62,54 @@ export interface ProductItem extends ProductPayload {
   updatedAt: string;
 }
 
+export interface ProductUploadFiles {
+  imageFile?: File | null;
+  tagIconFile?: File | null;
+  certificationFiles?: Array<File | null>;
+}
+
+function buildProductFormData(
+  payload: ProductPayload | Partial<ProductPayload>,
+  files?: ProductUploadFiles,
+) {
+  const formData = new FormData();
+  formData.append("payload", JSON.stringify(payload));
+
+  if (files?.imageFile) {
+    formData.append("image", files.imageFile);
+  }
+  if (files?.tagIconFile) {
+    formData.append("tagIcon", files.tagIconFile);
+  }
+  files?.certificationFiles?.forEach((file, idx) => {
+    if (file) {
+      formData.append(`certificationImages[${idx}]`, file);
+    }
+  });
+
+  return formData;
+}
+
 export const productsApi = {
   list: async () => (await api.get<ProductItem[]>("/products")).data,
-  create: async (payload: ProductPayload) =>
-    (await api.post<ProductItem>("/products", payload)).data,
-  update: async (slugOrId: string, payload: Partial<ProductPayload>) =>
+  create: async (payload: ProductPayload, files?: ProductUploadFiles) =>
+    (
+      await api.post<ProductItem>("/products", buildProductFormData(payload, files), {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+    ).data,
+  update: async (
+    slugOrId: string,
+    payload: Partial<ProductPayload>,
+    files?: ProductUploadFiles,
+  ) =>
     (
       await api.put<ProductItem>(
         `/products/${encodeURIComponent(slugOrId)}`,
-        payload,
+        buildProductFormData(payload, files),
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        },
       )
     ).data,
   remove: async (slugOrId: string) =>

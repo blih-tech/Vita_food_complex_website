@@ -10,6 +10,7 @@ import {
   NutritionUnit,
   ProductItem,
   ProductPayload,
+  ProductUploadFiles,
   productsApi,
 } from "@/lib/productsApi";
 
@@ -110,22 +111,32 @@ function parseCommaList(s: string): string[] {
     .filter(Boolean);
 }
 
+function emptyUploadFiles(): ProductUploadFiles {
+  return {
+    imageFile: null,
+    tagIconFile: null,
+    certificationFiles: [],
+  };
+}
+
 function ProductModal({
   title,
   value,
+  files,
   onChange,
+  onFilesChange,
   onClose,
   onSubmit,
   submitting,
-  editingId,
 }: {
   title: string;
   value: ProductPayload;
+  files: ProductUploadFiles;
   onChange: (next: ProductPayload) => void;
+  onFilesChange: (next: ProductUploadFiles) => void;
   onClose: () => void;
   onSubmit: () => void;
   submitting: boolean;
-  editingId: string | null;
 }) {
   const [tab, setTab] = useState<TabId>("basic");
 
@@ -199,12 +210,6 @@ function ProductModal({
         <div className="p-5 overflow-y-auto flex-1 min-h-0 space-y-4">
           {tab === "basic" && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {editingId && (
-                <div className="md:col-span-2">
-                  <label className="block text-xs font-semibold text-gray-500 mb-1">Mongo _id (read-only)</label>
-                  <input className={`${inputCls} bg-gray-100 text-gray-500`} readOnly value={editingId} />
-                </div>
-              )}
               <div className="md:col-span-2">
                 <label className="block text-xs font-semibold text-[#333733] mb-1">
                   Slug <span className="text-red-500">*</span>
@@ -265,26 +270,52 @@ function ProductModal({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div className="md:col-span-2">
                 <label className="block text-xs font-semibold text-[#333733] mb-1">
-                  Image URL <span className="text-red-500">*</span>
+                  Product image file <span className="text-red-500">*</span>
                 </label>
                 <input
+                  type="file"
+                  accept="image/*"
                   className={inputCls}
-                  value={value.media.image}
-                  onChange={(e) => onChange({ ...value, media: { ...value.media, image: e.target.value } })}
-                />
-              </div>
-              <div className="md:col-span-2">
-                <label className="block text-xs font-semibold text-[#333733] mb-1">Tag icon URL</label>
-                <input
-                  className={inputCls}
-                  value={value.media.tagIcon ?? ""}
                   onChange={(e) =>
-                    onChange({
-                      ...value,
-                      media: { ...value.media, tagIcon: e.target.value || undefined },
+                    onFilesChange({
+                      ...files,
+                      imageFile: e.target.files?.[0] ?? null,
                     })
                   }
                 />
+                {value.media.image ? (
+                  <p className="text-xs text-gray-400 mt-1">Current image is already set.</p>
+                ) : null}
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-xs font-semibold text-[#333733] mb-1">
+                  Tag icon file (optional)
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  className={inputCls}
+                  onChange={(e) =>
+                    onFilesChange({
+                      ...files,
+                      tagIconFile: e.target.files?.[0] ?? null,
+                    })
+                  }
+                />
+                {value.media.tagIcon ? (
+                  <button
+                    type="button"
+                    className="mt-2 text-xs text-red-500 hover:underline"
+                    onClick={() =>
+                      onChange({
+                        ...value,
+                        media: { ...value.media, tagIcon: undefined },
+                      })
+                    }
+                  >
+                    Remove current tag icon
+                  </button>
+                ) : null}
               </div>
             </div>
           )}
@@ -577,23 +608,37 @@ function ProductModal({
                     }}
                   />
                   <input
-                    className={`${inputCls} flex-1 min-w-[160px]`}
-                    placeholder="Image URL"
-                    value={row.image}
+                    type="file"
+                    accept="image/*"
+                    className={`${inputCls} flex-1 min-w-[180px]`}
                     onChange={(e) => {
-                      const next = [...certifications];
-                      next[idx] = { ...row, image: e.target.value };
-                      setContent({ certifications: next });
+                      const nextCertFiles = [...(files.certificationFiles ?? [])];
+                      nextCertFiles[idx] = e.target.files?.[0] ?? null;
+                      onFilesChange({
+                        ...files,
+                        certificationFiles: nextCertFiles,
+                      });
                     }}
                   />
+                  {row.image ? (
+                    <p className="w-full text-xs text-gray-400">
+                      Current certification image is already set.
+                    </p>
+                  ) : null}
                   <button
                     type="button"
                     className="p-2 rounded-lg text-red-500 hover:bg-red-50"
-                    onClick={() =>
+                    onClick={() => {
                       setContent({
                         certifications: certifications.filter((_, i) => i !== idx),
-                      })
-                    }
+                      });
+                      const nextCertFiles = [...(files.certificationFiles ?? [])];
+                      nextCertFiles.splice(idx, 1);
+                      onFilesChange({
+                        ...files,
+                        certificationFiles: nextCertFiles,
+                      });
+                    }}
                   >
                     <Trash2 size={16} />
                   </button>
@@ -647,6 +692,9 @@ export default function ProductsPage() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState<ProductPayload>(() => emptyForm());
+  const [uploadFiles, setUploadFiles] = useState<ProductUploadFiles>(() =>
+    emptyUploadFiles(),
+  );
   const [editing, setEditing] = useState<ProductItem | null>(null);
   const [open, setOpen] = useState(false);
 
@@ -666,12 +714,14 @@ export default function ProductsPage() {
   const openCreate = () => {
     setEditing(null);
     setForm(emptyForm());
+    setUploadFiles(emptyUploadFiles());
     setOpen(true);
   };
 
   const openEdit = (item: ProductItem) => {
     setEditing(item);
     setForm(itemToForm(item));
+    setUploadFiles(emptyUploadFiles());
     setOpen(true);
   };
 
@@ -684,8 +734,8 @@ export default function ProductsPage() {
       window.alert("Name (EN) and Name (AM) are required.");
       return;
     }
-    if (!form.media.image.trim()) {
-      window.alert("Image URL is required.");
+    if (!editing && !uploadFiles.imageFile) {
+      window.alert("Product image file is required.");
       return;
     }
     if (!form.content.description.en.trim() || !form.content.description.am.trim()) {
@@ -696,11 +746,12 @@ export default function ProductsPage() {
     setSubmitting(true);
     try {
       if (editing) {
-        await productsApi.update(resolveItemKey(editing), form);
+        await productsApi.update(resolveItemKey(editing), form, uploadFiles);
       } else {
-        await productsApi.create(form);
+        await productsApi.create(form, uploadFiles);
       }
       setOpen(false);
+      setUploadFiles(emptyUploadFiles());
       await load();
     } finally {
       setSubmitting(false);
@@ -792,11 +843,12 @@ export default function ProductsPage() {
         <ProductModal
           title={editing ? "Edit Product" : "Add Product"}
           value={form}
+          files={uploadFiles}
           onChange={setForm}
+          onFilesChange={setUploadFiles}
           onClose={() => setOpen(false)}
           onSubmit={submit}
           submitting={submitting}
-          editingId={editing?._id ?? null}
         />
       )}
     </>
