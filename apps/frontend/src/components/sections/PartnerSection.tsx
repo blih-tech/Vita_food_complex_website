@@ -16,8 +16,9 @@ const certLogos = [
   { alt: "EAS", src: "/assets/quality/figma/cert_eas.png", width: 320 },
 ];
 
-export default function PartnerSection() {
+export default function PartnerSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Partner");
+  const c = content?.[locale as string] || content?.en;
 
   return (
     <section
@@ -27,10 +28,10 @@ export default function PartnerSection() {
       {/* ── Header ── */}
       <div className="max-w-[1024px] mx-auto px-5 sm:px-6 lg:px-8 flex flex-col items-center text-center gap-4 mb-12 sm:mb-16">
         <p className="font-['Funnel_Display'] font-medium text-lg sm:text-[20px] text-[#404040] leading-tight">
-          {t("subtitle")}
+          {c?.subtitle || t("subtitle")}
         </p>
         <h2 className="font-['Outfit'] font-black text-[42px] sm:text-[52px] lg:text-[80px] text-[#23B349] leading-[0.92] sm:leading-[0.9] tracking-[-0.02em]">
-          {t("heading")}
+          {c?.heading || t("heading")}
         </h2>
       </div>
 

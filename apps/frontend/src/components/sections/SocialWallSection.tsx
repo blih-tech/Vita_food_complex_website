@@ -87,8 +87,9 @@ function ScrollingColumn({ images, direction, speed = '25s' }: ScrollingColumnPr
   );
 }
 
-export default function SocialWallSection() {
+export default function SocialWallSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("SocialWall");
+  const c = content?.[locale as string] || content?.en;
 
   return (
     <section className="bg-white py-20 lg:py-32 relative overflow-hidden h-[1080px] flex items-center justify-center">
@@ -127,16 +128,16 @@ export default function SocialWallSection() {
         
         <div className="flex flex-col items-center gap-4">
           <p className="font-['Funnel_Display'] font-medium text-[20px] text-[#404040] leading-tight">
-            {t("label")}
+            {c?.label || t("label")}
           </p>
           <h2 className="font-['Outfit'] font-black text-[50px] sm:text-[64px] lg:text-[80px] text-[#23B349] leading-[0.9] tracking-[-0.02em]">
-            {t("heading")}
+            {c?.heading || t("heading")}
           </h2>
         </div>
 
         {/* Explore Button */}
         <button className="flex items-center justify-center gap-3 bg-[#23B349] text-white px-8 py-4 rounded-full font-['Funnel_Display'] font-medium text-[24px] leading-tight hover:bg-[#1a8e38] transition-colors group">
-          {t("cta")}
+          {c?.cta || t("cta")}
           <span className="font-['Outfit'] text-[20px] group-hover:translate-x-1 transition-transform">→</span>
         </button>
 

@@ -43,9 +43,10 @@ const recipes = [
   },
 ];
 
-export default function RecipesSection() {
+export default function RecipesSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Recipes");
-  const t_items = t.raw("items") as { title: string; description: string }[];
+  const c = content?.[locale as string] || content?.en;
+  const t_items = (c?.items || t.raw("items")) as { title: string; description: string }[];
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -65,12 +66,12 @@ export default function RecipesSection() {
       {/* Header */}
       <div className="max-w-[1440px] mx-auto px-5 sm:px-6 md:px-12 lg:px-24 mb-10 sm:mb-14 md:mb-20 flex flex-col items-center text-center">
         <p className="font-['Funnel_Display'] font-semibold text-base sm:text-lg md:text-[20px] text-[#23B349] tracking-widest uppercase mb-3">
-          {t("header.label")}
+          {c?.label || t("header.label")}
         </p>
         <h2 className="font-['Outfit'] font-black text-[42px] sm:text-5xl md:text-[64px] lg:text-[80px] text-[#404040] leading-[1.05] tracking-[-0.02em] px-2">
-          {t.rich("header.heading", {
-            enjoy: (chunks) => <span className="text-[#23B349]">{chunks}</span>,
-          })}
+          {c?.heading
+            ? c.heading
+            : t.rich("header.heading", { enjoy: (chunks) => <span className="text-[#23B349]">{chunks}</span> })}
         </h2>
       </div>
 

@@ -2,7 +2,7 @@
 
 import {
   LayoutDashboard, FileText, ShoppingBag, Briefcase,
-  MessageSquare, Users, Settings, LogOut, ChevronRight, X, Newspaper, Heart, HelpCircle, ScrollText,
+  MessageSquare, Users, Settings, LogOut, ChevronRight, X, Newspaper, Heart, HelpCircle, ScrollText, Home,
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -13,8 +13,9 @@ const navSections = [
   {
     label: 'Content',
     items: [
-      { icon: LayoutDashboard, label: 'Overview', href: '/' },
-      { icon: FileText,         label: 'Pages',    href: '/pages' },
+      { icon: LayoutDashboard, label: 'Overview',  href: '/' },
+      { icon: Home,            label: 'Home Page', href: '/home' },
+      { icon: FileText,        label: 'Pages',     href: '/pages' },
     ],
   },
   {

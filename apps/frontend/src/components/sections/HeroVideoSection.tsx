@@ -50,8 +50,11 @@ function MarqueeBanner({ t }: { t: ReturnType<typeof useTranslations> }) {
   );
 }
 
-export default function HeroVideoSection() {
+export default function HeroVideoSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Hero");
+  const c = content?.[locale as string] || content?.en;
+  const secondaryQuote = c?.secondaryQuote || t("secondaryQuote");
+  const ourClients = c?.ourClients || t("ourClients");
 
   return (
     <section
@@ -94,13 +97,13 @@ export default function HeroVideoSection() {
         {/* Secondary Quote Section */}
         <div className="flex max-w-6xl flex-col items-start text-left px-1 sm:px-0">
           <blockquote className="max-w-4xl font-['Outfit'] text-[26px] leading-[1.05] sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-[-0.02em] text-white">
-            “{t("secondaryQuote")}”
+            "{secondaryQuote}"
           </blockquote>
 
           <div className="mt-8 sm:mt-10 flex items-center gap-4 sm:gap-5">
             <ClientAvatars />
             <span className="font-['Outfit'] text-base sm:text-lg md:text-xl font-semibold text-white">
-              {t("ourClients")}
+              {ourClients}
             </span>
           </div>
         </div>

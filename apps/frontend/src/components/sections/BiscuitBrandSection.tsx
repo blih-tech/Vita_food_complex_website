@@ -20,8 +20,9 @@ const tagIcons = [
   "zoo.png",
 ];
 
-export default function BiscuitBrandSection() {
+export default function BiscuitBrandSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("BiscuitBrand");
+  const c = content?.[locale as string] || content?.en;
   const [emblaRef] = useEmblaCarousel(
     { align: "center", dragFree: true, containScroll: false, loop: true },
     [Autoplay({ delay: 3000, stopOnInteraction: false })]
@@ -57,13 +58,11 @@ export default function BiscuitBrandSection() {
         {/* Text content */}
         <div className="flex flex-col items-center gap-4 text-center mb-12 lg:mb-16 px-6">
           <p className="font-['Funnel_Display'] font-semibold text-[14px] sm:text-[16px] text-[#404040]/60 tracking-[0.15em] uppercase">
-            {t("label")}
+            {c?.label || t("label")}
           </p>
 
           <h2 className="font-['Outfit'] font-black text-[40px] sm:text-[56px] lg:text-[72px] text-[#23B349] leading-[1.05] tracking-tight max-w-4xl capitalize">
-            {t.rich("title", {
-              br: () => <br />
-            })}
+            {c?.title ? c.title : t.rich("title", { br: () => <br /> })}
           </h2>
         </div>
 
@@ -110,9 +109,7 @@ export default function BiscuitBrandSection() {
         {/* Bottom Text and CTA */}
         <div className="flex flex-col items-center gap-8 mt-12 sm:mt-16 lg:mt-20 relative z-20 px-6">
           <p className="font-['Funnel_Display'] font-medium text-[14px] sm:text-[16px] lg:text-[18px] text-[#404040]/80 text-center max-w-xl leading-relaxed">
-            {t.rich("description", {
-              br: () => <br className="hidden sm:block" />
-            })}
+            {c?.description ? c.description : t.rich("description", { br: () => <br className="hidden sm:block" /> })}
           </p>
 
           <Link
@@ -120,7 +117,7 @@ export default function BiscuitBrandSection() {
             className="group bg-[#23B349] text-white px-8 py-4 rounded-full flex items-center gap-3 hover:bg-[#1f9d40] transition-all duration-300 shadow-xl shadow-green-500/20 active:scale-[0.98]"
           >
             <span className="font-['Funnel_Display'] font-bold text-[16px]">
-              {t("cta")}
+              {c?.cta || t("cta")}
             </span>
             <div className="bg-white/20 rounded-full p-1 group-hover:translate-x-1 transition-transform flex items-center justify-center">
               <svg

@@ -32,6 +32,20 @@ export class ContentService {
     return page;
   }
 
+  async updateSection(slug: string, sectionId: string, content: any): Promise<PageDocument> {
+    const page = await this.pageModel.findOne({ slug }).exec();
+    if (!page) throw new NotFoundException(`Page ${slug} not found`);
+    const idx = page.sections.findIndex((s: any) => s.id === sectionId);
+    if (idx === -1) throw new NotFoundException(`Section ${sectionId} not found`);
+    page.sections[idx].content = content;
+    page.markModified('sections');
+    return page.save();
+  }
+
+  async upsert(slug: string, pageData: any): Promise<PageDocument> {
+    return this.pageModel.findOneAndUpdate({ slug }, pageData, { new: true, upsert: true }).exec() as Promise<PageDocument>;
+  }
+
   async delete(slug: string): Promise<any> {
     const result = await this.pageModel.deleteOne({ slug }).exec();
     if (result.deletedCount === 0) {
