@@ -1,424 +1,257 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { useParams } from "next/navigation";
+import { CheckCircle, AlertCircle, Loader2, Upload, FileText, X } from "lucide-react";
+import api from "@/lib/api";
+
+const ACCEPTED = ".pdf,.doc,.docx,.jpg,.jpeg,.png";
+
+interface FormState {
+  firstName: string; lastName: string; email: string; phone: string; address: string;
+  currentRole: string; yearsExperience: string;
+  highestEducation: string; institution: string; fieldOfStudy: string;
+  skills: string; coverLetter: string; additionalInfo: string;
+}
+
+const EMPTY: FormState = {
+  firstName: '', lastName: '', email: '', phone: '', address: '',
+  currentRole: '', yearsExperience: '',
+  highestEducation: '', institution: '', fieldOfStudy: '',
+  skills: '', coverLetter: '', additionalInfo: '',
+};
+
+const inputStyle: React.CSSProperties = {
+  width: '100%', fontFamily: "'Outfit', sans-serif", fontWeight: 300,
+  fontSize: 16, lineHeight: '1.26em', letterSpacing: '-0.064px',
+  color: '#333733', padding: '8px 15.06px', borderRadius: 10.04,
+  border: '1px solid rgba(0,0,0,0.2)', background: 'transparent', outline: 'none',
+};
 
 export default function JobApplicationForm() {
   const t = useTranslations("Careers");
+  const params = useParams();
+  const jobId = (params?.id as string) ?? '';
+
+  const [form, setForm] = useState<FormState>(EMPTY);
+  const [cvFile, setCvFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
+  const fileRef = useRef<HTMLInputElement>(null);
+
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
-      },
-      { threshold: 0.1 },
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => {
-      if (sectionRef.current) observer.unobserve(sectionRef.current);
-    };
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setIsVisible(true); }, { threshold: 0.1 });
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => { if (sectionRef.current) obs.unobserve(sectionRef.current); };
   }, []);
 
-  /* Card sections matching Figma node structure */
-  interface FormField {
-    labelKey: string;
-    placeholderKey?: string;
-    type: string;
-    full?: boolean;
-  }
+  const set = useCallback((key: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm((p) => ({ ...p, [key]: e.target.value })), []);
 
-  const formSections: {
-    key: string;
-    titleKey: string;
-    descKey: string;
-    rows: FormField[][];
-  }[] = [
-    {
-      key: "personal",
-      titleKey: "form.personal.title",
-      descKey: "form.personal.desc",
-      rows: [
-        [
-          {
-            labelKey: "form.fields.firstName",
-            placeholderKey: "form.fields.firstNamePlaceholder",
-            type: "text",
-          },
-          {
-            labelKey: "form.fields.lastName",
-            placeholderKey: "form.fields.lastNamePlaceholder",
-            type: "text",
-          },
-        ],
-        [
-          {
-            labelKey: "form.fields.email",
-            placeholderKey: "form.fields.emailPlaceholder",
-            type: "email",
-          },
-          {
-            labelKey: "form.fields.phone",
-            placeholderKey: "form.fields.phonePlaceholder",
-            type: "tel",
-          },
-        ],
-        [
-          {
-            labelKey: "form.fields.address",
-            placeholderKey: "form.fields.addressPlaceholder",
-            type: "text",
-            full: true,
-          },
-        ],
-      ],
-    },
-    {
-      key: "professional",
-      titleKey: "form.professional.title",
-      descKey: "form.professional.desc",
-      rows: [
-        [
-          {
-            labelKey: "form.fields.currentRole",
-            placeholderKey: "form.fields.currentRolePlaceholder",
-            type: "text",
-          },
-          {
-            labelKey: "form.fields.yearsExperience",
-            placeholderKey: "form.fields.yearsExperiencePlaceholder",
-            type: "text",
-          },
-        ],
-      ],
-    },
-    {
-      key: "education",
-      titleKey: "form.education.title",
-      descKey: "form.education.desc",
-      rows: [
-        [
-          {
-            labelKey: "form.fields.highestEducation",
-            placeholderKey: "form.fields.highestEducationPlaceholder",
-            type: "text",
-          },
-          {
-            labelKey: "form.fields.institution",
-            placeholderKey: "form.fields.institutionPlaceholder",
-            type: "text",
-          },
-        ],
-        [
-          {
-            labelKey: "form.fields.fieldOfStudy",
-            placeholderKey: "form.fields.fieldOfStudyPlaceholder",
-            type: "text",
-          },
-        ],
-      ],
-    },
-    {
-      key: "resume",
-      titleKey: "form.resume.title",
-      descKey: "form.resume.desc",
-      rows: [
-        [{ labelKey: "form.fields.resume", type: "file", full: true }],
-        [
-          {
-            labelKey: "form.fields.skills",
-            placeholderKey: "form.fields.skillsPlaceholder",
-            type: "textarea",
-            full: true,
-          },
-        ],
-        [
-          {
-            labelKey: "form.fields.coverLetter",
-            placeholderKey: "form.fields.coverLetterPlaceholder",
-            type: "textarea",
-            full: true,
-          },
-        ],
-      ],
-    },
-    {
-      key: "additional",
-      titleKey: "form.additional.title",
-      descKey: "form.additional.desc",
-      rows: [
-        [
-          {
-            labelKey: "form.fields.additionalInfo",
-            placeholderKey: "form.fields.additionalInfoPlaceholder",
-            type: "textarea",
-            full: true,
-          },
-        ],
-      ],
-    },
-  ];
-
-  /* Shared input style — layout_8I6MOZ: padding:5.02px 15.06px, radius:10px */
-  /* fill_J2KVTC: transparent, fill_M0FZ88: rgba(0,0,0,0.2) border 1px */
-  /* style_IPDQ4Z: Outfit 300, 16px, 1.26em lh, #8A8C8A */
-  const inputStyle: React.CSSProperties = {
-    width: "100%",
-    fontFamily: "'Outfit', sans-serif",
-    fontWeight: 300,
-    fontSize: 16,
-    lineHeight: "1.26em",
-    letterSpacing: "-0.064px",
-    color: "#8A8C8A",
-    padding: "5.02px 15.06px",
-    borderRadius: 10.04,
-    border: "1px solid rgba(0,0,0,0.2)",
-    background: "transparent",
-    outline: "none",
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file) setCvFile(file);
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!cvFile) { setErrorMsg('Please upload your CV.'); setStatus('error'); return; }
+
+    setSubmitting(true);
+    setErrorMsg('');
+    try {
+      // 1. Upload CV to Cloudinary via backend
+      setUploading(true);
+      const formData = new FormData();
+      formData.append('file', cvFile);
+      const { data: cvData } = await api.post('/applications/upload-cv', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+      setUploading(false);
+
+      // 2. Submit application
+      await api.post('/applications', {
+        jobId,
+        ...form,
+        cvUrl: cvData.url,
+        cvPublicId: cvData.publicId,
+        cvFileName: cvData.originalName,
+      });
+
+      setStatus('success');
+      setForm(EMPTY);
+      setCvFile(null);
+    } catch (err: any) {
+      setUploading(false);
+      setErrorMsg(err?.response?.data?.message ?? 'Submission failed. Please try again.');
+      setStatus('error');
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (status === 'success') {
+    return (
+      <section className="px-4 sm:px-6 lg:px-[128px] flex justify-center items-center" style={{ paddingTop: 196, paddingBottom: 80 }}>
+        <div className="text-center max-w-md">
+          <div className="w-20 h-20 rounded-full bg-[#23B349]/10 flex items-center justify-center mx-auto mb-6">
+            <CheckCircle className="w-10 h-10 text-[#23B349]" />
+          </div>
+          <h2 className="font-['Funnel_Display'] text-3xl font-bold text-[#23B349] mb-3">Application Submitted!</h2>
+          <p className="font-['Outfit'] text-[#4A5565] text-lg">Thank you for applying. We'll review your application and get back to you soon.</p>
+        </div>
+      </section>
+    );
+  }
+
+  const cardStyle = (i: number): React.CSSProperties => ({
+    borderRadius: 24, border: '1px solid rgba(0,0,0,0.1)', background: '#FFFFFF',
+    gap: 30, padding: '27.36px 30.13px 30.13px',
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+    transition: `all 0.8s ease-out ${i * 0.08}s`,
+    display: 'flex', flexDirection: 'column' as const,
+  });
+
+  const sectionTitle = (title: string, desc: string) => (
+    <div style={{ marginBottom: 20 }}>
+      <p style={{ fontFamily: "'Funnel Display', sans-serif", fontWeight: 500, fontSize: 20, lineHeight: '1.25em', letterSpacing: '-0.08px', color: '#000500', marginBottom: 4 }}>{title}</p>
+      <p style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 300, fontSize: 16, lineHeight: '1.26em', color: '#717182' }}>{desc}</p>
+    </div>
+  );
+
+  const label = (text: string) => (
+    <label style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 400, fontSize: 18, lineHeight: '1em', letterSpacing: '-0.072px', color: '#000500' }}>{text}</label>
+  );
+
+  const field = (key: keyof FormState, placeholder: string, type = 'text', full = false) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flex: full ? '1 1 100%' : '1 1 0' }}>
+      {label(t(`form.fields.${key}` as any) || placeholder)}
+      <input type={type} style={inputStyle} placeholder={placeholder} value={(form as any)[key]} onChange={set(key)} />
+    </div>
+  );
+
+  const textarea = (key: keyof FormState, placeholder: string) => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flex: '1 1 100%' }}>
+      {label(t(`form.fields.${key}` as any) || placeholder)}
+      <textarea style={{ ...inputStyle, minHeight: 108, resize: 'vertical', padding: '10px 15.06px' }} placeholder={placeholder} value={(form as any)[key]} onChange={set(key)} />
+    </div>
+  );
+
+  const row = (...children: React.ReactNode[]) => (
+    <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' as const }}>{children}</div>
+  );
+
   return (
-    <section
-      ref={sectionRef}
-      className="px-4 sm:px-6 lg:px-[128px]"
-      style={{ background: "#FFFFFF", paddingTop: 196, paddingBottom: 80 }}
-    >
-      {/* layout_0V3ABA: column, stretch, gap:40px, width:964px */}
+    <section ref={sectionRef} className="px-4 sm:px-6 lg:px-[128px]" style={{ background: '#FFFFFF', paddingTop: 196, paddingBottom: 80 }}>
       <div className="mx-auto flex flex-col" style={{ maxWidth: 964, gap: 40 }}>
-        {/* Form Header — layout_GSX3OS: column, stretch, gap:10px */}
-        <div className="flex flex-col items-center" style={{ gap: 10.04 }}>
-          {/* "Job Application Form" — style_GOGAIG: Funnel Display 500, 30px, 1.506em lh, CENTER, #23B349 */}
-          <h1
-            className="text-center"
-            style={{
-              fontFamily: "'Funnel Display', sans-serif",
-              fontWeight: 500,
-              fontSize: "clamp(22px, 2.5vw, 30px)",
-              lineHeight: "1.506em",
-              color: "#23B349",
-            }}
-          >
+        {/* Header */}
+        <div className="flex flex-col items-center" style={{ gap: 10 }}>
+          <h1 style={{ fontFamily: "'Funnel Display', sans-serif", fontWeight: 500, fontSize: 'clamp(22px, 2.5vw, 30px)', lineHeight: '1.506em', color: '#23B349', textAlign: 'center' }}>
             {t("form.title")}
           </h1>
-
-          {/* Subtitle — style_VTE07G: Outfit 400, 20px, 1.26em lh, -0.4% ls, CENTER, #4A5565 */}
-          <p
-            className="text-center"
-            style={{
-              fontFamily: "'Outfit', sans-serif",
-              fontWeight: 400,
-              fontSize: 20,
-              lineHeight: "1.26em",
-              letterSpacing: "-0.08px",
-              color: "#4A5565",
-            }}
-          >
+          <p style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 400, fontSize: 20, lineHeight: '1.26em', letterSpacing: '-0.08px', color: '#4A5565', textAlign: 'center' }}>
             {t("form.subtitle")}
           </p>
         </div>
 
-        {/* Form Cards — layout_EP464A: column, stretch, gap:30.13px */}
-        <form
-          className="flex flex-col"
-          style={{ gap: 30.13 }}
-          onSubmit={(e) => e.preventDefault()}
-        >
-          {formSections.map((section, i) => (
-            /* Card — layout_PT690O/EWN631: column, gap:30px, radius:24px */
-            /* fill_T3NGMJ: rgba(0,0,0,0.1) border 1px, fill_1MVHTJ: white */
-            <div
-              key={section.key}
-              className="flex flex-col"
-              style={{
-                borderRadius: 24,
-                border: "1px solid rgba(0,0,0,0.1)",
-                background: "#FFFFFF",
-                gap: 30,
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? "translateY(0)" : "translateY(20px)",
-                transition: `all 0.8s ease-out ${i * 0.08}s`,
-                overflow: "hidden",
-              }}
-            >
-              {/* CardHeader — layout_IYMVZQ: height:87.86px, padding-left:30.13px, padding-top:27.36px */}
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 30.13 }}>
+          {/* Personal */}
+          <div style={cardStyle(0)}>
+            {sectionTitle(t("form.personal.title"), t("form.personal.desc"))}
+            {row(field('firstName', 'John'), field('lastName', 'Doe'))}
+            {row(field('email', 'john@example.com', 'email'), field('phone', '+251 91 234 5678', 'tel'))}
+            {row(field('address', 'Addis Ababa, Ethiopia', 'text', true))}
+          </div>
+
+          {/* Professional */}
+          <div style={cardStyle(1)}>
+            {sectionTitle(t("form.professional.title"), t("form.professional.desc"))}
+            {row(field('currentRole', 'e.g. Production Manager'), field('yearsExperience', 'e.g. 5'))}
+          </div>
+
+          {/* Education */}
+          <div style={cardStyle(2)}>
+            {sectionTitle(t("form.education.title"), t("form.education.desc"))}
+            {row(field('highestEducation', 'e.g. Bachelor\'s Degree'), field('institution', 'e.g. AAU'))}
+            {row(field('fieldOfStudy', 'e.g. Food Science', 'text', true))}
+          </div>
+
+          {/* CV & Skills */}
+          <div style={cardStyle(3)}>
+            {sectionTitle(t("form.resume.title"), t("form.resume.desc"))}
+
+            {/* CV Upload */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {label('CV / Resume *')}
               <div
+                onClick={() => fileRef.current?.click()}
+                onDrop={handleDrop}
+                onDragOver={(e) => e.preventDefault()}
                 style={{
-                  paddingLeft: 30.13,
-                  paddingRight: 30.13,
-                  paddingTop: 27.36,
+                  height: 140, borderRadius: 12.55, border: cvFile ? '2px solid #23B349' : '2px dashed #D1D5DC',
+                  background: cvFile ? 'rgba(35,179,73,0.04)' : 'transparent',
+                  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                  cursor: 'pointer', transition: 'all 0.2s', gap: 8,
                 }}
               >
-                {/* Section title — Subtitle 2: Funnel Display 500, 20px, 1.25em lh, -0.4% ls, #000500 */}
-                <p
-                  style={{
-                    fontFamily: "'Funnel Display', sans-serif",
-                    fontWeight: 500,
-                    fontSize: 20,
-                    lineHeight: "1.25em",
-                    letterSpacing: "-0.08px",
-                    color: "#000500",
-                    marginBottom: 4,
-                  }}
-                >
-                  {t(section.titleKey)}
-                </p>
-
-                {/* Section description — style_UU1RIR: Outfit 300, 20px, 1.26em lh, -0.4% ls, #717182 */}
-                <p
-                  style={{
-                    fontFamily: "'Outfit', sans-serif",
-                    fontWeight: 300,
-                    fontSize: 20,
-                    lineHeight: "1.26em",
-                    letterSpacing: "-0.08px",
-                    color: "#717182",
-                  }}
-                >
-                  {t(section.descKey)}
-                </p>
+                {cvFile ? (
+                  <>
+                    <FileText size={28} color="#23B349" />
+                    <p style={{ fontFamily: "'Outfit'", fontSize: 14, color: '#23B349', fontWeight: 600 }}>{cvFile.name}</p>
+                    <button type="button" onClick={(e) => { e.stopPropagation(); setCvFile(null); }}
+                      style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#999', display: 'flex', alignItems: 'center', gap: 4, fontSize: 12 }}>
+                      <X size={12} /> Remove
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Upload size={28} color="#23B349" />
+                    <p style={{ fontFamily: "'Outfit'", fontWeight: 300, fontSize: 16, color: '#4A5565', textAlign: 'center' }}>
+                      Click or drag to upload your CV
+                    </p>
+                    <p style={{ fontFamily: "'Outfit'", fontWeight: 300, fontSize: 13, color: '#8A8C8A' }}>PDF, Word, or Image (max 10 MB)</p>
+                  </>
+                )}
               </div>
-
-              {/* CardContent — layout_7N4GLL/BRT6BV/6DHZS1: column, stretch, gap:20px, padding:0px 30px */}
-              <div
-                className="flex flex-col"
-                style={{ gap: 20.08, padding: "0px 30.13px 30.13px" }}
-              >
-                {section.rows.map((row, ri) => (
-                  <div
-                    key={ri}
-                    className={`flex ${row.length > 1 ? "flex-col sm:flex-row" : "flex-col"}`}
-                    style={{ gap: 20.08 }}
-                  >
-                    {row.map((field, fi) => (
-                      <div
-                        key={fi}
-                        className="flex flex-col"
-                        style={{
-                          gap: 10.04,
-                          flex: field.full ? "1 1 100%" : "1 1 0",
-                        }}
-                      >
-                        {/* Label — style_SEFZ0E: Outfit 400, 18px, 1em lh, -0.4% ls, #000500 */}
-                        <label
-                          style={{
-                            fontFamily: "'Outfit', sans-serif",
-                            fontWeight: 400,
-                            fontSize: 18,
-                            lineHeight: "1em",
-                            letterSpacing: "-0.072px",
-                            color: "#000500",
-                          }}
-                        >
-                          {t(field.labelKey)}
-                        </label>
-
-                        {field.type === "file" ? (
-                          /* Upload area — layout_SU1CR6: height:139.58px, dashed border #D1D5DC 2px, radius:12.55px */
-                          <div
-                            className="flex flex-col items-center justify-center cursor-pointer"
-                            style={{
-                              height: 139.58,
-                              borderRadius: 12.55,
-                              border: "2px dashed #D1D5DC",
-                              background: "transparent",
-                            }}
-                          >
-                            <svg
-                              width="40"
-                              height="40"
-                              viewBox="0 0 40 40"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M20 8v16M12 16l8-8 8 8"
-                                stroke="#23B349"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                              <path
-                                d="M8 28h24v4H8v-4z"
-                                fill="#23B349"
-                                opacity="0.3"
-                              />
-                            </svg>
-                            <p
-                              className="mt-2"
-                              style={{
-                                fontFamily: "'Outfit', sans-serif",
-                                fontWeight: 300,
-                                fontSize: 16,
-                                lineHeight: "1.26em",
-                                color: "#4A5565",
-                                textAlign: "center",
-                              }}
-                            >
-                              {t("form.fields.uploadLabel")}
-                            </p>
-                            <p
-                              style={{
-                                fontFamily: "'Outfit', sans-serif",
-                                fontWeight: 300,
-                                fontSize: 14,
-                                color: "#8A8C8A",
-                                textAlign: "center",
-                              }}
-                            >
-                              {t("form.fields.uploadHint")}
-                            </p>
-                          </div>
-                        ) : field.type === "textarea" ? (
-                          <textarea
-                            style={{
-                              ...inputStyle,
-                              minHeight: 108,
-                              resize: "vertical",
-                              padding: "10px 15.06px",
-                            }}
-                            placeholder={t(field.placeholderKey ?? "")}
-                          />
-                        ) : (
-                          <input
-                            type={field.type}
-                            style={inputStyle}
-                            placeholder={t(field.placeholderKey ?? "")}
-                          />
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                ))}
-              </div>
+              <input ref={fileRef} type="file" accept={ACCEPTED} className="hidden" onChange={(e) => setCvFile(e.target.files?.[0] ?? null)} />
             </div>
-          ))}
 
-          {/* Submit container — layout_B0SUJ0: row, flex-end */}
+            {row(textarea('skills', 'e.g. Quality control, Food safety, ISO 22000...'))}
+            {row(textarea('coverLetter', 'Tell us why you\'re a great fit for this role...'))}
+          </div>
+
+          {/* Additional */}
+          <div style={cardStyle(4)}>
+            {sectionTitle(t("form.additional.title"), t("form.additional.desc"))}
+            {row(textarea('additionalInfo', 'Any other information you\'d like to share...'))}
+          </div>
+
+          {/* Status messages */}
+          {status === 'error' && (
+            <div className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-[12px] px-4 py-3">
+              <AlertCircle className="w-5 h-5 text-red-500 shrink-0" />
+              <p className="font-['Outfit'] text-sm text-red-700">{errorMsg}</p>
+            </div>
+          )}
+
+          {/* Submit */}
           <div className="flex justify-end">
-            {/* Submit button — layout_6OAAVD: row, center, gap:10px, padding:10px 20px, w:251px, h:45.19px, radius:24px, #23B349 */}
-            {/* style_SHGHM3: Inter 500, 17.57px, 1.43em lh, white */}
             <button
               type="submit"
-              className="inline-flex items-center justify-center transition-all hover:shadow-lg"
-              style={{
-                gap: 10,
-                padding: "10px 20px",
-                width: 251,
-                height: 45.19,
-                borderRadius: 24,
-                background: "#23B349",
-                fontFamily: "'Inter', sans-serif",
-                fontWeight: 500,
-                fontSize: 17.57,
-                lineHeight: "1.43em",
-                color: "#FFFFFF",
-                border: "none",
-                cursor: "pointer",
-              }}
+              disabled={submitting}
+              className="inline-flex items-center justify-center gap-2 transition-all hover:shadow-lg disabled:opacity-60"
+              style={{ padding: '10px 24px', minWidth: 200, height: 48, borderRadius: 24, background: '#23B349', fontFamily: "'Funnel Display', sans-serif", fontWeight: 500, fontSize: 17, color: '#FFFFFF', border: 'none', cursor: 'pointer' }}
             >
-              {t("form.submit")}
+              {uploading ? <><Loader2 size={16} className="animate-spin" /> Uploading CV…</> :
+               submitting ? <><Loader2 size={16} className="animate-spin" /> Submitting…</> :
+               t("form.submit")}
             </button>
           </div>
         </form>

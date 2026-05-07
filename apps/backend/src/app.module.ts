@@ -13,6 +13,8 @@ import { ContactModule } from './modules/contact/contact.module';
 import { OrdersModule } from './modules/orders/orders.module';
 import { NewsModule } from './modules/news/news.module';
 import { ContactMessagesModule } from './modules/contact-messages/contact-messages.module';
+import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
+import { ApplicationsModule } from './modules/applications/applications.module';
 
 @Module({
   imports: [
@@ -36,6 +38,8 @@ import { ContactMessagesModule } from './modules/contact-messages/contact-messag
     OrdersModule,
     NewsModule,
     ContactMessagesModule,
+    CloudinaryModule,
+    ApplicationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
