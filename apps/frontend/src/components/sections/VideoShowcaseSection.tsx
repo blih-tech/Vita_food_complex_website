@@ -29,7 +29,7 @@ export default function VideoShowcaseSection() {
   const t = useTranslations("Hero");
 
   return (
-    <section className="relative w-full px-4 sm:px-6 md:px-10 lg:px-16 pb-16 md:pb-24 lg:pb-32">
+    <section className="relative w-full overflow-hidden px-4 sm:px-6 md:px-10 lg:px-16 pb-16 md:pb-24 lg:pb-32">
       <div className="relative mx-auto max-w-[1380px]">
         <MarqueeBanner t={t} />
 

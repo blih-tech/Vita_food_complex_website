@@ -29,7 +29,7 @@ const bricolageGrotesque = Bricolage_Grotesque({
 });
 
 export default function WhyChooseVitaWhoAreWeSection() {
-  const t = useTranslations("WhyChooseVita.whoWeAre");
+  const t = useTranslations("WhyChooseVita.whoAreWe");
 
   return (
     <section className="flex w-full flex-col items-center bg-white px-4 py-12 sm:px-6 sm:py-16 md:px-8 md:py-20 lg:px-8 lg:py-24 xl:px-[128px]">
