@@ -2,7 +2,7 @@
 
 import {
   LayoutDashboard, FileText, ShoppingBag, Briefcase,
-  MessageSquare, Users, Settings, LogOut, ChevronRight, X, Newspaper, Heart, HelpCircle, ScrollText, Home, Info,
+  MessageSquare, Users, Settings, LogOut, ChevronRight, X, Newspaper, Heart, HelpCircle, ScrollText,
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -13,10 +13,8 @@ const navSections = [
   {
     label: 'Content',
     items: [
-      { icon: LayoutDashboard, label: 'Overview',  href: '/' },
-      { icon: Home,            label: 'Home Page', href: '/home' },
-      { icon: Info,            label: 'About Us',  href: '/about' },
-      { icon: FileText,        label: 'Pages',     href: '/pages' },
+      { icon: LayoutDashboard, label: 'Overview', href: '/' },
+      { icon: FileText,        label: 'Pages',    href: '/pages' },
     ],
   },
   {
@@ -54,8 +52,11 @@ export default function Sidebar({ open = false, onClose }: SidebarProps) {
   const pathname = usePathname();
   const { user, logout } = useAuth();
 
-  const isActive = (href: string) =>
-    href === '/' ? pathname === '/' : pathname.startsWith(href);
+  const isActive = (href: string) => {
+    if (href === '/') return pathname === '/';
+    if (href === '/pages') return pathname.startsWith('/pages') || pathname.startsWith('/home') || pathname.startsWith('/about');
+    return pathname.startsWith(href);
+  };
 
   return (
     <aside
