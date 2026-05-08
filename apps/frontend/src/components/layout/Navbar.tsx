@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import type { MouseEvent as ReactMouseEvent } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, useRouter, usePathname } from "@frontend/navigation";
 import { useSearchParams } from "next/navigation";
@@ -125,7 +126,7 @@ export default function Navbar() {
                 <div
                   key={link.key}
                   className="flex gap-[3px] items-center justify-center group cursor-pointer"
-                  onClick={(e) => {
+                  onClick={(e: ReactMouseEvent<HTMLDivElement>) => {
                     if (link.hasDropdown) {
                       e.preventDefault();
                       toggleDropdown(link.key);
@@ -135,7 +136,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     className="text-white text-[13px] xl:text-[16px] 2xl:text-[20px] font-['Funnel_Display'] font-medium leading-normal tracking-[-0.08px] hover:opacity-80 transition-opacity whitespace-nowrap"
-                    onClick={(e) => {
+                    onClick={(e: ReactMouseEvent<HTMLAnchorElement>) => {
                       if (link.hasDropdown) e.preventDefault();
                     }}
                   >

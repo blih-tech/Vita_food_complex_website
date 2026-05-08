@@ -4,15 +4,30 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-export default function DistributorHeroSection() {
+interface DistributorHeroContent {
+  label?: string;
+  headline?: string;
+  subtitle?: string;
+  cta?: string;
+  image?: string;
+}
+
+export default function DistributorHeroSection({ content }: { content?: DistributorHeroContent }) {
   const t = useTranslations("Distributor");
+  const hero = {
+    label: content?.label || t("hero.label"),
+    headline: content?.headline || t("hero.headline"),
+    subtitle: content?.subtitle || t("hero.subtitle"),
+    cta: content?.cta || t("hero.cta"),
+    image: content?.image || "/assets/distributor/hero-bg.png",
+  };
 
   return (
     <section className="relative w-full overflow-hidden min-h-[500px] sm:min-h-[650px] lg:min-h-[800px]">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/assets/distributor/hero-bg.png"
+          src={hero.image}
           alt="Vita distribution warehouse"
           fill
           className="object-cover object-center"
@@ -55,7 +70,7 @@ export default function DistributorHeroSection() {
                 textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               }}
             >
-              {t("hero.label")}
+              {hero.label}
             </span>
 
             {/* Headline */}
@@ -71,7 +86,7 @@ export default function DistributorHeroSection() {
                 textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               }}
             >
-              {t("hero.headline")}
+              {hero.headline}
             </h1>
 
             {/* Subtitle */}
@@ -87,7 +102,7 @@ export default function DistributorHeroSection() {
                 textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               }}
             >
-              {t("hero.subtitle")}
+              {hero.subtitle}
             </p>
           </div>
 
@@ -107,7 +122,7 @@ export default function DistributorHeroSection() {
                 color: "#FFFFFF",
               }}
             >
-              {t("hero.cta")}
+              {hero.cta}
             </span>
             <span
               className="text-[16px] sm:text-[20px]"

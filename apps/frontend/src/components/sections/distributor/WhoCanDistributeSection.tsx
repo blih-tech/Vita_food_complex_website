@@ -3,16 +3,24 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 
-export default function WhoCanDistributeSection() {
-  const t = useTranslations("Distributor");
+interface WhoCanPartnerContent {
+  sectionTitle?: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  items?: string[];
+}
 
-  const criteria = [
+export default function WhoCanDistributeSection({ content }: { content?: WhoCanPartnerContent }) {
+  const t = useTranslations("Distributor");
+  const fallbackCriteria = [
     t("whoCanPartner.items.0"),
     t("whoCanPartner.items.1"),
     t("whoCanPartner.items.2"),
     t("whoCanPartner.items.3"),
     t("whoCanPartner.items.4"),
   ];
+  const criteria = content?.items?.length ? content.items : fallbackCriteria;
 
   return (
     <section className="w-full bg-white py-12 lg:py-20">
@@ -29,7 +37,7 @@ export default function WhoCanDistributeSection() {
             color: "#23B349",
           }}
         >
-          {t("whoCanPartner.sectionTitle")}
+          {content?.sectionTitle || t("whoCanPartner.sectionTitle")}
         </h2>
 
         {/* Content row */}
@@ -37,7 +45,7 @@ export default function WhoCanDistributeSection() {
           {/* Van image */}
           <div className="relative rounded-[24px] sm:rounded-[48px] overflow-hidden flex-shrink-0 w-full max-w-[964px] h-[260px] sm:h-[380px] lg:h-[548px]">
             <Image
-              src="/assets/distributor/delivery-van.png"
+              src={content?.image || "/assets/distributor/delivery-van.png"}
               alt="Vita delivery van"
               fill
               className="object-cover"
@@ -59,7 +67,7 @@ export default function WhoCanDistributeSection() {
                   color: "#23B349",
                 }}
               >
-                {t("whoCanPartner.title")}
+                {content?.title || t("whoCanPartner.title")}
               </h3>
               <p
                 style={{
@@ -71,7 +79,7 @@ export default function WhoCanDistributeSection() {
                   color: "#000000",
                 }}
               >
-                {t("whoCanPartner.description")}
+                {content?.description || t("whoCanPartner.description")}
               </p>
             </div>
 

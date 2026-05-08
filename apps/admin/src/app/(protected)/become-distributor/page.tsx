@@ -6,7 +6,9 @@ import {
   Building2,
   CheckCircle,
   Edit3,
+  ImagePlus,
   ListChecks,
+  Loader2,
   Phone,
   RefreshCw,
   Rocket,
@@ -43,6 +45,7 @@ type DistributorSectionType =
   | "distributor-why-work"
   | "distributor-who-can-partner"
   | "distributor-steps"
+  | "distributor-easy-steps"
   | "distributor-contact";
 
 const SECTION_META: Record<
@@ -63,6 +66,11 @@ const SECTION_META: Record<
     name: "Who Can Partner",
     description: "Eligibility heading, copy, and requirement list",
     icon: ListChecks,
+  },
+  "distributor-easy-steps": {
+    name: "3 Easy Steps",
+    description: "Steps title/subtitle and step cards",
+    icon: Rocket,
   },
   "distributor-steps": {
     name: "3 Easy Steps",
@@ -92,12 +100,14 @@ const DEFAULT_PAGE: PageData = {
           headline: "Become a Vita Distributor",
           subtitle: "Join our network and bring quality products to your community.",
           cta: "Apply Now",
+          image: "/assets/distributor/hero-bg.png",
         },
         am: {
           label: "ንግድዎን ያሳድጉ",
           headline: "የቪታ አከፋፋይ ይሁኑ",
           subtitle: "ቡድናችንን ይቀላቀሉ እና ጥራት ያላቸውን ምርቶች ለማህበረሰብዎ ያቅርቡ።",
           cta: "አሁኑኑ ያመልክቱ",
+          image: "/assets/distributor/hero-bg.png",
         },
       },
     },
@@ -125,19 +135,21 @@ const DEFAULT_PAGE: PageData = {
           sectionTitle: "Who Can Become a Distributor?",
           title: "Requirements",
           description: "We are looking for partners who meet the following criteria:",
+          image: "/assets/distributor/delivery-van.png",
           items: ["Valid business license", "Warehouse facility", "Distribution vehicles", "Financial stability", "Commitment to quality"],
         },
         am: {
           sectionTitle: "ማን አከፋፋይ መሆን ይችላል?",
           title: "መስፈርቶች",
           description: "የሚከተሉትን መስፈርቶች የሚያሟሉ አጋሮችን እንፈልጋለን፡",
+          image: "/assets/distributor/delivery-van.png",
           items: ["ህጋዊ የንግድ ፈቃድ", "የመጋዘን አገልግሎት", "የማከፋፈያ ተሽከርካሪዎች", "የፋይናንስ መረጋጋት", "ለጥራት ያለው ቁርጠኝነት"],
         },
       },
     },
     {
       id: "steps",
-      type: "distributor-steps",
+      type: "distributor-easy-steps",
       content: {
         en: {
           title: "Start in 3 Easy Steps",
@@ -212,6 +224,7 @@ export default function BecomeDistributorAdminPage() {
   const [editingSection, setEditingSection] = useState<Section | null>(null);
   const [lang, setLang] = useState<Lang>("en");
   const [formContent, setFormContent] = useState<unknown>(null);
+  const [uploadingKey, setUploadingKey] = useState<string | null>(null);
   const [toast, setToast] = useState<{ type: "success" | "error"; msg: string } | null>(null);
 
   const showToast = (type: "success" | "error", msg: string) => {
@@ -237,7 +250,7 @@ export default function BecomeDistributorAdminPage() {
   const initializePage = async () => {
     setInitializing(true);
     try {
-      const res = await api.post<PageData>("/content/pages/become-distributor/initialize");
+      const res = await api.post<PageData>("/content/pages/upsert", DEFAULT_PAGE);
       setPage(res.data);
       showToast("success", "Become Distributor page initialized.");
     } catch {
@@ -276,6 +289,23 @@ export default function BecomeDistributorAdminPage() {
       showToast("error", "Failed to save section.");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const uploadImage = async (file: File, key: string) => {
+    setUploadingKey(key);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      const { data } = await api.post<{ url: string }>("/content/upload-image", fd, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      return data.url;
+    } catch {
+      showToast("error", "Image upload failed.");
+      return null;
+    } finally {
+      setUploadingKey(null);
     }
   };
 
@@ -415,6 +445,44 @@ export default function BecomeDistributorAdminPage() {
                   <input className={inputCls} placeholder="Headline" value={(localized.headline as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "headline"], e.target.value))} />
                   <textarea className={inputCls} rows={3} placeholder="Subtitle" value={(localized.subtitle as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "subtitle"], e.target.value))} />
                   <input className={inputCls} placeholder="CTA" value={(localized.cta as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "cta"], e.target.value))} />
+                  <div className="space-y-2">
+                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Background image</label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        className={inputCls}
+                        placeholder="Image URL"
+                        value={(localized.image as string) ?? ""}
+                        onChange={(e) =>
+                          setFormContent((prev: unknown) =>
+                            setAtPath((prev ?? {}) as object, [lang, "image"], e.target.value),
+                          )
+                        }
+                      />
+                      <label className="inline-flex items-center gap-1.5 px-3 py-2 rounded-[10px] bg-gray-100 text-gray-600 text-xs font-semibold cursor-pointer shrink-0 hover:bg-gray-200">
+                        {uploadingKey === `hero-${lang}` ? (
+                          <Loader2 size={14} className="animate-spin" />
+                        ) : (
+                          <ImagePlus size={14} />
+                        )}
+                        Upload
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          disabled={uploadingKey === `hero-${lang}`}
+                          onChange={async (e) => {
+                            const file = e.target.files?.[0];
+                            if (!file) return;
+                            const url = await uploadImage(file, `hero-${lang}`);
+                            if (!url) return;
+                            setFormContent((prev: unknown) =>
+                              setAtPath((prev ?? {}) as object, [lang, "image"], url),
+                            );
+                          }}
+                        />
+                      </label>
+                    </div>
+                  </div>
                 </>
               )}
 
@@ -434,13 +502,51 @@ export default function BecomeDistributorAdminPage() {
                   <input className={inputCls} placeholder="Section title" value={(localized.sectionTitle as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "sectionTitle"], e.target.value))} />
                   <input className={inputCls} placeholder="Title" value={(localized.title as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "title"], e.target.value))} />
                   <textarea className={inputCls} rows={2} placeholder="Description" value={(localized.description as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "description"], e.target.value))} />
+                  <div className="space-y-2">
+                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Section image</label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        className={inputCls}
+                        placeholder="Image URL"
+                        value={(localized.image as string) ?? ""}
+                        onChange={(e) =>
+                          setFormContent((prev: unknown) =>
+                            setAtPath((prev ?? {}) as object, [lang, "image"], e.target.value),
+                          )
+                        }
+                      />
+                      <label className="inline-flex items-center gap-1.5 px-3 py-2 rounded-[10px] bg-gray-100 text-gray-600 text-xs font-semibold cursor-pointer shrink-0 hover:bg-gray-200">
+                        {uploadingKey === `who-${lang}` ? (
+                          <Loader2 size={14} className="animate-spin" />
+                        ) : (
+                          <ImagePlus size={14} />
+                        )}
+                        Upload
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          disabled={uploadingKey === `who-${lang}`}
+                          onChange={async (e) => {
+                            const file = e.target.files?.[0];
+                            if (!file) return;
+                            const url = await uploadImage(file, `who-${lang}`);
+                            if (!url) return;
+                            setFormContent((prev: unknown) =>
+                              setAtPath((prev ?? {}) as object, [lang, "image"], url),
+                            );
+                          }}
+                        />
+                      </label>
+                    </div>
+                  </div>
                   {((localized.items as string[] | undefined) ?? []).map((item, idx) => (
                     <input key={idx} className={inputCls} placeholder={`Requirement ${idx + 1}`} value={item} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "items", String(idx)], e.target.value))} />
                   ))}
                 </>
               )}
 
-              {sectionType === "distributor-steps" && (
+              {(sectionType === "distributor-easy-steps" || sectionType === "distributor-steps") && (
                 <>
                   <input className={inputCls} placeholder="Title" value={(localized.title as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "title"], e.target.value))} />
                   <textarea className={inputCls} rows={2} placeholder="Subtitle" value={(localized.subtitle as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "subtitle"], e.target.value))} />

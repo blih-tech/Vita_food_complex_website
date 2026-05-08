@@ -10,6 +10,14 @@ interface StepProps {
   description: string;
 }
 
+interface EasyStepsContent {
+  title?: string;
+  subtitle?: string;
+  call?: { title?: string; description?: string };
+  discussion?: { title?: string; description?: string };
+  started?: { title?: string; description?: string };
+}
+
 function StepCard({ icon, title, description }: StepProps) {
   return (
     <div className="flex flex-col items-center gap-6 lg:gap-[30px] w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[484px]">
@@ -59,24 +67,24 @@ function StepCard({ icon, title, description }: StepProps) {
   );
 }
 
-export default function EasyStepsSection() {
+export default function EasyStepsSection({ content }: { content?: EasyStepsContent }) {
   const t = useTranslations("Distributor");
 
   const steps = [
     {
       icon: <Phone size={36} strokeWidth={2} color="#23B349" />,
-      title: t("steps.call.title"),
-      description: t("steps.call.description"),
+      title: content?.call?.title || t("steps.call.title"),
+      description: content?.call?.description || t("steps.call.description"),
     },
     {
       icon: <MessageSquare size={42} strokeWidth={2} color="#23B349" fill="#23B349" />,
-      title: t("steps.discussion.title"),
-      description: t("steps.discussion.description"),
+      title: content?.discussion?.title || t("steps.discussion.title"),
+      description: content?.discussion?.description || t("steps.discussion.description"),
     },
     {
       icon: <Rocket size={42} strokeWidth={2} color="#23B349" />,
-      title: t("steps.started.title"),
-      description: t("steps.started.description"),
+      title: content?.started?.title || t("steps.started.title"),
+      description: content?.started?.description || t("steps.started.description"),
     },
   ];
 
@@ -96,7 +104,7 @@ export default function EasyStepsSection() {
               color: "#23B349",
             }}
           >
-            {t("steps.title")}
+            {content?.title || t("steps.title")}
           </h2>
           <p
             className="text-center"
@@ -108,7 +116,7 @@ export default function EasyStepsSection() {
               color: "#333733",
             }}
           >
-            {t("steps.subtitle")}
+            {content?.subtitle || t("steps.subtitle")}
           </p>
         </div>
 

@@ -10,6 +10,17 @@ interface OfficeContactProps {
   coverage: string;
 }
 
+interface ContactContent {
+  title?: string;
+  description?: string;
+  offices?: Array<{
+    name?: string;
+    phone?: string;
+    address?: string;
+    coverage?: string;
+  }>;
+}
+
 function OfficeContactCard({ officeName, phone, address, coverage }: OfficeContactProps) {
   return (
     <div className="flex flex-col gap-3">
@@ -84,10 +95,9 @@ function OfficeContactCard({ officeName, phone, address, coverage }: OfficeConta
   );
 }
 
-export default function ContactDistributionSection() {
+export default function ContactDistributionSection({ content }: { content?: ContactContent }) {
   const t = useTranslations("Distributor");
-
-  const offices = [
+  const fallbackOffices = [
     {
       officeName: t("contact.offices.0.name"),
       phone: t("contact.offices.0.phone"),
@@ -107,6 +117,15 @@ export default function ContactDistributionSection() {
       coverage: t("contact.offices.2.coverage"),
     },
   ];
+  const offices =
+    content?.offices?.length
+      ? content.offices.map((office) => ({
+          officeName: office.name || "",
+          phone: office.phone || "",
+          address: office.address || "",
+          coverage: office.coverage || "",
+        }))
+      : fallbackOffices;
 
   return (
     <section
@@ -158,7 +177,7 @@ export default function ContactDistributionSection() {
                     maxWidth: 400,
                   }}
                 >
-                  {t("contact.title")}
+                  {content?.title || t("contact.title")}
                 </h3>
 
                 {/* Description */}
@@ -174,7 +193,7 @@ export default function ContactDistributionSection() {
                     maxWidth: 400,
                   }}
                 >
-                  {t("contact.description")}
+                  {content?.description || t("contact.description")}
                 </p>
               </div>
             </div>

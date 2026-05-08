@@ -10,6 +10,17 @@ interface BenefitCardProps {
   isHighlighted?: boolean;
 }
 
+interface WhyWorkContent {
+  title?: string;
+  description?: string;
+  cards?: {
+    demand?: string;
+    supply?: string;
+    brand?: string;
+    margins?: string;
+  };
+}
+
 function BenefitCard({ icon, label, isHighlighted = false }: BenefitCardProps) {
   return (
     <div
@@ -52,28 +63,35 @@ function BenefitCard({ icon, label, isHighlighted = false }: BenefitCardProps) {
   );
 }
 
-export default function WhyWorkWithVitaSection() {
+export default function WhyWorkWithVitaSection({ content }: { content?: WhyWorkContent }) {
   const t = useTranslations("Distributor");
+
+  const cards = {
+    demand: content?.cards?.demand || t("whyWork.cards.demand"),
+    supply: content?.cards?.supply || t("whyWork.cards.supply"),
+    brand: content?.cards?.brand || t("whyWork.cards.brand"),
+    margins: content?.cards?.margins || t("whyWork.cards.margins"),
+  };
 
   const benefits = [
     {
       icon: <TrendingUp size={28} strokeWidth={2.5} />,
-      label: t("whyWork.cards.demand"),
+      label: cards.demand,
       isHighlighted: true,
     },
     {
       icon: <Truck size={28} strokeWidth={2.5} />,
-      label: t("whyWork.cards.supply"),
+      label: cards.supply,
       isHighlighted: false,
     },
     {
       icon: <ShieldCheck size={28} strokeWidth={2.5} />,
-      label: t("whyWork.cards.brand"),
+      label: cards.brand,
       isHighlighted: false,
     },
     {
       icon: <BadgeDollarSign size={28} strokeWidth={2.5} />,
-      label: t("whyWork.cards.margins"),
+      label: cards.margins,
       isHighlighted: false,
     },
   ];
@@ -94,7 +112,7 @@ export default function WhyWorkWithVitaSection() {
               color: "#23B349",
             }}
           >
-            {t("whyWork.title")}
+            {content?.title || t("whyWork.title")}
           </h2>
 
           {/* Description */}
@@ -108,7 +126,7 @@ export default function WhyWorkWithVitaSection() {
               color: "#000000",
             }}
           >
-            {t("whyWork.description")}
+            {content?.description || t("whyWork.description")}
           </p>
         </div>
 
