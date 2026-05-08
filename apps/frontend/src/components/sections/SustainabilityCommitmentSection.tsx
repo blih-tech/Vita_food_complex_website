@@ -103,7 +103,7 @@ export default function SustainabilityCommitmentSection() {
 
           {/* Commitment cards - Grid layout for all screen sizes */}
           <div
-            className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-[clamp(16px,2.5vw,24px)] w-full"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[clamp(16px,2.5vw,24px)] w-full"
             data-node-id="274:5242"
             data-name="Commitment card"
           >
@@ -134,7 +134,7 @@ export default function SustainabilityCommitmentSection() {
                     data-node-id={`274:${5245 + index}`}
                   />
                   <div
-                    className="absolute h-[clamp(280px,60%,430.789px)] left-1/2 top-[clamp(40px,15%,127.91px)] w-[90%] sm:w-[95%] lg:w-[544px] -translate-x-1/2"
+                    className="absolute h-[clamp(280px,60%,430.789px)] left-1/2 top-[clamp(40px,15%,127.91px)] w-[90%] -translate-x-1/2"
                     data-node-id={`274:${5246 + index}`}
                     data-name="Frame"
                   >
@@ -216,7 +216,7 @@ export default function SustainabilityCommitmentSection() {
 
           {/* Quick Fact section */}
           <div
-            className="relative min-h-[700px] md:min-h-[800px] 2xl:h-[943.333px] rounded-[24px] sm:rounded-[32px] lg:rounded-[48px] w-full max-w-[1600px] mx-auto overflow-hidden"
+            className="relative min-h-[980px] md:min-h-[800px] 2xl:h-[943.333px] rounded-[24px] sm:rounded-[32px] lg:rounded-[48px] w-full max-w-[1600px] mx-auto overflow-hidden"
             data-node-id="274:5315"
             data-name="Quick fact"
           >
