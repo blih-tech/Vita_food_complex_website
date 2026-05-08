@@ -12,10 +12,10 @@ interface OfficeContactProps {
 
 function OfficeContactCard({ officeName, phone, address, coverage }: OfficeContactProps) {
   return (
-    <div className="flex flex-col gap-3" style={{ borderBottom: "1px solid #E8E8E8", paddingBottom: 24 }}>
+    <div className="flex flex-col gap-3">
       {/* Office name */}
       <div className="flex items-center gap-3">
-        <Building2 size={20} color="#333733" strokeWidth={1.5} />
+        <Building2 size={24} color="#333733" strokeWidth={1.5} />
         <span
           style={{
             fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
@@ -32,7 +32,7 @@ function OfficeContactCard({ officeName, phone, address, coverage }: OfficeConta
 
       {/* Phone */}
       <div className="flex items-center gap-3">
-        <Phone size={20} color="#23B349" strokeWidth={1.5} />
+        <Phone size={24} color="#23B349" strokeWidth={1.5} />
         <span
           style={{
             fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
@@ -49,7 +49,7 @@ function OfficeContactCard({ officeName, phone, address, coverage }: OfficeConta
 
       {/* Address */}
       <div className="flex items-center gap-3">
-        <MapPin size={20} color="#333733" strokeWidth={1.5} />
+        <MapPin size={24} color="#333733" strokeWidth={1.5} />
         <span
           style={{
             fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
@@ -66,7 +66,7 @@ function OfficeContactCard({ officeName, phone, address, coverage }: OfficeConta
 
       {/* Coverage */}
       <div className="flex items-center gap-3">
-        <MapPin size={20} color="#333733" strokeWidth={1.5} />
+        <MapPin size={24} color="#333733" strokeWidth={1.5} />
         <span
           style={{
             fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
@@ -116,68 +116,71 @@ export default function ContactDistributionSection() {
       <div className="mx-auto max-w-[1114px] px-4 sm:px-6">
         {/* Card container */}
         <div
-          className="relative overflow-hidden rounded-[32px] sm:rounded-[48px]"
+          className="relative overflow-hidden rounded-[48px] lg:min-h-[520px]"
           style={{
             background: "#FDFDFD",
             border: "1px solid #23B349",
             boxShadow: "0px 0px 65px 33px rgba(0, 0, 0, 0.03)",
           }}
         >
-          <div className="flex flex-col lg:flex-row">
-            {/* Left green panel */}
-            <div
-              className="relative flex flex-col items-start justify-center gap-6 overflow-hidden w-full lg:min-w-[457px] p-8 sm:p-10 lg:p-[64px_40px] min-h-[260px] sm:min-h-[320px] lg:min-h-[500px]"
-              style={{
-                background:
-                  "linear-gradient(170.79deg, #23B349 46.23%, rgba(35, 179, 73, 0.37) 101.23%)",
-              }}
-            >
-              {/* Dot pattern overlay */}
+          <div className="flex flex-col lg:flex-row lg:items-stretch">
+            {/* Left inset frame (Figma: x=17, y=11, radius=48) */}
+            <div className="w-full lg:flex-none lg:w-[457px] lg:pl-[17px] lg:py-[11px]">
+              {/* Left green panel */}
               <div
-                className="absolute inset-0 opacity-20 pointer-events-none"
+                className="relative flex flex-col items-start justify-start gap-6 overflow-hidden rounded-[48px] border border-[#23B349] w-full p-8 sm:p-10 lg:p-[64px_40px] min-h-[260px] sm:min-h-[320px] lg:min-h-[498px] lg:h-full"
                 style={{
-                  backgroundImage:
-                    "radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)",
-                  backgroundSize: "16px 16px",
-                }}
-              />
-
-              {/* Title */}
-              <h3
-                className="relative z-10"
-                style={{
-                  fontFamily:
-                    "var(--font-funnel-display), 'Funnel Display', sans-serif",
-                  fontWeight: 400,
-                  fontSize: "clamp(28px, 3.5vw, 48px)",
-                  lineHeight: "1",
-                  letterSpacing: "-0.01em",
-                  color: "#FFFFFF",
-                  maxWidth: 400,
+                  background:
+                    "linear-gradient(170.79deg, #23B349 46.23%, rgba(35, 179, 73, 0.37) 101.23%)",
                 }}
               >
-                {t("contact.title")}
-              </h3>
+                {/* Dot pattern overlay */}
+                <div
+                  className="absolute inset-0 opacity-20 pointer-events-none"
+                  style={{
+                    backgroundImage:
+                      "radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)",
+                    backgroundSize: "12px 12px",
+                  }}
+                />
 
-              {/* Description */}
-              <p
-                className="relative z-10"
-                style={{
-                  fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
-                  fontWeight: 400,
-                  fontSize: "clamp(16px, 1.5vw, 24px)",
-                  lineHeight: "1.5",
-                  letterSpacing: "-0.004em",
-                  color: "#E8E8E8",
-                  maxWidth: 400,
-                }}
-              >
-                {t("contact.description")}
-              </p>
+                {/* Title */}
+                <h3
+                  className="relative z-10"
+                  style={{
+                    fontFamily:
+                      "var(--font-funnel-display), 'Funnel Display', sans-serif",
+                    fontWeight: 400,
+                    fontSize: "clamp(28px, 3.5vw, 48px)",
+                    lineHeight: "1",
+                    letterSpacing: "-0.01em",
+                    color: "#FFFFFF",
+                    maxWidth: 400,
+                  }}
+                >
+                  {t("contact.title")}
+                </h3>
+
+                {/* Description */}
+                <p
+                  className="relative z-10"
+                  style={{
+                    fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
+                    fontWeight: 400,
+                    fontSize: "clamp(16px, 1.5vw, 24px)",
+                    lineHeight: "1.5",
+                    letterSpacing: "-0.004em",
+                    color: "#E8E8E8",
+                    maxWidth: 400,
+                  }}
+                >
+                  {t("contact.description")}
+                </p>
+              </div>
             </div>
 
             {/* Right contact list */}
-            <div className="flex flex-col justify-center gap-6 lg:gap-8 p-6 sm:p-8 lg:p-[48px_40px] flex-1">
+            <div className="flex flex-col justify-start gap-6 sm:gap-8 lg:gap-8 p-6 sm:p-8 lg:p-[56px_40px] flex-1 border-t border-[#23B349]/10 lg:border-t-0 lg:h-full">
               {offices.map((office, idx) => (
                 <OfficeContactCard key={idx} {...office} />
               ))}
