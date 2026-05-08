@@ -17,6 +17,7 @@ export default function PageEditor({ params: paramsPromise }: { params: Promise<
   useEffect(() => {
     if (params.slug === 'home')  { router.replace('/home');  return; }
     if (params.slug === 'about') { router.replace('/about'); return; }
+    if (params.slug === 'become-distributor') { router.replace('/become-distributor'); return; }
     fetchPage();
   }, [params.slug]);
 

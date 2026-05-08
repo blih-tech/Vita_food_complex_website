@@ -2,7 +2,7 @@
 
 import {
   LayoutDashboard, FileText, ShoppingBag, Briefcase,
-  MessageSquare, Users, Settings, LogOut, ChevronRight, X, Newspaper, Heart, HelpCircle, ScrollText,
+  MessageSquare, Users, Settings, LogOut, ChevronRight, X, Newspaper, Heart, HelpCircle, ScrollText, UtensilsCrossed,
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -21,6 +21,7 @@ const navSections = [
     label: 'Catalogue',
     items: [
       { icon: ShoppingBag, label: 'Products', href: '/products' },
+      { icon: UtensilsCrossed, label: 'Recipes', href: '/recipes' },
       { icon: Briefcase,   label: 'Careers',  href: '/careers' },
     ],
   },
@@ -54,7 +55,14 @@ export default function Sidebar({ open = false, onClose }: SidebarProps) {
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
-    if (href === '/pages') return pathname.startsWith('/pages') || pathname.startsWith('/home') || pathname.startsWith('/about');
+    if (href === '/pages') {
+      return (
+        pathname.startsWith('/pages') ||
+        pathname.startsWith('/home') ||
+        pathname.startsWith('/about') ||
+        pathname.startsWith('/become-distributor')
+      );
+    }
     return pathname.startsWith(href);
   };
 

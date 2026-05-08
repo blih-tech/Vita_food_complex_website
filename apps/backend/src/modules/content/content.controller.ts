@@ -9,6 +9,7 @@ import { CloudinaryService } from '../cloudinary/cloudinary.service';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../../common/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
+import { becomeDistributorDefaultPage } from './default-pages/become-distributor.default';
 
 @Controller('content')
 export class ContentController {
@@ -57,6 +58,16 @@ export class ContentController {
   @Roles('admin')
   async upsert(@Body() pageData: any) {
     return this.contentService.upsert(pageData.slug, pageData);
+  }
+
+  @Post('pages/become-distributor/initialize')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
+  async initializeBecomeDistributorPage() {
+    return this.contentService.upsert(
+      becomeDistributorDefaultPage.slug,
+      becomeDistributorDefaultPage,
+    );
   }
 
   @Post('upload-image')

@@ -45,7 +45,8 @@ export default function DistributorHeroSection() {
             {/* Sub-label */}
             <span
               style={{
-                fontFamily: "var(--font-funnel-display), 'Funnel Display', sans-serif",
+                fontFamily:
+                  "var(--font-funnel-display), 'Funnel Display', sans-serif",
                 fontWeight: 500,
                 fontSize: "clamp(16px, 2vw, 24px)",
                 lineHeight: "1",
@@ -61,7 +62,8 @@ export default function DistributorHeroSection() {
             <h1
               className="text-[40px] sm:text-[56px] lg:text-[80px]"
               style={{
-                fontFamily: "var(--font-funnel-display), 'Funnel Display', sans-serif",
+                fontFamily:
+                  "var(--font-funnel-display), 'Funnel Display', sans-serif",
                 fontWeight: 500,
                 lineHeight: "1",
                 letterSpacing: "-0.004em",
@@ -75,7 +77,8 @@ export default function DistributorHeroSection() {
             {/* Subtitle */}
             <p
               style={{
-                fontFamily: "var(--font-funnel-display), 'Funnel Display', sans-serif",
+                fontFamily:
+                  "var(--font-funnel-display), 'Funnel Display', sans-serif",
                 fontWeight: 500,
                 fontSize: "clamp(16px, 2vw, 24px)",
                 lineHeight: "1",
@@ -96,7 +99,8 @@ export default function DistributorHeroSection() {
             <span
               className="text-[18px] sm:text-[24px]"
               style={{
-                fontFamily: "var(--font-funnel-display), 'Funnel Display', sans-serif",
+                fontFamily:
+                  "var(--font-funnel-display), 'Funnel Display', sans-serif",
                 fontWeight: 500,
                 lineHeight: "30px",
                 letterSpacing: "-0.004em",

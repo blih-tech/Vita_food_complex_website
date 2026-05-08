@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import {
   Home, Info, ShoppingBag, Phone, Image as ImageIcon,
-  Briefcase, FileText, Edit3, ExternalLink, RefreshCw,
+  Briefcase, FileText, Edit3, ExternalLink, RefreshCw, UtensilsCrossed, Truck,
   CheckCircle, Clock,
 } from "lucide-react";
 import Link from "next/link";
@@ -29,12 +29,28 @@ const ALL_PAGES = [
     liveHref: "https://vitafoodcomplex.vercel.app/en/about",
   },
   {
+    slug: "become-distributor",
+    name: "Become Distributor",
+    description: "Distributor journey and office contact sections",
+    icon: Truck,
+    editorHref: "/become-distributor",
+    liveHref: "https://vitafoodcomplex.vercel.app/en/become-distributor",
+  },
+  {
     slug: "products",
     name: "Products",
     description: "Product catalogue and categories",
     icon: ShoppingBag,
     editorHref: null,
     liveHref: "https://vitafoodcomplex.vercel.app/en/products",
+  },
+  {
+    slug: "recipes",
+    name: "Recipes",
+    description: "Recipe hero, intro, and recipe cards",
+    icon: UtensilsCrossed,
+    editorHref: "/recipes",
+    liveHref: "https://vitafoodcomplex.vercel.app/en/recipes",
   },
   {
     slug: "contact",

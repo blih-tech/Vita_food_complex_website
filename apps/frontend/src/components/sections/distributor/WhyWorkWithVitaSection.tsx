@@ -1,12 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import {
-  TrendingUp,
-  Truck,
-  ShieldCheck,
-  BadgeDollarSign,
-} from "lucide-react";
+import { TrendingUp, Truck, ShieldCheck, BadgeDollarSign } from "lucide-react";
 import type { ReactNode } from "react";
 
 interface BenefitCardProps {
@@ -42,7 +37,8 @@ function BenefitCard({ icon, label, isHighlighted = false }: BenefitCardProps) {
       <p
         className="text-center mt-4 sm:mt-0"
         style={{
-          fontFamily: "var(--font-funnel-display), 'Funnel Display', sans-serif",
+          fontFamily:
+            "var(--font-funnel-display), 'Funnel Display', sans-serif",
           fontWeight: 500,
           fontSize: 20,
           lineHeight: "25px",
