@@ -411,44 +411,44 @@ export default function BecomeDistributorAdminPage() {
             <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
               {sectionType === "distributor-hero" && (
                 <>
-                  <input className={inputCls} placeholder="Label" value={(localized.label as string) ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "label"], e.target.value))} />
-                  <input className={inputCls} placeholder="Headline" value={(localized.headline as string) ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "headline"], e.target.value))} />
-                  <textarea className={inputCls} rows={3} placeholder="Subtitle" value={(localized.subtitle as string) ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "subtitle"], e.target.value))} />
-                  <input className={inputCls} placeholder="CTA" value={(localized.cta as string) ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "cta"], e.target.value))} />
+                  <input className={inputCls} placeholder="Label" value={(localized.label as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "label"], e.target.value))} />
+                  <input className={inputCls} placeholder="Headline" value={(localized.headline as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "headline"], e.target.value))} />
+                  <textarea className={inputCls} rows={3} placeholder="Subtitle" value={(localized.subtitle as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "subtitle"], e.target.value))} />
+                  <input className={inputCls} placeholder="CTA" value={(localized.cta as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "cta"], e.target.value))} />
                 </>
               )}
 
               {sectionType === "distributor-why-work" && (
                 <>
-                  <input className={inputCls} placeholder="Title" value={(localized.title as string) ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "title"], e.target.value))} />
-                  <textarea className={inputCls} rows={2} placeholder="Description" value={(localized.description as string) ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "description"], e.target.value))} />
-                  <input className={inputCls} placeholder="Card: demand" value={(localized.cards as Record<string, string> | undefined)?.demand ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "cards", "demand"], e.target.value))} />
-                  <input className={inputCls} placeholder="Card: supply" value={(localized.cards as Record<string, string> | undefined)?.supply ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "cards", "supply"], e.target.value))} />
-                  <input className={inputCls} placeholder="Card: brand" value={(localized.cards as Record<string, string> | undefined)?.brand ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "cards", "brand"], e.target.value))} />
-                  <input className={inputCls} placeholder="Card: margins" value={(localized.cards as Record<string, string> | undefined)?.margins ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "cards", "margins"], e.target.value))} />
+                  <input className={inputCls} placeholder="Title" value={(localized.title as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "title"], e.target.value))} />
+                  <textarea className={inputCls} rows={2} placeholder="Description" value={(localized.description as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "description"], e.target.value))} />
+                  <input className={inputCls} placeholder="Card: demand" value={(localized.cards as Record<string, string> | undefined)?.demand ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "cards", "demand"], e.target.value))} />
+                  <input className={inputCls} placeholder="Card: supply" value={(localized.cards as Record<string, string> | undefined)?.supply ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "cards", "supply"], e.target.value))} />
+                  <input className={inputCls} placeholder="Card: brand" value={(localized.cards as Record<string, string> | undefined)?.brand ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "cards", "brand"], e.target.value))} />
+                  <input className={inputCls} placeholder="Card: margins" value={(localized.cards as Record<string, string> | undefined)?.margins ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "cards", "margins"], e.target.value))} />
                 </>
               )}
 
               {sectionType === "distributor-who-can-partner" && (
                 <>
-                  <input className={inputCls} placeholder="Section title" value={(localized.sectionTitle as string) ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "sectionTitle"], e.target.value))} />
-                  <input className={inputCls} placeholder="Title" value={(localized.title as string) ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "title"], e.target.value))} />
-                  <textarea className={inputCls} rows={2} placeholder="Description" value={(localized.description as string) ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "description"], e.target.value))} />
+                  <input className={inputCls} placeholder="Section title" value={(localized.sectionTitle as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "sectionTitle"], e.target.value))} />
+                  <input className={inputCls} placeholder="Title" value={(localized.title as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "title"], e.target.value))} />
+                  <textarea className={inputCls} rows={2} placeholder="Description" value={(localized.description as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "description"], e.target.value))} />
                   {((localized.items as string[] | undefined) ?? []).map((item, idx) => (
-                    <input key={idx} className={inputCls} placeholder={`Requirement ${idx + 1}`} value={item} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "items", String(idx)], e.target.value))} />
+                    <input key={idx} className={inputCls} placeholder={`Requirement ${idx + 1}`} value={item} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "items", String(idx)], e.target.value))} />
                   ))}
                 </>
               )}
 
               {sectionType === "distributor-steps" && (
                 <>
-                  <input className={inputCls} placeholder="Title" value={(localized.title as string) ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "title"], e.target.value))} />
-                  <textarea className={inputCls} rows={2} placeholder="Subtitle" value={(localized.subtitle as string) ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "subtitle"], e.target.value))} />
+                  <input className={inputCls} placeholder="Title" value={(localized.title as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "title"], e.target.value))} />
+                  <textarea className={inputCls} rows={2} placeholder="Subtitle" value={(localized.subtitle as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "subtitle"], e.target.value))} />
                   {(["call", "discussion", "started"] as const).map((key) => (
                     <div key={key} className="border border-gray-100 rounded-[10px] p-3 space-y-2">
                       <p className="text-xs font-bold uppercase text-gray-400">{key}</p>
-                      <input className={inputCls} placeholder={`${key} title`} value={((localized[key] as Record<string, string> | undefined)?.title) ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, key, "title"], e.target.value))} />
-                      <textarea className={inputCls} rows={2} placeholder={`${key} description`} value={((localized[key] as Record<string, string> | undefined)?.description) ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, key, "description"], e.target.value))} />
+                      <input className={inputCls} placeholder={`${key} title`} value={((localized[key] as Record<string, string> | undefined)?.title) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, key, "title"], e.target.value))} />
+                      <textarea className={inputCls} rows={2} placeholder={`${key} description`} value={((localized[key] as Record<string, string> | undefined)?.description) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, key, "description"], e.target.value))} />
                     </div>
                   ))}
                 </>
@@ -456,15 +456,15 @@ export default function BecomeDistributorAdminPage() {
 
               {sectionType === "distributor-contact" && (
                 <>
-                  <input className={inputCls} placeholder="Title" value={(localized.title as string) ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "title"], e.target.value))} />
-                  <textarea className={inputCls} rows={2} placeholder="Description" value={(localized.description as string) ?? ""} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "description"], e.target.value))} />
+                  <input className={inputCls} placeholder="Title" value={(localized.title as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "title"], e.target.value))} />
+                  <textarea className={inputCls} rows={2} placeholder="Description" value={(localized.description as string) ?? ""} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "description"], e.target.value))} />
                   {((localized.offices as ContactOffice[] | undefined) ?? []).map((office, idx) => (
                     <div key={idx} className="border border-gray-100 rounded-[10px] p-3 space-y-2">
                       <p className="text-xs font-bold uppercase text-gray-400">Office {idx + 1}</p>
-                      <input className={inputCls} placeholder="Name" value={office.name} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "offices", String(idx), "name"], e.target.value))} />
-                      <input className={inputCls} placeholder="Phone" value={office.phone} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "offices", String(idx), "phone"], e.target.value))} />
-                      <input className={inputCls} placeholder="Address" value={office.address} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "offices", String(idx), "address"], e.target.value))} />
-                      <input className={inputCls} placeholder="Coverage" value={office.coverage} onChange={(e) => setFormContent((prev) => setAtPath(prev as object, [lang, "offices", String(idx), "coverage"], e.target.value))} />
+                      <input className={inputCls} placeholder="Name" value={office.name} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "offices", String(idx), "name"], e.target.value))} />
+                      <input className={inputCls} placeholder="Phone" value={office.phone} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "offices", String(idx), "phone"], e.target.value))} />
+                      <input className={inputCls} placeholder="Address" value={office.address} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "offices", String(idx), "address"], e.target.value))} />
+                      <input className={inputCls} placeholder="Coverage" value={office.coverage} onChange={(e) => setFormContent((prev: unknown) => setAtPath((prev ?? {}) as object, [lang, "offices", String(idx), "coverage"], e.target.value))} />
                     </div>
                   ))}
                 </>
