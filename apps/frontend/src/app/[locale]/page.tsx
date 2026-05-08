@@ -64,7 +64,7 @@ export default function Home({ params: paramsPromise }: { params: Promise<{ loca
         if (!Component) return null;
         
         return (
-          <div key={section.id} style={{ zIndex: 100 - index }} className="relative">
+          <div key={section.id} className="relative">
             <Component content={section.content} locale={locale} />
           </div>
         );
