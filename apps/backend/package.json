@@ -12,6 +12,7 @@
     "seed": "ts-node src/scripts/seed.ts",
     "seed:admin": "ts-node src/scripts/seed-admin.ts",
     "seed:products": "ts-node -r tsconfig-paths/register src/scripts/seed-products.ts",
+    "seed:distributor-content": "node src/seed-become-distributor.js",
     "type-check": "tsc --noEmit",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
