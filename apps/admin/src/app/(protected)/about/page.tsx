@@ -482,7 +482,16 @@ export default function AboutAdminPage() {
   const fetchPage = useCallback(async () => {
     try {
       const res = await api.get("/content/pages/about");
-      setPage(res.data);
+      const fetched: PageData = res.data;
+      const existingTypes = new Set((fetched.sections || []).map((s: Section) => s.type));
+      const missing = DEFAULT_PAGE.sections.filter(s => !existingTypes.has(s.type));
+      if (missing.length > 0) {
+        const merged = { ...fetched, sections: [...(fetched.sections || []), ...missing] };
+        const synced = await api.post("/content/pages/upsert", merged);
+        setPage(synced.data);
+      } else {
+        setPage(fetched);
+      }
     } catch {
       setPage(null);
     } finally {
@@ -505,22 +514,6 @@ export default function AboutAdminPage() {
     }
   };
 
-  const syncMissingSections = async (currentPage: PageData) => {
-    setInitializing(true);
-    try {
-      const existingTypes = new Set(currentPage.sections.map(s => s.type));
-      const missingSections = DEFAULT_PAGE.sections.filter(s => !existingTypes.has(s.type));
-      if (missingSections.length === 0) { showToast("success", "All sections are already present."); return; }
-      const merged = { ...currentPage, sections: [...currentPage.sections, ...missingSections] };
-      const res = await api.post("/content/pages/upsert", merged);
-      setPage(res.data);
-      showToast("success", `Added ${missingSections.length} missing section(s).`);
-    } catch {
-      showToast("error", "Failed to sync sections.");
-    } finally {
-      setInitializing(false);
-    }
-  };
 
   const saveSection = async (content: any) => {
     if (!editSection) return;
@@ -576,22 +569,6 @@ export default function AboutAdminPage() {
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#23B349] text-white rounded-full font-semibold text-sm hover:bg-[#1a9e3e] disabled:opacity-60 transition-colors">
             {initializing ? <RefreshCw size={14} className="animate-spin" /> : <CheckCircle size={14} />}
             {initializing ? "Initializing…" : "Initialize About Page"}
-          </button>
-        </div>
-      )}
-
-      {page && page.sections.length < DEFAULT_PAGE.sections.length && (
-        <div className="mb-4 bg-amber-50 border border-amber-200 rounded-[16px] p-4 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <AlertCircle size={18} className="text-amber-500 shrink-0" />
-            <p className="text-sm text-amber-800 font-medium">
-              {DEFAULT_PAGE.sections.length - page.sections.length} section(s) are missing from the database.
-            </p>
-          </div>
-          <button onClick={() => syncMissingSections(page)} disabled={initializing}
-            className="flex items-center gap-2 px-4 py-2 rounded-[10px] text-sm font-semibold bg-amber-500 text-white hover:bg-amber-600 disabled:opacity-60 transition-colors shrink-0">
-            {initializing ? <RefreshCw size={13} className="animate-spin" /> : <CheckCircle size={13} />}
-            {initializing ? "Syncing…" : "Add Missing Sections"}
           </button>
         </div>
       )}
