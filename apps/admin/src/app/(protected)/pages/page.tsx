@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import {
   Home, Info, ShoppingBag, Phone, Image as ImageIcon,
   Briefcase, FileText, Edit3, ExternalLink, RefreshCw, UtensilsCrossed, Truck, Star,
-  CheckCircle, Clock, Leaf, Globe,
+  CheckCircle, Clock, Leaf, Globe, Lightbulb,
 } from "lucide-react";
 import Link from "next/link";
 import api from "@/lib/api";
@@ -83,6 +83,14 @@ const ALL_PAGES = [
     icon: Briefcase,
     editorHref: null,
     liveHref: "https://vitafoodcomplex.vercel.app/en/careers",
+  },
+  {
+    slug: "innovation",
+    name: "Innovation",
+    description: "Approach and diverse business ecosystem",
+    icon: Lightbulb,
+    editorHref: "/innovation",
+    liveHref: "https://vitafoodcomplex.vercel.app/en/innovation",
   },
   {
     slug: "people-planet",

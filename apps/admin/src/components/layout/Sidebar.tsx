@@ -61,6 +61,7 @@ export default function Sidebar({ open = false, onClose }: SidebarProps) {
         pathname.startsWith('/home') ||
         pathname.startsWith('/about') ||
         pathname.startsWith('/become-distributor') ||
+        pathname.startsWith('/innovation') ||
         pathname.startsWith('/people-planet') ||
         pathname.startsWith('/sustainability')
       );

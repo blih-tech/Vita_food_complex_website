@@ -1,15 +1,21 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-export default function InnovationHeroSection() {
+export default function InnovationHeroSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Innovation.hero");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
+
+  const headline = c?.headline || t("headline");
+  const subtitle = c?.subtitle || t("subtitle");
+  const heroImage = c?.heroImage || "/assets/about/wheat-farming.png";
 
   return (
     <section className="relative w-full h-[1006px] flex flex-col items-center justify-center rounded-b-[48px] overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/assets/about/wheat-farming.png"
+          src={heroImage}
           alt="Wheat farming background"
           fill
           className="object-cover"
@@ -23,10 +29,10 @@ export default function InnovationHeroSection() {
       {/* Content */}
       <div className="relative z-20 flex flex-col items-center gap-6 px-4 max-w-[1028px] mx-auto text-center mt-[100px]">
         <h1 className="font-outfit font-extrabold text-[80px] leading-[90%] tracking-[-0.02em] text-white whitespace-pre-line">
-          {t("headline")}
+          {headline}
         </h1>
         <p className="font-funnel font-medium text-[24px] leading-none tracking-[-0.004em] text-white max-w-[676px]">
-          {t("subtitle")}
+          {subtitle}
         </p>
       </div>
     </section>
