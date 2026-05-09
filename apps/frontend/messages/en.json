@@ -614,7 +614,8 @@
         "label": "Unique SKUs for Everyone."
       },
       "biscuits": {
-        "value": "2tn"
+        "value": "2tn",
+        "label": "Biscuits Produced/Hour"
       },
       "flour": {
         "value": "60tn",

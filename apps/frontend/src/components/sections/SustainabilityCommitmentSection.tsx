@@ -3,26 +3,22 @@
 import { useTranslations } from "next-intl";
 import { useState, useEffect, useRef } from "react";
 
-// Figma assets from MCP
-const imgQuickFact =
-  "https://www.figma.com/api/mcp/asset/88c9664b-053f-4650-b3a7-5e6539068e18";
-const imgDollar1 =
-  "https://www.figma.com/api/mcp/asset/f418b127-5c30-4b56-89f8-7fb3d447b8c7";
-const imgFrame =
-  "https://www.figma.com/api/mcp/asset/a310c2c1-8101-453b-8041-3fc6c9715b6a";
-const imgVector =
-  "https://www.figma.com/api/mcp/asset/d25ad5e8-5c9d-4532-abef-a40f6313e6d2";
-const imgFrame1 =
-  "https://www.figma.com/api/mcp/asset/aa606042-4f6d-4557-9eda-4d275fc66dc6";
-const imgSubtract =
-  "https://www.figma.com/api/mcp/asset/f62a2636-81eb-42fa-84ad-febc3ed7b80f";
-const imgSubtract1 =
-  "https://www.figma.com/api/mcp/asset/38bca506-7565-480f-8d0d-7a0e75cecec8";
-
 export default function SustainabilityCommitmentSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Sustainability");
   const lang = (locale || "en") as "en" | "am";
   const c = content?.[lang];
+
+  // CMS-driven assets with local fallbacks
+  const assets = c?.assets || {};
+  const statsBackgrounds = c?.stats?.backgrounds || {};
+
+  const imgQuickFact = statsBackgrounds.quickFact || "https://res.cloudinary.com/dd4haxhgy/image/upload/v1778333851/vita-food/sustainability/assets/sustainability/assets/imgQuickFact.png";
+  const imgDollar1 = statsBackgrounds.dollar1 || "/assets/hero/hero-bg-element.svg";
+  const imgFrame = assets.imgFrame || "/assets/about/hero-background-frame.webp";
+  const imgVector = assets.imgVector || "/assets/products/items/related-vector.png";
+  const imgFrame1 = assets.imgFrame1 || "/assets/about/hero-background-frame.webp";
+  const imgSubtract = statsBackgrounds.subtract || "/assets/sections/wave-vector-2.svg";
+  const imgSubtract1 = statsBackgrounds.subtract1 || "/assets/sections/wave-vector-2.svg";
 
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);

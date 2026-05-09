@@ -614,7 +614,8 @@
         "label": "ለሁሉም ሰው የሚሆኑ ልዩ ምርቶች።"
       },
       "biscuits": {
-        "value": "2tn"
+        "value": "2tn",
+        "label": "በሰዓት የሚመረቱ ቢስኩቶች"
       },
       "flour": {
         "value": "60tn",
