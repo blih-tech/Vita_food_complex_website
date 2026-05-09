@@ -104,9 +104,13 @@ export default function ResearchOverviewSection({ content, locale }: { content?:
           <div className="relative w-full h-[300px] md:h-[400px] mt-12 ml-0 sm:ml-16">
             
             {/* Grid lines (Y-axis markers) */}
-            <div className="absolute inset-0 flex flex-col justify-between z-0 pointer-events-none">
+            <div className="absolute inset-0 z-0 pointer-events-none">
               {[100, 75, 50, 25, 0].map((tick) => (
-                <div key={tick} className="flex flex-row items-center w-full gap-4 relative">
+                <div 
+                  key={tick} 
+                  className="absolute w-full flex flex-row items-center gap-4"
+                  style={{ bottom: `${tick}%`, transform: 'translateY(50%)' }}
+                >
                   <span className="hidden sm:block font-['Funnel_Display'] font-medium text-[16px] md:text-[24px] text-black w-12 text-right absolute -left-16">
                     {tick}%
                   </span>
