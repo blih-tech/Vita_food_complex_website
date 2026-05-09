@@ -35,7 +35,7 @@ export default function OurProductSection({ content, locale }: { content?: any; 
 
         {/* Product Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {products.map((p, i) => (
+          {(products as { title: string; description: string; image: string; href: string }[]).map((p, i) => (
             <Link 
               key={i} 
               href={p.href}
