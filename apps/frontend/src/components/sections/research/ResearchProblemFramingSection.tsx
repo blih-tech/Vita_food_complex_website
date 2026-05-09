@@ -3,8 +3,19 @@
 import { Users, HelpCircle, Clock, Target } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-export default function ResearchProblemFramingSection() {
+export default function ResearchProblemFramingSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Research.problemFraming");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
+
+  const heading = c?.heading || t("heading");
+  const description = c?.description || t("description");
+  const cards = c?.cards || {
+    who: { title: t("cards.who.title"), text: t("cards.who.text") },
+    what: { title: t("cards.what.title"), text: t("cards.what.text") },
+    when: { title: t("cards.when.title"), text: t("cards.when.text") },
+    why: { title: t("cards.why.title"), text: t("cards.why.text") },
+  };
 
   return (
     <section className="w-full bg-white px-4 md:px-12 lg:px-24 py-16 lg:py-32">
@@ -13,10 +24,10 @@ export default function ResearchProblemFramingSection() {
         {/* Left Side: Text Content */}
         <div className="flex flex-col gap-6 lg:gap-8 lg:w-[45%] lg:sticky lg:top-32">
           <h2 className="font-['Outfit'] font-extrabold text-[48px] md:text-[60px] lg:text-[80px] leading-[90%] tracking-[-0.02em] text-[#23B349] uppercase">
-            {t("heading")}
+            {heading}
           </h2>
           <p className="font-['Funnel_Display'] font-medium text-[18px] md:text-[24px] leading-tight text-[#8A8C8A] tracking-[-0.004em] max-w-[600px]">
-            {t("description")}
+            {description}
           </p>
         </div>
 
@@ -29,10 +40,10 @@ export default function ResearchProblemFramingSection() {
               <Users className="w-6 h-6 text-[#23B349]" />
             </div>
             <h3 className="font-['Funnel_Display'] font-bold text-[28px] md:text-[32px] text-white leading-[120%] tracking-[-0.03em] mb-2 mt-4">
-              {t("cards.who.title")}
+              {cards.who.title}
             </h3>
             <p className="font-['Outfit'] font-normal text-[16px] md:text-[18px] text-white leading-[138%] tracking-[-0.01em]">
-              {t("cards.who.text")}
+              {cards.who.text}
             </p>
           </div>
 
@@ -42,10 +53,10 @@ export default function ResearchProblemFramingSection() {
               <HelpCircle className="w-6 h-6 text-white" />
             </div>
             <h3 className="font-['Funnel_Display'] font-bold text-[28px] md:text-[32px] text-[#404040] leading-[120%] tracking-[-0.03em] mb-2 mt-4">
-              {t("cards.what.title")}
+              {cards.what.title}
             </h3>
             <p className="font-['Outfit'] font-normal text-[16px] md:text-[18px] text-[#404040] leading-[138%] tracking-[-0.01em]">
-              {t("cards.what.text")}
+              {cards.what.text}
             </p>
           </div>
 
@@ -55,10 +66,10 @@ export default function ResearchProblemFramingSection() {
               <Clock className="w-6 h-6 text-[#FFEC19]" />
             </div>
             <h3 className="font-['Funnel_Display'] font-bold text-[28px] md:text-[32px] text-[#404040] leading-[120%] tracking-[-0.03em] mb-2 mt-4">
-              {t("cards.when.title")}
+              {cards.when.title}
             </h3>
             <p className="font-['Outfit'] font-normal text-[16px] md:text-[18px] text-[#404040] leading-[138%] tracking-[-0.01em]">
-              {t("cards.when.text")}
+              {cards.when.text}
             </p>
           </div>
 
@@ -68,10 +79,10 @@ export default function ResearchProblemFramingSection() {
               <Target className="w-6 h-6 text-white" />
             </div>
             <h3 className="font-['Funnel_Display'] font-bold text-[28px] md:text-[32px] text-[#404040] leading-[120%] tracking-[-0.03em] mb-2 mt-4">
-              {t("cards.why.title")}
+              {cards.why.title}
             </h3>
             <p className="font-['Outfit'] font-normal text-[16px] md:text-[18px] text-[#404040] leading-[138%] tracking-[-0.01em]">
-              {t("cards.why.text")}
+              {cards.why.text}
             </p>
           </div>
 

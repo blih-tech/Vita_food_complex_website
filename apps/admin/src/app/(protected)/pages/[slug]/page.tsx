@@ -23,6 +23,7 @@ export default function PageEditor({ params: paramsPromise }: { params: Promise<
     if (params.slug === 'sustainability')    { router.replace('/sustainability');    return; }
     if (params.slug === 'why-choose-vita')    { router.replace('/why-choose-vita');    return; }
     if (params.slug === 'we-care')            { router.replace('/we-care');            return; }
+    if (params.slug === 'research')           { router.replace('/research');           return; }
     fetchPage();
   }, [params.slug]);
 

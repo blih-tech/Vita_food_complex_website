@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import {
   Home, Info, ShoppingBag, Phone, Image as ImageIcon,
   Briefcase, FileText, Edit3, ExternalLink, RefreshCw, UtensilsCrossed, Truck, Star,
-  CheckCircle, Clock, Leaf, Globe, Lightbulb, Heart,
+  CheckCircle, Clock, Leaf, Globe, Lightbulb, Heart, BarChart3,
 } from "lucide-react";
 import Link from "next/link";
 import api from "@/lib/api";
@@ -115,6 +115,14 @@ const ALL_PAGES = [
     icon: Heart,
     editorHref: "/we-care",
     liveHref: "https://vitafoodcomplex.vercel.app/en/we-care",
+  },
+  {
+    slug: "research",
+    name: "Research",
+    description: "Market and consumer research, packaging influence, and user insights",
+    icon: BarChart3,
+    editorHref: "/research",
+    liveHref: "https://vitafoodcomplex.vercel.app/en/research",
   },
 ];
 

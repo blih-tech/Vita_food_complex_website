@@ -3,10 +3,24 @@
 import { Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-export default function ResearchOverviewSection() {
+export default function ResearchOverviewSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Research.overview");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
 
-  const chartData = [
+  const heading = c?.heading || t("heading");
+  const text1 = c?.text1 || t("text1");
+  const text2 = c?.text2 || t("text2");
+  const findingHeading = c?.findingHeading || t("findingHeading");
+  const findingSubheading = c?.findingSubheading || t("findingSubheading");
+  const info = c?.info || t("info");
+  const legend = c?.legend || {
+    kids: t("legend.kids"),
+    parents: t("legend.parents"),
+    youth: t("legend.youth"),
+  };
+
+  const chartData = c?.chart || [
     {
       label: t("chart.taste"),
       kids: 57,
@@ -46,14 +60,14 @@ export default function ResearchOverviewSection() {
         {/* Left Side: Overview */}
         <div className="flex flex-col gap-6 lg:gap-8 lg:w-[45%]">
           <h2 className="font-['Funnel_Display'] font-bold text-[36px] md:text-[48px] leading-none text-[#23B349] tracking-[-0.01em]">
-            {t("heading")}
+            {heading}
           </h2>
           <div className="flex flex-col gap-6">
             <p className="font-['Outfit'] font-light text-[18px] md:text-[24px] leading-[130%] text-[#8A8C8A] tracking-[-0.004em]">
-              {t("text1")}
+              {text1}
             </p>
             <p className="font-['Outfit'] font-light text-[18px] md:text-[24px] leading-[130%] text-[#8A8C8A] tracking-[-0.004em]">
-              {t("text2")}
+              {text2}
             </p>
           </div>
         </div>
@@ -64,24 +78,24 @@ export default function ResearchOverviewSection() {
           {/* Header & Legend */}
           <div className="flex flex-col gap-2">
             <h3 className="font-['Funnel_Display'] font-medium text-[20px] md:text-[24px] leading-none text-[#23B349]">
-              {t("findingHeading")}
+              {findingHeading}
             </h3>
             <p className="font-['Outfit'] font-medium text-[14px] md:text-[16px] text-[#8A8C8A]">
-              {t("findingSubheading")}
+              {findingSubheading}
             </p>
             
             <div className="flex flex-row items-center justify-end gap-6 w-full mt-4">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 md:w-8 md:h-8 bg-[#90D152] rounded-md md:rounded-lg"></div>
-                <span className="font-['Outfit'] font-medium text-[16px] md:text-[20px] text-[#333733]">{t("legend.kids")}</span>
+                <span className="font-['Outfit'] font-medium text-[16px] md:text-[20px] text-[#333733]">{legend.kids}</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 md:w-8 md:h-8 bg-[#116D29] rounded-md md:rounded-lg"></div>
-                <span className="font-['Outfit'] font-medium text-[16px] md:text-[20px] text-[#333733]">{t("legend.parents")}</span>
+                <span className="font-['Outfit'] font-medium text-[16px] md:text-[20px] text-[#333733]">{legend.parents}</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 md:w-8 md:h-8 bg-[#E8E8E8] rounded-md md:rounded-lg"></div>
-                <span className="font-['Outfit'] font-medium text-[16px] md:text-[20px] text-[#333733]">{t("legend.youth")}</span>
+                <span className="font-['Outfit'] font-medium text-[16px] md:text-[20px] text-[#333733]">{legend.youth}</span>
               </div>
             </div>
           </div>
@@ -102,7 +116,7 @@ export default function ResearchOverviewSection() {
             </div>
 
             {/* Bars */}
-            {chartData.map((data, idx) => (
+            {chartData.map((data: any, idx: number) => (
               <div key={idx} className="relative z-10 flex flex-col items-center h-full justify-end w-[18%] md:w-[15%]">
                 <div className="flex flex-row items-end gap-[2px] md:gap-[4px] h-full w-full justify-center">
                   
@@ -152,7 +166,7 @@ export default function ResearchOverviewSection() {
           <div className="mt-12 flex flex-row items-center gap-4 bg-[#E5F9FF] rounded-[16px] md:rounded-[24px] px-6 py-4 md:py-5 border border-[#E5F9FF]/0">
             <Info className="w-5 h-5 md:w-6 md:h-6 text-[#004A67] shrink-0" />
             <p className="font-['Outfit'] font-normal text-[12px] md:text-[14px] text-[#497AB8] leading-tight">
-              {t("info")}
+              {info}
             </p>
           </div>
 
