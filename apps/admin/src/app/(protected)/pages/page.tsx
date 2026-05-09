@@ -85,6 +85,14 @@ const ALL_PAGES = [
     liveHref: "https://vitafoodcomplex.vercel.app/en/careers",
   },
   {
+    slug: "people-planet",
+    name: "People & Planet",
+    description: "Community support, charity initiatives, and impact",
+    icon: Globe,
+    editorHref: "/people-planet",
+    liveHref: "https://vitafoodcomplex.vercel.app/en/people-planet",
+  },
+  {
     slug: "sustainability",
     name: "Sustainability",
     description: "Hero, commitments, process, and giving back",
