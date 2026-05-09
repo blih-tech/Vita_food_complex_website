@@ -8,17 +8,14 @@ export default function SustainabilityCommitmentSection({ content, locale }: { c
   const lang = (locale || "en") as "en" | "am";
   const c = content?.[lang];
 
-  // CMS-driven assets with local fallbacks
-  const assets = c?.assets || {};
-  const statsBackgrounds = c?.stats?.backgrounds || {};
-
-  const imgQuickFact = statsBackgrounds.quickFact || "https://res.cloudinary.com/dd4haxhgy/image/upload/v1778333851/vita-food/sustainability/assets/sustainability/assets/imgQuickFact.png";
-  const imgDollar1 = statsBackgrounds.dollar1 || "/assets/hero/hero-bg-element.svg";
-  const imgFrame = assets.imgFrame || "/assets/about/hero-background-frame.webp";
-  const imgVector = assets.imgVector || "/assets/products/items/related-vector.png";
-  const imgFrame1 = assets.imgFrame1 || "/assets/about/hero-background-frame.webp";
-  const imgSubtract = statsBackgrounds.subtract || "/assets/sections/wave-vector-2.svg";
-  const imgSubtract1 = statsBackgrounds.subtract1 || "/assets/sections/wave-vector-2.svg";
+  // Design assets (static, not part of CMS content)
+  const imgQuickFact = "https://res.cloudinary.com/dd4haxhgy/image/upload/v1778333851/vita-food/sustainability/assets/sustainability/assets/imgQuickFact.png";
+  const imgDollar1 = "/assets/hero/hero-bg-element.svg";
+  const imgFrame = "/assets/about/hero-background-frame.webp";
+  const imgVector = "/assets/products/items/related-vector.png";
+  const imgFrame1 = "/assets/about/hero-background-frame.webp";
+  const imgSubtract = "/assets/sections/wave-vector-2.svg";
+  const imgSubtract1 = "/assets/sections/wave-vector-2.svg";
 
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
