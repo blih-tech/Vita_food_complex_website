@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import {
   Home, Info, ShoppingBag, Phone, Image as ImageIcon,
   Briefcase, FileText, Edit3, ExternalLink, RefreshCw, UtensilsCrossed, Truck, Star,
-  CheckCircle, Clock, Leaf,
+  CheckCircle, Clock, Leaf, Globe,
 } from "lucide-react";
 import Link from "next/link";
 import api from "@/lib/api";
