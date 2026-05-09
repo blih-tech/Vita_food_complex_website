@@ -2,8 +2,16 @@ import { useTranslations } from "next-intl";
 import { Link } from "@frontend/navigation";
 import Image from "next/image";
 
-export default function WeCareBannerSection() {
+export default function WeCareBannerSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("WeCare.banner");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
+
+  const title = c?.title || t("title");
+  const desc = c?.desc || t("desc");
+  const cta1 = c?.cta1 || t("cta1");
+  const cta2 = c?.cta2 || t("cta2");
+  const mainImage = c?.mainImage || "/assets/about/story-image.png";
 
   return (
     <section className="w-full max-w-[1920px] mx-auto px-[128px] py-[64px] flex justify-center">
@@ -13,7 +21,7 @@ export default function WeCareBannerSection() {
         {/* Right side background image / panes placeholder */}
         <div className="absolute right-0 top-0 h-full w-[50%] pointer-events-none opacity-50 mix-blend-overlay">
           <Image
-            src="/assets/about/story-image.png"
+            src={mainImage}
             alt="Glass Panes"
             fill
             className="object-cover object-left"
@@ -25,10 +33,10 @@ export default function WeCareBannerSection() {
           
           <div className="flex flex-col gap-[16px]">
             <h2 className="font-outfit font-extrabold text-[80px] leading-[90%] tracking-[-0.02em] text-[#FFFBF6] whitespace-pre-line">
-              {t("title")}
+              {title}
             </h2>
             <p className="font-outfit font-medium text-[26px] leading-[149%] tracking-[-0.02em] text-white/90 max-w-[387px]">
-              {t("desc")}
+              {desc}
             </p>
           </div>
 
@@ -39,7 +47,7 @@ export default function WeCareBannerSection() {
               className="flex flex-row items-center justify-center gap-[12px] bg-[#FFCC33] backdrop-blur-[10px] rounded-[50px] px-[32px] py-[18px] hover:scale-105 transition-transform"
             >
               <span className="font-funnel font-medium text-[24px] leading-none text-[#000000] tracking-[-0.004em]">
-                {t("cta1")}
+                {cta1}
               </span>
               <span className="text-[#27221B] font-bold text-[24px] leading-none">
                 →
@@ -52,7 +60,7 @@ export default function WeCareBannerSection() {
               className="flex flex-row items-center justify-center gap-[12px] bg-[#FCFBF9] backdrop-blur-[10px] rounded-[50px] px-[32px] py-[18px] hover:scale-105 transition-transform"
             >
               <span className="font-funnel font-medium text-[24px] leading-none text-[#000000]">
-                {t("cta2")}
+                {cta2}
               </span>
               <span className="text-[#27221B] font-bold text-[24px] leading-none">
                 →

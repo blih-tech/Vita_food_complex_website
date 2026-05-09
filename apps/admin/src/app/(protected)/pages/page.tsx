@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import {
   Home, Info, ShoppingBag, Phone, Image as ImageIcon,
   Briefcase, FileText, Edit3, ExternalLink, RefreshCw, UtensilsCrossed, Truck, Star,
-  CheckCircle, Clock, Leaf, Globe, Lightbulb,
+  CheckCircle, Clock, Leaf, Globe, Lightbulb, Heart,
 } from "lucide-react";
 import Link from "next/link";
 import api from "@/lib/api";
@@ -107,6 +107,14 @@ const ALL_PAGES = [
     icon: Leaf,
     editorHref: "/sustainability",
     liveHref: "https://vitafoodcomplex.vercel.app/en/sustainability",
+  },
+  {
+    slug: "we-care",
+    name: "We Care",
+    description: "Nourishing communities, the heart behind Vita Care, and making a difference",
+    icon: Heart,
+    editorHref: "/we-care",
+    liveHref: "https://vitafoodcomplex.vercel.app/en/we-care",
   },
 ];
 

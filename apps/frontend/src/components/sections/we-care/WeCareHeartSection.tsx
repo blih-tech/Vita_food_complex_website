@@ -1,7 +1,12 @@
 import { useTranslations } from "next-intl";
 
-export default function WeCareHeartSection() {
+export default function WeCareHeartSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("WeCare.heart");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
+
+  const title = c?.title || t("title");
+  const desc = c?.desc || t("desc");
 
   return (
     <section className="relative w-full max-w-[1920px] mx-auto px-[128px] py-[64px] flex justify-center">
@@ -15,10 +20,10 @@ export default function WeCareHeartSection() {
         
         <div className="flex flex-col items-center justify-center gap-[64px] w-full max-w-[1002px]">
           <h2 className="font-outfit font-extrabold text-[80px] leading-[90%] tracking-[-0.02em] text-[#23B349] text-center">
-            {t("title")}
+            {title}
           </h2>
           <p className="font-outfit font-medium text-[24px] leading-[30px] tracking-[-0.004em] text-[#404040] text-center">
-            {t("desc")}
+            {desc}
           </p>
         </div>
 

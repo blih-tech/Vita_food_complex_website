@@ -22,6 +22,7 @@ export default function PageEditor({ params: paramsPromise }: { params: Promise<
     if (params.slug === 'people-planet')      { router.replace('/people-planet');      return; }
     if (params.slug === 'sustainability')    { router.replace('/sustainability');    return; }
     if (params.slug === 'why-choose-vita')    { router.replace('/why-choose-vita');    return; }
+    if (params.slug === 'we-care')            { router.replace('/we-care');            return; }
     fetchPage();
   }, [params.slug]);
 

@@ -1,8 +1,25 @@
 import { useTranslations } from "next-intl";
-import { HandHeart, Target, Star, Leaf, Users, HeartHandshake } from "lucide-react";
+import { HandHeart, Target, Star } from "lucide-react";
 
-export default function WeCareDrivenSection() {
+export default function WeCareDrivenSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("WeCare.driven");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
+
+  const title = c?.title || t("title");
+  const desc = c?.desc || t("desc");
+  const commitmentLabel = c?.commitment?.label || t("commitment.label");
+  const commitmentDesc = c?.commitment?.desc || t("commitment.desc");
+  const visionLabel = c?.vision?.label || t("vision.label");
+  const visionDesc = c?.vision?.desc || t("vision.desc");
+  const adaptedLabel = c?.adapted?.label || t("adapted.label");
+
+  const adaptedCards = c?.adapted?.cards || [
+    { title: t("adapted.community.title"), desc: t("adapted.community.desc") },
+    { title: t("adapted.sustainability.title"), desc: t("adapted.sustainability.desc") },
+    { title: t("adapted.empowerment.title"), desc: t("adapted.empowerment.desc") },
+    { title: t("adapted.sharedCare.title"), desc: t("adapted.sharedCare.desc") },
+  ];
 
   return (
     <section className="w-full max-w-[1920px] mx-auto px-[128px] py-[64px] flex flex-col items-center gap-[48px]">
@@ -10,10 +27,10 @@ export default function WeCareDrivenSection() {
       {/* Header Text */}
       <div className="flex flex-col items-center gap-[32px] w-full max-w-[844px]">
         <h2 className="font-outfit font-bold text-[64px] leading-[96%] tracking-[-0.02em] text-[#23B349] text-center whitespace-pre-line">
-          {t("title")}
+          {title}
         </h2>
         <p className="font-outfit font-normal text-[20px] leading-[25px] tracking-[-0.004em] text-black text-center">
-          {t("desc")}
+          {desc}
         </p>
       </div>
 
@@ -31,12 +48,12 @@ export default function WeCareDrivenSection() {
               </div>
               <div className="flex items-center h-[70px] bg-[#23B349] rounded-r-[16px] px-8 -ml-2">
                 <h3 className="font-funnel font-bold text-[32px] md:text-[40px] leading-none text-[#F9FFFC] tracking-[-0.01em]">
-                  {t("commitment.label")}
+                  {commitmentLabel}
                 </h3>
               </div>
             </div>
             <p className="font-outfit font-normal text-[24px] leading-[30px] tracking-[-0.004em] text-[#404040]">
-              {t("commitment.desc")}
+              {commitmentDesc}
             </p>
           </div>
 
@@ -48,12 +65,12 @@ export default function WeCareDrivenSection() {
               </div>
               <div className="flex items-center h-[70px] bg-[#23B349] rounded-r-[16px] px-8 -ml-2">
                 <h3 className="font-funnel font-bold text-[32px] md:text-[40px] leading-none text-[#F9FFFC] tracking-[-0.01em]">
-                  {t("vision.label")}
+                  {visionLabel}
                 </h3>
               </div>
             </div>
             <p className="font-funnel font-normal text-[22px] leading-[151%] tracking-[-0.01em] text-[#404040]">
-              {t("vision.desc")}
+              {visionDesc}
             </p>
           </div>
 
@@ -69,52 +86,23 @@ export default function WeCareDrivenSection() {
             </div>
             <div className="flex items-center h-[70px] bg-[#23B349] rounded-r-[16px] px-8 -ml-2">
               <h3 className="font-funnel font-bold text-[32px] md:text-[40px] leading-none text-[#FFFBF6] tracking-[-0.03em]">
-                {t("adapted.label")}
+                {adaptedLabel}
               </h3>
             </div>
           </div>
 
           {/* 2x2 Grid */}
           <div className="grid grid-cols-2 gap-[20px] mt-4">
-            {/* Community First */}
-            <div className="flex flex-col gap-2 p-6 bg-[#FEFBF6] shadow-[0px_5px_30px_rgba(144,144,144,0.06)] rounded-[16px]">
-              <h4 className="font-funnel font-bold text-[24px] leading-none tracking-[-0.004em] text-[#23B349]">
-                {t("adapted.community.title")}
-              </h4>
-              <p className="font-outfit font-normal text-[20px] leading-[142%] tracking-[-0.01em] text-[#404040]">
-                {t("adapted.community.desc")}
-              </p>
-            </div>
-
-            {/* Sustainability */}
-            <div className="flex flex-col gap-2 p-6 bg-[#FEFBF6] shadow-[0px_5px_30px_rgba(144,144,144,0.06)] rounded-[16px]">
-              <h4 className="font-funnel font-bold text-[24px] leading-none tracking-[-0.004em] text-[#23B349]">
-                {t("adapted.sustainability.title")}
-              </h4>
-              <p className="font-outfit font-normal text-[20px] leading-[142%] tracking-[-0.01em] text-[#404040]">
-                {t("adapted.sustainability.desc")}
-              </p>
-            </div>
-
-            {/* Empowerment */}
-            <div className="flex flex-col gap-2 p-6 bg-[#FEFBF6] shadow-[0px_5px_30px_rgba(144,144,144,0.06)] rounded-[16px]">
-              <h4 className="font-funnel font-bold text-[24px] leading-none tracking-[-0.004em] text-[#23B349]">
-                {t("adapted.empowerment.title")}
-              </h4>
-              <p className="font-outfit font-normal text-[20px] leading-[142%] tracking-[-0.01em] text-[#404040]">
-                {t("adapted.empowerment.desc")}
-              </p>
-            </div>
-
-            {/* Shared Care */}
-            <div className="flex flex-col gap-2 p-6 bg-[#FEFBF6] shadow-[0px_5px_30px_rgba(144,144,144,0.06)] rounded-[16px]">
-              <h4 className="font-funnel font-bold text-[24px] leading-none tracking-[-0.004em] text-[#23B349]">
-                {t("adapted.sharedCare.title")}
-              </h4>
-              <p className="font-outfit font-normal text-[20px] leading-[142%] tracking-[-0.01em] text-[#404040]">
-                {t("adapted.sharedCare.desc")}
-              </p>
-            </div>
+            {adaptedCards.map((card: any, idx: number) => (
+              <div key={idx} className="flex flex-col gap-2 p-6 bg-[#FEFBF6] shadow-[0px_5px_30px_rgba(144,144,144,0.06)] rounded-[16px]">
+                <h4 className="font-funnel font-bold text-[24px] leading-none tracking-[-0.004em] text-[#23B349]">
+                  {card.title}
+                </h4>
+                <p className="font-outfit font-normal text-[20px] leading-[142%] tracking-[-0.01em] text-[#404040]">
+                  {card.desc}
+                </p>
+              </div>
+            ))}
           </div>
 
         </div>
