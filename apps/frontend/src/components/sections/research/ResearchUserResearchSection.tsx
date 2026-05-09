@@ -23,9 +23,24 @@ export default function ResearchUserResearchSection({ content, locale }: { conte
     youth: t("legend.youth"),
   };
 
+  // Dynamic percentages for the donut chart
+  const p = c?.percentages || { kids: 33, parents: 33, youth: 34 };
+  const total = p.kids + p.parents + p.youth;
+  
+  // SVG Donut Calculations
+  const radius = 35;
+  const circumference = 2 * Math.PI * radius; // ~219.9
+  
+  const kidsOffset = circumference - (p.kids / 100) * circumference;
+  const parentsOffset = circumference - (p.parents / 100) * circumference;
+  const youthOffset = circumference - (p.youth / 100) * circumference;
+  
+  const kidsRotate = 0;
+  const parentsRotate = (p.kids / 100) * 360;
+  const youthRotate = ((p.kids + p.parents) / 100) * 360;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle email submission
     console.log("Research file requested for:", email);
     setEmail("");
   };
@@ -52,49 +67,52 @@ export default function ResearchUserResearchSection({ content, locale }: { conte
             
             {/* SVG Donut Chart */}
             <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90 drop-shadow-xl">
-              {/* Youth (34%) - Gray */}
+              {/* Kids Segment */}
               <circle 
-                cx="50" cy="50" r="35" 
-                fill="transparent" 
-                stroke="#E8E8E8" 
-                strokeWidth="24" 
-                strokeDasharray="219.9" 
-                strokeDashoffset="145.1" 
-                className="transform origin-center rotate-[0deg]"
-              />
-              {/* Kids (33%) - Light Green */}
-              <circle 
-                cx="50" cy="50" r="35" 
+                cx="50" cy="50" r={radius} 
                 fill="transparent" 
                 stroke="#90D152" 
                 strokeWidth="24" 
-                strokeDasharray="219.9" 
-                strokeDashoffset="147.3" 
-                className="transform origin-center rotate-[122.4deg]"
+                strokeDasharray={circumference} 
+                strokeDashoffset={kidsOffset} 
+                className="transform origin-center transition-all duration-1000 ease-out"
+                style={{ transform: `rotate(${kidsRotate}deg)` }}
               />
-              {/* Parents (33%) - Dark Green */}
+              {/* Parents Segment */}
               <circle 
-                cx="50" cy="50" r="35" 
+                cx="50" cy="50" r={radius} 
                 fill="transparent" 
                 stroke="#116D29" 
                 strokeWidth="24" 
-                strokeDasharray="219.9" 
-                strokeDashoffset="147.3" 
-                className="transform origin-center rotate-[241.2deg]"
+                strokeDasharray={circumference} 
+                strokeDashoffset={parentsOffset} 
+                className="transform origin-center transition-all duration-1000 ease-out"
+                style={{ transform: `rotate(${parentsRotate}deg)` }}
+              />
+              {/* Youth Segment */}
+              <circle 
+                cx="50" cy="50" r={radius} 
+                fill="transparent" 
+                stroke="#E8E8E8" 
+                strokeWidth="24" 
+                strokeDasharray={circumference} 
+                strokeDashoffset={youthOffset} 
+                className="transform origin-center transition-all duration-1000 ease-out"
+                style={{ transform: `rotate(${youthRotate}deg)` }}
               />
             </svg>
 
             {/* Floating Badges */}
-            <div className="absolute top-[15%] left-[5%] w-[70px] sm:w-[80px] md:w-[120px] lg:w-[140px] aspect-square bg-white rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-10">
-              <span className="font-['Outfit'] font-semibold text-[20px] sm:text-[24px] md:text-[32px] lg:text-[42px] text-black">72%</span>
+            <div className="absolute top-[15%] left-[5%] w-[70px] sm:w-[80px] md:w-[120px] lg:w-[140px] aspect-square bg-white rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-10 transition-all duration-700">
+              <span className="font-['Outfit'] font-semibold text-[20px] sm:text-[24px] md:text-[32px] lg:text-[42px] text-black">{p.kids}%</span>
             </div>
 
-            <div className="absolute top-[35%] right-[0%] sm:right-[-5%] lg:right-[-10%] w-[70px] sm:w-[80px] md:w-[120px] lg:w-[140px] aspect-square bg-white rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-10">
-              <span className="font-['Outfit'] font-semibold text-[20px] sm:text-[24px] md:text-[32px] lg:text-[42px] text-black">87%</span>
+            <div className="absolute top-[35%] right-[0%] sm:right-[-5%] lg:right-[-10%] w-[70px] sm:w-[80px] md:w-[120px] lg:w-[140px] aspect-square bg-white rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-10 transition-all duration-700">
+              <span className="font-['Outfit'] font-semibold text-[20px] sm:text-[24px] md:text-[32px] lg:text-[42px] text-black">{p.parents}%</span>
             </div>
 
-            <div className="absolute bottom-[5%] left-[15%] w-[70px] sm:w-[80px] md:w-[120px] lg:w-[140px] aspect-square bg-white rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-10">
-              <span className="font-['Outfit'] font-semibold text-[20px] sm:text-[24px] md:text-[32px] lg:text-[42px] text-black">93%</span>
+            <div className="absolute bottom-[5%] left-[15%] w-[70px] sm:w-[80px] md:w-[120px] lg:w-[140px] aspect-square bg-white rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-10 transition-all duration-700">
+              <span className="font-['Outfit'] font-semibold text-[20px] sm:text-[24px] md:text-[32px] lg:text-[42px] text-black">{p.youth}%</span>
             </div>
           </div>
 

@@ -352,6 +352,16 @@ function EditModal({ section, onChange }: { section: Section; onChange: (content
           </div>
 
           <div className="p-4 bg-white rounded-xl border border-gray-100 space-y-4">
+            <h4 className="text-sm font-bold text-gray-700">Donut Chart Percentages</h4>
+            <div className="grid grid-cols-3 gap-4">
+              <InputField label="Kids %" value={c.percentages?.kids} onChange={v => set('percentages.kids', parseInt(v) || 0)} />
+              <InputField label="Parents %" value={c.percentages?.parents} onChange={v => set('percentages.parents', parseInt(v) || 0)} />
+              <InputField label="Youth %" value={c.percentages?.youth} onChange={v => set('percentages.youth', parseInt(v) || 0)} />
+            </div>
+            <p className="text-[10px] text-gray-400 italic">Note: Ensure total adds up to 100% for best results.</p>
+          </div>
+
+          <div className="p-4 bg-white rounded-xl border border-gray-100 space-y-4">
             <h4 className="text-sm font-bold text-gray-700">Newsletter CTA</h4>
             <InputField label="CTA Text" value={c.cta} onChange={v => set('cta', v)} textarea />
             <InputField label="Email Placeholder" value={c.emailPlaceholder} onChange={v => set('emailPlaceholder', v)} />
