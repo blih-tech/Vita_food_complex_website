@@ -2,8 +2,14 @@
 
 import { useTranslations } from "next-intl";
 
-export default function SustainabilityHeroSection() {
+export default function SustainabilityHeroSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Sustainability");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
+
+  const headline = c?.headline || t("hero.headline");
+  const subtitle = c?.subtitle || t("hero.subtitle");
+  const heroImage = c?.heroImage || "/assets/images/sustainability/hero-bg.jpg";
 
   return (
     <section
@@ -15,7 +21,7 @@ export default function SustainabilityHeroSection() {
       {/* Hero background image from Figma */}
       <div className="absolute inset-0">
         <img
-          src="/assets/images/sustainability/hero-bg.jpg"
+          src={heroImage}
           alt=""
           className="w-full h-full object-cover"
           style={{ borderRadius: "0 0 48px 48px" }}
@@ -44,7 +50,7 @@ export default function SustainabilityHeroSection() {
             letterSpacing: "-0.02em",
           }}
         >
-          {t("hero.headline")}
+          {headline}
         </h1>
 
         {/* "We are committed to nourishing communities..." — Funnel Display Medium 24px, lh 24px, ls -0.096px, #FFFFFF */}
@@ -56,7 +62,7 @@ export default function SustainabilityHeroSection() {
             letterSpacing: "-0.004em",
           }}
         >
-          {t("hero.subtitle")}
+          {subtitle}
         </p>
       </div>
     </section>

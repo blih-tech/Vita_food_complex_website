@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import {
   Home, Info, ShoppingBag, Phone, Image as ImageIcon,
   Briefcase, FileText, Edit3, ExternalLink, RefreshCw, UtensilsCrossed, Truck, Star,
-  CheckCircle, Clock,
+  CheckCircle, Clock, Leaf,
 } from "lucide-react";
 import Link from "next/link";
 import api from "@/lib/api";
@@ -83,6 +83,14 @@ const ALL_PAGES = [
     icon: Briefcase,
     editorHref: null,
     liveHref: "https://vitafoodcomplex.vercel.app/en/careers",
+  },
+  {
+    slug: "sustainability",
+    name: "Sustainability",
+    description: "Hero, commitments, process, and giving back",
+    icon: Leaf,
+    editorHref: "/sustainability",
+    liveHref: "https://vitafoodcomplex.vercel.app/en/sustainability",
   },
 ];
 

@@ -5,8 +5,11 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { cn } from "@frontend/lib/utils";
 
-export default function SustainabilityProcessSection() {
+export default function SustainabilityProcessSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Sustainability");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
+
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -23,7 +26,10 @@ export default function SustainabilityProcessSection() {
     };
   }, []);
 
-  const steps = [
+  const sublabel = c?.sublabel || t("process.sublabel");
+  const title = c?.title || t("process.title");
+
+  const steps = c?.steps || [
     {
       key: "farmers",
       heading: t("process.farmers.heading"),
@@ -69,7 +75,7 @@ export default function SustainabilityProcessSection() {
               letterSpacing: "-0.004em",
             }}
           >
-            {t("process.sublabel")}
+            {sublabel}
           </span>
 
           <h2
@@ -80,15 +86,15 @@ export default function SustainabilityProcessSection() {
               fontFeatureSettings: "'liga' 0",
             }}
           >
-            {t("process.title")}
+            {title}
           </h2>
         </div>
 
         {/* Process Steps — 4 columns staggered */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[clamp(24px,3vw,32px)]">
-          {steps.map((step, i) => (
+          {steps.map((step: any, i: number) => (
             <div
-              key={step.key}
+              key={step.key || i}
               className={cn(
                 "flex flex-col group",
                 i === 1 && "lg:mt-[clamp(30px,5vw,60px)]",
@@ -120,7 +126,7 @@ export default function SustainabilityProcessSection() {
                 style={{ height: "clamp(200px, 30vw, 324px)", background: "#F5F5F5" }}
               >
                 <Image
-                  src={step.image}
+                  src={step.image || "/assets/images/placeholder.jpg"}
                   alt={step.heading}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"

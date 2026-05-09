@@ -5,8 +5,11 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { cn } from "@frontend/lib/utils";
 
-export default function SustainabilityGiveBackSection() {
+export default function SustainabilityGiveBackSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Sustainability");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
+
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -23,7 +26,10 @@ export default function SustainabilityGiveBackSection() {
     };
   }, []);
 
-  const cards = [
+  const title = c?.title || t("giveBack.title");
+  const description = c?.description || t("giveBack.description");
+
+  const cards = c?.cards || [
     {
       key: "farmers",
       heading: t("giveBack.farmers.heading"),
@@ -61,7 +67,7 @@ export default function SustainabilityGiveBackSection() {
               fontFeatureSettings: "'liga' 0",
             }}
           >
-            {t("giveBack.title")}
+            {title}
           </h2>
 
           <p className="font-[family-name:var(--font-funnel-display)] font-medium leading-[1.25] text-[#333733] max-w-[900px]"
@@ -70,15 +76,15 @@ export default function SustainabilityGiveBackSection() {
               letterSpacing: "-0.004em",
             }}
           >
-            {t("giveBack.description")}
+            {description}
           </p>
         </div>
 
         {/* 3 Cards — staggered layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[clamp(24px,4vw,48px)]">
-          {cards.map((card, i) => (
+          {cards.map((card: any, i: number) => (
             <div
-              key={card.key}
+              key={card.key || i}
               className={cn(
                 "flex flex-col group",
                 i === 1 && "xl:mt-[clamp(30px,5vw,60px)]",
@@ -96,7 +102,7 @@ export default function SustainabilityGiveBackSection() {
                 style={{ background: "#F5F5F5" }}
               >
                 <Image
-                  src={card.image}
+                  src={card.image || "/assets/images/placeholder.jpg"}
                   alt={card.heading}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"

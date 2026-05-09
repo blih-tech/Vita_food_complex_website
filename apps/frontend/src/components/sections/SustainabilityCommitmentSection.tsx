@@ -19,8 +19,11 @@ const imgSubtract =
 const imgSubtract1 =
   "https://www.figma.com/api/mcp/asset/38bca506-7565-480f-8d0d-7a0e75cecec8";
 
-export default function SustainabilityCommitmentSection() {
+export default function SustainabilityCommitmentSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Sustainability");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
+
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -37,7 +40,10 @@ export default function SustainabilityCommitmentSection() {
     };
   }, []);
 
-  const commitments = [
+  const description = c?.description || t("commitment.description");
+  const title = c?.title || t("commitment.title");
+
+  const commitments = c?.commitments || [
     {
       key: "localSourcing",
       title: t("commitment.localSourcing.title"),
@@ -57,6 +63,23 @@ export default function SustainabilityCommitmentSection() {
       frame: imgFrame1,
     },
   ];
+
+  // Map frames if they are missing in CMS content
+  const commitmentsWithFrames = commitments.map((item: any, idx: number) => ({
+    ...item,
+    frame: item.frame || (idx === 0 ? imgFrame : imgFrame1)
+  }));
+
+  const stats = c?.stats || {
+    skus: { value: t("stats.skus.value"), label: t("stats.skus.label") },
+    biscuits: { value: t("stats.biscuits.value"), label: t("stats.biscuits.label") },
+    flour: { value: t("stats.flour.value"), label: t("stats.flour.label") },
+    quickFact: t("stats.quickFact"),
+    jobs: { value: t("stats.jobs.value"), label: t("stats.jobs.label") },
+    factory: { value: t("stats.factory.value"), label: t("stats.factory.label") },
+    investment: { value: t("stats.investment.value"), label: t("stats.investment.label") },
+    export: { value: t("stats.export.value") }
+  };
 
   return (
     <section
@@ -86,7 +109,7 @@ export default function SustainabilityCommitmentSection() {
               }}
               data-node-id="274:5240"
             >
-              {t("commitment.description")}
+              {description}
             </p>
             <h2
               className="font-[family-name:var(--font-outfit)] font-bold leading-[0.96] text-[#23b349]"
@@ -97,7 +120,7 @@ export default function SustainabilityCommitmentSection() {
               }}
               data-node-id="274:5241"
             >
-              {t("commitment.title")}
+              {title}
             </h2>
           </div>
 
@@ -107,9 +130,9 @@ export default function SustainabilityCommitmentSection() {
             data-node-id="274:5242"
             data-name="Commitment card"
           >
-            {commitments.map((commitment, index) => (
+            {commitmentsWithFrames.map((commitment: any, index: number) => (
               <div
-                key={commitment.key}
+                key={commitment.key || index}
                 className="flex gap-[23.524px] min-h-[450px] sm:min-h-[500px] lg:min-h-[558.703px] items-center justify-center px-[clamp(16px,4vw,67.632px)] py-[23.524px] rounded-[24px] w-full relative group transition-all duration-300"
                 data-node-id={`274:${5243 + index}`}
                 data-name="card"
@@ -177,7 +200,7 @@ export default function SustainabilityCommitmentSection() {
                       className="flex flex-col gap-[clamp(4px,1vw,11.762px)] items-start w-full"
                       data-node-id={`274:${5254 + index}`}
                     >
-                      {commitment.items.map((item, itemIndex) => (
+                      {commitment.items.map((item: string, itemIndex: number) => (
                         <div
                           key={itemIndex}
                           className="bg-[rgba(255,249,242,0.74)] flex gap-[clamp(4px,1vw,11.762px)] items-center p-[clamp(4px,1vw,11.762px)] rounded-[8.822px] w-full"
@@ -237,49 +260,49 @@ export default function SustainabilityCommitmentSection() {
                   </div>
                 </div>
                 <div className="absolute h-full left-0 rounded-[20px] top-0 w-full flex flex-col items-center justify-center">
-                  <p className="font-['Outfit'] font-extrabold text-[48px] leading-[0.88] text-black tracking-[-2.4px]">{t("stats.skus.value")}</p>
-                  <p className="font-['Funnel_Display'] font-medium text-[14px] leading-none text-[#404040] mt-2">{t("stats.skus.label")}</p>
-                  <p className="font-['Outfit'] font-extrabold text-[32px] leading-[0.88] text-black mt-4">{t("stats.biscuits.value")}</p>
+                  <p className="font-['Outfit'] font-extrabold text-[48px] leading-[0.88] text-black tracking-[-2.4px]">{stats.skus.value}</p>
+                  <p className="font-['Funnel_Display'] font-medium text-[14px] leading-none text-[#404040] mt-2">{stats.skus.label}</p>
+                  <p className="font-['Outfit'] font-extrabold text-[32px] leading-[0.88] text-black mt-4">{stats.biscuits.value}</p>
                 </div>
               </div>
 
               {/* 60tn Flour card */}
               <div className="relative flex flex-col h-[120px] items-center justify-center rounded-[20px] border-[2.5px] border-white border-solid">
                 <div aria-hidden="true" className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light rounded-[20px]" />
-                <p className="font-['Outfit'] font-extrabold text-[48px] leading-[0.88] text-black tracking-[-2.4px]">{t("stats.flour.value")}</p>
-                <p className="font-['Funnel_Display'] font-medium text-[14px] leading-none text-[#404040] mt-1 text-center px-4">{t("stats.flour.label")}</p>
+                <p className="font-['Outfit'] font-extrabold text-[48px] leading-[0.88] text-black tracking-[-2.4px]">{stats.flour.value}</p>
+                <p className="font-['Funnel_Display'] font-medium text-[14px] leading-none text-[#404040] mt-1 text-center px-4">{stats.flour.label}</p>
               </div>
 
               {/* Quick Fact label */}
               <div className="relative border-[2.5px] border-white border-solid h-[80px] rounded-[20px] flex items-center justify-center">
                 <div aria-hidden="true" className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light rounded-[20px]" />
-                <p className="font-['Outfit'] font-extrabold text-[32px] leading-[0.9] text-[#404040]">{t("stats.quickFact")}</p>
+                <p className="font-['Outfit'] font-extrabold text-[32px] leading-[0.9] text-[#404040]">{stats.quickFact}</p>
               </div>
 
               {/* +200 Jobs card */}
               <div className="relative border-[2.5px] border-white border-solid h-[120px] rounded-[20px] flex flex-col items-center justify-center">
                 <div aria-hidden="true" className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light rounded-[20px]" />
-                <p className="font-['Outfit'] font-extrabold text-[48px] leading-[0.88] text-black tracking-[-2.4px]">{t("stats.jobs.value")}</p>
-                <p className="font-['Funnel_Display'] font-medium text-[14px] leading-none text-[#404040] mt-1">{t("stats.jobs.label")}</p>
+                <p className="font-['Outfit'] font-extrabold text-[48px] leading-[0.88] text-black tracking-[-2.4px]">{stats.jobs.value}</p>
+                <p className="font-['Funnel_Display'] font-medium text-[14px] leading-none text-[#404040] mt-1">{stats.jobs.label}</p>
               </div>
 
               {/* Factory Size card */}
               <div className="relative border-[2.5px] border-white border-solid h-[120px] rounded-[20px] flex flex-col items-center justify-center">
                 <div aria-hidden="true" className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light rounded-[20px]" />
                 <p className="text-white text-center">
-                  <span className="font-['Outfit'] font-extrabold text-[48px]">{t("stats.factory.value").replace("²", "")}</span>
+                  <span className="font-['Outfit'] font-extrabold text-[48px]">{stats.factory.value.replace("²", "")}</span>
                   <span className="font-['Outfit'] font-extrabold text-[32px] vertical-top">2</span>
                 </p>
-                <p className="font-['Funnel_Display'] font-medium text-[12px] text-white mt-1">{t("stats.factory.label")}</p>
+                <p className="font-['Funnel_Display'] font-medium text-[12px] text-white mt-1">{stats.factory.label}</p>
               </div>
 
               {/* Investment card */}
               <div className="relative h-[180px] rounded-[20px] overflow-hidden">
                 <img alt="" className="absolute inset-0 w-full h-full object-cover" src={imgSubtract1} />
                 <div className="relative h-full flex flex-col items-center justify-center">
-                  <p className="font-['Outfit'] font-extrabold text-[48px] leading-[0.88] text-white tracking-[-2.4px]">{t("stats.investment.value")}</p>
-                  <p className="font-['Funnel_Display'] font-medium text-[14px] text-white mt-1">{t("stats.investment.label")}</p>
-                  <p className="font-['Outfit'] font-extrabold text-[32px] text-[#404040] mt-4">{t("stats.export.value")}</p>
+                  <p className="font-['Outfit'] font-extrabold text-[48px] leading-[0.88] text-white tracking-[-2.4px]">{stats.investment.value}</p>
+                  <p className="font-['Funnel_Display'] font-medium text-[14px] text-white mt-1">{stats.investment.label}</p>
+                  <p className="font-['Outfit'] font-extrabold text-[32px] text-[#404040] mt-4">{stats.export.value}</p>
                 </div>
               </div>
             </div>
@@ -294,49 +317,49 @@ export default function SustainabilityCommitmentSection() {
                   </div>
                 </div>
                 <div className="absolute h-full left-0 rounded-[20px] top-0 w-full flex flex-col items-center justify-center p-6">
-                  <p className="font-['Outfit'] font-extrabold text-[64px] lg:text-[80px] leading-[0.88] text-black tracking-[-3.2px]">{t("stats.skus.value")}</p>
-                  <p className="font-['Funnel_Display'] font-medium text-[16px] lg:text-[18px] leading-none text-[#404040] mt-2 text-center">{t("stats.skus.label")}</p>
-                  <p className="font-['Outfit'] font-extrabold text-[40px] lg:text-[48px] leading-[0.88] text-black mt-4">{t("stats.biscuits.value")}</p>
+                  <p className="font-['Outfit'] font-extrabold text-[64px] lg:text-[80px] leading-[0.88] text-black tracking-[-3.2px]">{stats.skus.value}</p>
+                  <p className="font-['Funnel_Display'] font-medium text-[16px] lg:text-[18px] leading-none text-[#404040] mt-2 text-center">{stats.skus.label}</p>
+                  <p className="font-['Outfit'] font-extrabold text-[40px] lg:text-[48px] leading-[0.88] text-black mt-4">{stats.biscuits.value}</p>
                 </div>
               </div>
 
               {/* 60tn Flour card */}
               <div className="relative flex flex-col h-[300px] items-center justify-center rounded-[20px] border-[2.5px] border-white border-solid">
                 <div aria-hidden="true" className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light rounded-[20px]" />
-                <p className="font-['Outfit'] font-extrabold text-[64px] lg:text-[80px] leading-[0.88] text-black tracking-[-3.2px]">{t("stats.flour.value")}</p>
-                <p className="font-['Funnel_Display'] font-medium text-[16px] lg:text-[18px] leading-none text-[#404040] mt-2 text-center px-6">{t("stats.flour.label")}</p>
+                <p className="font-['Outfit'] font-extrabold text-[64px] lg:text-[80px] leading-[0.88] text-black tracking-[-3.2px]">{stats.flour.value}</p>
+                <p className="font-['Funnel_Display'] font-medium text-[16px] lg:text-[18px] leading-none text-[#404040] mt-2 text-center px-6">{stats.flour.label}</p>
               </div>
 
               {/* Quick Fact label */}
               <div className="relative border-[2.5px] border-white border-solid h-[300px] rounded-[20px] flex items-center justify-center">
                 <div aria-hidden="true" className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light rounded-[20px]" />
-                <p className="font-['Outfit'] font-extrabold text-[48px] lg:text-[56px] leading-[0.9] text-[#404040] text-center px-4">{t("stats.quickFact")}</p>
+                <p className="font-['Outfit'] font-extrabold text-[48px] lg:text-[56px] leading-[0.9] text-[#404040] text-center px-4">{stats.quickFact}</p>
               </div>
 
               {/* +200 Jobs card */}
               <div className="relative border-[2.5px] border-white border-solid h-[300px] rounded-[20px] flex flex-col items-center justify-center">
                 <div aria-hidden="true" className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light rounded-[20px]" />
-                <p className="font-['Outfit'] font-extrabold text-[64px] lg:text-[80px] leading-[0.88] text-black tracking-[-3.2px]">{t("stats.jobs.value")}</p>
-                <p className="font-['Funnel_Display'] font-medium text-[16px] lg:text-[18px] leading-none text-[#404040] mt-2">{t("stats.jobs.label")}</p>
+                <p className="font-['Outfit'] font-extrabold text-[64px] lg:text-[80px] leading-[0.88] text-black tracking-[-3.2px]">{stats.jobs.value}</p>
+                <p className="font-['Funnel_Display'] font-medium text-[16px] lg:text-[18px] leading-none text-[#404040] mt-2">{stats.jobs.label}</p>
               </div>
 
               {/* Factory Size card */}
               <div className="relative border-[2.5px] border-white border-solid h-[300px] rounded-[20px] flex flex-col items-center justify-center">
                 <div aria-hidden="true" className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light rounded-[20px]" />
                 <p className="text-white text-center">
-                  <span className="font-['Outfit'] font-extrabold text-[64px] lg:text-[80px]">{t("stats.factory.value").replace("²", "")}</span>
+                  <span className="font-['Outfit'] font-extrabold text-[64px] lg:text-[80px]">{stats.factory.value.replace("²", "")}</span>
                   <span className="font-['Outfit'] font-extrabold text-[32px] lg:text-[40px] align-top">2</span>
                 </p>
-                <p className="font-['Funnel_Display'] font-medium text-[14px] lg:text-[16px] text-white mt-2">{t("stats.factory.label")}</p>
+                <p className="font-['Funnel_Display'] font-medium text-[14px] lg:text-[16px] text-white mt-2">{stats.factory.label}</p>
               </div>
 
               {/* Investment card */}
               <div className="relative h-[300px] rounded-[20px] overflow-hidden">
                 <img alt="" className="absolute inset-0 w-full h-full object-cover" src={imgSubtract1} />
                 <div className="relative h-full flex flex-col items-center justify-center p-6">
-                  <p className="font-['Outfit'] font-extrabold text-[64px] lg:text-[80px] leading-[0.88] text-white tracking-[-3.2px]">{t("stats.investment.value")}</p>
-                  <p className="font-['Funnel_Display'] font-medium text-[16px] lg:text-[18px] text-white mt-2">{t("stats.investment.label")}</p>
-                  <p className="font-['Outfit'] font-extrabold text-[40px] lg:text-[48px] text-[#404040] mt-4">{t("stats.export.value")}</p>
+                  <p className="font-['Outfit'] font-extrabold text-[64px] lg:text-[80px] leading-[0.88] text-white tracking-[-3.2px]">{stats.investment.value}</p>
+                  <p className="font-['Funnel_Display'] font-medium text-[16px] lg:text-[18px] text-white mt-2">{stats.investment.label}</p>
+                  <p className="font-['Outfit'] font-extrabold text-[40px] lg:text-[48px] text-[#404040] mt-4">{stats.export.value}</p>
                 </div>
               </div>
             </div>
@@ -368,26 +391,26 @@ export default function SustainabilityCommitmentSection() {
                     className="absolute font-['Outfit'] font-extrabold text-[160px] leading-[0.88] left-0 right-0 text-black text-center top-[48.33px] tracking-[-4.8px]"
                     data-node-id="274:5321"
                   >
-                    +11
+                    {stats.skus.value}
                   </p>
                   <p
                     className="absolute font-['Funnel_Display'] font-medium text-[20px] leading-none left-0 right-0 text-[#404040] text-center top-[210px] tracking-[-0.08px]"
                     data-node-id="274:5322"
                   >
-                    {t("stats.skus.label")}
+                    {stats.skus.label}
                   </p>
                   <p
                     className="absolute font-['Funnel_Display'] font-medium text-[20px] leading-none left-[67.66px] right-[163.25px] text-[#404040] text-center top-[376.67px] tracking-[-0.08px]"
                     data-node-id="274:5323"
                   >
-                    {t("stats.biscuits.label")}
+                    {stats.biscuits.label}
                   </p>
                 </div>
                 <p
                   className="absolute font-['Outfit'] font-extrabold text-[80px] leading-[0.88] left-[66.82px] right-[110.27px] text-black text-center top-[296.59px] tracking-[-2.4px]"
                   data-node-id="274:5324"
                 >
-                  {t("stats.biscuits.value")}
+                  {stats.biscuits.value}
                 </p>
               </div>
 
@@ -408,13 +431,13 @@ export default function SustainabilityCommitmentSection() {
                     className="absolute font-['Outfit'] font-extrabold text-[160px] leading-[0.88] left-0 right-0 text-black text-center top-[47.39px] tracking-[-4.8px]"
                     data-node-id="274:5327"
                   >
-                    {t("stats.flour.value")}
+                    {stats.flour.value}
                   </p>
                   <p
                     className="absolute font-['Funnel_Display'] font-medium text-[20px] leading-none left-0 right-0 text-[#404040] text-center top-[209.05px] tracking-[-0.08px]"
                     data-node-id="274:5328"
                   >
-                    {t("stats.flour.label")}
+                    {stats.flour.label}
                   </p>
                 </div>
               </div>
@@ -429,7 +452,7 @@ export default function SustainabilityCommitmentSection() {
                   className="absolute bg-[rgba(171,255,152,0.5)] inset-0 mix-blend-soft-light pointer-events-none rounded-[20px]"
                 />
                 <p className="font-['Outfit'] font-extrabold text-[66.667px] leading-[0.9] left-[calc(50%+0.08px)] text-[#404040] text-center top-[calc(50%-33.33px)] -translate-x-1/2 absolute tracking-[-1.3333px] whitespace-nowrap">
-                  {t("stats.quickFact")}
+                  {stats.quickFact}
                 </p>
               </div>
 
@@ -446,13 +469,13 @@ export default function SustainabilityCommitmentSection() {
                   className="absolute font-['Outfit'] font-extrabold text-[160px] leading-[0.88] left-0 right-0 text-black text-center top-[47.5px] tracking-[-4.8px]"
                   data-node-id="274:5332"
                 >
-                  {t("stats.jobs.value")}
+                  {stats.jobs.value}
                 </p>
                 <p
                   className="absolute font-['Funnel_Display'] font-medium text-[20px] leading-none left-0 right-0 text-[#404040] text-center top-[209.17px] tracking-[-0.08px]"
                   data-node-id="274:5333"
                 >
-                  {t("stats.jobs.label")}
+                  {stats.jobs.label}
                 </p>
               </div>
 
@@ -470,7 +493,7 @@ export default function SustainabilityCommitmentSection() {
                   data-node-id="274:5335"
                 >
                   <span className="font-['Outfit'] font-extrabold leading-[0.88] text-[160px]">
-                    {t("stats.factory.value").replace("²", "")}
+                    {stats.factory.value.replace("²", "")}
                   </span>
                   <span className="font-['Outfit'] font-extrabold leading-[0.88] text-[96.212px]">
                     2
@@ -480,7 +503,7 @@ export default function SustainabilityCommitmentSection() {
                   className="absolute bottom-[75.83px] font-['Funnel_Display'] font-medium text-[20px] leading-none left-0 right-0 text-white text-center tracking-[-0.08px] translate-y-full"
                   data-node-id="274:5336"
                 >
-                  {t("stats.factory.label")}
+                  {stats.factory.label}
                 </p>
               </div>
 
@@ -526,19 +549,19 @@ export default function SustainabilityCommitmentSection() {
                     className="absolute bottom-[239.58px] font-['Outfit'] font-extrabold text-[160px] leading-[0.88] left-0 right-0 text-white text-center tracking-[-4.8px] translate-y-full"
                     data-node-id="274:5343"
                   >
-                    {t("stats.investment.value")}
+                    {stats.investment.value}
                   </p>
                   <p
                     className="absolute bottom-[77.92px] font-['Funnel_Display'] font-medium text-[20px] leading-none left-0 right-0 text-white text-center tracking-[-0.08px] translate-y-full"
                     data-node-id="274:5344"
                   >
-                    {t("stats.investment.label")}
+                    {stats.investment.label}
                   </p>
                   <p
                     className="absolute bottom-[390.42px] font-['Outfit'] font-extrabold text-[80px] leading-[0.88] left-[109.64px] right-0 text-[#404040] text-center tracking-[-2.4px] translate-y-full"
                     data-node-id="274:5345"
                   >
-                    {t("stats.export.value")}
+                    {stats.export.value}
                   </p>
                 </div>
               </div>
