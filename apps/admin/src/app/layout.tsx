@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit, Funnel_Display } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
+import { Toaster } from "react-hot-toast";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className={`${outfit.variable} ${funnelDisplay.variable} antialiased`}>
         <AuthProvider>
           {children}
+          <Toaster position="bottom-right" />
         </AuthProvider>
       </body>
     </html>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { 
   Save, RefreshCw, ChevronRight, ChevronDown, 
   Layout, Type, Image as ImageIcon, Plus, Trash2, 
