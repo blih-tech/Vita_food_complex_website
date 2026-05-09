@@ -11,21 +11,23 @@ const certs = [
   { name: "EAS", src: "/assets/images/why-choose-vita/qa-eas.png" }
 ];
 
-export default function QualityAssuranceSection() {
+export default function QualityAssuranceSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("WhyChooseVita");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
 
   return (
     <section className="bg-white py-16 md:py-24 px-4 flex flex-col items-center">
       <div className="mx-auto max-w-[1400px] w-full flex flex-col items-center">
-        
+
         {/* Caption Label */}
         <span className="font-[family-name:var(--font-funnel-display)] font-medium text-[14px] md:text-[16px] text-[#404040]/50 mb-4 text-center">
-          {t("qa.caption")}
+          {c?.caption || t("qa.caption")}
         </span>
 
         {/* Headline */}
         <h2 className="font-[family-name:var(--font-outfit)] font-bold text-[28px] sm:text-[32px] md:text-[48px] lg:text-[64px] text-[#23B349] text-center mb-8 md:mb-16">
-          {t("qa.title")}
+          {c?.title || t("qa.title")}
         </h2>
 
         {/* Certifications Row */}

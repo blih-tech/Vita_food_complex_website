@@ -5,22 +5,24 @@ import Image from "next/image";
 import { Link } from "@frontend/navigation";
 import { ArrowUpRight } from "lucide-react";
 
-export default function OurProductSection() {
+export default function OurProductSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("WhyChooseVita");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
 
-  const products = [
+  const products = c?.products ?? [
     {
       title: t("ourProducts.biscuits.title"),
-      desc: t("ourProducts.biscuits.description"),
+      description: t("ourProducts.biscuits.description"),
       image: "/assets/images/why-choose-vita/products-image-1.png",
-      href: "/products#biscuits"
+      href: "/products#biscuits",
     },
     {
       title: t("ourProducts.flour.title"),
-      desc: t("ourProducts.flour.description"),
+      description: t("ourProducts.flour.description"),
       image: "/assets/images/why-choose-vita/products-image-2.png",
-      href: "/products#flour"
-    }
+      href: "/products#flour",
+    },
   ];
 
   return (
@@ -28,7 +30,7 @@ export default function OurProductSection() {
       <div className="mx-auto max-w-[1400px]">
         {/* Headline */}
         <h2 className="font-[family-name:var(--font-outfit)] font-bold text-[28px] sm:text-[32px] md:text-[48px] lg:text-[64px] text-[#23B349] text-center mb-8 md:mb-16">
-          {t("ourProducts.title")}
+          {c?.title || t("ourProducts.title")}
         </h2>
 
         {/* Product Cards Grid */}
@@ -61,7 +63,7 @@ export default function OurProductSection() {
                   {p.title}
                 </h3>
                 <p className="font-[family-name:var(--font-funnel-display)] text-[14px] sm:text-[16px] md:text-[20px] lg:text-[24px] opacity-90">
-                  {p.desc}
+                  {p.description}
                 </p>
               </div>
             </Link>

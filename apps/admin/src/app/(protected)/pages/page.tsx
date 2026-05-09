@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import {
   Home, Info, ShoppingBag, Phone, Image as ImageIcon,
-  Briefcase, FileText, Edit3, ExternalLink, RefreshCw, UtensilsCrossed, Truck,
+  Briefcase, FileText, Edit3, ExternalLink, RefreshCw, UtensilsCrossed, Truck, Star,
   CheckCircle, Clock,
 } from "lucide-react";
 import Link from "next/link";
@@ -35,6 +35,14 @@ const ALL_PAGES = [
     icon: Truck,
     editorHref: "/become-distributor",
     liveHref: "https://vitafoodcomplex.vercel.app/en/become-distributor",
+  },
+  {
+    slug: "why-choose-vita",
+    name: "Why Choose Vita",
+    description: "Hero, who we are, sister companies, QA, products",
+    icon: Star,
+    editorHref: "/why-choose-vita",
+    liveHref: "https://vitafoodcomplex.vercel.app/en/why-choose-vita",
   },
   {
     slug: "products",

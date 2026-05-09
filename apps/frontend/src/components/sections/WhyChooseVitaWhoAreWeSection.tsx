@@ -28,8 +28,10 @@ const bricolageGrotesque = Bricolage_Grotesque({
   weight: ["700"],
 });
 
-export default function WhyChooseVitaWhoAreWeSection() {
+export default function WhyChooseVitaWhoAreWeSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("WhyChooseVita.whoAreWe");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
 
   return (
     <section className="flex w-full flex-col items-center bg-white px-4 py-12 sm:px-6 sm:py-16 md:px-8 md:py-20 lg:px-8 lg:py-24 xl:px-[128px]">
@@ -41,7 +43,7 @@ export default function WhyChooseVitaWhoAreWeSection() {
             <span
               className={`${bricolageGrotesque.className} text-center text-[clamp(32px,8vw,150px)] font-bold leading-none tracking-[-0.02em] text-[#404040]`}
             >
-              {t("headlineWho")}
+              {c?.headlineWho || t("headlineWho")}
             </span>
             {/* Line 1 — layout_9NSMKE: 123.81×0, stroke 10px #333733 */}
             <div
@@ -49,33 +51,33 @@ export default function WhyChooseVitaWhoAreWeSection() {
               aria-hidden
             />
             <span className="text-center font-[family-name:var(--font-funnel-display)] text-[clamp(32px,8vw,150px)] font-extrabold leading-[90%] tracking-[-0.02em] text-[#23B349]">
-              {t("headlineAreWe")}
+              {c?.headlineAreWe || t("headlineAreWe")}
             </span>
           </div>
 
           {/* Section Description — layout_3MMBXZ: gap 78 */}
           <div className="flex w-full flex-col items-center gap-8 sm:gap-[clamp(32px,6vw,78px)]">
             <p className="w-full text-center font-[family-name:var(--font-outfit)] text-[clamp(16px,2.2vw,32px)] font-normal leading-relaxed sm:leading-normal tracking-[-0.004em] text-[rgba(16,15,15,0.9)] px-2">
-              {t("fmcgIntro")}
+              {c?.fmcgIntro || t("fmcgIntro")}
             </p>
 
             <Link
               href="/about"
               className="inline-flex h-12 sm:h-14 min-h-[48px] sm:min-h-[56px] items-center justify-center gap-4 rounded-full bg-[#23B349] px-6 sm:px-8 py-3 sm:py-4 font-[family-name:var(--font-funnel-display)] text-[16px] sm:text-[18px] font-medium tracking-[-0.004em] text-white transition-colors hover:bg-[#1fa041] sm:text-[20px] lg:text-[24px]"
             >
-              {t("moreAboutCta")}
+              {c?.moreAboutCta || t("moreAboutCta")}
             </Link>
           </div>
         </div>
 
-        {/* Cards — Figma layout_MW7PY9; scroll on viewports &lt; 1664px to preserve geometry */}
+        {/* Cards — Figma layout_MW7PY9; scroll on viewports < 1664px to preserve geometry */}
         <div className="hidden w-full overflow-x-auto lg:block">
           <div className="relative mx-auto h-[607px] min-w-[1664px] max-w-[1664px]">
             {FEATURE_KEYS.map((key, index) => (
               <WhoWeAreCard
                 key={key}
-                title={t(`featureCards.${key}.title`)}
-                description={t(`featureCards.${key}.description`)}
+                title={c?.featureCards?.[index]?.title || t(`featureCards.${key}.title`)}
+                description={c?.featureCards?.[index]?.description || t(`featureCards.${key}.description`)}
                 imageSrc={CARD_IMAGES[index]}
                 layout={CARD_LAYOUT[index]}
               />
@@ -87,8 +89,8 @@ export default function WhyChooseVitaWhoAreWeSection() {
           {FEATURE_KEYS.map((key, index) => (
             <WhoWeAreCard
               key={key}
-              title={t(`featureCards.${key}.title`)}
-              description={t(`featureCards.${key}.description`)}
+              title={c?.featureCards?.[index]?.title || t(`featureCards.${key}.title`)}
+              description={c?.featureCards?.[index]?.description || t(`featureCards.${key}.description`)}
               imageSrc={CARD_IMAGES[index]}
               layout={null}
             />

@@ -18,6 +18,7 @@ export default function PageEditor({ params: paramsPromise }: { params: Promise<
     if (params.slug === 'home')  { router.replace('/home');  return; }
     if (params.slug === 'about') { router.replace('/about'); return; }
     if (params.slug === 'become-distributor') { router.replace('/become-distributor'); return; }
+    if (params.slug === 'why-choose-vita')    { router.replace('/why-choose-vita');    return; }
     fetchPage();
   }, [params.slug]);
 

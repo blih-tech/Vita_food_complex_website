@@ -3,8 +3,10 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@frontend/navigation";
 
-export default function WhyChooseVitaHeroSection() {
+export default function WhyChooseVitaHeroSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("WhyChooseVita");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
 
   return (
     <section className="relative w-full overflow-hidden bg-white pt-[80px] md:pt-[120px] lg:pt-[160px]">
@@ -14,14 +16,14 @@ export default function WhyChooseVitaHeroSection() {
         <h1
           className="font-[family-name:var(--font-outfit)] font-extrabold text-[32px] sm:text-[40px] md:text-[64px] lg:text-[80px] text-[#23B349] leading-[1.1] tracking-tight mb-6 whitespace-pre-line"
         >
-          {t("hero.title")}
+          {c?.title || t("hero.title")}
         </h1>
 
         {/* Subtitle — Funnel Display 500 */}
         <p
           className="font-[family-name:var(--font-funnel-display)] font-medium text-[14px] sm:text-[16px] md:text-[20px] lg:text-[24px] text-[#404040]/70 max-w-[850px] leading-relaxed mb-8 md:mb-12 px-2"
         >
-          {t("hero.description")}
+          {c?.description || t("hero.description")}
         </p>
 
         {/* CTA Buttons */}
@@ -30,13 +32,13 @@ export default function WhyChooseVitaHeroSection() {
             href="/products"
             className="bg-[#23B349] text-white px-8 py-3 md:py-4 rounded-full font-bold text-[16px] md:text-[18px] transition-transform hover:scale-105 text-center"
           >
-            {t("hero.exploreProducts")} →
+            {c?.exploreProducts || t("hero.exploreProducts")} →
           </Link>
           <Link
             href="/contact"
             className="border-[2px] border-[#404040]/20 text-[#404040] px-8 py-3 md:py-4 rounded-full font-bold text-[16px] md:text-[18px] transition-transform hover:bg-[#404040]/5 text-center"
           >
-            {t("hero.contactUs")}
+            {c?.contactUs || t("hero.contactUs")}
           </Link>
         </div>
       </div>

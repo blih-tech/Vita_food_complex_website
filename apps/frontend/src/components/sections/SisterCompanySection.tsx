@@ -100,8 +100,10 @@ const SISTER_COMPANY_ROWS: readonly {
   ],
 ];
 
-export default function SisterCompanySection() {
+export default function SisterCompanySection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("WhyChooseVita.sisterCompanies");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
 
   return (
     <section className="bg-white px-4 py-10 sm:px-6 sm:py-12 md:py-16">
@@ -113,7 +115,7 @@ export default function SisterCompanySection() {
         <div className="relative flex flex-col items-center bg-[linear-gradient(180deg,#3CC96A_0%,#23B349_22%,#1A7A3D_52%,#0F4B24_82%,#0A2814_100%)] px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:px-[73px] lg:py-[128px]">
           <div className="relative z-[1] flex w-full max-w-[1566px] flex-col items-center gap-16 lg:gap-[128px]">
             <h2 className="w-full max-w-[604px] text-center font-[family-name:var(--font-outfit)] text-[40px] font-extrabold leading-[90%] tracking-[-0.02em] text-white sm:text-[56px] md:text-[68px] lg:text-[80px]">
-              {t("title")}
+              {c?.title || t("title")}
             </h2>
 
             <div className="flex w-full flex-col items-center gap-8 sm:gap-12 lg:gap-[72px]">
@@ -130,10 +132,10 @@ export default function SisterCompanySection() {
                     <SisterCompanyCard
                       key={company.key}
                       company={company}
-                      name={t(`companies.${company.key}.name`)}
-                      category={t(`companies.${company.key}.category`)}
-                      description={t(`companies.${company.key}.description`)}
-                      seeMore={t("seeMore")}
+                      name={c?.companies?.[company.key]?.name || t(`companies.${company.key}.name`)}
+                      category={c?.companies?.[company.key]?.category || t(`companies.${company.key}.category`)}
+                      description={c?.companies?.[company.key]?.description || t(`companies.${company.key}.description`)}
+                      seeMore={c?.seeMore || t("seeMore")}
                     />
                   ))}
                 </div>
