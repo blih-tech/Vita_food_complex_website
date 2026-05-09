@@ -10,7 +10,7 @@ import QualityAssuranceSection from "@frontend/components/sections/QualityAssura
 import OurProductSection from "@frontend/components/sections/OurProductSection";
 import BackToTop from "@frontend/components/ui/BackToTop";
 
-const SECTION_COMPONENTS: Record<string, React.ComponentType<any>> = {
+const SECTION_COMPONENTS: Record<string, any> = {
   "wcv-hero": WhyChooseVitaHeroSection,
   "wcv-video": VideoShowcaseSection,
   "wcv-who-are-we": WhoWeAreSection,
