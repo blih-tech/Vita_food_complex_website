@@ -25,7 +25,6 @@ export default function ResearchUserResearchSection({ content, locale }: { conte
 
   // Dynamic percentages for the donut chart
   const p = c?.percentages || { kids: 33, parents: 33, youth: 34 };
-  const total = p.kids + p.parents + p.youth;
   
   // SVG Donut Calculations
   const radius = 35;
@@ -38,6 +37,20 @@ export default function ResearchUserResearchSection({ content, locale }: { conte
   const kidsRotate = 0;
   const parentsRotate = (p.kids / 100) * 360;
   const youthRotate = ((p.kids + p.parents) / 100) * 360;
+
+  // Calculate Badge Positions (Middle of each arc)
+  const getBadgePos = (startP: number, endP: number, distance: number) => {
+    const midP = startP + (endP - startP) / 2;
+    const angle = (midP / 100 * 360 - 90) * (Math.PI / 180);
+    return {
+      left: `${50 + distance * Math.cos(angle)}%`,
+      top: `${50 + distance * Math.sin(angle)}%`,
+    };
+  };
+
+  const kidsBadgePos = getBadgePos(0, p.kids, 45);
+  const parentsBadgePos = getBadgePos(p.kids, p.kids + p.parents, 45);
+  const youthBadgePos = getBadgePos(p.kids + p.parents, 100, 45);
 
   // Legend labels with dynamic percentages
   const kidsLabel = legend.kids.replace(/\d+%/, `${p.kids}%`);
@@ -107,16 +120,25 @@ export default function ResearchUserResearchSection({ content, locale }: { conte
               />
             </svg>
 
-            {/* Floating Badges */}
-            <div className="absolute top-[15%] left-[5%] w-[70px] sm:w-[80px] md:w-[120px] lg:w-[140px] aspect-square bg-white rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-10 transition-all duration-700">
+            {/* Floating Badges - Now Dynamic! */}
+            <div 
+              className="absolute w-[70px] sm:w-[80px] md:w-[120px] lg:w-[140px] aspect-square bg-white rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-10 transition-all duration-1000 ease-out -translate-x-1/2 -translate-y-1/2"
+              style={{ left: kidsBadgePos.left, top: kidsBadgePos.top }}
+            >
               <span className="font-['Outfit'] font-semibold text-[20px] sm:text-[24px] md:text-[32px] lg:text-[42px] text-black">{p.kids}%</span>
             </div>
 
-            <div className="absolute top-[35%] right-[0%] sm:right-[-5%] lg:right-[-10%] w-[70px] sm:w-[80px] md:w-[120px] lg:w-[140px] aspect-square bg-white rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-10 transition-all duration-700">
+            <div 
+              className="absolute w-[70px] sm:w-[80px] md:w-[120px] lg:w-[140px] aspect-square bg-white rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-10 transition-all duration-1000 ease-out -translate-x-1/2 -translate-y-1/2"
+              style={{ left: parentsBadgePos.left, top: parentsBadgePos.top }}
+            >
               <span className="font-['Outfit'] font-semibold text-[20px] sm:text-[24px] md:text-[32px] lg:text-[42px] text-black">{p.parents}%</span>
             </div>
 
-            <div className="absolute bottom-[5%] left-[15%] w-[70px] sm:w-[80px] md:w-[120px] lg:w-[140px] aspect-square bg-white rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-10 transition-all duration-700">
+            <div 
+              className="absolute w-[70px] sm:w-[80px] md:w-[120px] lg:w-[140px] aspect-square bg-white rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-10 transition-all duration-1000 ease-out -translate-x-1/2 -translate-y-1/2"
+              style={{ left: youthBadgePos.left, top: youthBadgePos.top }}
+            >
               <span className="font-['Outfit'] font-semibold text-[20px] sm:text-[24px] md:text-[32px] lg:text-[42px] text-black">{p.youth}%</span>
             </div>
           </div>
@@ -140,18 +162,18 @@ export default function ResearchUserResearchSection({ content, locale }: { conte
 
               {/* Legend */}
               <div className="flex flex-col gap-8 mt-8">
-              <div className="flex items-center gap-6">
-                <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#90D152] rounded-[16px] md:rounded-[24px] shrink-0"></div>
-                <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">{kidsLabel}</span>
-              </div>
-              <div className="flex items-center gap-6">
-                <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#116D29] rounded-[16px] md:rounded-[24px] shrink-0"></div>
-                <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">{parentsLabel}</span>
-              </div>
-              <div className="flex items-center gap-6">
-                <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#E8E8E8] rounded-[16px] md:rounded-[24px] shrink-0"></div>
-                <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">{youthLabel}</span>
-              </div>
+                <div className="flex items-center gap-6">
+                  <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#90D152] rounded-[16px] md:rounded-[24px] shrink-0"></div>
+                  <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">{kidsLabel}</span>
+                </div>
+                <div className="flex items-center gap-6">
+                  <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#116D29] rounded-[16px] md:rounded-[24px] shrink-0"></div>
+                  <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">{parentsLabel}</span>
+                </div>
+                <div className="flex items-center gap-6">
+                  <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#E8E8E8] rounded-[16px] md:rounded-[24px] shrink-0"></div>
+                  <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">{youthLabel}</span>
+                </div>
               </div>
             </div>
 
