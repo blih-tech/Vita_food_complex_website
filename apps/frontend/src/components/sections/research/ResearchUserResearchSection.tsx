@@ -39,6 +39,11 @@ export default function ResearchUserResearchSection({ content, locale }: { conte
   const parentsRotate = (p.kids / 100) * 360;
   const youthRotate = ((p.kids + p.parents) / 100) * 360;
 
+  // Legend labels with dynamic percentages
+  const kidsLabel = legend.kids.replace(/\d+%/, `${p.kids}%`);
+  const parentsLabel = legend.parents.replace(/\d+%/, `${p.parents}%`);
+  const youthLabel = legend.youth.replace(/\d+%/, `${p.youth}%`);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Research file requested for:", email);
@@ -135,18 +140,18 @@ export default function ResearchUserResearchSection({ content, locale }: { conte
 
               {/* Legend */}
               <div className="flex flex-col gap-8 mt-8">
-                <div className="flex items-center gap-6">
-                  <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#90D152] rounded-[16px] md:rounded-[24px] shrink-0"></div>
-                  <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">{legend.kids}</span>
-                </div>
-                <div className="flex items-center gap-6">
-                  <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#116D29] rounded-[16px] md:rounded-[24px] shrink-0"></div>
-                  <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">{legend.parents}</span>
-                </div>
-                <div className="flex items-center gap-6">
-                  <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#E8E8E8] rounded-[16px] md:rounded-[24px] shrink-0"></div>
-                  <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">{legend.youth}</span>
-                </div>
+              <div className="flex items-center gap-6">
+                <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#90D152] rounded-[16px] md:rounded-[24px] shrink-0"></div>
+                <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">{kidsLabel}</span>
+              </div>
+              <div className="flex items-center gap-6">
+                <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#116D29] rounded-[16px] md:rounded-[24px] shrink-0"></div>
+                <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">{parentsLabel}</span>
+              </div>
+              <div className="flex items-center gap-6">
+                <div className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] bg-[#E8E8E8] rounded-[16px] md:rounded-[24px] shrink-0"></div>
+                <span className="font-['Outfit'] font-medium text-[22px] sm:text-[28px] md:text-[40px] lg:text-[52px] text-[#333733]">{youthLabel}</span>
+              </div>
               </div>
             </div>
 

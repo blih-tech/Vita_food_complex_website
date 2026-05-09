@@ -101,10 +101,10 @@ export default function ResearchOverviewSection({ content, locale }: { content?:
           </div>
 
           {/* Bar Chart Area */}
-          <div className="relative w-full h-[300px] md:h-[400px] mt-4 ml-0 sm:ml-16 flex flex-row items-end justify-between pt-10 px-2 sm:px-4 md:px-10 pb-[40px] border-b border-dashed border-[#8A8C8A]">
+          <div className="relative w-full h-[300px] md:h-[400px] mt-12 ml-0 sm:ml-16">
             
             {/* Grid lines (Y-axis markers) */}
-            <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-between pb-[40px] z-0 pointer-events-none">
+            <div className="absolute inset-0 flex flex-col justify-between z-0 pointer-events-none">
               {[100, 75, 50, 25, 0].map((tick) => (
                 <div key={tick} className="flex flex-row items-center w-full gap-4 relative">
                   <span className="hidden sm:block font-['Funnel_Display'] font-medium text-[16px] md:text-[24px] text-black w-12 text-right absolute -left-16">
@@ -115,51 +115,53 @@ export default function ResearchOverviewSection({ content, locale }: { content?:
               ))}
             </div>
 
-            {/* Bars */}
-            {chartData.map((data: any, idx: number) => (
-              <div key={idx} className="relative z-10 flex flex-col items-center h-full justify-end w-[18%] md:w-[15%]">
-                <div className="flex flex-row items-end gap-[2px] md:gap-[4px] h-full w-full justify-center">
-                  
-                  {/* Kids Bar */}
-                  <div className="flex flex-col items-center justify-end h-full w-1/3 group">
-                    <span className="text-[#B8B5B5] font-['Outfit'] font-medium text-[10px] md:text-[14px] mb-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap absolute -top-6">
-                      {data.kids}%
-                    </span>
-                    <div 
-                      className="w-full bg-[#90D152] rounded-t-sm md:rounded-t-md transition-all duration-500 ease-out" 
-                      style={{ height: `${data.kids}%` }}
-                    ></div>
-                  </div>
+            {/* Bars Container */}
+            <div className="absolute inset-0 flex flex-row items-end justify-between px-2 sm:px-4 md:px-10 z-10">
+              {chartData.map((data: any, idx: number) => (
+                <div key={idx} className="relative flex flex-col items-center h-full justify-end w-[18%] md:w-[15%]">
+                  <div className="flex flex-row items-end gap-[2px] md:gap-[4px] h-full w-full justify-center">
+                    
+                    {/* Kids Bar */}
+                    <div className="flex flex-col items-center justify-end h-full w-1/3 group relative">
+                      <span className="text-[#B8B5B5] font-['Outfit'] font-medium text-[10px] md:text-[14px] mb-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap absolute -top-6 left-1/2 -translate-x-1/2">
+                        {data.kids}%
+                      </span>
+                      <div 
+                        className="w-full bg-[#90D152] rounded-t-sm md:rounded-t-md transition-all duration-500 ease-out" 
+                        style={{ height: `${data.kids}%` }}
+                      ></div>
+                    </div>
 
-                  {/* Parents Bar */}
-                  <div className="flex flex-col items-center justify-end h-full w-1/3 group">
-                    <span className="text-[#B8B5B5] font-['Outfit'] font-medium text-[10px] md:text-[14px] mb-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap absolute -top-6">
-                      {data.parents}%
-                    </span>
-                    <div 
-                      className="w-full bg-[#116D29] rounded-t-sm md:rounded-t-md transition-all duration-500 ease-out" 
-                      style={{ height: `${data.parents}%` }}
-                    ></div>
-                  </div>
+                    {/* Parents Bar */}
+                    <div className="flex flex-col items-center justify-end h-full w-1/3 group relative">
+                      <span className="text-[#B8B5B5] font-['Outfit'] font-medium text-[10px] md:text-[14px] mb-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap absolute -top-6 left-1/2 -translate-x-1/2">
+                        {data.parents}%
+                      </span>
+                      <div 
+                        className="w-full bg-[#116D29] rounded-t-sm md:rounded-t-md transition-all duration-500 ease-out" 
+                        style={{ height: `${data.parents}%` }}
+                      ></div>
+                    </div>
 
-                  {/* Youth Bar */}
-                  <div className="flex flex-col items-center justify-end h-full w-1/3 group">
-                    <span className="text-[#B8B5B5] font-['Outfit'] font-medium text-[10px] md:text-[14px] mb-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap absolute -top-6">
-                      {data.youth}%
-                    </span>
-                    <div 
-                      className="w-full bg-[#E8E8E8] rounded-t-sm md:rounded-t-md transition-all duration-500 ease-out" 
-                      style={{ height: `${data.youth}%` }}
-                    ></div>
-                  </div>
+                    {/* Youth Bar */}
+                    <div className="flex flex-col items-center justify-end h-full w-1/3 group relative">
+                      <span className="text-[#B8B5B5] font-['Outfit'] font-medium text-[10px] md:text-[14px] mb-1 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap absolute -top-6 left-1/2 -translate-x-1/2">
+                        {data.youth}%
+                      </span>
+                      <div 
+                        className="w-full bg-[#E8E8E8] rounded-t-sm md:rounded-t-md transition-all duration-500 ease-out" 
+                        style={{ height: `${data.youth}%` }}
+                      ></div>
+                    </div>
 
+                  </div>
+                  {/* X-axis Label */}
+                  <span className="absolute -bottom-8 font-['Outfit'] font-medium text-[12px] md:text-[16px] text-black text-center leading-tight whitespace-nowrap">
+                    {data.label}
+                  </span>
                 </div>
-                {/* X-axis Label */}
-                <span className="absolute -bottom-8 font-['Outfit'] font-medium text-[12px] md:text-[16px] text-black text-center leading-tight whitespace-nowrap">
-                  {data.label}
-                </span>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           {/* Info Box */}
