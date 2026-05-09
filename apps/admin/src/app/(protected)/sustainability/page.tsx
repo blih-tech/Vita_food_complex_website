@@ -1,13 +1,10 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import {
-  Leaf, ShieldCheck, Cog, Heart,
-  Edit3, CheckCircle, RefreshCw, AlertCircle, X, Globe,
-  ChevronDown, ChevronUp, ImagePlus, Loader2,
-} from "lucide-react";
+import { Leaf, ShieldCheck, Cog, Heart, Edit3, CheckCircle, RefreshCw, AlertCircle, X, Globe, ChevronDown, ChevronUp, ImagePlus, Loader2 } from "lucide-react";
 import Image from "next/image";
 import api from "@/lib/api";
+import { toast } from "react-hot-toast";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 interface Section { id: string; type: string; content: any; }
@@ -340,12 +337,6 @@ export default function SustainabilityAdminPage() {
   const [initializing, setInitializing] = useState(false);
   const [editSection, setEditSection] = useState<Section | null>(null);
   const [saving, setSaving] = useState(false);
-  const [toast, setToast] = useState<{ type: "success" | "error"; msg: string } | null>(null);
-
-  const showToast = (type: "success" | "error", msg: string) => {
-    setToast({ type, msg });
-    setTimeout(() => setToast(null), 3000);
-  };
 
   const fetchPage = useCallback(async () => {
     try {
@@ -365,9 +356,9 @@ export default function SustainabilityAdminPage() {
     try {
       const res = await api.post("/content/pages/upsert", DEFAULT_PAGE);
       setPage(res.data);
-      showToast("success", "Sustainability page initialized.");
+      toast.success("Sustainability page initialized.");
     } catch {
-      showToast("error", "Failed to initialize page.");
+      toast.error("Failed to initialize page.");
     } finally {
       setInitializing(false);
     }
@@ -383,9 +374,9 @@ export default function SustainabilityAdminPage() {
         sections: prev.sections.map(s => s.id === editSection.id ? { ...s, content } : s),
       } : prev);
       setEditSection(null);
-      showToast("success", "Section saved successfully.");
+      toast.success("Section saved successfully.");
     } catch {
-      showToast("error", "Failed to save section.");
+      toast.error("Failed to save section.");
     } finally {
       setSaving(false);
     }
@@ -434,7 +425,6 @@ export default function SustainabilityAdminPage() {
       )}
 
       {editSection && <EditModal section={editSection} onClose={() => setEditSection(null)} onSave={saveSection} saving={saving} />}
-      {toast && <div className={`fixed bottom-6 right-6 z-[60] flex items-center gap-3 px-5 py-3 rounded-[14px] shadow-lg text-sm font-semibold ${toast.type === "success" ? "bg-[#23B349] text-white" : "bg-red-500 text-white"}`}>{toast.msg}</div>}
     </div>
   );
 }
