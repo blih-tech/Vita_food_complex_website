@@ -4,8 +4,9 @@ import { useState, useEffect, useCallback } from "react";
 import {
   Star, Play, Users, Building2, Award, ShoppingBag,
   Edit3, CheckCircle, RefreshCw, AlertCircle, X, Globe,
-  ChevronDown, ChevronUp, Save, ArrowLeft, Loader2,
+  ChevronDown, ChevronUp, Save, ArrowLeft, Loader2, ImagePlus,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import api from "@/lib/api";
 
@@ -144,6 +145,34 @@ const COMPANY_KEYS = [
   "huajiaInternationalTrade", "belayabPoultryAndFeed", "belayabGeepas", "lewisRetailsSupermarket",
 ];
 
+// ── ImageUploadField ───────────────────────────────────────────────────────
+function ImageUploadField({
+  currentUrl, uploading, onFileSelected,
+}: {
+  currentUrl: string; uploading: boolean; onFileSelected: (file: File) => void;
+}) {
+  return (
+    <div className="flex items-center gap-3 mt-1">
+      {currentUrl ? (
+        <div className="relative w-14 h-14 rounded-[10px] overflow-hidden border border-gray-200 shrink-0">
+          <Image src={currentUrl} alt="preview" fill className="object-cover" unoptimized />
+        </div>
+      ) : (
+        <div className="w-14 h-14 rounded-[10px] bg-gray-100 border border-dashed border-gray-300 flex items-center justify-center shrink-0">
+          <ImagePlus size={18} className="text-gray-400" />
+        </div>
+      )}
+      <label className="inline-flex items-center gap-2 px-3 py-2 rounded-[10px] text-xs font-semibold border border-gray-200 hover:bg-gray-50 transition-colors text-gray-600 cursor-pointer">
+        {uploading ? <Loader2 size={13} className="animate-spin" /> : <ImagePlus size={13} />}
+        {uploading ? "Uploading…" : "Change Image"}
+        <input type="file" accept="image/*" className="hidden" disabled={uploading}
+          onChange={e => { const f = e.target.files?.[0]; if (f) onFileSelected(f); }} />
+      </label>
+      {currentUrl && <p className="text-[10px] text-gray-400 truncate max-w-[160px]">{currentUrl.split("/").pop()}</p>}
+    </div>
+  );
+}
+
 function getPreview(section: Section): string {
   const en = section.content?.en || section.content;
   const text = en?.title || en?.headlineWho || en?.caption || "";
@@ -157,6 +186,7 @@ export default function WhyChooseVitaEditor() {
   const [toast, setToast] = useState<{ type: "success" | "error"; msg: string } | null>(null);
   const [activeLang, setActiveLang] = useState<"en" | "am">("en");
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const [uploading, setUploading] = useState<string | null>(null);
 
   const showToast = (type: "success" | "error", msg: string) => {
     setToast({ type, msg });
@@ -185,6 +215,26 @@ export default function WhyChooseVitaEditor() {
       });
       return { ...prev, sections };
     });
+  }, []);
+
+  // Sets the same value in both EN and AM (used for images shared across locales)
+  const setBothLangs = useCallback((sectionId: string, path: string[], value: any) => {
+    set(sectionId, "en", path, value);
+    set(sectionId, "am", path, value);
+  }, [set]);
+
+  const uploadImage = useCallback(async (key: string, file: File, onUrl: (url: string) => void) => {
+    setUploading(key);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      const { data } = await api.post("/content/upload-image", fd, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      onUrl(data.url);
+    } finally {
+      setUploading(null);
+    }
   }, []);
 
   const handleSave = async () => {
@@ -323,6 +373,10 @@ export default function WhyChooseVitaEditor() {
                       section={section}
                       lang={activeLang}
                       onChange={(path, value) => set(section.id, activeLang, path, value)}
+                      onImageUpload={(key, file, path) =>
+                        uploadImage(key, file, (url) => setBothLangs(section.id, path, url))
+                      }
+                      uploading={uploading}
                     />
                   )}
                 </div>
@@ -337,10 +391,12 @@ export default function WhyChooseVitaEditor() {
 
 // ── Per-section field editors ──────────────────────────────────────────────
 
-function SectionEditor({ section, lang, onChange }: {
+function SectionEditor({ section, lang, onChange, onImageUpload, uploading }: {
   section: Section;
   lang: "en" | "am";
   onChange: (path: string[], value: any) => void;
+  onImageUpload: (key: string, file: File, path: string[]) => void;
+  uploading: string | null;
 }) {
   const c = section.content?.[lang] ?? {};
 
@@ -446,7 +502,14 @@ function SectionEditor({ section, lang, onChange }: {
               <p className="text-xs font-semibold text-gray-400">Product {i + 1}</p>
               {field("Title", ["products", String(i), "title"])}
               {field("Description", ["products", String(i), "description"], true)}
-              {field("Image URL", ["products", String(i), "image"])}
+              <div className="flex flex-col gap-1.5">
+                <label className="text-xs font-bold text-gray-600 uppercase tracking-wide">Image</label>
+                <ImageUploadField
+                  currentUrl={c?.products?.[i]?.image || ""}
+                  uploading={uploading === `product-${i}`}
+                  onFileSelected={(file) => onImageUpload(`product-${i}`, file, ["products", String(i), "image"])}
+                />
+              </div>
               {field("Link (href)", ["products", String(i), "href"])}
             </div>
           ))}
