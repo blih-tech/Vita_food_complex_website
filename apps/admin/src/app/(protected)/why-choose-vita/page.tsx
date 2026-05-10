@@ -331,7 +331,9 @@ export default function WhyChooseVitaEditor() {
                                   <InputField label="Name" value={company.name} onChange={v => set(section.id, `companies.${key}.name`, v)} />
                                   <InputField label="Category" value={company.category} onChange={v => set(section.id, `companies.${key}.category`, v)} />
                                 </div>
+                                <InputField label="Website Link (href)" value={company.href} onChange={v => setBoth(section.id, `companies.${key}.href`, v)} />
                                 <InputField label="Description" value={company.description} onChange={v => set(section.id, `companies.${key}.description`, v)} multiline />
+                                <ImageUploadField label="Company Logo" value={company.logoSrc} onChange={v => setBoth(section.id, `companies.${key}.logoSrc`, v)} />
                               </div>
                             );
                           })}

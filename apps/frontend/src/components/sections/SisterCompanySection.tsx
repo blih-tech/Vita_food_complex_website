@@ -135,6 +135,8 @@ export default function SisterCompanySection({ content, locale }: { content?: an
                       name={c?.companies?.[company.key]?.name || t(`companies.${company.key}.name`)}
                       category={c?.companies?.[company.key]?.category || t(`companies.${company.key}.category`)}
                       description={c?.companies?.[company.key]?.description || t(`companies.${company.key}.description`)}
+                      logoSrc={c?.companies?.[company.key]?.logoSrc || company.logoSrc}
+                      href={c?.companies?.[company.key]?.href || company.href}
                       seeMore={c?.seeMore || t("seeMore")}
                     />
                   ))}
@@ -153,28 +155,33 @@ function SisterCompanyCard({
   name,
   category,
   description,
+  logoSrc,
+  href,
   seeMore,
 }: {
   company: (typeof SISTER_COMPANY_ROWS)[number][number];
   name: string;
   category: string;
   description: string;
+  logoSrc: string;
+  href: string;
   seeMore: string;
 }) {
   return (
     <Link
-      href={company.href}
+      href={href}
       className="mx-auto flex w-full max-w-[490px] shrink-0 flex-col rounded-[24.5px] bg-white px-6 py-8 sm:px-[47.65px] sm:pt-[47.65px] sm:pb-0 outline-none transition-opacity hover:opacity-95 focus-visible:ring-2 focus-visible:ring-[#23B349] focus-visible:ring-offset-2 focus-visible:ring-offset-white"
     >
       <div className="flex flex-col gap-5 sm:gap-8 lg:gap-[35.737918854px]">
         {/* Figma layout_X0W1NV — logo well */}
         <div className="relative mx-auto box-border h-[180px] sm:h-[238.25px] w-full max-w-[394.7px] overflow-hidden rounded-[12.25px] border border-[#E8E8E8] bg-white px-6 py-6 sm:py-[35.737895966px] md:px-[119.126304626px]">
           <Image
-            src={company.logoSrc}
+            src={logoSrc}
             alt={name}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 395px"
             className="object-contain"
+            unoptimized
           />
         </div>
 
