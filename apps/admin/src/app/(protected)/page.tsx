@@ -3,82 +3,30 @@
 import { useAuth } from '@/context/AuthContext';
 import {
   ShoppingBag, Briefcase, MessageSquare, TrendingUp,
-  ArrowUpRight, FileText, Settings, Bell,
+  ArrowUpRight, FileText, Settings, Bell, Loader2,
 } from 'lucide-react';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import api from '@/lib/api';
 
-const stats = [
-  {
-    label: 'Total Products',
-    value: '11+',
-    change: '+2 this month',
-    icon: ShoppingBag,
-    iconBg: 'bg-blue-50',
-    iconColor: 'text-blue-500',
-  },
-  {
-    label: 'Job Openings',
-    value: '5',
-    change: '3 new applicants',
-    icon: Briefcase,
-    iconBg: 'bg-emerald-50',
-    iconColor: 'text-emerald-500',
-  },
-  {
-    label: 'New Messages',
-    value: '12',
-    change: '4 unread today',
-    icon: MessageSquare,
-    iconBg: 'bg-violet-50',
-    iconColor: 'text-violet-500',
-  },
-  {
-    label: 'Site Visits',
-    value: '1.2k',
-    change: '+18% this week',
-    icon: TrendingUp,
-    iconBg: 'bg-orange-50',
-    iconColor: 'text-orange-500',
-  },
-];
-
-const quickActions = [
-  {
-    label: 'Edit Pages',
-    desc: 'Update website content',
-    icon: FileText,
-    href: '/pages',
-    iconBg: 'bg-blue-50',
-    iconColor: 'text-blue-500',
-  },
-  {
-    label: 'Products',
-    desc: 'Manage your catalogue',
-    icon: ShoppingBag,
-    href: '/products',
-    iconBg: 'bg-emerald-50',
-    iconColor: 'text-emerald-500',
-  },
-  {
-    label: 'Messages',
-    desc: 'View contact submissions',
-    icon: MessageSquare,
-    href: '/messages',
-    iconBg: 'bg-violet-50',
-    iconColor: 'text-violet-500',
-  },
-  {
-    label: 'Settings',
-    desc: 'Site configuration',
-    icon: Settings,
-    href: '/settings',
-    iconBg: 'bg-orange-50',
-    iconColor: 'text-orange-500',
-  },
-];
+interface DashboardStats {
+  totalProducts: number;
+  jobOpenings: number;
+  unreadMessages: number;
+  siteVisits: number;
+}
 
 export default function DashboardPage() {
   const { user } = useAuth();
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    api.get('/dashboard/stats')
+      .then(res => setStats(res.data))
+      .catch(err => console.error('Failed to fetch dashboard stats:', err))
+      .finally(() => setLoading(false));
+  }, []);
 
   const hour = new Date().getHours();
   const greeting =
@@ -90,6 +38,76 @@ export default function DashboardPage() {
     month: 'long',
     day: 'numeric',
   });
+
+  const statsConfig = [
+    {
+      label: 'Total Products',
+      value: stats?.totalProducts ?? '...',
+      change: 'Live from catalogue',
+      icon: ShoppingBag,
+      iconBg: 'bg-blue-50',
+      iconColor: 'text-blue-500',
+    },
+    {
+      label: 'Job Openings',
+      value: stats?.jobOpenings ?? '...',
+      change: 'Active listings',
+      icon: Briefcase,
+      iconBg: 'bg-emerald-50',
+      iconColor: 'text-emerald-500',
+    },
+    {
+      label: 'New Messages',
+      value: stats?.unreadMessages ?? '...',
+      change: 'Unread submissions',
+      icon: MessageSquare,
+      iconBg: 'bg-violet-50',
+      iconColor: 'text-violet-500',
+    },
+    {
+      label: 'Site Visits',
+      value: stats ? `${(stats.siteVisits / 1000).toFixed(1)}k` : '...',
+      change: '+18% this week',
+      icon: TrendingUp,
+      iconBg: 'bg-orange-50',
+      iconColor: 'text-orange-500',
+    },
+  ];
+
+  const quickActions = [
+    {
+      label: 'Edit Pages',
+      desc: 'Update website content',
+      icon: FileText,
+      href: '/pages',
+      iconBg: 'bg-blue-50',
+      iconColor: 'text-blue-500',
+    },
+    {
+      label: 'Products',
+      desc: 'Manage your catalogue',
+      icon: ShoppingBag,
+      href: '/products',
+      iconBg: 'bg-emerald-50',
+      iconColor: 'text-emerald-500',
+    },
+    {
+      label: 'Messages',
+      desc: 'View contact submissions',
+      icon: MessageSquare,
+      href: '/messages',
+      iconBg: 'bg-violet-50',
+      iconColor: 'text-violet-500',
+    },
+    {
+      label: 'Settings',
+      desc: 'Site configuration',
+      icon: Settings,
+      href: '/settings',
+      iconBg: 'bg-orange-50',
+      iconColor: 'text-orange-500',
+    },
+  ];
 
   return (
     <>
@@ -104,7 +122,9 @@ export default function DashboardPage() {
         <div className="flex items-center gap-3">
           <button className="relative w-9 h-9 rounded-[10px] bg-gray-50 hover:bg-gray-100 flex items-center justify-center transition-colors">
             <Bell size={16} className="text-gray-500" />
-            <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#23B349] rounded-full" />
+            {(stats?.unreadMessages ?? 0) > 0 && (
+              <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#23B349] rounded-full" />
+            )}
           </button>
 
           <Link href="/settings?tab=profile" className="flex items-center gap-2.5 pl-3 border-l border-gray-100 group">
@@ -160,7 +180,7 @@ export default function DashboardPage() {
         </div>
 
         <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 lg:gap-4 mb-6 lg:mb-8">
-          {stats.map((stat) => (
+          {statsConfig.map((stat) => (
             <div
               key={stat.label}
               className="bg-white rounded-[16px] lg:rounded-[18px] p-4 lg:p-5 border border-gray-100 hover:border-[#23B349]/25 hover:shadow-sm transition-all"
@@ -172,7 +192,7 @@ export default function DashboardPage() {
                 <ArrowUpRight size={14} className="text-[#23B349] mt-0.5" />
               </div>
               <p className="font-['Funnel_Display'] text-[#333733] font-bold text-2xl lg:text-3xl leading-none">
-                {stat.value}
+                {loading ? <Loader2 size={24} className="animate-spin text-gray-200" /> : stat.value}
               </p>
               <p className="text-xs text-gray-400 mt-1">{stat.label}</p>
               <p className="text-xs text-[#23B349] font-semibold mt-2">{stat.change}</p>

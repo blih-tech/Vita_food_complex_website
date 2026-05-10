@@ -92,6 +92,10 @@ export class ProductsService {
     return this.productModel.find().exec();
   }
 
+  async count(): Promise<number> {
+    return this.productModel.countDocuments().exec();
+  }
+
   async findBySlugOrId(param: string): Promise<ProductDocument> {
     const product = await this.productModel
       .findOne(resolveFilter(param))

@@ -24,6 +24,10 @@ export class ContactMessagesService {
     return this.contactMessageModel.find().sort({ createdAt: -1 }).exec();
   }
 
+  async countUnread(): Promise<number> {
+    return this.contactMessageModel.countDocuments({ status: 'unread' }).exec();
+  }
+
   async findById(id: string): Promise<ContactMessageDocument> {
     const message = await this.contactMessageModel.findById(id).exec();
     if (!message) {

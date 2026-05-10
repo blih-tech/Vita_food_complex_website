@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import {
-  Home, Info, ShoppingBag, Phone, Image as ImageIcon,
-  Briefcase, FileText, Edit3, ExternalLink, RefreshCw, UtensilsCrossed, Truck, Star,
+  Home, Info, Image as ImageIcon,
+  FileText, Edit3, ExternalLink, RefreshCw, UtensilsCrossed, Truck, Star,
   CheckCircle, Clock, Leaf, Globe, Lightbulb, Heart, BarChart3,
 } from "lucide-react";
 import Link from "next/link";
@@ -45,14 +45,6 @@ const ALL_PAGES = [
     liveHref: "https://vitafoodcomplex.vercel.app/en/why-choose-vita",
   },
   {
-    slug: "products",
-    name: "Products",
-    description: "Product catalogue and categories",
-    icon: ShoppingBag,
-    editorHref: null,
-    liveHref: "https://vitafoodcomplex.vercel.app/en/products",
-  },
-  {
     slug: "recipes",
     name: "Recipes",
     description: "Recipe hero, intro, and recipe cards",
@@ -61,28 +53,12 @@ const ALL_PAGES = [
     liveHref: "https://vitafoodcomplex.vercel.app/en/recipes",
   },
   {
-    slug: "contact",
-    name: "Contact",
-    description: "Contact form and company location",
-    icon: Phone,
-    editorHref: null,
-    liveHref: "https://vitafoodcomplex.vercel.app/en/contact",
-  },
-  {
     slug: "gallery",
     name: "Gallery",
     description: "Visual journey, community wall, and partner testimonials",
     icon: ImageIcon,
     editorHref: "/gallery",
     liveHref: "https://vitafoodcomplex.vercel.app/en/gallery",
-  },
-  {
-    slug: "careers",
-    name: "Careers",
-    description: "Job listings and applications",
-    icon: Briefcase,
-    editorHref: null,
-    liveHref: "https://vitafoodcomplex.vercel.app/en/careers",
   },
   {
     slug: "innovation",

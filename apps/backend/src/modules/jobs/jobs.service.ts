@@ -13,6 +13,10 @@ export class JobsService {
     return this.jobModel.find().exec();
   }
 
+  async count(): Promise<number> {
+    return this.jobModel.countDocuments().exec();
+  }
+
   async findById(id: string): Promise<JobDocument> {
     const job = await this.jobModel.findOne({ id }).exec();
     if (!job) {
