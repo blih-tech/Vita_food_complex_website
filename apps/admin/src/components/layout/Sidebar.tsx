@@ -66,7 +66,8 @@ export default function Sidebar({ open = false, onClose }: SidebarProps) {
         pathname.startsWith('/sustainability') ||
         pathname.startsWith('/we-care') ||
         pathname.startsWith('/research') ||
-        pathname.startsWith('/gallery')
+        pathname.startsWith('/gallery') ||
+        pathname.startsWith('/why-choose-vita')
       );
     }
     return pathname.startsWith(href);

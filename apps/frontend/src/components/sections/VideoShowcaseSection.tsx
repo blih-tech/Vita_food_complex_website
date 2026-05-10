@@ -6,7 +6,7 @@ import { Play } from "lucide-react";
 
 const marqueeItems = Array.from({ length: 8 });
 
-function MarqueeBanner({ t }: { t: ReturnType<typeof useTranslations> }) {
+function MarqueeBanner({ t, text }: { t: any, text: string }) {
   return (
     <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-12 w-[220vw] -translate-x-1/2 -translate-y-1/2 rotate-[-5deg] bg-[#FFEC19] border-b-[5px] border-[#404040] shadow-2xl sm:h-14 sm:border-b-[6px] md:h-20 md:border-b-[8px] lg:h-28 lg:border-b-[12px]">
       <div className="relative flex h-full items-center overflow-hidden whitespace-nowrap">
@@ -16,7 +16,7 @@ function MarqueeBanner({ t }: { t: ReturnType<typeof useTranslations> }) {
               key={index}
               className="mx-6 sm:mx-8 md:mx-10 font-['Funnel_Display'] text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-7xl font-extrabold italic tracking-tighter text-[#DB4426]"
             >
-              {t("marqueeText").replace("{connecting}", t("connecting"))}
+              {text}
             </span>
           ))}
         </div>
@@ -25,23 +25,31 @@ function MarqueeBanner({ t }: { t: ReturnType<typeof useTranslations> }) {
   );
 }
 
-export default function VideoShowcaseSection() {
+export default function VideoShowcaseSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Hero");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
+
+  const marqueeText = c?.marqueeText?.replace("{connecting}", c?.connecting || t("connecting")) || t("marqueeText").replace("{connecting}", t("connecting"));
+  const videoAlt = c?.videoAlt || t("videoAlt");
+  const videoThumbnail = c?.videoThumbnail || "/assets/hero/video-family.png";
+  const badgeImage = c?.badgeImage || "/assets/hero/badge.svg";
 
   return (
     <section className="relative w-full overflow-hidden px-4 sm:px-6 md:px-10 lg:px-16 pb-16 md:pb-24 lg:pb-32">
       <div className="relative mx-auto max-w-[1380px]">
-        <MarqueeBanner t={t} />
+        <MarqueeBanner t={t} text={marqueeText} />
 
         <div className="relative z-10">
           {/* Video player */}
           <div className="group relative aspect-video overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-[48px] lg:rounded-[52px] border-4 border-white bg-[#404040] shadow-[0_20px_50px_rgba(0,0,0,0.35)] md:shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
             <Image
-              src="/assets/hero/video-family.png"
-              alt={t("videoAlt")}
+              src={videoThumbnail}
+              alt={videoAlt}
               fill
               priority
               className="object-cover transition-transform duration-1000 group-hover:scale-105"
+              unoptimized
             />
 
             <div className="absolute inset-0 bg-black/30 sm:bg-black/20 transition-all duration-500 group-hover:bg-black/5" />
@@ -71,7 +79,7 @@ export default function VideoShowcaseSection() {
           {/* Floating Badge */}
           <div className="absolute -right-3 -top-6 sm:-right-6 sm:-top-10 md:-right-8 md:-top-12 z-30 h-20 w-20 sm:h-24 sm:w-24 md:h-40 md:w-40 lg:h-[215px] lg:w-[215px] rotate-[10deg] drop-shadow-2xl transition-transform duration-700 hover:rotate-[20deg]">
             <Image
-              src="/assets/hero/badge.svg"
+              src={badgeImage}
               alt="Quality Badge"
               fill
               className="object-contain"

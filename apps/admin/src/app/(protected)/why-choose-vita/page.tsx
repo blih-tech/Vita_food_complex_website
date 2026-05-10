@@ -3,140 +3,102 @@
 import { useState, useEffect, useCallback } from "react";
 import {
   Star, Play, Users, Building2, Award, ShoppingBag,
-  Edit3, CheckCircle, RefreshCw, AlertCircle, X, Globe,
-  ChevronDown, ChevronUp, Save, ArrowLeft, Loader2, ImagePlus,
+  ArrowLeft, Loader2, Save, Globe, ChevronDown, ChevronUp,
+  Plus, Trash2, ImagePlus
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import api from "@/lib/api";
+import { toast } from "react-hot-toast";
 
-interface Section { id: string; type: string; content: any; }
-interface PageData {
-  slug: string;
-  title: { en: string; am: string };
-  sections: Section[];
-  updatedAt?: string;
+// ── Components ──────────────────────────────────────────────────────────────
+
+function InputField({ label, value, onChange, multiline = false }: { 
+  label: string; value: string; onChange: (v: string) => void; multiline?: boolean 
+}) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">{label}</label>
+      {multiline ? (
+        <textarea
+          value={value || ""}
+          onChange={(e) => onChange(e.target.value)}
+          rows={3}
+          className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#23B349]/20 focus:border-[#23B349] outline-none transition-all resize-none"
+        />
+      ) : (
+        <input
+          type="text"
+          value={value || ""}
+          onChange={(e) => onChange(e.target.value)}
+          className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#23B349]/20 focus:border-[#23B349] outline-none transition-all"
+        />
+      )}
+    </div>
+  );
 }
 
-const SECTION_META: Record<string, { name: string; icon: any; description: string; readOnly?: boolean }> = {
-  "wcv-hero":             { name: "Hero Banner",       icon: Star,      description: "Main headline, subtitle, and CTA buttons" },
-  "wcv-video":            { name: "Video Showcase",    icon: Play,      description: "Marquee banner and video player (layout only — no editable fields)", readOnly: true },
-  "wcv-who-are-we":       { name: "Who Are We",        icon: Users,     description: "Section headlines, intro paragraph, and 4 feature cards" },
-  "wcv-sister-companies": { name: "Sister Companies",  icon: Building2, description: "Section title and all 13 company names, categories, and descriptions" },
-  "wcv-qa":               { name: "Quality Assurance", icon: Award,     description: "Caption label and section headline" },
-  "wcv-products":         { name: "Our Products",      icon: ShoppingBag, description: "Section title and 2 product cards (title, description, image, link)" },
-};
+function ImageUploadField({ label, value, onChange }: { 
+  label: string; value: string; onChange: (url: string) => void 
+}) {
+  const [uploading, setUploading] = useState(false);
 
-const DEFAULT_PAGE: PageData = {
-  slug: "why-choose-vita",
-  title: { en: "Why Choose Vita", am: "ለምን ቪታ" },
-  sections: [
-    {
-      id: "wcv-hero", type: "wcv-hero",
-      content: {
-        en: { title: "A Better Choice\nfor Every Table", description: "Vita is committed to providing high-quality, nutritious food products that nourish families and support local communities.", exploreProducts: "Explore products", contactUs: "Contact US" },
-        am: { title: "ለእያንዳንዱ ማዕድ\nየተሻለ ምርጫ", description: "ቪታ ቤተሰቦችን የሚመግቡ och የአካባቢ ማህበረሰቦችን የሚደግፉ ከፍተኛ ጥራት ያላቸው och የተመጣጠነ የምግብ ምርቶችን ለማቅረብ ቁርጠኛ ነው።", exploreProducts: "ምርቶችን ያስሱ", contactUs: "ያግኙን" },
-      },
-    },
-    {
-      id: "wcv-video", type: "wcv-video",
-      content: {},
-    },
-    {
-      id: "wcv-who-are-we", type: "wcv-who-are-we",
-      content: {
-        en: {
-          headlineWho: "WHO", headlineAreWe: "ARE WE",
-          fmcgIntro: "Vita is a leading FMCG company in Ethiopia, dedicated to producing high-quality food products that meet the needs of our diverse consumers.",
-          moreAboutCta: "More About Vita",
-          featureCards: [
-            { title: "Built on Trust", description: "We have earned the trust of millions of families through our commitment to quality and safety." },
-            { title: "Reliable Supply", description: "Our robust supply chain ensures that our products are always available when you need them." },
-            { title: "Continuous Innovation", description: "We are constantly innovating to bring you new and exciting food products." },
-            { title: "Community Focused", description: "We are dedicated to supporting the communities we serve through various social initiatives." },
-          ],
-        },
-        am: {
-          headlineWho: "እኛ", headlineAreWe: "ማን ነን",
-          fmcgIntro: "ቪታ በኢትዮጵያ ውስጥ ግንባር ቀደም የፍጆታ ምርቶች አምራች ድርጅት ሲሆን፣ የተለያዩ ሸማቾቻችንን ፍላጎት የሚያሟሉ ከፍተኛ ጥራት ያላቸው የምግብ ምርቶችን ለማምረት የተቋቋመ ነው።",
-          moreAboutCta: "ስለ ቪታ ተጨማሪ",
-          featureCards: [
-            { title: "በእምነት ላይ የተገነባ", description: "ለጥራት och ለደህንነት ባለን ቁርጠኝነት በሚሊዮኖች የሚቆጠሩ ቤተሰቦችን እምነት አትርፈናል።" },
-            { title: "አስተማማኝ አቅርቦት", description: "የእኛ ጠንካራ የአቅርቦት ሰንሰለት ምርቶቻችንን በሚፈልጉበት ጊዜ ሁሉ ጊዜ መገኘቱን ያረጋግጣል።" },
-            { title: "ቀጣይነት ያለው ፈጠራ", description: "አዲስ och አስደሳሽ የምግብ ምርቶችን ለእርስዎ ለማቅረብ ዘወትር አዲስ ፈጠራዎችን እንሰራለን።" },
-            { title: "ማህበረሰብ ተኮር", description: "በተለያዩ ማህበራዊ ተነሳሽነቶች የምናገለግላቸውን ማህበረሰቦች ለመደገፍ ቆርጠን ተነስተናል።" },
-          ],
-        },
-      },
-    },
-    {
-      id: "wcv-sister-companies", type: "wcv-sister-companies",
-      content: {
-        en: {
-          title: "Our Sister Companies", seeMore: "See More",
-          companies: {
-            longTea:                  { name: "Long Tea",                   category: "Beverages",        description: "Premium tea products sourced from the finest tea gardens." },
-            belayabMotors:            { name: "Belayab Motors",             category: "Automotive",       description: "Leading automotive distributor and assembler in Ethiopia." },
-            belayabCable:             { name: "Belayab Cable",              category: "Manufacturing",    description: "High-quality electrical and telecommunication cables." },
-            belayabFoods:             { name: "Belayab Foods",              category: "Food & Beverage",  description: "Diverse range of food products for the Ethiopian market." },
-            goldenTulip:              { name: "Golden Tulip",               category: "Hospitality",      description: "World-class hospitality and hotel services." },
-            belayabDelivery:          { name: "Belayab Delivery",           category: "Logistics",        description: "Efficient and reliable delivery services across the nation." },
-            aradaCoffee:              { name: "Arada Coffee",               category: "Beverages",        description: "Authentic Ethiopian coffee experience." },
-            lionstone:                { name: "Lionstone",                  category: "Real Estate",      description: "Innovative real estate development projects." },
-            belayabPharmaceuticals:   { name: "Belayab Pharmaceuticals",   category: "Healthcare",       description: "Essential pharmaceutical products and medical supplies." },
-            huajiaInternationalTrade: { name: "Huajia International Trade", category: "Trade",           description: "Global trading and import-export services." },
-            belayabPoultryAndFeed:    { name: "Belayab Poultry and Feed",   category: "Agriculture",     description: "Sustainable poultry farming and high-quality animal feed." },
-            belayabGeepas:            { name: "Belayab Geepas",             category: "Electronics",     description: "Wide range of household electronics and appliances." },
-            lewisRetailsSupermarket:  { name: "Lewis Retails Supermarket",  category: "Retail",          description: "Premium retail experience with a wide selection of products." },
-          },
-        },
-        am: {
-          title: "እህት ኩባንያዎቻችን", seeMore: "ተጨማሪ ይመልከቱ",
-          companies: {
-            longTea:                  { name: "ሎንግ ቲ",                         category: "መጠጦች",             description: "ከምርጥ የሻይ አትክልት ስፍራዎች የተገኙ ምርጥ የሻይ ምርቶች።" },
-            belayabMotors:            { name: "በላያብ ሞተርስ",                    category: "አውቶሞቲቭ",           description: "በኢትዮጵያ ውስጥ ግንባር ቀደም የአውቶሞቢል አከፋፋይ och ገጣሚ።" },
-            belayabCable:             { name: "በላያብ ኬብል",                     category: "ማምረት",             description: "ከፍተኛ ጥራት ያላቸው የኤሌክትሪክ och የቴሌኮሙኒኬሽን ኬብሎች።" },
-            belayabFoods:             { name: "በላያብ ፑድስ",                     category: "ምግብ och መጠጥ",     description: "ለኢትዮጵያ ገበያ የሚቀርቡ የተለያዩ የምግብ ምርቶች።" },
-            goldenTulip:              { name: "ጎልደን ቱሊፕ",                     category: "ሆስፒታሊቲ",          description: "ዓለም አቀፍ ደረጃ የሚጠብቅ የሆቴል och የእንግዳ ተቀባይነት አገልግሎቶች።" },
-            belayabDelivery:          { name: "በላያብ ዴሊቬሪ",                   category: "ሎጂስቲክስ",           description: "በመላ ሀገሪቱ ቀልጣፋ och አስተማማኝ የማድረስ አገልግሎቶች።" },
-            aradaCoffee:              { name: "አራዳ ኮፊ",                        category: "መጠጦች",             description: "እውነተኛ የኢትዮጵያ ቡና ተሞክሮ።" },
-            lionstone:                { name: "ላይን ስቶን",                       category: "ሪል እስቴት",          description: "አዲስ የሪል እስቴት ልማት ፕሮጀክቶች።" },
-            belayabPharmaceuticals:   { name: "በላያብ ፋርማሲዩቲካልስ",             category: "ጤና ጥበቃ",           description: "አስፈላጊ የመድሃኒት ምርቶች och የሕክምና አቅርቦቶች።" },
-            huajiaInternationalTrade: { name: "ሁዋጂያ ኢንተርናሽናል ትሬድ",          category: "ንግድ",               description: "ዓለም አቀፍ የንግድ och የወጪ ንግድ አገልግሎቶች።" },
-            belayabPoultryAndFeed:    { name: "በላያብ ፖልትሪ እንድ ፊድ",           category: "ግብርና",             description: "ዘላቂ የዶሮ እርባታ och ከፍተኛ ጥራት ያለው የእንስሳት መኖ።" },
-            belayabGeepas:            { name: "በላያብ ጊፓስ",                     category: "ኤሌክትሮኒክስ",         description: "የተለያዩ የቤት ውስጥ ኤሌክትሮኒክስ och መሳሪያዎች።" },
-            lewisRetailsSupermarket:  { name: "ሌዊስ ሪቴይልስ ሱፐርማርኬት",         category: "ችርቻሮ",             description: "ሰፊ የምርት ምርጫ ያለው ምርጥ የችርቻሮ ተሞክሮ።" },
-          },
-        },
-      },
-    },
-    {
-      id: "wcv-qa", type: "wcv-qa",
-      content: {
-        en: { caption: "Uplifting Every Daily Food Moment.", title: "Quality is Built Around Us!" },
-        am: { caption: "የዕለት ተዕለት የምግብ ጊዜዎችን ማሳደግ።", title: "ጥራት በዙሪያዎቻችን ተገንብቷል!" },
-      },
-    },
-    {
-      id: "wcv-products", type: "wcv-products",
-      content: {
-        en: {
-          title: "Our Products",
-          products: [
-            { title: "Biscuits", description: "Delicious and crunchy biscuits for every occasion.", image: "/assets/images/why-choose-vita/products-image-1.png", href: "/products#biscuits" },
-            { title: "Flour", description: "Premium quality flour for all your baking needs.", image: "/assets/images/why-choose-vita/products-image-2.png", href: "/products#flour" },
-          ],
-        },
-        am: {
-          title: "ምርቶቻችን",
-          products: [
-            { title: "ቢስኩቶች", description: "ለማንኛውም አጋጣሚ የሚሆኑ ጣፋጭ och ጥርሳሳ ቢስኩቶች።", image: "/assets/images/why-choose-vita/products-image-1.png", href: "/products#biscuits" },
-            { title: "ዱቄት", description: "ለማንኛውም የምጋገሪያ ፍላጎቶ ከፍተኛ ጥራት ያለው ዱቄት።", image: "/assets/images/why-choose-vita/products-image-2.png", href: "/products#flour" },
-          ],
-        },
-      },
-    },
-  ],
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+      const { data } = await api.post("/content/upload-image", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      onChange(data.url);
+      toast.success("Image uploaded!");
+    } catch (error) {
+      toast.error("Upload failed");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-1.5">
+      <label className="text-xs font-bold text-gray-500 uppercase tracking-wider">{label}</label>
+      <div className="flex items-center gap-4 p-3 bg-gray-50 border border-gray-200 rounded-xl">
+        <div className="relative w-16 h-16 rounded-lg overflow-hidden border border-gray-200 bg-white shrink-0">
+          {value ? (
+            <Image src={value} alt="preview" fill className="object-cover" unoptimized />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-gray-300">
+              <ImagePlus size={24} />
+            </div>
+          )}
+        </div>
+        <div className="flex-1 min-w-0">
+          <label className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-50 cursor-pointer transition-all">
+            {uploading ? <Loader2 size={16} className="animate-spin" /> : <ImagePlus size={16} />}
+            {uploading ? "Uploading..." : "Choose Image"}
+            <input type="file" className="hidden" onChange={handleUpload} disabled={uploading} accept="image/*" />
+          </label>
+          {value && <p className="mt-1.5 text-[10px] text-gray-400 truncate">{value}</p>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Main Editor ─────────────────────────────────────────────────────────────
+
+const SECTION_META: Record<string, { name: string; icon: any; description: string }> = {
+  "wcv-hero":             { name: "Hero Banner",       icon: Star,      description: "Main headline, subtitle, and CTA buttons" },
+  "wcv-video":            { name: "Video Showcase",    icon: Play,      description: "Marquee text and video assets" },
+  "wcv-who-are-we":       { name: "Who Are We",        icon: Users,     description: "Section headlines, intro paragraph, and feature cards" },
+  "wcv-sister-companies": { name: "Sister Companies",  icon: Building2, description: "Section title and company details" },
+  "wcv-qa":               { name: "Quality Assurance", icon: Award,     description: "Caption, title, and certifications" },
+  "wcv-products":         { name: "Our Products",      icon: ShoppingBag, description: "Section title and product cards" },
 };
 
 const COMPANY_KEYS = [
@@ -145,96 +107,66 @@ const COMPANY_KEYS = [
   "huajiaInternationalTrade", "belayabPoultryAndFeed", "belayabGeepas", "lewisRetailsSupermarket",
 ];
 
-// ── ImageUploadField ───────────────────────────────────────────────────────
-function ImageUploadField({
-  currentUrl, uploading, onFileSelected,
-}: {
-  currentUrl: string; uploading: boolean; onFileSelected: (file: File) => void;
-}) {
-  return (
-    <div className="flex items-center gap-3 mt-1">
-      {currentUrl ? (
-        <div className="relative w-14 h-14 rounded-[10px] overflow-hidden border border-gray-200 shrink-0">
-          <Image src={currentUrl} alt="preview" fill className="object-cover" unoptimized />
-        </div>
-      ) : (
-        <div className="w-14 h-14 rounded-[10px] bg-gray-100 border border-dashed border-gray-300 flex items-center justify-center shrink-0">
-          <ImagePlus size={18} className="text-gray-400" />
-        </div>
-      )}
-      <label className="inline-flex items-center gap-2 px-3 py-2 rounded-[10px] text-xs font-semibold border border-gray-200 hover:bg-gray-50 transition-colors text-gray-600 cursor-pointer">
-        {uploading ? <Loader2 size={13} className="animate-spin" /> : <ImagePlus size={13} />}
-        {uploading ? "Uploading…" : "Change Image"}
-        <input type="file" accept="image/*" className="hidden" disabled={uploading}
-          onChange={e => { const f = e.target.files?.[0]; if (f) onFileSelected(f); }} />
-      </label>
-      {currentUrl && <p className="text-[10px] text-gray-400 truncate max-w-[160px]">{currentUrl.split("/").pop()}</p>}
-    </div>
-  );
-}
-
-function getPreview(section: Section): string {
-  const en = section.content?.en || section.content;
-  const text = en?.title || en?.headlineWho || en?.caption || "";
-  return text.length > 55 ? text.slice(0, 55).replace(/\n/g, " ") + "…" : text.replace(/\n/g, " ");
-}
-
 export default function WhyChooseVitaEditor() {
-  const [page, setPage] = useState<PageData | null>(null);
+  const [page, setPage] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [toast, setToast] = useState<{ type: "success" | "error"; msg: string } | null>(null);
   const [activeLang, setActiveLang] = useState<"en" | "am">("en");
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
-  const [uploading, setUploading] = useState<string | null>(null);
-
-  const showToast = (type: "success" | "error", msg: string) => {
-    setToast({ type, msg });
-    setTimeout(() => setToast(null), 3500);
-  };
 
   useEffect(() => {
     api.get("/content/pages/why-choose-vita")
       .then((res) => setPage(res.data))
-      .catch(() => setPage(DEFAULT_PAGE))
+      .catch(() => toast.error("Failed to load page data"))
       .finally(() => setLoading(false));
   }, []);
 
-  const set = useCallback((sectionId: string, lang: "en" | "am", path: string[], value: any) => {
-    setPage((prev) => {
+  const set = useCallback((sectionId: string, path: string, value: any) => {
+    setPage((prev: any) => {
       if (!prev) return prev;
-      const sections = prev.sections.map((s) => {
+      const sections = prev.sections.map((s: any) => {
         if (s.id !== sectionId) return s;
-        const content = JSON.parse(JSON.stringify(s.content));
-        let cur = content[lang] ??= {};
-        for (let i = 0; i < path.length - 1; i++) {
-          cur = cur[path[i]] ??= Array.isArray(cur[path[i]]) ? [] : {};
+        const newContent = { ...s.content };
+        const langContent = { ...(newContent[activeLang] || {}) };
+        
+        const keys = path.split('.');
+        let current = langContent;
+        for (let i = 0; i < keys.length - 1; i++) {
+          current[keys[i]] = { ...(current[keys[i]] || {}) };
+          current = current[keys[i]];
         }
-        cur[path[path.length - 1]] = value;
-        return { ...s, content };
+        current[keys[keys.length - 1]] = value;
+        
+        newContent[activeLang] = langContent;
+        return { ...s, content: newContent };
       });
       return { ...prev, sections };
     });
-  }, []);
+  }, [activeLang]);
 
-  // Sets the same value in both EN and AM (used for images shared across locales)
-  const setBothLangs = useCallback((sectionId: string, path: string[], value: any) => {
-    set(sectionId, "en", path, value);
-    set(sectionId, "am", path, value);
-  }, [set]);
-
-  const uploadImage = useCallback(async (key: string, file: File, onUrl: (url: string) => void) => {
-    setUploading(key);
-    try {
-      const fd = new FormData();
-      fd.append("file", file);
-      const { data } = await api.post("/content/upload-image", fd, {
-        headers: { "Content-Type": "multipart/form-data" },
+  const setBoth = useCallback((sectionId: string, path: string, value: any) => {
+    setPage((prev: any) => {
+      if (!prev) return prev;
+      const sections = prev.sections.map((s: any) => {
+        if (s.id !== sectionId) return s;
+        const newContent = { ...s.content };
+        
+        ["en", "am"].forEach(lang => {
+          const langContent = { ...(newContent[lang] || {}) };
+          const keys = path.split('.');
+          let current = langContent;
+          for (let i = 0; i < keys.length - 1; i++) {
+            current[keys[i]] = { ...(current[keys[i]] || {}) };
+            current = current[keys[i]];
+          }
+          current[keys[keys.length - 1]] = value;
+          newContent[lang] = langContent;
+        });
+        
+        return { ...s, content: newContent };
       });
-      onUrl(data.url);
-    } finally {
-      setUploading(null);
-    }
+      return { ...prev, sections };
+    });
   }, []);
 
   const handleSave = async () => {
@@ -242,285 +174,283 @@ export default function WhyChooseVitaEditor() {
     setSaving(true);
     try {
       await api.put("/content/pages/why-choose-vita", page);
-      showToast("success", "Page saved successfully!");
-    } catch {
-      try {
-        await api.post("/content/pages/upsert", page);
-        showToast("success", "Page created & saved!");
-      } catch {
-        showToast("error", "Failed to save. Please try again.");
-      }
+      toast.success("Page saved successfully!");
+    } catch (error) {
+      toast.error("Failed to save changes");
     } finally {
       setSaving(false);
     }
   };
 
-  const toggleSection = (id: string) =>
-    setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
-
   if (loading) {
     return (
-      <div className="h-[calc(100vh-80px)] flex items-center justify-center">
+      <div className="h-screen flex items-center justify-center">
         <Loader2 size={32} className="animate-spin text-[#23B349]" />
       </div>
     );
   }
 
-  if (!page) return null;
-
   return (
-    <>
-      {/* Toast */}
-      {toast && (
-        <div className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3 rounded-2xl shadow-xl text-white text-sm font-semibold transition-all ${toast.type === "success" ? "bg-[#23B349]" : "bg-red-500"}`}>
-          {toast.type === "success" ? <CheckCircle size={18} /> : <AlertCircle size={18} />}
-          {toast.msg}
-          <button onClick={() => setToast(null)}><X size={16} /></button>
-        </div>
-      )}
-
+    <div className="min-h-screen bg-gray-50 pb-20">
       {/* Header */}
-      <header className="h-20 bg-white border-b border-gray-200 px-8 flex items-center justify-between sticky top-0 z-10">
+      <header className="h-20 bg-white border-b border-gray-200 px-8 flex items-center justify-between sticky top-0 z-30">
         <div className="flex items-center gap-4">
           <Link href="/pages" className="p-2 hover:bg-gray-100 rounded-lg transition-all">
             <ArrowLeft size={20} />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold text-[#404040]">Why Choose Vita</h1>
-            <p className="text-sm text-gray-400">Manage all sections of the /why-choose-vita page</p>
+            <h1 className="text-xl font-bold text-gray-900">Why Choose Vita</h1>
+            <p className="text-xs text-gray-500">Manage all sections of the Why Choose Vita page</p>
           </div>
         </div>
+
         <div className="flex items-center gap-4">
-          {/* Language toggle */}
           <div className="flex bg-gray-100 p-1 rounded-xl">
-            {(["en", "am"] as const).map((lang) => (
+            {(["en", "am"] as const).map((l) => (
               <button
-                key={lang}
-                onClick={() => setActiveLang(lang)}
-                className={`px-4 py-1.5 rounded-lg text-sm font-bold transition-all flex items-center gap-1.5 ${activeLang === lang ? "bg-white text-[#23B349] shadow-sm" : "text-gray-500"}`}
+                key={l}
+                onClick={() => setActiveLang(l)}
+                className={`px-4 py-1.5 rounded-lg text-sm font-bold transition-all flex items-center gap-1.5 ${activeLang === l ? "bg-white text-[#23B349] shadow-sm" : "text-gray-500"}`}
               >
-                <Globe size={13} />
-                {lang === "en" ? "English" : "Amharic"}
+                <Globe size={14} />
+                {l === "en" ? "English" : "Amharic"}
               </button>
             ))}
           </div>
-          {/* Live link */}
-          <a
-            href="https://vitafoodcomplex.vercel.app/en/why-choose-vita"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-4 py-2 rounded-xl border border-gray-200 text-sm text-gray-500 hover:text-[#23B349] hover:border-[#23B349]/30 transition-colors"
-          >
-            View Live ↗
-          </a>
-          {/* Save */}
+
           <button
             onClick={handleSave}
             disabled={saving}
-            className="bg-[#23B349] text-white px-6 py-2 rounded-xl font-bold flex items-center gap-2 hover:bg-[#1fa041] transition-all disabled:opacity-70"
+            className="bg-[#23B349] text-white px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 hover:bg-[#1fa041] transition-all disabled:opacity-50"
           >
             {saving ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
-            {saving ? "Saving…" : "Save Changes"}
+            {saving ? "Saving..." : "Save Changes"}
           </button>
         </div>
       </header>
 
-      {/* Body */}
-      <div className="p-8 max-w-5xl mx-auto space-y-4">
-        {page.sections.map((section) => {
+      <main className="max-w-4xl mx-auto mt-8 px-4 space-y-6">
+        {page.sections.map((section: any) => {
           const meta = SECTION_META[section.type];
-          const Icon = meta?.icon ?? Edit3;
-          const isOpen = expanded[section.id] ?? false;
+          const Icon = meta?.icon || Star;
+          const isExpanded = expanded[section.id];
+          const c = section.content?.[activeLang] || {};
 
           return (
-            <div key={section.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-              {/* Section header row */}
+            <div key={section.id} className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
               <button
-                onClick={() => toggleSection(section.id)}
-                className="w-full flex items-center justify-between px-6 py-4 bg-gray-50 border-b border-gray-100 hover:bg-gray-100/60 transition-colors text-left"
+                onClick={() => setExpanded(prev => ({ ...prev, [section.id]: !isExpanded }))}
+                className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-[10px] bg-[#23B349]/10 flex items-center justify-center shrink-0">
-                    <Icon size={17} className="text-[#23B349]" />
+                <div className="flex items-center gap-4 text-left">
+                  <div className="w-10 h-10 rounded-xl bg-[#23B349]/10 flex items-center justify-center text-[#23B349]">
+                    <Icon size={20} />
                   </div>
                   <div>
-                    <p className="font-bold text-[#1F2937] text-[15px]">{meta?.name ?? section.type}</p>
-                    <p className="text-xs text-gray-400">{meta?.description}</p>
+                    <h3 className="font-bold text-gray-900">{meta?.name || section.type}</h3>
+                    <p className="text-xs text-gray-500">{meta?.description}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  {!isOpen && (
-                    <span className="text-xs text-gray-400 max-w-[200px] truncate hidden sm:block">
-                      {getPreview(section)}
-                    </span>
-                  )}
-                  {meta?.readOnly && (
-                    <span className="text-[10px] font-bold uppercase tracking-wide bg-gray-100 text-gray-400 px-2 py-0.5 rounded-full">Auto</span>
-                  )}
-                  {isOpen ? <ChevronUp size={18} className="text-gray-400 shrink-0" /> : <ChevronDown size={18} className="text-gray-400 shrink-0" />}
-                </div>
+                {isExpanded ? <ChevronUp size={20} className="text-gray-400" /> : <ChevronDown size={20} className="text-gray-400" />}
               </button>
 
-              {/* Section fields */}
-              {isOpen && (
-                <div className="p-6">
-                  {meta?.readOnly ? (
-                    <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-blue-700 text-sm">
-                      This section renders automatically — no editable fields.
+              {isExpanded && (
+                <div className="px-6 pb-6 pt-2 border-t border-gray-100 space-y-6">
+                  {/* Hero Section */}
+                  {section.type === "wcv-hero" && (
+                    <div className="grid gap-4">
+                      <InputField label="Title" value={c.title} onChange={v => set(section.id, 'title', v)} multiline />
+                      <InputField label="Description" value={c.description} onChange={v => set(section.id, 'description', v)} multiline />
+                      <div className="grid grid-cols-2 gap-4">
+                        <InputField label="Explore Products CTA" value={c.exploreProducts} onChange={v => set(section.id, 'exploreProducts', v)} />
+                        <InputField label="Contact Us CTA" value={c.contactUs} onChange={v => set(section.id, 'contactUs', v)} />
+                      </div>
                     </div>
-                  ) : (
-                    <SectionEditor
-                      section={section}
-                      lang={activeLang}
-                      onChange={(path, value) => set(section.id, activeLang, path, value)}
-                      onImageUpload={(key, file, path) =>
-                        uploadImage(key, file, (url) => setBothLangs(section.id, path, url))
-                      }
-                      uploading={uploading}
-                    />
+                  )}
+
+                  {/* Video Section */}
+                  {section.type === "wcv-video" && (
+                    <div className="grid gap-4">
+                      <InputField label="Marquee Text" value={c.marqueeText} onChange={v => set(section.id, 'marqueeText', v)} />
+                      <InputField label="Connecting Text (for marquee)" value={c.connecting} onChange={v => set(section.id, 'connecting', v)} />
+                      <InputField label="Video Alt Text" value={c.videoAlt} onChange={v => set(section.id, 'videoAlt', v)} />
+                      <ImageUploadField label="Video Thumbnail" value={c.videoThumbnail} onChange={v => setBoth(section.id, 'videoThumbnail', v)} />
+                      <ImageUploadField label="Badge Image" value={c.badgeImage} onChange={v => setBoth(section.id, 'badgeImage', v)} />
+                    </div>
+                  )}
+
+                  {/* Who Are We Section */}
+                  {section.type === "wcv-who-are-we" && (
+                    <div className="space-y-6">
+                      <div className="grid grid-cols-2 gap-4">
+                        <InputField label="Headline Who" value={c.headlineWho} onChange={v => set(section.id, 'headlineWho', v)} />
+                        <InputField label="Headline Are We" value={c.headlineAreWe} onChange={v => set(section.id, 'headlineAreWe', v)} />
+                      </div>
+                      <InputField label="Intro Text" value={c.fmcgIntro} onChange={v => set(section.id, 'fmcgIntro', v)} multiline />
+                      <InputField label="More About CTA" value={c.moreAboutCta} onChange={v => set(section.id, 'moreAboutCta', v)} />
+                      
+                      <div className="space-y-4">
+                        <h4 className="text-sm font-bold text-gray-700">Feature Cards</h4>
+                        <div className="grid grid-cols-2 gap-4">
+                          {(c.featureCards || []).map((card: any, idx: number) => (
+                            <div key={idx} className="p-4 bg-gray-50 rounded-xl space-y-3 border border-gray-100">
+                              <p className="text-xs font-bold text-gray-400 uppercase">Card {idx + 1}</p>
+                              <InputField label="Title" value={card.title} onChange={v => {
+                                const newCards = [...c.featureCards];
+                                newCards[idx] = { ...card, title: v };
+                                set(section.id, 'featureCards', newCards);
+                              }} />
+                              <InputField label="Description" value={card.description} onChange={v => {
+                                const newCards = [...c.featureCards];
+                                newCards[idx] = { ...card, description: v };
+                                set(section.id, 'featureCards', newCards);
+                              }} multiline />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Sister Companies Section */}
+                  {section.type === "wcv-sister-companies" && (
+                    <div className="space-y-6">
+                      <div className="grid grid-cols-2 gap-4">
+                        <InputField label="Title" value={c.title} onChange={v => set(section.id, 'title', v)} />
+                        <InputField label="See More Text" value={c.seeMore} onChange={v => set(section.id, 'seeMore', v)} />
+                      </div>
+                      <div className="space-y-4">
+                        <h4 className="text-sm font-bold text-gray-700">Companies</h4>
+                        <div className="grid gap-4">
+                          {COMPANY_KEYS.map((key) => {
+                            const company = c.companies?.[key] || {};
+                            return (
+                              <div key={key} className="p-4 bg-gray-50 rounded-xl border border-gray-100 space-y-3">
+                                <p className="text-xs font-bold text-gray-400 uppercase">{key}</p>
+                                <div className="grid grid-cols-2 gap-4">
+                                  <InputField label="Name" value={company.name} onChange={v => set(section.id, `companies.${key}.name`, v)} />
+                                  <InputField label="Category" value={company.category} onChange={v => set(section.id, `companies.${key}.category`, v)} />
+                                </div>
+                                <InputField label="Description" value={company.description} onChange={v => set(section.id, `companies.${key}.description`, v)} multiline />
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* QA Section */}
+                  {section.type === "wcv-qa" && (
+                    <div className="space-y-6">
+                      <InputField label="Caption" value={c.caption} onChange={v => set(section.id, 'caption', v)} />
+                      <InputField label="Title" value={c.title} onChange={v => set(section.id, 'title', v)} />
+                      
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <h4 className="text-sm font-bold text-gray-700">Certifications</h4>
+                          <button
+                            onClick={() => {
+                              const newCerts = [...(c.certs || []), { name: "", src: "" }];
+                              setBoth(section.id, 'certs', newCerts);
+                            }}
+                            className="text-[#23B349] hover:bg-[#23B349]/10 p-2 rounded-lg transition-all flex items-center gap-2 text-sm font-bold"
+                          >
+                            <Plus size={16} /> Add Cert
+                          </button>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                          {(c.certs || []).map((cert: any, idx: number) => (
+                            <div key={idx} className="p-4 bg-gray-50 rounded-xl border border-gray-100 space-y-3 relative">
+                              <button
+                                onClick={() => {
+                                  const newCerts = c.certs.filter((_: any, i: number) => i !== idx);
+                                  setBoth(section.id, 'certs', newCerts);
+                                }}
+                                className="absolute top-2 right-2 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
+                              >
+                                <Trash2 size={14} />
+                              </button>
+                              <InputField label="Name" value={cert.name} onChange={v => {
+                                const newCerts = [...c.certs];
+                                newCerts[idx] = { ...cert, name: v };
+                                setBoth(section.id, 'certs', newCerts);
+                              }} />
+                              <ImageUploadField label="Logo" value={cert.src} onChange={v => {
+                                const newCerts = [...c.certs];
+                                newCerts[idx] = { ...cert, src: v };
+                                setBoth(section.id, 'certs', newCerts);
+                              }} />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Products Section */}
+                  {section.type === "wcv-products" && (
+                    <div className="space-y-6">
+                      <InputField label="Title" value={c.title} onChange={v => set(section.id, 'title', v)} />
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between">
+                          <h4 className="text-sm font-bold text-gray-700">Products</h4>
+                          <button
+                            onClick={() => {
+                              const newProducts = [...(c.products || []), { title: "", description: "", image: "", href: "" }];
+                              setBoth(section.id, 'products', newProducts);
+                            }}
+                            className="text-[#23B349] hover:bg-[#23B349]/10 p-2 rounded-lg transition-all flex items-center gap-2 text-sm font-bold"
+                          >
+                            <Plus size={16} /> Add Product
+                          </button>
+                        </div>
+                        <div className="grid gap-4">
+                          {(c.products || []).map((prod: any, idx: number) => (
+                            <div key={idx} className="p-4 bg-gray-50 rounded-xl border border-gray-100 space-y-3 relative">
+                              <button
+                                onClick={() => {
+                                  const newProducts = c.products.filter((_: any, i: number) => i !== idx);
+                                  setBoth(section.id, 'products', newProducts);
+                                }}
+                                className="absolute top-2 right-2 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
+                              >
+                                <Trash2 size={14} />
+                              </button>
+                              <div className="grid grid-cols-2 gap-4">
+                                <InputField label="Title" value={prod.title} onChange={v => {
+                                  const newProds = [...c.products];
+                                  newProds[idx] = { ...prod, title: v };
+                                  set(section.id, 'products', newProds);
+                                }} />
+                                <InputField label="Link (href)" value={prod.href} onChange={v => {
+                                  const newProds = [...c.products];
+                                  newProds[idx] = { ...prod, href: v };
+                                  setBoth(section.id, 'products', newProds);
+                                }} />
+                              </div>
+                              <InputField label="Description" value={prod.description} onChange={v => {
+                                const newProds = [...c.products];
+                                newProds[idx] = { ...prod, description: v };
+                                set(section.id, 'products', newProds);
+                              }} multiline />
+                              <ImageUploadField label="Image" value={prod.image} onChange={v => {
+                                const newProds = [...c.products];
+                                newProds[idx] = { ...prod, image: v };
+                                setBoth(section.id, 'products', newProds);
+                              }} />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   )}
                 </div>
               )}
             </div>
           );
         })}
-      </div>
-    </>
-  );
-}
-
-// ── Per-section field editors ──────────────────────────────────────────────
-
-function SectionEditor({ section, lang, onChange, onImageUpload, uploading }: {
-  section: Section;
-  lang: "en" | "am";
-  onChange: (path: string[], value: any) => void;
-  onImageUpload: (key: string, file: File, path: string[]) => void;
-  uploading: string | null;
-}) {
-  const c = section.content?.[lang] ?? {};
-
-  const field = (label: string, path: string[], multiline = false) => (
-    <div key={path.join(".")} className="flex flex-col gap-1.5">
-      <label className="text-xs font-bold text-gray-600 uppercase tracking-wide">{label}</label>
-      {multiline ? (
-        <textarea
-          rows={3}
-          className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#23B349]/30 focus:border-[#23B349] outline-none resize-none"
-          value={path.reduce((o: any, k) => o?.[k], c) ?? ""}
-          onChange={(e) => onChange(path, e.target.value)}
-        />
-      ) : (
-        <input
-          type="text"
-          className="w-full px-3 py-2 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#23B349]/30 focus:border-[#23B349] outline-none"
-          value={path.reduce((o: any, k) => o?.[k], c) ?? ""}
-          onChange={(e) => onChange(path, e.target.value)}
-        />
-      )}
-    </div>
-  );
-
-  if (section.type === "wcv-hero") {
-    return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        {field("Title (supports \\n for line breaks)", ["title"], true)}
-        {field("Description", ["description"], true)}
-        {field("Explore Products Button", ["exploreProducts"])}
-        {field("Contact Us Button", ["contactUs"])}
-      </div>
-    );
-  }
-
-  if (section.type === "wcv-who-are-we") {
-    return (
-      <div className="space-y-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {field("Headline — Part 1 (e.g. WHO)", ["headlineWho"])}
-          {field("Headline — Part 2 (e.g. ARE WE)", ["headlineAreWe"])}
-          {field("Intro Paragraph", ["fmcgIntro"], true)}
-          {field("More About CTA", ["moreAboutCta"])}
-        </div>
-        <div>
-          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">Feature Cards</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {[0, 1, 2, 3].map((i) => (
-              <div key={i} className="bg-gray-50 rounded-xl p-4 space-y-3">
-                <p className="text-xs font-semibold text-gray-400">Card {i + 1}</p>
-                {field("Title", ["featureCards", String(i), "title"])}
-                {field("Description", ["featureCards", String(i), "description"], true)}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (section.type === "wcv-sister-companies") {
-    return (
-      <div className="space-y-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {field("Section Title", ["title"])}
-          {field("See More Link Text", ["seeMore"])}
-        </div>
-        <div>
-          <p className="text-xs font-bold text-gray-500 uppercase tracking-wide mb-3">Companies (13)</p>
-          <div className="space-y-3">
-            {COMPANY_KEYS.map((key) => (
-              <div key={key} className="bg-gray-50 rounded-xl p-4">
-                <p className="text-xs font-semibold text-gray-400 mb-3 font-mono">{key}</p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {field("Name", ["companies", key, "name"])}
-                  {field("Category", ["companies", key, "category"])}
-                  {field("Description", ["companies", key, "description"], true)}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (section.type === "wcv-qa") {
-    return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        {field("Caption (small text above title)", ["caption"])}
-        {field("Section Title", ["title"])}
-      </div>
-    );
-  }
-
-  if (section.type === "wcv-products") {
-    return (
-      <div className="space-y-6">
-        {field("Section Title", ["title"])}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {[0, 1].map((i) => (
-            <div key={i} className="bg-gray-50 rounded-xl p-4 space-y-3">
-              <p className="text-xs font-semibold text-gray-400">Product {i + 1}</p>
-              {field("Title", ["products", String(i), "title"])}
-              {field("Description", ["products", String(i), "description"], true)}
-              <div className="flex flex-col gap-1.5">
-                <label className="text-xs font-bold text-gray-600 uppercase tracking-wide">Image</label>
-                <ImageUploadField
-                  currentUrl={c?.products?.[i]?.image || ""}
-                  uploading={uploading === `product-${i}`}
-                  onFileSelected={(file) => onImageUpload(`product-${i}`, file, ["products", String(i), "image"])}
-                />
-              </div>
-              {field("Link (href)", ["products", String(i), "href"])}
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="bg-yellow-50 border border-yellow-100 rounded-xl p-4 text-yellow-700 text-sm">
-      No editor defined for <strong>{section.type}</strong>.
+      </main>
     </div>
   );
 }
