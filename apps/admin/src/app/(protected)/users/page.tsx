@@ -30,16 +30,18 @@ const ALL_PERMISSIONS = navSections
 
 function Modal({ title, onClose, children }: { title: string; onClose: () => void; children: React.ReactNode }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative bg-white rounded-[20px] shadow-2xl w-full max-w-md p-6 z-10">
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="font-['Funnel_Display'] font-bold text-[#333733] text-lg">{title}</h3>
-          <button onClick={onClose} className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors">
-            <X size={15} className="text-gray-500" />
+      <div className="relative bg-white rounded-[24px] shadow-2xl w-full max-w-lg max-h-[90vh] flex flex-col z-10 animate-in fade-in zoom-in-95 duration-200">
+        <div className="flex items-center justify-between p-6 border-b border-gray-50">
+          <h3 className="font-['Funnel_Display'] font-bold text-[#333733] text-xl">{title}</h3>
+          <button onClick={onClose} className="w-9 h-9 rounded-full bg-gray-50 hover:bg-gray-100 flex items-center justify-center transition-colors border border-gray-100">
+            <X size={18} className="text-gray-500" />
           </button>
         </div>
-        {children}
+        <div className="flex-1 overflow-y-auto p-6 scrollbar-hide">
+          {children}
+        </div>
       </div>
     </div>
   );
@@ -333,16 +335,18 @@ export default function UsersPage() {
 
             {form.role === 'admin' && (
               <Field label="Sidebar Permissions" icon={Users}>
-                <div className="grid grid-cols-2 gap-2 mt-2 max-h-[200px] overflow-y-auto p-2 bg-gray-50 rounded-[12px] border border-gray-100">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2 p-2 bg-gray-50 rounded-[16px] border border-gray-100">
                   {ALL_PERMISSIONS.map((p: any) => (
-                    <label key={p.id} className="flex items-center gap-2 p-2 hover:bg-white rounded-lg cursor-pointer transition-colors border border-transparent hover:border-gray-100">
-                      <input
-                        type="checkbox"
-                        className="w-4 h-4 rounded border-gray-300 text-[#23B349] focus:ring-[#23B349]"
-                        checked={form.permissions.includes(p.id)}
-                        onChange={() => togglePermission(p.id)}
-                      />
-                      <span className="text-xs font-medium text-gray-600">{p.label}</span>
+                    <label key={p.id} className="flex items-center gap-3 p-3 bg-white hover:bg-gray-50 rounded-[12px] cursor-pointer transition-all border border-gray-100 hover:border-[#23B349]/30 shadow-sm hover:shadow-md">
+                      <div className="relative flex items-center">
+                        <input
+                          type="checkbox"
+                          className="peer w-5 h-5 rounded-md border-gray-300 text-[#23B349] focus:ring-[#23B349] transition-all cursor-pointer"
+                          checked={form.permissions.includes(p.id)}
+                          onChange={() => togglePermission(p.id)}
+                        />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-700">{p.label}</span>
                     </label>
                   ))}
                 </div>
@@ -382,16 +386,18 @@ export default function UsersPage() {
 
             {form.role === 'admin' && (
               <Field label="Sidebar Permissions" icon={Users}>
-                <div className="grid grid-cols-2 gap-2 mt-2 max-h-[200px] overflow-y-auto p-2 bg-gray-50 rounded-[12px] border border-gray-100">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2 p-2 bg-gray-50 rounded-[16px] border border-gray-100">
                   {ALL_PERMISSIONS.map((p: any) => (
-                    <label key={p.id} className="flex items-center gap-2 p-2 hover:bg-white rounded-lg cursor-pointer transition-colors border border-transparent hover:border-gray-100">
-                      <input
-                        type="checkbox"
-                        className="w-4 h-4 rounded border-gray-300 text-[#23B349] focus:ring-[#23B349]"
-                        checked={form.permissions.includes(p.id)}
-                        onChange={() => togglePermission(p.id)}
-                      />
-                      <span className="text-xs font-medium text-gray-600">{p.label}</span>
+                    <label key={p.id} className="flex items-center gap-3 p-3 bg-white hover:bg-gray-50 rounded-[12px] cursor-pointer transition-all border border-gray-100 hover:border-[#23B349]/30 shadow-sm hover:shadow-md">
+                      <div className="relative flex items-center">
+                        <input
+                          type="checkbox"
+                          className="peer w-5 h-5 rounded-md border-gray-300 text-[#23B349] focus:ring-[#23B349] transition-all cursor-pointer"
+                          checked={form.permissions.includes(p.id)}
+                          onChange={() => togglePermission(p.id)}
+                        />
+                      </div>
+                      <span className="text-sm font-semibold text-gray-700">{p.label}</span>
                     </label>
                   ))}
                 </div>
