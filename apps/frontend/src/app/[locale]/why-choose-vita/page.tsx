@@ -19,15 +19,6 @@ const SECTION_COMPONENTS: Record<string, any> = {
   "wcv-products": OurProductSection,
 };
 
-const scrollStyles = `
-  html { scroll-behavior: smooth; }
-  ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-track { background: #f1f1f1; }
-  ::-webkit-scrollbar-thumb { background: #23B349; border-radius: 5px; }
-  ::-webkit-scrollbar-thumb:hover { background: #0F4B1F; }
-  button:focus-visible { outline: 2px solid #23B349; outline-offset: 2px; }
-`;
-
 export default function WhyChooseVitaPage({ params: paramsPromise }: { params: Promise<{ locale: string }> }) {
   const params = use(paramsPromise);
   const { locale } = params;
@@ -43,7 +34,6 @@ export default function WhyChooseVitaPage({ params: paramsPromise }: { params: P
         <QualityAssuranceSection />
         <OurProductSection />
         <BackToTop />
-        <style dangerouslySetInnerHTML={{ __html: scrollStyles }} />
       </main>
     );
   }
@@ -60,7 +50,6 @@ export default function WhyChooseVitaPage({ params: paramsPromise }: { params: P
         );
       })}
       <BackToTop />
-      <style dangerouslySetInnerHTML={{ __html: scrollStyles }} />
     </main>
   );
 }
