@@ -9,37 +9,37 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 
-const navSections = [
+export const navSections = [
   {
     label: 'Content',
     items: [
-      { icon: LayoutDashboard, label: 'Overview', href: '/' },
-      { icon: FileText,        label: 'Pages',    href: '/pages' },
+      { id: 'overview', icon: LayoutDashboard, label: 'Overview', href: '/' },
+      { id: 'pages',    icon: FileText,        label: 'Pages',    href: '/pages' },
     ],
   },
   {
     label: 'Catalogue',
     items: [
-      { icon: ShoppingBag, label: 'Products', href: '/products' },
-      { icon: UtensilsCrossed, label: 'Recipes', href: '/recipes' },
-      { icon: Briefcase,   label: 'Careers',  href: '/careers' },
+      { id: 'products', icon: ShoppingBag, label: 'Products', href: '/products' },
+      { id: 'recipes',  icon: UtensilsCrossed, label: 'Recipes', href: '/recipes' },
+      { id: 'careers',   icon: Briefcase,   label: 'Careers',  href: '/careers' },
     ],
   },
   {
     label: 'Engagement',
     items: [
-      { icon: Newspaper,    label: 'News',       href: '/news' },
-      { icon: Heart,        label: 'Donations',  href: '/donations' },
-      { icon: HelpCircle,   label: 'FAQs',       href: '/faqs' },
-      { icon: ScrollText,   label: 'Terms',      href: '/terms' },
-      { icon: MessageSquare, label: 'Messages',  href: '/messages' },
-      { icon: Users,         label: 'Users',     href: '/users' },
+      { id: 'news',      icon: Newspaper,    label: 'News',       href: '/news' },
+      { id: 'donations', icon: Heart,        label: 'Donations',  href: '/donations' },
+      { id: 'faqs',      icon: HelpCircle,   label: 'FAQs',       href: '/faqs' },
+      { id: 'terms',     icon: ScrollText,   label: 'Terms',      href: '/terms' },
+      { id: 'messages',  icon: MessageSquare, label: 'Messages',  href: '/messages' },
+      { id: 'users',     icon: Users,         label: 'Users',     href: '/users' },
     ],
   },
   {
     label: 'System',
     items: [
-      { icon: Settings, label: 'Settings', href: '/settings' },
+      { id: 'settings', icon: Settings, label: 'Settings', href: '/settings' },
     ],
   },
 ];
@@ -120,51 +120,59 @@ export default function Sidebar({ open = false, onClose }: SidebarProps) {
 
       {/* ── Navigation ── */}
       <nav className="flex-1 px-3 py-4 overflow-y-auto space-y-4 scrollbar-hide">
-        {navSections.map((section) => (
-          <div key={section.label}>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 px-3 mb-1.5">
-              {section.label}
-            </p>
-            <div className="space-y-0.5">
-              {section.items.map((item) => {
-                const active = isActive(item.href);
-                return (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className={`flex items-center gap-3 px-3 py-2.5 rounded-[12px] transition-all group ${
-                      active
-                        ? 'text-white shadow-sm'
-                        : 'text-gray-500 hover:text-[#23B349] hover:bg-[#23B349]/10'
-                    }`}
-                    style={
-                      active
-                        ? {
-                            background:
-                              'radial-gradient(ellipse at 10px 20px, rgba(31,214,80,1) 0%, rgba(35,179,73,1) 60%, rgba(116,255,56,1) 100%)',
-                            boxShadow: '0 2px 10px rgba(35,179,73,0.3)',
-                          }
-                        : {}
-                    }
-                  >
-                    <item.icon
-                      size={16}
-                      className={
+        {navSections.map((section) => {
+          const visibleItems = section.items.filter(item => 
+            user?.role === 'superadmin' || user?.permissions?.includes(item.id)
+          );
+
+          if (visibleItems.length === 0) return null;
+
+          return (
+            <div key={section.label}>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 px-3 mb-1.5">
+                {section.label}
+              </p>
+              <div className="space-y-0.5">
+                {visibleItems.map((item) => {
+                  const active = isActive(item.href);
+                  return (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      className={`flex items-center gap-3 px-3 py-2.5 rounded-[12px] transition-all group ${
                         active
-                          ? 'text-white'
-                          : 'text-gray-400 group-hover:text-[#23B349] transition-colors'
+                          ? 'text-white shadow-sm'
+                          : 'text-gray-500 hover:text-[#23B349] hover:bg-[#23B349]/10'
+                      }`}
+                      style={
+                        active
+                          ? {
+                              background:
+                                'radial-gradient(ellipse at 10px 20px, rgba(31,214,80,1) 0%, rgba(35,179,73,1) 60%, rgba(116,255,56,1) 100%)',
+                              boxShadow: '0 2px 10px rgba(35,179,73,0.3)',
+                            }
+                          : {}
                       }
-                    />
-                    <span className={`text-sm font-medium flex-1 ${active ? 'text-white' : ''}`}>
-                      {item.label}
-                    </span>
-                    {active && <ChevronRight size={13} className="text-white/70" />}
-                  </Link>
-                );
-              })}
+                    >
+                      <item.icon
+                        size={16}
+                        className={
+                          active
+                            ? 'text-white'
+                            : 'text-gray-400 group-hover:text-[#23B349] transition-colors'
+                        }
+                      />
+                      <span className={`text-sm font-medium flex-1 ${active ? 'text-white' : ''}`}>
+                        {item.label}
+                      </span>
+                      {active && <ChevronRight size={13} className="text-white/70" />}
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </nav>
 
       {/* ── User & Logout ── */}

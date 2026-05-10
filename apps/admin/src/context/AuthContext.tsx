@@ -37,7 +37,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const response = await api.post('/auth/login', { email, password });
       const { access_token, user: userData } = response.data;
 
-      if (userData.role !== 'admin') {
+      if (userData.role !== 'admin' && userData.role !== 'superadmin') {
         throw new Error('Unauthorized: Admin access required');
       }
 

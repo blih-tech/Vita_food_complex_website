@@ -37,26 +37,26 @@ export class UsersController {
   // ── Admin: all users ──────────────────────────────────────────────
   @Get()
   @UseGuards(RolesGuard)
-  @Roles('admin')
+  @Roles('superadmin')
   findAll() {
     return this.usersService.findAll();
   }
 
   @Post()
   @UseGuards(RolesGuard)
-  @Roles('admin')
+  @Roles('superadmin')
   create(
-    @Body() body: { name: string; email: string; password: string; role: string },
+    @Body() body: { name: string; email: string; password: string; role: string; permissions?: string[] },
   ) {
     return this.usersService.create(body);
   }
 
   @Put(':id')
   @UseGuards(RolesGuard)
-  @Roles('admin')
+  @Roles('superadmin')
   update(
     @Param('id') id: string,
-    @Body() body: { name?: string; email?: string; role?: string },
+    @Body() body: { name?: string; email?: string; role?: string; permissions?: string[] },
   ) {
     return this.usersService.update(id, body);
   }
@@ -64,7 +64,7 @@ export class UsersController {
   @Put(':id/password')
   @HttpCode(HttpStatus.OK)
   @UseGuards(RolesGuard)
-  @Roles('admin')
+  @Roles('superadmin')
   async updateUserPassword(
     @Param('id') id: string,
     @Body() body: { password: string },
@@ -76,7 +76,7 @@ export class UsersController {
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
   @UseGuards(RolesGuard)
-  @Roles('admin')
+  @Roles('superadmin')
   async remove(@Param('id') id: string) {
     await this.usersService.remove(id);
     return { message: 'User deleted' };

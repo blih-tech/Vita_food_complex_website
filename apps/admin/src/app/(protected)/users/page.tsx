@@ -12,14 +12,21 @@ interface AdminUser {
   _id: string;
   name: string;
   email: string;
-  role: 'admin' | 'distributor';
+  role: 'superadmin' | 'admin';
+  permissions: string[];
   createdAt: string;
 }
 
 const ROLE_STYLES = {
+  superadmin: 'bg-purple-50 text-purple-600 border border-purple-200',
   admin: 'bg-emerald-50 text-emerald-600 border border-emerald-200',
-  distributor: 'bg-blue-50 text-blue-600 border border-blue-200',
 };
+
+import { navSections } from '@/components/layout/Sidebar';
+
+const ALL_PERMISSIONS = navSections
+  .flatMap((s: any) => s.items.map((i: any) => ({ id: i.id, label: i.label })))
+  .filter((p: any) => p.id !== 'users');
 
 function Modal({ title, onClose, children }: { title: string; onClose: () => void; children: React.ReactNode }) {
   return (
@@ -64,7 +71,13 @@ export default function UsersPage() {
   const [deleteUser, setDeleteUser] = useState<AdminUser | null>(null);
 
   // Form state
-  const [form, setForm] = useState({ name: '', email: '', password: '', role: 'distributor' });
+  const [form, setForm] = useState<{
+    name: string;
+    email: string;
+    password: string;
+    role: 'superadmin' | 'admin';
+    permissions: string[];
+  }>({ name: '', email: '', password: '', role: 'admin', permissions: [] });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
 
@@ -84,13 +97,13 @@ export default function UsersPage() {
   );
 
   const openCreate = () => {
-    setForm({ name: '', email: '', password: '', role: 'distributor' });
+    setForm({ name: '', email: '', password: '', role: 'admin', permissions: [] });
     setError('');
     setShowCreate(true);
   };
 
   const openEdit = (u: AdminUser) => {
-    setForm({ name: u.name, email: u.email, password: '', role: u.role });
+    setForm({ name: u.name, email: u.email, password: '', role: u.role, permissions: u.permissions || [] });
     setError('');
     setEditUser(u);
   };
@@ -111,13 +124,27 @@ export default function UsersPage() {
     if (!editUser) return;
     setSaving(true); setError('');
     try {
-      await api.put(`/users/${editUser._id}`, { name: form.name, email: form.email, role: form.role });
+      await api.put(`/users/${editUser._id}`, { 
+        name: form.name, 
+        email: form.email, 
+        role: form.role,
+        permissions: form.role === 'superadmin' ? [] : form.permissions 
+      });
       if (form.password) await api.put(`/users/${editUser._id}/password`, { password: form.password });
       setEditUser(null);
       load();
     } catch (e: any) {
       setError(e.response?.data?.message || 'Failed to update user.');
     } finally { setSaving(false); }
+  };
+
+  const togglePermission = (id: string) => {
+    setForm(prev => ({
+      ...prev,
+      permissions: prev.permissions.includes(id)
+        ? prev.permissions.filter(p => p !== id)
+        : [...prev.permissions, id]
+    }));
   };
 
   const handleDelete = async () => {
@@ -167,8 +194,8 @@ export default function UsersPage() {
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
           {[
             { label: 'Total Users', value: users.length, color: 'text-[#23B349]' },
+            { label: 'Superadmins', value: users.filter(u => u.role === 'superadmin').length, color: 'text-purple-600' },
             { label: 'Admins', value: users.filter(u => u.role === 'admin').length, color: 'text-emerald-600' },
-            { label: 'Distributors', value: users.filter(u => u.role === 'distributor').length, color: 'text-blue-600' },
           ].map(s => (
             <div key={s.label} className="bg-white rounded-[16px] border border-gray-100 px-5 py-4">
               <p className={`font-['Funnel_Display'] font-bold text-3xl ${s.color}`}>{s.value}</p>
@@ -225,7 +252,7 @@ export default function UsersPage() {
                       <td className="px-6 py-4 text-sm text-gray-500">{u.email}</td>
                       <td className="px-6 py-4">
                         <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full ${ROLE_STYLES[u.role]}`}>
-                          {u.role === 'admin' && <ShieldCheck size={11} />}
+                          {(u.role === 'admin' || u.role === 'superadmin') && <ShieldCheck size={11} />}
                           {u.role}
                         </span>
                       </td>
@@ -298,11 +325,29 @@ export default function UsersPage() {
               <input className={inputCls} type="password" placeholder="Min 6 characters" value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} />
             </Field>
             <Field label="Role" icon={ShieldCheck}>
-              <select className={selectCls} value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))}>
-                <option value="distributor">Distributor</option>
+              <select className={selectCls} value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value as any }))}>
                 <option value="admin">Admin</option>
+                <option value="superadmin">Superadmin</option>
               </select>
             </Field>
+
+            {form.role === 'admin' && (
+              <Field label="Sidebar Permissions" icon={Users}>
+                <div className="grid grid-cols-2 gap-2 mt-2 max-h-[200px] overflow-y-auto p-2 bg-gray-50 rounded-[12px] border border-gray-100">
+                  {ALL_PERMISSIONS.map((p: any) => (
+                    <label key={p.id} className="flex items-center gap-2 p-2 hover:bg-white rounded-lg cursor-pointer transition-colors border border-transparent hover:border-gray-100">
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 rounded border-gray-300 text-[#23B349] focus:ring-[#23B349]"
+                        checked={form.permissions.includes(p.id)}
+                        onChange={() => togglePermission(p.id)}
+                      />
+                      <span className="text-xs font-medium text-gray-600">{p.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </Field>
+            )}
             <div className="flex gap-3 pt-2">
               <button onClick={() => setShowCreate(false)} className="flex-1 py-3 rounded-[12px] border border-gray-200 text-gray-500 text-sm font-semibold hover:bg-gray-50 transition-colors">Cancel</button>
               <button onClick={handleCreate} disabled={saving} className="flex-1 py-3 rounded-[12px] text-white text-sm font-semibold flex items-center justify-center gap-2 disabled:opacity-60"
@@ -329,11 +374,29 @@ export default function UsersPage() {
               <input className={inputCls} type="password" placeholder="Leave blank to keep current" value={form.password} onChange={e => setForm(f => ({ ...f, password: e.target.value }))} />
             </Field>
             <Field label="Role" icon={ShieldCheck}>
-              <select className={selectCls} value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))}>
-                <option value="distributor">Distributor</option>
+              <select className={selectCls} value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value as any }))}>
                 <option value="admin">Admin</option>
+                <option value="superadmin">Superadmin</option>
               </select>
             </Field>
+
+            {form.role === 'admin' && (
+              <Field label="Sidebar Permissions" icon={Users}>
+                <div className="grid grid-cols-2 gap-2 mt-2 max-h-[200px] overflow-y-auto p-2 bg-gray-50 rounded-[12px] border border-gray-100">
+                  {ALL_PERMISSIONS.map((p: any) => (
+                    <label key={p.id} className="flex items-center gap-2 p-2 hover:bg-white rounded-lg cursor-pointer transition-colors border border-transparent hover:border-gray-100">
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 rounded border-gray-300 text-[#23B349] focus:ring-[#23B349]"
+                        checked={form.permissions.includes(p.id)}
+                        onChange={() => togglePermission(p.id)}
+                      />
+                      <span className="text-xs font-medium text-gray-600">{p.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </Field>
+            )}
             <div className="flex gap-3 pt-2">
               <button onClick={() => setEditUser(null)} className="flex-1 py-3 rounded-[12px] border border-gray-200 text-gray-500 text-sm font-semibold hover:bg-gray-50 transition-colors">Cancel</button>
               <button onClick={handleEdit} disabled={saving} className="flex-1 py-3 rounded-[12px] text-white text-sm font-semibold flex items-center justify-center gap-2 disabled:opacity-60"

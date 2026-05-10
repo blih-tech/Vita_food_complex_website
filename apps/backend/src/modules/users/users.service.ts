@@ -16,7 +16,7 @@ export class UsersService {
     return this.userModel.findById(id).exec();
   }
 
-  async create(userData: { name: string; email: string; password: string; role: string }): Promise<UserDocument> {
+  async create(userData: { name: string; email: string; password: string; role: string; permissions?: string[] }): Promise<UserDocument> {
     const hashedPassword = await bcrypt.hash(userData.password, 10);
     const newUser = new this.userModel({ ...userData, password: hashedPassword });
     return newUser.save();
@@ -26,7 +26,7 @@ export class UsersService {
     return this.userModel.find().select('-password').sort({ createdAt: -1 }).exec();
   }
 
-  async update(id: string, data: { name?: string; email?: string; role?: string }): Promise<UserDocument | null> {
+  async update(id: string, data: { name?: string; email?: string; role?: string; permissions?: string[] }): Promise<UserDocument | null> {
     return this.userModel.findByIdAndUpdate(id, data, { new: true }).select('-password').exec();
   }
 

@@ -28,9 +28,9 @@ async function bootstrap() {
         name: adminName,
         email: adminEmail,
         password: adminPassword,
-        role: 'admin',
+        role: 'superadmin',
       });
-      console.log(`Admin user created: ${adminEmail}`);
+      console.log(`Superadmin user created: ${adminEmail}`);
       return;
     }
 
@@ -38,8 +38,8 @@ async function bootstrap() {
     if (existingAdmin.name !== adminName) {
       updates.name = adminName;
     }
-    if (existingAdmin.role !== 'admin') {
-      updates.role = 'admin';
+    if (existingAdmin.role !== 'superadmin') {
+      updates.role = 'superadmin';
     }
 
     if (Object.keys(updates).length > 0) {
