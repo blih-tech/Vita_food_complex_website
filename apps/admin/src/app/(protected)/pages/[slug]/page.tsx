@@ -24,6 +24,7 @@ export default function PageEditor({ params: paramsPromise }: { params: Promise<
     if (params.slug === 'why-choose-vita')    { router.replace('/why-choose-vita');    return; }
     if (params.slug === 'we-care')            { router.replace('/we-care');            return; }
     if (params.slug === 'research')           { router.replace('/research');           return; }
+    if (params.slug === 'gallery')            { router.replace('/gallery');            return; }
     fetchPage();
   }, [params.slug]);
 

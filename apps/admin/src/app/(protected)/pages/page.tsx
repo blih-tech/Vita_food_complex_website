@@ -71,9 +71,9 @@ const ALL_PAGES = [
   {
     slug: "gallery",
     name: "Gallery",
-    description: "Photo gallery and media",
+    description: "Visual journey, community wall, and partner testimonials",
     icon: ImageIcon,
-    editorHref: null,
+    editorHref: "/gallery",
     liveHref: "https://vitafoodcomplex.vercel.app/en/gallery",
   },
   {

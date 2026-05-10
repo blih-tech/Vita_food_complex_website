@@ -4,10 +4,16 @@ import Image from "next/image";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-export default function PartnerTestimonialSection() {
+export default function PartnerTestimonialSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Gallery.partnerTestimonial");
+  const lang = (locale || "en") as "en" | "am";
+  const c = content?.[lang];
 
-  const items = [
+  const heading = c?.heading || t("heading");
+  const subheading = c?.subheading || t("subheading");
+  const backgroundImage = c?.backgroundImage || 'https://picsum.photos/1920/1080?random=100';
+  
+  const items = c?.items || [
     {
       id: 1,
       quote: t("items.0.quote"),
@@ -30,7 +36,7 @@ export default function PartnerTestimonialSection() {
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `url('https://picsum.photos/1920/1080?random=100')`,
+          backgroundImage: `url('${backgroundImage}')`,
         }}
       >
         <div className="absolute inset-0 bg-[#37FF00]/40 backdrop-blur-[15px]"></div>
@@ -45,20 +51,20 @@ export default function PartnerTestimonialSection() {
         <div className="relative w-full flex flex-col items-center justify-center mb-16">
           <div className="border border-white/40 px-6 py-1 rounded-full mb-4 backdrop-blur-sm">
             <span className="font-['Funnel_Display'] font-medium text-white text-[20px] tracking-[-0.004em]">
-              {t("heading")}
+              {heading}
             </span>
           </div>
           
           <h2 className="font-['Funnel_Display'] font-bold text-white text-[80px] md:text-[140px] lg:text-[183px] leading-[1] tracking-[-0.02em] text-center w-full uppercase opacity-90 drop-shadow-lg">
-            {t("subheading")}
+            {subheading}
           </h2>
         </div>
 
         {/* Testimonials Slider */}
         <div className="w-full flex overflow-x-auto snap-x snap-mandatory gap-8 pb-12 scrollbar-hide" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-          {items.map((testimonial) => (
+          {items.map((testimonial: any, idx: number) => (
             <article
-              key={testimonial.id} 
+              key={idx} 
               className="flex flex-col md:flex-row items-center gap-8 md:gap-12 w-[90vw] md:w-[1040px] shrink-0 snap-center mx-auto"
             >
               {/* Image */}
