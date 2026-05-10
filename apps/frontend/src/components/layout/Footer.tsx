@@ -4,10 +4,55 @@ import Image from "next/image";
 import { Link } from "@frontend/navigation";
 import { useTranslations } from "next-intl";
 import { useSettings } from "@/hooks/useSettings";
-import { Facebook, Instagram, Youtube, Twitter, Link2 } from "lucide-react";
 
-// Custom TikTok icon since Lucide doesn't have a great one in all versions
-function TikTokIcon({ className }: { className?: string }) {
+// Custom Social Icons since this version of Lucide doesn't include brand icons
+function FacebookIcon({ className, size = 24 }: { className?: string; size?: number }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} width={size} height={size}>
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  );
+}
+
+function TwitterIcon({ className, size = 24 }: { className?: string; size?: number }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} width={size} height={size}>
+      <path d="M22 4s-1 2.1-3 2.4c1.1.8 1.8 1.8 1.8 3 0 1.2-.7 2.1-1.8 3-.5 1.1-1.2 2-2.2 2.5-1 4.5-5 8-11 8-3.3 0-6.1-1-8-3 1.4.1 2.8-.2 4-1-2.2-.4-4.1-1.7-4.8-3.8.3.1.6.1.9.1.5 0 1-.1 1.4-.2-2.3-.5-4-2.5-4-4.9v-.1c.7.4 1.5.6 2.4.6-1.4-.9-2.3-2.4-2.3-4.1 0-.9.2-1.8.7-2.5 2.5 3.1 6.2 5.1 10.4 5.3-.2-.4-.3-.8-.3-1.3 0-2.6 2.1-4.7 4.7-4.7 1.4 0 2.6.6 3.4 1.5.9-.2 1.8-.5 2.6-1-.3.9-.9 1.6-1.7 2.1 1.1-.1 2.1-.4 3-.8z" />
+    </svg>
+  );
+}
+
+function InstagramIcon({ className, size = 24 }: { className?: string; size?: number }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} width={size} height={size}>
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+    </svg>
+  );
+}
+
+function YoutubeIcon({ className, size = 24 }: { className?: string; size?: number }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} width={size} height={size}>
+      <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.14 1 12 1 12s0 3.86.42 5.58a2.78 2.78 0 0 0 1.94 2c1.71.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.86 23 12 23 12s0-3.86-.42-5.58z" />
+      <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" />
+    </svg>
+  );
+}
+
+function LinkedinIcon({ className, size = 24 }: { className?: string; size?: number }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} width={size} height={size}>
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect x="2" y="9" width="4" height="12" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
+
+// Custom TikTok icon
+function TikTokIcon({ className, size = 24 }: { className?: string; size?: number }) {
   return (
     <svg 
       viewBox="0 0 24 24" 
@@ -17,6 +62,8 @@ function TikTokIcon({ className }: { className?: string }) {
       strokeLinecap="round" 
       strokeLinejoin="round" 
       className={className}
+      width={size}
+      height={size}
     >
       <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
     </svg>
@@ -72,12 +119,12 @@ export default function Footer() {
   const { settings } = useSettings();
 
   const socialLinks = [
-    { icon: Facebook, href: settings?.socialLinks?.facebook, label: "Facebook" },
-    { icon: Twitter, href: settings?.socialLinks?.twitter, label: "Twitter" },
-    { icon: Instagram, href: settings?.socialLinks?.instagram, label: "Instagram" },
-    { icon: Youtube, href: settings?.socialLinks?.youtube, label: "YouTube" },
+    { icon: FacebookIcon, href: settings?.socialLinks?.facebook, label: "Facebook" },
+    { icon: TwitterIcon, href: settings?.socialLinks?.twitter, label: "Twitter" },
+    { icon: InstagramIcon, href: settings?.socialLinks?.instagram, label: "Instagram" },
+    { icon: YoutubeIcon, href: settings?.socialLinks?.youtube, label: "YouTube" },
     { icon: TikTokIcon, href: settings?.socialLinks?.tiktok, label: "TikTok" },
-    { icon: Link2, href: settings?.socialLinks?.linkedin, label: "LinkedIn" },
+    { icon: LinkedinIcon, href: settings?.socialLinks?.linkedin, label: "LinkedIn" },
   ];
 
   const footerLinks = {
