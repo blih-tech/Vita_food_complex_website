@@ -8,7 +8,7 @@ import { RolesGuard } from '../../common/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
 
 @Controller('users')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -36,14 +36,12 @@ export class UsersController {
 
   // ── Admin: all users ──────────────────────────────────────────────
   @Get()
-  @UseGuards(RolesGuard)
   @Roles('superadmin')
   findAll() {
     return this.usersService.findAll();
   }
 
   @Post()
-  @UseGuards(RolesGuard)
   @Roles('superadmin')
   create(
     @Body() body: { name: string; email: string; password: string; role: string; permissions?: string[] },
@@ -52,7 +50,6 @@ export class UsersController {
   }
 
   @Put(':id')
-  @UseGuards(RolesGuard)
   @Roles('superadmin')
   update(
     @Param('id') id: string,
@@ -63,7 +60,6 @@ export class UsersController {
 
   @Put(':id/password')
   @HttpCode(HttpStatus.OK)
-  @UseGuards(RolesGuard)
   @Roles('superadmin')
   async updateUserPassword(
     @Param('id') id: string,
@@ -75,7 +71,6 @@ export class UsersController {
 
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
-  @UseGuards(RolesGuard)
   @Roles('superadmin')
   async remove(@Param('id') id: string) {
     await this.usersService.remove(id);

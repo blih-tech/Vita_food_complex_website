@@ -29,7 +29,7 @@ export class AuthController {
       name: 'Vita Admin',
       email: 'admin@vitafoodcomplex.com',
       password: 'adminpassword',
-      role: 'admin',
+      role: 'superadmin',
     });
     return { message: 'Admin created successfully' };
   }

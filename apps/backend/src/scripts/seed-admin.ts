@@ -15,7 +15,7 @@ async function bootstrap() {
 
     const adminName = process.env.ADMIN_NAME ?? 'Vita Admin';
     const adminEmail = process.env.ADMIN_EMAIL ?? 'admin@vitafoodcomplex.com';
-    const adminPassword = process.env.ADMIN_PASSWORD ?? 'adminpassword';
+    const adminPassword = process.env.ADMIN_PASSWORD ?? '123456';
     const resetPasswordOnExisting = toBoolean(
       process.env.ADMIN_RESET_PASSWORD,
       true,
