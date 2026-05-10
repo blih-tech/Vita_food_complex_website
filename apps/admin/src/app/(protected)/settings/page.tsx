@@ -16,7 +16,7 @@ type Tab = 'site' | 'profile';
 interface SiteSettings {
   siteName: { en: string; am: string };
   analytics: { ga4Id: string };
-  socialLinks: { facebook?: string; instagram?: string; linkedin?: string; twitter?: string };
+  socialLinks: { facebook?: string; instagram?: string; linkedin?: string; twitter?: string; youtube?: string; tiktok?: string };
 }
 
 function SectionCard({ title, icon: Icon, children }: { title: string; icon: any; children: React.ReactNode }) {
@@ -52,7 +52,7 @@ function SiteSettingsTab() {
   const [form, setForm] = useState<SiteSettings>({
     siteName: { en: '', am: '' },
     analytics: { ga4Id: '' },
-    socialLinks: { facebook: '', instagram: '', linkedin: '', twitter: '' },
+    socialLinks: { facebook: '', instagram: '', linkedin: '', twitter: '', youtube: '', tiktok: '' },
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -66,7 +66,7 @@ function SiteSettingsTab() {
         setForm({
           siteName: data.siteName ?? { en: '', am: '' },
           analytics: data.analytics ?? { ga4Id: '' },
-          socialLinks: data.socialLinks ?? { facebook: '', instagram: '', linkedin: '', twitter: '' },
+          socialLinks: data.socialLinks ?? { facebook: '', instagram: '', linkedin: '', twitter: '', youtube: '', tiktok: '' },
         });
       }
     }).catch(() => {}).finally(() => setLoading(false));
@@ -140,6 +140,8 @@ function SiteSettingsTab() {
             { key: 'instagram', label: 'Instagram', placeholder: 'https://instagram.com/…', color: 'text-pink-500' },
             { key: 'linkedin', label: 'LinkedIn', placeholder: 'https://linkedin.com/…', color: 'text-blue-600' },
             { key: 'twitter', label: 'Twitter / X', placeholder: 'https://x.com/…', color: 'text-sky-500' },
+            { key: 'youtube', label: 'YouTube', placeholder: 'https://youtube.com/…', color: 'text-red-600' },
+            { key: 'tiktok', label: 'TikTok', placeholder: 'https://tiktok.com/…', color: 'text-black' },
           ].map(({ key, label, placeholder, color }) => (
             <Field key={key} label={label}>
               <div className="relative">

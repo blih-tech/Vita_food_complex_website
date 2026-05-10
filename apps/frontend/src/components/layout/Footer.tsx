@@ -3,6 +3,25 @@
 import Image from "next/image";
 import { Link } from "@frontend/navigation";
 import { useTranslations } from "next-intl";
+import { useSettings } from "@/hooks/useSettings";
+import { Facebook, Instagram, Youtube, Twitter, Link2 } from "lucide-react";
+
+// Custom TikTok icon since Lucide doesn't have a great one in all versions
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={className}
+    >
+      <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+    </svg>
+  );
+}
 
 /* ─────────────────────────────────────────────
    Types
@@ -50,6 +69,16 @@ function FooterColumn({ title, links }: FooterColumnProps) {
 export default function Footer() {
   const t = useTranslations("Footer");
   const tProducts = useTranslations("Products");
+  const { settings } = useSettings();
+
+  const socialLinks = [
+    { icon: Facebook, href: settings?.socialLinks?.facebook, label: "Facebook" },
+    { icon: Twitter, href: settings?.socialLinks?.twitter, label: "Twitter" },
+    { icon: Instagram, href: settings?.socialLinks?.instagram, label: "Instagram" },
+    { icon: Youtube, href: settings?.socialLinks?.youtube, label: "YouTube" },
+    { icon: TikTokIcon, href: settings?.socialLinks?.tiktok, label: "TikTok" },
+    { icon: Link2, href: settings?.socialLinks?.linkedin, label: "LinkedIn" },
+  ];
 
   const footerLinks = {
     biscuits: [
@@ -164,13 +193,24 @@ export default function Footer() {
               </p>
             </div>
 
-            <Image
-              src="/assets/footer/social-icons.svg"
-              alt="Social Media"
-              width={280}
-              height={40}
-              className="w-auto h-auto"
-            />
+            <div className="flex items-center gap-4">
+              {socialLinks.map((social, i) => {
+                const Icon = social.icon;
+                if (!social.href) return null;
+                return (
+                  <a
+                    key={i}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#23B349] hover:border-[#23B349] transition-all duration-300"
+                    aria-label={social.label}
+                  >
+                    <Icon size={20} />
+                  </a>
+                );
+              })}
+            </div>
           </div>
 
           {/* Navigation */}

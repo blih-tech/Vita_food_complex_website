@@ -25,7 +25,7 @@ export class SiteSettings {
   analytics: { ga4Id: string };
 
   @Prop({ type: Object })
-  socialLinks: { facebook?: string; instagram?: string; linkedin?: string; twitter?: string };
+  socialLinks: { facebook?: string; instagram?: string; linkedin?: string; twitter?: string; youtube?: string; tiktok?: string };
 }
 
 export const SiteSettingsSchema = SchemaFactory.createForClass(SiteSettings);
