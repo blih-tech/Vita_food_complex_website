@@ -47,7 +47,7 @@ const ALL_PAGES = [
   {
     slug: "recipes",
     name: "Recipes",
-    description: "Recipe hero, intro, and recipe cards",
+    description: "Hero & intro (CMS tab) and recipe cards (Recipes → Recipe cards)",
     icon: UtensilsCrossed,
     editorHref: "/recipes",
     liveHref: "https://vitafoodcomplex.vercel.app/en/recipes",

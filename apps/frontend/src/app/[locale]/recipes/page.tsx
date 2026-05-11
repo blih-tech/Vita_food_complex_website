@@ -24,6 +24,20 @@ type ApiRecipe = {
   published?: boolean;
 };
 
+type RecipesCmsSection = {
+  id: string;
+  type: string;
+  content?: {
+    en?: Record<string, unknown>;
+    am?: Record<string, unknown>;
+  };
+};
+
+type RecipesCmsPage = {
+  slug: string;
+  sections?: RecipesCmsSection[];
+};
+
 const CONTAINER_CLASS = "w-full max-w-[1400px] mx-auto px-4 lg:px-20";
 
 /** When the API is empty, show the first cards from `seed-data.ts` (matches default CMS rows). */
@@ -32,14 +46,50 @@ const recipeImages = recipeSeedRows.slice(0, 3).map((r) => ({
   bgColor: r.bgColor,
 }));
 
+function normalizeApiV1Base(url: string): string {
+  const trimmed = url.replace(/\/+$/, "");
+  if (trimmed.endsWith("/api/v1")) return trimmed;
+  return `${trimmed}/api/v1`;
+}
+
 function resolveApiBase(): string {
   const raw = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4002/api/v1";
-  const urls = raw.split(",").map((u) => u.trim());
+  const urls = raw.split(",").map((u) => normalizeApiV1Base(u.trim()));
   return urls.length > 1
     ? process.env.NODE_ENV === "production"
       ? (urls.find((u) => !u.includes("localhost")) ?? urls[0])
       : urls[0]
     : urls[0];
+}
+
+async function fetchRecipesCmsPage(): Promise<RecipesCmsPage | null> {
+  const apiBase = resolveApiBase();
+  try {
+    const response = await fetch(`${apiBase}/content/pages/recipes`, {
+      next: { revalidate: 120 },
+    });
+    if (!response.ok) return null;
+    return (await response.json()) as RecipesCmsPage;
+  } catch {
+    return null;
+  }
+}
+
+const RECIPES_CMS_HERO_TYPES = new Set(["recipes-hero", "hero"]);
+const RECIPES_CMS_HEADER_TYPES = new Set(["recipes-header", "header"]);
+
+function getLocalizedRecipesSection(
+  page: RecipesCmsPage | null,
+  kind: "hero" | "header",
+  locale: string,
+): Record<string, unknown> | undefined {
+  const types = kind === "hero" ? RECIPES_CMS_HERO_TYPES : RECIPES_CMS_HEADER_TYPES;
+  const section = page?.sections?.find((s) => types.has(s.type));
+  if (!section?.content) return undefined;
+  const key = locale === "am" ? "am" : "en";
+  return (section.content[key] ?? section.content.en) as
+    | Record<string, unknown>
+    | undefined;
 }
 
 async function fetchPublishedRecipes(): Promise<ApiRecipe[]> {
@@ -62,8 +112,20 @@ export default async function RecipesPage({ params }: LocaleParams) {
   setRequestLocale(locale);
   const t = await getTranslations("Recipes");
 
-  const apiRecipes = await fetchPublishedRecipes();
+  const [cmsPage, apiRecipes] = await Promise.all([
+    fetchRecipesCmsPage(),
+    fetchPublishedRecipes(),
+  ]);
+
   const localeKey = locale === "am" ? "am" : "en";
+  const heroCms = getLocalizedRecipesSection(cmsPage, "hero", locale);
+  const headerCms = getLocalizedRecipesSection(cmsPage, "header", locale);
+
+  const pickStr = (cms: Record<string, unknown> | undefined, key: string, fallback: string) => {
+    const v = cms?.[key];
+    return typeof v === "string" && v.trim() ? v : fallback;
+  };
+
   const fallbackItems = t.raw("items") as { title: string; description: string }[];
 
   const items =
@@ -83,10 +145,21 @@ export default async function RecipesPage({ params }: LocaleParams) {
           bgColor: img.bgColor,
         }));
 
-  const heroTitle = t("hero.title");
-  const heroImage = "/assets/recipes/hero.png";
-  const headerTitle = t("header.title");
-  const headerDescription = t("header.description");
+  const heroTitle = pickStr(heroCms, "title", t("hero.title"));
+  const heroImage = pickStr(heroCms, "image", "/assets/recipes/hero.png");
+
+  const headerLabel = pickStr(headerCms, "label", t("header.label"));
+  const headerTitle = pickStr(headerCms, "title", t("header.title"));
+  const headerHeading = headerCms?.heading;
+  const headerHeadingAccent = headerCms?.headingAccent;
+  const headerDescription = pickStr(headerCms, "description", t("header.description"));
+
+  const headingLead =
+    typeof headerHeading === "string" && headerHeading.trim() ? headerHeading : "";
+  const headingAccent =
+    typeof headerHeadingAccent === "string" && headerHeadingAccent.trim()
+      ? headerHeadingAccent
+      : "";
 
   return (
     <main className="flex flex-col bg-white">
@@ -99,14 +172,29 @@ export default async function RecipesPage({ params }: LocaleParams) {
             fill
             priority
             className="object-cover"
+            sizes="(max-width: 1400px) 100vw, 1400px"
           />
         </div>
       </section>
 
       <section className={`${CONTAINER_CLASS} mb-8 md:mb-12`}>
-        <h2 className="font-['Outfit'] font-bold text-[#23B349] text-[36px] md:text-[52px] leading-[1.1] tracking-tight mb-2">
+        {headerLabel.trim() ? (
+          <p className="font-['Funnel_Display'] font-semibold text-[#23B349] text-[14px] md:text-[16px] tracking-wide uppercase mb-2">
+            {headerLabel}
+          </p>
+        ) : null}
+        <h2 className="font-['Outfit'] font-bold text-[#23B349] text-[36px] md:text-[52px] leading-[1.1] tracking-tight mb-3">
           {headerTitle}
         </h2>
+        {(headingLead || headingAccent) && (
+          <p className="font-['Funnel_Display'] text-[18px] md:text-[22px] text-[#404040]/90 mb-3">
+            {headingLead}
+            {headingLead && headingAccent ? " " : ""}
+            {headingAccent ? (
+              <span className="text-[#23B349] font-semibold">{headingAccent}</span>
+            ) : null}
+          </p>
+        )}
         <p className="font-['Funnel_Display'] text-[16px] md:text-[20px] text-[#404040]/80">
           {headerDescription}
         </p>

@@ -1,6 +1,15 @@
 import {
-  Controller, Get, Post, Body, Param, Put, Patch, Delete,
-  UseGuards, UploadedFile, UseInterceptors,
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Put,
+  Patch,
+  Delete,
+  UseGuards,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
@@ -10,6 +19,7 @@ import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../../common/guards/roles.guard';
 import { Roles } from '../../common/decorators/roles.decorator';
 import { becomeDistributorDefaultPage } from './default-pages/become-distributor.default';
+import { recipesPageDefault } from './default-pages/recipes.default';
 
 @Controller('content')
 export class ContentController {
@@ -67,6 +77,16 @@ export class ContentController {
     return this.contentService.upsert(
       becomeDistributorDefaultPage.slug,
       becomeDistributorDefaultPage,
+    );
+  }
+
+  @Post('pages/recipes/initialize')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
+  async initializeRecipesPage() {
+    return this.contentService.upsert(
+      recipesPageDefault.slug,
+      recipesPageDefault,
     );
   }
 

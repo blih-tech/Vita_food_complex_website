@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Plus, Pencil, Trash2, X, UtensilsCrossed } from "lucide-react";
+import { LayoutGrid, Plus, Pencil, Trash2, X, UtensilsCrossed } from "lucide-react";
+import RecipesPageCmsPanel from "./RecipesPageCmsPanel";
 import {
   RecipeItem,
   RecipePayload,
@@ -261,7 +262,10 @@ function RecipeModal({
   );
 }
 
+type RecipesAdminTab = "page" | "cards";
+
 export default function RecipesAdminPage() {
+  const [adminTab, setAdminTab] = useState<RecipesAdminTab>("cards");
   const [items, setItems] = useState<RecipeItem[]>([]);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
@@ -399,28 +403,60 @@ export default function RecipesAdminPage() {
     }
   };
 
+  const tabBtn = (id: RecipesAdminTab, label: string, Icon: typeof LayoutGrid) => (
+    <button
+      type="button"
+      key={id}
+      onClick={() => setAdminTab(id)}
+      className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${
+        adminTab === id
+          ? "bg-[#23B349] text-white"
+          : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+      }`}
+    >
+      <Icon size={16} />
+      {label}
+    </button>
+  );
+
   return (
     <>
-      <header className="hidden lg:flex h-[68px] bg-white border-b border-gray-100 px-8 items-center justify-between sticky top-0 z-10">
-        <h1 className="font-['Funnel_Display'] text-lg font-bold text-[#333733]">
-          Recipes
-        </h1>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={deleteSelected}
-            disabled={selectedIds.length === 0}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold bg-red-50 text-red-600 disabled:opacity-40 disabled:cursor-not-allowed"
-          >
-            <Trash2 size={14} /> Delete Selected ({selectedIds.length})
-          </button>
-          <button
-            onClick={openCreate}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-white bg-[#23B349] text-sm font-semibold"
-          >
-            <Plus size={14} /> Add Recipe
-          </button>
+      <header className="min-h-[68px] bg-white border-b border-gray-100 px-4 lg:px-8 py-3 lg:py-0 lg:flex lg:items-center lg:justify-between sticky top-0 z-10 gap-3">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+          <h1 className="font-['Funnel_Display'] text-lg font-bold text-[#333733] shrink-0">
+            Recipes
+          </h1>
+          <div className="flex flex-wrap gap-2">
+            {tabBtn("page", "Page content", LayoutGrid)}
+            {tabBtn("cards", "Recipe cards", UtensilsCrossed)}
+          </div>
         </div>
+        {adminTab === "cards" && (
+          <div className="flex items-center gap-2 mt-3 lg:mt-0">
+            <button
+              type="button"
+              onClick={deleteSelected}
+              disabled={selectedIds.length === 0}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold bg-red-50 text-red-600 disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <Trash2 size={14} /> Delete ({selectedIds.length})
+            </button>
+            <button
+              type="button"
+              onClick={openCreate}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-white bg-[#23B349] text-sm font-semibold"
+            >
+              <Plus size={14} /> Add Recipe
+            </button>
+          </div>
+        )}
       </header>
+      {adminTab === "page" && (
+        <div className="p-4 sm:p-6 lg:p-8">
+          <RecipesPageCmsPanel />
+        </div>
+      )}
+      {adminTab === "cards" && (
       <div className="p-4 sm:p-6 lg:p-8">
         {loading ? (
           <div className="py-16 flex justify-center">
@@ -558,6 +594,7 @@ export default function RecipesAdminPage() {
           </div>
         )}
       </div>
+      )}
 
       {open && (
         <RecipeModal
