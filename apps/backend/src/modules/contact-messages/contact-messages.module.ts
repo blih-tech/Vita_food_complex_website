@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ContactMessagesController } from './contact-messages.controller';
 import { ContactMessagesService } from './contact-messages.service';
+import { ContactMailerService } from './contact-mailer.service';
 import {
   ContactMessage,
   ContactMessageSchema,
@@ -9,10 +10,12 @@ import {
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: ContactMessage.name, schema: ContactMessageSchema }]),
+    MongooseModule.forFeature([
+      { name: ContactMessage.name, schema: ContactMessageSchema },
+    ]),
   ],
-  providers: [ContactMessagesService],
+  providers: [ContactMessagesService, ContactMailerService],
   controllers: [ContactMessagesController],
-  exports: [ContactMessagesService],
+  exports: [ContactMessagesService, ContactMailerService],
 })
 export class ContactMessagesModule {}

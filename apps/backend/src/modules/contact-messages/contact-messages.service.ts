@@ -7,17 +7,22 @@ import {
   ContactMessage,
   ContactMessageDocument,
 } from './schemas/contact-message.schema';
+import { ContactMailerService } from './contact-mailer.service';
 
 @Injectable()
 export class ContactMessagesService {
   constructor(
     @InjectModel(ContactMessage.name)
     private contactMessageModel: Model<ContactMessageDocument>,
+    private readonly contactMailerService: ContactMailerService,
   ) {}
 
   async create(payload: CreateContactMessageDto): Promise<ContactMessageDocument> {
     const message = new this.contactMessageModel(payload);
-    return message.save();
+    const saved = await message.save();
+    // Do not fail the API request if email delivery fails.
+    await this.contactMailerService.sendContactEmails(payload);
+    return saved;
   }
 
   async findAll(): Promise<ContactMessageDocument[]> {

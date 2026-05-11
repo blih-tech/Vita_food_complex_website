@@ -557,11 +557,7 @@
       },
       "communityImpact": {
         "title": "Community Impact",
-        "items": [
-          "Job creation",
-          "Educational support",
-          "Health initiatives"
-        ]
+        "items": ["Job creation", "Educational support", "Health initiatives"]
       },
       "responsibleProduction": {
         "title": "Responsible Production",
@@ -1157,7 +1153,7 @@
       "locationName": "Vita Food Complex"
     },
     "feedback": {
-      "heading": "Give US Your <br/> Feed back",
+      "heading": "Give US Your Feed back",
       "description": "Share your feedback on our distribution, products, and more to help us improve your experience!"
     }
   },
