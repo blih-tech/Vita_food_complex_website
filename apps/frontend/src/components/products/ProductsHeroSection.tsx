@@ -2,23 +2,34 @@
 
 import { memo, useState, useEffect } from "react";
 import Image from "next/image";
-import { products } from "@frontend/app/[locale]/products/data";
-import { useTranslations } from "next-intl";
 
 interface ProductsHeroProps {
   title: string;
+  subtitle: string;
+  products: Array<{
+    id: string;
+    name: string;
+    media: { image: string };
+    ui: { bgColor: string };
+  }>;
 }
 
-export const ProductsHeroSection = memo(({ title }: ProductsHeroProps) => {
-  const t = useTranslations("ProductsPage");
+export const ProductsHeroSection = memo(({ title, subtitle, products }: ProductsHeroProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const sliderProducts = products.length > 0 ? products : [{
+    id: "fallback",
+    name: title,
+    media: { image: "/assets/products/items/zoo-1.png" },
+    ui: { bgColor: "linear-gradient(135deg, #23B349 0%, #1a9e3e 100%)" },
+  }];
 
   useEffect(() => {
+    if (sliderProducts.length <= 1) return;
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % products.length);
+      setCurrentIndex((prev) => (prev + 1) % sliderProducts.length);
     }, 4000);
     return () => clearInterval(timer);
-  }, []);
+  }, [sliderProducts.length]);
 
   return (
     <section className="relative w-full h-[50vh] md:h-[60vh] lg:h-[95vh] overflow-hidden">
@@ -36,7 +47,7 @@ export const ProductsHeroSection = memo(({ title }: ProductsHeroProps) => {
           WebkitMaskRepeat: "no-repeat",
         }}
       >
-        {products.map((product, idx) => (
+        {sliderProducts.map((product, idx) => (
           <div
             key={`bg-${product.id}`}
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
@@ -61,7 +72,7 @@ export const ProductsHeroSection = memo(({ title }: ProductsHeroProps) => {
         </h1>
         <div className="hidden md:block text-right">
           <p className="font-['Outfit'] font-bold text-sm text-white/90 tracking-wider uppercase drop-shadow-sm">
-            {t("hero.subtitle")}
+            {subtitle}
           </p>
         </div>
       </div>
@@ -72,7 +83,7 @@ export const ProductsHeroSection = memo(({ title }: ProductsHeroProps) => {
           className="flex transition-transform duration-1000 ease-in-out w-full"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
-          {products.map((product) => (
+          {sliderProducts.map((product) => (
             <div
               key={product.id}
               className="w-full flex-shrink-0 flex justify-center items-center"

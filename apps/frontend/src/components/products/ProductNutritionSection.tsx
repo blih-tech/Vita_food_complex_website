@@ -6,10 +6,46 @@ interface ProductNutritionSectionProps {
   product: Product;
 }
 
+const NUTRITION_TRANSLATION_KEY_MAP: Record<string, string> = {
+  fat: "fat",
+  carbohydrate: "carbohydrate",
+  protein: "protein",
+  cholesterol: "cholesterol",
+  sodium: "sodium",
+  potassium: "potassium",
+  calcium: "calcium",
+  iron: "iron",
+};
+
+const INGREDIENT_TRANSLATION_KEY_MAP: Record<string, string> = {
+  "whole milk powder": "whole milk powder",
+  "canola oil": "canola oil",
+  "potassium sorbate": "potassium sorbate",
+  "citric acid": "citric acid",
+  "artificial flavours": "artificial flavours",
+  "tree nuts (pistachio)": "tree nuts (pistachio)",
+};
+
 export default function ProductNutritionSection({
   product,
 }: ProductNutritionSectionProps) {
   const t = useTranslations("Nutrition");
+
+  const renderNutritionItemLabel = (name: string) => {
+    const key = NUTRITION_TRANSLATION_KEY_MAP[name.toLowerCase()];
+    if (!key) return name;
+    return t(`items.${key}`);
+  };
+
+  const renderIngredientLabel = (name: string) => {
+    const key = INGREDIENT_TRANSLATION_KEY_MAP[name.toLowerCase()] ?? name.toLowerCase();
+    try {
+      return t(`ingredientsList.${key}`);
+    } catch {
+      return name;
+    }
+  };
+
   return (
     <section className="w-full bg-white px-4 md:px-8 lg:px-32 py-16 lg:py-24 z-10">
       <div className="max-w-[1664px] mx-auto flex flex-col gap-20">
@@ -63,7 +99,7 @@ export default function ProductNutritionSection({
                 >
                   <div className="w-5/12">
                     <span className="font-['Outfit'] font-medium text-lg md:text-2xl text-black whitespace-nowrap">
-                      {t(`items.${item.name.toLowerCase()}`)}
+                      {renderNutritionItemLabel(item.name)}
                     </span>
                   </div>
                   <div className="w-1/3 text-right">
@@ -117,7 +153,7 @@ export default function ProductNutritionSection({
               <p className="font-['Outfit'] font-normal text-xl md:text-3xl leading-snug tracking-tight text-black">
                 {t("ingredients")}:{" "}
                 {product.content?.ingredients?.list
-                  .map((i) => t(`ingredientsList.${i.name.toLowerCase()}`))
+                  .map((i) => renderIngredientLabel(i.name))
                   .join(", ")}
                 .
               </p>
@@ -127,7 +163,7 @@ export default function ProductNutritionSection({
                     <>
                       {t("contains")}:{" "}
                       {product.content.ingredients.contains
-                        .map((c) => t(`ingredientsList.${c.toLowerCase()}`))
+                        .map((c) => renderIngredientLabel(c))
                         .join(", ")}
                       .
                       <br />
@@ -138,7 +174,7 @@ export default function ProductNutritionSection({
                     <>
                       {t("mayContain")}:{" "}
                       {product.content.ingredients.mayContain
-                        .map((m) => t(`ingredientsList.${m.toLowerCase()}`))
+                        .map((m) => renderIngredientLabel(m))
                         .join(", ")}
                       .
                     </>

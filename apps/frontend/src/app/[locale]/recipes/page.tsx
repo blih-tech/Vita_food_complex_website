@@ -1,6 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
-import { recipeSeedRows } from "./seed-data";
 
 type LocaleParams = {
   params: Promise<{ locale: string }>;
@@ -39,12 +38,6 @@ type RecipesCmsPage = {
 };
 
 const CONTAINER_CLASS = "w-full max-w-[1400px] mx-auto px-4 lg:px-20";
-
-/** When the API is empty, show the first cards from `seed-data.ts` (matches default CMS rows). */
-const recipeImages = recipeSeedRows.slice(0, 3).map((r) => ({
-  imageSrc: r.imageWebPath,
-  bgColor: r.bgColor,
-}));
 
 function normalizeApiV1Base(url: string): string {
   const trimmed = url.replace(/\/+$/, "");
@@ -126,24 +119,13 @@ export default async function RecipesPage({ params }: LocaleParams) {
     return typeof v === "string" && v.trim() ? v : fallback;
   };
 
-  const fallbackItems = t.raw("items") as { title: string; description: string }[];
-
-  const items =
-    apiRecipes.length > 0
-      ? apiRecipes.map((recipe) => ({
-          key: recipe._id,
-          title: recipe.title[localeKey] || recipe.title.en,
-          description: recipe.description[localeKey] || recipe.description.en,
-          imageSrc: recipe.media?.image || "/assets/recipes/recipe-1.png",
-          bgColor: recipe.bgColor,
-        }))
-      : recipeImages.map((img, index) => ({
-          key: `fallback-${index}`,
-          title: fallbackItems[index]?.title || "",
-          description: fallbackItems[index]?.description || "",
-          imageSrc: img.imageSrc,
-          bgColor: img.bgColor,
-        }));
+  const items = apiRecipes.map((recipe) => ({
+    key: recipe._id,
+    title: recipe.title[localeKey] || recipe.title.en,
+    description: recipe.description[localeKey] || recipe.description.en,
+    imageSrc: recipe.media?.image || "/assets/recipes/recipe-1.png",
+    bgColor: recipe.bgColor,
+  }));
 
   const heroTitle = pickStr(heroCms, "title", t("hero.title"));
   const heroImage = pickStr(heroCms, "image", "/assets/recipes/hero.png");
@@ -201,17 +183,23 @@ export default async function RecipesPage({ params }: LocaleParams) {
       </section>
 
       <section className={`${CONTAINER_CLASS} mb-20 md:mb-32`}>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {items.map((recipe) => (
-            <RecipeCard
-              key={recipe.key}
-              imageSrc={recipe.imageSrc}
-              bgColor={recipe.bgColor}
-              title={recipe.title}
-              description={recipe.description}
-            />
-          ))}
-        </div>
+        {items.length === 0 ? (
+          <p className="font-['Funnel_Display'] text-[16px] text-[#404040]/70">
+            No recipes found.
+          </p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {items.map((recipe) => (
+              <RecipeCard
+                key={recipe.key}
+                imageSrc={recipe.imageSrc}
+                bgColor={recipe.bgColor}
+                title={recipe.title}
+                description={recipe.description}
+              />
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );

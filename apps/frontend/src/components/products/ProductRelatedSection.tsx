@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Link } from "@frontend/navigation";
 import { Product } from "@frontend/app/[locale]/products/data";
-import { useTranslations } from "next-intl";
 
 interface ProductRelatedSectionProps {
   relatedProducts: Product[];
@@ -9,7 +8,6 @@ interface ProductRelatedSectionProps {
 
 
 export default function ProductRelatedSection({ relatedProducts }: ProductRelatedSectionProps) {
-  const t = useTranslations("Products");
   return (
     <section className="w-full bg-white px-4 md:px-8 lg:px-32 py-16">
       <div className="max-w-[1664px] mx-auto flex justify-center">
@@ -35,7 +33,7 @@ export default function ProductRelatedSection({ relatedProducts }: ProductRelate
               <div className="relative w-full h-36 md:h-48 z-10 flex items-center justify-center mb-6">
                 <Image
                   src={relatedProduct.media.image}
-                  alt={t(`items.${relatedProduct.id}.name`)}
+                  alt={relatedProduct.name}
                   fill
                   className="object-contain group-hover:-translate-y-2 transition-transform duration-300 drop-shadow-xl"
                 />

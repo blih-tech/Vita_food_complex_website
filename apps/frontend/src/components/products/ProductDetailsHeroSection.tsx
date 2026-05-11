@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Product } from "@frontend/app/[locale]/products/data";
-import { useTranslations } from "next-intl";
 
 interface ProductHeroSectionProps {
   product: Product;
@@ -9,13 +8,6 @@ interface ProductHeroSectionProps {
 export default function ProductHeroSection({
   product,
 }: ProductHeroSectionProps) {
-  const t = useTranslations("Products");
-  const netWtMatch = (product.content?.netWeight || "120g").match(
-    /^(\d+)(.*)$/,
-  );
-  const netWtNum = netWtMatch ? netWtMatch[1] : "120";
-  const netWtUnit = netWtMatch ? netWtMatch[2] : "g";
-
   return (
     <section
       className="relative w-full overflow-hidden flex flex-col items-center pb-20"
@@ -39,8 +31,7 @@ export default function ProductHeroSection({
               className="font-['Funnel_Display'] font-black text-7xl md:text-[9rem] lg:text-[12rem] tracking-tight leading-none text-center whitespace-nowrap drop-shadow-md"
               style={{ color: product.ui.nameColor }}
             >
-              {t(`items.${product.id}.name`)}
-              {product.id === "oreo" ? " Cream" : ""}
+              {product.name}
             </h1>
           </div>
         </div>
@@ -73,7 +64,7 @@ export default function ProductHeroSection({
           className="relative font-['Outfit'] -mt-20 font-medium text-base md:text-xl lg:text-2xl max-w-2xl text-center mx-auto leading-tight  z-20"
           style={{ color: product.ui.nameColor }}
         >
-          {t(`items.${product.id}.description`)}
+          {product.content?.description ?? ""}
         </p>
       </div>
     </section>
