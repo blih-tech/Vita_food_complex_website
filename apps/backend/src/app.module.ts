@@ -19,6 +19,7 @@ import { DonationsModule } from './modules/donations/donations.module';
 import { FAQsModule } from './modules/faqs/faqs.module';
 import { TermsModule } from './modules/terms/terms.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { RecipesModule } from './modules/recipes/recipes.module';
 
 @Module({
   imports: [
@@ -28,8 +29,10 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGODB_URI') || 'mongodb://localhost:27018/vitafood',
+      useFactory: (configService: ConfigService) => ({
+        uri:
+          configService.get<string>('MONGODB_URI') ||
+          'mongodb://localhost:27018/vitafood',
       }),
     }),
     AuthModule,
@@ -48,6 +51,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
     FAQsModule,
     TermsModule,
     DashboardModule,
+    RecipesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
