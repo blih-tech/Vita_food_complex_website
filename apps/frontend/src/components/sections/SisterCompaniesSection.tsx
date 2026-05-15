@@ -9,7 +9,9 @@ export default function SisterCompaniesSection({ content, locale }: { content?: 
   const t = useTranslations("About.sisterCompanies");
   const c = content?.[locale as string] || content?.en;
 
-  const cmsLogos: Array<{ src?: string; alt?: string }> = c?.logos || [];
+  const cmsLogos: Array<{ src?: string; alt?: string }> = (c?.logos || []).filter(
+    (l: any) => l && typeof l.src === "string" && l.src.trim() !== ""
+  );
   
   return (
     <section className="relative w-full bg-white overflow-hidden py-16 sm:py-24">
@@ -35,7 +37,7 @@ export default function SisterCompaniesSection({ content, locale }: { content?: 
             {cmsLogos.map((logo, idx) => (
               <div key={`logo-a-${idx}`} className="flex-shrink-0 flex flex-col items-center justify-center gap-4">
                 <Image
-                  src={logo.src || ""}
+                  src={logo.src as string}
                   alt={logo.alt || `Sister Company ${idx + 1}`}
                   width={240}
                   height={240}
@@ -52,7 +54,7 @@ export default function SisterCompaniesSection({ content, locale }: { content?: 
             {cmsLogos.map((logo, idx) => (
               <div key={`logo-b-${idx}`} className="flex-shrink-0 flex flex-col items-center justify-center gap-4">
                 <Image
-                  src={logo.src || ""}
+                  src={logo.src as string}
                   alt={logo.alt || `Sister Company ${idx + 1}`}
                   width={240}
                   height={240}

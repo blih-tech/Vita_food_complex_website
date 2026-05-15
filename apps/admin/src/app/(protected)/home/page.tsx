@@ -63,7 +63,12 @@ const SECTION_META: Record<
   "biscuit-brand": {
     name: "Biscuit Brands",
     icon: Cookie,
-    description: "Brand carousel, tagline and CTA",
+    description: "Intro to our signature biscuit flavors",
+  },
+  feedback: {
+    name: "Feedback & Complaints",
+    icon: AlertCircle,
+    description: "Customer feedback CTA and support features",
   },
   recipes: {
     name: "Recipes",
@@ -156,6 +161,72 @@ const DEFAULT_PAGE: PageData = {
           cta: "ምርቶችን ያስሱ",
         },
       },
+    },
+    {
+      id: "feedback",
+      type: "feedback",
+      content: {
+        en: {
+          heading: "Do you have a Feedback or Complain?",
+          description: "Share your feedback, report an issue, or send us your concerns. We're committed to providing fast support and better service",
+          buttonText: "Contact Customer Care",
+          features: [
+            {
+              title: "12/6 days availability",
+              description: "Our customer care team is available 12 hours a day, 6 days a week to assist you with all your needs",
+            },
+            {
+              title: "Customer feedback & complaints",
+              description: "We value your input and handle all feedback and complaints with care and priority",
+            },
+            {
+              title: "Reliable distribution network",
+              description: "Get support for distribution queries, tracking, and logistics assistance from our dedicated team",
+            }
+          ]
+        },
+        am: {
+          heading: "አስተያየት ወይም ቅሬታ አለዎት?",
+          description: "አስተያየትዎን ያካፍሉ፣ ችግር ሪፖርት ያድርጉ፣ ወይም ስጋቶችዎን ይላኩልን። ፈጣን ድጋፍ እና የተሻለ አገልግሎት ለመስጠት ቆርጠናል",
+          buttonText: "የደንበኞች እንክብካቤን ያነጋግሩ",
+          features: [
+            {
+              title: "የ12/6 ቀናት ተገኝነት",
+              description: "የደንበኞች እንክብካቤ ቡድናችን በቀን 12 ሰዓት፣ በሳምንት 6 ቀናት ፍላጎቶችዎን ለማሟላት ዝግጁ ነው",
+            },
+            {
+              title: "የደንበኛ አስተያየት እና ቅሬታዎች",
+              description: "ለአስተያየትዎ ዋጋ እንሰጣለን እና ሁሉንም ቅሬታዎች በጥንቃቄ እና በቅድሚያ እናስተናግዳለን",
+            },
+            {
+              title: "አስተማማኝ የስርጭት አውታር",
+              description: "ለስርጭት ጥያቄዎች፣ ክትትል እና ሎጂስቲክስ እገዛ ከተሰጠው ቡድናችን ድጋፍ ያግኙ",
+            }
+          ]
+        }
+      }
+    },
+    {
+      id: "sister-companies",
+      type: "sister-companies",
+      content: {
+        en: {
+          subtitle: "Sister Companies",
+          heading: "Different Experiences",
+          description: "Through our diverse sister companies, we deliver value across every touchpoint of everyday life.",
+          cta: "See more",
+          link: "/about#sister-companies",
+          logos: []
+        },
+        am: {
+          subtitle: "እህት ኩባንያዎች",
+          heading: "የተለያዩ ልምዶች",
+          description: "በእህት ኩባንያዎቻችን አማካኝነት በየዕለቱ ለሚኖሩን የተለያዩ ልምዶች እሴት እንጨምራለን።",
+          cta: "ተጨማሪ ይመልከቱ",
+          link: "/about#sister-companies",
+          logos: []
+        }
+      }
     },
     {
       id: "recipes",
@@ -317,29 +388,6 @@ const DEFAULT_PAGE: PageData = {
         },
         am: { subtitle: "አጋሮቻችን", heading: "በባለሙያዎች የታመነ", logos: [] },
       },
-    },
-    {
-      id: "sister-companies",
-      type: "sister-companies",
-      content: {
-        en: {
-          subtitle: "Sister Companies",
-          heading: "Different Experiences",
-          description: "Through our diverse sister companies, we deliver value across every touchpoint of everyday life.",
-          cta: "See more",
-          link: "/about#sister-companies",
-          logos: []
-        },
-        am: {
-          subtitle: "እህት ኩባንያዎች",
-          heading: "የተለያዩ ልምዶች",
-          description: "በእህት ኩባንያዎቻችን አማካኝነት በየዕለቱ ለሚኖሩን የተለያዩ ልምዶች እሴት እንጨምራለን።",
-          cta: "ተጨማሪ ይመልከቱ",
-          link: "/about#sister-companies",
-          logos: []
-        }
-      }
-    }
   ],
 };
 
@@ -1028,6 +1076,90 @@ function EditModal({
         );
       }
 
+      case "feedback": {
+        const features = form[l]?.features || Array.from({ length: 3 }, () => ({ title: "", description: "" }));
+        return (
+          <div className="space-y-4">
+            <div>
+              {L("Heading")}
+              <input
+                className={inputCls}
+                value={form[l]?.heading || ""}
+                onChange={(e) => set([l, "heading"], e.target.value)}
+              />
+            </div>
+            <div>
+              {L("Description")}
+              <textarea
+                rows={3}
+                className={textareaCls}
+                value={form[l]?.description || ""}
+                onChange={(e) => set([l, "description"], e.target.value)}
+              />
+            </div>
+            <div>
+              {L("Button Text")}
+              <input
+                className={inputCls}
+                value={form[l]?.buttonText || ""}
+                onChange={(e) => set([l, "buttonText"], e.target.value)}
+              />
+            </div>
+            <div className="border-t border-gray-100 pt-4">
+              <p className={labelCls}>Support Features (3 cards)</p>
+              <div className="space-y-3">
+                {features.map((feature: any, i: number) => (
+                  <div key={i} className="bg-gray-50 rounded-[10px] p-3 space-y-2">
+                    <p className="text-xs font-bold text-gray-400 uppercase">
+                      Feature {i + 1}
+                    </p>
+                    <div>
+                      <label className="text-xs text-gray-500 mb-0.5 block">
+                        Title
+                      </label>
+                      <input
+                        className={inputCls}
+                        value={feature.title || ""}
+                        onChange={(e) => {
+                          const nf = JSON.parse(JSON.stringify(features));
+                          nf[i].title = e.target.value;
+                          setForm((prev: any) => {
+                            const next = JSON.parse(JSON.stringify(prev));
+                            if (!next[l]) next[l] = {};
+                            next[l].features = nf;
+                            return next;
+                          });
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs text-gray-500 mb-0.5 block">
+                        Description
+                      </label>
+                      <textarea
+                        rows={2}
+                        className={textareaCls}
+                        value={feature.description || ""}
+                        onChange={(e) => {
+                          const nf = JSON.parse(JSON.stringify(features));
+                          nf[i].description = e.target.value;
+                          setForm((prev: any) => {
+                            const next = JSON.parse(JSON.stringify(prev));
+                            if (!next[l]) next[l] = {};
+                            next[l].features = nf;
+                            return next;
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      }
+
       case "sister-companies": {
         const logos: { alt: string; src: string }[] = form.en?.logos || [];
 
@@ -1441,6 +1573,25 @@ export default function HomeAdminPage() {
       await api.patch(`/content/pages/home/sections/${editSection.id}`, {
         content,
       });
+
+      // Synchronize logos to About page if we are saving the home Sister Companies
+      if (editSection.type === "sister-companies" && content.en?.logos) {
+        try {
+          const aboutRes = await api.get("/content/pages/about");
+          const aboutPage = aboutRes.data;
+          const aboutSister = aboutPage?.sections?.find((s: any) => s.type === "about-sister");
+          if (aboutSister) {
+            const newAboutContent = JSON.parse(JSON.stringify(aboutSister.content || {}));
+            if (!newAboutContent.en) newAboutContent.en = {};
+            if (!newAboutContent.am) newAboutContent.am = {};
+            newAboutContent.en.logos = content.en.logos;
+            newAboutContent.am.logos = content.am.logos;
+            await api.patch(`/content/pages/about/sections/${aboutSister.id}`, { content: newAboutContent });
+          }
+        } catch (syncErr) {
+          console.warn("Could not sync logos to about page:", syncErr);
+        }
+      }
       setPage((prev) =>
         prev
           ? {

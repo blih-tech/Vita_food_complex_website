@@ -12,6 +12,7 @@ import QuickFactSection from "@frontend/components/sections/QuickFactSection";
 import SocialWallSection from "@frontend/components/sections/SocialWallSection";
 import PartnerSection from "@frontend/components/sections/PartnerSection";
 import SisterCompaniesSection from "@frontend/components/sections/SisterCompaniesSection";
+import FeedbackSection from "@frontend/components/sections/FeedbackSection";
 
 const SECTION_COMPONENTS: Record<string, any> = {
   // kebab-case keys matching DB section types
@@ -25,6 +26,7 @@ const SECTION_COMPONENTS: Record<string, any> = {
   "social-wall": SocialWallSection,
   partners: PartnerSection,
   "sister-companies": SisterCompaniesSection,
+  feedback: FeedbackSection,
   // PascalCase fallback keys
   HeroSection,
   HeroVideoSection,
@@ -36,6 +38,7 @@ const SECTION_COMPONENTS: Record<string, any> = {
   SocialWallSection,
   PartnerSection,
   SisterCompaniesSection,
+  FeedbackSection,
 };
 
 export default function Home({
@@ -55,12 +58,13 @@ export default function Home({
         <HeroVideoSection />
         <ProductsSection />
         <BiscuitBrandSection />
-        <RecipesSection />
         <SisterCompaniesSection />
+        <RecipesSection />
         <QuickFactSection />
         <MerchandiseSection />
         <SocialWallSection />
         <PartnerSection />
+        <FeedbackSection />
       </main>
     );
   }

@@ -20,25 +20,33 @@ const allLogos = [
 
 mongoose.connect(uri).then(async () => {
   const db = mongoose.connection.db;
-  const page = await db.collection('pages').findOne({ slug: 'home' });
-  if (page) {
-    const hasSister = page.sections.some(s => s.id === 'sister-companies');
-    if (hasSister) {
-      await db.collection('pages').updateOne(
-        { slug: 'home', 'sections.id': 'sister-companies' },
-        { 
-          $set: { 
-            'sections.$.content.en.logos': allLogos,
-            'sections.$.content.am.logos': allLogos,
-          } 
-        }
-      );
-      console.log('Updated sister-companies logos successfully');
+  
+  // Update both home and about pages
+  const slugs = ['home', 'about'];
+  
+  for (const slug of slugs) {
+    const page = await db.collection('pages').findOne({ slug });
+    if (page) {
+      const hasSister = page.sections.some(s => s.id === 'sister-companies');
+      if (hasSister) {
+        await db.collection('pages').updateOne(
+          { slug, 'sections.id': 'sister-companies' },
+          { 
+            $set: { 
+              'sections.$.content.en.logos': allLogos,
+              'sections.$.content.am.logos': allLogos,
+            } 
+          }
+        );
+        console.log(`Updated sister-companies logos successfully for page: ${slug}`);
+      } else {
+        // If it doesn't have it, maybe push it? The user might just want it updated if it exists.
+        console.log(`Page ${slug} does not have sister-companies section`);
+      }
     } else {
-      console.log('home page does not have sister-companies');
+      console.log(`Page ${slug} not found`);
     }
-  } else {
-    console.log('home page not found');
   }
+
   process.exit(0);
 }).catch(console.error);

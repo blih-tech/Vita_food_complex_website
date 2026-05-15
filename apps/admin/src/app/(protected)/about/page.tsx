@@ -196,29 +196,9 @@ function EditModal({ section, onClose, onSave, saving }: {
             <div>{L("Long Tea Card Text")}<textarea rows={2} className={textareaCls} value={form[l]?.longTeaBlurb || ""} onChange={e => set([l, "longTeaBlurb"], e.target.value)} /></div>
             <div className="border-t border-gray-100 pt-4">
               <p className={labelCls}>Brand Logos (shared across languages)</p>
-              <div className="space-y-2">
-                {logos.map((logo, i) => (
-                  <div key={i} className="flex items-center gap-2 bg-gray-50 rounded-[10px] px-3 py-2">
-                    <span className="text-xs font-semibold text-gray-400 w-32 shrink-0">{LOGO_LABELS[i]}</span>
-                    <div className="flex-1">
-                      <ImageUploadField
-                        currentUrl={logo.src || ""}
-                        uploading={uploading === `sisterLogo${i}`}
-                        onFileSelected={file => uploadImage(`sisterLogo${i}`, file, url => {
-                          setForm((prev: any) => {
-                            const next = JSON.parse(JSON.stringify(prev));
-                            ["en", "am"].forEach(lng => {
-                              if (!next[lng]) next[lng] = {};
-                              if (!next[lng].logos) next[lng].logos = Array.from({ length: 8 }, () => ({ src: "" }));
-                              next[lng].logos[i] = { src: url };
-                            });
-                            return next;
-                          });
-                        })}
-                      />
-                    </div>
-                  </div>
-                ))}
+              <div className="p-4 bg-blue-50 border border-blue-100 rounded-[10px] text-sm text-blue-700 flex items-start gap-2">
+                <AlertCircle size={16} className="mt-0.5 shrink-0" />
+                <p><strong>Logos are synchronized from the Home Page.</strong> Any updates to the Sister Companies logos made on the Home page will automatically be applied here.</p>
               </div>
             </div>
           </div>

@@ -1,176 +1,161 @@
-import React, { useState } from "react";
-import { AlertCircle, CheckCircle, Loader2 } from "lucide-react";
-import { useTranslations } from "next-intl";
-import api from "@/lib/api";
+"use client";
 
-export function FeedbackSection() {
-  const t = useTranslations("Contact");
-  const [form, setForm] = useState({
-    fullName: "",
-    email: "",
-    message: "",
-    agreeToTerms: false,
-  });
-  const [status, setStatus] = useState<
-    "idle" | "sending" | "success" | "error"
-  >("idle");
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Clock, MessageSquare, Truck } from "lucide-react";
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.fullName.trim() || !form.email.trim()) return;
+interface FeedbackFeature {
+  title: string;
+  description: string;
+}
 
-    setStatus("sending");
-    try {
-      await api.post("/contact-messages", {
-        fullName: form.fullName.trim(),
-        email: form.email.trim(),
-        phoneNumber: "Not provided",
-        message:
-          form.message.trim() || "Feedback submitted from products page.",
-        agreeToTerms: form.agreeToTerms,
-      });
-      setStatus("success");
-      setForm({ fullName: "", email: "", message: "", agreeToTerms: false });
-    } catch {
-      setStatus("error");
-    }
+interface FeedbackContent {
+  heading?: string;
+  description?: string;
+  buttonText?: string;
+  features?: FeedbackFeature[];
+}
+
+export default function FeedbackSection({
+  content,
+  locale = "en",
+}: {
+  content?: Record<string, FeedbackContent>;
+  locale?: string;
+}) {
+  const currentContent = content?.[locale] || {
+    heading: "Do you have a Feedback or Complain?",
+    description:
+      "Share your feedback, report an issue, or send us your concerns. We're committed to providing fast support and better service",
+    buttonText: "Contact Customer Care",
+    features: [
+      {
+        title: "12/6 days availability",
+        description:
+          "Our customer care team is available 12 hours a day, 6 days a week to assist you with all your needs",
+      },
+      {
+        title: "Customer feedback & complaints",
+        description:
+          "We value your input and handle all feedback and complaints with care and priority",
+      },
+      {
+        title: "Reliable distribution network",
+        description:
+          "Get support for distribution queries, tracking, and logistics assistance from our dedicated team",
+      },
+    ],
   };
 
+  const icons = [
+    <Clock key="clock" className="w-8 h-8 text-[#23B349]" />,
+    <MessageSquare key="msg" className="w-8 h-8 text-[#23B349]" />,
+    <Truck key="truck" className="w-8 h-8 text-[#23B349]" />,
+  ];
+
   return (
-    <section className="w-full bg-white px-6 lg:px-24 py-16 pb-24 flex justify-center relative z-10">
-      <div className="w-full max-w-[1100px] bg-[#23B349] rounded-[40px] p-8 md:p-12 lg:p-20 flex flex-col items-center text-center shadow-xl relative overflow-hidden">
-        <h2 className="font-['Funnel_Display'] font-black text-6xl md:text-7xl lg:text-[100px] text-white mb-6 leading-[0.9] tracking-tighter drop-shadow-sm">
-          {t.rich("feedback.heading", {
-            br: () => <br />,
-          })}
-        </h2>
-
-        <p className="font-['Outfit'] text-white md:text-xl lg:text-[22px] mb-12 max-w-4xl leading-snug drop-shadow-sm">
-          {t("feedback.description")}
-        </p>
-
-        <form
-          onSubmit={handleSubmit}
-          className="w-full max-w-5xl flex flex-col gap-6"
+    <section className="w-full bg-white py-16 px-4 md:px-8">
+      <div className="max-w-[1664px] mx-auto flex flex-col gap-[160px]">
+        {/* Top Green Banner */}
+        <div 
+          className="relative w-full rounded-[48px] overflow-hidden min-h-[572px] flex items-center justify-center"
+          style={{
+            background: `
+              radial-gradient(circle at 15% 85%, rgba(255, 236, 25, 0.5) 0%, transparent 50%),
+              radial-gradient(circle at 85% 15%, rgba(144, 209, 82, 0.5) 0%, transparent 50%),
+              radial-gradient(circle at 20% 10%, rgba(144, 209, 82, 0.4) 0%, transparent 50%),
+              #23B349
+            `
+          }}
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-            {/* Left Column */}
-            <div className="flex flex-col gap-4 md:gap-6">
-              <div className="bg-white rounded-[24px] p-5 md:p-6 text-left flex flex-col gap-1.5 shadow-sm">
-                <label className="font-['Outfit'] font-bold text-[#333333] text-[15px] md:text-[17px]">
-                  {t("form.fullName")}*
-                </label>
-                <input
-                  type="text"
-                  placeholder={t("form.fullNamePlaceholder")}
-                  value={form.fullName}
-                  onChange={(e) =>
-                    setForm((prev) => ({ ...prev, fullName: e.target.value }))
-                  }
-                  className="w-full font-['Outfit'] text-[15px] md:text-[17px] text-[#888888] bg-transparent focus:outline-none placeholder:text-[#BBBBBB]"
-                  required
-                />
-              </div>
-              <div className="bg-white rounded-[24px] p-5 md:p-6 text-left flex flex-col gap-1.5 shadow-sm">
-                <label className="font-['Outfit'] font-bold text-[#333333] text-[15px] md:text-[17px]">
-                  {t("form.email")}*
-                </label>
-                <input
-                  type="email"
-                  placeholder={t("form.emailPlaceholder")}
-                  value={form.email}
-                  onChange={(e) =>
-                    setForm((prev) => ({ ...prev, email: e.target.value }))
-                  }
-                  className="w-full font-['Outfit'] text-[15px] md:text-[17px] text-[#888888] bg-transparent focus:outline-none placeholder:text-[#BBBBBB]"
-                  required
-                />
-              </div>
-            </div>
 
-            {/* Right Column */}
-            <div className="bg-white rounded-[24px] p-5 md:p-6 text-left flex flex-col gap-1.5 shadow-sm relative min-h-[200px] md:min-h-full">
-              <label className="font-['Outfit'] font-bold text-[#333333] text-[15px] md:text-[17px]">
-                {t("form.message")}*
-              </label>
-              <textarea
-                placeholder={t("form.messagePlaceholder")}
-                value={form.message}
-                onChange={(e) =>
-                  setForm((prev) => ({ ...prev, message: e.target.value }))
-                }
-                className="w-full h-full font-['Outfit'] text-[15px] md:text-[17px] text-[#888888] bg-transparent focus:outline-none resize-none pb-12"
-              ></textarea>
-              <button
-                type="submit"
-                disabled={status === "sending" || status === "success"}
-                className="absolute bottom-4 right-4 md:bottom-6 md:right-6 bg-[#E5E5E5] text-[#888888] px-8 py-2.5 rounded-full font-['Outfit'] font-bold text-[15px] hover:bg-[#D5D5D5] transition-colors"
-              >
-                {status === "sending" ? (
-                  <span className="inline-flex items-center gap-1.5">
-                    <Loader2 className="w-4 h-4 animate-spin" /> Sending...
-                  </span>
-                ) : status === "success" ? (
-                  "Sent!"
-                ) : (
-                  t("form.submit")
-                )}
-              </button>
-            </div>
+          {/* Floating Images */}
+          {/* Hand Left */}
+          <div className="absolute top-[14.73px] left-[-15.6px] z-10 w-[383.46px] aspect-[1.5] transform rotate-[15.26deg] max-lg:hidden">
+            <Image
+              src="/assets/feedback/hand-biscuit-left.png"
+              alt="Hand holding product"
+              fill
+              className="object-contain"
+            />
           </div>
 
-          {/* Checkbox line */}
-          <div className="flex items-start gap-3 mt-4 text-left px-1">
-            <div className="relative flex items-center justify-center w-[22px] h-[22px] mt-0.5 shrink-0 border-[1.5px] border-white rounded-[6px]">
-              <input
-                type="checkbox"
-                checked={form.agreeToTerms}
-                onChange={(e) =>
-                  setForm((prev) => ({
-                    ...prev,
-                    agreeToTerms: e.target.checked,
-                  }))
-                }
-                className="absolute opacity-0 w-full h-full cursor-pointer peer"
-                required
-              />
-              <svg
-                className="w-3.5 h-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity"
-                viewBox="0 0 14 10"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 5L5 9L13 1"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-            <p className="font-['Outfit'] text-white text-[13px] md:text-[15px] leading-snug">
-              {t("form.agreeText")} {t("form.terms")}
+          {/* Wheat */}
+          <div className="absolute top-[360.53px] left-[320.65px] z-10 w-[203.24px] aspect-square transform rotate-[11.8deg] opacity-70 max-lg:hidden">
+            <Image
+              src="/assets/feedback/wheat.png"
+              alt="Wheat"
+              fill
+              className="object-contain"
+            />
+          </div>
+
+          {/* Yellow Flower */}
+          <div className="absolute top-[393.46px] left-[238.89px] z-10 w-[160.22px] aspect-square transform -rotate-[25.2deg] max-lg:hidden">
+            <Image
+              src="/assets/feedback/yellow-flower.png"
+              alt="Yellow Flower"
+              fill
+              className="object-contain"
+            />
+          </div>
+
+          {/* Floating Biscuit */}
+          <div className="absolute top-[266.07px] left-[1115.4px] z-10 w-[194.43px] aspect-[1.96] transform rotate-[43.88deg] max-lg:hidden">
+            <Image
+              src="/assets/feedback/floating-biscuit.png"
+              alt="Floating Biscuit"
+              fill
+              className="object-contain"
+            />
+          </div>
+
+          {/* Hand Right */}
+          <div className="absolute top-[189.72px] right-[-50px] lg:left-[1333.69px] z-10 w-[334.08px] aspect-square transform rotate-[7.69deg] max-lg:hidden">
+            <Image
+              src="/assets/feedback/hand-biscuit-right.png"
+              alt="Hand holding product"
+              fill
+              className="object-contain"
+            />
+          </div>
+
+          {/* Content */}
+          <div className="relative z-20 flex flex-col items-center text-center px-4 max-w-[850px]">
+            <h2 className="font-[Funnel_Display,sans-serif] font-extrabold text-[40px] md:text-[69px] leading-[1.1] text-white mb-5">
+              {currentContent.heading}
+            </h2>
+            <p className="font-[Funnel_Display,sans-serif] font-medium text-[16px] md:text-[20.8px] leading-[1.2] text-white mb-10 max-w-[660px]">
+              {currentContent.description}
             </p>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center bg-[#FFEC19] text-[#404040] rounded-full px-8 py-3 font-[Funnel_Display,sans-serif] font-medium text-[17.3px] hover:bg-yellow-400 transition-colors"
+            >
+              {currentContent.buttonText}
+            </Link>
           </div>
+        </div>
 
-          {status === "success" && (
-            <div className="flex items-center gap-2 rounded-xl px-4 py-3 bg-emerald-50 text-emerald-700 border border-emerald-200">
-              <CheckCircle className="w-5 h-5 shrink-0" />
-              <span className="text-sm">
-                Thanks! Your feedback was sent successfully.
-              </span>
-            </div>
-          )}
-          {status === "error" && (
-            <div className="flex items-center gap-2 rounded-xl px-4 py-3 bg-red-50 text-red-700 border border-red-200">
-              <AlertCircle className="w-5 h-5 shrink-0" />
-              <span className="text-sm">
-                Could not send feedback. Please try again.
-              </span>
-            </div>
-          )}
-        </form>
+        {/* Bottom Features Row */}
+        <div className="border-t border-[#8A8C8A] pt-8 md:pt-12 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+            {currentContent.features?.map((feature, idx) => (
+              <div key={idx} className="flex flex-col items-start text-left max-w-[485px] mx-auto md:mx-0">
+                <div className="w-[72px] h-[72px] rounded-full border-[2.4px] border-[#E6E6E6] flex items-center justify-center mb-6">
+                  {icons[idx] || <MessageSquare className="w-8 h-8 text-[#23B349]" />}
+                </div>
+                <h3 className="font-outfit font-medium text-[24px] md:text-[28px] text-black mb-3">
+                  {feature.title}
+                </h3>
+                <p className="font-outfit font-light text-[18px] md:text-[20px] text-[#333733] leading-[1.25]">
+                  {feature.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
