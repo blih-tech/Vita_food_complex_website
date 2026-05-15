@@ -2,207 +2,82 @@
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { Link } from "@frontend/navigation";
-import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
-/**
- * Figma 2066:3484 "Biscuit brand": column, center, gap 31.92px, width 681;
- * heading + scroll (2066:3488 1280.87×365.11, overflow-x) + caption + Frame 225.
- * Figma 2201:8936 "Belayab groups": row, align center, gap 200px.
- */
-const SCROLL_GAP_PX = 200;
-
-type BrandAltKey =
-  | "belayabGroup"
-  | "motors"
-  | "cables"
-  | "goldenTulip"
-  | "lewis"
-  | "foods"
-  | "limestone";
-
-type LogoSlot = {
-  kind: "logo";
-  src: string;
-  altKey: BrandAltKey;
-  boxClass: string;
-};
-
-const SCROLL_SLOTS: (LogoSlot | { kind: "longTeaCard" })[] = [
-  {
-    kind: "logo",
-    src: "/assets/sister/belayab.png",
-    altKey: "belayabGroup",
-    boxClass: "relative h-[min(146px,26vw)] w-[min(600px,92vw)] shrink-0 snap-start",
-  },
-  {
-    kind: "logo",
-    src: "/assets/sister/motors.png",
-    altKey: "motors",
-    boxClass:
-      "relative h-[200px] w-[200px] shrink-0 snap-start md:h-[234px] md:w-[234px]",
-  },
-  {
-    kind: "logo",
-    src: "/assets/sister/cables.png",
-    altKey: "cables",
-    boxClass:
-      "relative h-[200px] w-[200px] shrink-0 snap-start md:h-[234px] md:w-[234px]",
-  },
-  { kind: "longTeaCard" },
-  {
-    kind: "logo",
-    src: "/assets/sister/golden-tulip.png",
-    altKey: "goldenTulip",
-    boxClass:
-      "relative h-[220px] w-[220px] shrink-0 snap-start md:h-[240px] md:w-[240px]",
-  },
-  {
-    kind: "logo",
-    src: "/assets/sister/lewis.png",
-    altKey: "lewis",
-    boxClass:
-      "relative h-[220px] w-[220px] shrink-0 snap-start md:h-[240px] md:w-[240px]",
-  },
-  {
-    kind: "logo",
-    src: "/assets/sister/foods.png",
-    altKey: "foods",
-    boxClass:
-      "relative h-[220px] w-[220px] shrink-0 snap-start md:h-[240px] md:w-[240px]",
-  },
-  {
-    kind: "logo",
-    src: "/assets/sister/limestone.png",
-    altKey: "limestone",
-    boxClass: "relative h-[250px] w-[min(205px,48vw)] shrink-0 snap-start md:w-[205px]",
-  },
+const SISTER_COMPANIES = [
+  { alt: "Belayab Food & Feed", src: "/assets/sister/foods.svg", width: 234, height: 234 },
+  { alt: "Golden Tulip", src: "/assets/sister/golden-tulip.svg", width: 240, height: 240 },
+  { alt: "Long Tea", src: "/assets/sister/long-tea-logo.png", width: 400, height: 132 },
+  { alt: "Lewis Retails", src: "/assets/sister/lewis.svg", width: 500, height: 178 },
+  { alt: "Belayab Motors", src: "/assets/sister/motors.svg", width: 234, height: 234 },
+  { alt: "Belayab Cables", src: "/assets/sister/cables.svg", width: 234, height: 234 },
+  { alt: "Limestone", src: "/assets/sister/limestone.svg", width: 205, height: 250 },
 ];
 
 export default function SisterCompaniesSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("About.sisterCompanies");
-  const tBrands = useTranslations("About.sisterCompanies.brands");
-  const tCompanies = useTranslations("About.sisterCompanies.companies");
   const c = content?.[locale as string] || content?.en;
 
-  // CMS logos indexed by SCROLL_SLOTS position; index 3 = longTea card logo
-  const cmsLogos: Array<{ src?: string } | null> = c?.logos || [];
-  const getLogoSrc = (slotIdx: number, fallback: string) =>
-    cmsLogos[slotIdx % SCROLL_SLOTS.length]?.src || fallback;
-
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isPaused, setIsPaused] = useState(false);
-
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-
-    let animationId: number;
-    let lastTime = 0;
-    const speed = 0.5; // pixels per frame
-
-    const step = (time: number) => {
-      if (lastTime !== 0 && !isPaused) {
-        scrollContainer.scrollLeft += speed;
-        // Reset to start if we've scrolled past the content
-        if (
-          scrollContainer.scrollLeft >=
-          scrollContainer.scrollWidth - scrollContainer.clientWidth
-        ) {
-          scrollContainer.scrollLeft = 0;
-        }
-      }
-      lastTime = time;
-      animationId = requestAnimationFrame(step);
-    };
-
-    animationId = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(animationId);
-  }, [isPaused]);
-
-  // Triple the slots for seamless infinite scroll
-  const extendedSlots = [...SCROLL_SLOTS, ...SCROLL_SLOTS, ...SCROLL_SLOTS];
-
+  const cmsLogos: Array<{ src?: string; alt?: string }> = c?.logos || [];
+  
   return (
-    <section className="relative z-10 flex flex-col items-center bg-white px-8 py-16 md:px-16 md:py-24 lg:px-[128px]">
-      <div className="mx-auto flex w-full max-w-[681px] flex-col items-center gap-8 text-center">
-        <span className="font-[family-name:var(--font-funnel-display)] text-[13.3px] font-medium leading-none tracking-[-0.004em] text-[#404040]">
-          {c?.label || t("label")}
-        </span>
-        <h2 className="font-[family-name:var(--font-outfit)] text-[32px] font-extrabold leading-[0.9] tracking-[-0.02em] text-[#23B349] md:text-[44px] lg:text-[53.2px]">
-          {c?.title || t("title")}
+    <section className="relative w-full bg-white overflow-hidden py-16 sm:py-24">
+      {/* ── Header ── */}
+      <div className="max-w-[1024px] mx-auto px-5 flex flex-col items-center text-center mb-16">
+        <p className="font-['Funnel_Display'] font-medium text-[16px] sm:text-[18px] text-[#404040] mb-3">
+          {c?.subtitle || "Sister Companies"}
+        </p>
+        <h2 className="font-['Outfit'] font-bold text-[36px] sm:text-[48px] lg:text-[60px] text-[#23B349] leading-tight tracking-tight">
+          {c?.heading || "Different Experiences"}
         </h2>
       </div>
 
-      <div
-        ref={scrollRef}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        className="mx-auto mt-8 w-full max-w-[1281px] snap-x snap-mandatory min-h-[280px] overflow-x-auto overflow-y-hidden scrollbar-hide scroll-smooth [-webkit-overflow-scrolling:touch] md:min-h-[320px] lg:h-[365px] lg:min-h-[365px]"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-      >
-        <div
-          className="flex h-full w-max flex-row items-center px-4 py-6 md:px-6"
-          style={{ gap: "clamp(40px, 15vw, 200px)" }}
-        >
-          {extendedSlots.map((slot, index) =>
-            slot.kind === "longTeaCard" ? (
-              <article
-                key={`long-tea-card-${index}`}
-                className="flex w-[min(400px,85vw)] shrink-0 snap-start flex-col gap-3 rounded-[20px] border border-[#E8E8E8] bg-white p-5 shadow-[0_8px_30px_rgba(0,0,0,0.06)]"
-              >
-                <div className="relative mx-auto h-[74px] w-full max-w-[320px]">
-                  <Image
-                    src={getLogoSrc(3, "/assets/sister/long-tea-logo.png")}
-                    alt={tCompanies("longTea")}
-                    fill
-                    className="object-contain"
-                    sizes="320px"
-                  />
-                </div>
-                <p className="text-center font-[family-name:var(--font-outfit)] text-[11px] font-normal leading-snug tracking-[-0.004em] text-[#404040] md:text-[12px]">
-                  {c?.longTeaBlurb || t("longTeaCard.blurb")}
-                </p>
-                <Link
-                  href="/contact"
-                  className="mx-auto mt-1 inline-flex h-8 items-center justify-center rounded-full bg-[#23B349] px-5 font-[family-name:var(--font-funnel-display)] text-[12px] font-medium tracking-[-0.004em] text-white transition-colors hover:bg-[#1fa041] md:text-[13px]"
-                >
-                  {c?.visitSite || t("visitSite")}
-                </Link>
-              </article>
-            ) : (
-              <div key={`${slot.src}-${index}`} className={slot.boxClass}>
-                <Image
-                  src={getLogoSrc(index, slot.src)}
-                  alt={tBrands(slot.altKey)}
-                  fill
-                  className="object-contain object-center"
-                  sizes={
-                    slot.altKey === "belayabGroup"
-                      ? "600px"
-                      : slot.altKey === "limestone"
-                        ? "205px"
-                        : "240px"
-                  }
-                />
-              </div>
-            ),
-          )}
+      {/* ── Logos Marquee ── */}
+      <div className="relative w-full overflow-hidden py-8 mb-12">
+        {/* Fades for smooth entry/exit */}
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent" />
+
+        <div className="flex items-center animate-marquee whitespace-nowrap" style={{ gap: '200px' }}>
+          {/* First Set */}
+          {SISTER_COMPANIES.map((logo, idx) => (
+            <div key={`logo-a-${idx}`} className="flex-shrink-0 flex items-center justify-center">
+              <Image
+                src={cmsLogos[idx]?.src || logo.src}
+                alt={cmsLogos[idx]?.alt || logo.alt}
+                width={logo.width}
+                height={logo.height}
+                className="object-contain h-[80px] sm:h-[120px] lg:h-[150px] w-auto hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          ))}
+          {/* Duplicate Set for seamless looping */}
+          {SISTER_COMPANIES.map((logo, idx) => (
+            <div key={`logo-b-${idx}`} className="flex-shrink-0 flex items-center justify-center">
+              <Image
+                src={cmsLogos[idx]?.src || logo.src}
+                alt={cmsLogos[idx]?.alt || logo.alt}
+                width={logo.width}
+                height={logo.height}
+                className="object-contain h-[80px] sm:h-[120px] lg:h-[150px] w-auto hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="mx-auto mt-8 flex w-full max-w-[681px] flex-col items-center gap-8 text-center">
-        <p className="max-w-[365px] font-[family-name:var(--font-funnel-display)] text-[13.3px] font-medium leading-relaxed tracking-[-0.004em] text-[#404040]">
-          {c?.description || t("description")}
+      {/* ── Footer text & button ── */}
+      <div className="max-w-[800px] mx-auto px-5 flex flex-col items-center text-center gap-8">
+        <p className="font-['Funnel_Display'] text-[14px] sm:text-[16px] text-[#404040] leading-relaxed max-w-[450px]">
+          {c?.description || "Through our diverse sister companies, we deliver value across every touchpoint of everyday life."}
         </p>
-        <Link
-          href="/gallery"
-          className="inline-flex h-[37px] items-center justify-center gap-[10.64px] rounded-full bg-[#23B349] px-[21px] py-[10.64px] font-[family-name:var(--font-funnel-display)] text-[15.96px] font-medium tracking-[-0.004em] text-white transition-colors hover:bg-[#1fa041]"
+        <Link 
+          href={c?.link || "/about#sister-companies"}
+          className="inline-flex items-center justify-center gap-2 bg-[#23B349] hover:bg-[#1d963c] text-white font-['Funnel_Display'] text-[14px] px-6 py-2 rounded-full transition-colors duration-300"
         >
-          <span>{c?.cta || t("cta")}</span>
-          <span className="font-[family-name:var(--font-outfit)] text-[13.3px] font-normal leading-none tracking-[-0.004em]">
-            →
-          </span>
+          {c?.cta || "See more"}
+          <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
     </section>

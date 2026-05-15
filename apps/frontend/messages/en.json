@@ -1319,6 +1319,7 @@
     "categories": {
       "all": "All Products",
       "biscuits": "Biscuits",
+      "biscuit": "Biscuits",
       "flour": "Flour"
     },
     "hero": {

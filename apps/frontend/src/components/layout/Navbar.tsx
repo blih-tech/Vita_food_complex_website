@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import type { MouseEvent as ReactMouseEvent } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, useRouter, usePathname } from "@frontend/navigation";
@@ -16,6 +16,14 @@ interface NavNewsItem {
   coverImage: string;
   publishedAt: string;
   category: string;
+}
+
+interface NavProductItem {
+  _id: string;
+  slug: string;
+  name: { en: string; am: string };
+  category: "Biscuit" | "Flour";
+  available?: boolean;
 }
 
 type NavKey =
@@ -35,7 +43,6 @@ const navLinks: { key: NavKey; href: string; hasDropdown?: boolean }[] = [
 
 export default function Navbar() {
   const t = useTranslations("Navbar");
-  const t_products = useTranslations("Products");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<NavKey | null>(null);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
@@ -47,6 +54,8 @@ export default function Navbar() {
   const [latestNews, setLatestNews] = useState<NavNewsItem[]>([]);
   const [recentUpdates, setRecentUpdates] = useState<NavNewsItem[]>([]);
   const [newsLoaded, setNewsLoaded] = useState(false);
+  const [menuProducts, setMenuProducts] = useState<NavProductItem[]>([]);
+  const [productsLoaded, setProductsLoaded] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -75,12 +84,34 @@ export default function Navbar() {
     }
   }, [activeDropdown, newsLoaded]);
 
+  useEffect(() => {
+    if (activeDropdown !== "products" || productsLoaded) return;
+    api
+      .get<NavProductItem[]>("/products")
+      .then((res) => {
+        const items = Array.isArray(res.data)
+          ? res.data.filter((p) => p.available !== false)
+          : [];
+        setMenuProducts(items);
+      })
+      .finally(() => setProductsLoaded(true));
+  }, [activeDropdown, productsLoaded]);
+
   const toggleDropdown = (key: NavKey) => {
     setActiveDropdown((prev) => (prev === key ? null : key));
   };
 
   const locale = useLocale();
   const searchParams = useSearchParams();
+  const isAm = locale === "am";
+  const biscuitProducts = useMemo(
+    () => menuProducts.filter((p) => p.category === "Biscuit"),
+    [menuProducts],
+  );
+  const flourProducts = useMemo(
+    () => menuProducts.filter((p) => p.category === "Flour"),
+    [menuProducts],
+  );
 
   // Language switcher function — toggles between en/am
   const handleLanguageSwitch = () => {
@@ -225,7 +256,7 @@ export default function Navbar() {
                       {link.key === "products" && (
                         <div className="flex flex-col">
                           {[
-                            { label: t("dropdowns.products.biscuits.label"), href: "/products?category=biscuits", desc: t("dropdowns.products.biscuits.desc") },
+                            { label: t("dropdowns.products.biscuits.label"), href: "/products?category=biscuit", desc: t("dropdowns.products.biscuits.desc") },
                             { label: t("dropdowns.products.flour.label"), href: "/products?category=flour", desc: t("dropdowns.products.flour.desc") },
                             { label: t("dropdowns.products.recipes.label"), href: "/recipes", desc: t("dropdowns.products.recipes.desc") },
                           ].map((item) => (
@@ -239,6 +270,18 @@ export default function Navbar() {
                             className="px-6 py-3 text-white/90 font-['Funnel_Display'] font-semibold text-[14px] flex items-center gap-2 hover:bg-white/10 transition-colors">
                             {t("dropdowns.products.viewAll")} <ArrowRight className="w-4 h-4" />
                           </Link>
+                          {menuProducts.slice(0, 6).map((product) => (
+                            <Link
+                              key={product._id}
+                              href={`/products/${product.slug}`}
+                              onClick={() => setMobileOpen(false)}
+                              className="px-6 py-3 flex flex-col border-t border-white/10 hover:bg-white/10 transition-colors"
+                            >
+                              <span className="text-white font-['Funnel_Display'] font-semibold text-[14px] line-clamp-1">
+                                {isAm ? product.name.am || product.name.en : product.name.en}
+                              </span>
+                            </Link>
+                          ))}
                         </div>
                       )}
 
@@ -389,7 +432,7 @@ export default function Navbar() {
                 <div className="flex flex-col gap-4 xl:gap-6 w-full xl:flex-1 xl:max-w-[340px]">
                   <div className="flex flex-col gap-2 xl:gap-3">
                     {[
-                      { label: t("dropdowns.products.biscuits.label"), desc: t("dropdowns.products.biscuits.desc"), href: "/products?category=biscuits", img: "/assets/products/biscuit-scatter.png", bg: "bg-gray-100" },
+                      { label: t("dropdowns.products.biscuits.label"), desc: t("dropdowns.products.biscuits.desc"), href: "/products?category=biscuit", img: "/assets/products/biscuit-scatter.png", bg: "bg-gray-100" },
                       { label: t("dropdowns.products.flour.label"), desc: t("dropdowns.products.flour.desc"), href: "/products?category=flour", img: "https://picsum.photos/100/100?random=81", bg: "bg-[#FFF6E5]" },
                       { label: t("dropdowns.products.recipes.label"), desc: t("dropdowns.products.recipes.desc"), href: "/recipes", img: "https://picsum.photos/100/100?random=82", bg: "bg-[#FFF0F0]" },
                     ].map((item) => (
@@ -414,21 +457,27 @@ export default function Navbar() {
                 {/* Product name lists — hidden at lg, shown at xl */}
                 <div className="hidden xl:flex gap-16 flex-1 border-l border-gray-100 pl-12">
                   <ul className="flex flex-col gap-4">
-                    {["zoo", "chewata", "oreo", "sina", "tafach-vanilla", "marie", "marie-cream"].map((id) => (
-                      <li key={id}>
-                        <Link href="/products" onClick={() => setActiveDropdown(null)}
-                          className="text-gray-600 hover:text-[#23B349] text-[16px] font-medium transition-colors">
-                          {t_products(`items.${id}.name`)}
+                    {biscuitProducts.slice(0, 7).map((product) => (
+                      <li key={product._id}>
+                        <Link
+                          href={`/products/${product.slug}`}
+                          onClick={() => setActiveDropdown(null)}
+                          className="text-gray-600 hover:text-[#23B349] text-[16px] font-medium transition-colors"
+                        >
+                          {isAm ? product.name.am || product.name.en : product.name.en}
                         </Link>
                       </li>
                     ))}
                   </ul>
                   <ul className="flex flex-col gap-4">
-                    {["bora", "cream", "glucose", "digestive", "tea-biscuit", "high-energy"].map((id) => (
-                      <li key={id}>
-                        <Link href="/products" onClick={() => setActiveDropdown(null)}
-                          className="text-gray-600 hover:text-[#23B349] text-[16px] font-medium transition-colors">
-                          {t_products(`items.${id}.name`)}
+                    {biscuitProducts.slice(7, 14).concat(flourProducts.slice(0, 7)).map((product) => (
+                      <li key={product._id}>
+                        <Link
+                          href={`/products/${product.slug}`}
+                          onClick={() => setActiveDropdown(null)}
+                          className="text-gray-600 hover:text-[#23B349] text-[16px] font-medium transition-colors"
+                        >
+                          {isAm ? product.name.am || product.name.en : product.name.en}
                         </Link>
                       </li>
                     ))}
@@ -437,7 +486,7 @@ export default function Navbar() {
 
                 {/* Featured card — hidden at lg, shown at xl */}
                 <div className="hidden xl:block flex-1 max-w-[280px]">
-                  <Link href="/products" onClick={() => setActiveDropdown(null)}
+                  <Link href={menuProducts[0] ? `/products/${menuProducts[0].slug}` : "/products"} onClick={() => setActiveDropdown(null)}
                     className="block bg-gray-50 rounded-[24px] p-4 flex flex-col gap-4 hover:shadow-lg transition-shadow group">
                     <div className="w-full aspect-4/3 bg-gray-200 rounded-xl relative overflow-hidden">
                       <Image src="/assets/products/figma/figma_prod_12.png" alt="Sina Biscuit" fill
@@ -446,7 +495,11 @@ export default function Navbar() {
                     <div>
                       <p className="text-[#23B349] text-[14px] font-bold uppercase tracking-wider mb-1">{t("dropdowns.products.specialEdition")}</p>
                       <h4 className="text-[#1A1A1A] font-['Funnel_Display'] text-[20px] font-bold group-hover:text-[#23B349] transition-colors">
-                        {t_products("items.sina.name")} {t_products("items.sina.name").toLowerCase().includes("biscuit") ? "" : "Biscuit"}
+                        {menuProducts[0]
+                          ? isAm
+                            ? menuProducts[0].name.am || menuProducts[0].name.en
+                            : menuProducts[0].name.en
+                          : t("dropdowns.products.viewAll")}
                       </h4>
                       <p className="text-gray-500 text-[14px] mt-2">{t("dropdowns.products.latestUpdates")}</p>
                     </div>

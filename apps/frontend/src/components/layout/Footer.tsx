@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { Link } from "@frontend/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { useEffect, useMemo, useState } from "react";
 import { useSettings } from "@/hooks/useSettings";
+import api from "@/lib/api";
 
 // Custom Social Icons since this version of Lucide doesn't include brand icons
 function FacebookIcon({ className, size = 24 }: { className?: string; size?: number }) {
@@ -115,8 +117,53 @@ function FooterColumn({ title, links }: FooterColumnProps) {
 
 export default function Footer() {
   const t = useTranslations("Footer");
-  const tProducts = useTranslations("Products");
   const { settings } = useSettings();
+  const locale = useLocale();
+  const [products, setProducts] = useState<
+    Array<{
+      _id: string;
+      slug: string;
+      name: { en: string; am: string };
+      category: "Biscuit" | "Flour";
+      available?: boolean;
+    }>
+  >([]);
+
+  useEffect(() => {
+    api
+      .get<
+        Array<{
+          _id: string;
+          slug: string;
+          name: { en: string; am: string };
+          category: "Biscuit" | "Flour";
+          available?: boolean;
+        }>
+      >("/products")
+      .then((res) => {
+        const items = Array.isArray(res.data)
+          ? res.data.filter((p) => p.available !== false)
+          : [];
+        setProducts(items);
+      })
+      .catch(() => setProducts([]));
+  }, []);
+
+  const [biscuitLinks, flourLinks] = useMemo(() => {
+    const biscuits = products
+      .filter((p) => p.category === "Biscuit")
+      .map((p) => ({
+        label: locale === "am" ? p.name.am || p.name.en : p.name.en,
+        href: `/products/${p.slug}`,
+      }));
+    const flour = products
+      .filter((p) => p.category === "Flour")
+      .map((p) => ({
+        label: locale === "am" ? p.name.am || p.name.en : p.name.en,
+        href: `/products/${p.slug}`,
+      }));
+    return [biscuits, flour];
+  }, [locale, products]);
 
   const socialLinks = [
     { icon: FacebookIcon, href: settings?.socialLinks?.facebook, label: "Facebook" },
@@ -128,23 +175,8 @@ export default function Footer() {
   ];
 
   const footerLinks = {
-    biscuits: [
-      { label: tProducts("items.zoo.name"), id: "zoo" },
-      { label: tProducts("items.chewata.name"), id: "chewata" },
-      { label: tProducts("items.marie.name"), id: "marie" },
-      { label: tProducts("items.marie-cream.name"), id: "marie-cream" },
-      { label: tProducts("items.tafach-vanilla.name"), id: "tafach-vanilla" },
-      { label: tProducts("items.oreo.name"), id: "oreo" },
-      { label: tProducts("items.bora.name"), id: "bora" },
-      { label: tProducts("items.cream.name"), id: "cream" },
-      { label: tProducts("items.digestive.name"), id: "digestive" },
-      { label: tProducts("items.glucose.name"), id: "glucose" },
-      { label: tProducts("items.tea-biscuit.name"), id: "tea-biscuit" },
-    ],
-    flour: [
-      { label: tProducts("items.all-purpose.name"), id: "all-purpose" },
-      { label: tProducts("items.burger-flour.name"), id: "burger-flour" },
-    ],
+    biscuits: biscuitLinks,
+    flour: flourLinks,
     company: [
       { label: t("links.investors"), href: "/about#investors" },
       { label: t("links.aboutUs"), href: "/about" },
@@ -264,11 +296,11 @@ export default function Footer() {
           <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-10">
             <FooterColumn
               title={t("columns.biscuits")}
-              links={footerLinks.biscuits.map(b => ({ label: b.label, href: `/products/${b.id}` }))}
+              links={footerLinks.biscuits}
             />
             <FooterColumn
               title={t("columns.flour")}
-              links={footerLinks.flour.map(f => ({ label: f.label, href: `/products/${f.id}` }))}
+              links={footerLinks.flour}
             />
             <FooterColumn title={t("columns.company")} links={footerLinks.company} />
             <FooterColumn title={t("columns.resources")} links={footerLinks.resources} />
