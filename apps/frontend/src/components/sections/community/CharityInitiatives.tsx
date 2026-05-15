@@ -21,10 +21,11 @@ export default function CharityInitiatives({ content, locale }: { content?: any;
     "/assets/community/community-hero-right.png",
   ];
 
-  const initiatives = c?.initiatives || (t.raw("initiatives") as any[]).map((item, idx) => ({
+  const rawInitiatives = c?.initiatives || t.raw("initiatives");
+  const initiatives = (Array.isArray(rawInitiatives) ? rawInitiatives : []).map((item, idx) => ({
     ...item,
-    image: staticImages[idx] || staticImages[0],
-    isFeatured: idx === 0
+    image: typeof item.image === "string" && item.image.trim() !== "" ? item.image : (staticImages[idx] || staticImages[0]),
+    isFeatured: item.isFeatured ?? idx === 0
   }));
 
   return (

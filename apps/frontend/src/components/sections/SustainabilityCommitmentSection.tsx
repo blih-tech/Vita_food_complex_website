@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { useState, useEffect, useRef } from "react";
+import { Check } from "lucide-react";
 
 export default function SustainabilityCommitmentSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Sustainability");
@@ -126,9 +127,7 @@ export default function SustainabilityCommitmentSection({ content, locale }: { c
             {commitmentsWithFrames.map((commitment: any, index: number) => (
               <div
                 key={commitment.key || index}
-                className="flex gap-[23.524px] min-h-[450px] sm:min-h-[500px] lg:min-h-[558.703px] items-center justify-center px-[clamp(16px,4vw,67.632px)] py-[23.524px] rounded-[24px] w-full relative group transition-all duration-300"
-                data-node-id={`274:${5243 + index}`}
-                data-name="card"
+                className="relative flex flex-col items-center justify-start p-4 sm:p-6 rounded-[24px] w-full min-h-[480px] sm:min-h-[500px] overflow-hidden group transition-all duration-300"
                 style={{
                   opacity: isVisible ? 1 : 0,
                   transform: isVisible ? "translateY(0)" : "translateY(20px)",
@@ -136,94 +135,41 @@ export default function SustainabilityCommitmentSection({ content, locale }: { c
                 }}
               >
                 {/* Background gradient and frame */}
-                <div
-                  className="absolute inset-0"
-                  data-node-id={`274:${5244 + index}`}
-                  data-name="yellow-abstract-bg"
-                >
-                  <div
-                    className="absolute inset-0 rounded-[17.643px]"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(145.96992870178786deg, rgb(233, 247, 237) 17.067%, rgb(35, 179, 73) 100%)",
-                    }}
-                    data-node-id={`274:${5245 + index}`}
+                <div 
+                  className="absolute inset-0 z-0 transition-opacity duration-500"
+                  style={{ backgroundImage: "linear-gradient(146deg, #e9f7ed 17%, #23b349 100%)" }}
+                />
+                
+                <div className="absolute inset-0 z-0 mix-blend-overlay opacity-20 pointer-events-none">
+                  <img
+                    alt=""
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    src={commitment.frame}
                   />
-                  <div
-                    className="absolute h-[clamp(280px,60%,430.789px)] left-1/2 top-[clamp(40px,15%,127.91px)] w-[90%] -translate-x-1/2"
-                    data-node-id={`274:${5246 + index}`}
-                    data-name="Frame"
-                  >
-                    <img
-                      alt=""
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      src={commitment.frame}
-                    />
-                  </div>
                 </div>
 
                 {/* Card content */}
-                <div
-                  className="bg-[#e9f7ed] border-[2px] sm:border-[2.941px] border-[#9adcab] border-solid flex flex-col min-h-[320px] sm:min-h-[350px] lg:min-h-[373.449px] items-center justify-center px-[clamp(12px,2vw,29.405px)] py-[clamp(12px,1.5vw,17.643px)] rounded-[22.054px] relative w-full"
-                  data-node-id={`274:${5250 + index}`}
-                >
-                  <div
-                    className="flex flex-col gap-[clamp(8px,1.5vw,23.524px)] items-center justify-center w-full"
-                    data-node-id={`274:${5251 + index}`}
-                  >
-                    {/* Card title */}
-                    <div
-                      className="flex flex-col items-center"
-                      data-node-id={`274:${5252 + index}`}
-                    >
-                      <h3
-                        className="font-[family-name:var(--font-funnel-display)] font-bold leading-none text-[#197f34]"
-                        style={{
-                          fontSize: "clamp(20px, 2.8vw, 32px)",
-                          letterSpacing: "-0.01em",
-                        }}
-                        data-node-id={`274:${5253 + index}`}
-                      >
-                        {commitment.title}
-                      </h3>
-                    </div>
+                <div className="relative z-10 w-full bg-[#e9f7ed] border-[3px] border-[#9adcab] rounded-[24px] p-6 sm:p-8 flex flex-col items-center shadow-sm">
+                  {/* Card title */}
+                  <h3 className="font-['Funnel_Display'] font-bold text-[24px] sm:text-[28px] text-[#197f34] mb-6 text-center">
+                    {commitment.title}
+                  </h3>
 
-                    {/* Card items */}
-                    <div
-                      className="flex flex-col gap-[clamp(4px,1vw,11.762px)] items-start w-full"
-                      data-node-id={`274:${5254 + index}`}
-                    >
-                      {commitment.items.map((item: string, itemIndex: number) => (
-                        <div
-                          key={itemIndex}
-                          className="bg-[rgba(255,249,242,0.74)] flex gap-[clamp(4px,1vw,11.762px)] items-center p-[clamp(4px,1vw,11.762px)] rounded-[8.822px] w-full"
-                          data-node-id={`274:${5255 + index * 4 + itemIndex}`}
-                        >
-                          {/* Vector icon */}
-                          <div
-                            className="relative w-[clamp(14px,2vw,23.524px)] h-[clamp(14px,2vw,23.524px)] flex-shrink-0"
-                            data-node-id={`274:${5256 + index * 4 + itemIndex}`}
-                            data-name="Vector"
-                          >
-                            <img
-                              alt=""
-                              className="absolute inset-0 w-full h-full object-contain"
-                              src={imgVector}
-                            />
-                          </div>
-                          <p
-                            className="font-[family-name:var(--font-outfit)] font-normal leading-normal text-[#333733]"
-                            style={{
-                              fontSize: "clamp(14px, 2vw, 24px)",
-                              letterSpacing: "-0.004em",
-                            }}
-                            data-node-id={`274:${5257 + index * 4 + itemIndex}`}
-                          >
-                            {item}
-                          </p>
+                  {/* Card items */}
+                  <div className="flex flex-col gap-3 w-full">
+                    {commitment.items.map((item: string, itemIndex: number) => (
+                      <div
+                        key={itemIndex}
+                        className="flex items-center gap-3 bg-white/95 px-3 py-2.5 sm:px-4 sm:py-3 rounded-[8px] w-full shadow-sm"
+                      >
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#197f34] flex items-center justify-center flex-shrink-0 shadow-sm">
+                          <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" strokeWidth={3} />
                         </div>
-                      ))}
-                    </div>
+                        <p className="font-['Outfit'] font-medium text-[14px] sm:text-[16px] text-[#333733] leading-tight">
+                          {item}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>

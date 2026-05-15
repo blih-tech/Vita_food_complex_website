@@ -112,13 +112,13 @@ export default function TestimonialSection({ content, locale }: { content?: any;
               className="relative flex w-[min(1040px,calc(100vw-8rem))] max-w-[1040px] shrink-0 flex-col gap-6 rounded-[48px] border border-white/15 bg-white/5 p-6 lg:flex-row lg:items-stretch lg:gap-10 lg:p-8"
             >
               <div className="relative mx-auto h-[280px] w-[260px] shrink-0 overflow-hidden rounded-[48px] sm:h-[320px] sm:w-[300px] lg:mx-0 lg:h-[339.72px] lg:w-[314.56px]">
-                <Image
-                  src={item.image}
-                  alt={item.author}
-                  fill
-                  className="object-cover"
-                  sizes="315px"
-                />
+                  <Image
+                    src={typeof item.image === "string" && item.image.trim() !== "" ? item.image : "/assets/about/story.png"}
+                    alt={item.author || "Testimonial"}
+                    fill
+                    className="object-cover"
+                    sizes="315px"
+                  />
               </div>
               <div className="flex min-w-0 flex-1 flex-col justify-center gap-4 text-left">
                 <p className="font-[family-name:var(--font-funnel-display)] text-[22px] font-normal leading-none tracking-[-0.004em] text-white md:text-[28px] lg:text-[32px]">
@@ -141,13 +141,13 @@ export default function TestimonialSection({ content, locale }: { content?: any;
           {current ? (
             <article className="flex flex-col gap-8 rounded-[48px] border border-white/15 bg-white/5 p-6">
               <div className="relative mx-auto aspect-[315/340] w-full max-w-[315px] overflow-hidden rounded-[48px]">
-                <Image
-                  src={current.image}
-                  alt={current.author}
-                  fill
-                  className="object-cover"
-                  sizes="315px"
-                />
+                  <Image
+                    src={typeof current.image === "string" && current.image.trim() !== "" ? current.image : "/assets/about/story.png"}
+                    alt={current.author || "Testimonial"}
+                    fill
+                    className="object-cover"
+                    sizes="315px"
+                  />
               </div>
               <div className="text-left">
                 <p className="mb-4 font-[family-name:var(--font-funnel-display)] text-[24px] font-normal leading-tight tracking-[-0.004em] text-white">
