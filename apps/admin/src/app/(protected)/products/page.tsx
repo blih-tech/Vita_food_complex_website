@@ -108,7 +108,6 @@ function emptyUploadFiles(): ProductUploadFiles {
     imageFile: null,
     tagIconFile: null,
     certificationFiles: [],
-    variationFiles: [],
   };
 }
 
@@ -703,7 +702,7 @@ function ProductModal({
                   onClick={() =>
                     onChange({
                       ...value,
-                      colorVariations: [...(value.colorVariations ?? []), { colorCode: "", bgColor: "", image: "" }],
+                      colorVariations: [...(value.colorVariations ?? []), { colorCode: "", bgColor: "" }],
                     })
                   }
                 >
@@ -734,35 +733,6 @@ function ProductModal({
                       }}
                     />
                   </div>
-                  <div className="flex-1 min-w-[200px] space-y-2">
-                    <input
-                      type="file"
-                      accept="image/*"
-                      className={`${inputCls}`}
-                      onChange={(e) => {
-                        const nextVarFiles = [...(files.variationFiles ?? [])];
-                        nextVarFiles[idx] = e.target.files?.[0] ?? null;
-                        onFilesChange({
-                          ...files,
-                          variationFiles: nextVarFiles,
-                        });
-                      }}
-                    />
-                    {(files.variationFiles?.[idx] || row.image) && (
-                      <div className="flex items-center gap-3">
-                        <img
-                          src={resolvePreviewUrl(files.variationFiles?.[idx] ?? null, row.image)}
-                          alt="Variation preview"
-                          className="w-12 h-12 rounded-lg object-contain border border-gray-200"
-                        />
-                        <p className="text-xs text-gray-500 truncate max-w-[120px]">
-                          {files.variationFiles?.[idx]
-                            ? `Selected`
-                            : "Current image"}
-                        </p>
-                      </div>
-                    )}
-                  </div>
                   <button
                     type="button"
                     className="p-2 rounded-lg text-red-500 hover:bg-red-50"
@@ -770,13 +740,6 @@ function ProductModal({
                       const next = [...(value.colorVariations ?? [])];
                       next.splice(idx, 1);
                       onChange({ ...value, colorVariations: next });
-                      
-                      const nextVarFiles = [...(files.variationFiles ?? [])];
-                      nextVarFiles.splice(idx, 1);
-                      onFilesChange({
-                        ...files,
-                        variationFiles: nextVarFiles,
-                      });
                     }}
                   >
                     <Trash2 size={16} />

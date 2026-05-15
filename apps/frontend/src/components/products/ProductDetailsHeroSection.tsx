@@ -19,7 +19,6 @@ export default function ProductHeroSection({
       : null;
 
   const currentBgColor = activeVariation ? activeVariation.bgColor : product.ui.bgColor;
-  const currentImage = activeVariation ? activeVariation.image : product.media.image;
   return (
     <section
       className="relative w-full overflow-hidden flex flex-col items-center pb-32 transition-colors duration-500"
@@ -63,7 +62,7 @@ export default function ProductHeroSection({
           </div>
 
           <Image
-            src={currentImage}
+            src={product.media.image}
             alt={product.name}
             fill
             className="object-contain drop-shadow-2xl hover:-translate-y-4 transition-all duration-500 scale-110 lg:scale-125 z-10"

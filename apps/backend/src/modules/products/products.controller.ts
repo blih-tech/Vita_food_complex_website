@@ -90,17 +90,6 @@ export class ProductsController {
         mutablePayload.content = content;
         continue;
       }
-
-      const varMatch = file.fieldname.match(/^variationImages\[(\d+)\]$/);
-      if (varMatch) {
-        const varIndex = Number(varMatch[1]);
-        const variations = (mutablePayload.colorVariations as Array<Record<string, unknown>> | undefined) ?? [];
-        if (variations[varIndex]) {
-          variations[varIndex].image = upload.url;
-        }
-        mutablePayload.colorVariations = variations;
-        continue;
-      }
     }
 
     return payload;

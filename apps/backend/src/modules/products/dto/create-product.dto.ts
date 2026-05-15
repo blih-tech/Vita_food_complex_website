@@ -136,9 +136,6 @@ class ColorVariationDto {
 
   @IsString()
   bgColor: string;
-
-  @IsString()
-  image: string;
 }
 
 export class CreateProductDto {

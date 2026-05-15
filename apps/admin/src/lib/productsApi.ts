@@ -48,7 +48,6 @@ export interface ProductContent {
 export interface ColorVariation {
   colorCode: string;
   bgColor: string;
-  image: string;
 }
 
 export interface ProductPayload {
@@ -73,7 +72,6 @@ export interface ProductUploadFiles {
   imageFile?: File | null;
   tagIconFile?: File | null;
   certificationFiles?: Array<File | null>;
-  variationFiles?: Array<File | null>;
 }
 
 function buildProductFormData(
@@ -92,11 +90,6 @@ function buildProductFormData(
   files?.certificationFiles?.forEach((file, idx) => {
     if (file) {
       formData.append(`certificationImages[${idx}]`, file);
-    }
-  });
-  files?.variationFiles?.forEach((file, idx) => {
-    if (file) {
-      formData.append(`variationImages[${idx}]`, file);
     }
   });
 

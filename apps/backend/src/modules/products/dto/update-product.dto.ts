@@ -155,10 +155,6 @@ class ColorVariationDto {
   @IsOptional()
   @IsString()
   bgColor?: string;
-
-  @IsOptional()
-  @IsString()
-  image?: string;
 }
 
 export class UpdateProductDto {

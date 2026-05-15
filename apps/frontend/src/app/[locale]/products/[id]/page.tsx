@@ -21,7 +21,7 @@ type ApiProduct = {
   category: "Biscuit" | "Flour";
   media: { image: string; tagIcon?: string };
   ui: { bgColor: string; textColor: string; nameColor: string };
-  colorVariations?: { colorCode: string; bgColor: string; image: string }[];
+  colorVariations?: { colorCode: string; bgColor: string }[];
   relatedProducts?: string[];
   content?: {
     description?: { en: string; am: string };

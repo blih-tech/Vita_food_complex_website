@@ -3,7 +3,6 @@ export type ProductCategory = "Biscuit" | "Flour";
 export interface ColorVariation {
   colorCode: string;
   bgColor: string;
-  image: string;
 }
 
 export interface Product {

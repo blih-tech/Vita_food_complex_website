@@ -95,9 +95,6 @@ class ColorVariationSchema {
 
   @Prop({ required: true })
   bgColor: string;
-
-  @Prop({ required: true })
-  image: string;
 }
 
 @Schema({ timestamps: true })
