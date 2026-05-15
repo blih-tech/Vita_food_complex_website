@@ -130,6 +130,17 @@ class ProductContentDto {
   certifications?: CertificationDto[];
 }
 
+class ColorVariationDto {
+  @IsString()
+  colorCode: string;
+
+  @IsString()
+  bgColor: string;
+
+  @IsString()
+  image: string;
+}
+
 export class CreateProductDto {
   @IsString()
   @Matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/i, {
@@ -155,6 +166,12 @@ export class CreateProductDto {
   @ValidateNested()
   @Type(() => ProductContentDto)
   content: ProductContentDto;
+
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @Type(() => ColorVariationDto)
+  @IsArray()
+  colorVariations?: ColorVariationDto[];
 
   @IsOptional()
   @IsArray()

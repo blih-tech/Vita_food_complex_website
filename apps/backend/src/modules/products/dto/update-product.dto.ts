@@ -147,6 +147,20 @@ class ProductContentDto {
   certifications?: CertificationDto[];
 }
 
+class ColorVariationDto {
+  @IsOptional()
+  @IsString()
+  colorCode?: string;
+
+  @IsOptional()
+  @IsString()
+  bgColor?: string;
+
+  @IsOptional()
+  @IsString()
+  image?: string;
+}
+
 export class UpdateProductDto {
   @IsOptional()
   @IsString()
@@ -178,6 +192,12 @@ export class UpdateProductDto {
   @ValidateNested()
   @Type(() => ProductContentDto)
   content?: ProductContentDto;
+
+  @IsOptional()
+  @ValidateNested({ each: true })
+  @Type(() => ColorVariationDto)
+  @IsArray()
+  colorVariations?: ColorVariationDto[];
 
   @IsOptional()
   @IsArray()

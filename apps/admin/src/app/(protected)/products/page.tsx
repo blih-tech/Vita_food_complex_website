@@ -36,6 +36,7 @@ type TabId =
   | "nutrition"
   | "ingredients"
   | "certs"
+  | "variations"
   | "related";
 
 type ProductsAdminTab = "page" | "cards";
@@ -54,6 +55,7 @@ function emptyForm(): ProductPayload {
       ingredients: { list: [], contains: [], mayContain: [] },
       certifications: [],
     },
+    colorVariations: [],
     relatedProducts: [],
     available: true,
   };
@@ -84,6 +86,7 @@ function itemToForm(item: ProductItem): ProductPayload {
       },
       certifications: item.content?.certifications ?? [],
     },
+    colorVariations: item.colorVariations ?? [],
     relatedProducts: item.relatedProducts ?? [],
     available: item.available ?? true,
   };
@@ -105,6 +108,7 @@ function emptyUploadFiles(): ProductUploadFiles {
     imageFile: null,
     tagIconFile: null,
     certificationFiles: [],
+    variationFiles: [],
   };
 }
 
@@ -183,6 +187,7 @@ function ProductModal({
     { id: "nutrition", label: "Nutrition" },
     { id: "ingredients", label: "Ingredients" },
     { id: "certs", label: "Certifications" },
+    { id: "variations", label: "Variations" },
     { id: "related", label: "Related" },
   ];
 
@@ -678,6 +683,99 @@ function ProductModal({
                       onFilesChange({
                         ...files,
                         certificationFiles: nextCertFiles,
+                      });
+                    }}
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {tab === "variations" && (
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-semibold text-[#333733]">Color Variations</span>
+                <button
+                  type="button"
+                  className="text-xs font-semibold text-[#23B349] px-2 py-1 rounded-lg bg-emerald-50"
+                  onClick={() =>
+                    onChange({
+                      ...value,
+                      colorVariations: [...(value.colorVariations ?? []), { colorCode: "", bgColor: "", image: "" }],
+                    })
+                  }
+                >
+                  + Add variation
+                </button>
+              </div>
+              {(value.colorVariations ?? []).map((row, idx) => (
+                <div key={idx} className="flex flex-wrap gap-2 items-start p-3 rounded-xl bg-gray-50 border border-gray-100">
+                  <div className="flex-1 space-y-2 min-w-[200px]">
+                    <input
+                      className={`${inputCls}`}
+                      placeholder="Dot Color (Hex or CSS)"
+                      value={row.colorCode}
+                      onChange={(e) => {
+                        const next = [...(value.colorVariations ?? [])];
+                        next[idx] = { ...row, colorCode: e.target.value };
+                        onChange({ ...value, colorVariations: next });
+                      }}
+                    />
+                    <input
+                      className={`${inputCls}`}
+                      placeholder="Background Color (Hex or Gradient)"
+                      value={row.bgColor}
+                      onChange={(e) => {
+                        const next = [...(value.colorVariations ?? [])];
+                        next[idx] = { ...row, bgColor: e.target.value };
+                        onChange({ ...value, colorVariations: next });
+                      }}
+                    />
+                  </div>
+                  <div className="flex-1 min-w-[200px] space-y-2">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className={`${inputCls}`}
+                      onChange={(e) => {
+                        const nextVarFiles = [...(files.variationFiles ?? [])];
+                        nextVarFiles[idx] = e.target.files?.[0] ?? null;
+                        onFilesChange({
+                          ...files,
+                          variationFiles: nextVarFiles,
+                        });
+                      }}
+                    />
+                    {(files.variationFiles?.[idx] || row.image) && (
+                      <div className="flex items-center gap-3">
+                        <img
+                          src={resolvePreviewUrl(files.variationFiles?.[idx] ?? null, row.image)}
+                          alt="Variation preview"
+                          className="w-12 h-12 rounded-lg object-contain border border-gray-200"
+                        />
+                        <p className="text-xs text-gray-500 truncate max-w-[120px]">
+                          {files.variationFiles?.[idx]
+                            ? `Selected`
+                            : "Current image"}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                  <button
+                    type="button"
+                    className="p-2 rounded-lg text-red-500 hover:bg-red-50"
+                    onClick={() => {
+                      const next = [...(value.colorVariations ?? [])];
+                      next.splice(idx, 1);
+                      onChange({ ...value, colorVariations: next });
+                      
+                      const nextVarFiles = [...(files.variationFiles ?? [])];
+                      nextVarFiles.splice(idx, 1);
+                      onFilesChange({
+                        ...files,
+                        variationFiles: nextVarFiles,
                       });
                     }}
                   >

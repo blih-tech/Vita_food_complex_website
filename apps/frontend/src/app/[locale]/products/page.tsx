@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { FeedbackSection } from "@frontend/components/sections/FeedbackSection";
+import FeedbackSection from "@frontend/components/sections/FeedbackSection";
 import { QualitySection } from "@frontend/components/sections/QualitySection";
 import { ProductsHeroSection } from "@frontend/components/products/ProductsHeroSection";
 import { DecorativeCookiesSection } from "@frontend/components/products/DecorativeCookiesSection";

@@ -88,6 +88,18 @@ class ProductContentSchema {
   certifications?: CertificationSchema[];
 }
 
+@Schema({ _id: false })
+class ColorVariationSchema {
+  @Prop({ required: true })
+  colorCode: string;
+
+  @Prop({ required: true })
+  bgColor: string;
+
+  @Prop({ required: true })
+  image: string;
+}
+
 @Schema({ timestamps: true })
 export class Product {
   @Prop({ required: true, unique: true })
@@ -120,6 +132,9 @@ export class Product {
 
   @Prop({ type: ProductContentSchema, required: true })
   content: ProductContentSchema;
+
+  @Prop({ type: [ColorVariationSchema], default: [] })
+  colorVariations?: ColorVariationSchema[];
 
   @Prop({ type: [{ type: Types.ObjectId, ref: Product.name }], default: [] })
   relatedProducts?: Types.ObjectId[];

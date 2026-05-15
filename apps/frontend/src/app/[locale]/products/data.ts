@@ -1,5 +1,11 @@
 export type ProductCategory = "Biscuit" | "Flour";
 
+export interface ColorVariation {
+  colorCode: string;
+  bgColor: string;
+  image: string;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -13,6 +19,7 @@ export interface Product {
     textColor: string;
     nameColor: string;
   };
+  colorVariations?: ColorVariation[];
   relatedProducts?: string[];
   content?: ProductContent;
 }

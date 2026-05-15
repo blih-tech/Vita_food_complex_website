@@ -388,6 +388,7 @@ const DEFAULT_PAGE: PageData = {
         },
         am: { subtitle: "አጋሮቻችን", heading: "በባለሙያዎች የታመነ", logos: [] },
       },
+    }
   ],
 };
 

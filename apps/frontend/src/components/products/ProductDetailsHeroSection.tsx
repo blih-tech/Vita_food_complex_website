@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { Product } from "@frontend/app/[locale]/products/data";
 
 interface ProductHeroSectionProps {
@@ -8,11 +11,20 @@ interface ProductHeroSectionProps {
 export default function ProductHeroSection({
   product,
 }: ProductHeroSectionProps) {
+  const [activeVariationIndex, setActiveVariationIndex] = useState<number | null>(null);
+
+  const activeVariation =
+    activeVariationIndex !== null && product.colorVariations
+      ? product.colorVariations[activeVariationIndex]
+      : null;
+
+  const currentBgColor = activeVariation ? activeVariation.bgColor : product.ui.bgColor;
+  const currentImage = activeVariation ? activeVariation.image : product.media.image;
   return (
     <section
-      className="relative w-full overflow-hidden flex flex-col items-center pb-20"
+      className="relative w-full overflow-hidden flex flex-col items-center pb-32 transition-colors duration-500"
       style={{
-        background: product.ui.bgColor,
+        background: currentBgColor,
         maskImage: `url('/wave-2.svg')`,
         WebkitMaskImage: `url('/wave-2.svg')`,
         maskSize: "cover",
@@ -51,10 +63,10 @@ export default function ProductHeroSection({
           </div>
 
           <Image
-            src={product.media.image}
+            src={currentImage}
             alt={product.name}
             fill
-            className="object-contain drop-shadow-2xl hover:-translate-y-4 transition-transform duration-500 scale-110 lg:scale-125 z-10"
+            className="object-contain drop-shadow-2xl hover:-translate-y-4 transition-all duration-500 scale-110 lg:scale-125 z-10"
             priority
           />
         </div>
@@ -66,6 +78,35 @@ export default function ProductHeroSection({
         >
           {product.content?.description ?? ""}
         </p>
+
+        {/* Color Variation Dots */}
+        {product.colorVariations && product.colorVariations.length > 0 && (
+          <div className="relative z-20 flex items-center justify-center gap-4 mt-8">
+            <button
+              onClick={() => setActiveVariationIndex(null)}
+              className={`w-8 h-8 rounded-full border-2 transition-all duration-300 ${
+                activeVariationIndex === null
+                  ? "border-white scale-125 shadow-lg"
+                  : "border-transparent hover:scale-110"
+              }`}
+              style={{ backgroundColor: product.ui.bgColor }}
+              aria-label="Default color"
+            />
+            {product.colorVariations.map((variation, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveVariationIndex(idx)}
+                className={`w-8 h-8 rounded-full border-2 transition-all duration-300 ${
+                  activeVariationIndex === idx
+                    ? "border-white scale-125 shadow-lg"
+                    : "border-transparent hover:scale-110"
+                }`}
+                style={{ backgroundColor: variation.colorCode }}
+                aria-label={`Color variation ${idx + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

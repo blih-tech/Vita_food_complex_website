@@ -45,6 +45,12 @@ export interface ProductContent {
   certifications?: Certification[];
 }
 
+export interface ColorVariation {
+  colorCode: string;
+  bgColor: string;
+  image: string;
+}
+
 export interface ProductPayload {
   slug: string;
   name: LocalizedText;
@@ -52,6 +58,7 @@ export interface ProductPayload {
   media: { image: string; tagIcon?: string };
   ui: { bgColor: string; textColor: string; nameColor: string };
   content: ProductContent;
+  colorVariations?: ColorVariation[];
   relatedProducts?: string[];
   available?: boolean;
 }
@@ -66,6 +73,7 @@ export interface ProductUploadFiles {
   imageFile?: File | null;
   tagIconFile?: File | null;
   certificationFiles?: Array<File | null>;
+  variationFiles?: Array<File | null>;
 }
 
 function buildProductFormData(
@@ -84,6 +92,11 @@ function buildProductFormData(
   files?.certificationFiles?.forEach((file, idx) => {
     if (file) {
       formData.append(`certificationImages[${idx}]`, file);
+    }
+  });
+  files?.variationFiles?.forEach((file, idx) => {
+    if (file) {
+      formData.append(`variationImages[${idx}]`, file);
     }
   });
 
