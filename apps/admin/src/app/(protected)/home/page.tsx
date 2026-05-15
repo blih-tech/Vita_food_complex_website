@@ -90,6 +90,11 @@ const SECTION_META: Record<
     icon: Award,
     description: "Certifications and partners section header",
   },
+  "sister-companies": {
+    name: "Sister Companies",
+    icon: Globe,
+    description: "Sister companies logos and texts",
+  },
 };
 
 // ── Default page data ──────────────────────────────────────────────────────
@@ -313,6 +318,28 @@ const DEFAULT_PAGE: PageData = {
         am: { subtitle: "አጋሮቻችን", heading: "በባለሙያዎች የታመነ", logos: [] },
       },
     },
+    {
+      id: "sister-companies",
+      type: "sister-companies",
+      content: {
+        en: {
+          subtitle: "Sister Companies",
+          heading: "Different Experiences",
+          description: "Through our diverse sister companies, we deliver value across every touchpoint of everyday life.",
+          cta: "See more",
+          link: "/about#sister-companies",
+          logos: []
+        },
+        am: {
+          subtitle: "እህት ኩባንያዎች",
+          heading: "የተለያዩ ልምዶች",
+          description: "በእህት ኩባንያዎቻችን አማካኝነት በየዕለቱ ለሚኖሩን የተለያዩ ልምዶች እሴት እንጨምራለን።",
+          cta: "ተጨማሪ ይመልከቱ",
+          link: "/about#sister-companies",
+          logos: []
+        }
+      }
+    }
   ],
 };
 
@@ -985,6 +1012,164 @@ function EditModal({
                                 next[lng].logos[i] = {
                                   ...(next[lng].logos[i] || {}),
                                   url,
+                                };
+                              });
+                              return next;
+                            });
+                          })
+                        }
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      case "sister-companies": {
+        const logos: { alt: string; src: string }[] = form.en?.logos || [];
+
+        const addLogo = () => {
+          setForm((prev: any) => {
+            const next = JSON.parse(JSON.stringify(prev));
+            (["en", "am"] as const).forEach((lng) => {
+              if (!next[lng]) next[lng] = {};
+              if (!next[lng].logos) next[lng].logos = [...logos];
+              next[lng].logos.push({ alt: "", src: "" });
+            });
+            return next;
+          });
+        };
+
+        const removeLogo = (index: number) => {
+          setForm((prev: any) => {
+            const next = JSON.parse(JSON.stringify(prev));
+            (["en", "am"] as const).forEach((lng) => {
+              if (next[lng] && next[lng].logos) {
+                next[lng].logos.splice(index, 1);
+              }
+            });
+            return next;
+          });
+        };
+        return (
+          <div className="space-y-4">
+            <div>
+              {L("Subtitle")}
+              <input
+                className={inputCls}
+                value={form[l]?.subtitle || ""}
+                onChange={(e) => set([l, "subtitle"], e.target.value)}
+              />
+            </div>
+            <div>
+              {L("Heading")}
+              <input
+                className={inputCls}
+                value={form[l]?.heading || ""}
+                onChange={(e) => set([l, "heading"], e.target.value)}
+              />
+            </div>
+            <div>
+              {L("Description")}
+              <textarea
+                rows={3}
+                className={textareaCls}
+                value={form[l]?.description || ""}
+                onChange={(e) => set([l, "description"], e.target.value)}
+              />
+            </div>
+            <div>
+              {L("CTA Button Text")}
+              <input
+                className={inputCls}
+                value={form[l]?.cta || ""}
+                onChange={(e) => set([l, "cta"], e.target.value)}
+              />
+            </div>
+            <div>
+              {L("CTA Button Link")}
+              <input
+                className={inputCls}
+                value={form[l]?.link || ""}
+                onChange={(e) => set([l, "link"], e.target.value)}
+              />
+            </div>
+            <div className="border-t border-gray-100 pt-4">
+              <div className="flex items-center justify-between mb-3">
+                <p className={labelCls}>Company Logos</p>
+                <button
+                  type="button"
+                  onClick={addLogo}
+                  className="text-xs bg-[#23B349] text-white px-3 py-1.5 rounded-[10px] font-medium"
+                >
+                  + Add Logo
+                </button>
+              </div>
+              <div className="space-y-3">
+                {logos.map((logo: any, i: number) => (
+                  <div
+                    key={i}
+                    className="bg-gray-50 rounded-[10px] p-3 space-y-2 relative"
+                  >
+                    <div className="flex items-center justify-between">
+                      <p className="text-xs font-bold text-gray-400 uppercase">
+                        Company {i + 1}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => removeLogo(i)}
+                        className="text-xs text-red-500 hover:text-red-700 font-medium"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                    <div>
+                      <label className="text-xs text-gray-500 mb-0.5 block">
+                        Alt Text
+                      </label>
+                      <input
+                        className={inputCls}
+                        value={logo.alt || ""}
+                        onChange={(e) => {
+                          const altVal = e.target.value;
+                          setForm((prev: any) => {
+                            const next = JSON.parse(JSON.stringify(prev));
+                            (["en", "am"] as const).forEach((lng) => {
+                              if (!next[lng]) next[lng] = {};
+                              if (!next[lng].logos)
+                                next[lng].logos = [...logos];
+                              next[lng].logos[i] = {
+                                ...(next[lng].logos[i] || {}),
+                                alt: altVal,
+                              };
+                            });
+                            return next;
+                          });
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs text-gray-500 mb-0.5 block">
+                        Logo Image
+                      </label>
+                      <ImageUploadField
+                        uploadKey={`sisterLogo${i}`}
+                        currentUrl={logo.src || ""}
+                        uploading={uploading === `sisterLogo${i}`}
+                        onFileSelected={(file) =>
+                          uploadImage(`sisterLogo${i}`, file, (url) => {
+                            setForm((prev: any) => {
+                              const next = JSON.parse(JSON.stringify(prev));
+                              (["en", "am"] as const).forEach((lng) => {
+                                if (!next[lng]) next[lng] = {};
+                                if (!next[lng].logos)
+                                  next[lng].logos = [...logos];
+                                next[lng].logos[i] = {
+                                  ...(next[lng].logos[i] || {}),
+                                  src: url,
                                 };
                               });
                               return next;

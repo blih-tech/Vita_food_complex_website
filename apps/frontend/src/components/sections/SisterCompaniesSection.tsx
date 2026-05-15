@@ -5,16 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-const SISTER_COMPANIES = [
-  { alt: "Belayab Food & Feed", src: "/assets/sister/foods.svg", width: 234, height: 234 },
-  { alt: "Golden Tulip", src: "/assets/sister/golden-tulip.svg", width: 240, height: 240 },
-  { alt: "Long Tea", src: "/assets/sister/long-tea-logo.png", width: 400, height: 132 },
-  { alt: "Lewis Retails", src: "/assets/sister/lewis.svg", width: 500, height: 178 },
-  { alt: "Belayab Motors", src: "/assets/sister/motors.svg", width: 234, height: 234 },
-  { alt: "Belayab Cables", src: "/assets/sister/cables.svg", width: 234, height: 234 },
-  { alt: "Limestone", src: "/assets/sister/limestone.svg", width: 205, height: 250 },
-];
-
 export default function SisterCompaniesSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("About.sisterCompanies");
   const c = content?.[locale as string] || content?.en;
@@ -34,38 +24,50 @@ export default function SisterCompaniesSection({ content, locale }: { content?: 
       </div>
 
       {/* ── Logos Marquee ── */}
-      <div className="relative w-full overflow-hidden py-8 mb-12">
-        {/* Fades for smooth entry/exit */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent" />
+      {cmsLogos.length > 0 && (
+        <div className="relative w-full overflow-hidden py-8 mb-12">
+          {/* Fades for smooth entry/exit */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent" />
+          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent" />
 
-        <div className="flex items-center animate-marquee whitespace-nowrap" style={{ gap: '200px' }}>
-          {/* First Set */}
-          {SISTER_COMPANIES.map((logo, idx) => (
-            <div key={`logo-a-${idx}`} className="flex-shrink-0 flex items-center justify-center">
-              <Image
-                src={cmsLogos[idx]?.src || logo.src}
-                alt={cmsLogos[idx]?.alt || logo.alt}
-                width={logo.width}
-                height={logo.height}
-                className="object-contain h-[80px] sm:h-[120px] lg:h-[150px] w-auto hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-          ))}
-          {/* Duplicate Set for seamless looping */}
-          {SISTER_COMPANIES.map((logo, idx) => (
-            <div key={`logo-b-${idx}`} className="flex-shrink-0 flex items-center justify-center">
-              <Image
-                src={cmsLogos[idx]?.src || logo.src}
-                alt={cmsLogos[idx]?.alt || logo.alt}
-                width={logo.width}
-                height={logo.height}
-                className="object-contain h-[80px] sm:h-[120px] lg:h-[150px] w-auto hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-          ))}
+          <div className="flex items-center animate-marquee whitespace-nowrap" style={{ gap: '200px' }}>
+            {/* First Set */}
+            {cmsLogos.map((logo, idx) => (
+              <div key={`logo-a-${idx}`} className="flex-shrink-0 flex flex-col items-center justify-center gap-4">
+                <Image
+                  src={logo.src || ""}
+                  alt={logo.alt || `Sister Company ${idx + 1}`}
+                  width={240}
+                  height={240}
+                  className="object-contain h-[80px] sm:h-[120px] lg:h-[150px] w-auto hover:scale-105 transition-transform duration-500"
+                />
+                {logo.alt && (
+                  <p className="font-['Outfit'] font-semibold text-[16px] text-[#404040] tracking-wide">
+                    {logo.alt}
+                  </p>
+                )}
+              </div>
+            ))}
+            {/* Duplicate Set for seamless looping */}
+            {cmsLogos.map((logo, idx) => (
+              <div key={`logo-b-${idx}`} className="flex-shrink-0 flex flex-col items-center justify-center gap-4">
+                <Image
+                  src={logo.src || ""}
+                  alt={logo.alt || `Sister Company ${idx + 1}`}
+                  width={240}
+                  height={240}
+                  className="object-contain h-[80px] sm:h-[120px] lg:h-[150px] w-auto hover:scale-105 transition-transform duration-500"
+                />
+                {logo.alt && (
+                  <p className="font-['Outfit'] font-semibold text-[16px] text-[#404040] tracking-wide">
+                    {logo.alt}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* ── Footer text & button ── */}
       <div className="max-w-[800px] mx-auto px-5 flex flex-col items-center text-center gap-8">
