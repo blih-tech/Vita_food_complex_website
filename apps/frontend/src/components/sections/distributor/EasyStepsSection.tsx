@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Phone, MessageSquare, Rocket } from "lucide-react";
+import { Laptop, MessageCircle, Rocket } from "lucide-react";
 import type { ReactNode } from "react";
 
 interface StepProps {
@@ -52,12 +52,12 @@ function StepCard({ icon, title, description }: StepProps) {
         <p
           className="text-center"
           style={{
-            fontFamily: "var(--font-funnel-display), 'Funnel Display', sans-serif",
-            fontWeight: 500,
-            fontSize: "clamp(16px, 1.5vw, 20px)",
-            lineHeight: "25px",
-            letterSpacing: "-0.004em",
-            color: "#423D3D",
+            fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
+            fontWeight: 400,
+            fontSize: "clamp(14px, 1.2vw, 16px)",
+            lineHeight: "1.4",
+            color: "#404040",
+            maxWidth: "280px"
           }}
         >
           {description}
@@ -72,19 +72,19 @@ export default function EasyStepsSection({ content }: { content?: EasyStepsConte
 
   const steps = [
     {
-      icon: <Phone size={36} strokeWidth={2} color="#23B349" />,
-      title: content?.call?.title || t("steps.call.title"),
-      description: content?.call?.description || t("steps.call.description"),
+      icon: <Laptop size={42} strokeWidth={2} color="#23B349" />,
+      title: content?.call?.title || "Fill Out Our partnership Form",
+      description: content?.call?.description || "Please complete the form below to get in touch with us",
     },
     {
-      icon: <MessageSquare size={42} strokeWidth={2} color="#23B349" fill="#23B349" />,
-      title: content?.discussion?.title || t("steps.discussion.title"),
-      description: content?.discussion?.description || t("steps.discussion.description"),
+      icon: <MessageCircle size={48} strokeWidth={2} color="#ffffff" fill="#23B349" />,
+      title: content?.discussion?.title || "Quick Discussion",
+      description: content?.discussion?.description || "We understand your location and business",
     },
     {
-      icon: <Rocket size={42} strokeWidth={2} color="#23B349" />,
-      title: content?.started?.title || t("steps.started.title"),
-      description: content?.started?.description || t("steps.started.description"),
+      icon: <Rocket size={48} strokeWidth={2} color="#ffffff" fill="#23B349" />,
+      title: content?.started?.title || "Get Started",
+      description: content?.started?.description || "Receive guidance and begin distribution",
     },
   ];
 
@@ -111,12 +111,12 @@ export default function EasyStepsSection({ content }: { content?: EasyStepsConte
             style={{
               fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
               fontWeight: 400,
-              fontSize: "clamp(18px, 2vw, 32px)",
+              fontSize: "clamp(18px, 2vw, 24px)",
               lineHeight: "1.5",
               color: "#333733",
             }}
           >
-            {content?.subtitle || t("steps.subtitle")}
+            {content?.subtitle || "Simple Process"}
           </p>
         </div>
 
@@ -132,9 +132,9 @@ export default function EasyStepsSection({ content }: { content?: EasyStepsConte
           >
             <path
               d="M0 42 C94 0, 283 0, 377 42"
-              stroke="#333733"
-              strokeWidth="1.52"
-              strokeDasharray="8 6"
+              stroke="#A8A8A8"
+              strokeWidth="1.5"
+              strokeDasharray="6 6"
               fill="none"
             />
           </svg>
@@ -148,9 +148,9 @@ export default function EasyStepsSection({ content }: { content?: EasyStepsConte
           >
             <path
               d="M0 0 C94 42, 283 42, 377 0"
-              stroke="#333733"
-              strokeWidth="1.52"
-              strokeDasharray="8 6"
+              stroke="#A8A8A8"
+              strokeWidth="1.5"
+              strokeDasharray="6 6"
               fill="none"
             />
           </svg>

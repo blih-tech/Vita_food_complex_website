@@ -71,7 +71,7 @@ export default async function BecomeDistributorPage({ params }: BecomeDistributo
     ["distributor-easy-steps", "distributor-steps"],
     locale,
   );
-  const contactContent = getLocalizedSectionContent(cmsPage, "distributor-contact", locale);
+
 
   return (
     <main className="flex flex-col">
@@ -87,9 +87,7 @@ export default async function BecomeDistributorPage({ params }: BecomeDistributo
       <EasyStepsSection
         content={stepsContent as { title?: string; subtitle?: string; call?: { title?: string; description?: string }; discussion?: { title?: string; description?: string }; started?: { title?: string; description?: string } } | undefined}
       />
-      <ContactDistributionSection
-        content={contactContent as { title?: string; description?: string; offices?: Array<{ name?: string; phone?: string; address?: string; coverage?: string }> } | undefined}
-      />
+      <ContactDistributionSection />
     </main>
   );
 }

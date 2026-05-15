@@ -1,210 +1,164 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Building2, Phone, MapPin } from "lucide-react";
+import { ClipboardList, MapPin, Package } from "lucide-react";
 
-interface OfficeContactProps {
-  officeName: string;
-  phone: string;
-  address: string;
-  coverage: string;
-}
-
-interface ContactContent {
-  title?: string;
-  description?: string;
-  offices?: Array<{
-    name?: string;
-    phone?: string;
-    address?: string;
-    coverage?: string;
-  }>;
-}
-
-function OfficeContactCard({ officeName, phone, address, coverage }: OfficeContactProps) {
-  return (
-    <div className="flex flex-col gap-3">
-      {/* Office name */}
-      <div className="flex items-center gap-3">
-        <Building2 size={24} color="#333733" strokeWidth={1.5} />
-        <span
-          style={{
-            fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
-            fontWeight: 500,
-            fontSize: 16,
-            lineHeight: "1",
-            letterSpacing: "-0.004em",
-            color: "#333733",
-          }}
-        >
-          {officeName}
-        </span>
-      </div>
-
-      {/* Phone */}
-      <div className="flex items-center gap-3">
-        <Phone size={24} color="#23B349" strokeWidth={1.5} />
-        <span
-          style={{
-            fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
-            fontWeight: 500,
-            fontSize: 16,
-            lineHeight: "1",
-            letterSpacing: "-0.004em",
-            color: "#23B349",
-          }}
-        >
-          {phone}
-        </span>
-      </div>
-
-      {/* Address */}
-      <div className="flex items-center gap-3">
-        <MapPin size={24} color="#333733" strokeWidth={1.5} />
-        <span
-          style={{
-            fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
-            fontWeight: 400,
-            fontSize: 14,
-            lineHeight: "1",
-            letterSpacing: "-0.004em",
-            color: "#666",
-          }}
-        >
-          {address}
-        </span>
-      </div>
-
-      {/* Coverage */}
-      <div className="flex items-center gap-3">
-        <MapPin size={24} color="#333733" strokeWidth={1.5} />
-        <span
-          style={{
-            fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
-            fontWeight: 400,
-            fontSize: 14,
-            lineHeight: "1",
-            letterSpacing: "-0.004em",
-            color: "#666",
-          }}
-        >
-          {coverage}
-        </span>
-      </div>
-    </div>
-  );
-}
-
-export default function ContactDistributionSection({ content }: { content?: ContactContent }) {
+export default function ContactDistributionSection() {
   const t = useTranslations("Distributor");
-  const fallbackOffices = [
-    {
-      officeName: t("contact.offices.0.name"),
-      phone: t("contact.offices.0.phone"),
-      address: t("contact.offices.0.address"),
-      coverage: t("contact.offices.0.coverage"),
-    },
-    {
-      officeName: t("contact.offices.1.name"),
-      phone: t("contact.offices.1.phone"),
-      address: t("contact.offices.1.address"),
-      coverage: t("contact.offices.1.coverage"),
-    },
-    {
-      officeName: t("contact.offices.2.name"),
-      phone: t("contact.offices.2.phone"),
-      address: t("contact.offices.2.address"),
-      coverage: t("contact.offices.2.coverage"),
-    },
-  ];
-  const offices =
-    content?.offices?.length
-      ? content.offices.map((office) => ({
-          officeName: office.name || "",
-          phone: office.phone || "",
-          address: office.address || "",
-          coverage: office.coverage || "",
-        }))
-      : fallbackOffices;
 
   return (
-    <section
-      id="contact-form"
-      className="w-full bg-white scroll-mt-20 py-12 lg:py-20"
-    >
-      <div className="mx-auto max-w-[1114px] px-4 sm:px-6">
-        {/* Card container */}
-        <div
-          className="relative overflow-hidden rounded-[48px] lg:min-h-[520px]"
-          style={{
-            background: "#FDFDFD",
-            border: "1px solid #23B349",
-            boxShadow: "0px 0px 65px 33px rgba(0, 0, 0, 0.03)",
-          }}
-        >
-          <div className="flex flex-col lg:flex-row lg:items-stretch">
-            {/* Left inset frame (Figma: x=17, y=11, radius=48) */}
-            <div className="w-full lg:flex-none lg:w-[457px] lg:pl-[17px] lg:py-[11px]">
-              {/* Left green panel */}
-              <div
-                className="relative flex flex-col items-start justify-start gap-6 overflow-hidden rounded-[48px] border border-[#23B349] w-full p-8 sm:p-10 lg:p-[64px_40px] min-h-[260px] sm:min-h-[320px] lg:min-h-[498px] lg:h-full"
-                style={{
-                  background:
-                    "linear-gradient(170.79deg, #23B349 46.23%, rgba(35, 179, 73, 0.37) 101.23%)",
-                }}
-              >
-                {/* Dot pattern overlay */}
-                <div
-                  className="absolute inset-0 opacity-20 pointer-events-none"
-                  style={{
-                    backgroundImage:
-                      "radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px)",
-                    backgroundSize: "12px 12px",
-                  }}
-                />
+    <section className="w-full bg-white py-16 lg:py-24" id="contact-form">
+      <div className="mx-auto flex flex-col lg:flex-row items-start lg:justify-between gap-12 lg:gap-16 max-w-[1920px] px-4 sm:px-6 lg:px-[128px]">
+        {/* Left Side: Text */}
+        <div className="flex flex-col gap-6 w-full lg:max-w-[545px]">
+          <h2
+            style={{
+              fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
+              fontWeight: 800,
+              fontSize: "clamp(48px, 6vw, 80px)",
+              lineHeight: "0.9",
+              letterSpacing: "-0.02em",
+              color: "#23B349",
+            }}
+          >
+            Apply for Distribution Partnership
+          </h2>
+          <p
+            style={{
+              fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
+              fontWeight: 500,
+              fontSize: "clamp(16px, 2vw, 20px)",
+              lineHeight: "1.25",
+              letterSpacing: "-0.004em",
+              color: "#404040",
+            }}
+          >
+            Submit your business profile to become an authorized distributor. Every application is carefully reviewed to ensure strong partnership alignment.
+          </p>
+        </div>
 
-                {/* Title */}
-                <h3
-                  className="relative z-10"
-                  style={{
-                    fontFamily:
-                      "var(--font-funnel-display), 'Funnel Display', sans-serif",
-                    fontWeight: 400,
-                    fontSize: "clamp(28px, 3.5vw, 48px)",
-                    lineHeight: "1",
-                    letterSpacing: "-0.01em",
-                    color: "#FFFFFF",
-                    maxWidth: 400,
-                  }}
-                >
-                  {content?.title || t("contact.title")}
-                </h3>
-
-                {/* Description */}
-                <p
-                  className="relative z-10"
-                  style={{
-                    fontFamily: "var(--font-outfit), 'Outfit', sans-serif",
-                    fontWeight: 400,
-                    fontSize: "clamp(16px, 1.5vw, 24px)",
-                    lineHeight: "1.5",
-                    letterSpacing: "-0.004em",
-                    color: "#E8E8E8",
-                    maxWidth: 400,
-                  }}
-                >
-                  {content?.description || t("contact.description")}
-                </p>
+        {/* Right Side: Form */}
+        <div className="w-full lg:w-[896px] bg-white border border-[#E8E8E8] shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)] rounded-[10px] p-6 sm:p-8 flex flex-col gap-10">
+          
+          {/* Section 1: Business Information */}
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center w-8 h-8 bg-[#C8F7D5] rounded-[10px]">
+                <ClipboardList size={18} color="#23B349" strokeWidth={2.5} />
               </div>
+              <h3 
+                className="font-medium text-[24px] text-[#333733] tracking-[-0.004em]"
+                style={{ fontFamily: "var(--font-funnel-display), 'Funnel Display', sans-serif" }}
+              >
+                1. Business Information
+              </h3>
             </div>
-
-            {/* Right contact list */}
-            <div className="flex flex-col justify-start gap-6 sm:gap-8 lg:gap-8 p-6 sm:p-8 lg:p-[56px_40px] flex-1 border-t border-[#23B349]/10 lg:border-t-0 lg:h-full">
-              {offices.map((office, idx) => (
-                <OfficeContactCard key={idx} {...office} />
-              ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <label className="flex flex-col gap-2">
+                <span className="text-[16px] text-[#404040]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>Business Name *</span>
+                <input type="text" placeholder="Enter your business name" className="border border-[#D1D5DC] rounded-[10px] p-3 text-[16px] placeholder:text-[#8A8C8A] focus:outline-none focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }} />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-[16px] text-[#404040]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>Business Type *</span>
+                <input type="text" placeholder="e.g., LLC, Corporation" className="border border-[#D1D5DC] rounded-[10px] p-3 text-[16px] placeholder:text-[#8A8C8A] focus:outline-none focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }} />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-[16px] text-[#404040]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>Business ID *</span>
+                <input type="text" placeholder="Enter business ID" className="border border-[#D1D5DC] rounded-[10px] p-3 text-[16px] placeholder:text-[#8A8C8A] focus:outline-none focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }} />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-[16px] text-[#404040]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>Business Contact Person *</span>
+                <input type="text" placeholder="Contact person name" className="border border-[#D1D5DC] rounded-[10px] p-3 text-[16px] placeholder:text-[#8A8C8A] focus:outline-none focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }} />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-[16px] text-[#404040]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>Phone Number *</span>
+                <input type="tel" placeholder="+1 (555) 000-0000" className="border border-[#D1D5DC] rounded-[10px] p-3 text-[16px] placeholder:text-[#8A8C8A] focus:outline-none focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }} />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-[16px] text-[#404040]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>Email Address *</span>
+                <input type="email" placeholder="email@example.com" className="border border-[#D1D5DC] rounded-[10px] p-3 text-[16px] placeholder:text-[#8A8C8A] focus:outline-none focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }} />
+              </label>
             </div>
           </div>
+
+          {/* Section 2: Location Details */}
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center w-8 h-8 bg-[#D2FFD6] rounded-[10px]">
+                <MapPin size={18} color="#23B349" strokeWidth={2.5} />
+              </div>
+              <h3 
+                className="font-medium text-[24px] text-[#333733] tracking-[-0.004em]"
+                style={{ fontFamily: "var(--font-funnel-display), 'Funnel Display', sans-serif" }}
+              >
+                2. Location Details
+              </h3>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <label className="flex flex-col gap-2">
+                <span className="text-[16px] text-[#404040]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>Warehouse Address *</span>
+                <input type="text" placeholder="Enter warehouse address" className="border border-[#D1D5DC] rounded-[10px] p-3 text-[16px] placeholder:text-[#8A8C8A] focus:outline-none focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }} />
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-[16px] text-[#404040]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>City *</span>
+                <input type="text" placeholder="Enter city" className="border border-[#D1D5DC] rounded-[10px] p-3 text-[16px] placeholder:text-[#8A8C8A] focus:outline-none focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }} />
+              </label>
+              <label className="flex flex-col gap-2 sm:col-span-2">
+                <span className="text-[16px] text-[#404040]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>Full Address *</span>
+                <input type="text" placeholder="Enter full address" className="border border-[#D1D5DC] rounded-[10px] p-3 text-[16px] placeholder:text-[#8A8C8A] focus:outline-none focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }} />
+              </label>
+              <label className="flex flex-col gap-2 sm:col-span-2">
+                <span className="text-[16px] text-[#404040]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>Additional Note</span>
+                <textarea rows={3} placeholder="Add any additional notes here (optional)" className="border border-[#D1D5DC] rounded-[10px] p-3 text-[16px] placeholder:text-[#8A8C8A] resize-none focus:outline-none focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }} />
+              </label>
+            </div>
+          </div>
+
+          {/* Section 3: Products Interest */}
+          <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <div className="flex items-center justify-center w-8 h-8 bg-[#D3FFDB] rounded-[10px]">
+                  <Package size={18} color="#23B349" strokeWidth={2.5} />
+                </div>
+                <h3 
+                  className="font-medium text-[24px] text-[#333733] tracking-[-0.004em]"
+                  style={{ fontFamily: "var(--font-funnel-display), 'Funnel Display', sans-serif" }}
+                >
+                  3. Products Interest
+                </h3>
+              </div>
+              <p className="font-normal text-[14px] text-[#333733]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>
+                Select the product categories you are interested in distributing
+              </p>
+            </div>
+            
+            <div className="flex flex-col gap-3">
+              <span className="text-[16px] text-[#404040]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>Product Categories *</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <label className="flex items-center gap-3 border border-[#E5E7EB] rounded-[10px] p-3 cursor-pointer hover:border-[#23B349] transition-colors">
+                  <input type="checkbox" className="w-4 h-4 rounded-[2px] border-[#8A8C8A] text-[#23B349] focus:ring-[#23B349]" />
+                  <span className="font-medium text-[14px] text-[#404040]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>Biscuits Products</span>
+                </label>
+                <label className="flex items-center gap-3 border border-[#E5E7EB] rounded-[10px] p-3 cursor-pointer hover:border-[#23B349] transition-colors">
+                  <input type="checkbox" className="w-4 h-4 rounded-[2px] border-[#8A8C8A] text-[#23B349] focus:ring-[#23B349]" />
+                  <span className="font-medium text-[14px] text-[#404040]" style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}>Flour Products</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          {/* Submit Action */}
+          <div className="flex justify-end pt-6 border-t border-[#E5E7EB] mt-2">
+            <button
+              type="button"
+              className="bg-[#23B349] text-white font-medium text-[16px] px-8 py-3 rounded-full hover:bg-[#1f9f41] transition-colors shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]"
+              style={{ fontFamily: "var(--font-outfit), 'Outfit', sans-serif" }}
+            >
+              Submit Application
+            </button>
+          </div>
+
         </div>
       </div>
     </section>
