@@ -16,7 +16,7 @@ export default function ContactCustomerCarePage({
 
   return (
     <main className="flex flex-col min-h-screen bg-[#F9FAFB] overflow-x-hidden">
-      <CustomerCareHero activeTab={activeTab} />
+      <CustomerCareHero />
       
       <div className="container mx-auto px-4 -mt-10 relative z-20">
         <FormSwitch activeTab={activeTab} onTabChange={setActiveTab} />
