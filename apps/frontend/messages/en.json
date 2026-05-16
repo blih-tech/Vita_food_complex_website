@@ -1563,5 +1563,61 @@
     "whyVita": "Why Vita?",
     "secondaryQuote": "Nourishing families with every bite, bringing joy to every home.",
     "ourClients": "Our Happy Clients"
+  },
+  "CustomerCare": {
+    "title": "Customer Care",
+    "heading": "Share your feedback, questions, or concerns",
+    "subheading": "Share your feedback, report an issue, or send us your concerns. We're committed to providing fast support and better service",
+    "cta": "Contact Customer Care",
+    "switch": {
+      "feedback": "Feedback",
+      "complaint": "Complaint"
+    },
+    "feedback": {
+      "title": "Customer feedback recording form",
+      "subtitle": "Kindly Put your suggestion and comment by Mark (✓) regarding our products and services.",
+      "table": {
+        "no": "No",
+        "header": "Feed back",
+        "vGood": "V.Good",
+        "good": "Good",
+        "satisfactory": "Satisfactory",
+        "poor": "Poor",
+        "q1": "How do you get sales department Guests handling",
+        "q2": "Time taken for purchasing process",
+        "q3": "How do you get store keepers Customer handling",
+        "q4": "Products quality and safety status",
+        "q5": "Delivery Time & adequacy",
+        "q6": "Is loading condition meet standard",
+        "q7": "Products' price"
+      },
+      "experience": "Previous experience regarding with our product and service",
+      "employee": "How do you evaluate our employee with you in different place",
+      "suggestion": "If there is other information you would like to tell us for better complaint",
+      "additional": "If you have any suggestion, which is not mentioned above please share us on below space",
+      "reference": {
+        "title": "Reference (optional)",
+        "name": "Name",
+        "address": "Address",
+        "date": "Date"
+      },
+      "submit": "Submit Feedback"
+    },
+    "complaint": {
+      "title": "Customer Complaint Registration Form",
+      "subtitle": "Kindly fill out the form below to register your complaint.",
+      "form": {
+        "customerName": "Customer Name",
+        "address": "Address",
+        "city": "City",
+        "woreda": "Woreda",
+        "phone": "Phone",
+        "productDetails": "Product Details",
+        "productType": "Product Type Purchased",
+        "quantity": "Quantity/Number",
+        "detail": "Detail of Complaint / Encountered Problem",
+        "submit": "Submit Complaint"
+      }
+    }
   }
 }
