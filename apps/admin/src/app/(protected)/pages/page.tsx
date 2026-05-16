@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import {
   Home, Info, Image as ImageIcon,
   FileText, Edit3, ExternalLink, RefreshCw, UtensilsCrossed, Truck, Star,
-  CheckCircle, Clock, Leaf, Globe, Lightbulb, Heart, BarChart3,
+  CheckCircle, Clock, Leaf, Globe, Lightbulb, Heart, BarChart3, Headphones,
 } from "lucide-react";
 import Link from "next/link";
 import api from "@/lib/api";
@@ -99,6 +99,14 @@ const ALL_PAGES = [
     icon: BarChart3,
     editorHref: "/research",
     liveHref: "https://vitafoodcomplex.vercel.app/en/research",
+  },
+  {
+    slug: "contact-customer-care",
+    name: "Contact Customer Care",
+    description: "Hero, feedback and complaint tabs, bilingual form copy",
+    icon: Headphones,
+    editorHref: "/contact-customer-care",
+    liveHref: "https://vitafoodcomplex.vercel.app/en/contact-customer-care",
   },
 ];
 
