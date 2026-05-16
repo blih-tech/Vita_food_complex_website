@@ -18,7 +18,7 @@ export default function ContactCustomerCarePage({
     <main className="flex flex-col min-h-screen bg-[#F9FAFB] overflow-x-hidden">
       <CustomerCareHero />
       
-      <div className="container mx-auto px-4 -mt-10 relative z-20">
+      <div className="container mx-auto px-4 -mt-40 lg:-mt-56 relative z-20 flex flex-col gap-8 lg:gap-12">
         <FormSwitch activeTab={activeTab} onTabChange={setActiveTab} />
         
         {activeTab === "feedback" ? <FeedbackForm /> : <ComplaintForm />}

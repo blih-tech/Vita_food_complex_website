@@ -8,14 +8,14 @@ export default function CustomerCareHero() {
   const t = useTranslations("CustomerCare");
 
   return (
-    <section className="relative w-full min-h-[600px] lg:min-h-[700px] flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative w-full min-h-[700px] lg:min-h-[850px] flex items-start justify-center overflow-hidden pt-32 md:pt-40">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/assets/images/customer-care/customer-care-bg.png"
           alt="Customer Care Background"
           fill
-          className="object-cover"
+          className="object-cover object-bottom"
           priority
         />
       </div>

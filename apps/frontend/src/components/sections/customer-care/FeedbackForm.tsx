@@ -22,7 +22,7 @@ export default function FeedbackForm() {
   };
 
   return (
-    <div className="max-w-[1440px] mx-auto bg-white rounded-[14px] border border-[#DCDCDC] shadow-[0px_2px_6px_-4px_rgba(216,216,216,0.1)] overflow-hidden mb-20 mt-12">
+    <div className="max-w-[1440px] mx-auto bg-white rounded-[14px] border border-[#DCDCDC] shadow-[0px_2px_6px_-4px_rgba(216,216,216,0.1)] overflow-hidden mb-20">
       {/* Header */}
       <div className="p-10 border-b border-black/10">
         <h2 className="font-outfit font-semibold text-[30px] text-[#404040] mb-2">

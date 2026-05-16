@@ -13,7 +13,7 @@ export default function FormSwitch({ activeTab, onTabChange }: FormSwitchProps) 
   const t = useTranslations("CustomerCare.switch");
 
   return (
-    <div className="flex justify-center -mt-[30px] relative z-30">
+    <div className="flex justify-center relative z-30">
       <div className="relative flex bg-white p-[1.43px] rounded-[8.57px] shadow-lg border-[1.43px] border-white w-[400px] h-[60px]">
         {/* Active Indicator Overlay */}
         <div
