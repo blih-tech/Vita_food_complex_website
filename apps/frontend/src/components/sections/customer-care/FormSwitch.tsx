@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTranslations } from "next-intl";
-import { ClipboardList, AlertCircle } from "lucide-react";
+import Image from "next/image";
 
 interface FormSwitchProps {
   activeTab: "feedback" | "complaint";
@@ -29,7 +29,14 @@ export default function FormSwitch({ activeTab, onTabChange }: FormSwitchProps) 
             activeTab === "feedback" ? "text-[#23B349]" : "text-[#404040]"
           }`}
         >
-          <ClipboardList className={`w-6 h-6 ${activeTab === "feedback" ? "text-[#23B349]" : "text-[#D9D9D9]"}`} />
+          <div className={`relative w-6 h-6 transition-opacity duration-300 ${activeTab === "feedback" ? "opacity-100" : "opacity-40 grayscale"}`}>
+            <Image
+              src="/assets/images/customer-care/feedback-icon.svg"
+              alt="Feedback"
+              fill
+              className="object-contain"
+            />
+          </div>
           <span className="font-outfit font-semibold text-[18px] lg:text-[22.86px]">{t("feedback")}</span>
         </button>
 
@@ -40,7 +47,14 @@ export default function FormSwitch({ activeTab, onTabChange }: FormSwitchProps) 
             activeTab === "complaint" ? "text-[#23B349]" : "text-[#404040]"
           }`}
         >
-          <AlertCircle className={`w-6 h-6 ${activeTab === "complaint" ? "text-[#23B349]" : "text-[#D9D9D9]"}`} />
+          <div className={`relative w-6 h-6 transition-opacity duration-300 ${activeTab === "complaint" ? "opacity-100" : "opacity-40 grayscale"}`}>
+            <Image
+              src="/assets/images/customer-care/complaint-icon.svg"
+              alt="Complaint"
+              fill
+              className="object-contain"
+            />
+          </div>
           <span className="font-outfit font-semibold text-[18px] lg:text-[22.86px]">{t("complaint")}</span>
         </button>
       </div>
