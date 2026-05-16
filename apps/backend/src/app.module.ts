@@ -20,6 +20,7 @@ import { FAQsModule } from './modules/faqs/faqs.module';
 import { TermsModule } from './modules/terms/terms.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { RecipesModule } from './modules/recipes/recipes.module';
+import { CustomerCareSubmissionsModule } from './modules/customer-care-submissions/customer-care-submissions.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { RecipesModule } from './modules/recipes/recipes.module';
     TermsModule,
     DashboardModule,
     RecipesModule,
+    CustomerCareSubmissionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

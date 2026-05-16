@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useTranslations } from "next-intl";
+import api from "@/lib/api";
 
 export default function ComplaintForm({
   content,
@@ -13,6 +14,18 @@ export default function ComplaintForm({
   const t = useTranslations("CustomerCare.complaint");
   const lang = locale === "am" ? "am" : "en";
   const branch = content?.[lang] as Record<string, string | undefined> | undefined;
+
+  const [customerName, setCustomerName] = useState("");
+  const [city, setCity] = useState("");
+  const [woreda, setWoreda] = useState("");
+  const [phone, setPhone] = useState("");
+  const [productType, setProductType] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [complaintDetail, setComplaintDetail] = useState("");
+  const [complainantName, setComplainantName] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [formSuccess, setFormSuccess] = useState<string | null>(null);
 
   const formTitle = branch?.formTitle ?? t("title");
   const formSubtitle =
@@ -60,10 +73,67 @@ export default function ComplaintForm({
   const submitBtn = branch?.submitButton ?? t("form.submit");
 
   const addrRows = [
-    { label: cityLabel, parenRaw: cityParen, placeholder: cityPlaceholder },
-    { label: woredaLabel, parenRaw: woredaParen, placeholder: woredaPlaceholder },
-    { label: phoneLabel, parenRaw: phoneParen, placeholder: phonePlaceholder, type: "tel" as const },
+    {
+      label: cityLabel,
+      parenRaw: cityParen,
+      placeholder: cityPlaceholder,
+      value: city,
+      onChange: setCity,
+      type: "text" as const,
+    },
+    {
+      label: woredaLabel,
+      parenRaw: woredaParen,
+      placeholder: woredaPlaceholder,
+      value: woreda,
+      onChange: setWoreda,
+      type: "text" as const,
+    },
+    {
+      label: phoneLabel,
+      parenRaw: phoneParen,
+      placeholder: phonePlaceholder,
+      value: phone,
+      onChange: setPhone,
+      type: "tel" as const,
+    },
   ];
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormError(null);
+    setFormSuccess(null);
+    setSubmitting(true);
+    try {
+      await api.post("/customer-care-submissions", {
+        kind: "complaint",
+        locale: lang,
+        payload: {
+          customerName,
+          city,
+          woreda,
+          phone,
+          productType,
+          quantity,
+          complaintDetail,
+          complainantName,
+        },
+      });
+      setFormSuccess(t("submitSent"));
+      setCustomerName("");
+      setCity("");
+      setWoreda("");
+      setPhone("");
+      setProductType("");
+      setQuantity("");
+      setComplaintDetail("");
+      setComplainantName("");
+    } catch {
+      setFormError(t("submitFailed"));
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className="w-full max-w-[1440px] mx-auto bg-white rounded-[14px] border border-[#DCDCDC] shadow-[0px_2px_6px_-4px_rgba(216,216,216,0.1)] overflow-hidden mb-8 sm:mb-16 lg:mb-20">
@@ -76,7 +146,7 @@ export default function ComplaintForm({
         </p>
       </div>
 
-      <form className="p-4 sm:p-6 lg:p-10 space-y-5 sm:space-y-7 lg:space-y-10">
+      <form className="p-4 sm:p-6 lg:p-10 space-y-5 sm:space-y-7 lg:space-y-10" onSubmit={handleSubmit}>
         <div className="bg-[#FFFFFD] border border-[#F3F4F6] rounded-[10px] p-4 sm:p-5 lg:p-6 space-y-3 sm:space-y-4">
           <label className="block font-inter font-medium text-[14px] sm:text-[16px] lg:text-[18px] text-[#404040]">
             {customerNameLead}{" "}
@@ -90,6 +160,8 @@ export default function ComplaintForm({
             <input
               type="text"
               required
+              value={customerName}
+              onChange={(e) => setCustomerName(e.target.value)}
               className="w-full bg-transparent font-outfit font-light text-[14px] sm:text-[16px] lg:text-[18px] text-black/50 outline-none placeholder:text-black/50"
               placeholder={customerNamePlaceholder}
             />
@@ -116,8 +188,10 @@ export default function ComplaintForm({
                 </label>
                 <div className="border-b-[1.6px] border-[#F6F6F6] py-2">
                   <input
-                    type={row.type ?? "text"}
+                    type={row.type}
                     required
+                    value={row.value}
+                    onChange={(e) => row.onChange(e.target.value)}
                     className="w-full bg-transparent font-outfit font-light text-[14px] sm:text-[15px] lg:text-[16px] text-black/50 outline-none placeholder:text-black/50"
                     placeholder={row.placeholder}
                   />
@@ -143,6 +217,8 @@ export default function ComplaintForm({
                 <input
                   type="text"
                   required
+                  value={productType}
+                  onChange={(e) => setProductType(e.target.value)}
                   className="w-full bg-transparent font-outfit font-light text-[14px] sm:text-[15px] lg:text-[16px] text-black/50 outline-none placeholder:text-black/50"
                   placeholder={productTypePlaceholder}
                 />
@@ -157,6 +233,8 @@ export default function ComplaintForm({
                 <input
                   type="text"
                   required
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
                   className="w-full bg-transparent font-outfit font-light text-[14px] sm:text-[15px] lg:text-[16px] text-black/50 outline-none placeholder:text-black/50"
                   placeholder={quantityPlaceholder}
                 />
@@ -177,6 +255,8 @@ export default function ComplaintForm({
           <div className="border border-[#F6F6F6] rounded-[10px] p-3 sm:p-4 lg:p-5">
             <textarea
               required
+              value={complaintDetail}
+              onChange={(e) => setComplaintDetail(e.target.value)}
               className="w-full bg-transparent font-outfit font-light text-[14px] sm:text-[15px] lg:text-[16px] text-black/50 outline-none placeholder:text-black/50 resize-none h-24 sm:h-28 lg:h-32"
               placeholder={detailPlaceholder}
             />
@@ -194,18 +274,31 @@ export default function ComplaintForm({
             <input
               type="text"
               required
+              value={complainantName}
+              onChange={(e) => setComplainantName(e.target.value)}
               className="w-full bg-transparent font-outfit font-light text-[14px] sm:text-[15px] lg:text-[16px] text-black/50 outline-none placeholder:text-black/50"
               placeholder={complainantPlaceholder}
             />
           </div>
         </div>
 
-        <div className="flex justify-end pt-4 sm:pt-6 lg:pt-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-3 pt-4 sm:pt-6 lg:pt-8">
+          {formError ?
+            <p className="text-sm text-red-600 sm:mr-auto text-center sm:text-left" role="alert">
+              {formError}
+            </p>
+          : null}
+          {formSuccess ?
+            <p className="text-sm text-[#23B349] sm:mr-auto text-center sm:text-left" role="status">
+              {formSuccess}
+            </p>
+          : null}
           <button
             type="submit"
-            className="bg-[#23B349] text-white px-8 sm:px-10 lg:px-12 py-2.5 sm:py-3 rounded-[99px] font-outfit font-medium text-[14px] sm:text-[15px] lg:text-[16px] hover:bg-[#1f9d40] active:scale-95 transition-all shadow-md"
+            disabled={submitting}
+            className="bg-[#23B349] text-white px-8 sm:px-10 lg:px-12 py-2.5 sm:py-3 rounded-[99px] font-outfit font-medium text-[14px] sm:text-[15px] lg:text-[16px] hover:bg-[#1f9d40] active:scale-95 transition-all shadow-md disabled:opacity-60 disabled:pointer-events-none self-end"
           >
-            {submitBtn}
+            {submitting ? t("submitSending") : submitBtn}
           </button>
         </div>
       </form>

@@ -34,6 +34,42 @@ type PageData = {
   updatedAt?: string;
 };
 
+type ExtraSurveyRow = {
+  id: string;
+  primary: string;
+  secondary: string;
+  placeholderEn?: string;
+  placeholderAm?: string;
+  inputType?: "text" | "textarea";
+};
+
+type ReferenceFieldDraft = {
+  key?: string;
+  primary?: string;
+  secondary?: string;
+  type?: string;
+  placeholderEn?: string;
+  placeholderAm?: string;
+};
+
+function newSurveyFieldId(): string {
+  const c =
+    typeof globalThis.crypto !== "undefined" && typeof globalThis.crypto.randomUUID === "function"
+      ? globalThis.crypto.randomUUID()
+      : `${Date.now()}-${Math.floor(Math.random() * 1e6)}`;
+  return `survey_${c}`;
+}
+
+function uniqRefFieldKey(existing: string[]): string {
+  let n = 1;
+  let k = `field_${n}`;
+  while (existing.includes(k)) {
+    n += 1;
+    k = `field_${n}`;
+  }
+  return k;
+}
+
 const SECTION_META: Record<string, { name: string; icon: typeof Layout }> = {
   "customer-care-hero": { name: "Hero", icon: Layout },
   "customer-care-switch": { name: "Feedback / Complaint tabs", icon: ToggleLeft },
@@ -62,6 +98,7 @@ const DEFAULT_FEEDBACK_SHARE = {
     { key: "address", primary: "Address", secondary: "አድራሻ", type: "text", placeholderEn: "Your address", placeholderAm: "አድራሻ" },
     { key: "date", primary: "Date", secondary: "ቀን", type: "date", placeholderEn: "", placeholderAm: "" },
   ],
+  extraSurveyFields: [] as ExtraSurveyRow[],
 };
 
 const DEFAULT_PAGE: PageData = {
@@ -388,37 +425,90 @@ function EditModal({
           </div>
 
           <div className="border-t border-gray-100 pt-4 space-y-3">
-            <h4 className="text-sm font-bold text-gray-700">Rating column labels (same for both locales)</h4>
-            {((content.ratingLabels as { primary?: string; secondary?: string }[]) || []).map((row, i) => (
-              <div key={i} className="grid grid-cols-2 gap-4 p-3 bg-white rounded-xl border border-gray-100">
-                <InputField
-                  label={`Column ${i + 1} — English`}
-                  value={row.primary}
-                  onChange={(v) => {
-                    const next = [...((content.ratingLabels as typeof row[]) || [])];
-                    next[i] = { ...row, primary: v };
-                    setShare("ratingLabels", next);
-                  }}
-                />
-                <InputField
-                  label={`Column ${i + 1} — Amharic`}
-                  value={row.secondary}
-                  onChange={(v) => {
-                    const next = [...((content.ratingLabels as typeof row[]) || [])];
-                    next[i] = { ...row, secondary: v };
-                    setShare("ratingLabels", next);
-                  }}
-                />
+            <div className="flex flex-wrap items-start justify-between gap-2">
+              <div className="min-w-0">
+                <h4 className="text-sm font-bold text-gray-700">Rating column labels (survey grid)</h4>
+                <p className="text-[11px] text-gray-500 mt-1 max-w-xl leading-relaxed">
+                  One column = one selectable score step (the site renders as many radios as columns). Minimum 2 columns.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const curr = [...((content.ratingLabels as Array<{ primary?: string; secondary?: string }>) || [])];
+                  curr.push({ primary: "", secondary: "" });
+                  setShare("ratingLabels", curr);
+                }}
+                className="inline-flex items-center gap-1.5 shrink-0 px-3 py-2 rounded-xl bg-[#23B349]/15 text-[#188f3f] text-xs font-bold hover:bg-[#23B349]/25 transition-colors"
+              >
+                <Plus size={14} /> Add column
+              </button>
+            </div>
+            {((content.ratingLabels as { primary?: string; secondary?: string }[]) || []).map((row, i, arr) => (
+              <div key={i} className="p-3 bg-white rounded-xl border border-gray-100 space-y-3">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[11px] font-bold text-gray-400 uppercase">Score column {i + 1}</span>
+                  <button
+                    type="button"
+                    disabled={arr.length <= 2}
+                    onClick={() => {
+                      if (arr.length <= 2) return;
+                      const next = arr.filter((_, idx) => idx !== i);
+                      setShare("ratingLabels", next);
+                    }}
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-bold border border-red-100 text-red-500 hover:bg-red-50 disabled:opacity-35 disabled:pointer-events-none"
+                  >
+                    <Trash2 size={11} /> Remove
+                  </button>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <InputField
+                    label="English"
+                    value={row.primary}
+                    onChange={(v) => {
+                      const next = [...((content.ratingLabels as typeof row[]) || [])];
+                      next[i] = { ...row, primary: v };
+                      setShare("ratingLabels", next);
+                    }}
+                  />
+                  <InputField
+                    label="Amharic"
+                    value={row.secondary}
+                    onChange={(v) => {
+                      const next = [...((content.ratingLabels as typeof row[]) || [])];
+                      next[i] = { ...row, secondary: v };
+                      setShare("ratingLabels", next);
+                    }}
+                  />
+                </div>
               </div>
             ))}
           </div>
 
           <div className="border-t border-gray-100 pt-4 space-y-3">
-            <h4 className="text-sm font-bold text-gray-700">Feedback rows (question text)</h4>
-            {((content.feedbackQuestions as { primary?: string; secondary?: string }[]) || []).map((row, i) => (
-              <div key={i} className="grid grid-cols-2 gap-4 p-3 bg-white rounded-xl border border-gray-100">
+            <div className="flex flex-wrap items-start justify-between gap-2">
+              <div className="min-w-0">
+                <h4 className="text-sm font-bold text-gray-700">Table question rows</h4>
+                <p className="text-[11px] text-gray-500 mt-1 max-w-xl leading-relaxed">
+                  Each row becomes a numbered question beside the scoring grid (bilingual labels). Minimum 1 row.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const curr = [...((content.feedbackQuestions as Array<{ primary?: string; secondary?: string }>) || [])];
+                  curr.push({ primary: "", secondary: "" });
+                  setShare("feedbackQuestions", curr);
+                }}
+                className="inline-flex items-center gap-1.5 shrink-0 px-3 py-2 rounded-xl bg-[#23B349]/15 text-[#188f3f] text-xs font-bold hover:bg-[#23B349]/25 transition-colors"
+              >
+                <Plus size={14} /> Add question
+              </button>
+            </div>
+            {((content.feedbackQuestions as { primary?: string; secondary?: string }[]) || []).map((row, i, arr) => (
+              <div key={i} className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-4 p-3 bg-white rounded-xl border border-gray-100 items-start">
                 <InputField
-                  label={`Q${i + 1} — English`}
+                  label={`Question ${i + 1} — English`}
                   value={row.primary}
                   onChange={(v) => {
                     const next = [...((content.feedbackQuestions as typeof row[]) || [])];
@@ -428,7 +518,7 @@ function EditModal({
                   textarea
                 />
                 <InputField
-                  label={`Q${i + 1} — Amharic`}
+                  label={`Question ${i + 1} — Amharic`}
                   value={row.secondary}
                   onChange={(v) => {
                     const next = [...((content.feedbackQuestions as typeof row[]) || [])];
@@ -437,48 +527,197 @@ function EditModal({
                   }}
                   textarea
                 />
+                <button
+                  type="button"
+                  disabled={arr.length <= 1}
+                  onClick={() => {
+                    if (arr.length <= 1) return;
+                    const next = arr.filter((_, idx) => idx !== i);
+                    setShare("feedbackQuestions", next);
+                  }}
+                  className="md:mt-7 p-2 rounded-lg border border-red-100 text-red-400 hover:bg-red-50 disabled:opacity-35 disabled:pointer-events-none self-start md:self-auto"
+                  aria-label={`Remove question ${i + 1}`}
+                >
+                  <Trash2 size={14} />
+                </button>
               </div>
             ))}
           </div>
 
           <div className="border-t border-gray-100 pt-4 space-y-3">
-            <h4 className="text-sm font-bold text-gray-700">Reference fields (labels & placeholders)</h4>
-            {((content.referenceFields as {
-              key?: string;
-              primary?: string;
-              secondary?: string;
-              type?: string;
-              placeholderEn?: string;
-              placeholderAm?: string;
-            }[]) || []).map((f, i) => (
+            <div className="flex flex-wrap items-start justify-between gap-2">
+              <div className="min-w-0">
+                <h4 className="text-sm font-bold text-gray-700">Reference fields</h4>
+                <p className="text-[11px] text-gray-500 mt-1 max-w-xl leading-relaxed">
+                  Compact optional fields near the footer (keys are stable ids in submissions; change labels anytime).
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const ref = [...((content.referenceFields as ReferenceFieldDraft[]) || [])];
+                  const keys = ((content.referenceFields as ReferenceFieldDraft[]) || [])
+                    .map((x) => (x.key ?? "").trim())
+                    .filter(Boolean);
+                  ref.push({
+                    key: uniqRefFieldKey(keys),
+                    primary: "",
+                    secondary: "",
+                    type: "text",
+                    placeholderEn: "",
+                    placeholderAm: "",
+                  });
+                  setShare("referenceFields", ref);
+                }}
+                className="inline-flex items-center gap-1.5 shrink-0 px-3 py-2 rounded-xl bg-[#23B349]/15 text-[#188f3f] text-xs font-bold hover:bg-[#23B349]/25 transition-colors"
+              >
+                <Plus size={14} /> Add field
+              </button>
+            </div>
+            {((content.referenceFields as ReferenceFieldDraft[]) || []).map((f, i) => (
               <div key={`${f.key}-${i}`} className="p-4 bg-white rounded-xl border border-gray-100 space-y-3">
-                <p className="text-xs font-bold text-gray-400 uppercase">{f.key ?? `field_${i}`}</p>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs font-bold text-gray-400 uppercase">Slot {i + 1}</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const arr = [...((content.referenceFields as ReferenceFieldDraft[]) || [])];
+                      arr.splice(i, 1);
+                      setShare("referenceFields", arr);
+                    }}
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-bold border border-red-100 text-red-500 hover:bg-red-50"
+                  >
+                    <Trash2 size={11} /> Remove field
+                  </button>
+                </div>
+                <InputField label="Stable key (stored in payloads)" value={f.key ?? ""} onChange={(v) => {
+                  const arr = [...((content.referenceFields as ReferenceFieldDraft[]) || [])];
+                  arr[i] = { ...f, key: v.replace(/\s+/g, "_").toLowerCase() };
+                  setShare("referenceFields", arr);
+                }} />
                 <div className="grid grid-cols-2 gap-4">
                   <InputField label="Label EN" value={f.primary} onChange={(v) => {
-                    const ref = [...((content.referenceFields as typeof f[]) || [])];
+                    const ref = [...((content.referenceFields as ReferenceFieldDraft[]) || [])];
                     ref[i] = { ...f, primary: v };
                     setShare("referenceFields", ref);
                   }} />
                   <InputField label="Label AM" value={f.secondary} onChange={(v) => {
-                    const ref = [...((content.referenceFields as typeof f[]) || [])];
+                    const ref = [...((content.referenceFields as ReferenceFieldDraft[]) || [])];
                     ref[i] = { ...f, secondary: v };
                     setShare("referenceFields", ref);
                   }} />
                   <InputField label="Placeholder EN" value={f.placeholderEn} onChange={(v) => {
-                    const ref = [...((content.referenceFields as typeof f[]) || [])];
+                    const ref = [...((content.referenceFields as ReferenceFieldDraft[]) || [])];
                     ref[i] = { ...f, placeholderEn: v };
                     setShare("referenceFields", ref);
                   }} />
                   <InputField label="Placeholder AM" value={f.placeholderAm} onChange={(v) => {
-                    const ref = [...((content.referenceFields as typeof f[]) || [])];
+                    const ref = [...((content.referenceFields as ReferenceFieldDraft[]) || [])];
                     ref[i] = { ...f, placeholderAm: v };
                     setShare("referenceFields", ref);
                   }} />
-                  <InputField label="Input type (text|date)" value={f.type} onChange={(v) => {
-                    const ref = [...((content.referenceFields as typeof f[]) || [])];
-                    ref[i] = { ...f, type: v };
-                    setShare("referenceFields", ref);
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Input type</label>
+                    <select
+                      value={f.type === "date" ? "date" : "text"}
+                      onChange={(e) => {
+                        const ref = [...((content.referenceFields as ReferenceFieldDraft[]) || [])];
+                        ref[i] = { ...f, type: e.target.value };
+                        setShare("referenceFields", ref);
+                      }}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349] outline-none transition-all text-sm bg-white"
+                    >
+                      <option value="text">Text</option>
+                      <option value="date">Date</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="border-t border-gray-100 pt-4 space-y-3">
+            <div className="flex flex-wrap items-start justify-between gap-2">
+              <div className="min-w-0">
+                <h4 className="text-sm font-bold text-gray-700">Extra survey prompts (below table)</h4>
+                <p className="text-[11px] text-gray-500 mt-1 max-w-xl leading-relaxed">
+                  Optional bilingual questions answered as text fields (shown after “employee evaluation”). Answers are grouped under{" "}
+                  <code className="text-[10px] bg-gray-100 px-1 rounded">extras</code> in submissions.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const list = [...((content.extraSurveyFields as ExtraSurveyRow[]) || [])];
+                  list.push({
+                    id: newSurveyFieldId(),
+                    primary: "",
+                    secondary: "",
+                    placeholderEn: "",
+                    placeholderAm: "",
+                    inputType: "textarea",
+                  });
+                  setShare("extraSurveyFields", list);
+                }}
+                className="inline-flex items-center gap-1.5 shrink-0 px-3 py-2 rounded-xl bg-[#23B349]/15 text-[#188f3f] text-xs font-bold hover:bg-[#23B349]/25 transition-colors"
+              >
+                <Plus size={14} /> Add prompt
+              </button>
+            </div>
+            {((content.extraSurveyFields as ExtraSurveyRow[]) || []).map((field, i) => (
+              <div key={field.id} className="p-4 bg-white rounded-xl border border-gray-100 space-y-3">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs font-mono text-gray-500 truncate max-w-[200px]" title={field.id}>{field.id}</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const list = ((content.extraSurveyFields as ExtraSurveyRow[]) || []).filter((_, idx) => idx !== i);
+                      setShare("extraSurveyFields", list);
+                    }}
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[11px] font-bold border border-red-100 text-red-500 hover:bg-red-50"
+                  >
+                    <Trash2 size={11} /> Remove
+                  </button>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <InputField label="Question — English (lead)" value={field.primary} onChange={(v) => {
+                    const list = [...((content.extraSurveyFields as ExtraSurveyRow[]) || [])];
+                    list[i] = { ...field, primary: v };
+                    setShare("extraSurveyFields", list);
                   }} />
+                  <InputField label="Question — Amharic" value={field.secondary} onChange={(v) => {
+                    const list = [...((content.extraSurveyFields as ExtraSurveyRow[]) || [])];
+                    list[i] = { ...field, secondary: v };
+                    setShare("extraSurveyFields", list);
+                  }} />
+                  <InputField label="Placeholder EN" value={field.placeholderEn} onChange={(v) => {
+                    const list = [...((content.extraSurveyFields as ExtraSurveyRow[]) || [])];
+                    list[i] = { ...field, placeholderEn: v };
+                    setShare("extraSurveyFields", list);
+                  }} />
+                  <InputField label="Placeholder AM" value={field.placeholderAm} onChange={(v) => {
+                    const list = [...((content.extraSurveyFields as ExtraSurveyRow[]) || [])];
+                    list[i] = { ...field, placeholderAm: v };
+                    setShare("extraSurveyFields", list);
+                  }} />
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Field type</label>
+                    <select
+                      value={field.inputType === "text" ? "text" : "textarea"}
+                      onChange={(e) => {
+                        const list = [...((content.extraSurveyFields as ExtraSurveyRow[]) || [])];
+                        list[i] = {
+                          ...field,
+                          inputType: e.target.value === "text" ? "text" : "textarea",
+                        };
+                        setShare("extraSurveyFields", list);
+                      }}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#23B349] focus:ring-1 focus:ring-[#23B349] outline-none transition-all text-sm bg-white"
+                    >
+                      <option value="textarea">Multi-line</option>
+                      <option value="text">Single-line</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             ))}

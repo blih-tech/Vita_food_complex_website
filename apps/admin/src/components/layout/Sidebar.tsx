@@ -33,7 +33,7 @@ export const navSections = [
       { id: 'donations', icon: Heart,        label: 'Donations',  href: '/donations' },
       { id: 'faqs',      icon: HelpCircle,   label: 'FAQs',       href: '/faqs' },
       { id: 'terms',     icon: ScrollText,   label: 'Terms',      href: '/terms' },
-      { id: 'customer-care', icon: Headphones, label: 'Customer Care', href: '/contact-customer-care' },
+      { id: 'customer-care', icon: Headphones, label: 'Care forms', href: '/customer-care-submissions' },
       { id: 'messages',  icon: MessageSquare, label: 'Messages',  href: '/messages' },
       { id: 'users',     icon: Users,         label: 'Users',     href: '/users' },
     ],
@@ -70,6 +70,7 @@ export default function Sidebar({ open = false, onClose }: SidebarProps) {
         pathname.startsWith('/research') ||
         pathname.startsWith('/gallery') ||
         pathname.startsWith('/contact-customer-care') ||
+        pathname.startsWith('/customer-care-submissions') ||
         pathname.startsWith('/why-choose-vita')
       );
     }

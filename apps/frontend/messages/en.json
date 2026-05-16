@@ -1601,7 +1601,11 @@
         "address": "Address",
         "date": "Date"
       },
-      "submit": "Submit Feedback"
+      "submit": "Submit Feedback",
+      "submitSending": "Sending…",
+      "submitSent": "Thank you — your feedback was received.",
+      "submitFailed": "Could not submit. Please try again in a moment.",
+      "submitRatingsRequired": "Please select a rating for every row."
     },
     "complaint": {
       "title": "Customer Complaint Registration Form",
@@ -1617,7 +1621,10 @@
         "quantity": "Quantity/Number",
         "detail": "Detail of Complaint / Encountered Problem",
         "submit": "Submit Complaint"
-      }
+      },
+      "submitSending": "Sending…",
+      "submitSent": "Thank you — your complaint was received.",
+      "submitFailed": "Could not submit. Please try again in a moment."
     }
   }
 }
