@@ -25,6 +25,7 @@ export default function PageEditor({ params: paramsPromise }: { params: Promise<
     if (params.slug === 'we-care')            { router.replace('/we-care');            return; }
     if (params.slug === 'research')           { router.replace('/research');           return; }
     if (params.slug === 'gallery')            { router.replace('/gallery');            return; }
+    if (params.slug === 'contact-customer-care') { router.replace('/contact-customer-care'); return; }
     fetchPage();
   }, [params.slug]);
 

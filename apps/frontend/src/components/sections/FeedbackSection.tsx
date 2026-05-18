@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@frontend/navigation";
 import { Clock, MessageSquare, Truck } from "lucide-react";
 
 interface FeedbackFeature {
@@ -130,7 +130,7 @@ export default function FeedbackSection({
               {currentContent.description}
             </p>
             <Link
-              href="/contact"
+              href="/contact-customer-care"
               className="inline-flex items-center justify-center bg-[#FFEC19] text-[#404040] rounded-full px-8 py-3 font-[Funnel_Display,sans-serif] font-medium text-[17.3px] hover:bg-yellow-400 transition-colors"
             >
               {currentContent.buttonText}
