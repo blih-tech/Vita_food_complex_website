@@ -1,7 +1,9 @@
-import { useTranslations } from "next-intl";
-import { Link } from "@frontend/navigation";
-import Image from "next/image";
+"use client";
 
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import DonationModal from "../community/DonationModal";
 export default function WeCareBannerSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("WeCare.banner");
   const lang = (locale || "en") as "en" | "am";
@@ -12,6 +14,8 @@ export default function WeCareBannerSection({ content, locale }: { content?: any
   const cta1 = c?.cta1 || t("cta1");
   const cta2 = c?.cta2 || t("cta2");
   const mainImage = c?.mainImage || "/assets/about/story-image.png";
+
+  const [modalType, setModalType] = useState<"money" | "inkind" | null>(null);
 
   return (
     <section className="w-full max-w-[1920px] mx-auto px-[128px] py-[64px] flex justify-center">
@@ -42,8 +46,8 @@ export default function WeCareBannerSection({ content, locale }: { content?: any
 
           <div className="flex flex-row items-center gap-[16px]">
             {/* Make an Impact Button */}
-            <Link
-              href="/contact"
+            <button
+              onClick={() => setModalType("money")}
               className="flex flex-row items-center justify-center gap-[12px] bg-[#FFCC33] backdrop-blur-[10px] rounded-[50px] px-[32px] py-[18px] hover:scale-105 transition-transform"
             >
               <span className="font-funnel font-medium text-[24px] leading-none text-[#000000] tracking-[-0.004em]">
@@ -52,11 +56,11 @@ export default function WeCareBannerSection({ content, locale }: { content?: any
               <span className="text-[#27221B] font-bold text-[24px] leading-none">
                 →
               </span>
-            </Link>
+            </button>
 
             {/* Get Involved Button */}
-            <Link
-              href="/contact"
+            <button
+              onClick={() => setModalType("inkind")}
               className="flex flex-row items-center justify-center gap-[12px] bg-[#FCFBF9] backdrop-blur-[10px] rounded-[50px] px-[32px] py-[18px] hover:scale-105 transition-transform"
             >
               <span className="font-funnel font-medium text-[24px] leading-none text-[#000000]">
@@ -65,13 +69,18 @@ export default function WeCareBannerSection({ content, locale }: { content?: any
               <span className="text-[#27221B] font-bold text-[24px] leading-none">
                 →
               </span>
-            </Link>
+            </button>
           </div>
 
         </div>
 
       </div>
 
+      <DonationModal
+        isOpen={modalType !== null}
+        onClose={() => setModalType(null)}
+        type={modalType || "money"}
+      />
     </section>
   );
 }
