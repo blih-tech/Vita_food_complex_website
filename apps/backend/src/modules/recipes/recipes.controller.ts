@@ -24,7 +24,7 @@ import { CloudinaryService } from '../cloudinary/cloudinary.service';
 type RecipePayload = CreateRecipeDto | UpdateRecipeDto;
 type UploadedRecipeFile = Express.Multer.File;
 
-@Controller('recipes')
+@Controller('vita-recipes')
 export class RecipesController {
   constructor(
     private readonly recipesService: RecipesService,

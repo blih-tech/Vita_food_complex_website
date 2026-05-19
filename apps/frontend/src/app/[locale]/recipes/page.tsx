@@ -88,7 +88,7 @@ function getLocalizedRecipesSection(
 async function fetchPublishedRecipes(): Promise<ApiRecipe[]> {
   const apiBase = resolveApiBase();
   try {
-    const response = await fetch(`${apiBase}/recipes`, {
+    const response = await fetch(`${apiBase}/vita-recipes`, {
       next: { revalidate: 120 },
     });
     if (!response.ok) return [];

@@ -38,10 +38,10 @@ function buildRecipeFormData(
 }
 
 export const recipesApi = {
-  list: async () => (await api.get<RecipeItem[]>("/recipes")).data,
+  list: async () => (await api.get<RecipeItem[]>("/vita-recipes")).data,
   create: async (payload: RecipePayload, files?: RecipeUploadFiles) =>
     (
-      await api.post<RecipeItem>("/recipes", buildRecipeFormData(payload, files), {
+      await api.post<RecipeItem>("/vita-recipes", buildRecipeFormData(payload, files), {
         headers: { "Content-Type": "multipart/form-data" },
       })
     ).data,
@@ -52,7 +52,7 @@ export const recipesApi = {
   ) =>
     (
       await api.put<RecipeItem>(
-        `/recipes/${encodeURIComponent(recipeId)}`,
+        `/vita-recipes/${encodeURIComponent(recipeId)}`,
         buildRecipeFormData(payload, files),
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -60,5 +60,5 @@ export const recipesApi = {
       )
     ).data,
   remove: async (recipeId: string) =>
-    (await api.delete(`/recipes/${encodeURIComponent(recipeId)}`)).data,
+    (await api.delete(`/vita-recipes/${encodeURIComponent(recipeId)}`)).data,
 };
