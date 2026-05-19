@@ -67,7 +67,7 @@ export const ProductsHeroSection = memo(({ title, subtitle, products }: Products
 
       {/* Title & Subtext Row */}
       <div className="absolute inset-0 z-0 max-w-[1600px] mx-auto px-6 lg:px-20 flex items-center justify-between w-full pointer-events-none select-none pb-20">
-        <h1 className="font-['Funnel_Display'] font-black text-[6rem] md:text-[10rem] lg:text-[16rem] text-white leading-none drop-shadow-md tracking-tighter text-left">
+        <h1 className="font-['Funnel_Display'] font-black text-[5rem] md:text-[8rem] lg:text-[12rem] xl:text-[13rem] text-white leading-none drop-shadow-md tracking-tighter text-left">
           {title}
         </h1>
         <div className="hidden md:block text-right">
@@ -88,7 +88,7 @@ export const ProductsHeroSection = memo(({ title, subtitle, products }: Products
               key={product.id}
               className="w-full flex-shrink-0 flex justify-center items-center"
             >
-              <div className="relative w-full max-w-[400px] md:max-w-[700px] lg:max-w-[1000px] aspect-[1.8]">
+              <div className="relative w-full max-w-[500px] md:max-w-[900px] lg:max-w-[1200px] aspect-[1.8]">
                 <Image
                   src={product.media.image}
                   alt={product.name}

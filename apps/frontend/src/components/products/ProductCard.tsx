@@ -16,7 +16,7 @@ export const ProductCard = memo(function ProductCard({
       href={`/products/${id}`}
       className="
         group relative
-        w-full aspect-539/500
+        w-full aspect-[1.15/1]
         flex flex-col mt-8
       "
     >

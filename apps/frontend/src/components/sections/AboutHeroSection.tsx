@@ -4,16 +4,16 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { ABOUT_ASSETS } from "@frontend/constants/aboutAssets";
 
-/** Figma About (277:8084): Header hero fill_JQM9DP; headline Headline (179:449); subtitle style_8R6JGC; image 277:8195 824×586, radius 16px */
-const HERO_RADIAL =
-  "radial-gradient(circle at 2% 163%, rgb(31, 214, 80) 0%, rgb(35, 179, 73) 60%, rgb(116, 255, 56) 100%)";
 
 export default function AboutHeroSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("About");
   const c = content?.[locale as string] || content?.en;
 
   return (
-    <section className="relative w-full overflow-hidden" style={{ background: HERO_RADIAL }}>
+    <section 
+      className="relative w-full overflow-hidden bg-cover bg-bottom bg-no-repeat" 
+      style={{ backgroundImage: "url('/assets/about/about-hero.svg')" }}
+    >
       <div className="relative z-10 mx-auto flex max-w-[1920px] flex-col items-center px-8 pb-0 pt-[clamp(80px,10vw,160px)] text-center md:px-16 lg:px-[128px]">
         <h1
           className="mb-8 max-w-[1000px] font-[family-name:var(--font-outfit)] text-[clamp(36px,6vw,80px)] font-extrabold leading-[1] tracking-[-0.02em] text-white"
@@ -42,9 +42,7 @@ export default function AboutHeroSection({ content, locale }: { content?: any; l
         </div>
       </div>
 
-      <div className="relative mt-[-48px] h-[100px] w-full md:mt-[-64px] md:h-[140px] lg:mt-[-80px] lg:h-[180px]">
-        <div className="absolute bottom-0 left-1/2 aspect-[4/1] w-[150%] -translate-x-1/2 rounded-t-[100%] bg-white" />
-      </div>
+
     </section>
   );
 }

@@ -214,8 +214,8 @@ export default function ProductsPage() {
         getLabel={getCategoryLabel}
       />
       {loadingProducts ? (
-        <section className="w-full px-6 lg:px-20 pb-24 bg-white">
-          <div className="max-w-7xl mx-auto flex justify-center py-16">
+        <section className="w-full pb-24 bg-white">
+          <div className="w-full max-w-[1664px] mx-auto px-4 sm:px-6 lg:px-8 flex justify-center py-16">
             <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#23B349]" />
           </div>
         </section>

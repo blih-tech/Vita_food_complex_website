@@ -37,7 +37,7 @@ type RecipesCmsPage = {
   sections?: RecipesCmsSection[];
 };
 
-const CONTAINER_CLASS = "w-full max-w-[1400px] mx-auto px-4 lg:px-20";
+const CONTAINER_CLASS = "w-full max-w-[1664px] mx-auto px-4 sm:px-6 lg:px-8";
 
 function normalizeApiV1Base(url: string): string {
   const trimmed = url.replace(/\/+$/, "");

@@ -25,12 +25,12 @@ const EmptyState = memo(() => {
 EmptyState.displayName = "EmptyState";
 
 export const ProductGrid = memo(({ items }: { items: Product[] }) => (
-  <section className="w-full px-6 lg:px-20 pb-24 bg-white">
-    <div className="max-w-7xl mx-auto">
+  <section className="w-full pb-24 bg-white">
+    <div className="w-full max-w-[1664px] mx-auto px-4 sm:px-6 lg:px-8">
       {items.length === 0 ? (
         <EmptyState />
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-20 lg:gap-y-32 xl:gap-x-8 justify-items-center pt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 lg:gap-x-8 gap-y-20 lg:gap-y-32 justify-items-center pt-8">
           {items.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
