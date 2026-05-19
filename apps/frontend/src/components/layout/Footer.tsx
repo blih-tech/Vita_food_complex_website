@@ -101,8 +101,8 @@ function FooterColumn({ title, links }: FooterColumnProps) {
     <div className="flex flex-col gap-5">
       <h4 className={headingClass}>{title}</h4>
       <nav className="flex flex-col gap-3">
-        {links.map(({ label, href }) => (
-          <Link key={label} href={href} className={linkClass}>
+        {links.map(({ label, href }, i) => (
+          <Link key={`${href}-${i}`} href={href} className={linkClass}>
             {label}
           </Link>
         ))}

@@ -427,55 +427,55 @@ export default function Navbar() {
 
             {/* ── Products ── */}
             {activeDropdown === "products" && (
-              <div className="flex flex-col xl:flex-row justify-between gap-8 xl:gap-12 w-full">
+              <div className="flex flex-col xl:flex-row justify-between gap-8 xl:gap-[64px] w-full">
                 {/* Categories */}
-                <div className="flex flex-col gap-4 xl:gap-6 w-full xl:flex-1 xl:max-w-[340px]">
-                  <div className="flex flex-col gap-2 xl:gap-3">
+                <div className="flex flex-col gap-4 xl:gap-6 w-full xl:w-[436px]">
+                  <div className="flex flex-col gap-2 xl:gap-2">
                     {[
-                      { label: t("dropdowns.products.biscuits.label"), desc: t("dropdowns.products.biscuits.desc"), href: "/products?category=biscuit", img: "/assets/products/biscuit-scatter.png", bg: "bg-gray-100" },
-                      { label: t("dropdowns.products.flour.label"), desc: t("dropdowns.products.flour.desc"), href: "/products?category=flour", img: "https://picsum.photos/100/100?random=81", bg: "bg-[#FFF6E5]" },
-                      { label: t("dropdowns.products.recipes.label"), desc: t("dropdowns.products.recipes.desc"), href: "/recipes", img: "https://picsum.photos/100/100?random=82", bg: "bg-[#FFF0F0]" },
+                      { label: t("dropdowns.products.biscuits.label"), desc: t("dropdowns.products.biscuits.desc"), href: "/products?category=biscuit", img: "/assets/products/figma/figma_prod_12.png" },
+                      { label: t("dropdowns.products.flour.label"), desc: t("dropdowns.products.flour.desc"), href: "/products?category=flour", img: "/assets/products/figma/figma_prod_12.png" },
+                      { label: t("dropdowns.products.recipes.label"), desc: t("dropdowns.products.recipes.desc"), href: "/recipes", img: "/assets/products/figma/figma_prod_12.png" },
                     ].map((item) => (
                       <Link key={item.href} href={item.href} onClick={() => setActiveDropdown(null)}
-                        className="flex items-center justify-between p-3 xl:p-4 rounded-[14px] xl:rounded-[16px] border border-gray-200 hover:border-[#23B349] hover:bg-[#23B349]/5 transition-colors group">
-                        <div>
-                          <h3 className="text-[#1A1A1A] font-['Funnel_Display'] text-[15px] xl:text-[18px] font-bold group-hover:text-[#23B349] transition-colors">{item.label}</h3>
-                          <p className="text-gray-500 text-[12px] xl:text-[14px]">{item.desc}</p>
+                        className="flex flex-row justify-between items-center rounded-[16px] transition-all duration-300 xl:w-[436px] xl:h-[87px] bg-[#F3F3F3] hover:bg-white border box-border border-transparent hover:border-[#23B349] overflow-hidden group">
+                        <div className="flex flex-col justify-center py-[20px] px-[24px]">
+                          <h3 className="text-[#404040] font-['Funnel_Display'] text-[16px] xl:text-[20px] font-medium leading-[25px] tracking-[-0.004em]">{item.label}</h3>
+                          <p className="text-[#404040] font-['Outfit'] text-[12px] xl:text-[14px] leading-tight tracking-[-0.004em] mt-1">{item.desc}</p>
                         </div>
-                        <div className={`w-10 h-10 xl:w-12 xl:h-12 ${item.bg} rounded-lg overflow-hidden relative shrink-0`}>
-                          <Image src={item.img} alt={item.label} fill className="object-cover" sizes="48px" />
+                        <div className={`w-[105px] h-[87px] relative shrink-0`}>
+                          <Image src={item.img} alt={item.label} fill className="object-cover" sizes="105px" />
                         </div>
                       </Link>
                     ))}
                   </div>
                   <Link href="/products" onClick={() => setActiveDropdown(null)}
-                    className="inline-flex items-center justify-center gap-2 bg-[#23B349] hover:bg-[#1A1A1A] text-white px-6 py-3 xl:py-4 rounded-[999px] font-['Funnel_Display'] text-[14px] xl:text-[16px] font-medium transition-colors w-full group">
-                    {t("dropdowns.products.viewAll")} <ArrowRight className="w-4 h-4 xl:w-5 xl:h-5 group-hover:translate-x-1 transition-transform" />
+                    className="inline-flex items-center justify-center gap-4 bg-[#23B349] hover:bg-[#1A1A1A] text-white px-[32px] py-[16px] rounded-[999px] font-['Outfit'] text-[14px] xl:text-[20px] font-medium transition-colors w-fit self-start xl:h-[56px] group whitespace-nowrap">
+                    {t("dropdowns.products.viewAll")} Products <ArrowRight className="w-4 h-4 xl:w-5 xl:h-5 shrink-0 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
 
                 {/* Product name lists — hidden at lg, shown at xl */}
-                <div className="hidden xl:flex gap-16 flex-1 border-l border-gray-100 pl-12">
-                  <ul className="flex flex-col gap-4">
+                <div className="hidden xl:flex gap-6 w-[384px] h-[208px]">
+                  <ul className="flex flex-col gap-4 w-[180px] opacity-80">
                     {biscuitProducts.slice(0, 7).map((product) => (
                       <li key={product._id}>
                         <Link
                           href={`/products/${product.slug}`}
                           onClick={() => setActiveDropdown(null)}
-                          className="text-gray-600 hover:text-[#23B349] text-[16px] font-medium transition-colors"
+                          className="text-[#404040] hover:text-[#23B349] font-['Outfit'] text-[16px] font-medium transition-colors tracking-[-0.004em]"
                         >
                           {isAm ? product.name.am || product.name.en : product.name.en}
                         </Link>
                       </li>
                     ))}
                   </ul>
-                  <ul className="flex flex-col gap-4">
+                  <ul className="flex flex-col gap-4 w-[180px] opacity-80">
                     {biscuitProducts.slice(7, 14).concat(flourProducts.slice(0, 7)).map((product) => (
                       <li key={product._id}>
                         <Link
                           href={`/products/${product.slug}`}
                           onClick={() => setActiveDropdown(null)}
-                          className="text-gray-600 hover:text-[#23B349] text-[16px] font-medium transition-colors"
+                          className="text-[#404040] hover:text-[#23B349] font-['Outfit'] text-[16px] font-medium transition-colors tracking-[-0.004em]"
                         >
                           {isAm ? product.name.am || product.name.en : product.name.en}
                         </Link>
@@ -485,23 +485,24 @@ export default function Navbar() {
                 </div>
 
                 {/* Featured card — hidden at lg, shown at xl */}
-                <div className="hidden xl:block flex-1 max-w-[280px]">
-                  <Link href={menuProducts[0] ? `/products/${menuProducts[0].slug}` : "/products"} onClick={() => setActiveDropdown(null)}
-                    className="block bg-gray-50 rounded-[24px] p-4 flex flex-col gap-4 hover:shadow-lg transition-shadow group">
-                    <div className="w-full aspect-4/3 bg-gray-200 rounded-xl relative overflow-hidden">
+                <div className="hidden xl:flex flex-col bg-[#F3F3F3] p-2 gap-2 rounded-[16px] w-[287px] h-[260px]">
+                  <Link href={menuProducts[0] ? `/products/${menuProducts[0].slug}` : "/products"} onClick={() => setActiveDropdown(null)} className="group block h-full">
+                    <div className="w-[271px] h-[185px] relative rounded-[8px] overflow-hidden mb-2">
                       <Image src="/assets/products/figma/figma_prod_12.png" alt="Sina Biscuit" fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="280px" />
+                        className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="271px" />
                     </div>
-                    <div>
-                      <p className="text-[#23B349] text-[14px] font-bold uppercase tracking-wider mb-1">{t("dropdowns.products.specialEdition")}</p>
-                      <h4 className="text-[#1A1A1A] font-['Funnel_Display'] text-[20px] font-bold group-hover:text-[#23B349] transition-colors">
-                        {menuProducts[0]
-                          ? isAm
-                            ? menuProducts[0].name.am || menuProducts[0].name.en
-                            : menuProducts[0].name.en
-                          : t("dropdowns.products.viewAll")}
+                    <div className="flex flex-col px-2">
+                      <h4 className="text-[#404040] font-['Outfit'] text-[16px] font-medium group-hover:text-[#23B349] transition-colors leading-[16px] flex items-center gap-1">
+                        {t("dropdowns.products.specialEdition")}—{" "}
+                        <span className="font-['Funnel_Display'] text-[20px] font-medium">
+                          {menuProducts[0]
+                            ? isAm
+                              ? menuProducts[0].name.am || menuProducts[0].name.en
+                              : menuProducts[0].name.en
+                            : "Sina Biscuit"}
+                        </span>
                       </h4>
-                      <p className="text-gray-500 text-[14px] mt-2">{t("dropdowns.products.latestUpdates")}</p>
+                      <p className="text-[#404040] text-[14px] font-['Outfit'] mt-1 leading-[14px]">{t("dropdowns.products.latestUpdates")}</p>
                     </div>
                   </Link>
                 </div>
@@ -510,7 +511,7 @@ export default function Navbar() {
 
             {/* ── People & Planet ── */}
             {activeDropdown === "people-planet" && (
-              <div className="flex flex-col xl:flex-row gap-8 xl:gap-12 w-full xl:justify-between xl:max-w-6xl xl:mx-auto">
+              <div className="flex flex-col xl:flex-row gap-8 xl:gap-12 w-full xl:justify-between">
                 {/* Image card — hidden at lg */}
                 <div className="hidden xl:flex w-[340px] min-h-[260px] rounded-[24px] p-6 flex-col justify-between relative overflow-hidden group shadow-sm shrink-0">
                   <Image src="https://picsum.photos/400/300?random=55" fill className="object-cover" alt="Experiences" />
@@ -519,30 +520,30 @@ export default function Navbar() {
                     <h3 className="font-['Funnel_Display'] text-[24px] font-bold text-[#1A1A1A]">{t("dropdowns.peoplePlanet.experiences")}</h3>
                     <p className="text-gray-600 text-[14px] mt-1 font-medium">{t("dropdowns.peoplePlanet.communityInitiatives")}</p>
                   </div>
-                  <Link href="/people-planet" onClick={() => setActiveDropdown(null)}
+                  <Link href="/gallery" onClick={() => setActiveDropdown(null)}
                     className="bg-[#23B349] hover:bg-[#1A1A1A] transition-colors text-white px-6 py-2.5 rounded-full font-medium self-start z-10 flex items-center gap-2 mt-auto">
                     {t("dropdowns.peoplePlanet.seeAll")} <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
 
                 {/* Links — two columns on lg, stacked single on smaller */}
-                <div className="flex flex-row xl:contents gap-12 flex-1">
-                  <div className="flex flex-col gap-6 xl:gap-8 py-2 flex-1 xl:pl-4">
+                <div className="flex flex-row xl:contents gap-12">
+                  <div className="flex flex-col gap-6 xl:gap-8 py-2 xl:w-auto">
                     {[
                       { label: t("dropdowns.peoplePlanet.community.label"), desc: t("dropdowns.peoplePlanet.community.desc"), href: "/people-planet" },
                       { label: t("dropdowns.peoplePlanet.innovation.label"), desc: t("dropdowns.peoplePlanet.innovation.desc"), href: "/innovation" },
                       { label: t("dropdowns.peoplePlanet.weCare.label"), desc: t("dropdowns.peoplePlanet.weCare.desc"), href: "/we-care" },
                     ].map((item) => (
-                      <Link key={item.href} href={item.href} onClick={() => setActiveDropdown(null)} className="flex flex-col group">
-                        <h4 className="font-['Funnel_Display'] text-[16px] xl:text-[18px] font-bold text-[#1A1A1A] group-hover:text-[#23B349] transition-colors">{item.label}</h4>
-                        <p className="text-gray-500 text-[13px] xl:text-[14px] mt-0.5">{item.desc}</p>
+                      <Link key={item.href} href={item.href} onClick={() => setActiveDropdown(null)} className="flex flex-col justify-center px-6 py-5 rounded-[16px] transition-all duration-300 xl:w-[334px] xl:h-[87px] gap-2 border box-border border-transparent hover:border-[#23B349]">
+                        <h4 className="text-[#404040] font-['Funnel_Display'] text-[16px] xl:text-[20px] font-medium leading-[25px] tracking-[-0.004em]">{item.label}</h4>
+                        <p className="text-[#404040] font-['Outfit'] text-[12px] xl:text-[14px] leading-tight tracking-[-0.004em]">{item.desc}</p>
                       </Link>
                     ))}
                   </div>
-                  <div className="flex flex-col gap-6 xl:gap-8 py-2 flex-1">
-                    <Link href="/terms" onClick={() => setActiveDropdown(null)} className="flex flex-col group">
-                      <h4 className="font-['Funnel_Display'] text-[16px] xl:text-[18px] font-bold text-[#1A1A1A] group-hover:text-[#23B349] transition-colors">{t("dropdowns.peoplePlanet.terms.label")}</h4>
-                      <p className="text-gray-500 text-[13px] xl:text-[14px] mt-0.5">{t("dropdowns.peoplePlanet.terms.desc")}</p>
+                  <div className="flex flex-col gap-6 xl:gap-8 py-2 xl:w-auto">
+                    <Link href="/terms" onClick={() => setActiveDropdown(null)} className="flex flex-col justify-center px-6 py-5 rounded-[16px] transition-all duration-300 xl:w-[334px] xl:h-[87px] gap-2 border box-border border-transparent hover:border-[#23B349]">
+                      <h4 className="text-[#404040] font-['Funnel_Display'] text-[16px] xl:text-[20px] font-medium leading-[25px] tracking-[-0.004em]">{t("dropdowns.peoplePlanet.terms.label")}</h4>
+                      <p className="text-[#404040] font-['Outfit'] text-[12px] xl:text-[14px] leading-tight tracking-[-0.004em]">{t("dropdowns.peoplePlanet.terms.desc")}</p>
                     </Link>
                   </div>
                 </div>
@@ -551,7 +552,7 @@ export default function Navbar() {
 
             {/* ── Company ── */}
             {activeDropdown === "company" && (
-              <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 xl:gap-6 w-full xl:max-w-6xl xl:mx-auto">
+              <div className="flex flex-col xl:flex-row gap-6 xl:gap-[64px] w-full xl:justify-center">
                 {[
                   { title: t("dropdowns.company.about.label"), desc: t("dropdowns.company.about.desc"), href: "/about", active: true },
                   { title: t("dropdowns.company.whyChoose.label"), desc: t("dropdowns.company.whyChoose.desc"), href: "/why-choose-vita" },
@@ -559,9 +560,9 @@ export default function Navbar() {
                   { title: t("dropdowns.company.sustainability.label"), desc: t("dropdowns.company.sustainability.desc"), href: "/sustainability" },
                 ].map((item, idx) => (
                   <Link key={idx} href={item.href} onClick={() => setActiveDropdown(null)}
-                    className={`flex flex-col p-4 xl:p-6 rounded-[14px] xl:rounded-[16px] hover:bg-gray-50 transition-colors group ${item.active ? "border-l-[4px] border-[#23B349] bg-gray-50" : "border-l-[4px] border-transparent"}`}>
-                    <h3 className="text-[#1A1A1A] font-['Funnel_Display'] text-[16px] xl:text-[20px] font-bold group-hover:text-[#23B349] transition-colors mb-1 xl:mb-2">{item.title}</h3>
-                    <p className="text-gray-500 text-[12px] xl:text-[14px]">{item.desc}</p>
+                    className={`flex flex-col justify-center px-6 py-5 rounded-[16px] transition-all duration-300 xl:w-[334px] xl:h-[87px] gap-2 border box-border ${item.active ? "border-[#23B349]" : "border-transparent hover:border-[#23B349]"}`}>
+                    <h3 className="text-[#404040] font-['Funnel_Display'] text-[16px] xl:text-[20px] font-medium leading-[25px] tracking-[-0.004em]">{item.title}</h3>
+                    <p className="text-[#404040] font-['Outfit'] text-[12px] xl:text-[14px] leading-tight tracking-[-0.004em]">{item.desc}</p>
                   </Link>
                 ))}
               </div>
@@ -569,23 +570,35 @@ export default function Navbar() {
 
             {/* ── Resources ── */}
             {activeDropdown === "resources" && (
-              <div className="flex flex-col xl:flex-row gap-8 xl:gap-12 w-full xl:justify-between xl:max-w-6xl xl:mx-auto">
-                {/* Primary links */}
-                <div className="flex flex-col gap-6 xl:gap-8 flex-1">
+              <div className="flex flex-col xl:flex-row gap-8 xl:gap-12 w-full xl:justify-between">
+                {/* Column 1: Primary links */}
+                <div className="flex flex-col gap-6 xl:gap-8 xl:w-auto">
                   {[
                     { label: t("dropdowns.resources.distributor.label"), desc: t("dropdowns.resources.distributor.desc"), href: "/become-distributor" },
+                    { label: t("dropdowns.resources.customerCare.label"), desc: t("dropdowns.resources.customerCare.desc"), href: "/contact-customer-care" },
                     { label: t("dropdowns.resources.research.label"), desc: t("dropdowns.resources.research.desc"), href: "/research" },
+                  ].map((item) => (
+                    <Link key={item.href} href={item.href} onClick={() => setActiveDropdown(null)} className="flex flex-col justify-center px-6 py-5 rounded-[16px] transition-all duration-300 xl:w-[334px] xl:h-[87px] gap-2 border box-border border-transparent hover:border-[#23B349]">
+                      <h4 className="text-[#404040] font-['Funnel_Display'] text-[16px] xl:text-[20px] font-medium leading-[25px] tracking-[-0.004em]">{item.label}</h4>
+                      <p className="text-[#404040] font-['Outfit'] text-[12px] xl:text-[14px] leading-tight tracking-[-0.004em]">{item.desc}</p>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Column 2: FAQs */}
+                <div className="flex flex-col gap-6 xl:gap-8 xl:w-auto">
+                  {[
                     { label: t("dropdowns.resources.faqs.label"), desc: t("dropdowns.resources.faqs.desc"), href: "/faqs" },
                   ].map((item) => (
-                    <Link key={item.href} href={item.href} onClick={() => setActiveDropdown(null)} className="flex flex-col group">
-                      <h4 className="font-['Funnel_Display'] text-[16px] xl:text-[20px] font-bold text-[#1A1A1A] group-hover:text-[#23B349] transition-colors">{item.label}</h4>
-                      <p className="text-gray-500 text-[13px] xl:text-[14px]">{item.desc}</p>
+                    <Link key={item.href} href={item.href} onClick={() => setActiveDropdown(null)} className="flex flex-col justify-center px-6 py-5 rounded-[16px] transition-all duration-300 xl:w-[334px] xl:h-[87px] gap-2 border box-border border-transparent hover:border-[#23B349]">
+                      <h4 className="text-[#404040] font-['Funnel_Display'] text-[16px] xl:text-[20px] font-medium leading-[25px] tracking-[-0.004em]">{item.label}</h4>
+                      <p className="text-[#404040] font-['Outfit'] text-[12px] xl:text-[14px] leading-tight tracking-[-0.004em]">{item.desc}</p>
                     </Link>
                   ))}
                 </div>
 
                 {/* More pills — hidden at lg */}
-                <div className="hidden xl:flex flex-col gap-3 flex-1">
+                <div className="hidden xl:flex flex-col gap-3 xl:w-[280px]">
                   <h4 className="font-['Funnel_Display'] text-[16px] font-bold text-[#1A1A1A] mb-2">{t("dropdowns.resources.more")}</h4>
                   {[1, 2, 3].map((i) => (
                     <div key={i} className="bg-[#F5F5F5] rounded-[12px] px-5 py-3.5 flex items-center hover:bg-gray-200 transition-colors cursor-pointer">
@@ -595,7 +608,7 @@ export default function Navbar() {
                 </div>
 
                 {/* CTA card — hidden at lg */}
-                <div className="hidden xl:block flex-1 max-w-[340px]">
+                <div className="hidden xl:block xl:w-[340px]">
                   <Link href="/research" onClick={() => setActiveDropdown(null)}
                     className="rounded-[16px] p-6 flex flex-col justify-center relative overflow-hidden group min-h-[120px] shadow-sm hover:shadow-md transition-shadow"
                     style={{ background: "linear-gradient(90deg, rgba(31,214,80,1) 0%, rgba(116,255,56,1) 100%)" }}>
@@ -611,22 +624,22 @@ export default function Navbar() {
 
             {/* ── What's New ── */}
             {activeDropdown === "whats-new" && (
-              <div className="flex flex-col xl:flex-row gap-8 xl:gap-12 w-full xl:justify-between xl:max-w-6xl xl:mx-auto">
+              <div className="flex flex-col xl:flex-row gap-8 w-full xl:justify-between">
                 {/* Primary links */}
-                <div className="flex flex-col gap-6 xl:gap-8 flex-1 xl:max-w-[280px]">
+                <div className="flex flex-col gap-6 xl:gap-8 xl:w-auto">
                   {[
                     { label: t("dropdowns.whatsNew.news.label"), desc: t("dropdowns.whatsNew.news.desc"), href: "/news" },
                     { label: t("dropdowns.whatsNew.updates.label"), desc: t("dropdowns.whatsNew.updates.desc"), href: "/news" },
                   ].map((item) => (
-                    <Link key={item.label} href={item.href} onClick={() => setActiveDropdown(null)} className="flex flex-col group">
-                      <h4 className="font-['Funnel_Display'] text-[16px] xl:text-[20px] font-bold text-[#1A1A1A] group-hover:text-[#23B349] transition-colors">{item.label}</h4>
-                      <p className="text-gray-500 text-[13px] xl:text-[14px]">{item.desc}</p>
+                    <Link key={item.label} href={item.href} onClick={() => setActiveDropdown(null)} className="flex flex-col justify-center px-6 py-5 rounded-[16px] transition-all duration-300 xl:w-[334px] xl:h-[87px] gap-2 border box-border border-transparent hover:border-[#23B349]">
+                      <h4 className="text-[#404040] font-['Funnel_Display'] text-[16px] xl:text-[20px] font-medium leading-[25px] tracking-[-0.004em]">{item.label}</h4>
+                      <p className="text-[#404040] font-['Outfit'] text-[12px] xl:text-[14px] leading-tight tracking-[-0.004em]">{item.desc}</p>
                     </Link>
                   ))}
                 </div>
 
                 {/* Latest News cards — hidden at lg */}
-                <div className="hidden xl:flex flex-col gap-4 flex-1">
+                <div className="hidden xl:flex flex-col gap-4 xl:w-[340px]">
                   <h4 className="font-['Funnel_Display'] text-[16px] font-bold text-[#1A1A1A] mb-2">{t("dropdowns.whatsNew.latestNews")}</h4>
                   {!newsLoaded ? (
                     // Skeleton while loading
@@ -662,8 +675,8 @@ export default function Navbar() {
                   )}
                 </div>
 
-                {/* Recent updates — hidden at lg */}
-                <div className="hidden xl:flex flex-col gap-3 flex-1">
+                {/* Recent Updates pills — hidden at lg */}
+                <div className="hidden xl:flex flex-col gap-3 xl:w-[340px]">
                   <h4 className="font-['Funnel_Display'] text-[16px] font-bold text-[#1A1A1A] mb-2">{t("dropdowns.whatsNew.recentUpdates")}</h4>
                   {!newsLoaded ? (
                     [1, 2, 3].map((i) => (

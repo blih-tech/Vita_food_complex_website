@@ -146,6 +146,10 @@
           "label": "Become a Distributor",
           "desc": "Grow With Us"
         },
+        "customerCare": {
+          "label": "Customer Care",
+          "desc": "We value your voice in improving the product"
+        },
         "research": {
           "label": "Research",
           "desc": "Market Insights"
