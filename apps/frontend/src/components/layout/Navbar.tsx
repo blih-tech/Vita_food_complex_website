@@ -151,12 +151,13 @@ export default function Navbar() {
               </div>
             </Link>
 
-            {/* Desktop nav links — visible on lg+ (laptop, desktop) */}
             <div className="hidden lg:flex items-center gap-[14px] xl:gap-[24px] 2xl:gap-[48px]">
               {navLinks.map((link) => (
                 <div
                   key={link.key}
-                  className="flex gap-[3px] items-center justify-center group cursor-pointer"
+                  className={`flex gap-[3px] items-center justify-center cursor-pointer transition-all duration-300 rounded-[999px] ${
+                    activeDropdown === link.key ? "bg-white px-3 py-1.5 xl:px-4 xl:py-2" : "hover:opacity-80"
+                  }`}
                   onClick={(e: ReactMouseEvent<HTMLDivElement>) => {
                     if (link.hasDropdown) {
                       e.preventDefault();
@@ -166,7 +167,9 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className="text-white text-[13px] xl:text-[16px] 2xl:text-[20px] font-['Funnel_Display'] font-medium leading-normal tracking-[-0.08px] hover:opacity-80 transition-opacity whitespace-nowrap"
+                    className={`text-[13px] xl:text-[16px] 2xl:text-[20px] font-['Funnel_Display'] font-medium leading-normal tracking-[-0.08px] whitespace-nowrap ${
+                      activeDropdown === link.key ? "text-[#23B349]" : "text-white"
+                    }`}
                     onClick={(e: ReactMouseEvent<HTMLAnchorElement>) => {
                       if (link.hasDropdown) e.preventDefault();
                     }}
@@ -176,7 +179,9 @@ export default function Navbar() {
                   {link.hasDropdown && (
                     <div className="flex items-center justify-center">
                       <ChevronDown
-                        className={`w-3 h-3 xl:w-4 xl:h-4 text-white opacity-80 group-hover:opacity-100 transition-transform duration-300 ${activeDropdown === link.key ? "rotate-180" : ""}`}
+                        className={`w-3 h-3 xl:w-4 xl:h-4 transition-transform duration-300 ${
+                          activeDropdown === link.key ? "text-[#23B349] rotate-180" : "text-white opacity-80"
+                        }`}
                       />
                     </div>
                   )}
@@ -240,12 +245,16 @@ export default function Navbar() {
                         setMobileOpen(false);
                       }
                     }}
-                    className="w-full px-6 py-4 text-white text-[18px] sm:text-[20px] font-['Funnel_Display'] font-medium rounded-[16px] hover:bg-white/10 transition-colors flex justify-between items-center text-left"
+                    className={`w-full px-6 py-4 text-[18px] sm:text-[20px] font-['Funnel_Display'] font-medium rounded-[16px] transition-colors flex justify-between items-center text-left ${
+                      activeDropdown === link.key ? "bg-white text-[#23B349]" : "text-white hover:bg-white/10"
+                    }`}
                   >
                     {t(`links.${link.key}`)}
                     {link.hasDropdown && (
                       <ChevronDown
-                        className={`w-5 h-5 transition-transform duration-300 shrink-0 ${activeDropdown === link.key ? "rotate-180" : ""}`}
+                        className={`w-5 h-5 transition-transform duration-300 shrink-0 ${
+                          activeDropdown === link.key ? "text-[#23B349] rotate-180" : "text-white"
+                        }`}
                       />
                     )}
                   </button>

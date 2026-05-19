@@ -7,6 +7,7 @@ import {
   CustomerCareSubmission,
   CustomerCareSubmissionDocument,
 } from './schemas/customer-care-submission.schema';
+import { CustomerCareMailerService } from './customer-care-mailer.service';
 
 const MAX_PAYLOAD_BYTES = 96_000;
 
@@ -15,6 +16,7 @@ export class CustomerCareSubmissionsService {
   constructor(
     @InjectModel(CustomerCareSubmission.name)
     private readonly model: Model<CustomerCareSubmissionDocument>,
+    private readonly mailerService: CustomerCareMailerService,
   ) {}
 
   private buildSummary(kind: 'feedback' | 'complaint', payload: Record<string, unknown>): string {
@@ -49,7 +51,12 @@ export class CustomerCareSubmissionsService {
       payload: body.payload,
       status: 'new',
     });
-    return doc.save();
+    return doc.save().then((saved) => {
+      this.mailerService
+        .sendSubmissionNotification(body.kind, saved.summary, body.payload)
+        .catch(() => {});
+      return saved;
+    });
   }
 
   async findAll(): Promise<CustomerCareSubmissionDocument[]> {

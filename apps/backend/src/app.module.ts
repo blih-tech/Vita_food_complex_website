@@ -21,6 +21,7 @@ import { TermsModule } from './modules/terms/terms.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { RecipesModule } from './modules/recipes/recipes.module';
 import { CustomerCareSubmissionsModule } from './modules/customer-care-submissions/customer-care-submissions.module';
+import { DistributorApplicationsModule } from './modules/distributor-applications/distributor-applications.module';
 
 @Module({
   imports: [
@@ -54,6 +55,7 @@ import { CustomerCareSubmissionsModule } from './modules/customer-care-submissio
     DashboardModule,
     RecipesModule,
     CustomerCareSubmissionsModule,
+    DistributorApplicationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

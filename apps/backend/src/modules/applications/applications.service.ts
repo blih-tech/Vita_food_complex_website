@@ -2,13 +2,29 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Application, ApplicationDocument, ApplicationStatus } from './schemas/application.schema';
+import { ApplicationMailerService } from './application-mailer.service';
 
 @Injectable()
 export class ApplicationsService {
-  constructor(@InjectModel(Application.name) private model: Model<ApplicationDocument>) {}
+  constructor(
+    @InjectModel(Application.name) private model: Model<ApplicationDocument>,
+    private readonly mailerService: ApplicationMailerService,
+  ) {}
 
   async create(data: Partial<Application>): Promise<ApplicationDocument> {
-    return new this.model(data).save();
+    const saved = await new this.model(data).save();
+    if (data.firstName && data.lastName && data.email && data.phone && data.jobId) {
+      this.mailerService
+        .sendApplicationEmails({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          phone: data.phone,
+          jobId: data.jobId,
+        })
+        .catch(() => {});
+    }
+    return saved;
   }
 
   async findAll(jobId?: string): Promise<ApplicationDocument[]> {
