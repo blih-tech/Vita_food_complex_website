@@ -89,8 +89,12 @@ export default function DistributorSubmissionsPage() {
     try {
       const res = await api.get<DistributorApplication[]>("/distributor-applications");
       setApplications(res.data);
-    } catch {
-      showToast("error", "Failed to load distributor applications.");
+    } catch (err: any) {
+      if (err.response?.status === 404) {
+        setApplications([]);
+      } else {
+        showToast("error", "Failed to load distributor applications.");
+      }
     } finally {
       setLoading(false);
     }
