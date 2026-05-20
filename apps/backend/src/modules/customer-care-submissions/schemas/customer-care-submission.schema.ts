@@ -5,8 +5,8 @@ export type CustomerCareSubmissionDocument = CustomerCareSubmission & Document;
 
 @Schema({ timestamps: true })
 export class CustomerCareSubmission {
-  @Prop({ required: true, enum: ['feedback', 'complaint'] })
-  kind: 'feedback' | 'complaint';
+  @Prop({ required: true, enum: ['feedback', 'complaint', 'compliment'] })
+  kind: 'feedback' | 'complaint' | 'compliment';
 
   /** UI locale used on the site */
   @Prop({ default: 'en' })
