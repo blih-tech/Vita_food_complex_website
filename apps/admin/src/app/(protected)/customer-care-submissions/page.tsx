@@ -192,7 +192,21 @@ export default function CustomerCareSubmissionsPage() {
                     <h2 className="text-xl font-bold truncate">{selected.summary}</h2>
                  </div>
                  <div className="flex-1 overflow-y-auto p-4 md:p-8">
-                    <pre className="bg-gray-50 p-4 md:p-6 rounded-2xl text-[10px] md:text-xs overflow-x-auto">{JSON.stringify(selected.payload, null, 2)}</pre>
+                    <div className="space-y-6">
+                      <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+                        <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">Submission Details</h4>
+                        <div className="space-y-4">
+                          {Object.entries(selected.payload).map(([key, value]) => (
+                            <div key={key} className="grid grid-cols-2 gap-4">
+                              <span className="font-medium text-gray-500 capitalize">{key.replace(/([A-Z])/g, ' $1')}</span>
+                              <span className="font-semibold text-[#333733]">
+                                {typeof value === 'object' ? JSON.stringify(value, null, 2) : String(value)}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                  </div>
                  <div className="p-4 md:p-8 border-t border-gray-100 flex gap-3">
                    <button onClick={() => exportSingleSubmissionPdf(selected)} className="flex-1 px-4 py-3 bg-gray-100 rounded-xl text-xs md:text-sm font-bold flex items-center justify-center gap-2"><FileDown size={16}/> PDF</button>
