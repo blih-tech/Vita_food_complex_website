@@ -258,7 +258,7 @@ export default function CustomerCareSubmissionsPage() {
                     </div>
                  </div>
                  <div className="p-4 md:p-8 border-t border-gray-100 flex gap-3">
-                   <button onClick={() => exportSingleSubmissionPdf(selected)} className="flex-1 px-4 py-3 bg-gray-100 rounded-xl text-xs md:text-sm font-bold flex items-center justify-center gap-2"><FileDown size={16}/> PDF</button>
+                   <button onClick={() => exportSingleSubmissionPdf(selected, questionMap)} className="flex-1 px-4 py-3 bg-gray-100 rounded-xl text-xs md:text-sm font-bold flex items-center justify-center gap-2"><FileDown size={16}/> PDF</button>
                    <button onClick={() => handleDelete(selected._id)} className="flex-1 px-4 py-3 bg-red-50 text-red-500 rounded-xl text-xs md:text-sm font-bold">Delete</button>
                  </div>
               </div>

@@ -8,32 +8,6 @@ const BRAND_GREEN: [number, number, number] = [35, 179, 73];
 const BRAND_DARK: [number, number, number] = [51, 55, 51];
 const BRAND_LIGHT: [number, number, number] = [240, 250, 243];
 
-const QUESTION_MAP: Record<string, { en: string; am: string }> = {
-  q1: { en: "Sales department guest handling", am: "የሽያጭ ክፍል የእንግዳ አቀባበል" },
-  q2: { en: "Purchasing process time", am: "ለግዢ ሂደት የሚወስደው ጊዜ" },
-  q3: { en: "Store keepers customer handling", am: "የመጋዘን ሰራተኞች የደንበኞች አያያዝ" },
-  q4: { en: "Products quality and safety", am: "የምርቶች ጥራት እና ደህንነት" },
-  q5: { en: "Delivery time & adequacy", am: "የማድረስ ጊዜ እና በቂነት" },
-  q6: { en: "Loading condition standard", am: "የምርቱ አጫጫን ሁኔታ ደረጃውን የጠበቀ" },
-  q7: { en: "Products' price", am: "የምርቶች ዋጋ" },
-  q8: { en: "Do you love vita?", am: "ቪታን ትወደዋለህ?" },
-  previousExperience: { en: "Previous experience", am: "ከዚህ ቀደም ከምርታችን እና ከአገልግሎታችን ጋር የተያያዘ ልምድ" },
-  employeeEvaluation: { en: "Employee evaluation", am: "የሰራተኞች ግምገማ" },
-  suggestion: { en: "Additional suggestion", am: "ተጨማሪ አስተያየት" },
-  additional: { en: "Additional information", am: "ተጨማሪ መረጃ" },
-  customerName: { en: "Customer Name", am: "የደንበኛ ስም" },
-  address: { en: "Address", am: "አድራሻ" },
-  city: { en: "City", am: "ከተማ" },
-  woreda: { en: "Woreda", am: "ወረዳ" },
-  phone: { en: "Phone", am: "ስልክ" },
-  productDetails: { en: "Product Details", am: "የምርት ዝርዝሮች" },
-  productType: { en: "Product Type Purchased", am: "የተገዛው የምርት ዓይነት" },
-  quantity: { en: "Quantity/Number", am: "ብዛት/ቁጥር" },
-  detail: { en: "Detail of Complaint/Compliment", am: "የቅሬታ/ምስጋና ዝርዝር" },
-  name: { en: "Reference Name", am: "ማጣቀሻ ስም" },
-  date: { en: "Date", am: "ቀን" }
-};
-
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-US", {
     year: "numeric",
@@ -144,7 +118,10 @@ export function exportSubmissionsToPdf(items: CustomerCareSubmissionItem[], titl
   doc.save(`vita-care-submissions-${Date.now()}.pdf`);
 }
 
-export function exportSingleSubmissionPdf(item: CustomerCareSubmissionItem) {
+export function exportSingleSubmissionPdf(
+    item: CustomerCareSubmissionItem, 
+    questionMap: Record<string, { en: string; am: string }>
+) {
   const doc = new jsPDF({ unit: "mm", format: "a4" });
 
   addBrandHeader(doc, "Vita Food Complex", "Customer Care Detail");
@@ -197,7 +174,7 @@ export function exportSingleSubmissionPdf(item: CustomerCareSubmissionItem) {
   Object.entries(item.payload).forEach(([key, value]) => {
     if (typeof value === 'object' && value !== null) {
         Object.entries(value as Record<string, unknown>).forEach(([subKey, subVal]) => {
-           const labels = QUESTION_MAP[subKey] || { en: subKey, am: subKey };
+           const labels = questionMap[subKey] || { en: subKey, am: subKey };
            doc.setFont("helvetica", "bold");
            doc.text(`${labels.en}:`, 18, y);
            doc.setFont("helvetica", "normal");
@@ -205,7 +182,7 @@ export function exportSingleSubmissionPdf(item: CustomerCareSubmissionItem) {
            y += 7;
         });
     } else {
-        const labels = QUESTION_MAP[key] || { en: key, am: key };
+        const labels = questionMap[key] || { en: key, am: key };
         doc.setFont("helvetica", "bold");
         doc.text(`${labels.en}:`, 18, y);
         doc.setFont("helvetica", "normal");
