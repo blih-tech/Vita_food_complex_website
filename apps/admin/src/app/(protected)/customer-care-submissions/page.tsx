@@ -46,6 +46,30 @@ const STATUS_STYLES: Record<CareSubmissionStatus, string> = {
 
 const COLORS = ["#23B349", "#DB2777", "#2563EB", "#9333EA", "#F59E0B"];
 
+const QUESTION_MAP: Record<string, string> = {
+  q1: "How do you get sales department Guests handling",
+  q2: "Time taken for purchasing process",
+  q3: "How do you get store keepers Customer handling",
+  q4: "Products quality and safety status",
+  q5: "Delivery Time & adequacy",
+  q6: "Is loading condition meet standard",
+  q7: "Products' price",
+  q8: "General Satisfaction",
+  previousExperience: "Previous experience",
+  employeeEvaluation: "Employee evaluation",
+  suggestion: "Additional suggestion",
+  additional: "Additional information",
+  customerName: "Customer Name",
+  address: "Address",
+  city: "City",
+  woreda: "Woreda",
+  phone: "Phone",
+  productDetails: "Product Details",
+  productType: "Product Type Purchased",
+  quantity: "Quantity/Number",
+  detail: "Detail of Complaint/Compliment"
+};
+
 function timeAgo(dateStr: string) {
   const diff = Date.now() - new Date(dateStr).getTime();
   const m = Math.floor(diff / 60000);
@@ -164,7 +188,6 @@ export default function CustomerCareSubmissionsPage() {
       <div className="flex-1 overflow-auto p-4 md:p-8">
         {viewMode === 'list' ? (
           <div className="flex flex-col lg:flex-row gap-6 h-full">
-            {/* List side - adaptive width */}
             <div className={`flex flex-col gap-4 ${selected ? 'hidden lg:flex lg:w-1/3' : 'w-full'} transition-all`}>
               <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0">
                 {(["all", "feedback", "complaint", "compliment"] as const).map(k => (
@@ -184,7 +207,6 @@ export default function CustomerCareSubmissionsPage() {
               ))}
             </div>
             
-            {/* Detail Side - full screen on mobile when selected */}
             {selected && (
               <div className={`${selected ? 'fixed inset-0 z-30 bg-white md:relative md:inset-auto md:flex-1 md:rounded-[32px] md:border md:border-gray-100 shadow-xl' : 'hidden'} flex flex-col`}>
                  <div className="p-4 md:p-8 border-b border-gray-100 flex items-center justify-between">
@@ -196,14 +218,30 @@ export default function CustomerCareSubmissionsPage() {
                       <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
                         <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">Submission Details</h4>
                         <div className="space-y-4">
-                          {Object.entries(selected.payload).map(([key, value]) => (
-                            <div key={key} className="grid grid-cols-2 gap-4">
-                              <span className="font-medium text-gray-500 capitalize">{key.replace(/([A-Z])/g, ' $1')}</span>
-                              <span className="font-semibold text-[#333733]">
-                                {typeof value === 'object' ? JSON.stringify(value, null, 2) : String(value)}
-                              </span>
-                            </div>
-                          ))}
+                          {Object.entries(selected.payload).map(([key, value]) => {
+                            if (key === 'ratings' && typeof value === 'object') {
+                              return Object.entries(value as Record<string, unknown>).map(([qKey, qVal]) => (
+                                <div key={qKey} className="grid grid-cols-2 gap-4 border-b border-gray-50 pb-2">
+                                  <span className="text-sm font-medium text-gray-500">{QUESTION_MAP[qKey] || qKey}</span>
+                                  <span className="text-sm font-semibold text-[#333733]">{String(qVal)}</span>
+                                </div>
+                              ));
+                            }
+                            if (typeof value === 'object') {
+                              return Object.entries(value as Record<string, unknown>).map(([subKey, subVal]) => (
+                                <div key={subKey} className="grid grid-cols-2 gap-4 border-b border-gray-50 pb-2">
+                                  <span className="text-sm font-medium text-gray-500">{QUESTION_MAP[subKey] || subKey}</span>
+                                  <span className="text-sm font-semibold text-[#333733]">{String(subVal)}</span>
+                                </div>
+                              ));
+                            }
+                            return (
+                              <div key={key} className="grid grid-cols-2 gap-4 border-b border-gray-50 pb-2">
+                                <span className="text-sm font-medium text-gray-500">{QUESTION_MAP[key] || key}</span>
+                                <span className="text-sm font-semibold text-[#333733]">{String(value)}</span>
+                              </div>
+                            );
+                          })}
                         </div>
                       </div>
                     </div>
@@ -216,7 +254,6 @@ export default function CustomerCareSubmissionsPage() {
             )}
           </div>
         ) : (
-          /* Analytics View - adaptive grid */
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8">
             <div className="bg-white p-6 md:p-8 rounded-3xl border border-gray-100">
                <h3 className="text-base md:text-lg font-bold mb-6">Submission Trend (30 Days)</h3>
@@ -224,7 +261,7 @@ export default function CustomerCareSubmissionsPage() {
             </div>
             <div className="bg-white p-6 md:p-8 rounded-3xl border border-gray-100">
                <h3 className="text-base md:text-lg font-bold mb-6">Distribution</h3>
-               <div className="h-48 md:h-64"><ResponsiveContainer width="100%" height="100%"><PieChart><Pie data={analytics.types} dataKey="value" nameKey="name" fill="#8884d8"><Cell fill="#23B349"/><Cell fill="#F59E0B"/><Cell fill="#DB2777"/></Pie><Tooltip/><Legend/></PieChart></ResponsiveContainer></div>
+               <div className="h-64"><ResponsiveContainer width="100%" height="100%"><PieChart><Pie data={analytics.types} dataKey="value" nameKey="name" fill="#8884d8"><Cell fill="#23B349"/><Cell fill="#F59E0B"/><Cell fill="#DB2777"/></Pie><Tooltip/><Legend/></PieChart></ResponsiveContainer></div>
             </div>
           </div>
         )}
