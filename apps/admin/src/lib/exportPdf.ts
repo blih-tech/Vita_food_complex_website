@@ -1,7 +1,7 @@
 "use client";
 
 import jsPDF from "jspdf";
-import { autoTable } from "jspdf-autotable";
+import autoTable from "jspdf-autotable";
 import { CustomerCareSubmissionItem } from "./customerCareSubmissionsApi";
 
 const BRAND_GREEN: [number, number, number] = [35, 179, 73];

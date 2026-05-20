@@ -25,7 +25,7 @@ export class CustomerCareMailerService {
   }
 
   async sendSubmissionNotification(
-    kind: 'feedback' | 'complaint',
+    kind: 'feedback' | 'complaint' | 'compliment',
     summary: string,
     payload: Record<string, unknown>,
   ): Promise<void> {
@@ -44,7 +44,7 @@ export class CustomerCareMailerService {
 
     if (!senderEmail || !adminEmail) return;
 
-    const kindLabel = kind === 'feedback' ? 'Customer Feedback' : 'Customer Complaint';
+    const kindLabel = kind === 'feedback' ? 'Customer Feedback' : kind === 'complaint' ? 'Customer Complaint' : 'Customer Compliment';
 
     const payloadRows = Object.entries(payload)
       .filter(([, v]) => v !== null && v !== undefined && v !== '')

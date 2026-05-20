@@ -19,7 +19,7 @@ export class CustomerCareSubmissionsService {
     private readonly mailerService: CustomerCareMailerService,
   ) {}
 
-  private buildSummary(kind: 'feedback' | 'complaint', payload: Record<string, unknown>): string {
+  private buildSummary(kind: 'feedback' | 'complaint' | 'compliment', payload: Record<string, unknown>): string {
     if (kind === 'complaint') {
       const name =
         String(payload.customerName ?? '')
@@ -28,6 +28,11 @@ export class CustomerCareSubmissionsService {
       if (name) return `Complaint · ${name}`;
       if (phone) return `Complaint · ${phone}`;
       return 'Complaint';
+    }
+
+    if (kind === 'compliment') {
+      const name = String(payload.customerName ?? '').trim();
+      return name ? `Compliment · ${name}` : 'Compliment';
     }
 
     const ref = payload.reference;
