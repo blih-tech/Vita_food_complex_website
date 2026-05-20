@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   Headphones,
   Trash2,
@@ -9,18 +9,41 @@ import {
   Inbox,
   Archive,
   Eye,
+  Download,
+  FileDown,
+  BarChart2,
+  Layout,
+  TrendingUp,
+  MessageCircle,
+  Heart,
+  Calendar,
 } from "lucide-react";
+import {
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  PieChart,
+  Pie,
+  Cell,
+} from "recharts";
 import {
   CustomerCareSubmissionItem,
   CareSubmissionStatus,
   customerCareSubmissionsApi,
 } from "@/lib/customerCareSubmissionsApi";
+import { exportSubmissionsToPdf, exportSingleSubmissionPdf } from "@/lib/exportPdf";
 
 const STATUS_STYLES: Record<CareSubmissionStatus, string> = {
   new: "bg-blue-50 text-blue-600 border-blue-200",
   read: "bg-emerald-50 text-emerald-600 border-emerald-200",
   archived: "bg-gray-100 text-gray-500 border-gray-200",
 };
+
+const COLORS = ["#23B349", "#DB2777", "#2563EB", "#9333EA", "#F59E0B"];
 
 function timeAgo(dateStr: string) {
   const diff = Date.now() - new Date(dateStr).getTime();
@@ -34,21 +57,14 @@ function timeAgo(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
-function payloadSearchBlob(p: Record<string, unknown>): string {
-  try {
-    return JSON.stringify(p).toLowerCase();
-  } catch {
-    return "";
-  }
-}
-
 export default function CustomerCareSubmissionsPage() {
   const [items, setItems] = useState<CustomerCareSubmissionItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<CustomerCareSubmissionItem | null>(null);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<CareSubmissionStatus | "all">("all");
-  const [kindFilter, setKindFilter] = useState<"all" | "feedback" | "complaint">("all");
+  const [kindFilter, setKindFilter] = useState<"all" | "feedback" | "complaint" | "compliment">("all");
+  const [viewMode, setViewMode] = useState<'list' | 'analytics'>('list');
 
   const load = async () => {
     setLoading(true);
@@ -86,239 +102,118 @@ export default function CustomerCareSubmissionsPage() {
   };
 
   const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure?")) return;
     await customerCareSubmissionsApi.remove(id);
     setItems((prev) => prev.filter((m) => m._id !== id));
     if (selected?._id === id) setSelected(null);
   };
 
-  const q = search.toLowerCase();
-
   const filtered = items
     .filter((m) => (filter === "all" ? true : m.status === filter))
-    .filter((m) => (kindFilter === "all" ? true : m.kind === kindFilter))
-    .filter(
-      (m) =>
-        !q ||
-        m.summary.toLowerCase().includes(q) ||
-        m.locale.toLowerCase().includes(q) ||
-        payloadSearchBlob(m.payload).includes(q),
-    );
+    .filter((m) => (kindFilter === "all" ? true : m.kind === kindFilter));
 
-  const newCount = items.filter((m) => m.status === "new").length;
-  const today = new Date().toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const analytics = useMemo(() => {
+    const total = items.length;
+    const feedback = items.filter(i => i.kind === 'feedback').length;
+    const complaint = items.filter(i => i.kind === 'complaint').length;
+    const compliment = items.filter(i => i.kind === 'compliment').length;
+    const newCount = items.filter(i => i.status === 'new').length;
+    
+    // Trend (last 30 days)
+    const dailyData: Record<string, number> = {};
+    items.forEach(i => {
+      const ds = i.createdAt.split('T')[0];
+      dailyData[ds] = (dailyData[ds] || 0) + 1;
+    });
+    const trend = Object.keys(dailyData).sort().slice(-30).map(date => ({ date, count: dailyData[date] }));
+    
+    return { total, feedback, complaint, compliment, newCount, trend, 
+      types: [{ name: "Feedback", value: feedback }, { name: "Complaint", value: complaint }, { name: "Compliment", value: compliment }] 
+    };
+  }, [items]);
 
-  const kindBadge = (k: CustomerCareSubmissionItem["kind"]) =>
-    k === "complaint"
-      ? "bg-amber-50 text-amber-700 border-amber-200"
-      : "bg-sky-50 text-sky-700 border-sky-200";
-
-  const initialLetter = selected?.summary?.charAt(0)?.toUpperCase() ?? "?";
+  const kindBadge = (k: string) =>
+    k === "complaint" ? "bg-amber-50 text-amber-700 border-amber-200" : 
+    k === "compliment" ? "bg-pink-50 text-pink-700 border-pink-200" :
+    "bg-sky-50 text-sky-700 border-sky-200";
 
   return (
-    <>
-      <header className="hidden lg:flex h-[68px] bg-white border-b border-gray-100 px-8 items-center justify-between sticky top-0 z-10 font-['Outfit']">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-[10px] bg-[#23B349]/15 flex items-center justify-center">
-            <Headphones size={17} className="text-[#23B349]" />
+    <div className="flex flex-col h-full bg-[#F8FAF8] font-['Outfit']">
+      <header className="h-16 md:h-20 bg-white border-b border-gray-100 flex items-center justify-between px-4 md:px-8 sticky top-0 z-20">
+        <div className="flex items-center gap-3 md:gap-6">
+          <h1 className="text-lg md:text-2xl font-bold text-[#333733] font-['Funnel_Display']">Care</h1>
+          <div className="flex bg-gray-100 p-1 rounded-lg md:rounded-xl">
+            <button onClick={() => setViewMode('list')} className={`flex items-center gap-2 px-3 py-1 md:px-4 md:py-1.5 rounded-lg text-xs md:text-sm font-semibold transition-all ${viewMode === 'list' ? 'bg-white text-[#23B349] shadow-sm' : 'text-gray-500'}`}>
+              <Layout size={14} /> <span className="hidden md:inline">List</span>
+            </button>
+            <button onClick={() => setViewMode('analytics')} className={`flex items-center gap-2 px-3 py-1 md:px-4 md:py-1.5 rounded-lg text-xs md:text-sm font-semibold transition-all ${viewMode === 'analytics' ? 'bg-white text-[#23B349] shadow-sm' : 'text-gray-500'}`}>
+              <BarChart2 size={14} /> <span className="hidden md:inline">Stats</span>
+            </button>
           </div>
-          <div>
-            <h1 className="font-['Funnel_Display'] text-lg font-bold text-[#333733] leading-none">Care forms</h1>
-            <p className="text-[11px] text-gray-400 mt-0.5">{today}</p>
-          </div>
-          <p className="text-[11px] text-gray-500 max-w-[220px] leading-snug">
-            Submissions from the public Feedback & Complaint forms.
-          </p>
-          {newCount > 0 && (
-            <span className="bg-[#23B349] text-white text-[11px] font-bold px-2 py-0.5 rounded-full">{newCount} new</span>
-          )}
         </div>
-        <button
-          type="button"
-          onClick={load}
-          className="w-9 h-9 rounded-[10px] bg-gray-50 hover:bg-gray-100 flex items-center justify-center transition-colors"
-        >
-          <RefreshCw size={15} className={`text-gray-500 ${loading ? "animate-spin" : ""}`} />
-        </button>
+
+        <div className="flex items-center gap-2 md:gap-4">
+          <button onClick={() => exportSubmissionsToPdf(filtered)} className="flex items-center gap-2 px-3 py-2 bg-[#23B349] text-white rounded-lg md:rounded-xl text-xs md:text-sm font-semibold hover:bg-[#1f9d40]">
+            <Download size={14} /> <span className="hidden md:inline">Export</span>
+          </button>
+          <button onClick={load} className={`p-2 rounded-lg md:rounded-xl bg-gray-50 ${loading ? 'animate-spin' : ''}`}><RefreshCw size={16} /></button>
+        </div>
       </header>
 
-      <div className="p-4 sm:p-6 lg:p-8 font-['Outfit']">
-        <div className="flex items-center justify-between mb-4 lg:hidden">
-          <div className="flex items-center gap-2">
-            <h2 className="font-['Funnel_Display'] font-bold text-[#333733] text-lg">Care forms</h2>
-            {newCount > 0 && (
-              <span className="bg-[#23B349] text-white text-[11px] font-bold px-2 py-0.5 rounded-full">{newCount}</span>
-            )}
-          </div>
-          <button type="button" onClick={load} className="w-9 h-9 rounded-[10px] bg-gray-50 flex items-center justify-center">
-            <RefreshCw size={15} className={`text-gray-500 ${loading ? "animate-spin" : ""}`} />
-          </button>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-3 mb-4">
-          <div className="flex gap-1 bg-gray-100 p-1 rounded-[10px]">
-            {(["all", "new", "read", "archived"] as const).map((f) => (
-              <button
-                key={f}
-                type="button"
-                onClick={() => setFilter(f)}
-                className={[
-                  "px-3 py-1.5 rounded-[8px] text-sm font-semibold transition-all capitalize",
-                  filter === f ? "bg-white text-[#23B349] shadow-sm" : "text-gray-500 hover:text-[#333733]",
-                ].join(" ")}
-              >
-                {f}
-                {f === "new" && newCount > 0 ? ` (${newCount})` : ""}
-              </button>
-            ))}
-          </div>
-          <div className="flex gap-1 bg-gray-100 p-1 rounded-[10px]">
-            {(["all", "feedback", "complaint"] as const).map((f) => (
-              <button
-                key={f}
-                type="button"
-                onClick={() => setKindFilter(f)}
-                className={[
-                  "px-3 py-1.5 rounded-[8px] text-sm font-semibold transition-all capitalize",
-                  kindFilter === f ? "bg-white text-[#23B349] shadow-sm" : "text-gray-500 hover:text-[#333733]",
-                ].join(" ")}
-              >
-                {f === "all" ? "All types" : f}
-              </button>
-            ))}
-          </div>
-          <div className="relative flex-1 min-w-[180px]">
-            <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400" />
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search summaries or payload…"
-              className="w-full pl-9 pr-4 py-2.5 bg-white border border-gray-200 rounded-[10px] text-sm focus:outline-none focus:border-[#23B349] focus:ring-2 focus:ring-[#23B349]/10 transition-all"
-            />
-          </div>
-        </div>
-
-        {loading ? (
-          <div className="flex items-center justify-center h-48">
-            <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#23B349]" />
-          </div>
-        ) : filtered.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-48 text-gray-400 gap-3">
-            <Inbox size={36} strokeWidth={1.5} />
-            <p className="text-sm font-medium">No submissions yet</p>
-          </div>
-        ) : (
-          <div className="flex gap-4 lg:gap-5" style={{ height: "calc(100vh - 270px)", minHeight: 400 }}>
-            <div className={`flex flex-col gap-2 overflow-y-auto ${selected ? "hidden lg:flex lg:w-[320px] xl:w-[360px] shrink-0" : "flex-1"}`}>
-              {filtered.map((msg) => (
-                <button
-                  key={msg._id}
-                  type="button"
-                  onClick={() => void handleSelect(msg)}
-                  className={[
-                    "w-full text-left p-4 rounded-[14px] border transition-all",
-                    selected?._id === msg._id ?
-                      "bg-[#23B349]/5 border-[#23B349]/30"
-                    : "bg-white border-gray-100 hover:border-[#23B349]/20 hover:shadow-sm",
-                  ].join(" ")}
-                >
-                  <div className="flex items-start justify-between gap-2 mb-1">
-                    <div className="flex items-center gap-2 min-w-0 flex-wrap">
-                      {msg.status === "new" && <span className="w-2 h-2 bg-[#23B349] rounded-full shrink-0" />}
-                      <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full border ${kindBadge(msg.kind)}`}>
-                        {msg.kind}
-                      </span>
-                      <p className={`text-sm truncate ${msg.status === "new" ? "font-bold" : "font-medium"} text-[#333733]`}>{msg.summary}</p>
-                    </div>
-                    <div className="flex items-center gap-1.5 shrink-0 flex-col items-end">
-                      <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full border capitalize ${STATUS_STYLES[msg.status]}`}>
-                        {msg.status}
-                      </span>
-                      <span className="text-[11px] text-gray-400">{timeAgo(msg.createdAt)}</span>
-                    </div>
+      <div className="flex-1 overflow-auto p-4 md:p-8">
+        {viewMode === 'list' ? (
+          <div className="flex flex-col lg:flex-row gap-6 h-full">
+            {/* List side - adaptive width */}
+            <div className={`flex flex-col gap-4 ${selected ? 'hidden lg:flex lg:w-1/3' : 'w-full'} transition-all`}>
+              <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0">
+                {(["all", "feedback", "complaint", "compliment"] as const).map(k => (
+                  <button key={k} onClick={() => setKindFilter(k)} className={`px-3 py-1.5 md:px-4 md:py-2 rounded-xl text-xs md:text-sm font-bold capitalize whitespace-nowrap ${kindFilter === k ? 'bg-[#23B349]/10 text-[#23B349]' : 'bg-white'}`}>
+                    {k}
+                  </button>
+                ))}
+              </div>
+              {filtered.map(item => (
+                <div key={item._id} onClick={() => handleSelect(item)} className="p-4 md:p-5 bg-white rounded-2xl border border-gray-100 cursor-pointer shadow-sm hover:shadow-md">
+                  <div className="flex justify-between mb-2">
+                    <h3 className="font-bold text-sm md:text-base truncate">{item.summary}</h3>
+                    <span className={`text-[9px] md:text-[10px] px-2 py-0.5 rounded-lg font-bold uppercase ${kindBadge(item.kind)}`}>{item.kind}</span>
                   </div>
-                  <p className="text-xs text-gray-400">Locale · {msg.locale}</p>
-                </button>
+                  <p className="text-[10px] md:text-xs text-gray-400">{timeAgo(item.createdAt)}</p>
+                </div>
               ))}
             </div>
-
+            
+            {/* Detail Side - full screen on mobile when selected */}
             {selected && (
-              <div className="flex-1 bg-white rounded-[18px] border border-gray-100 flex flex-col overflow-hidden">
-                <div className="flex items-start justify-between p-5 border-b border-gray-100 gap-4">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div
-                      className="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0"
-                      style={{
-                        background:
-                          "radial-gradient(ellipse, rgba(31,214,80,1) 0%, rgba(35,179,73,1) 60%, rgba(116,255,56,1) 100%)",
-                      }}
-                    >
-                      {initialLetter}
-                    </div>
-                    <div className="min-w-0">
-                      <p className="font-['Funnel_Display'] font-bold text-[#333733] text-base leading-none mb-1 truncate">{selected.summary}</p>
-                      <div className="flex flex-wrap gap-2 mt-1">
-                        <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${kindBadge(selected.kind)}`}>{selected.kind}</span>
-                        <span className="text-xs text-gray-400">locale: {selected.locale}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 shrink-0 flex-wrap justify-end">
-                    <span className="text-xs text-gray-400">{timeAgo(selected.createdAt)}</span>
-                    <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full border capitalize ${STATUS_STYLES[selected.status]}`}>{selected.status}</span>
-                    <button
-                      type="button"
-                      onClick={() => void handleDelete(selected._id)}
-                      className="w-8 h-8 rounded-[8px] bg-red-50 hover:bg-red-100 text-red-400 hover:text-red-500 flex items-center justify-center transition-colors"
-                    >
-                      <Trash2 size={14} />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setSelected(null)}
-                      className="lg:hidden w-8 h-8 rounded-[8px] bg-gray-100 text-gray-500 flex items-center justify-center text-xs font-bold"
-                    >
-                      ←
-                    </button>
-                  </div>
-                </div>
-
-                <div className="flex-1 p-5 overflow-y-auto">
-                  <p className="text-[11px] font-bold uppercase text-gray-400 tracking-wider mb-2">Submitted data</p>
-                  <pre className="bg-gray-50 rounded-[14px] p-4 text-xs text-[#333733] whitespace-pre-wrap break-words overflow-x-auto font-mono">
-                    {JSON.stringify(selected.payload, null, 2)}
-                  </pre>
-
-                  <div className="flex flex-wrap gap-2 mt-4">
-                    {selected.status === "new" && (
-                      <button
-                        type="button"
-                        onClick={() => void handleStatus(selected._id, "read")}
-                        className="inline-flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-600 text-sm font-semibold px-4 py-2.5 rounded-[10px] transition-colors"
-                      >
-                        <Eye size={14} /> Mark read
-                      </button>
-                    )}
-                    {selected.status !== "archived" && (
-                      <button
-                        type="button"
-                        onClick={() => void handleStatus(selected._id, "archived")}
-                        className="inline-flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-600 text-sm font-semibold px-4 py-2.5 rounded-[10px] transition-colors"
-                      >
-                        <Archive size={14} /> Archive
-                      </button>
-                    )}
-                  </div>
-                </div>
+              <div className={`${selected ? 'fixed inset-0 z-30 bg-white md:relative md:inset-auto md:flex-1 md:rounded-[32px] md:border md:border-gray-100 shadow-xl' : 'hidden'} flex flex-col`}>
+                 <div className="p-4 md:p-8 border-b border-gray-100 flex items-center justify-between">
+                    <button onClick={() => setSelected(null)} className="lg:hidden text-gray-400 font-bold">← Back</button>
+                    <h2 className="text-xl font-bold truncate">{selected.summary}</h2>
+                 </div>
+                 <div className="flex-1 overflow-y-auto p-4 md:p-8">
+                    <pre className="bg-gray-50 p-4 md:p-6 rounded-2xl text-[10px] md:text-xs overflow-x-auto">{JSON.stringify(selected.payload, null, 2)}</pre>
+                 </div>
+                 <div className="p-4 md:p-8 border-t border-gray-100 flex gap-3">
+                   <button onClick={() => exportSingleSubmissionPdf(selected)} className="flex-1 px-4 py-3 bg-gray-100 rounded-xl text-xs md:text-sm font-bold flex items-center justify-center gap-2"><FileDown size={16}/> PDF</button>
+                   <button onClick={() => handleDelete(selected._id)} className="flex-1 px-4 py-3 bg-red-50 text-red-500 rounded-xl text-xs md:text-sm font-bold">Delete</button>
+                 </div>
               </div>
             )}
           </div>
+        ) : (
+          /* Analytics View - adaptive grid */
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8">
+            <div className="bg-white p-6 md:p-8 rounded-3xl border border-gray-100">
+               <h3 className="text-base md:text-lg font-bold mb-6">Submission Trend (30 Days)</h3>
+               <div className="h-48 md:h-64"><ResponsiveContainer width="100%" height="100%"><AreaChart data={analytics.trend}><CartesianGrid strokeDasharray="3 3"/><XAxis dataKey="date"/><YAxis/><Tooltip/><Area type="monotone" dataKey="count" fill="#23B349"/></AreaChart></ResponsiveContainer></div>
+            </div>
+            <div className="bg-white p-6 md:p-8 rounded-3xl border border-gray-100">
+               <h3 className="text-base md:text-lg font-bold mb-6">Distribution</h3>
+               <div className="h-48 md:h-64"><ResponsiveContainer width="100%" height="100%"><PieChart><Pie data={analytics.types} dataKey="value" nameKey="name" fill="#8884d8"><Cell fill="#23B349"/><Cell fill="#F59E0B"/><Cell fill="#DB2777"/></Pie><Tooltip/><Legend/></PieChart></ResponsiveContainer></div>
+            </div>
+          </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
