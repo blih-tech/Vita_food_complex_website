@@ -2,7 +2,7 @@ import api from '@/lib/api';
 
 export interface LocalizedText {
   en: string;
-  am: string;
+  am?: string;
 }
 
 export type NewsCategory =

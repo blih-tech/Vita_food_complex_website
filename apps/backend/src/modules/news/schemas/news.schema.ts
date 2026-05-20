@@ -9,7 +9,7 @@ class LocalizedStringSchema {
   @Prop({ required: true })
   en: string;
 
-  @Prop({ required: true })
+  @Prop({ default: '' })
   am: string;
 }
 

@@ -2,7 +2,7 @@
 
 export interface LocalizedString {
   en: string;
-  am: string;
+  am?: string;
 }
 
 export interface User {

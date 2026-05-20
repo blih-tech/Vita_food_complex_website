@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useNews } from "@/hooks/useNews";
+import { localized } from "@/lib/localized";
 
 export default function NewsGridSection() {
   const t = useTranslations("News.newsGrid");
@@ -40,12 +41,12 @@ export default function NewsGridSection() {
         {articles.map((a) => (
           <Link key={a._id} href={`/news/${a.slug}`} className="group flex flex-col sm:flex-row items-center sm:items-start gap-4 md:gap-6 w-full">
             <div className="relative w-full sm:w-[214px] aspect-[4/5] sm:h-[252px] rounded-2xl overflow-hidden shrink-0">
-              <Image src={a.coverImage || 'https://picsum.photos/300/350'} alt={a.title[lang]} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width:640px) 100vw,214px" />
+              <Image src={a.coverImage || 'https://picsum.photos/300/350'} alt={localized(a.title, lang)} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width:640px) 100vw,214px" />
             </div>
             <div className="flex flex-col gap-6 py-2 flex-1">
               <div className="flex flex-col gap-3">
-                <h3 className="font-funnel-display font-normal text-2xl leading-tight text-[#202124] group-hover:text-[#23B349] transition-colors">{a.title[lang]}</h3>
-                <p className="font-outfit font-light text-lg md:text-xl leading-snug text-[#333733]">{a.summary[lang]}</p>
+                <h3 className="font-funnel-display font-normal text-2xl leading-tight text-[#202124] group-hover:text-[#23B349] transition-colors">{localized(a.title, lang)}</h3>
+                <p className="font-outfit font-light text-lg md:text-xl leading-snug text-[#333733]">{localized(a.summary, lang)}</p>
               </div>
               <div className="flex flex-wrap items-center gap-3">
                 <span className="font-outfit font-normal text-base text-[#333733]">{a.readTime}</span>

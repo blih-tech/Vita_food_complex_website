@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Calendar, Clock } from "lucide-react";
 import { useParams } from "next/navigation";
 import { NewsArticle } from "@/hooks/useNews";
+import { localized } from "@/lib/localized";
 
 export default function ArticleHero({ article }: { article: NewsArticle }) {
   const params = useParams();
@@ -26,10 +27,10 @@ export default function ArticleHero({ article }: { article: NewsArticle }) {
         {/* Title */}
         <div className="flex flex-col">
           <h1 className="font-funnel-display font-bold text-4xl md:text-6xl leading-tight text-[#23B349]/95">
-            {article.title[lang]}
+            {localized(article.title, lang)}
           </h1>
           <h2 className="font-outfit font-bold text-3xl md:text-5xl leading-tight text-[#8A8C8A] mt-2">
-            {article.summary[lang]}
+            {localized(article.summary, lang)}
           </h2>
         </div>
 
@@ -54,7 +55,7 @@ export default function ArticleHero({ article }: { article: NewsArticle }) {
       <div className="relative w-full aspect-[21/9] md:h-[611px] rounded-[16px] overflow-hidden shadow-[0px_18px_27px_-5px_rgba(0,0,0,0.1)]">
         <Image
           src={article.coverImage || 'https://picsum.photos/1427/611'}
-          alt={article.title[lang]}
+          alt={localized(article.title, lang)}
           fill
           className="object-cover"
           sizes="100vw"

@@ -203,7 +203,7 @@ export default function NewsPage() {
               <div className="md:col-span-2">
                 <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Content (Amharic)</p>
                 <RichTextEditor
-                  value={form.content.am}
+                  value={form.content.am ?? ''}
                   onChange={(html) => setForm(f => ({ ...f, content: { ...f.content, am: html } }))}
                   placeholder="ሙሉ የጽሑፉን ይዘት በአማርኛ ይፃፉ…"
                 />

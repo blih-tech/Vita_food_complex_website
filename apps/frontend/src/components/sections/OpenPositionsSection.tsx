@@ -4,14 +4,15 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import api from "@/lib/api";
+import { localized } from "@/lib/localized";
 
 interface Job {
   _id: string;
   id: string;
-  title: { en: string; am: string };
-  location: { en: string; am: string };
-  type: { en: string; am: string };
-  summary: { en: string; am: string };
+  title: { en: string; am?: string };
+  location: { en: string; am?: string };
+  type: { en: string; am?: string };
+  summary: { en: string; am?: string };
   active: boolean;
 }
 
@@ -88,10 +89,10 @@ export default function OpenPositionsSection() {
                         className="font-[family-name:var(--font-funnel-display)] font-normal text-[#23B349]"
                         style={{ fontSize: "clamp(24px, 2.8vw, 35.52px)", lineHeight: "1em", letterSpacing: "-0.01em" }}
                       >
-                        {job.title[lang]}
+                        {localized(job.title, lang)}
                       </h3>
                       <div className="flex flex-row flex-wrap" style={{ gap: 8.88 }}>
-                        {[job.location[lang], job.type[lang]].map((tag, ti) => (
+                        {[localized(job.location, lang), localized(job.type, lang)].map((tag, ti) => (
                           <span
                             key={ti}
                             className="font-[family-name:var(--font-outfit)] font-medium text-[#404040]"
@@ -106,7 +107,7 @@ export default function OpenPositionsSection() {
                       className="font-[family-name:var(--font-outfit)] font-medium text-[#333733]"
                       style={{ fontSize: "clamp(16px, 1.8vw, 22.2px)", lineHeight: "1.26em", letterSpacing: "-0.004em" }}
                     >
-                      {job.summary[lang]}
+                      {localized(job.summary, lang)}
                     </p>
                   </div>
 

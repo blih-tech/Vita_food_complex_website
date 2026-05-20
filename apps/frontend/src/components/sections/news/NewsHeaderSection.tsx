@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useNews } from "@/hooks/useNews";
+import { localized } from "@/lib/localized";
 
 export default function NewsHeaderSection({
   activeCategory,
@@ -78,7 +79,7 @@ export default function NewsHeaderSection({
           <div className="relative w-full aspect-[16/7] md:h-[731px] rounded-3xl md:rounded-[48px] overflow-hidden">
             <Image
               src={featured.coverImage || 'https://picsum.photos/1664/731'}
-              alt={featured.title[lang]}
+              alt={localized(featured.title, lang)}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"
               sizes="100vw"
@@ -101,7 +102,7 @@ export default function NewsHeaderSection({
                 </span>
               </div>
               <h2 className="font-funnel-display font-normal text-4xl md:text-[48px] leading-tight text-[#333733] tracking-tight">
-                {featured.title[lang]}
+                {localized(featured.title, lang)}
               </h2>
             </div>
 

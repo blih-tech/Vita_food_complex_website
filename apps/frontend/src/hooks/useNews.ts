@@ -6,9 +6,9 @@ import api from '@/lib/api';
 export interface NewsArticle {
   _id: string;
   slug: string;
-  title: { en: string; am: string };
-  summary: { en: string; am: string };
-  content: { en: string; am: string };
+  title: { en: string; am?: string };
+  summary: { en: string; am?: string };
+  content: { en: string; am?: string };
   category: string;
   coverImage: string;
   readTime: string;

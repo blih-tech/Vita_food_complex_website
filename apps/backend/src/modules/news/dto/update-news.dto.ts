@@ -12,8 +12,9 @@ class LocalizedStringDto {
   @IsString()
   en: string;
 
+  @IsOptional()
   @IsString()
-  am: string;
+  am?: string;
 }
 
 export class UpdateNewsDto {

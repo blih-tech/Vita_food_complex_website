@@ -3,13 +3,14 @@
 import React from "react";
 import { useParams } from "next/navigation";
 import { NewsArticle } from "@/hooks/useNews";
+import { localized } from "@/lib/localized";
 
 export default function ArticleContent({ article }: { article: NewsArticle }) {
   const params = useParams();
   const locale = (params?.locale as string) ?? 'en';
   const lang = locale === 'am' ? 'am' : 'en';
 
-  const content = article.content[lang];
+  const content = localized(article.content, lang);
 
   // If content is HTML (from rich text editor), render it directly
   const isHtml = content.trimStart().startsWith('<');

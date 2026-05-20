@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useNews } from "@/hooks/useNews";
+import { localized } from "@/lib/localized";
 
 export default function UpdatesSection() {
   const t = useTranslations("News.updates");
@@ -38,7 +39,7 @@ export default function UpdatesSection() {
         {items.map((a) => (
           <Link key={a._id} href={`/news/${a.slug}`} className="group flex flex-col gap-4">
             <div className="relative w-full aspect-[5/4] rounded-[16px] overflow-hidden">
-              <Image src={a.coverImage || 'https://picsum.photos/400/350'} alt={a.title[lang]} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width:640px) 100vw,(max-width:1024px) 50vw,25vw" />
+              <Image src={a.coverImage || 'https://picsum.photos/400/350'} alt={localized(a.title, lang)} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width:640px) 100vw,(max-width:1024px) 50vw,25vw" />
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-3">
@@ -46,7 +47,7 @@ export default function UpdatesSection() {
                 <div className="w-4 h-[1.26px] bg-[#333733]" />
                 <span className="font-outfit font-light text-base text-[#333733]">{new Date(a.publishedAt).toLocaleDateString()}</span>
               </div>
-              <h3 className="font-funnel-display font-medium text-xl leading-tight text-[#333733] group-hover:text-[#23B349] transition-colors">{a.title[lang]}</h3>
+              <h3 className="font-funnel-display font-medium text-xl leading-tight text-[#333733] group-hover:text-[#23B349] transition-colors">{localized(a.title, lang)}</h3>
             </div>
           </Link>
         ))}
