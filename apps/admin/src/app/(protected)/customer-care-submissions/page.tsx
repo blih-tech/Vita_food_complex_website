@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import {
   Headphones,
   Trash2,
@@ -47,7 +47,7 @@ const STATUS_STYLES: Record<CareSubmissionStatus, string> = {
 
 const COLORS = ["#23B349", "#DB2777"];
 
-const DEFAULT_QUESTION_MAP: Record<string, { en: string; am: string }> = {
+const FALLBACK_QUESTION_MAP: Record<string, { en: string; am: string }> = {
   q1: { en: "Sales department guest handling", am: "የሽያጭ ክፍል የእንግዳ አቀባበል" },
   q2: { en: "Purchasing process time", am: "ለግዢ ሂደት የሚወስደው ጊዜ" },
   q3: { en: "Store keepers customer handling", am: "የመጋዘን ሰራተኞች የደንበኞች አያያዝ" },
@@ -55,7 +55,7 @@ const DEFAULT_QUESTION_MAP: Record<string, { en: string; am: string }> = {
   q5: { en: "Delivery time & adequacy", am: "የማድረስ ጊዜ እና በቂነት" },
   q6: { en: "Loading condition standard", am: "የምርቱ አጫጫን ሁኔታ ደረጃውን የጠበቀ" },
   q7: { en: "Products' price", am: "የምርቶች ዋጋ" },
-  q8: { en: "Do you love vita?", am: "ቪታን ትወደዋለህ?" },
+  q8: { en: "General Satisfaction", am: "አጠቃላይ እርካታ" },
   previousExperience: { en: "Previous experience", am: "ከዚህ ቀደም ከምርታችን እና ከአገልግሎታችን ጋር የተያያዘ ልምድ" },
   employeeEvaluation: { en: "Employee evaluation", am: "የሰራተኞች ግምገማ" },
   suggestion: { en: "Additional suggestion", am: "ተጨማሪ አስተያየት" },
@@ -87,7 +87,7 @@ function timeAgo(dateStr: string) {
 
 export default function CustomerCareSubmissionsPage() {
   const [items, setItems] = useState<CustomerCareSubmissionItem[]>([]);
-  const [questionMap, setQuestionMap] = useState<Record<string, { en: string; am: string }>>(DEFAULT_QUESTION_MAP);
+  const [questionMap, setQuestionMap] = useState<Record<string, { en: string; am: string }>>(FALLBACK_QUESTION_MAP);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<CustomerCareSubmissionItem | null>(null);
   const [search, setSearch] = useState("");
@@ -110,9 +110,16 @@ export default function CustomerCareSubmissionsPage() {
   useEffect(() => {
     void load();
     contentApi.getPage("contact-customer-care").then((page) => {
-        // Here we could parse page.sections if we had a standard mapping format,
-        // for now, we rely on the DEFAULT_QUESTION_MAP which we've carefully maintained.
-        // If we want it strictly dynamic, we would need to store this mapping in the CMS.
+        const feedbackSection = page.sections.find((s: any) => s.type === "customer-care-feedback");
+        const cmsRows = feedbackSection?.content?.feedbackQuestions as any[] | undefined;
+        
+        if (cmsRows) {
+            const newMap = { ...FALLBACK_QUESTION_MAP };
+            cmsRows.forEach((row, i) => {
+                newMap[`q${i+1}`] = { en: row.primary, am: row.secondary };
+            });
+            setQuestionMap(newMap);
+        }
     }).catch(console.error);
   }, []);
 
