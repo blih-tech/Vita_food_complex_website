@@ -15,7 +15,6 @@ import {
   Layout,
   TrendingUp,
   MessageCircle,
-  Heart,
   Calendar,
 } from "lucide-react";
 import {
@@ -26,10 +25,10 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   PieChart,
   Pie,
   Cell,
+  Legend,
 } from "recharts";
 import {
   CustomerCareSubmissionItem,
@@ -44,7 +43,7 @@ const STATUS_STYLES: Record<CareSubmissionStatus, string> = {
   archived: "bg-gray-100 text-gray-500 border-gray-200",
 };
 
-const COLORS = ["#23B349", "#DB2777", "#2563EB", "#9333EA", "#F59E0B"];
+const COLORS = ["#23B349", "#DB2777"];
 
 const QUESTION_MAP: Record<string, string> = {
   q1: "How do you get sales department Guests handling",
@@ -67,7 +66,7 @@ const QUESTION_MAP: Record<string, string> = {
   productDetails: "Product Details",
   productType: "Product Type Purchased",
   quantity: "Quantity/Number",
-  detail: "Detail of Complaint/Compliment"
+  detail: "Detail of Complaint"
 };
 
 function timeAgo(dateStr: string) {
@@ -88,7 +87,7 @@ export default function CustomerCareSubmissionsPage() {
   const [selected, setSelected] = useState<CustomerCareSubmissionItem | null>(null);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<CareSubmissionStatus | "all">("all");
-  const [kindFilter, setKindFilter] = useState<"all" | "feedback" | "complaint" | "compliment">("all");
+  const [kindFilter, setKindFilter] = useState<"all" | "feedback" | "complaint">("all");
   const [viewMode, setViewMode] = useState<'list' | 'analytics'>('list');
 
   const load = async () => {
@@ -141,7 +140,6 @@ export default function CustomerCareSubmissionsPage() {
     const total = items.length;
     const feedback = items.filter(i => i.kind === 'feedback').length;
     const complaint = items.filter(i => i.kind === 'complaint').length;
-    const compliment = items.filter(i => i.kind === 'compliment').length;
     const newCount = items.filter(i => i.status === 'new').length;
     
     // Trend (last 30 days)
@@ -152,14 +150,13 @@ export default function CustomerCareSubmissionsPage() {
     });
     const trend = Object.keys(dailyData).sort().slice(-30).map(date => ({ date, count: dailyData[date] }));
     
-    return { total, feedback, complaint, compliment, newCount, trend, 
-      types: [{ name: "Feedback", value: feedback }, { name: "Complaint", value: complaint }, { name: "Compliment", value: compliment }] 
+    return { total, feedback, complaint, newCount, trend, 
+      types: [{ name: "Feedback", value: feedback }, { name: "Complaint", value: complaint }] 
     };
   }, [items]);
 
   const kindBadge = (k: string) =>
     k === "complaint" ? "bg-amber-50 text-amber-700 border-amber-200" : 
-    k === "compliment" ? "bg-pink-50 text-pink-700 border-pink-200" :
     "bg-sky-50 text-sky-700 border-sky-200";
 
   return (
@@ -190,7 +187,7 @@ export default function CustomerCareSubmissionsPage() {
           <div className="flex flex-col lg:flex-row gap-6 h-full">
             <div className={`flex flex-col gap-4 ${selected ? 'hidden lg:flex lg:w-1/3' : 'w-full'} transition-all`}>
               <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0">
-                {(["all", "feedback", "complaint", "compliment"] as const).map(k => (
+                {(["all", "feedback", "complaint"] as const).map(k => (
                   <button key={k} onClick={() => setKindFilter(k)} className={`px-3 py-1.5 md:px-4 md:py-2 rounded-xl text-xs md:text-sm font-bold capitalize whitespace-nowrap ${kindFilter === k ? 'bg-[#23B349]/10 text-[#23B349]' : 'bg-white'}`}>
                     {k}
                   </button>
@@ -261,7 +258,7 @@ export default function CustomerCareSubmissionsPage() {
             </div>
             <div className="bg-white p-6 md:p-8 rounded-3xl border border-gray-100">
                <h3 className="text-base md:text-lg font-bold mb-6">Distribution</h3>
-               <div className="h-64"><ResponsiveContainer width="100%" height="100%"><PieChart><Pie data={analytics.types} dataKey="value" nameKey="name" fill="#8884d8"><Cell fill="#23B349"/><Cell fill="#F59E0B"/><Cell fill="#DB2777"/></Pie><Tooltip/><Legend/></PieChart></ResponsiveContainer></div>
+               <div className="h-64"><ResponsiveContainer width="100%" height="100%"><PieChart><Pie data={analytics.types} dataKey="value" nameKey="name" fill="#8884d8"><Cell fill="#23B349"/><Cell fill="#DB2777"/></Pie><Tooltip/><Legend/></PieChart></ResponsiveContainer></div>
             </div>
           </div>
         )}

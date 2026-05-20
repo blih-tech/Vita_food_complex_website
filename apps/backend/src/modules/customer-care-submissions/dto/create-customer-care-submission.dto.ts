@@ -1,8 +1,8 @@
 import { IsIn, IsObject, IsOptional, IsString } from 'class-validator';
 
 export class CreateCustomerCareSubmissionDto {
-  @IsIn(['feedback', 'complaint', 'compliment'])
-  kind!: 'feedback' | 'complaint' | 'compliment';
+  @IsIn(['feedback', 'complaint'])
+  kind!: 'feedback' | 'complaint';
 
   @IsOptional()
   @IsString()
