@@ -17,9 +17,6 @@ class LocalizedStringDto {
 }
 
 export class CreateNewsDto {
-  @IsString()
-  slug: string;
-
   @ValidateNested()
   @Type(() => LocalizedStringDto)
   title: LocalizedStringDto;

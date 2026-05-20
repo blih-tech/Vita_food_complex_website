@@ -17,10 +17,6 @@ class LocalizedStringDto {
 
 export class UpdateJobDto {
   @IsOptional()
-  @IsString()
-  id?: string;
-
-  @IsOptional()
   @ValidateNested()
   @Type(() => LocalizedStringDto)
   title?: LocalizedStringDto;

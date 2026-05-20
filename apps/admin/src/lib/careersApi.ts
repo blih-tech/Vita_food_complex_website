@@ -6,7 +6,6 @@ export interface LocalizedText {
 }
 
 export interface CareerPayload {
-  id: string;
   title: LocalizedText;
   location: LocalizedText;
   type: LocalizedText;
@@ -21,6 +20,7 @@ export interface CareerPayload {
 
 export interface CareerItem extends CareerPayload {
   _id: string;
+  id: string;
   createdAt: string;
   updatedAt: string;
 }

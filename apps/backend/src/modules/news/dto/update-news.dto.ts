@@ -18,10 +18,6 @@ class LocalizedStringDto {
 
 export class UpdateNewsDto {
   @IsOptional()
-  @IsString()
-  slug?: string;
-
-  @IsOptional()
   @ValidateNested()
   @Type(() => LocalizedStringDto)
   title?: LocalizedStringDto;

@@ -54,7 +54,7 @@ function stringifyLocalizedList(values: LocalizedText[] = []) {
 }
 
 const defaultForm: CareerPayload = {
-  id: "", title: blankLocalized(), location: blankLocalized(),
+  title: blankLocalized(), location: blankLocalized(),
   type: blankLocalized(), department: blankLocalized(),
   summary: blankLocalized(), reportsTo: blankLocalized(),
   responsibilities: [], requirements: [], benefits: [], active: true,
@@ -132,7 +132,19 @@ export default function CareersPage() {
   };
 
   const openEdit = (item: CareerItem) => {
-    setEditing(item); setForm(item);
+    setEditing(item);
+    setForm({
+      title: item.title,
+      location: item.location,
+      type: item.type,
+      department: item.department,
+      reportsTo: item.reportsTo,
+      summary: item.summary,
+      responsibilities: item.responsibilities,
+      requirements: item.requirements,
+      benefits: item.benefits,
+      active: item.active,
+    });
     setResponsibilitiesText(stringifyLocalizedList(item.responsibilities));
     setRequirementsText(stringifyLocalizedList(item.requirements));
     setBenefitsText(stringifyLocalizedList(item.benefits));
@@ -524,12 +536,11 @@ export default function CareersPage() {
               <button onClick={() => setOpen(false)} className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><X size={14} /></button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <input className={inputCls} placeholder="Role ID (e.g. production-manager)" value={form.id} onChange={(e) => setForm({ ...form, id: e.target.value })} />
+              <input className={inputCls} placeholder="Title (EN)" value={form.title.en} onChange={(e) => setForm({ ...form, title: { ...form.title, en: e.target.value } })} />
               <label className="flex items-center gap-2 text-sm font-medium text-[#333733]">
                 <input type="checkbox" checked={form.active ?? true} onChange={(e) => setForm({ ...form, active: e.target.checked })} />
                 Active (visible on website)
               </label>
-              <input className={inputCls} placeholder="Title (EN)" value={form.title.en} onChange={(e) => setForm({ ...form, title: { ...form.title, en: e.target.value } })} />
               <input className={inputCls} placeholder="Title (AM)" value={form.title.am} onChange={(e) => setForm({ ...form, title: { ...form.title, am: e.target.value } })} />
               <input className={inputCls} placeholder="Location (EN)" value={form.location.en} onChange={(e) => setForm({ ...form, location: { ...form.location, en: e.target.value } })} />
               <input className={inputCls} placeholder="Location (AM)" value={form.location.am} onChange={(e) => setForm({ ...form, location: { ...form.location, am: e.target.value } })} />

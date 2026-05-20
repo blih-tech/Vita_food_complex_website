@@ -18,7 +18,6 @@ const categories: NewsCategory[] = [
 ];
 
 const defaultForm: NewsPayload = {
-  slug: "",
   title: { en: "", am: "" },
   summary: { en: "", am: "" },
   content: { en: "", am: "" },
@@ -61,7 +60,6 @@ export default function NewsPage() {
   const openEdit = (item: NewsItem) => {
     setEditing(item);
     setForm({
-      slug: item.slug,
       title: item.title,
       summary: item.summary,
       content: item.content,
@@ -166,11 +164,10 @@ export default function NewsPage() {
               <button onClick={() => setOpen(false)} className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center"><X size={14} /></button>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <input className={inputCls} placeholder="Slug" value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
+              <input className={inputCls} placeholder="Title (EN)" value={form.title.en} onChange={(e) => setForm({ ...form, title: { ...form.title, en: e.target.value } })} />
               <select className={inputCls} value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value as NewsCategory })}>
                 {categories.map((category) => <option key={category} value={category}>{category}</option>)}
               </select>
-              <input className={inputCls} placeholder="Title (EN)" value={form.title.en} onChange={(e) => setForm({ ...form, title: { ...form.title, en: e.target.value } })} />
               <input className={inputCls} placeholder="Title (AM)" value={form.title.am} onChange={(e) => setForm({ ...form, title: { ...form.title, am: e.target.value } })} />
               <input className={inputCls} placeholder="Summary (EN)" value={form.summary.en} onChange={(e) => setForm({ ...form, summary: { ...form.summary, en: e.target.value } })} />
               <input className={inputCls} placeholder="Summary (AM)" value={form.summary.am} onChange={(e) => setForm({ ...form, summary: { ...form.summary, am: e.target.value } })} />

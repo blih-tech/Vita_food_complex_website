@@ -16,9 +16,6 @@ class LocalizedStringDto {
 }
 
 export class CreateJobDto {
-  @IsString()
-  id: string;
-
   @ValidateNested()
   @Type(() => LocalizedStringDto)
   title: LocalizedStringDto;
