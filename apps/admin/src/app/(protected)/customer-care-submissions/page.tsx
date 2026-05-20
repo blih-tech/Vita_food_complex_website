@@ -15,6 +15,7 @@ import {
   Layout,
   TrendingUp,
   MessageCircle,
+  Heart,
   Calendar,
 } from "lucide-react";
 import {
@@ -36,6 +37,7 @@ import {
   customerCareSubmissionsApi,
 } from "@/lib/customerCareSubmissionsApi";
 import { exportSubmissionsToPdf, exportSingleSubmissionPdf } from "@/lib/exportPdf";
+import { contentApi } from "@/lib/contentApi";
 
 const STATUS_STYLES: Record<CareSubmissionStatus, string> = {
   new: "bg-blue-50 text-blue-600 border-blue-200",
@@ -45,28 +47,30 @@ const STATUS_STYLES: Record<CareSubmissionStatus, string> = {
 
 const COLORS = ["#23B349", "#DB2777"];
 
-const QUESTION_MAP: Record<string, string> = {
-  q1: "How do you get sales department Guests handling",
-  q2: "Time taken for purchasing process",
-  q3: "How do you get store keepers Customer handling",
-  q4: "Products quality and safety status",
-  q5: "Delivery Time & adequacy",
-  q6: "Is loading condition meet standard",
-  q7: "Products' price",
-  q8: "General Satisfaction",
-  previousExperience: "Previous experience",
-  employeeEvaluation: "Employee evaluation",
-  suggestion: "Additional suggestion",
-  additional: "Additional information",
-  customerName: "Customer Name",
-  address: "Address",
-  city: "City",
-  woreda: "Woreda",
-  phone: "Phone",
-  productDetails: "Product Details",
-  productType: "Product Type Purchased",
-  quantity: "Quantity/Number",
-  detail: "Detail of Complaint"
+const DEFAULT_QUESTION_MAP: Record<string, { en: string; am: string }> = {
+  q1: { en: "Sales department guest handling", am: "የሽያጭ ክፍል የእንግዳ አቀባበል" },
+  q2: { en: "Purchasing process time", am: "ለግዢ ሂደት የሚወስደው ጊዜ" },
+  q3: { en: "Store keepers customer handling", am: "የመጋዘን ሰራተኞች የደንበኞች አያያዝ" },
+  q4: { en: "Products quality and safety", am: "የምርቶች ጥራት እና ደህንነት" },
+  q5: { en: "Delivery time & adequacy", am: "የማድረስ ጊዜ እና በቂነት" },
+  q6: { en: "Loading condition standard", am: "የምርቱ አጫጫን ሁኔታ ደረጃውን የጠበቀ" },
+  q7: { en: "Products' price", am: "የምርቶች ዋጋ" },
+  q8: { en: "Do you love vita?", am: "ቪታን ትወደዋለህ?" },
+  previousExperience: { en: "Previous experience", am: "ከዚህ ቀደም ከምርታችን እና ከአገልግሎታችን ጋር የተያያዘ ልምድ" },
+  employeeEvaluation: { en: "Employee evaluation", am: "የሰራተኞች ግምገማ" },
+  suggestion: { en: "Additional suggestion", am: "ተጨማሪ አስተያየት" },
+  additional: { en: "Additional information", am: "ተጨማሪ መረጃ" },
+  customerName: { en: "Customer Name", am: "የደንበኛ ስም" },
+  address: { en: "Address", am: "አድራሻ" },
+  city: { en: "City", am: "ከተማ" },
+  woreda: { en: "Woreda", am: "ወረዳ" },
+  phone: { en: "Phone", am: "ስልክ" },
+  productDetails: { en: "Product Details", am: "የምርት ዝርዝሮች" },
+  productType: { en: "Product Type Purchased", am: "የተገዛው የምርት ዓይነት" },
+  quantity: { en: "Quantity/Number", am: "ብዛት/ቁጥር" },
+  detail: { en: "Detail of Complaint/Compliment", am: "የቅሬታ/ምስጋና ዝርዝር" },
+  name: { en: "Reference Name", am: "ማጣቀሻ ስም" },
+  date: { en: "Date", am: "ቀን" }
 };
 
 function timeAgo(dateStr: string) {
@@ -83,11 +87,12 @@ function timeAgo(dateStr: string) {
 
 export default function CustomerCareSubmissionsPage() {
   const [items, setItems] = useState<CustomerCareSubmissionItem[]>([]);
+  const [questionMap, setQuestionMap] = useState<Record<string, { en: string; am: string }>>(DEFAULT_QUESTION_MAP);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<CustomerCareSubmissionItem | null>(null);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<CareSubmissionStatus | "all">("all");
-  const [kindFilter, setKindFilter] = useState<"all" | "feedback" | "complaint">("all");
+  const [kindFilter, setKindFilter] = useState<"all" | "feedback" | "complaint" | "compliment">("all");
   const [viewMode, setViewMode] = useState<'list' | 'analytics'>('list');
 
   const load = async () => {
@@ -104,6 +109,11 @@ export default function CustomerCareSubmissionsPage() {
 
   useEffect(() => {
     void load();
+    contentApi.getPage("contact-customer-care").then((page) => {
+        // Here we could parse page.sections if we had a standard mapping format,
+        // for now, we rely on the DEFAULT_QUESTION_MAP which we've carefully maintained.
+        // If we want it strictly dynamic, we would need to store this mapping in the CMS.
+    }).catch(console.error);
   }, []);
 
   const handleSelect = async (item: CustomerCareSubmissionItem) => {
@@ -216,28 +226,25 @@ export default function CustomerCareSubmissionsPage() {
                         <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-4">Submission Details</h4>
                         <div className="space-y-4">
                           {Object.entries(selected.payload).map(([key, value]) => {
+                            const renderRow = (k: string, val: unknown) => {
+                                const labels = questionMap[k] || { en: k, am: k };
+                                return (
+                                    <div key={k} className="grid grid-cols-2 gap-4 border-b border-gray-50 pb-2">
+                                      <span className="text-sm font-medium text-gray-500">
+                                        {labels.en} / <span className="font-desta">{labels.am}</span>
+                                      </span>
+                                      <span className="text-sm font-semibold text-[#333733]">{String(val)}</span>
+                                    </div>
+                                );
+                            };
+
                             if (key === 'ratings' && typeof value === 'object') {
-                              return Object.entries(value as Record<string, unknown>).map(([qKey, qVal]) => (
-                                <div key={qKey} className="grid grid-cols-2 gap-4 border-b border-gray-50 pb-2">
-                                  <span className="text-sm font-medium text-gray-500">{QUESTION_MAP[qKey] || qKey}</span>
-                                  <span className="text-sm font-semibold text-[#333733]">{String(qVal)}</span>
-                                </div>
-                              ));
+                              return Object.entries(value as Record<string, unknown>).map(([qKey, qVal]) => renderRow(qKey, qVal));
                             }
                             if (typeof value === 'object') {
-                              return Object.entries(value as Record<string, unknown>).map(([subKey, subVal]) => (
-                                <div key={subKey} className="grid grid-cols-2 gap-4 border-b border-gray-50 pb-2">
-                                  <span className="text-sm font-medium text-gray-500">{QUESTION_MAP[subKey] || subKey}</span>
-                                  <span className="text-sm font-semibold text-[#333733]">{String(subVal)}</span>
-                                </div>
-                              ));
+                              return Object.entries(value as Record<string, unknown>).map(([subKey, subVal]) => renderRow(subKey, subVal));
                             }
-                            return (
-                              <div key={key} className="grid grid-cols-2 gap-4 border-b border-gray-50 pb-2">
-                                <span className="text-sm font-medium text-gray-500">{QUESTION_MAP[key] || key}</span>
-                                <span className="text-sm font-semibold text-[#333733]">{String(value)}</span>
-                              </div>
-                            );
+                            return renderRow(key, value);
                           })}
                         </div>
                       </div>
