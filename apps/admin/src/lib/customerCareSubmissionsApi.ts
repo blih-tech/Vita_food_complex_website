@@ -4,7 +4,7 @@ export type CareSubmissionStatus = 'new' | 'read' | 'archived';
 
 export interface CustomerCareSubmissionItem {
   _id: string;
-  kind: 'feedback' | 'complaint';
+  kind: 'feedback' | 'complaint' | 'compliment';
   locale: string;
   summary: string;
   payload: Record<string, unknown>;
