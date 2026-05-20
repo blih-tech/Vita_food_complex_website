@@ -8,6 +8,30 @@ const BRAND_GREEN: [number, number, number] = [35, 179, 73];
 const BRAND_DARK: [number, number, number] = [51, 55, 51];
 const BRAND_LIGHT: [number, number, number] = [240, 250, 243];
 
+const QUESTION_MAP: Record<string, string> = {
+  q1: "How do you get sales department Guests handling",
+  q2: "Time taken for purchasing process",
+  q3: "How do you get store keepers Customer handling",
+  q4: "Products quality and safety status",
+  q5: "Delivery Time & adequacy",
+  q6: "Is loading condition meet standard",
+  q7: "Products' price",
+  q8: "General Satisfaction",
+  previousExperience: "Previous experience",
+  employeeEvaluation: "Employee evaluation",
+  suggestion: "Additional suggestion",
+  additional: "Additional information",
+  customerName: "Customer Name",
+  address: "Address",
+  city: "City",
+  woreda: "Woreda",
+  phone: "Phone",
+  productDetails: "Product Details",
+  productType: "Product Type Purchased",
+  quantity: "Quantity/Number",
+  detail: "Detail of Complaint/Compliment"
+};
+
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-US", {
     year: "numeric",
@@ -158,25 +182,35 @@ export function exportSingleSubmissionPdf(item: CustomerCareSubmissionItem) {
   doc.setFontSize(10);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(...BRAND_GREEN);
-  doc.text("Submission Content (JSON Payload)", 14, 85);
+  doc.text("Submission Content", 14, 85);
 
   doc.setFillColor(248, 250, 252);
-  doc.roundedRect(14, 89, 182, 180, 3, 3, "F");
+  doc.roundedRect(14, 89, 182, 160, 3, 3, "F");
 
   doc.setFontSize(8);
-  doc.setFont("courier", "normal");
+  doc.setFont("helvetica", "normal");
   doc.setTextColor(...BRAND_DARK);
-  const jsonStr = JSON.stringify(item.payload, null, 2);
-  const lines = doc.splitTextToSize(jsonStr, 174);
-  
-  // Handle multi-page if JSON is very long
-  if (lines.length > 60) {
-     doc.text(lines.slice(0, 60), 18, 100);
-     // simplistic truncation for now
-     doc.text("... (truncated for PDF preview)", 18, 260);
-  } else {
-     doc.text(lines, 18, 100);
-  }
+
+  let y = 100;
+  Object.entries(item.payload).forEach(([key, value]) => {
+    if (typeof value === 'object' && value !== null) {
+        Object.entries(value as Record<string, unknown>).forEach(([subKey, subVal]) => {
+           const label = QUESTION_MAP[subKey] || subKey;
+           doc.setFont("helvetica", "bold");
+           doc.text(`${label}:`, 18, y);
+           doc.setFont("helvetica", "normal");
+           doc.text(String(subVal), 100, y);
+           y += 7;
+        });
+    } else {
+        const label = QUESTION_MAP[key] || key;
+        doc.setFont("helvetica", "bold");
+        doc.text(`${label}:`, 18, y);
+        doc.setFont("helvetica", "normal");
+        doc.text(String(value), 100, y);
+        y += 7;
+    }
+  });
 
   doc.setFontSize(7);
   doc.setTextColor(180, 180, 180);
