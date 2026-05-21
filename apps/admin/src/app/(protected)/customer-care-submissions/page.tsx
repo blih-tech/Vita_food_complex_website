@@ -192,7 +192,7 @@ export default function CustomerCareSubmissionsPage() {
         </div>
 
         <div className="flex items-center gap-2 md:gap-4">
-          <button onClick={() => exportSubmissionsToPdf(filtered)} className="flex items-center gap-2 px-3 py-2 bg-[#23B349] text-white rounded-lg md:rounded-xl text-xs md:text-sm font-semibold hover:bg-[#1f9d40]">
+          <button onClick={async () => await exportSubmissionsToPdf(filtered)} className="flex items-center gap-2 px-3 py-2 bg-[#23B349] text-white rounded-lg md:rounded-xl text-xs md:text-sm font-semibold hover:bg-[#1f9d40]">
             <Download size={14} /> <span className="hidden md:inline">Export</span>
           </button>
           <button onClick={load} className={`p-2 rounded-lg md:rounded-xl bg-gray-50 ${loading ? 'animate-spin' : ''}`}><RefreshCw size={16} /></button>
@@ -258,7 +258,7 @@ export default function CustomerCareSubmissionsPage() {
                     </div>
                  </div>
                  <div className="p-4 md:p-8 border-t border-gray-100 flex gap-3">
-                   <button onClick={() => exportSingleSubmissionPdf(selected, questionMap)} className="flex-1 px-4 py-3 bg-gray-100 rounded-xl text-xs md:text-sm font-bold flex items-center justify-center gap-2"><FileDown size={16}/> PDF</button>
+                   <button onClick={async () => await exportSingleSubmissionPdf(selected, questionMap)} className="flex-1 px-4 py-3 bg-gray-100 rounded-xl text-xs md:text-sm font-bold flex items-center justify-center gap-2"><FileDown size={16}/> PDF</button>
                    <button onClick={() => handleDelete(selected._id)} className="flex-1 px-4 py-3 bg-red-50 text-red-500 rounded-xl text-xs md:text-sm font-bold">Delete</button>
                  </div>
               </div>
