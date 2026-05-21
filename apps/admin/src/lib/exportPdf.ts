@@ -8,6 +8,32 @@ const BRAND_GREEN: [number, number, number] = [35, 179, 73];
 const BRAND_DARK: [number, number, number] = [51, 55, 51];
 const BRAND_LIGHT: [number, number, number] = [240, 250, 243];
 
+const QUESTION_MAP: Record<string, { en: string; am: string }> = {
+  q1: { en: "Sales department guest handling", am: "የሽያጭ ክፍል የእንግዳ አቀባበል" },
+  q2: { en: "Purchasing process time", am: "ለግዢ ሂደት የሚወስደው ጊዜ" },
+  q3: { en: "Store keepers customer handling", am: "የመጋዘን ሰራተኞች የደንበኞች አያያዝ" },
+  q4: { en: "Products quality and safety", am: "የምርቶች ጥራት እና ደህንነት" },
+  q5: { en: "Delivery time & adequacy", am: "የማድረስ ጊዜ እና በቂነት" },
+  q6: { en: "Loading condition standard", am: "የምርቱ አጫጫን ሁኔታ ደረጃውን የጠበቀ" },
+  q7: { en: "Products' price", am: "የምርቶች ዋጋ" },
+  q8: { en: "Do you love vita?", am: "ቪታን ትወደዋለህ?" },
+  previousExperience: { en: "Previous experience", am: "ከዚህ ቀደም ከምርታችን እና ከአገልግሎታችን ጋር የተያያዘ ልምድ" },
+  employeeEvaluation: { en: "Employee evaluation", am: "የሰራተኞች ግምገማ" },
+  suggestion: { en: "Additional suggestion", am: "ተጨማሪ አስተያየት" },
+  additional: { en: "Additional information", am: "ተጨማሪ መረጃ" },
+  customerName: { en: "Customer Name", am: "የደንበኛ ስም" },
+  address: { en: "Address", am: "አድራሻ" },
+  city: { en: "City", am: "ከተማ" },
+  woreda: { en: "Woreda", am: "ወረዳ" },
+  phone: { en: "Phone", am: "ስልክ" },
+  productDetails: { en: "Product Details", am: "የምርት ዝርዝሮች" },
+  productType: { en: "Product Type Purchased", am: "የተገዛው የምርት ዓይነት" },
+  quantity: { en: "Quantity/Number", am: "ብዛት/ቁጥር" },
+  detail: { en: "Detail of Complaint/Compliment", am: "የቅሬታ/ምስጋና ዝርዝር" },
+  name: { en: "Reference Name", am: "ማጣቀሻ ስም" },
+  date: { en: "Date", am: "ቀን" }
+};
+
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-US", {
     year: "numeric",
@@ -16,6 +42,12 @@ function formatDate(dateStr: string) {
     hour: "2-digit",
     minute: "2-digit",
   });
+}
+
+function sanitizeText(text: any): string {
+    if (typeof text !== 'string') return String(text ?? '');
+    // Remove non-printable characters and control characters
+    return text.replace(/[^\x20-\x7E\u1200-\u137F\u00A0-\u00FF]/g, '');
 }
 
 function addBrandHeader(doc: jsPDF, title: string, subtitle: string) {
@@ -48,83 +80,15 @@ function addBrandHeader(doc: jsPDF, title: string, subtitle: string) {
   doc.text(`Generated: ${now}`, doc.internal.pageSize.width - 14, 22, { align: "right" });
 }
 
-function addSummaryBadges(
-  doc: jsPDF,
-  items: { label: string; value: number; color: [number, number, number] }[],
-  startY: number
-) {
-  const badgeWidth = (doc.internal.pageSize.width - 28 - (items.length - 1) * 5) / items.length;
-  
-  items.forEach((badge, i) => {
-    const x = 14 + i * (badgeWidth + 5);
-    doc.setFillColor(...BRAND_LIGHT);
-    doc.roundedRect(x, startY, badgeWidth, 14, 2, 2, "F");
-    doc.setFontSize(14);
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor(...badge.color);
-    doc.text(String(badge.value), x + badgeWidth / 2, startY + 9, { align: "center" });
-    doc.setFontSize(7);
-    doc.setFont("helvetica", "normal");
-    doc.setTextColor(120, 120, 120);
-    doc.text(badge.label, x + badgeWidth / 2, startY + 13, { align: "center" });
-  });
-}
-
-export function exportSubmissionsToPdf(items: CustomerCareSubmissionItem[], title = "Customer Care Submissions") {
-  const doc = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
-
-  addBrandHeader(doc, "Vita Food Complex", title);
-
-  const stats = [
-    { label: "Total", value: items.length, color: BRAND_DARK },
-    { label: "Feedback", value: items.filter(i => i.kind === 'feedback').length, color: BRAND_GREEN },
-    { label: "Complaints", value: items.filter(i => i.kind === 'complaint').length, color: [219, 39, 119] as [number, number, number] },
-    { label: "New", value: items.filter(i => i.status === 'new').length, color: [37, 99, 235] as [number, number, number] },
-  ];
-
-  addSummaryBadges(doc, stats, 36);
-
-  autoTable(doc, {
-    startY: 56,
-    head: [["#", "Summary", "Type", "Status", "Locale", "Submitted"]],
-    body: items.map((i, idx) => [
-      idx + 1,
-      i.summary,
-      i.kind.toUpperCase(),
-      i.status.toUpperCase(),
-      i.locale.toUpperCase(),
-      formatDate(i.createdAt),
-    ]),
-    styles: { fontSize: 8, cellPadding: 3, textColor: BRAND_DARK },
-    headStyles: {
-      fillColor: BRAND_GREEN,
-      textColor: [255, 255, 255],
-      fontStyle: "bold",
-      fontSize: 8.5,
-    },
-    alternateRowStyles: { fillColor: BRAND_LIGHT },
-    didDrawPage: (data) => {
-      doc.setFontSize(7);
-      doc.setTextColor(160, 160, 160);
-      doc.text(
-        `Page ${data.pageNumber} of ${doc.getNumberOfPages()}  •  Vita Food Complex — Customer Care Report`,
-        148.5,
-        doc.internal.pageSize.height - 5,
-        { align: "center" }
-      );
-    },
-  });
-
-  doc.save(`vita-care-submissions-${Date.now()}.pdf`);
-}
-
 export function exportSingleSubmissionPdf(
     item: CustomerCareSubmissionItem, 
     questionMap: Record<string, { en: string; am: string }>
 ) {
   const doc = new jsPDF({ unit: "mm", format: "a4" });
-
-  addBrandHeader(doc, "Vita Food Complex", "Customer Care Detail");
+  
+  // Note: Standard fonts don't support Amharic well without specific unicode support.
+  // Using standard font but filtering characters, or potentially using a custom font if available.
+  addBrandHeader(doc, "Vita Food Complex", "Submission Detail Report");
 
   doc.setFillColor(...BRAND_LIGHT);
   doc.roundedRect(14, 38, 182, 35, 3, 3, "F");
@@ -132,7 +96,7 @@ export function exportSingleSubmissionPdf(
   doc.setFontSize(13);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(...BRAND_DARK);
-  doc.text(item.summary, 24, 49);
+  doc.text(sanitizeText(item.summary), 24, 49);
 
   doc.setFontSize(8.5);
   doc.setFont("helvetica", "normal");
@@ -140,63 +104,45 @@ export function exportSingleSubmissionPdf(
   doc.text(`Type: ${item.kind.toUpperCase()}`, 24, 57);
   doc.text(`Locale: ${item.locale.toUpperCase()}`, 24, 63);
 
-  const statusColors: Record<string, [number, number, number]> = {
-    new: [37, 99, 235],
-    read: BRAND_GREEN,
-    archived: [107, 114, 128],
-  };
-  const sColor = statusColors[item.status] ?? BRAND_DARK;
-  doc.setFillColor(...sColor);
-  doc.roundedRect(155, 42, 30, 10, 2, 2, "F");
-  doc.setFontSize(8.5);
-  doc.setFont("helvetica", "bold");
-  doc.setTextColor(255, 255, 255);
-  doc.text(item.status.toUpperCase(), 170, 49, { align: "center" });
-
-  doc.setFontSize(7.5);
-  doc.setFont("helvetica", "normal");
-  doc.setTextColor(120, 120, 120);
-  doc.text(`Received: ${formatDate(item.createdAt)}`, 155, 63);
-
   doc.setFontSize(10);
   doc.setFont("helvetica", "bold");
   doc.setTextColor(...BRAND_GREEN);
-  doc.text("Submission Content", 14, 85);
+  doc.text("Submission Details", 14, 85);
 
-  doc.setFillColor(248, 250, 252);
-  doc.roundedRect(14, 89, 182, 160, 3, 3, "F");
-
-  doc.setFontSize(8);
+  doc.setFontSize(9);
   doc.setFont("helvetica", "normal");
   doc.setTextColor(...BRAND_DARK);
 
-  let y = 100;
-  Object.entries(item.payload).forEach(([key, value]) => {
-    if (typeof value === 'object' && value !== null) {
+  let y = 95;
+
+  const renderPayload = (payload: Record<string, unknown>) => {
+    Object.entries(payload).forEach(([key, value]) => {
+      if (typeof value === 'object' && value !== null) {
         Object.entries(value as Record<string, unknown>).forEach(([subKey, subVal]) => {
            const labels = questionMap[subKey] || { en: subKey, am: subKey };
            doc.setFont("helvetica", "bold");
            doc.text(`${labels.en}:`, 18, y);
            doc.setFont("helvetica", "normal");
-           doc.text(`${String(subVal)} (${labels.am})`, 80, y);
+           doc.text(sanitizeText(subVal), 80, y);
            y += 7;
         });
-    } else {
+      } else {
         const labels = questionMap[key] || { en: key, am: key };
         doc.setFont("helvetica", "bold");
         doc.text(`${labels.en}:`, 18, y);
         doc.setFont("helvetica", "normal");
-        doc.text(`${String(value)} (${labels.am})`, 80, y);
+        doc.text(sanitizeText(value), 80, y);
         y += 7;
-    }
-  });
+      }
+    });
+  };
+
+  renderPayload(item.payload);
 
   doc.setFontSize(7);
   doc.setTextColor(180, 180, 180);
-  doc.text(`Submission ID: ${item._id}`, 14, 275);
-  if (item.readAt) doc.text(`Viewed at: ${formatDate(item.readAt)}`, 14, 279);
-
+  doc.text(`Submission ID: ${item._id}`, 14, 280);
   doc.text("Vita Food Complex — Customer Care Document", 105, 285, { align: "center" });
 
-  doc.save(`vita-care-${item._id}.pdf`);
+  doc.save(`submission-${item._id}.pdf`);
 }
