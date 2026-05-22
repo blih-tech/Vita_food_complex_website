@@ -180,8 +180,8 @@ export default function Sidebar({ open = false, onClose }: SidebarProps) {
         })}
       </nav>
 
-      {/* ── Notifications (desktop) ── */}
-      <div className="hidden lg:flex items-center justify-between px-4 py-2 border-t border-gray-100">
+      {/* ── Notifications ── */}
+      <div className="flex items-center justify-between px-4 py-2 border-t border-gray-100">
         <span className="text-[11px] font-semibold uppercase tracking-widest text-gray-400">Notifications</span>
         <BellTrigger />
       </div>
