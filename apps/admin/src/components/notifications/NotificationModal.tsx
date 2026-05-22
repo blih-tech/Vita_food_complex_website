@@ -144,16 +144,16 @@ export default function NotificationModal() {
   const [tab, setTab] = useState<Tab>('all');
   const panelRef = useRef<HTMLDivElement>(null);
 
-  // Close on outside click
+  // Close on outside pointer-down (works for both mouse and touch)
   useEffect(() => {
     if (!isOpen) return;
-    const handler = (e: MouseEvent) => {
+    const handler = (e: PointerEvent) => {
       if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
         closePanel();
       }
     };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
+    document.addEventListener('pointerdown', handler);
+    return () => document.removeEventListener('pointerdown', handler);
   }, [isOpen, closePanel]);
 
   // Close on Escape
@@ -186,6 +186,7 @@ export default function NotificationModal() {
       {/* Panel */}
       <div
         ref={panelRef}
+        onPointerDown={(e) => e.stopPropagation()}
         className={`
           fixed z-50 bg-white shadow-2xl flex flex-col font-['Outfit']
           bottom-0 left-0 right-0 rounded-t-2xl max-h-[85dvh]

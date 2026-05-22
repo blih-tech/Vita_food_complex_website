@@ -10,6 +10,7 @@ export default function BellTrigger() {
   return (
     <button
       onClick={isOpen ? closePanel : openPanel}
+      onPointerDown={(e) => e.stopPropagation()}
       className="relative w-9 h-9 rounded-[10px] bg-gray-50 hover:bg-gray-100 flex items-center justify-center transition-colors"
       aria-label="Notifications"
     >
