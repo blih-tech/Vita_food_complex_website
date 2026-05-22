@@ -9,6 +9,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import BellTrigger from '@/components/notifications/BellTrigger';
 
 export const navSections = [
   {
@@ -178,6 +179,12 @@ export default function Sidebar({ open = false, onClose }: SidebarProps) {
           );
         })}
       </nav>
+
+      {/* ── Notifications (desktop) ── */}
+      <div className="hidden lg:flex items-center justify-between px-4 py-2 border-t border-gray-100">
+        <span className="text-[11px] font-semibold uppercase tracking-widest text-gray-400">Notifications</span>
+        <BellTrigger />
+      </div>
 
       {/* ── User & Logout ── */}
       <div className="border-t border-gray-100 p-3 space-y-1">

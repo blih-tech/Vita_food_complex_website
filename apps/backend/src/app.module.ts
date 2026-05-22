@@ -22,6 +22,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { RecipesModule } from './modules/recipes/recipes.module';
 import { CustomerCareSubmissionsModule } from './modules/customer-care-submissions/customer-care-submissions.module';
 import { DistributorApplicationsModule } from './modules/distributor-applications/distributor-applications.module';
+import { NotificationsModule } from './modules/notifications/notifications.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { DistributorApplicationsModule } from './modules/distributor-application
     RecipesModule,
     CustomerCareSubmissionsModule,
     DistributorApplicationsModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

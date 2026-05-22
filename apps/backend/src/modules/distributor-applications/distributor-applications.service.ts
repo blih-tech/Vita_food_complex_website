@@ -8,6 +8,7 @@ import {
   DistributorApplicationDocument,
 } from './schemas/distributor-application.schema';
 import { DistributorMailerService } from './distributor-mailer.service';
+import { NotificationsService } from '../notifications/notifications.service';
 
 @Injectable()
 export class DistributorApplicationsService {
@@ -15,6 +16,7 @@ export class DistributorApplicationsService {
     @InjectModel(DistributorApplication.name)
     private readonly model: Model<DistributorApplicationDocument>,
     private readonly mailerService: DistributorMailerService,
+    private readonly notificationsService: NotificationsService,
   ) {}
 
   async create(
@@ -24,6 +26,13 @@ export class DistributorApplicationsService {
     const saved = await doc.save();
     // Fire-and-forget email — don't block the API response
     this.mailerService.sendDistributorEmails(payload).catch(() => {});
+    this.notificationsService.create({
+      type: 'distributor_application',
+      title: 'New Distributor Application',
+      body: `${payload.businessName} (${payload.contactPerson}) applied to become a distributor`,
+      link: '/distributor-submissions',
+      resourceId: String(saved._id),
+    }).catch(() => {});
     return saved;
   }
 

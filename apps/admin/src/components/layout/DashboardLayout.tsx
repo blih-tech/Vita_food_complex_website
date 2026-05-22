@@ -3,10 +3,12 @@
 import { useAuth } from '@/context/AuthContext';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Menu, Bell } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Sidebar from './Sidebar';
+import NotificationModal from '@/components/notifications/NotificationModal';
+import BellTrigger from '@/components/notifications/BellTrigger';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -20,7 +22,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     }
   }, [user, loading, router]);
 
-  // Close drawer on every route change
   useEffect(() => {
     setSidebarOpen(false);
   }, [pathname]);
@@ -44,6 +45,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       )}
 
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
+      {/* Notification modal — rendered once at layout root, always accessible */}
+      <NotificationModal />
 
       <main className="flex-1 lg:ml-64 min-w-0">
         {/* Mobile-only top bar */}
@@ -72,10 +76,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
 
           <div className="flex items-center gap-2">
-            <button className="relative w-9 h-9 rounded-[10px] bg-gray-50 hover:bg-gray-100 flex items-center justify-center transition-colors">
-              <Bell size={16} className="text-gray-500" />
-              <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#23B349] rounded-full" />
-            </button>
+            <BellTrigger />
             <Link
               href="/settings?tab=profile"
               className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-sm hover:opacity-80 transition-opacity"

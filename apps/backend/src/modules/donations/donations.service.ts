@@ -3,12 +3,14 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Donation, DonationDocument, DonationStatus, DonationType } from './schemas/donation.schema';
 import { DonationMailerService } from './donation-mailer.service';
+import { NotificationsService } from '../notifications/notifications.service';
 
 @Injectable()
 export class DonationsService {
   constructor(
     @InjectModel(Donation.name) private model: Model<DonationDocument>,
     private readonly mailerService: DonationMailerService,
+    private readonly notificationsService: NotificationsService,
   ) {}
 
   async create(data: Partial<Donation>): Promise<DonationDocument> {
@@ -26,6 +28,15 @@ export class DonationsService {
         })
         .catch(() => {});
     }
+    this.notificationsService.create({
+      type: 'donation',
+      title: 'New Donation',
+      body: data.fullName
+        ? `${data.fullName} submitted a donation`
+        : 'A new donation was submitted',
+      link: '/donations',
+      resourceId: String(saved._id),
+    }).catch(() => {});
     return saved;
   }
 

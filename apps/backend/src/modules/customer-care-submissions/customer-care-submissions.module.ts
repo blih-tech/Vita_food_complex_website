@@ -7,12 +7,14 @@ import {
   CustomerCareSubmissionSchema,
 } from './schemas/customer-care-submission.schema';
 import { CustomerCareMailerService } from './customer-care-mailer.service';
+import { NotificationsModule } from '../notifications/notifications.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: CustomerCareSubmission.name, schema: CustomerCareSubmissionSchema },
     ]),
+    NotificationsModule,
   ],
   controllers: [CustomerCareSubmissionsController],
   providers: [CustomerCareSubmissionsService, CustomerCareMailerService],

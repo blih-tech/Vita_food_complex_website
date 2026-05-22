@@ -7,6 +7,7 @@ import {
   DistributorApplication,
   DistributorApplicationSchema,
 } from './schemas/distributor-application.schema';
+import { NotificationsModule } from '../notifications/notifications.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import {
         schema: DistributorApplicationSchema,
       },
     ]),
+    NotificationsModule,
   ],
   providers: [DistributorApplicationsService, DistributorMailerService],
   controllers: [DistributorApplicationsController],

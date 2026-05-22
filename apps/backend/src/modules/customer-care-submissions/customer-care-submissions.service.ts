@@ -8,6 +8,7 @@ import {
   CustomerCareSubmissionDocument,
 } from './schemas/customer-care-submission.schema';
 import { CustomerCareMailerService } from './customer-care-mailer.service';
+import { NotificationsService } from '../notifications/notifications.service';
 
 const MAX_PAYLOAD_BYTES = 96_000;
 
@@ -17,6 +18,7 @@ export class CustomerCareSubmissionsService {
     @InjectModel(CustomerCareSubmission.name)
     private readonly model: Model<CustomerCareSubmissionDocument>,
     private readonly mailerService: CustomerCareMailerService,
+    private readonly notificationsService: NotificationsService,
   ) {}
 
   private buildSummary(kind: 'feedback' | 'complaint' | 'compliment', payload: Record<string, unknown>): string {
@@ -60,6 +62,13 @@ export class CustomerCareSubmissionsService {
       this.mailerService
         .sendSubmissionNotification(body.kind, saved.summary, body.payload)
         .catch(() => {});
+      this.notificationsService.create({
+        type: 'customer_care',
+        title: 'New Customer Care Submission',
+        body: saved.summary,
+        link: '/customer-care-submissions',
+        resourceId: String(saved._id),
+      }).catch(() => {});
       return saved;
     });
   }

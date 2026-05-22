@@ -8,6 +8,7 @@ import {
   ContactMessageDocument,
 } from './schemas/contact-message.schema';
 import { ContactMailerService } from './contact-mailer.service';
+import { NotificationsService } from '../notifications/notifications.service';
 
 @Injectable()
 export class ContactMessagesService {
@@ -15,6 +16,7 @@ export class ContactMessagesService {
     @InjectModel(ContactMessage.name)
     private contactMessageModel: Model<ContactMessageDocument>,
     private readonly contactMailerService: ContactMailerService,
+    private readonly notificationsService: NotificationsService,
   ) {}
 
   async create(payload: CreateContactMessageDto): Promise<ContactMessageDocument> {
@@ -22,6 +24,13 @@ export class ContactMessagesService {
     const saved = await message.save();
     // Do not fail the API request if email delivery fails.
     await this.contactMailerService.sendContactEmails(payload);
+    this.notificationsService.create({
+      type: 'contact_message',
+      title: 'New Contact Message',
+      body: `${payload.fullName} sent a message`,
+      link: '/messages',
+      resourceId: String(saved._id),
+    }).catch(() => {});
     return saved;
   }
 

@@ -7,12 +7,14 @@ import {
   ContactMessage,
   ContactMessageSchema,
 } from './schemas/contact-message.schema';
+import { NotificationsModule } from '../notifications/notifications.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: ContactMessage.name, schema: ContactMessageSchema },
     ]),
+    NotificationsModule,
   ],
   providers: [ContactMessagesService, ContactMailerService],
   controllers: [ContactMessagesController],
