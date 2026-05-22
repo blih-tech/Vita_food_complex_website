@@ -10,13 +10,10 @@ import {
   Archive,
   Eye,
   Download,
-  FileDown,
+  Calendar,
   BarChart2,
   Layout,
-  TrendingUp,
   MessageCircle,
-  Heart,
-  Calendar,
 } from "lucide-react";
 import {
   ResponsiveContainer,
@@ -36,7 +33,7 @@ import {
   CareSubmissionStatus,
   customerCareSubmissionsApi,
 } from "@/lib/customerCareSubmissionsApi";
-import { exportSubmissionsToPdf, exportSingleSubmissionPdf } from "@/lib/exportPdf";
+import { exportSubmissionsToExcel } from "@/lib/exportExcel";
 import { contentApi } from "@/lib/contentApi";
 
 const STATUS_STYLES: Record<CareSubmissionStatus, string> = {
@@ -92,8 +89,9 @@ export default function CustomerCareSubmissionsPage() {
   const [selected, setSelected] = useState<CustomerCareSubmissionItem | null>(null);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState<CareSubmissionStatus | "all">("all");
-  const [kindFilter, setKindFilter] = useState<"all" | "feedback" | "complaint" | "compliment">("all");
+  const [kindFilter, setKindFilter] = useState<"all" | "feedback" | "complaint">("all");
   const [viewMode, setViewMode] = useState<'list' | 'analytics'>('list');
+  const [dateRange, setDateRange] = useState<'all' | 'month' | 'quarter' | 'year'>('all');
 
   const load = async () => {
     setLoading(true);
@@ -149,15 +147,27 @@ export default function CustomerCareSubmissionsPage() {
     if (selected?._id === id) setSelected(null);
   };
 
-  const filtered = items
-    .filter((m) => (filter === "all" ? true : m.status === filter))
-    .filter((m) => (kindFilter === "all" ? true : m.kind === kindFilter));
+  const filtered = useMemo(() => {
+    const now = new Date();
+    return items
+      .filter((m) => (filter === "all" ? true : m.status === filter))
+      .filter((m) => (kindFilter === "all" ? true : m.kind === kindFilter))
+      .filter((m) => {
+        const d = new Date(m.createdAt);
+        if (dateRange === 'month') return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+        if (dateRange === 'year') return d.getFullYear() === now.getFullYear();
+        if (dateRange === 'quarter') {
+            const q = Math.floor(now.getMonth() / 3);
+            return Math.floor(d.getMonth() / 3) === q && d.getFullYear() === now.getFullYear();
+        }
+        return true;
+      });
+  }, [items, filter, kindFilter, dateRange]);
 
   const analytics = useMemo(() => {
     const total = items.length;
     const feedback = items.filter(i => i.kind === 'feedback').length;
     const complaint = items.filter(i => i.kind === 'complaint').length;
-    const newCount = items.filter(i => i.status === 'new').length;
     
     // Trend (last 30 days)
     const dailyData: Record<string, number> = {};
@@ -167,7 +177,7 @@ export default function CustomerCareSubmissionsPage() {
     });
     const trend = Object.keys(dailyData).sort().slice(-30).map(date => ({ date, count: dailyData[date] }));
     
-    return { total, feedback, complaint, newCount, trend, 
+    return { total, feedback, complaint, trend, 
       types: [{ name: "Feedback", value: feedback }, { name: "Complaint", value: complaint }] 
     };
   }, [items]);
@@ -192,8 +202,14 @@ export default function CustomerCareSubmissionsPage() {
         </div>
 
         <div className="flex items-center gap-2 md:gap-4">
-          <button onClick={async () => await exportSubmissionsToPdf(filtered)} className="flex items-center gap-2 px-3 py-2 bg-[#23B349] text-white rounded-lg md:rounded-xl text-xs md:text-sm font-semibold hover:bg-[#1f9d40]">
-            <Download size={14} /> <span className="hidden md:inline">Export</span>
+          <select value={dateRange} onChange={(e) => setDateRange(e.target.value as any)} className="px-3 py-2 text-xs md:text-sm border rounded-lg md:rounded-xl">
+             <option value="all">All Time</option>
+             <option value="month">This Month</option>
+             <option value="quarter">This Quarter</option>
+             <option value="year">This Year</option>
+          </select>
+          <button onClick={() => exportSubmissionsToExcel(filtered)} className="flex items-center gap-2 px-3 py-2 bg-[#23B349] text-white rounded-lg md:rounded-xl text-xs md:text-sm font-semibold hover:bg-[#1f9d40]">
+            <Download size={14} /> <span className="hidden md:inline">Export Excel</span>
           </button>
           <button onClick={load} className={`p-2 rounded-lg md:rounded-xl bg-gray-50 ${loading ? 'animate-spin' : ''}`}><RefreshCw size={16} /></button>
         </div>
@@ -258,7 +274,6 @@ export default function CustomerCareSubmissionsPage() {
                     </div>
                  </div>
                  <div className="p-4 md:p-8 border-t border-gray-100 flex gap-3">
-                   <button onClick={async () => await exportSingleSubmissionPdf(selected, questionMap)} className="flex-1 px-4 py-3 bg-gray-100 rounded-xl text-xs md:text-sm font-bold flex items-center justify-center gap-2"><FileDown size={16}/> PDF</button>
                    <button onClick={() => handleDelete(selected._id)} className="flex-1 px-4 py-3 bg-red-50 text-red-500 rounded-xl text-xs md:text-sm font-bold">Delete</button>
                  </div>
               </div>
