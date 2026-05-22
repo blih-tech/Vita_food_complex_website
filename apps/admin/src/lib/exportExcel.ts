@@ -14,7 +14,11 @@ const FIELD_LABELS: Record<string, string> = {
   quantity: "Quantity"
 };
 
-export function exportSubmissionsToExcel(items: CustomerCareSubmissionItem[], fileName: string = "submissions.xlsx") {
+export function exportSubmissionsToExcel(
+  items: CustomerCareSubmissionItem[],
+  questionMap: Record<string, { en: string; am: string }> = {},
+  fileName: string = "submissions.xlsx",
+) {
   const feedbackItems = items.filter(item => item.kind === 'feedback');
   const complaintItems = items.filter(item => item.kind === 'complaint');
 
@@ -30,14 +34,16 @@ export function exportSubmissionsToExcel(items: CustomerCareSubmissionItem[], fi
     Object.entries(item.payload).forEach(([key, value]) => {
       if (key === 'ratings' && typeof value === 'object') {
         Object.entries(value as Record<string, any>).forEach(([qKey, qVal]) => {
-          row[`Rating: ${qKey}`] = qVal;
+          const label = questionMap[qKey]?.en || qKey;
+          row[label] = qVal;
         });
       } else if (typeof value === 'object' && value !== null) {
         Object.entries(value as Record<string, any>).forEach(([subKey, subVal]) => {
-          row[subKey] = subVal;
+          const label = questionMap[subKey]?.en || FIELD_LABELS[subKey] || subKey;
+          row[label] = subVal;
         });
       } else {
-        const label = FIELD_LABELS[key] || key;
+        const label = questionMap[key]?.en || FIELD_LABELS[key] || key;
         row[label] = value;
       }
     });

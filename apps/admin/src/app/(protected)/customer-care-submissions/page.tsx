@@ -210,7 +210,7 @@ export default function CustomerCareSubmissionsPage() {
              <option value="quarter">This Quarter</option>
              <option value="year">This Year</option>
           </select>
-          <button onClick={() => exportSubmissionsToExcel(filtered)} className="flex items-center gap-2 px-3 py-2 bg-[#23B349] text-white rounded-lg md:rounded-xl text-xs md:text-sm font-semibold hover:bg-[#1f9d40]">
+          <button onClick={() => exportSubmissionsToExcel(filtered, questionMap)} className="flex items-center gap-2 px-3 py-2 bg-[#23B349] text-white rounded-lg md:rounded-xl text-xs md:text-sm font-semibold hover:bg-[#1f9d40]">
             <Download size={14} /> <span className="hidden md:inline">Export Excel</span>
           </button>
           <button onClick={load} className={`p-2 rounded-lg md:rounded-xl bg-gray-50 ${loading ? 'animate-spin' : ''}`}><RefreshCw size={16} /></button>
