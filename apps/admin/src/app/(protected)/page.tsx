@@ -3,7 +3,7 @@
 import { useAuth } from '@/context/AuthContext';
 import {
   ShoppingBag, Briefcase, MessageSquare, TrendingUp,
-  ArrowUpRight, FileText, Settings, Bell, Loader2,
+  ArrowUpRight, FileText, Settings, Loader2,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
@@ -120,13 +120,6 @@ export default function DashboardPage() {
         </div>
 
         <div className="flex items-center gap-3">
-          <button className="relative w-9 h-9 rounded-[10px] bg-gray-50 hover:bg-gray-100 flex items-center justify-center transition-colors">
-            <Bell size={16} className="text-gray-500" />
-            {(stats?.unreadMessages ?? 0) > 0 && (
-              <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#23B349] rounded-full" />
-            )}
-          </button>
-
           <Link href="/settings?tab=profile" className="flex items-center gap-2.5 pl-3 border-l border-gray-100 group">
             <div className="text-right">
               <p className="text-sm font-semibold text-[#333733] group-hover:text-[#23B349] transition-colors leading-none">{user?.name}</p>
