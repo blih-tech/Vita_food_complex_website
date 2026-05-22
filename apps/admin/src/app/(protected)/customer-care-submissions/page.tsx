@@ -15,6 +15,12 @@ import {
   BarChart2,
   Layout,
   MessageCircle,
+  TrendingUp,
+  TrendingDown,
+  Star,
+  AlertTriangle,
+  CheckCircle2,
+  Users,
 } from "lucide-react";
 import {
   ResponsiveContainer,
@@ -28,6 +34,11 @@ import {
   Pie,
   Cell,
   Legend,
+  RadarChart,
+  Radar,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
 } from "recharts";
 import {
   CustomerCareSubmissionItem,
@@ -170,7 +181,8 @@ export default function CustomerCareSubmissionsPage() {
     const total = items.length;
     const feedback = items.filter(i => i.kind === 'feedback').length;
     const complaint = items.filter(i => i.kind === 'complaint').length;
-    
+    const readCount = items.filter(i => i.status !== 'new').length;
+
     // Trend (last 30 days)
     const dailyData: Record<string, number> = {};
     items.forEach(i => {
@@ -178,11 +190,47 @@ export default function CustomerCareSubmissionsPage() {
       dailyData[ds] = (dailyData[ds] || 0) + 1;
     });
     const trend = Object.keys(dailyData).sort().slice(-30).map(date => ({ date, count: dailyData[date] }));
-    
-    return { total, feedback, complaint, trend, 
-      types: [{ name: "Feedback", value: feedback }, { name: "Complaint", value: complaint }] 
+
+    // Per-question rating aggregation
+    const ratingAccum: Record<string, { sum: number; count: number }> = {};
+    items.forEach(item => {
+      const ratings = (item.payload as Record<string, unknown>).ratings;
+      if (ratings && typeof ratings === 'object') {
+        Object.entries(ratings as Record<string, unknown>).forEach(([qKey, qVal]) => {
+          const score = Number(qVal);
+          if (!isNaN(score)) {
+            if (!ratingAccum[qKey]) ratingAccum[qKey] = { sum: 0, count: 0 };
+            ratingAccum[qKey].sum += score;
+            ratingAccum[qKey].count += 1;
+          }
+        });
+      }
+    });
+
+    const ratingData = Object.entries(ratingAccum)
+      .map(([qKey, { sum, count }]) => ({
+        key: qKey,
+        label: questionMap[qKey]?.en || qKey,
+        shortLabel: questionMap[qKey]?.en?.split(' ').slice(0, 3).join(' ') || qKey,
+        avg: Math.round((sum / count) * 10) / 10,
+        count,
+      }))
+      .sort((a, b) => Number(a.key.replace('q', '')) - Number(b.key.replace('q', '')));
+
+    const avgOverall = ratingData.length > 0
+      ? Math.round((ratingData.reduce((s, r) => s + r.avg, 0) / ratingData.length) * 10) / 10
+      : 0;
+
+    const radarData = ratingData.map(r => ({ subject: r.shortLabel, score: r.avg, fullMark: 5 }));
+    const worst = [...ratingData].sort((a, b) => a.avg - b.avg).slice(0, 3);
+    const best = [...ratingData].sort((a, b) => b.avg - a.avg).slice(0, 3);
+
+    return {
+      total, feedback, complaint, readCount, trend, avgOverall,
+      ratingData, radarData, worst, best,
+      types: [{ name: "Feedback", value: feedback }, { name: "Complaint", value: complaint }],
     };
-  }, [items]);
+  }, [items, questionMap]);
 
   const kindBadge = (k: string) =>
     k === "complaint" ? "bg-amber-50 text-amber-700 border-amber-200" : 
@@ -283,15 +331,188 @@ export default function CustomerCareSubmissionsPage() {
             )}
           </div>
         ) : (
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8">
-            <div className="bg-white p-6 md:p-8 rounded-3xl border border-gray-100">
-               <h3 className="text-base md:text-lg font-bold mb-6">Submission Trend (30 Days)</h3>
-               <div className="h-48 md:h-64"><ResponsiveContainer width="100%" height="100%"><AreaChart data={analytics.trend}><CartesianGrid strokeDasharray="3 3"/><XAxis dataKey="date"/><YAxis/><Tooltip/><Area type="monotone" dataKey="count" fill="#23B349"/></AreaChart></ResponsiveContainer></div>
+          <div className="space-y-6">
+
+            {/* KPI Cards */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                {
+                  label: "Total Submissions", value: analytics.total, icon: Users,
+                  color: "text-[#23B349]", bg: "bg-[#23B349]/10",
+                },
+                {
+                  label: "Avg Satisfaction", value: analytics.avgOverall ? `${analytics.avgOverall}/5` : "—", icon: Star,
+                  color: "text-amber-500", bg: "bg-amber-50",
+                },
+                {
+                  label: "Feedback Forms", value: analytics.feedback, icon: MessageCircle,
+                  color: "text-sky-500", bg: "bg-sky-50",
+                },
+                {
+                  label: "Complaints", value: analytics.complaint, icon: AlertTriangle,
+                  color: "text-rose-500", bg: "bg-rose-50",
+                },
+              ].map(({ label, value, icon: Icon, color, bg }) => (
+                <div key={label} className="bg-white rounded-2xl border border-gray-100 p-5 flex items-center gap-4 shadow-sm">
+                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${bg}`}>
+                    <Icon size={20} className={color} />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold text-[#333733]">{value}</p>
+                    <p className="text-xs text-gray-400 mt-0.5">{label}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="bg-white p-6 md:p-8 rounded-3xl border border-gray-100">
-               <h3 className="text-base md:text-lg font-bold mb-6">Distribution</h3>
-               <div className="h-64"><ResponsiveContainer width="100%" height="100%"><PieChart><Pie data={analytics.types} dataKey="value" nameKey="name" fill="#8884d8"><Cell fill="#23B349"/><Cell fill="#DB2777"/></Pie><Tooltip/><Legend/></PieChart></ResponsiveContainer></div>
+
+            {/* Radar + Decision cards */}
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+
+              {/* Radar Chart */}
+              <div className="bg-white rounded-3xl border border-gray-100 p-6 shadow-sm">
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'radial-gradient(ellipse at 4px 14px, rgba(31,214,80,1) 0%, rgba(35,179,73,1) 60%, rgba(116,255,56,1) 100%)' }}>
+                    <BarChart2 size={14} className="text-white" />
+                  </div>
+                  <h3 className="font-bold text-[#333733]">Satisfaction by Category</h3>
+                </div>
+                <p className="text-xs text-gray-400 mb-4 ml-9">Average score per questionnaire dimension (out of 5)</p>
+                {analytics.radarData.length > 0 ? (
+                  <div className="h-72">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <RadarChart data={analytics.radarData} margin={{ top: 10, right: 30, bottom: 10, left: 30 }}>
+                        <PolarGrid stroke="#e5e7eb" />
+                        <PolarAngleAxis dataKey="subject" tick={{ fontSize: 11, fill: '#6b7280', fontFamily: 'Outfit' }} />
+                        <PolarRadiusAxis angle={30} domain={[0, 5]} tick={{ fontSize: 10, fill: '#9ca3af' }} tickCount={6} />
+                        <Radar dataKey="score" stroke="#23B349" fill="#23B349" fillOpacity={0.25} dot={{ fill: '#23B349', r: 4 }} />
+                        <Tooltip formatter={(v) => [`${v}/5`, 'Avg Score']} contentStyle={{ borderRadius: 12, fontFamily: 'Outfit', fontSize: 12 }} />
+                      </RadarChart>
+                    </ResponsiveContainer>
+                  </div>
+                ) : (
+                  <div className="h-72 flex items-center justify-center text-gray-400 text-sm">No rating data yet</div>
+                )}
+              </div>
+
+              {/* Per-question score bars */}
+              <div className="bg-white rounded-3xl border border-gray-100 p-6 shadow-sm">
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-amber-50">
+                    <Star size={14} className="text-amber-500" />
+                  </div>
+                  <h3 className="font-bold text-[#333733]">Score Breakdown</h3>
+                </div>
+                <p className="text-xs text-gray-400 mb-5 ml-9">Question-by-question average rating</p>
+                {analytics.ratingData.length > 0 ? (
+                  <div className="space-y-4 max-h-64 overflow-y-auto pr-1">
+                    {analytics.ratingData.map(r => {
+                      const pct = (r.avg / 5) * 100;
+                      const color = r.avg >= 4 ? '#23B349' : r.avg >= 3 ? '#f59e0b' : '#ef4444';
+                      return (
+                        <div key={r.key}>
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-xs font-medium text-gray-700 truncate max-w-[70%]">{r.label}</span>
+                            <span className="text-xs font-bold ml-2 shrink-0" style={{ color }}>{r.avg}/5</span>
+                          </div>
+                          <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                            <div className="h-full rounded-full transition-all duration-500" style={{ width: `${pct}%`, background: color }} />
+                          </div>
+                          <span className="text-[10px] text-gray-400">{r.count} response{r.count !== 1 ? 's' : ''}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="h-64 flex items-center justify-center text-gray-400 text-sm">No rating data yet</div>
+                )}
+              </div>
             </div>
+
+            {/* Needs attention + Performing well */}
+            {analytics.ratingData.length > 0 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-white rounded-3xl border border-rose-100 p-6 shadow-sm">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-7 h-7 rounded-lg bg-rose-50 flex items-center justify-center">
+                      <TrendingDown size={14} className="text-rose-500" />
+                    </div>
+                    <h3 className="font-bold text-[#333733]">Needs Attention</h3>
+                    <span className="ml-auto text-[10px] px-2 py-0.5 bg-rose-50 text-rose-500 rounded-full font-semibold">Action Required</span>
+                  </div>
+                  <div className="space-y-3">
+                    {analytics.worst.map((r, i) => (
+                      <div key={r.key} className="flex items-center gap-3">
+                        <span className="w-6 h-6 rounded-full bg-rose-50 text-rose-500 text-xs font-bold flex items-center justify-center shrink-0">{i + 1}</span>
+                        <span className="text-sm text-gray-700 flex-1 truncate">{r.label}</span>
+                        <span className="text-sm font-bold text-rose-500 shrink-0">{r.avg}/5</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-3xl border border-emerald-100 p-6 shadow-sm">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-7 h-7 rounded-lg bg-emerald-50 flex items-center justify-center">
+                      <TrendingUp size={14} className="text-[#23B349]" />
+                    </div>
+                    <h3 className="font-bold text-[#333733]">Performing Well</h3>
+                    <span className="ml-auto text-[10px] px-2 py-0.5 bg-[#23B349]/10 text-[#23B349] rounded-full font-semibold">Keep It Up</span>
+                  </div>
+                  <div className="space-y-3">
+                    {analytics.best.map((r, i) => (
+                      <div key={r.key} className="flex items-center gap-3">
+                        <span className="w-6 h-6 rounded-full bg-[#23B349]/10 text-[#23B349] text-xs font-bold flex items-center justify-center shrink-0">{i + 1}</span>
+                        <span className="text-sm text-gray-700 flex-1 truncate">{r.label}</span>
+                        <span className="text-sm font-bold text-[#23B349] shrink-0">{r.avg}/5</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Trend + Distribution */}
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+              <div className="bg-white rounded-3xl border border-gray-100 p-6 shadow-sm">
+                <h3 className="font-bold text-[#333733] mb-1">Submission Trend</h3>
+                <p className="text-xs text-gray-400 mb-4">Daily volume — last 30 days</p>
+                <div className="h-48">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={analytics.trend}>
+                      <defs>
+                        <linearGradient id="trendGrad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#23B349" stopOpacity={0.2} />
+                          <stop offset="95%" stopColor="#23B349" stopOpacity={0} />
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                      <XAxis dataKey="date" tick={{ fontSize: 10, fill: '#9ca3af' }} tickFormatter={d => d.slice(5)} />
+                      <YAxis tick={{ fontSize: 10, fill: '#9ca3af' }} allowDecimals={false} />
+                      <Tooltip contentStyle={{ borderRadius: 12, fontFamily: 'Outfit', fontSize: 12 }} />
+                      <Area type="monotone" dataKey="count" stroke="#23B349" strokeWidth={2} fill="url(#trendGrad)" />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-3xl border border-gray-100 p-6 shadow-sm">
+                <h3 className="font-bold text-[#333733] mb-1">Submission Types</h3>
+                <p className="text-xs text-gray-400 mb-4">Feedback vs Complaints distribution</p>
+                <div className="h-48">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie data={analytics.types} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={70} innerRadius={40} paddingAngle={3}>
+                        <Cell fill="#23B349" />
+                        <Cell fill="#f43f5e" />
+                      </Pie>
+                      <Tooltip contentStyle={{ borderRadius: 12, fontFamily: 'Outfit', fontSize: 12 }} />
+                      <Legend wrapperStyle={{ fontSize: 12, fontFamily: 'Outfit' }} />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            </div>
+
           </div>
         )}
       </div>
