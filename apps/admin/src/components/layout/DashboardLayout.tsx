@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Sidebar from './Sidebar';
 import NotificationModal from '@/components/notifications/NotificationModal';
+import BellTrigger from '@/components/notifications/BellTrigger';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -75,6 +76,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </div>
 
           <div className="flex items-center gap-2">
+            <BellTrigger />
             <Link
               href="/settings?tab=profile"
               className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-sm hover:opacity-80 transition-opacity"
