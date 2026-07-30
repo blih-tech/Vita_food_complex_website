@@ -60,7 +60,7 @@ export default function HeroVideoSection({ content, locale }: { content?: any; l
   return (
     <section
       id="hero-video"
-      className="relative max-sm:pt-16"
+      className="relative max-sm:pt-16 z-20"
       aria-label="Hero section"
     >
       {/* Background Layers */}
@@ -69,10 +69,10 @@ export default function HeroVideoSection({ content, locale }: { content?: any; l
       </div>
 
       {/* Floating Decorative Assets - Improved mobile positioning & scaling */}
-      <div className="pointer-events-none absolute inset-0 z-10">
+      <div className="pointer-events-none absolute inset-0 z-30 md:z-10">
 
         {/* Doctor Duck */}
-        <div className="absolute -left-14 -top-12 h-32 w-32 sm:-left-12 sm:-top-16 sm:h-44 sm:w-44 md:-left-8 md:-top-40 md:h-[340px] md:w-[340px] lg:left-0 lg:-top-80 lg:h-[540px] lg:w-[540px]">
+        <div className="absolute -left-6 -top-16 h-36 w-36 sm:-left-12 sm:-top-16 sm:h-44 sm:w-44 md:-left-8 md:-top-40 md:h-[340px] md:w-[340px] lg:left-0 lg:-top-80 lg:h-[540px] lg:w-[540px]">
           <Image
             src="/assets/hero/doctor-duck.png"
             alt="Doctor Duck"
@@ -83,7 +83,7 @@ export default function HeroVideoSection({ content, locale }: { content?: any; l
         </div>
 
         {/* Biscuit Stack */}
-        <div className="absolute -right-8 -top-8 h-28 w-28 sm:-right-6 sm:-top-10 sm:h-40 sm:w-40 md:-right-4 md:-top-28 md:h-[300px] md:w-[300px] lg:right-0 lg:-top-60 lg:h-[500px] lg:w-[500px]">
+        <div className="absolute -right-4 -top-12 h-32 w-32 sm:-right-6 sm:-top-10 sm:h-40 sm:w-40 md:-right-4 md:-top-28 md:h-[300px] md:w-[300px] lg:right-0 lg:-top-60 lg:h-[500px] lg:w-[500px]">
           <Image
             src="/assets/hero/cream-sandwich-stack.png"
             alt="Biscuit Stack"
@@ -111,7 +111,7 @@ export default function HeroVideoSection({ content, locale }: { content?: any; l
         </div>
 
         {/* Video Showcase */}
-        <div className="relative mt-14 sm:mt-20 md:mt-24 lg:mt-32 w-full">
+        <div className="relative mt-14 sm:mt-20 md:mt-24 lg:mt-32 w-full overflow-hidden">
           <MarqueeBanner t={t} />
 
           <div className="relative z-10 mx-auto max-w-[1380px] px-1 sm:px-0">

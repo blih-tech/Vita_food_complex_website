@@ -69,9 +69,9 @@ export default async function RootLayout({
     <html
       lang={locale}
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${funnelDisplay.variable} ${inter.variable} h-full antialiased scroll-smooth`}
+      className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${funnelDisplay.variable} ${inter.variable} h-full antialiased scroll-smooth overflow-x-hidden`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col overflow-x-hidden">
         <NextIntlClientProvider messages={messages}>
           <PageLoader />
           <Navbar />

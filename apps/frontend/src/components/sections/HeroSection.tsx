@@ -36,7 +36,7 @@ const HeroContent = ({ t, content, locale }: { t: any, content?: any, locale?: s
   };
 
   return (
-    <div className="relative pt-16 pb-12 sm:pt-20 md:pt-[140px] lg:pt-[220px] pb-12 sm:pb-16 md:pb-[40px] lg:pb-[60px] flex flex-col items-center z-10">
+    <div className="relative pt-28 pb-12 sm:pt-20 md:pt-[140px] lg:pt-[220px] sm:pb-16 md:pb-[40px] lg:pb-[60px] flex flex-col items-center z-10">
       <div className="relative flex flex-col items-center text-center px-4 sm:px-6 md:px-8 max-w-[1200px] mx-auto w-full">
         {/* Endorsement Badge */}
         <div className="flex items-center gap-1.5 sm:gap-2 rounded-full border border-[#23B349]/20 bg-white/90 px-3 py-1 sm:px-4 sm:py-1.5 shadow-[0_2px_8px_rgba(35,179,73,0.08)] backdrop-blur-sm mb-6 sm:mb-8 select-none transition-all hover:border-[#23B349]/40 duration-300">
@@ -90,26 +90,26 @@ const HeroContent = ({ t, content, locale }: { t: any, content?: any, locale?: s
         </h1>
 
         {/* Subtitle */}
-        <p className="max-w-[620px] font-[family-name:var(--font-outfit)] font-medium text-[15px] sm:text-base md:text-[18px] lg:text-[20px] text-[#404040]/70 leading-relaxed mb-4 px-2 sm:px-4">
+        <p className="hidden sm:block max-w-[620px] font-[family-name:var(--font-outfit)] font-medium text-[15px] sm:text-base md:text-[18px] lg:text-[20px] text-[#404040]/70 leading-relaxed mb-4 px-2 sm:px-4">
           {displayContent.description}
         </p>
 
         {/* Relationship Statement */}
-        <p className="font-[family-name:var(--font-outfit)] text-[13px] sm:text-sm text-[#404040]/60 font-medium mb-8 sm:mb-10 tracking-wide px-4">
+        <p className="hidden sm:block font-[family-name:var(--font-outfit)] text-[13px] sm:text-sm text-[#404040]/60 font-medium mb-8 sm:mb-10 tracking-wide px-4">
           {t("relationshipStatement")}
         </p>
 
         {/* CTA Buttons - Better mobile experience */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4 w-full max-w-[280px] sm:max-w-none mx-auto">
+        <div className="flex flex-col sm:flex-row justify-center gap-4 w-full max-w-[280px] sm:max-w-none mx-auto mt-6 sm:mt-0">
           <Link
             href="/products"
-            className="bg-[#23B349] text-white flex items-center justify-center gap-3 px-8 sm:px-10 py-4 rounded-full font-[family-name:var(--font-funnel-display)] font-bold text-lg sm:text-[18px] md:text-[22px] lg:text-[24px] transition-all hover:scale-105 hover:bg-[#1fa041] active:scale-95 shadow-[0_10px_25px_-5px_rgba(35,179,73,0.35)] min-h-[52px] sm:min-h-[56px] touch-manipulation"
+            className="bg-[#23B349] text-white flex items-center justify-center gap-3 px-6 py-3 sm:px-10 sm:py-4 rounded-full font-[family-name:var(--font-funnel-display)] font-bold text-base sm:text-[18px] md:text-[22px] lg:text-[24px] transition-all hover:scale-105 hover:bg-[#1fa041] active:scale-95 shadow-[0_10px_25px_-5px_rgba(35,179,73,0.35)] min-h-[46px] sm:min-h-[56px] touch-manipulation"
           >
             {displayContent.cta} <span className="text-xl sm:text-2xl">→</span>
           </Link>
           <Link
             href="/about"
-            className="border-[2.5px] border-[#23B349] text-[#404040] flex items-center justify-center px-8 sm:px-10 py-4 rounded-full font-[family-name:var(--font-funnel-display)] font-bold text-lg sm:text-[18px] md:text-[22px] lg:text-[24px] transition-all hover:bg-[#23B349]/5 active:scale-95 min-h-[52px] sm:min-h-[56px] touch-manipulation"
+            className="border-[2.5px] border-[#23B349] text-[#404040] flex items-center justify-center px-6 py-3 sm:px-10 sm:py-4 rounded-full font-[family-name:var(--font-funnel-display)] font-bold text-base sm:text-[18px] md:text-[22px] lg:text-[24px] transition-all hover:bg-[#23B349]/5 active:scale-95 min-h-[46px] sm:min-h-[56px] touch-manipulation"
           >
             {t("whyVita")}
           </Link>
