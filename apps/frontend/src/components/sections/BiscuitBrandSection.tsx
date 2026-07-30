@@ -141,7 +141,7 @@ export default function BiscuitBrandSection({
       className="relative flex min-h-[860px] w-full flex-col items-center overflow-hidden bg-white pb-40 pt-24 sm:pb-48 lg:min-h-[960px] lg:pb-[220px] lg:pt-32"
     >
       {/* Bottom-left decorative biscuit */}
-      <div className="pointer-events-none absolute bottom-[-35px] left-[-45px] z-10 h-[210px] w-[210px] -rotate-[14deg] opacity-95 sm:bottom-[-20px] sm:left-[-55px] sm:h-[320px] sm:w-[320px] lg:bottom-[10px] lg:left-[-70px] lg:h-[450px] lg:w-[450px]">
+      <div className="pointer-events-none absolute bottom-[-35px] left-[-60px] z-10 h-[210px] w-[210px] -rotate-[26deg] opacity-95 sm:bottom-[-20px] sm:left-[-100px] sm:h-[320px] sm:w-[320px] lg:bottom-[10px] lg:left-[-150px] lg:h-[450px] lg:w-[450px]">
         <Image
           src="/assets/products/biscuts/biscut-5.png"
           alt=""
@@ -154,7 +154,7 @@ export default function BiscuitBrandSection({
       </div>
 
       {/* Bottom-right decorative biscuit */}
-      <div className="pointer-events-none absolute bottom-[-35px] right-[-45px] z-10 h-[210px] w-[210px] rotate-[14deg] opacity-95 sm:bottom-[-20px] sm:right-[-55px] sm:h-[320px] sm:w-[320px] lg:bottom-[10px] lg:right-[-70px] lg:h-[450px] lg:w-[450px]">
+      <div className="pointer-events-none absolute bottom-[-35px] right-[-60px] z-10 h-[210px] w-[210px] rotate-[22deg] opacity-95 sm:bottom-[-20px] sm:right-[-100px] sm:h-[320px] sm:w-[320px] lg:bottom-[10px] lg:right-[-150px] lg:h-[450px] lg:w-[450px]">
         <Image
           src="/assets/products/biscuts/biscut-1.png"
           alt=""

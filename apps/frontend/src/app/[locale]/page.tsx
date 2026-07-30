@@ -14,15 +14,17 @@ import SocialWallSection from "@frontend/components/sections/SocialWallSection";
 import PartnerSection from "@frontend/components/sections/PartnerSection";
 import SisterCompaniesSection from "@frontend/components/sections/SisterCompaniesSection";
 import FeedbackSection from "@frontend/components/sections/FeedbackSection";
+import ScrollReveal from "@frontend/components/ui/ScrollReveal";
 
 const SECTION_COMPONENTS: Record<string, any> = {
   // kebab-case keys matching DB section types
   hero: HeroSection,
   "hero-video": HeroVideoSection,
+  recipes: RecipesSection,
   products: ProductsSection,
   "biscuit-brand": BiscuitBrandSection,
   "social-proof": SocialProofSection,
-  recipes: RecipesSection,
+
   "quick-facts": QuickFactSection,
   merchandise: MerchandiseSection,
   "social-wall": SocialWallSection,
@@ -57,18 +59,18 @@ export default function Home({
   if (loading || !page || !page.sections || page.sections.length === 0) {
     return (
       <main className="flex flex-col min-h-screen bg-white overflow-x-hidden">
-        <HeroSection />
-        <HeroVideoSection />
-        <ProductsSection />
-        <BiscuitBrandSection />
-        <SocialProofSection />
-        <SisterCompaniesSection />
-        <RecipesSection />
-        <QuickFactSection />
-        <MerchandiseSection />
-        <SocialWallSection />
-        <PartnerSection />
-        <FeedbackSection />
+        <ScrollReveal><HeroSection /></ScrollReveal>
+        <ScrollReveal><HeroVideoSection /></ScrollReveal>
+        <ScrollReveal><ProductsSection /></ScrollReveal>
+        <ScrollReveal><BiscuitBrandSection /></ScrollReveal>
+        <ScrollReveal><RecipesSection /></ScrollReveal>
+        <ScrollReveal><SocialProofSection /></ScrollReveal>
+        <ScrollReveal><SisterCompaniesSection /></ScrollReveal>
+        <ScrollReveal><QuickFactSection /></ScrollReveal>
+        <ScrollReveal><MerchandiseSection /></ScrollReveal>
+        <ScrollReveal><SocialWallSection /></ScrollReveal>
+        <ScrollReveal><PartnerSection /></ScrollReveal>
+        <ScrollReveal><FeedbackSection /></ScrollReveal>
       </main>
     );
   }
@@ -80,9 +82,9 @@ export default function Home({
         if (!Component) return null;
 
         return (
-          <div key={section.id} className="relative">
+          <ScrollReveal key={section.id} className="relative">
             <Component content={section.content} locale={locale} />
-          </div>
+          </ScrollReveal>
         );
       })}
     </main>

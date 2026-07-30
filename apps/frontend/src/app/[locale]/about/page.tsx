@@ -9,6 +9,7 @@ import WhoAreWeSection from "@frontend/components/sections/WhoAreWeSection";
 import ProcessSections from "@frontend/components/sections/ProcessSections";
 import TestimonialSection from "@frontend/components/sections/TestimonialSection";
 import BackToTop from "@frontend/components/ui/BackToTop";
+import ScrollReveal from "@frontend/components/ui/ScrollReveal";
 
 /* Figma About page (277:8084) section order:
    1. Hero (2376:9999) — headline + subtitle + story image with white frame
@@ -36,12 +37,12 @@ export default function AboutPage({ params: paramsPromise }: { params: Promise<{
   if (loading || !page || !page.sections || page.sections.length === 0) {
     return (
       <main className="flex flex-col scroll-smooth">
-        <AboutHeroSection />
-        <AboutCompanySection />
-        <SisterCompaniesSection />
-        <WhoAreWeSection />
-        <ProcessSections />
-        <TestimonialSection />
+        <ScrollReveal><AboutHeroSection /></ScrollReveal>
+        <ScrollReveal><AboutCompanySection /></ScrollReveal>
+        <ScrollReveal><SisterCompaniesSection /></ScrollReveal>
+        <ScrollReveal><WhoAreWeSection /></ScrollReveal>
+        <ScrollReveal><ProcessSections /></ScrollReveal>
+        <ScrollReveal><TestimonialSection /></ScrollReveal>
         <BackToTop />
       </main>
     );
@@ -52,7 +53,11 @@ export default function AboutPage({ params: paramsPromise }: { params: Promise<{
       {page.sections.map((section: any) => {
         const Component = SECTION_COMPONENTS[section.type];
         if (!Component) return null;
-        return <Component key={section.id} content={section.content} locale={locale} />;
+        return (
+          <ScrollReveal key={section.id}>
+            <Component content={section.content} locale={locale} />
+          </ScrollReveal>
+        );
       })}
       <BackToTop />
     </main>

@@ -1427,7 +1427,7 @@
     "label": "Our Brands",
     "title": "A World of Flavor",
     "description": "Discover our range of delicious biscuits made with love.",
-    "cta": "Explore Products"
+    "cta": "View Products"
   },
   "QuickFact": {
     "label": "Quick Fact",
@@ -1558,12 +1558,12 @@
     }
   },
   "Hero": {
-    "connecting": "connecting",
+    "connecting": "Connecting!",
     "marqueeText": "A new stylish way of {connecting}!",
     "videoAlt": "Family enjoying Vita",
-    "stylishWayPart1": "A new stylish way of",
-    "stylishWayPart2": "connecting",
-    "description": "Experience the perfect blend of nutrition and flavor with Vita's premium range of biscuits and flour products.",
+    "stylishWayPart1": "A new stylish",
+    "stylishWayPart2": "way of",
+    "description": "From everyday baking to special treats, Vita brings joy, taste, and quality to your table.",
     "ourProducts": "Our Products",
     "whyVita": "Why Vita?",
     "secondaryQuote": "Nourishing families with every bite, bringing joy to every home.",

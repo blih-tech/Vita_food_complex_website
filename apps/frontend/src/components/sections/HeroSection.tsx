@@ -7,19 +7,23 @@ import { ReactNode } from "react";
 // ── SUB-COMPONENTS ──
 const BackgroundDecorations = () => (
   <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-    {/* Top Left Blurred Cookie - Responsive positioning & size */}
-    <div className="absolute top-[8%] left-[-8%] sm:left-[-5%] w-[180px] h-[180px] sm:w-[240px] sm:h-[240px] md:w-[280px] md:h-[280px] lg:w-[300px] lg:h-[300px] opacity-[0.12] blur-[40px] rotate-[-15deg]">
+    {/* Glowing Background Gradients */}
+    {/* Left glowing gradient (vibrant green wash matching design) */}
+    <div className="absolute top-[-15%] left-[-25%] w-[450px] h-[450px] sm:w-[650px] sm:h-[650px] md:w-[850px] md:h-[850px] lg:w-[1100px] lg:h-[1100px] bg-[radial-gradient(circle_at_20%_20%,rgba(35,179,73,0.38)_0%,rgba(74,222,128,0.18)_50%,transparent_80%)] blur-[60px] rounded-full" />
+    
+    {/* Right glowing gradient (soft brand green glow) */}
+    <div className="absolute top-[-5%] right-[-10%] w-[350px] h-[350px] sm:w-[500px] sm:h-[500px] md:w-[700px] md:h-[700px] lg:w-[900px] lg:h-[900px] bg-[radial-gradient(circle_at_70%_30%,rgba(35,179,73,0.15)_0%,transparent_75%)] blur-[50px] rounded-full" />
+
+    {/* Top Left Blurry Biscuit - Placed higher up matching design */}
+    <div className="absolute top-[4%] left-[-15%] sm:left-[-12%] md:left-[-10%] lg:left-[-8%] w-[180px] h-[180px] sm:w-[260px] sm:h-[260px] md:w-[340px] md:h-[340px] lg:w-[440px] lg:h-[440px] rotate-[-12deg] blur-[5px] opacity-90 transition-transform duration-300">
       <Image
-        src="/assets/hero/cookie.png"
+        src="/assets/hero/round-biscuit.png"
         alt=""
         fill
+        priority
         className="object-contain"
       />
     </div>
-
-    {/* Soft Radial Brand Glows - Better mobile containment */}
-    <div className="absolute top-[12%] right-[2%] sm:right-[5%] w-[320px] h-[320px] sm:w-[420px] sm:h-[420px] md:w-[520px] md:h-[520px] lg:w-[600px] lg:h-[600px] bg-[#23B349]/5 blur-[100px] sm:blur-[130px] rounded-full" />
-    <div className="absolute top-[18%] left-[8%] sm:left-[12%] w-[240px] h-[240px] sm:w-[320px] sm:h-[320px] md:w-[380px] md:h-[380px] lg:w-[400px] lg:h-[400px] bg-[#FFEC19]/5 blur-[80px] sm:blur-[110px] rounded-full" />
   </div>
 );
 

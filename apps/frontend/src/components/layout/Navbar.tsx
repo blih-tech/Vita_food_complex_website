@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useMemo } from "react";
 import type { MouseEvent as ReactMouseEvent } from "react";
+import { motion } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, useRouter, usePathname } from "@frontend/navigation";
 import { useSearchParams } from "next/navigation";
@@ -57,6 +58,17 @@ export default function Navbar() {
   const [newsLoaded, setNewsLoaded] = useState(false);
   const [menuProducts, setMenuProducts] = useState<NavProductItem[]>([]);
   const [productsLoaded, setProductsLoaded] = useState(false);
+  const [pageLoaded, setPageLoaded] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && (window as any).__pageLoaded) {
+      setPageLoaded(true);
+      return;
+    }
+    const handlePageLoaded = () => setPageLoaded(true);
+    document.addEventListener("page-loaded", handlePageLoaded);
+    return () => document.removeEventListener("page-loaded", handlePageLoaded);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -136,16 +148,26 @@ export default function Navbar() {
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center px-4 sm:px-6 lg:px-8 py-4 sm:py-6"
+      className="fixed top-0 left-0 right-0 z-999 flex flex-col items-center px-4 sm:px-6 lg:px-8 py-4 sm:py-6"
     >
       <div className="w-full max-w-[1664px] relative">
-        {/* Main bar - Exact Figma design specifications with proper containment */}
-        <div
-          className="w-full pl-[12px] sm:pl-[24px] lg:pl-[28px] xl:pl-[48px] pr-[12px] sm:pr-[16px] lg:pr-[20px] xl:pr-[32px] py-[8px] sm:py-[12px] rounded-[16px] sm:rounded-[24px] lg:rounded-[32px] flex items-center shadow-lg transition-all duration-300 relative z-50"
+        {/* Main bar - entrance animation: starts small width, centered, then drops/expands into place */}
+        <motion.div
+          initial={{ scaleX: 0.05, opacity: 0, y: -40 }}
+          animate={pageLoaded ? { scaleX: 1, opacity: 1, y: 0 } : { scaleX: 0.05, opacity: 0, y: -40 }}
+          transition={{
+            type: "spring",
+            stiffness: 85,
+            damping: 14,
+            mass: 0.9,
+            delay: 0.15,
+          }}
           style={{
             background:
               "radial-gradient(ellipse at 25.041px 143.28px, rgba(31,214,80,1) 0%, rgba(35,179,73,1) 60%, rgba(75,217,64,1) 80%, rgba(116,255,56,1) 100%)",
+            transformOrigin: "top center",
           }}
+          className="w-full pl-[12px] sm:pl-[24px] lg:pl-[28px] xl:pl-[48px] pr-[12px] sm:pr-[16px] lg:pr-[20px] xl:pr-[32px] py-[8px] sm:py-[12px] rounded-[16px] sm:rounded-[24px] lg:rounded-[32px] flex items-center shadow-lg relative z-50"
         >
           <div className="flex gap-[16px] sm:gap-[24px] lg:gap-[28px] xl:gap-[64px] items-center flex-1">
             {/* Logo */}
@@ -256,9 +278,9 @@ export default function Navbar() {
             <div className="hidden lg:block">
               <Link
                 href="/contact"
-                className="border border-white px-[14px] lg:px-[18px] xl:px-[24px] py-[7px] lg:py-[8px] xl:py-[10px] rounded-[99px] flex items-center justify-center gap-[8px] hover:bg-white hover:text-[#23B349] transition-all duration-300 group"
+                className="border border-white px-[10px] lg:px-[18px] xl:px-[24px] py-[7px] lg:py-[5px] xl:py-[10px] rounded-[99px] flex items-center justify-center gap-[8px] hover:bg-white hover:text-[#23B349] transition-all duration-300 group"
               >
-                <span className="text-white group-hover:text-[#23B349] text-[13px] xl:text-[18px] 2xl:text-[24px] font-['Funnel_Display'] font-medium leading-normal tracking-[-0.096px] whitespace-nowrap">
+                <span className="text-black group-hover:text-[#23B349] text-[13px] xl:text-[15px] 2xl:text-[24px] font-['Funnel_Display'] font-medium leading-normal tracking-[-0.096px] whitespace-nowrap">
                   {t("cta")}
                 </span>
               </Link>
@@ -277,7 +299,7 @@ export default function Navbar() {
               )}
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Mobile / tablet dropdown — hidden on lg+ where desktop nav is shown */}
         {mobileOpen && (

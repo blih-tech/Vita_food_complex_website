@@ -70,6 +70,7 @@ export default function HeroVideoSection({ content, locale }: { content?: any; l
 
       {/* Floating Decorative Assets - Improved mobile positioning & scaling */}
       <div className="pointer-events-none absolute inset-0 z-10">
+
         {/* Doctor Duck */}
         <div className="absolute -left-14 -top-12 h-32 w-32 sm:-left-12 sm:-top-16 sm:h-44 sm:w-44 md:-left-8 md:-top-40 md:h-[340px] md:w-[340px] lg:left-0 lg:-top-80 lg:h-[540px] lg:w-[540px]">
           <Image
@@ -84,7 +85,7 @@ export default function HeroVideoSection({ content, locale }: { content?: any; l
         {/* Biscuit Stack */}
         <div className="absolute -right-8 -top-8 h-28 w-28 sm:-right-6 sm:-top-10 sm:h-40 sm:w-40 md:-right-4 md:-top-28 md:h-[300px] md:w-[300px] lg:right-0 lg:-top-60 lg:h-[500px] lg:w-[500px]">
           <Image
-            src="/assets/hero/biscuit-stack.png"
+            src="/assets/hero/cream-sandwich-stack.png"
             alt="Biscuit Stack"
             fill
             priority
