@@ -1567,7 +1567,9 @@
     "ourProducts": "Our Products",
     "whyVita": "Why Vita?",
     "secondaryQuote": "Nourishing families with every bite, bringing joy to every home.",
-    "ourClients": "Our Happy Clients"
+    "ourClients": "Our Happy Clients",
+    "poweredBy": "Powered by <brand>Belayab Foods</brand>",
+    "relationshipStatement": "Vita Food Complex is a sister company of Belayab Delivery."
   },
   "CustomerCare": {
     "title": "Customer Care",
@@ -1630,6 +1632,23 @@
       "submitSending": "Sending…",
       "submitSent": "Thank you — your complaint was received.",
       "submitFailed": "Could not submit. Please try again in a moment."
+    }
+  },
+  "SocialProof": {
+    "eyebrow": "Trusted by customers",
+    "heading": "Brands and businesses that choose Vita",
+    "description": "Vita Food Complex supports retailers, distributors, hospitality businesses, and organizations with dependable food products and consistent quality.",
+    "demoDisclaimer": "Note: Displayed brands are concept demonstrators for layout visualization. Not actual endorsements.",
+    "demoLabel": "Demo Logo",
+    "customers": {
+      "addisMarket": "Addis Market",
+      "greenBasket": "Green Basket",
+      "sunriseSupermarket": "Sunrise Supermarket",
+      "blueNileRetail": "Blue Nile Retail",
+      "unityHotels": "Unity Hotels",
+      "freshChoice": "Fresh Choice",
+      "metroFoods": "Metro Foods",
+      "habeshaMart": "Habesha Mart"
     }
   }
 }

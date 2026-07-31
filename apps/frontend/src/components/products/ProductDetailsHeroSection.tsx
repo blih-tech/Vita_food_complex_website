@@ -18,10 +18,14 @@ export default function ProductHeroSection({
       ? product.colorVariations[activeVariationIndex]
       : null;
 
-  const currentBgColor = activeVariation ? activeVariation.bgColor : product.ui.bgColor;
+  const isBora = product.id === "bora";
+  const currentBgColor = isBora
+    ? "linear-gradient(135deg, #F5F5F5 0%, #E5E5E5 100%)"
+    : (activeVariation ? activeVariation.bgColor : product.ui.bgColor);
+
   return (
     <section
-      className="relative w-full overflow-hidden flex flex-col items-center pb-32 transition-colors duration-500"
+      className="relative w-full overflow-hidden flex flex-col items-center pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 transition-colors duration-500"
       style={{
         background: currentBgColor,
         maskImage: `url('/wave-2.svg')`,
@@ -34,12 +38,12 @@ export default function ProductHeroSection({
         WebkitMaskRepeat: "no-repeat",
       }}
     >
-      <div className="relative z-10 w-full flex flex-col items-center text-center px-4 pt-12 md:pt-24 max-w-[1400px] mx-auto">
+      <div className="relative z-10 w-full flex flex-col items-center text-center px-4 max-w-[1200px] mx-auto">
         {/* HUGE Background Text & Net WT */}
         <div className="relative w-full flex justify-center items-center pointer-events-none select-none z-0">
           <div className="relative inline-block">
             <h1
-              className="font-['Funnel_Display'] font-black text-7xl md:text-[9rem] lg:text-[12rem] tracking-tight leading-none text-center whitespace-nowrap drop-shadow-md"
+              className="font-['Funnel_Display'] font-black text-6xl xs:text-7xl sm:text-8xl md:text-[9rem] lg:text-[10rem] tracking-tight leading-none text-center whitespace-nowrap drop-shadow-md"
               style={{ color: product.ui.nameColor }}
             >
               {product.name}
@@ -48,7 +52,7 @@ export default function ProductHeroSection({
         </div>
 
         {/* Hero Product Image */}
-        <div className="relative w-[500px] h-[400px] md:w-full md:max-w-5xl md:aspect-[1.1] lg:max-w-[1800px] lg:aspect-[1.3] z-20 -mt-4 md:-mt-12 lg:-mt-20 flex justify-center items-center">
+        <div className="relative w-full max-w-[280px] xs:max-w-[340px] sm:max-w-[460px] md:max-w-[620px] lg:max-w-[720px] aspect-[1.5] z-20 -mt-6 sm:-mt-12 md:-mt-16 lg:-mt-20 flex justify-center items-center">
           {/* Faint Background Vector behind the product */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] opacity-[0.04] pointer-events-none z-0">
             <Image
@@ -65,25 +69,17 @@ export default function ProductHeroSection({
             src={product.media.image}
             alt={product.name}
             fill
-            className="object-contain drop-shadow-2xl hover:-translate-y-4 transition-all duration-500 scale-110 lg:scale-125 z-10"
+            className="object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.16)] hover:-translate-y-2 transition-all duration-500 scale-110 z-10"
             priority
           />
         </div>
 
-        {/* Subtext */}
-        <p
-          className="relative font-['Outfit'] -mt-20 font-medium text-base md:text-xl lg:text-2xl max-w-2xl text-center mx-auto leading-tight  z-20"
-          style={{ color: product.ui.nameColor }}
-        >
-          {product.content?.description ?? ""}
-        </p>
-
         {/* Color Variation Dots */}
         {product.colorVariations && product.colorVariations.length > 0 && (
-          <div className="relative z-20 flex items-center justify-center gap-4 mt-8">
+          <div className="relative z-20 flex items-center justify-center gap-4 mt-6">
             <button
               onClick={() => setActiveVariationIndex(null)}
-              className={`w-8 h-8 rounded-full border-2 transition-all duration-300 ${
+              className={`w-6 h-6 rounded-full border-2 transition-all duration-300 ${
                 activeVariationIndex === null
                   ? "border-white scale-125 shadow-lg"
                   : "border-transparent hover:scale-110"
@@ -95,7 +91,7 @@ export default function ProductHeroSection({
               <button
                 key={idx}
                 onClick={() => setActiveVariationIndex(idx)}
-                className={`w-8 h-8 rounded-full border-2 transition-all duration-300 ${
+                className={`w-6 h-6 rounded-full border-2 transition-all duration-300 ${
                   activeVariationIndex === idx
                     ? "border-white scale-125 shadow-lg"
                     : "border-transparent hover:scale-110"

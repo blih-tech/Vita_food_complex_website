@@ -1,7 +1,8 @@
 "use client";
-import { useTranslations } from "next-intl";
 import { Link } from "@frontend/navigation";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { ReactNode } from "react";
 
 // ── SUB-COMPONENTS ──
 const BackgroundDecorations = () => (
@@ -33,6 +34,23 @@ const HeroContent = ({ t, content, locale }: { t: any, content?: any, locale?: s
   return (
     <div className="relative pt-16 pb-12 sm:pt-20 md:pt-[140px] lg:pt-[220px] pb-12 sm:pb-16 md:pb-[40px] lg:pb-[60px] flex flex-col items-center z-10">
       <div className="relative flex flex-col items-center text-center px-4 sm:px-6 md:px-8 max-w-[1200px] mx-auto w-full">
+        {/* Endorsement Badge */}
+        <div className="flex items-center gap-1.5 sm:gap-2 rounded-full border border-[#23B349]/20 bg-white/90 px-3 py-1 sm:px-4 sm:py-1.5 shadow-[0_2px_8px_rgba(35,179,73,0.08)] backdrop-blur-sm mb-6 sm:mb-8 select-none transition-all hover:border-[#23B349]/40 duration-300">
+          <div className="relative w-4 h-4 sm:w-[22px] sm:h-[22px]">
+            <Image
+              src="/assets/sister/foods.png"
+              alt="Belayab Foods Logo"
+              fill
+              className="object-contain"
+            />
+          </div>
+          <span className="font-[family-name:var(--font-outfit)] text-[11px] sm:text-[13px] md:text-sm text-[#404040]/80 tracking-wide font-medium">
+            {t.rich("poweredBy", {
+              brand: (chunks: ReactNode) => <span className="font-bold text-[#404040]">{chunks}</span>
+            })}
+          </span>
+        </div>
+
         {/* Headline Group */}
         <div className="flex flex-col items-center mb-6 sm:mb-8 md:mb-10">
           <h2 className="font-[family-name:var(--font-outfit)] font-extrabold text-[26px] sm:text-[28px] md:text-[42px] lg:text-[56px] text-[#404040] leading-tight tracking-tight">
@@ -63,13 +81,18 @@ const HeroContent = ({ t, content, locale }: { t: any, content?: any, locale?: s
         </div>
 
         {/* Main Heading */}
-        <h1 className="font-[family-name:var(--font-funnel-display)] font-black text-[42px] xs:text-[48px] sm:text-[68px] md:text-[130px] lg:text-[180px] text-[#23B349] leading-[0.92] sm:leading-[0.88] md:leading-[0.85] tracking-[-0.04em] sm:tracking-[-0.05em] mb-8 sm:mb-10 md:mb-12">
+        <h1 className="font-[family-name:var(--font-funnel-display)] font-black text-[40px] xs:text-[48px] sm:text-[58px] md:text-[100px] lg:text-[150px] text-[#23B349] leading-[0.92] sm:leading-[0.88] md:leading-[0.85] tracking-[-0.04em] sm:tracking-[-0.05em] mb-8 sm:mb-10 md:mb-12">
           {t("connecting")}
         </h1>
 
         {/* Subtitle */}
-        <p className="max-w-[620px] font-[family-name:var(--font-outfit)] font-medium text-[15px] sm:text-base md:text-[18px] lg:text-[20px] text-[#404040]/70 leading-relaxed mb-10 sm:mb-12 px-2 sm:px-4">
+        <p className="max-w-[620px] font-[family-name:var(--font-outfit)] font-medium text-[15px] sm:text-base md:text-[18px] lg:text-[20px] text-[#404040]/70 leading-relaxed mb-4 px-2 sm:px-4">
           {displayContent.description}
+        </p>
+
+        {/* Relationship Statement */}
+        <p className="font-[family-name:var(--font-outfit)] text-[13px] sm:text-sm text-[#404040]/60 font-medium mb-8 sm:mb-10 tracking-wide px-4">
+          {t("relationshipStatement")}
         </p>
 
         {/* CTA Buttons - Better mobile experience */}

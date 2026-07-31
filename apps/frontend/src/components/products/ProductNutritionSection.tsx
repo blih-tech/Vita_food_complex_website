@@ -46,143 +46,183 @@ export default function ProductNutritionSection({
     }
   };
 
+  const isBora = product.id === "bora";
+  const headerBgColor = product.ui.bgColor;
+
+  const tintBgStyle = {
+    background: isBora
+      ? "rgba(18, 18, 18, 0.05)"
+      : "rgba(35, 179, 73, 0.06)",
+  };
+
+  const servingSize = product.content?.nutrition?.servingSize || "Per 1 Piece (70 g)";
+  const calories = product.content?.nutrition?.calories || 120;
+
   return (
-    <section className="w-full bg-white px-4 md:px-8 lg:px-32 py-16 lg:py-24 z-10">
-      <div className="max-w-[1664px] mx-auto flex flex-col gap-20">
-        {/* Nutrition Facts */}
-        <div className="w-full flex flex-col">
+    <section className="w-full bg-white px-4 md:px-8 lg:px-16 xl:px-32 pt-8 sm:pt-10 md:pt-12 pb-16 lg:pb-24 z-10">
+      <div className="max-w-[1400px] mx-auto flex flex-col gap-16">
+        
+        {/* Main Nutrition Facts card container */}
+        <div className="w-full rounded-[32px] border border-neutral-100 shadow-[0_10px_35px_rgba(0,0,0,0.03)] bg-white overflow-hidden">
+          
           {/* Header */}
           <div
-            className="w-full h-20 rounded-t-3xl flex items-center px-7"
-            style={{ background: product.ui.bgColor }}
+            className="w-full py-5 px-6 sm:px-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 transition-colors duration-500"
+            style={{ background: headerBgColor }}
           >
-            <h2 className="font-['Funnel_Display'] font-bold text-white text-3xl tracking-tight">
+            <h2 className="font-['Funnel_Display'] font-black text-white text-3xl tracking-tight leading-none">
               {t("title")}
             </h2>
+            <span className="font-['Outfit'] font-medium text-white/90 text-sm sm:text-base tracking-wide">
+              Per serving: {servingSize.replace(/Per\s+1\s+Piece\s+\(/i, "").replace(/\)/, "")}
+            </span>
           </div>
 
-          {/* Body */}
-          <div className="w-full rounded-b-3xl border-b border-l border-r border-[#E8E8E8] flex flex-col lg:flex-row pt-12 pb-14 gap-12">
-            {/* Left Side: Table */}
-            <div className="flex-1 flex flex-col pt-5 px-7 lg:px-12 overflow-x-auto">
-              {/* Table Header */}
-              <div className="flex w-full pb-6 border-b border-[#E8E8E8] items-end min-w-[700px]">
-                <div className="w-5/12">
-                  <span className="font-['Outfit'] font-bold text-xl md:text-3xl text-black whitespace-nowrap">
-                    {t("details")}
-                  </span>
-                </div>
-                <div className="w-1/3 text-right">
-                  <span className="font-['Outfit'] font-normal text-lg md:text-3xl text-black tracking-tight whitespace-nowrap">
-                    {t("servingSize")}
-                  </span>
-                </div>
-                <div className="w-1/4 text-right">
-                  <span className="font-['Outfit'] font-normal text-lg md:text-3xl text-black tracking-tight whitespace-nowrap">
-                    {t("dailyValue")}
-                  </span>
-                </div>
-              </div>
-
-              {/* Calories Row */}
-              <div className="flex w-full py-6 border-b border-[#E8E8E8] items-center min-w-[700px]">
-                <span className="font-['Outfit'] font-black text-2xl md:text-3xl uppercase text-black tracking-tighter whitespace-nowrap">
-                  {t("calories")} {product.content?.nutrition?.calories}
+          {/* Grid Layout: Left Table (75%) and Right Certifications Panel (25%) */}
+          <div className="flex flex-col lg:flex-row divide-y lg:divide-y-0 lg:divide-x divide-neutral-100">
+            
+            {/* Left Nutrition Panel: 75% width */}
+            <div className="flex-1 p-6 sm:p-8 md:p-10 flex flex-col gap-6">
+              
+              {/* Calories Summary Strip */}
+              <div 
+                className="w-full flex items-center justify-between px-6 py-4 rounded-2xl"
+                style={tintBgStyle}
+              >
+                <span className="font-['Outfit'] font-extrabold text-lg text-neutral-800 tracking-tight uppercase">
+                  {t("calories")}
+                </span>
+                <span 
+                  className="font-['Outfit'] font-black text-3xl sm:text-4xl tracking-tighter"
+                  style={{ color: isBora ? "#1C1C1C" : "#23B349" }}
+                >
+                  {calories}
                 </span>
               </div>
 
-              {/* Nutrition Items */}
-              {(product.content?.nutrition?.items || []).map((item, i) => (
-                <div
-                  key={i}
-                  className="flex w-full py-5 border-b border-[#E8E8E8] last:border-0 items-center min-w-[700px]"
-                >
-                  <div className="w-5/12">
-                    <span className="font-['Outfit'] font-medium text-lg md:text-2xl text-black whitespace-nowrap">
-                      {renderNutritionItemLabel(item.name)}
-                    </span>
-                  </div>
-                  <div className="w-1/3 text-right">
-                    <span className="font-['Inter'] font-medium text-lg md:text-2xl text-black tracking-tight whitespace-nowrap">
-                      {item.value} {item.unit}
-                    </span>
-                  </div>
-                  <div className="w-1/4 text-right">
-                    <span className="font-['Inter'] font-medium text-lg md:text-2xl text-black tracking-tight whitespace-nowrap">
-                      {item.dailyValue ? `${item.dailyValue} %` : ""}
-                    </span>
-                  </div>
-                </div>
-              ))}
+              {/* Table */}
+              <div className="w-full overflow-x-auto">
+                <table className="w-full min-w-[500px] border-collapse">
+                  <thead>
+                    <tr className="border-b border-neutral-100 text-left text-neutral-400 font-['Outfit'] font-semibold text-xs sm:text-sm tracking-wider uppercase">
+                      <th className="pb-3 w-5/12">Nutrient</th>
+                      <th className="pb-3 w-4/12 text-right">Amount per serving</th>
+                      <th className="pb-3 w-3/12 text-right">% Daily Value</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-neutral-100 font-['Outfit']">
+                    {(product.content?.nutrition?.items || []).map((item, i) => (
+                      <tr 
+                        key={i}
+                        className="hover:bg-neutral-50/50 transition-colors duration-200"
+                      >
+                        {/* Nutrient Name */}
+                        <td className="py-3.5 font-medium text-neutral-800 text-sm sm:text-base">
+                          {renderNutritionItemLabel(item.name)}
+                        </td>
+                        {/* Amount */}
+                        <td className="py-3.5 text-right font-semibold text-neutral-800 text-sm sm:text-base">
+                          {item.value} {item.unit}
+                        </td>
+                        {/* % Daily Value */}
+                        <td className="py-3.5 text-right font-bold text-neutral-900 text-sm sm:text-base">
+                          {item.dailyValue ? `${item.dailyValue}%` : "—"}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
 
-            {/* Right Side: Badges */}
-            <div className="w-full lg:w-96 shrink-0 flex flex-wrap gap-6 px-7 lg:px-0 lg:pr-12 items-start content-start justify-center lg:justify-start">
-              {product.content?.certifications?.map((cert, i) => (
-                <div
-                  key={i}
-                  className="relative w-24 h-24 lg:w-32 lg:h-32"
-                >
-                  <Image
-                    src={cert.image}
-                    alt={cert.name}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              ))}
+            {/* Right Certifications Panel: 25% width */}
+            <div className="w-full lg:w-[360px] shrink-0 p-6 sm:p-8 md:p-10 bg-neutral-50/30 flex flex-col gap-6">
+              <div>
+                <h3 className="font-['Outfit'] font-bold text-lg text-neutral-800 tracking-tight mb-1">
+                  Quality Certifications
+                </h3>
+                <p className="font-['Outfit'] text-xs text-neutral-400">
+                  Certified quality and food-safety standards
+                </p>
+              </div>
+
+              {/* Grid 2x2 of Logos */}
+              <div className="grid grid-cols-2 gap-4">
+                {(product.content?.certifications || []).map((cert, i) => (
+                  <div
+                    key={i}
+                    className="relative flex items-center justify-center bg-white border border-neutral-100 rounded-xl p-3 aspect-square shadow-[0_2px_8px_rgba(0,0,0,0.01)] hover:shadow-md transition-all duration-300 group"
+                    title={cert.name}
+                  >
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={cert.image}
+                        alt={cert.name}
+                        fill
+                        className="object-contain transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
+
           </div>
         </div>
 
-        {/* Ingredients & Allergens */}
-        <div className="w-full flex flex-col">
+        {/* Ingredients & Allergens Container */}
+        <div className="w-full rounded-[32px] border border-neutral-100 shadow-[0_10px_35px_rgba(0,0,0,0.03)] bg-white overflow-hidden">
           {/* Header */}
           <div
-            className="w-full h-20 rounded-t-3xl flex items-center px-7"
-            style={{ background: product.ui.bgColor }}
+            className="w-full py-5 px-6 sm:px-8 transition-colors duration-500"
+            style={{ background: headerBgColor }}
           >
-            <h2 className="font-['Funnel_Display'] font-bold text-white text-3xl tracking-tight">
+            <h2 className="font-['Funnel_Display'] font-black text-white text-3xl tracking-tight leading-none">
               {t("ingredientsTitle")}
             </h2>
           </div>
 
           {/* Body */}
-          <div className="w-full rounded-b-3xl border-b border-l border-r border-[#E8E8E8] px-7 py-14 lg:px-7 lg:pb-28">
-            <div className="flex flex-col gap-10 max-w-7xl">
-              <p className="font-['Outfit'] font-normal text-xl md:text-3xl leading-snug tracking-tight text-black">
-                {t("ingredients")}:{" "}
-                {product.content?.ingredients?.list
-                  .map((i) => renderIngredientLabel(i.name))
-                  .join(", ")}
-                .
-              </p>
-              <p className="font-['Outfit'] font-normal text-xl md:text-3xl leading-snug tracking-tight text-black">
+          <div className="w-full p-6 sm:p-8 md:p-10 flex flex-col gap-6">
+            <p className="font-['Outfit'] font-normal text-base sm:text-lg md:text-xl leading-relaxed text-neutral-800">
+              <strong className="font-bold text-neutral-900">{t("ingredients")}:</strong>{" "}
+              {product.content?.ingredients?.list
+                .map((i) => renderIngredientLabel(i.name))
+                .join(", ")}
+              .
+            </p>
+            
+            {(product.content?.ingredients?.contains || product.content?.ingredients?.mayContain) && (
+              <div className="p-5 bg-neutral-50/50 rounded-2xl border border-neutral-100/50 flex flex-col gap-3">
                 {product.content?.ingredients?.contains &&
                   product.content.ingredients.contains.length > 0 && (
-                    <>
-                      {t("contains")}:{" "}
+                    <p className="font-['Outfit'] text-sm sm:text-base text-neutral-700">
+                      <strong className="font-bold text-red-600 uppercase tracking-wider text-xs mr-2">
+                        {t("contains")}
+                      </strong>
                       {product.content.ingredients.contains
                         .map((c) => renderIngredientLabel(c))
                         .join(", ")}
                       .
-                      <br />
-                    </>
+                    </p>
                   )}
                 {product.content?.ingredients?.mayContain &&
                   product.content.ingredients.mayContain.length > 0 && (
-                    <>
-                      {t("mayContain")}:{" "}
+                    <p className="font-['Outfit'] text-sm sm:text-base text-neutral-700">
+                      <strong className="font-bold text-neutral-500 uppercase tracking-wider text-xs mr-2">
+                        {t("mayContain")}
+                      </strong>
                       {product.content.ingredients.mayContain
                         .map((m) => renderIngredientLabel(m))
                         .join(", ")}
                       .
-                    </>
+                    </p>
                   )}
-              </p>
-            </div>
+              </div>
+            )}
           </div>
         </div>
+
       </div>
     </section>
   );

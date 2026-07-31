@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 
 export default function MerchandiseSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Merchandise");
@@ -21,14 +21,32 @@ export default function MerchandiseSection({ content, locale }: { content?: any;
   ];
   const MERCH_BGS = ['#23B349', '#23B349', '#23B349', '#23B349', '#23B349', '#FF0707'];
 
-  const MERCH_ITEMS = MERCH_KEYS.map((key, i) => ({
-    id: i + 1,
-    image: typeof c?.items?.[i]?.image === 'string' && c?.items?.[i]?.image.trim() !== '' ? c.items[i].image : MERCH_IMAGES[i],
-    title: c?.items?.[i]?.title || t(`items.${key}.title`),
-    desc: c?.items?.[i]?.desc || t(`items.${key}.desc`),
-    bg: MERCH_BGS[i],
-    isSpecial: i === 5,
-  }));
+  const MERCH_ITEMS = MERCH_KEYS.map((key, i) => {
+    const rawItem = c?.items?.[i];
+
+    // A card only gets the captioned treatment when the CMS content
+    // explicitly provides a title/desc. Missing/undefined fields fall
+    // back to translations; an item with no title AND no desc (and no
+    // translation match) renders as an image-only card.
+    const cmsTitle = typeof rawItem?.title === 'string' ? rawItem.title : undefined;
+    const cmsDesc = typeof rawItem?.desc === 'string' ? rawItem.desc : undefined;
+
+    const fallbackTitle = t.has(`items.${key}.title`) ? t(`items.${key}.title`) : '';
+    const fallbackDesc = t.has(`items.${key}.desc`) ? t(`items.${key}.desc`) : '';
+
+    const title = (cmsTitle ?? fallbackTitle).trim();
+    const desc = (cmsDesc ?? fallbackDesc).trim();
+
+    return {
+      id: i + 1,
+      image: typeof rawItem?.image === 'string' && rawItem.image.trim() !== '' ? rawItem.image : MERCH_IMAGES[i],
+      title,
+      desc,
+      hasCaption: Boolean(title || desc),
+      bg: MERCH_BGS[i],
+      isSpecial: i === 5,
+    };
+  });
 
   const handleScroll = () => {
     if (scrollRef.current) {
@@ -49,7 +67,7 @@ export default function MerchandiseSection({ content, locale }: { content?: any;
   return (
     <section className="bg-white py-24 lg:py-32 relative overflow-hidden">
       <div className="max-w-[1920px] mx-auto px-6 sm:px-10 lg:px-[128px] flex flex-col items-center">
-        
+
         {/* Header Column */}
         <div className="flex flex-col items-center text-center mb-16 lg:mb-20 gap-4">
           <p className="font-['Funnel_Display'] font-medium text-[20px] text-[#404040] leading-tight">
@@ -61,41 +79,49 @@ export default function MerchandiseSection({ content, locale }: { content?: any;
         </div>
 
         {/* Horizontal Scroll Container */}
-        <div 
+        <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto no-scrollbar cursor-grab active:cursor-grabbing pb-12 w-full snap-x snap-mandatory"
+          className="flex items-end gap-6 overflow-x-auto no-scrollbar cursor-grab active:cursor-grabbing pb-12 w-full snap-x snap-mandatory"
         >
           {MERCH_ITEMS.map((item) => (
-            <div 
+            <div
               key={item.id}
-              className={`flex-shrink-0 relative rounded-[24px] overflow-hidden select-none group w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] lg:w-[740px] lg:h-[740px] snap-center ${item.isSpecial ? 'bg-[#FF0707]' : 'bg-[#F3F3F3]'}`}
+              className={`flex-shrink-0 relative rounded-[16px] overflow-hidden select-none group snap-center ${
+                item.hasCaption
+                  ? 'w-[220px] h-[220px] sm:w-[340px] sm:h-[340px] lg:w-[460px] lg:h-[460px]'
+                  : 'w-[110px] h-[150px] sm:w-[150px] sm:h-[200px] lg:w-[200px] lg:h-[260px]'
+              } ${item.isSpecial ? 'bg-[#FF0707]' : 'bg-[#F3F3F3]'}`}
             >
               <Image
                 src={item.image}
-                alt={item.title}
+                alt={item.title || 'Merchandise item'}
                 fill
                 className={`object-cover transition-transform duration-700 group-hover:scale-105 ${item.isSpecial ? 'mix-blend-soft-light' : ''}`}
               />
-              
-              {/* Product Info Area */}
-              {item.isSpecial ? (
-                <div className="absolute inset-0 flex flex-col justify-end p-8 sm:p-12 z-10 bg-gradient-to-t from-[#FF0707]/90 to-transparent">
-                  <h3 className="font-['Funnel_Display'] font-medium text-[20px] sm:text-[24px] text-[#FFEC19] leading-none mb-4">
-                    {item.title}
-                  </h3>
-                  <p className="font-['Outfit'] font-bold text-[32px] sm:text-[48px] lg:text-[64px] text-white leading-[0.96] tracking-[-0.02em] max-w-[600px]">
-                    {item.desc}
-                  </p>
-                </div>
-              ) : (
-                <div className="absolute bottom-0 left-0 w-full p-6 sm:p-8" style={{ backgroundColor: item.bg }}>
-                  <h3 className="font-['Outfit'] font-bold text-[32px] lg:text-[40px] xl:text-[48px] text-white leading-tight tracking-[-0.02em] mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="font-['Outfit'] font-medium text-[14px] lg:text-[16px] text-white/90">
-                    {item.desc}
-                  </p>
-                </div>
+
+              {/* Product Info Area — only rendered when the item has a caption */}
+              {item.hasCaption && (
+                item.isSpecial ? (
+                  <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-6 lg:p-8 z-10 bg-gradient-to-t from-[#FF0707]/90 to-transparent">
+                    <h3 className="font-['Funnel_Display'] font-medium text-[13px] sm:text-[16px] text-[#FFEC19] leading-none mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="font-['Outfit'] font-bold text-[18px] sm:text-[28px] lg:text-[36px] text-white leading-[0.96] tracking-[-0.02em] max-w-[400px]">
+                      {item.desc}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="absolute bottom-0 left-0 w-full p-4 sm:p-5 lg:p-6" style={{ backgroundColor: item.bg }}>
+                    <h3 className="font-['Outfit'] font-bold text-[18px] sm:text-[22px] lg:text-[26px] text-white leading-tight tracking-[-0.02em] mb-1">
+                      {item.title}
+                    </h3>
+                    {item.desc && (
+                      <p className="font-['Outfit'] font-medium text-[11px] sm:text-[13px] lg:text-[14px] text-white/90">
+                        {item.desc}
+                      </p>
+                    )}
+                  </div>
+                )
               )}
             </div>
           ))}
@@ -104,9 +130,9 @@ export default function MerchandiseSection({ content, locale }: { content?: any;
         {/* Custom Scroll Bar */}
         <div className="mt-8 flex justify-center w-full">
           <div className="relative w-full max-w-[1067px] h-2 bg-[#E5E5E5] rounded-full overflow-hidden">
-            <div 
+            <div
               className="absolute top-0 left-0 h-full bg-[#23B349] transition-all duration-100 rounded-full"
-              style={{ 
+              style={{
                 width: '30%', // Simulated thumb width
                 transform: `translateX(${scrollProgress * 2.33}%)` // Factor to map progress to track
               }}

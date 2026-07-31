@@ -1,123 +1,423 @@
 "use client";
+
 import { useTranslations } from "next-intl";
 
-export default function QuickFactSection({ content, locale }: { content?: any; locale?: string }) {
+type QuickFactSectionProps = {
+  content?: Record<string, unknown>;
+  locale?: string;
+};
+
+type QuickFactItem = {
+  id?: string;
+  value?: string;
+  value2?: string;
+  label?: string;
+};
+
+type LocalizedQuickFactContent = {
+  label?: string;
+  facts?: QuickFactItem[];
+};
+
+export default function QuickFactSection({
+  content,
+  locale,
+}: QuickFactSectionProps) {
   const t = useTranslations("QuickFact");
-  const c = content?.[locale as string] || content?.en;
-  const facts: any[] | undefined = c?.facts;
-  const getFact = (id: string) => facts?.find((f: any) => f.id === id);
-  const fVal = (id: string, def: string) => getFact(id)?.value ?? def;
-  const fVal2 = (id: string, def: string) => getFact(id)?.value2 ?? def;
-  const fLabel = (id: string, tKey: string) => getFact(id)?.label ?? t(tKey);
-  const sectionLabel = c?.label || t("label");
+
+  const contentRecord = content as
+    | Record<string, LocalizedQuickFactContent>
+    | undefined;
+
+  const localizedContent: LocalizedQuickFactContent =
+    contentRecord?.[locale ?? "en"] ?? contentRecord?.en ?? {};
+
+  const facts: QuickFactItem[] = Array.isArray(localizedContent.facts)
+    ? localizedContent.facts
+    : [];
+
+  const getFact = (id: string): QuickFactItem | undefined =>
+    facts.find((fact) => fact.id === id);
+
+  const getValue = (id: string, fallback: string): string =>
+    getFact(id)?.value ?? fallback;
+
+  const getSecondaryValue = (id: string, fallback: string): string =>
+    getFact(id)?.value2 ?? fallback;
+
+  const getLabel = (id: string, translationKey: string): string =>
+    getFact(id)?.label ?? t(translationKey);
+
+  const sectionLabel = localizedContent.label ?? t("label");
 
   return (
-    <section className="relative w-full bg-white py-12 sm:py-16 md:py-20 lg:py-24 overflow-hidden">
-      {/* Decorative repeating pattern top border */}
-      <div className="absolute top-0 left-0 w-full h-10 sm:h-12 md:h-[60px] lg:h-[76px] pointer-events-none overflow-hidden z-10">
+    <section className="relative w-full overflow-hidden bg-white py-16 sm:py-20 lg:py-24 xl:py-28">
+      {/* Top decorative frame */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 top-0 z-0 h-10 w-full overflow-hidden sm:h-12 lg:h-[60px] xl:h-[72px]"
+      >
         <div
           className="absolute inset-0"
           style={{
             backgroundImage: "url('/quick-fact-frame.svg')",
-            backgroundRepeat: "repeat-x",
-            backgroundSize: "auto 100%",
             backgroundPosition: "top center",
+            backgroundRepeat: "repeat-x",
+            backgroundSize: "auto 100%",
           }}
         />
       </div>
 
-      {/* Decorative repeating pattern bottom border */}
-      <div className="absolute bottom-0 left-0 w-full h-10 sm:h-12 md:h-[60px] lg:h-[76px] pointer-events-none overflow-hidden z-10 scale-y-[-1]">
+      {/* Bottom decorative frame */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 left-0 z-0 h-10 w-full scale-y-[-1] overflow-hidden sm:h-12 lg:h-[60px] xl:h-[72px]"
+      >
         <div
           className="absolute inset-0"
           style={{
             backgroundImage: "url('/quick-fact-frame.svg')",
+            backgroundPosition: "bottom center",
             backgroundRepeat: "repeat-x",
             backgroundSize: "auto 100%",
-            backgroundPosition: "bottom center",
           }}
         />
       </div>
 
-      <div className="relative z-20 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 md:gap-6 relative">
-          {/* Row 1 */}
-          {/* Fact 1 - Unique SKUs */}
-          <div className="md:col-span-3 bg-[#F3F3F3] rounded-[2rem] p-6 sm:p-8 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center items-center text-center">
-            <div className="font-['Outfit'] font-extrabold text-5xl sm:text-6xl md:text-[90px] lg:text-[110px] text-[#23B349] leading-none tracking-tighter mb-3 md:mb-4 group-hover:scale-105 transition-transform">
-              {fVal('skus', '+11')}
-            </div>
-            <p className="font-['Funnel_Display'] font-medium text-base sm:text-lg md:text-lg text-[#404040]">
-              {fLabel('skus', 'skus')}
-            </p>
-          </div>
+      <div className="relative z-10 mx-auto w-full px-4 sm:px-6 lg:px-8">
+        {/* =========================================================
+            LARGE DESKTOP
 
-          {/* Fact 2 - Flour Production */}
-          <div className="md:col-span-5 bg-[#F3F3F3] rounded-[2rem] p-6 sm:p-8 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center items-center text-center">
-            <div className="font-['Outfit'] font-extrabold text-5xl sm:text-6xl md:text-[90px] lg:text-[110px] text-[#23B349] leading-none tracking-tighter mb-3 md:mb-4 group-hover:scale-105 transition-transform">
-              {fVal('flour', '60tn')}
-            </div>
-            <p className="font-['Funnel_Display'] font-medium text-base sm:text-lg md:text-lg text-[#404040]">
-              {fLabel('flour', 'flour')}
-            </p>
-          </div>
+            The original 968px × 510px design is scaled by 1.2.
+            This increases:
+            - card dimensions
+            - text sizes
+            - gaps
+            - border radii
+            - SVG geometry
+            - reverse-L clip
+        ========================================================== */}
+        <div className="mx-auto hidden h-[612px] w-full max-w-[1162px] xl:block">
+          <div className="relative left-1/2 h-[510px] w-[968px] origin-top-left -translate-x-1/2 scale-[1.2]">
+            {/* MERGED +11 / 2tn CARD */}
+            <article className="group absolute left-0 top-0 h-[299px] w-[270px] transition-transform duration-300 hover:-translate-y-0.5">
+              <svg
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full"
+                preserveAspectRatio="none"
+                viewBox="0 0 270 299"
+              >
+                <path
+                  d="
+                    M18 0
+                    H252
+                    Q270 0 270 18
+                    V177
+                    Q270 195 252 195
+                    H190
+                    A28 28 0 0 0 162 223
+                    V281
+                    Q162 299 144 299
+                    H18
+                    Q0 299 0 281
+                    V18
+                    Q0 0 18 0
+                    Z
+                  "
+                  fill="#F3F3F3"
+                />
+              </svg>
 
-          {/* Fact 3 - Jobs Created */}
-          <div className="md:col-span-4 bg-[#F3F3F3] rounded-[2rem] p-6 sm:p-8 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center items-center text-center">
-            <div className="font-['Outfit'] font-extrabold text-5xl sm:text-6xl md:text-[90px] lg:text-[110px] text-[#23B349] leading-none tracking-tighter mb-3 md:mb-4 group-hover:scale-105 transition-transform">
-              {fVal('jobs', '+200')}
-            </div>
-            <p className="font-['Funnel_Display'] font-medium text-base sm:text-lg md:text-lg text-[#404040]">
-              {fLabel('jobs', 'jobs')}
-            </p>
-          </div>
+              {/* +11 */}
+              <div className="absolute left-0 top-0 flex h-[195px] w-full flex-col items-center justify-center px-5 text-center">
+                <div className="font-['Outfit'] text-[76px] font-extrabold leading-[0.88] tracking-[-0.06em] text-[#20B94B] transition-transform duration-300 group-hover:scale-[1.025]">
+                  {getValue("skus", "+11")}
+                </div>
 
-          {/* Row 2 */}
-          {/* Fact 4 - Biscuits/Hour */}
-          <div className="md:col-span-2 bg-[#F3F3F3] rounded-[2rem] p-6 sm:p-8 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center items-center text-center min-h-[148px] md:min-h-[160px]">
-            <div className="font-['Outfit'] font-extrabold text-4xl sm:text-5xl md:text-[70px] lg:text-[80px] text-[#E6B720] leading-none tracking-tighter mb-3 group-hover:scale-105 transition-transform">
-              {fVal('biscuits', '2tn')}
-            </div>
-            <p className="font-['Funnel_Display'] font-medium text-sm sm:text-base md:text-base text-[#404040]">
-              {fLabel('biscuits', 'biscuits')}
-            </p>
-          </div>
+                <p className="mt-5 font-['Funnel_Display'] text-[14px] font-medium leading-tight text-[#383838]">
+                  {getLabel("skus", "skus")}
+                </p>
+              </div>
 
-          {/* Central "Quick Fact" Badge */}
-          <div className="md:col-span-3 relative flex justify-center items-center z-30 py-6 md:py-0 pointer-events-none">
-            <div className="bg-[#23B349] rounded-[2rem] px-8 py-4 md:px-10 md:py-6 flex items-center justify-center ring-[8px] md:ring-[16px] ring-white md:absolute pointer-events-auto shadow-2xl hover:scale-105 transition-transform">
-              <h2 className="font-['Outfit'] font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-[64px] text-white leading-none tracking-[-0.02em] whitespace-nowrap">
+              {/* 2tn */}
+              <div className="absolute bottom-0 left-0 flex h-[90px] w-[162px] flex-col items-start justify-center pl-[44px] pr-3 text-left">
+                <div className="font-['Outfit'] text-[54px] font-extrabold leading-[0.82] tracking-[-0.06em] text-[#EDB815] transition-transform duration-300 group-hover:scale-[1.025]">
+                  {getValue("biscuits", "2tn")}
+                </div>
+
+                <p className="mt-3 whitespace-nowrap font-['Funnel_Display'] text-[13px] font-medium leading-none text-[#383838]">
+                  {getLabel("biscuits", "biscuits")}
+                </p>
+              </div>
+            </article>
+
+            {/* FLOUR */}
+            <article className="group absolute left-[284px] top-0 flex h-[195px] w-[334px] flex-col items-center justify-center rounded-[16px] bg-[#F3F3F3] px-6 text-center transition-transform duration-300 hover:-translate-y-0.5">
+              <div className="font-['Outfit'] text-[76px] font-extrabold leading-[0.88] tracking-[-0.06em] text-[#20B94B] transition-transform duration-300 group-hover:scale-[1.025]">
+                {getValue("flour", "60tn")}
+              </div>
+
+              <p className="mt-5 font-['Funnel_Display'] text-[14px] font-medium leading-tight text-[#383838]">
+                {getLabel("flour", "flour")}
+              </p>
+            </article>
+
+            {/* JOBS */}
+            <article className="group absolute right-0 top-0 flex h-[195px] w-[336px] flex-col items-center justify-center rounded-[16px] bg-[#F3F3F3] px-6 text-center transition-transform duration-300 hover:-translate-y-0.5">
+              <div className="font-['Outfit'] text-[76px] font-extrabold leading-[0.88] tracking-[-0.06em] text-[#20B94B] transition-transform duration-300 group-hover:scale-[1.025]">
+                {getValue("jobs", "+200")}
+              </div>
+
+              <p className="mt-5 font-['Funnel_Display'] text-[14px] font-medium leading-tight text-[#383838]">
+                {getLabel("jobs", "jobs")}
+              </p>
+            </article>
+
+            {/* QUICK FACT */}
+            <div className="absolute left-[191px] top-[209px] z-20 h-[90px] w-[266px]">
+              <div className="flex h-full w-full items-center justify-center rounded-[16px] bg-[#20B94B] px-5 transition-transform duration-300 hover:-translate-y-0.5">
+                <h2 className="whitespace-nowrap font-['Outfit'] text-[44px] font-extrabold leading-none tracking-[-0.045em] text-white">
+                  {sectionLabel}
+                </h2>
+              </div>
+            </div>
+
+            {/* INVESTMENT */}
+            <article className="group absolute left-[414px] top-[209px] h-[301px] w-[554px] overflow-hidden rounded-[16px] bg-[#F3F3F3] transition-transform duration-300 hover:-translate-y-0.5">
+              {/*
+                Reverse-L clip:
+                104px keeps its bottom aligned with the Factory card.
+              */}
+              <div className="pointer-events-none absolute left-0 top-0 z-[1] h-[104px] w-[57px] rounded-br-[34px] bg-white" />
+
+              <div className="relative z-10 flex h-full w-full flex-col px-8 pb-7 pt-6">
+                {/* $1.4M */}
+                <div className="ml-[50px] origin-left font-['Outfit'] text-[58px] font-extrabold leading-none tracking-[-0.06em] text-[#EDB815] transition-transform duration-300 group-hover:scale-[1.02]">
+                  {getValue("investment", "$1.4M")}
+                </div>
+
+                {/* Br210M */}
+                <div className="flex flex-1 flex-col items-center justify-center pb-1 pt-3 text-center">
+                  <div className="font-['Outfit'] text-[82px] font-extrabold leading-[0.88] tracking-[-0.065em] text-[#20B94B] transition-transform duration-300 group-hover:scale-[1.025]">
+                    {getSecondaryValue("investment", "Br210M")}
+                  </div>
+
+                  <p className="mt-5 font-['Funnel_Display'] text-[15px] font-medium leading-tight text-[#383838]">
+                    {getLabel("investment", "investment")}
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            {/* FACTORY SIZE */}
+            <article className="group absolute bottom-0 left-0 flex h-[197px] w-[400px] flex-col items-center justify-center rounded-[16px] bg-[#F3F3F3] px-6 text-center transition-transform duration-300 hover:-translate-y-0.5">
+              <div className="font-['Outfit'] text-[72px] font-extrabold leading-[0.88] tracking-[-0.065em] text-[#20B94B] transition-transform duration-300 group-hover:scale-[1.025]">
+                {getValue("factorySize", "22Km²")}
+              </div>
+
+              <p className="mt-5 font-['Funnel_Display'] text-[14px] font-medium leading-tight text-[#383838]">
+                {getLabel("factorySize", "factorySize")}
+              </p>
+            </article>
+          </div>
+        </div>
+
+        {/* =========================================================
+            STANDARD DESKTOP
+
+            Original dimensions are preserved for laptops where the
+            enlarged 1162px layout would not fit.
+        ========================================================== */}
+        <div className="relative mx-auto hidden h-[510px] w-full max-w-[968px] lg:block xl:hidden">
+          {/* MERGED +11 / 2tn CARD */}
+          <article className="group absolute left-0 top-0 h-[299px] w-[270px] transition-transform duration-300 hover:-translate-y-0.5">
+            <svg
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full"
+              preserveAspectRatio="none"
+              viewBox="0 0 270 299"
+            >
+              <path
+                d="
+                  M18 0
+                  H252
+                  Q270 0 270 18
+                  V177
+                  Q270 195 252 195
+                  H190
+                  A28 28 0 0 0 162 223
+                  V281
+                  Q162 299 144 299
+                  H18
+                  Q0 299 0 281
+                  V18
+                  Q0 0 18 0
+                  Z
+                "
+                fill="#F3F3F3"
+              />
+            </svg>
+
+            <div className="absolute left-0 top-0 flex h-[195px] w-full flex-col items-center justify-center px-5 text-center">
+              <div className="font-['Outfit'] text-[76px] font-extrabold leading-[0.88] tracking-[-0.06em] text-[#20B94B]">
+                {getValue("skus", "+11")}
+              </div>
+
+              <p className="mt-5 font-['Funnel_Display'] text-[14px] font-medium text-[#383838]">
+                {getLabel("skus", "skus")}
+              </p>
+            </div>
+
+            <div className="absolute bottom-0 left-0 flex h-[90px] w-[162px] flex-col items-start justify-center pl-[44px] pr-3 text-left">
+              <div className="font-['Outfit'] text-[54px] font-extrabold leading-[0.82] tracking-[-0.06em] text-[#EDB815]">
+                {getValue("biscuits", "2tn")}
+              </div>
+
+              <p className="mt-3 whitespace-nowrap font-['Funnel_Display'] text-[13px] font-medium text-[#383838]">
+                {getLabel("biscuits", "biscuits")}
+              </p>
+            </div>
+          </article>
+
+          {/* FLOUR */}
+          <article className="absolute left-[284px] top-0 flex h-[195px] w-[334px] flex-col items-center justify-center rounded-[16px] bg-[#F3F3F3] px-6 text-center">
+            <div className="font-['Outfit'] text-[76px] font-extrabold leading-[0.88] tracking-[-0.06em] text-[#20B94B]">
+              {getValue("flour", "60tn")}
+            </div>
+
+            <p className="mt-5 font-['Funnel_Display'] text-[14px] font-medium text-[#383838]">
+              {getLabel("flour", "flour")}
+            </p>
+          </article>
+
+          {/* JOBS */}
+          <article className="absolute right-0 top-0 flex h-[195px] w-[336px] flex-col items-center justify-center rounded-[16px] bg-[#F3F3F3] px-6 text-center">
+            <div className="font-['Outfit'] text-[76px] font-extrabold leading-[0.88] tracking-[-0.06em] text-[#20B94B]">
+              {getValue("jobs", "+200")}
+            </div>
+
+            <p className="mt-5 font-['Funnel_Display'] text-[14px] font-medium text-[#383838]">
+              {getLabel("jobs", "jobs")}
+            </p>
+          </article>
+
+          {/* QUICK FACT */}
+          <div className="absolute left-[191px] top-[209px] z-20 h-[90px] w-[266px]">
+            <div className="flex h-full w-full items-center justify-center rounded-[16px] bg-[#20B94B] px-5">
+              <h2 className="whitespace-nowrap font-['Outfit'] text-[44px] font-extrabold leading-none tracking-[-0.045em] text-white">
                 {sectionLabel}
               </h2>
             </div>
           </div>
 
-          {/* Fact 5 - Investment (Large Card) */}
-          <div className="md:col-span-7 md:row-span-2 bg-[#F3F3F3] rounded-[2rem] p-6 sm:p-8 md:p-10 lg:p-12 group hover:scale-[1.02] transition-all duration-500 shadow-sm relative flex flex-col justify-center items-center min-h-[260px] md:min-h-full">
-            <div className="md:absolute md:top-8 md:left-10 lg:top-12 lg:left-12 font-['Outfit'] font-extrabold text-4xl sm:text-5xl md:text-[60px] lg:text-[80px] text-[#E6B720] tracking-tighter text-center md:text-left mb-6 md:mb-0 group-hover:scale-105 transition-transform origin-top-left">
-              {fVal('investment', '$1.4M')}
+          {/* INVESTMENT */}
+          <article className="absolute left-[414px] top-[209px] h-[301px] w-[554px] overflow-hidden rounded-[16px] bg-[#F3F3F3]">
+            <div className="pointer-events-none absolute left-0 top-0 z-[1] h-[104px] w-[57px] rounded-br-[34px] bg-white" />
+
+            <div className="relative z-10 flex h-full w-full flex-col px-8 pb-7 pt-6">
+              <div className="ml-[50px] font-['Outfit'] text-[58px] font-extrabold leading-none tracking-[-0.06em] text-[#EDB815]">
+                {getValue("investment", "$1.4M")}
+              </div>
+
+              <div className="flex flex-1 flex-col items-center justify-center pb-1 pt-3 text-center">
+                <div className="font-['Outfit'] text-[82px] font-extrabold leading-[0.88] tracking-[-0.065em] text-[#20B94B]">
+                  {getSecondaryValue("investment", "Br210M")}
+                </div>
+
+                <p className="mt-5 font-['Funnel_Display'] text-[15px] font-medium text-[#383838]">
+                  {getLabel("investment", "investment")}
+                </p>
+              </div>
+            </div>
+          </article>
+
+          {/* FACTORY */}
+          <article className="absolute bottom-0 left-0 flex h-[197px] w-[400px] flex-col items-center justify-center rounded-[16px] bg-[#F3F3F3] px-6 text-center">
+            <div className="font-['Outfit'] text-[72px] font-extrabold leading-[0.88] tracking-[-0.065em] text-[#20B94B]">
+              {getValue("factorySize", "22Km²")}
             </div>
 
-            <div className="flex flex-col items-center justify-center w-full mt-6 md:mt-12 lg:mt-16">
-              <div className="font-['Outfit'] font-extrabold text-5xl sm:text-6xl md:text-[100px] lg:text-[130px] text-[#23B349] leading-none tracking-tighter mb-2 group-hover:scale-105 transition-transform">
-                {fVal2('investment', 'Br210M')}
+            <p className="mt-5 font-['Funnel_Display'] text-[14px] font-medium text-[#383838]">
+              {getLabel("factorySize", "factorySize")}
+            </p>
+          </article>
+        </div>
+
+        {/* =========================================================
+            MOBILE / TABLET
+        ========================================================== */}
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:hidden">
+          <article className="flex min-h-[180px] flex-col items-center justify-center rounded-[20px] bg-[#F3F3F3] px-5 py-7 text-center">
+            <div className="font-['Outfit'] text-[64px] font-extrabold leading-[0.88] tracking-[-0.06em] text-[#20B94B]">
+              {getValue("skus", "+11")}
+            </div>
+
+            <p className="mt-5 font-['Funnel_Display'] text-sm font-medium text-[#383838]">
+              {getLabel("skus", "skus")}
+            </p>
+          </article>
+
+          <article className="flex min-h-[180px] flex-col items-center justify-center rounded-[20px] bg-[#F3F3F3] px-5 py-7 text-center">
+            <div className="font-['Outfit'] text-[64px] font-extrabold leading-[0.88] tracking-[-0.06em] text-[#20B94B]">
+              {getValue("flour", "60tn")}
+            </div>
+
+            <p className="mt-5 font-['Funnel_Display'] text-sm font-medium text-[#383838]">
+              {getLabel("flour", "flour")}
+            </p>
+          </article>
+
+          <article className="flex min-h-[180px] flex-col items-center justify-center rounded-[20px] bg-[#F3F3F3] px-5 py-7 text-center sm:col-span-2">
+            <div className="font-['Outfit'] text-[64px] font-extrabold leading-[0.88] tracking-[-0.06em] text-[#20B94B]">
+              {getValue("jobs", "+200")}
+            </div>
+
+            <p className="mt-5 font-['Funnel_Display'] text-sm font-medium text-[#383838]">
+              {getLabel("jobs", "jobs")}
+            </p>
+          </article>
+
+          <article className="flex min-h-[150px] flex-col items-center justify-center rounded-[20px] bg-[#F3F3F3] px-5 py-6 text-center">
+            <div className="font-['Outfit'] text-[58px] font-extrabold leading-[0.88] tracking-[-0.06em] text-[#EDB815]">
+              {getValue("biscuits", "2tn")}
+            </div>
+
+            <p className="mt-4 font-['Funnel_Display'] text-sm font-medium text-[#383838]">
+              {getLabel("biscuits", "biscuits")}
+            </p>
+          </article>
+
+          <div className="flex min-h-[150px] items-center justify-center rounded-[20px] bg-[#20B94B] px-5 py-6">
+            <h2 className="whitespace-nowrap font-['Outfit'] text-[40px] font-extrabold leading-none tracking-[-0.045em] text-white">
+              {sectionLabel}
+            </h2>
+          </div>
+
+          <article className="flex min-h-[290px] flex-col rounded-[20px] bg-[#F3F3F3] px-6 py-8 sm:col-span-2">
+            <div className="text-center font-['Outfit'] text-[56px] font-extrabold leading-none tracking-[-0.06em] text-[#EDB815] sm:text-left">
+              {getValue("investment", "$1.4M")}
+            </div>
+
+            <div className="flex flex-1 flex-col items-center justify-center pt-8 text-center">
+              <div className="font-['Outfit'] text-[68px] font-extrabold leading-[0.88] tracking-[-0.065em] text-[#20B94B]">
+                {getSecondaryValue("investment", "Br210M")}
               </div>
-              <p className="font-['Funnel_Display'] font-medium text-base sm:text-lg md:text-xl text-[#404040] text-center md:text-left">
-                {fLabel('investment', 'investment')}
+
+              <p className="mt-5 font-['Funnel_Display'] text-sm font-medium text-[#383838]">
+                {getLabel("investment", "investment")}
               </p>
             </div>
-          </div>
+          </article>
 
-          {/* Row 3 */}
-          {/* Fact 6 - Factory Size */}
-          <div className="md:col-span-5 bg-[#F3F3F3] rounded-[2rem] p-6 sm:p-8 md:p-8 group hover:scale-[1.02] transition-all duration-500 shadow-sm flex flex-col justify-center items-center text-center">
-            <div className="font-['Outfit'] font-extrabold text-5xl sm:text-6xl md:text-[90px] lg:text-[110px] text-[#23B349] leading-none tracking-tighter mb-3 md:mb-4 group-hover:scale-105 transition-transform">
-              {fVal('factorySize', '22Km²')}
+          <article className="flex min-h-[210px] flex-col items-center justify-center rounded-[20px] bg-[#F3F3F3] px-5 py-7 text-center sm:col-span-2">
+            <div className="font-['Outfit'] text-[62px] font-extrabold leading-[0.88] tracking-[-0.065em] text-[#20B94B]">
+              {getValue("factorySize", "22Km²")}
             </div>
-            <p className="font-['Funnel_Display'] font-medium text-base sm:text-lg md:text-lg text-[#404040]">
-              {fLabel('factorySize', 'factorySize')}
+
+            <p className="mt-5 font-['Funnel_Display'] text-sm font-medium text-[#383838]">
+              {getLabel("factorySize", "factorySize")}
             </p>
-          </div>
+          </article>
         </div>
       </div>
     </section>

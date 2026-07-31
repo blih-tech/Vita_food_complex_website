@@ -103,31 +103,6 @@ export default function DistributorHeroSection({ content }: { content?: Distribu
           </span>
         </Link>
       </div>
-
-      {/* Floating Logos at the bottom */}
-      <div className="absolute bottom-[10%] left-0 right-0 z-20 flex justify-center items-center gap-6 sm:gap-12 lg:gap-16 px-4 opacity-90 overflow-hidden">
-        {cmsLogos.length > 0 ? (
-          cmsLogos.map((logo, idx) => (
-            <Image
-              key={idx}
-              src={logo.src as string}
-              alt={logo.alt || `Sister Company ${idx + 1}`}
-              width={120}
-              height={50}
-              className={`object-contain w-[70px] sm:w-[120px] filter brightness-0 opacity-90 ${idx % 2 === 0 ? 'sepia saturate-[50] hue-rotate-[30deg]' : 'invert'}`}
-            />
-          ))
-        ) : (
-          <>
-            <Image src="/assets/sister/arada-coffee-logo.png" alt="Arada Coffee" width={120} height={50} className="object-contain w-[80px] sm:w-[120px] filter brightness-0 sepia saturate-[50] hue-rotate-[30deg] opacity-80" />
-            <Image src="/assets/sister/belayab-delivery-logo.png" alt="BelayAb Delivery" width={100} height={50} className="object-contain w-[70px] sm:w-[100px] filter brightness-0 invert opacity-90" />
-            <Image src="/assets/sister/arada-coffee-logo.png" alt="Arada Coffee" width={120} height={50} className="object-contain w-[80px] sm:w-[120px] filter brightness-0 sepia saturate-[50] hue-rotate-[30deg] opacity-100" />
-            <Image src="/assets/sister/arada-coffee-logo.png" alt="Arada Coffee" width={120} height={50} className="object-contain w-[80px] sm:w-[120px] filter brightness-0 invert opacity-90" />
-            <Image src="/assets/sister/belayab-delivery-logo.png" alt="BelayAb Delivery" width={100} height={50} className="object-contain w-[70px] sm:w-[100px] filter brightness-0 sepia saturate-[50] hue-rotate-[30deg] opacity-100" />
-            <Image src="/assets/sister/arada-coffee-logo.png" alt="Arada Coffee" width={120} height={50} className="object-contain w-[80px] sm:w-[120px] filter brightness-0 invert opacity-90" />
-          </>
-        )}
-      </div>
     </section>
   );
 }

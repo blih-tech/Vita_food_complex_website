@@ -1559,7 +1559,9 @@
     "ourProducts": "ምርቶቻችን",
     "whyVita": "ለምን ቪታ?",
     "secondaryQuote": "በእያንዳንዱ ንክሻ ቤተሰቦችን መመገብ፣ ለእያንዳንዱ ቤት ደስታን ማምጣት።",
-    "ourClients": "ደስተኛ ደንበኞቻችን"
+    "ourClients": "ደስተኛ ደንበኞቻችን",
+    "poweredBy": "በ<brand>በላይአብ ፉድስ</brand> የተደገፈ",
+    "relationshipStatement": "ቪታ ፉድ ኮምፕሌክስ የበላይአብ ዴሊቨሪ እህት ኩባንያ ነው።"
   },
   "CustomerCare": {
     "title": "የደንበኞች አገልግሎት",
@@ -1622,6 +1624,23 @@
       "submitSending": "በመላክ ላይ…",
       "submitSent": "እናመሰግናለን — ቅሬታዎ ተቀብለናል።",
       "submitFailed": "መላክ አልተሳካም። አንድ ጊዜ እንደገና ይሞክሩ።"
+    }
+  },
+  "SocialProof": {
+    "eyebrow": "በደንበኞች የታመነ",
+    "heading": "ቪታን የሚመርጡ ብራንዶች እና ንግዶች",
+    "description": "ቪታ ፉድ ኮምፕሌክስ ቸርቻሪዎችን፣ አከፋፋዮችን፣ የሆቴል እና ሬስቶራንት ንግዶችን እንዲሁም ድርጅቶችን አስተማማኝ በሆኑ የምግብ ምርቶች እና ወጥ በሆነ ጥራት ይደግፋል።",
+    "demoDisclaimer": "ማሳሰቢያ: እዚህ የቀረቡት ብራንዶች ለማሳያነት ብቻ የቀረቡ ናቸው፤ ትክክለኛ የደንበኞች ምስክርነት አይደሉም።",
+    "demoLabel": "የማሳያ ሎጎ",
+    "customers": {
+      "addisMarket": "አዲስ ማርኬት",
+      "greenBasket": "ግሪን ባስኬት",
+      "sunriseSupermarket": "ሳንራይዝ ሱፐርማርኬት",
+      "blueNileRetail": "ብሉ ናይል ሪቴይል",
+      "unityHotels": "ዩኒቲ ሆቴሎች",
+      "freshChoice": "ፍሬሽ ቾይስ",
+      "metroFoods": "ሜትሮ ፉድስ",
+      "habeshaMart": "ሐበሻ ማርት"
     }
   }
 }

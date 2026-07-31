@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 
 const recipes = [
   {
@@ -85,8 +85,8 @@ export default function RecipesSection({ content, locale }: { content?: any; loc
           {recipes.map((recipe, index) => (
             <div
               key={recipe.id}
-              className="relative shrink-0 w-[260px] sm:w-[300px] md:w-[360px] lg:w-[480px] 
-                         h-[380px] sm:h-[460px] md:h-[520px] lg:h-[600px] 
+              className="relative shrink-0 w-[230px] sm:w-[270px] md:w-[320px] lg:w-[420px] 
+                         h-[340px] sm:h-[410px] md:h-[460px] lg:h-[530px] 
                          rounded-3xl sm:rounded-[32px] md:rounded-[40px] overflow-hidden 
                          snap-center group cursor-pointer shadow-2xl flex flex-col 
                          transition-all duration-500 hover:scale-[1.02] active:scale-[0.97]"
@@ -101,13 +101,26 @@ export default function RecipesSection({ content, locale }: { content?: any; loc
                 />
               </div>
 
+              {/* Curvy divider between image and content */}
+              <svg
+                className="absolute left-0 w-full h-10 sm:h-12 md:h-14 lg:h-16 z-10 pointer-events-none"
+                style={{ top: "58%", transform: "translateY(-55%)" }}
+                viewBox="0 0 500 100"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M0,0 C160,55 340,55 500,0 L500,100 L0,100 Z"
+                  fill={recipe.color}
+                />
+              </svg>
+
               {/* Content Area */}
               <div
                 className="relative w-full h-[42%] p-5 sm:p-7 md:p-8 flex flex-col justify-center gap-2 sm:gap-3"
                 style={{ backgroundColor: recipe.color }}
               >
                 {/* Floating Arrow */}
-                <div className="absolute -top-5 right-5 w-11 h-11 sm:w-12 sm:h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <div className="absolute -top-5 sm:-top-6 md:-top-7 right-5 z-20 w-11 h-11 sm:w-12 sm:h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                   <svg
                     width="24"
                     height="24"

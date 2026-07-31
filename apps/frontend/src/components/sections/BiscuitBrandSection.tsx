@@ -1,80 +1,197 @@
 "use client";
 
+import Autoplay from "embla-carousel-autoplay";
+import useEmblaCarousel from "embla-carousel-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { Link } from "@frontend/navigation";
-import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
-const tagIcons = [
-  "bora.png",
-  "chewata.png",
-  "cream.png",
-  "digestive.png",
-  "glucose.png",
-  "marie.png",
-  "oreo.png",
-  "sina.png",
-  "tafach.png",
-  "tea.png",
-  "zoo.png",
+import { Link } from "@frontend/navigation";
+
+type BrandIcon = {
+  name: string;
+  src: string;
+};
+
+const tagIcons: BrandIcon[] = [
+  {
+    name: "Bora",
+    src: "/assets/products/tag_icons/optimized/bora.png",
+  },
+  {
+    name: "Chewata",
+    src: "/assets/products/tag_icons/optimized/chewata.png",
+  },
+  {
+    name: "Cream",
+    src: "/assets/products/tag_icons/optimized/cream.png",
+  },
+  {
+    name: "Digestive",
+    src: "/assets/products/tag_icons/optimized/digestive.png",
+  },
+  {
+    name: "Glucose",
+    src: "/assets/products/tag_icons/optimized/glucose.png",
+  },
+  {
+    name: "Marie",
+    src: "/assets/products/tag_icons/optimized/marie.png",
+  },
+  {
+    name: "Oreo",
+    src: "/assets/products/tag_icons/optimized/oreo.png",
+  },
+  {
+    name: "Sina",
+    src: "/assets/products/tag_icons/optimized/sina.png",
+  },
+  {
+    name: "Tafach",
+    src: "/assets/products/tag_icons/optimized/tafach.png",
+  },
+  {
+    name: "Tea",
+    src: "/assets/products/tag_icons/optimized/tea.png",
+  },
+  {
+    name: "Zoo",
+    src: "/assets/products/tag_icons/optimized/zoo.png",
+  },
 ];
 
-export default function BiscuitBrandSection({ content, locale }: { content?: any; locale?: string }) {
+type LocalizedSectionContent = {
+  label?: string;
+  title?: string;
+  description?: string;
+  cta?: string;
+};
+
+type BiscuitBrandSectionProps = {
+  content?: Record<string, LocalizedSectionContent>;
+  locale?: string;
+};
+
+export default function BiscuitBrandSection({
+  content,
+  locale,
+}: BiscuitBrandSectionProps) {
   const t = useTranslations("BiscuitBrand");
-  const c = content?.[locale as string] || content?.en;
-  const [emblaRef] = useEmblaCarousel(
-    { align: "center", dragFree: true, containScroll: false, loop: true },
-    [Autoplay({ delay: 3000, stopOnInteraction: false })]
+
+  const localizedContent =
+    (locale ? content?.[locale] : undefined) ??
+    content?.en;
+
+  const autoplayPlugin = useRef(
+    Autoplay({
+      delay: 3000,
+      playOnInit: true,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+      stopOnFocusIn: false,
+    }),
   );
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      align: "center",
+      loop: true,
+      dragFree: false,
+      skipSnaps: false,
+      containScroll: false,
+      duration: 28,
+    },
+    [autoplayPlugin.current],
+  );
+
+  const handleSelect = useCallback(() => {
+    if (!emblaApi) {
+      return;
+    }
+
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) {
+      return;
+    }
+
+    handleSelect();
+
+    emblaApi.on("select", handleSelect);
+    emblaApi.on("reInit", handleSelect);
+
+    return () => {
+      emblaApi.off("select", handleSelect);
+      emblaApi.off("reInit", handleSelect);
+    };
+  }, [emblaApi, handleSelect]);
 
   return (
     <section
       id="biscuit-brand"
-      className="relative w-full bg-white pt-24 pb-48 lg:pt-32 lg:pb-[250px] overflow-hidden min-h-[900px] flex flex-col items-center"
+      className="relative flex min-h-[860px] w-full flex-col items-center overflow-hidden bg-white pb-40 pt-24 sm:pb-48 lg:min-h-[960px] lg:pb-[220px] lg:pt-32"
     >
-
-      {/* Bottom Left: Oreo (blurred) */}
-      <div className="absolute bottom-[-50px] sm:bottom-0 lg:bottom-[20px] left-[-50px] sm:left-[-50px] lg:left-[-50px] w-[200px] h-[200px] sm:w-[350px] sm:h-[350px] lg:w-[450px] lg:h-[450px] z-30 blur-[8px] sm:blur-[12px] opacity-95 -rotate-[15deg] hover:blur-none transition-all duration-500 pointer-events-none">
+      {/* Bottom-left decorative biscuit */}
+      <div className="pointer-events-none absolute bottom-[-35px] left-[-45px] z-10 h-[210px] w-[210px] -rotate-[14deg] opacity-95 sm:bottom-[-20px] sm:left-[-55px] sm:h-[320px] sm:w-[320px] lg:bottom-[10px] lg:left-[-70px] lg:h-[450px] lg:w-[450px]">
         <Image
           src="/assets/products/biscuts/biscut-5.png"
-          alt="Oreo"
+          alt=""
           fill
+          priority
+          quality={100}
+          sizes="(max-width: 640px) 210px, (max-width: 1024px) 320px, 450px"
           className="object-contain"
         />
       </div>
 
-      {/* Bottom Right: Chocolate Chip Cookie (blurred) */}
-      <div className="absolute bottom-[-50px] sm:bottom-0 lg:bottom-[20px] right-[-50px] sm:right-[-50px] lg:right-[-50px] w-[200px] h-[200px] sm:w-[350px] sm:h-[350px] lg:w-[450px] lg:h-[450px] z-30 blur-[8px] sm:blur-[12px] opacity-95 rotate-[15deg] hover:blur-none transition-all duration-500 pointer-events-none">
+      {/* Bottom-right decorative biscuit */}
+      <div className="pointer-events-none absolute bottom-[-35px] right-[-45px] z-10 h-[210px] w-[210px] rotate-[14deg] opacity-95 sm:bottom-[-20px] sm:right-[-55px] sm:h-[320px] sm:w-[320px] lg:bottom-[10px] lg:right-[-70px] lg:h-[450px] lg:w-[450px]">
         <Image
           src="/assets/products/biscuts/biscut-1.png"
-          alt="Cookie"
+          alt=""
           fill
+          priority
+          quality={100}
+          sizes="(max-width: 640px) 210px, (max-width: 1024px) 320px, 450px"
           className="object-contain"
         />
       </div>
 
-      <div className="relative z-20 w-full flex flex-col items-center">
-        {/* Text content */}
-        <div className="flex flex-col items-center gap-4 text-center mb-12 lg:mb-16 px-6">
-          <p className="font-['Funnel_Display'] font-semibold text-[14px] sm:text-[16px] text-[#404040]/60 tracking-[0.15em] uppercase">
-            {c?.label || t("label")}
+      <div className="relative z-20 flex w-full flex-col items-center">
+        {/* Heading */}
+        <div className="mb-10 flex flex-col items-center gap-4 px-6 text-center sm:mb-14 lg:mb-16">
+          <p className="font-['Funnel_Display'] text-[14px] font-semibold uppercase tracking-[0.15em] text-[#404040]/60 sm:text-[16px]">
+            {localizedContent?.label || t("label")}
           </p>
 
-          <h2 className="font-['Outfit'] font-black text-[40px] sm:text-[56px] lg:text-[72px] text-[#23B349] leading-[1.05] tracking-tight max-w-4xl capitalize">
-            {c?.title ? c.title : t.rich("title", { br: () => <br /> })}
+          <h2 className="max-w-4xl font-['Outfit'] text-[40px] font-black capitalize leading-[1.05] tracking-tight text-[#23B349] sm:text-[56px] lg:text-[72px]">
+            {localizedContent?.title
+              ? localizedContent.title
+              : t.rich("title", {
+                  br: () => <br />,
+                })}
           </h2>
         </div>
 
-        {/* Scrollable Tag Icons */}
-        <div className="relative w-full my-20 lg:my-32 z-20 flex items-center justify-center">
-          {/* Background decoration specifically for the Tag Icons */}
+        {/* Brand carousel */}
+        <div className="relative my-8 flex w-full items-center justify-center sm:my-12 lg:my-16">
+          {/* Decorative center shape */}
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] sm:w-[550px] sm:h-[550px] lg:w-[700px] lg:h-[700px] pointer-events-none z-0"
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[360px] w-[360px] -translate-x-1/2 -translate-y-1/2 opacity-[0.055] sm:h-[520px] sm:w-[520px] lg:h-[680px] lg:w-[680px]"
             style={{
               backgroundColor: "#282828",
-              maskImage: `url('/product-vector.svg')`,
-              WebkitMaskImage: `url('/product-vector.svg')`,
+              maskImage: "url('/product-vector.svg')",
+              WebkitMaskImage: "url('/product-vector.svg')",
               maskSize: "contain",
               WebkitMaskSize: "contain",
               maskPosition: "center",
@@ -83,43 +200,81 @@ export default function BiscuitBrandSection({ content, locale }: { content?: any
               WebkitMaskRepeat: "no-repeat",
             }}
           />
-          {/* Embla Viewport */}
-          <div className="relative z-10 w-full overflow-hidden" ref={emblaRef}>
-            {/* Embla Container */}
-            <div className="flex flex-row items-center gap-12 sm:gap-20 lg:gap-32 px-[10vw] sm:px-[20vw] lg:px-[30vw] py-12 cursor-grab active:cursor-grabbing">
-              {tagIcons.map((icon, index) => (
-                <div
-                  key={icon}
-                  className="relative shrink-0 min-w-[280px] h-[200px] sm:min-w-[400px] sm:h-[280px] lg:min-w-[550px] lg:h-[350px] transition-all duration-500 hover:scale-105"
-                >
-                  <Image
-                    src={`/assets/products/tag_icons/${icon}`}
-                    alt={icon.replace(".png", "")}
-                    fill
-                    className="object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.8)] pointer-events-none select-none"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    priority={index < 3}
-                  />
-                </div>
-              ))}
+
+          {/* Fixed viewport */}
+          <div
+            ref={emblaRef}
+            className="relative z-10 h-[300px] w-full overflow-hidden sm:h-[360px] lg:h-[420px]"
+          >
+            <div className="flex h-full touch-pan-y items-center">
+              {tagIcons.map((icon, index) => {
+                const isActive = selectedIndex === index;
+
+                return (
+                  <div
+                    key={icon.name}
+                    className="relative h-full min-w-0 shrink-0 basis-[76%] sm:basis-[45%] lg:basis-[32%]"
+                  >
+                    {/* Fixed slide container */}
+                    <div className="absolute inset-0 flex items-center justify-center px-2 sm:px-3 lg:px-4">
+                      {/* Fixed image area */}
+                      <div className="relative flex h-[260px] w-full max-w-[520px] items-center justify-center sm:h-[310px] sm:max-w-[620px] lg:h-[360px] lg:max-w-[720px]">
+                        {/* Only this inner layer changes size */}
+                        <div
+                          className={[
+                            "relative h-full w-full",
+                            "transition-[transform,opacity,filter] duration-700",
+                            "ease-[cubic-bezier(0.22,1,0.36,1)]",
+                            "will-change-transform",
+                            isActive
+                              ? "z-20 scale-100 opacity-100"
+                              : "z-10 scale-[0.76] opacity-55",
+                          ].join(" ")}
+                        >
+                          <Image
+                            src={icon.src}
+                            alt={`${icon.name} biscuit brand`}
+                            fill
+                            unoptimized
+                            priority={index < 3}
+                            draggable={false}
+                            sizes="(max-width: 640px) 520px, (max-width: 1024px) 620px, 720px"
+                            className="pointer-events-none select-none object-contain mix-blend-screen"
+                            style={{
+                              filter: isActive
+                                ? "contrast(1.12) saturate(1.15) brightness(1.02) drop-shadow(0 16px 22px rgba(0, 0, 0, 0.12))"
+                                : "contrast(1.08) saturate(1.08) brightness(1.02) drop-shadow(0 8px 12px rgba(0, 0, 0, 0.05))",
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
 
-        {/* Bottom Text and CTA */}
-        <div className="flex flex-col items-center gap-8 mt-12 sm:mt-16 lg:mt-20 relative z-20 px-6">
-          <p className="font-['Funnel_Display'] font-medium text-[14px] sm:text-[16px] lg:text-[18px] text-[#404040]/80 text-center max-w-xl leading-relaxed">
-            {c?.description ? c.description : t.rich("description", { br: () => <br className="hidden sm:block" /> })}
+        {/* Description and CTA */}
+        <div className="relative z-20 mt-6 flex flex-col items-center gap-8 px-6 text-center sm:mt-10 lg:mt-14">
+          <p className="max-w-xl font-['Funnel_Display'] text-[14px] font-medium leading-relaxed text-[#404040]/80 sm:text-[16px] lg:text-[18px]">
+            {localizedContent?.description
+              ? localizedContent.description
+              : t.rich("description", {
+                  br: () => <br className="hidden sm:block" />,
+                })}
           </p>
 
           <Link
             href="/products"
-            className="group bg-[#23B349] text-white px-8 py-4 rounded-full flex items-center gap-3 hover:bg-[#1f9d40] transition-all duration-300 shadow-xl shadow-green-500/20 active:scale-[0.98]"
+            className="group flex items-center gap-3 rounded-full bg-[#23B349] px-8 py-4 text-white shadow-xl shadow-green-500/20 transition-all duration-300 hover:bg-[#1f9d40] active:scale-[0.98]"
           >
-            <span className="font-['Funnel_Display'] font-bold text-[16px]">
-              {c?.cta || t("cta")}
+            <span className="font-['Funnel_Display'] text-[16px] font-bold">
+              {localizedContent?.cta || t("cta")}
             </span>
-            <div className="bg-white/20 rounded-full p-1 group-hover:translate-x-1 transition-transform flex items-center justify-center">
+
+            <span className="flex items-center justify-center rounded-full bg-white/20 p-1 transition-transform duration-300 group-hover:translate-x-1">
               <svg
                 width="18"
                 height="18"
@@ -127,14 +282,15 @@ export default function BiscuitBrandSection({ content, locale }: { content?: any
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                  d="M13.5 4.5L21 12m0 0-7.5 7.5M21 12H3"
                 />
               </svg>
-            </div>
+            </span>
           </Link>
         </div>
       </div>
