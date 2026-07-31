@@ -3,6 +3,7 @@
 import { useRef, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 const COLUMN_1_IMAGES = [
   '/assets/social/social-1.png',
@@ -126,29 +127,55 @@ export default function SocialWallSection({ content, locale }: { content?: any; 
             background: 'linear-gradient(to top, #FFFFFF 10%, rgba(255,255,255,0.7) 50%, transparent 100%)' 
           }}
         />
-        {/* Radial gradient to focus center */}
-        <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_30%,rgba(255,255,255,0.8)_70%,#FFFFFF_100%)]" />
+        {/* Radial gradient to focus center - strong white center glow fade */}
+        <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(255,255,255,1)_0%,rgba(255,255,255,0.98)_20%,rgba(255,255,255,0.7)_60%,transparent_90%)]" />
       </div>
 
-      {/* Center Content */}
-      <div className="relative z-20 max-w-[1024px] mx-auto px-6 flex flex-col items-center justify-center text-center gap-12 bg-white/50 backdrop-blur-md p-12 rounded-[48px] shadow-2xl shadow-green-900/5">
+      {/* Center Content with Framer Motion and Big White Center Shadow Fade */}
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-20 max-w-[1024px] mx-auto px-6 flex flex-col items-center justify-center text-center gap-8 md:gap-12"
+      >
         
         <div className="flex flex-col items-center gap-4">
-          <p className="font-['Funnel_Display'] font-medium text-[20px] text-[#404040] leading-tight">
+          <motion.p 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="font-['Funnel_Display'] font-medium text-[20px] text-[#404040] leading-tight"
+          >
             {c?.label || t("label")}
-          </p>
-          <h2 className="font-['Outfit'] font-black text-[50px] sm:text-[64px] lg:text-[80px] text-[#23B349] leading-[0.9] tracking-[-0.02em]">
+          </motion.p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="font-['Outfit'] font-black text-[50px] sm:text-[64px] lg:text-[80px] text-[#23B349] leading-[0.9] tracking-[-0.02em]"
+          >
             {c?.heading || t("heading")}
-          </h2>
+          </motion.h2>
         </div>
 
         {/* Explore Button */}
-        <button className="flex items-center justify-center gap-3 bg-[#23B349] text-white px-8 py-4 rounded-full font-['Funnel_Display'] font-medium text-[24px] leading-tight hover:bg-[#1a8e38] transition-colors group">
+        <motion.button 
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.6, type: "spring", stiffness: 100 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="flex items-center justify-center gap-3 bg-[#23B349] text-white px-8 py-4 rounded-full font-['Funnel_Display'] font-medium text-[24px] leading-tight hover:bg-[#1a8e38] transition-colors group shadow-lg"
+        >
           {c?.cta || t("cta")}
           <span className="font-['Outfit'] text-[20px] group-hover:translate-x-1 transition-transform">→</span>
-        </button>
+        </motion.button>
 
-      </div>
+      </motion.div>
 
     </section>
   );

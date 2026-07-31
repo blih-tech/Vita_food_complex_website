@@ -92,12 +92,12 @@ export default function RecipesSection({ content, locale }: { content?: any; loc
                          transition-all duration-500 hover:scale-[1.02] active:scale-[0.97]"
             >
               {/* Image Area */}
-              <div className="relative w-full h-[58%] bg-gradient-to-b from-gray-700 to-gray-900 flex items-center justify-center p-4 sm:p-6 md:p-8">
+              <div className="relative w-full h-[58%] overflow-hidden">
                 <Image
                   src={t_items[index]?.image || recipe.image}
                   alt={t_items[index]?.title || recipe.title}
                   fill
-                  className="object-contain p-4 sm:p-6 group-hover:scale-110 transition-transform duration-700"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
               </div>
 
