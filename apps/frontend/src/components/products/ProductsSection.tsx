@@ -15,6 +15,7 @@ export default function ProductsSection() {
   const autoplayPlugin = useRef(
     Autoplay({
       delay: 4000,
+      playOnInit: false,
       stopOnInteraction: false,
       stopOnMouseEnter: true,
       stopOnFocusIn: true,
@@ -49,10 +50,11 @@ export default function ProductsSection() {
   useEffect(() => {
     if (!emblaApi) return;
 
+    const autoplay = emblaApi.plugins().autoplay;
     if (sectionIsActive) {
-      autoplayPlugin.current.play();
+      autoplay?.play();
     } else {
-      autoplayPlugin.current.stop();
+      autoplay?.stop();
     }
   }, [emblaApi, sectionIsActive]);
 
