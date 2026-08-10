@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Link } from "@frontend/navigation";
+import { useViewportActivity } from "@/hooks/useViewportActivity";
 
 type BrandIcon = {
   name: string;
@@ -46,11 +47,13 @@ export default function BiscuitBrandSection({
   const t = useTranslations("BiscuitBrand");
   const localizedContent =
     (locale ? content?.[locale] : undefined) ?? content?.en;
+  const { ref: sectionRef, isActive: sectionIsActive } =
+    useViewportActivity<HTMLElement>("250px 0px");
 
   const autoplayPlugin = useRef(
     Autoplay({
       delay: 3000,
-      playOnInit: true,
+      playOnInit: false,
       stopOnInteraction: false,
       stopOnMouseEnter: true,
       stopOnFocusIn: false,
@@ -89,8 +92,19 @@ export default function BiscuitBrandSection({
     };
   }, [emblaApi, handleSelect]);
 
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    if (sectionIsActive) {
+      autoplayPlugin.current.play();
+    } else {
+      autoplayPlugin.current.stop();
+    }
+  }, [emblaApi, sectionIsActive]);
+
   return (
     <section
+      ref={sectionRef}
       id="biscuit-brand"
       className="relative flex min-h-[860px] w-full flex-col items-center overflow-hidden bg-white pb-40 pt-24 sm:pb-48 lg:min-h-[960px] lg:pb-[220px] lg:pt-32"
     >
@@ -99,7 +113,7 @@ export default function BiscuitBrandSection({
           src="/assets/products/biscuts/biscut-5.png"
           alt=""
           fill
-          loading="eager"
+          loading="lazy"
           decoding="async"
           quality={90}
           sizes="(max-width: 640px) 210px, (max-width: 1024px) 320px, 450px"
@@ -112,7 +126,7 @@ export default function BiscuitBrandSection({
           src="/assets/products/biscuts/biscut-1.png"
           alt=""
           fill
-          loading="eager"
+          loading="lazy"
           decoding="async"
           quality={90}
           sizes="(max-width: 640px) 210px, (max-width: 1024px) 320px, 450px"
@@ -157,6 +171,13 @@ export default function BiscuitBrandSection({
             <div className="flex h-full touch-pan-y items-center">
               {tagIcons.map((icon, index) => {
                 const isActive = selectedIndex === index;
+                const rawDistance = Math.abs(selectedIndex - index);
+                const loopDistance = Math.min(
+                  rawDistance,
+                  tagIcons.length - rawDistance,
+                );
+                const isNearActive = loopDistance <= 1;
+                const shouldPromote = sectionIsActive && isNearActive;
 
                 return (
                   <div
@@ -168,20 +189,24 @@ export default function BiscuitBrandSection({
                         <div
                           className={[
                             "relative h-full w-full",
-                            "transition-[transform,opacity,filter] duration-700",
+                            "transition-[transform,opacity] duration-700",
                             "ease-[cubic-bezier(0.22,1,0.36,1)]",
-                            "will-change-transform",
                             isActive
                               ? "z-20 scale-100 opacity-100"
                               : "z-10 scale-[0.76] opacity-55",
                           ].join(" ")}
+                          style={{
+                            willChange: shouldPromote ? "transform, opacity" : "auto",
+                          }}
                         >
                           <Image
                             src={icon.src}
                             alt={`${icon.name} biscuit brand`}
                             fill
-                            loading={index < 5 ? "eager" : "lazy"}
-                            fetchPriority={index === 0 ? "high" : "auto"}
+                            loading={sectionIsActive && isNearActive ? "eager" : "lazy"}
+                            fetchPriority={
+                              sectionIsActive && isActive ? "high" : "auto"
+                            }
                             decoding="async"
                             quality={90}
                             draggable={false}
