@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Play } from "lucide-react";
@@ -13,12 +14,16 @@ function ClientAvatars() {
         {clients.map((client) => (
           <div
             key={client}
-            className="relative h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-12 overflow-hidden rounded-full border-2 border-white shadow-md"
+            className="relative h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-12 overflow-hidden rounded-full border-2 border-white shadow-md bg-white/10"
           >
             <Image
               src={`/assets/hero/client-${client}.png`}
               alt={`Client ${client}`}
               fill
+              loading="eager"
+              decoding="async"
+              quality={80}
+              sizes="(max-width: 640px) 36px, (max-width: 768px) 40px, 48px"
               className="object-cover"
             />
           </div>
@@ -50,7 +55,13 @@ function MarqueeBanner({ t }: { t: ReturnType<typeof useTranslations> }) {
   );
 }
 
-export default function HeroVideoSection({ content, locale }: { content?: any; locale?: string }) {
+export default function HeroVideoSection({
+  content,
+  locale,
+}: {
+  content?: any;
+  locale?: string;
+}) {
   const t = useTranslations("Hero");
   const c = content?.[locale as string] || content?.en;
   const secondaryQuote = c?.secondaryQuote || t("secondaryQuote");
@@ -63,40 +74,39 @@ export default function HeroVideoSection({ content, locale }: { content?: any; l
       className="relative max-sm:pt-16 z-20"
       aria-label="Hero section"
     >
-      {/* Background Layers */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 bg-[#0f4b1f]">
         <div className="absolute inset-0 bg-[url('/landing-hero.svg')] bg-cover bg-top bg-no-repeat" />
       </div>
 
-      {/* Floating Decorative Assets - Improved mobile positioning & scaling */}
       <div className="pointer-events-none absolute inset-0 z-30 md:z-10">
-
-        {/* Doctor Duck */}
         <div className="absolute -left-6 -top-16 h-36 w-36 sm:-left-12 sm:-top-16 sm:h-44 sm:w-44 md:-left-8 md:-top-40 md:h-[340px] md:w-[340px] lg:left-0 lg:-top-80 lg:h-[540px] lg:w-[540px]">
           <Image
             src="/assets/hero/doctor-duck.png"
             alt="Doctor Duck"
             fill
-            priority
+            loading="eager"
+            decoding="async"
+            quality={85}
+            sizes="(max-width: 640px) 144px, (max-width: 768px) 176px, (max-width: 1024px) 340px, 540px"
             className="object-contain drop-shadow-2xl"
           />
         </div>
 
-        {/* Biscuit Stack */}
         <div className="absolute -right-4 -top-12 h-32 w-32 sm:-right-6 sm:-top-10 sm:h-40 sm:w-40 md:-right-4 md:-top-28 md:h-[300px] md:w-[300px] lg:right-0 lg:-top-60 lg:h-[500px] lg:w-[500px]">
           <Image
             src="/assets/hero/cream-sandwich-stack.png"
             alt="Biscuit Stack"
             fill
-            priority
+            loading="eager"
+            decoding="async"
+            quality={85}
+            sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, (max-width: 1024px) 300px, 500px"
             className="object-contain drop-shadow-2xl"
           />
         </div>
       </div>
 
-      {/* Main Content Container */}
       <div className="relative z-20 mx-auto flex max-w-[1440px] flex-col px-4 sm:px-6 md:px-10 pb-16 pt-20 sm:pt-24 md:pb-36 md:pt-40 lg:px-16 lg:pb-44 lg:pt-52">
-        {/* Secondary Quote Section */}
         <div className="flex max-w-6xl flex-col items-start text-left px-1 sm:px-0">
           <blockquote className="max-w-4xl font-['Outfit'] text-[26px] leading-[1.05] sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-[-0.02em] text-white">
             "{secondaryQuote}"
@@ -110,7 +120,6 @@ export default function HeroVideoSection({ content, locale }: { content?: any; l
           </div>
         </div>
 
-        {/* Video Showcase */}
         <div className="relative mt-14 sm:mt-20 md:mt-24 lg:mt-32 w-full overflow-hidden">
           <MarqueeBanner t={t} />
 
@@ -120,13 +129,16 @@ export default function HeroVideoSection({ content, locale }: { content?: any; l
                 src={videoThumbnail}
                 alt="Family enjoying Vita"
                 fill
-                priority
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                quality={85}
+                sizes="(max-width: 640px) 96vw, (max-width: 1024px) 92vw, 1380px"
                 className="object-cover transition-transform duration-1000 group-hover:scale-105"
               />
 
               <div className="absolute inset-0 bg-black/30 sm:bg-black/20 transition-all duration-500 group-hover:bg-black/5" />
 
-              {/* Mute Button */}
               <button
                 aria-label="Mute video"
                 className="absolute left-3 top-3 sm:left-4 sm:top-4 flex h-11 w-11 sm:h-12 sm:w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-black/40 backdrop-blur-md transition-all hover:scale-110 md:left-8 md:top-8"
@@ -135,11 +147,14 @@ export default function HeroVideoSection({ content, locale }: { content?: any; l
                   src="/assets/hero/sound-mute-video.svg"
                   alt="Mute"
                   fill
+                  unoptimized
+                  loading="eager"
+                  decoding="async"
+                  sizes="56px"
                   className="p-2.5 sm:p-3"
                 />
               </button>
 
-              {/* Play Button - Larger touch target on mobile */}
               <button
                 aria-label="Play video"
                 className="absolute inset-0 m-auto flex h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 items-center justify-center rounded-full bg-white/30 backdrop-blur-md transition-all active:scale-95 hover:scale-110 hover:bg-white/40"
@@ -148,19 +163,21 @@ export default function HeroVideoSection({ content, locale }: { content?: any; l
               </button>
             </div>
 
-            {/* Floating Badge */}
             <div className="absolute -right-3 -top-6 sm:-right-6 sm:-top-10 md:-right-8 md:-top-12 z-30 h-20 w-20 sm:h-24 sm:w-24 md:h-40 md:w-40 lg:h-[215px] lg:w-[215px] rotate-[10deg] drop-shadow-2xl transition-transform duration-700 hover:rotate-[20deg]">
               <Image
                 src="/assets/hero/badge.svg"
                 alt="Quality Badge"
                 fill
+                unoptimized
+                loading="eager"
+                decoding="async"
+                sizes="(max-width: 640px) 80px, (max-width: 768px) 96px, (max-width: 1024px) 160px, 215px"
                 className="object-contain"
               />
             </div>
           </div>
         </div>
       </div>
-
     </section>
   );
 }
