@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 interface ScrollRevealProps {
   children: React.ReactNode;
@@ -10,48 +10,47 @@ interface ScrollRevealProps {
   yOffset?: number;
   xOffset?: number;
   className?: string;
-  // Controls if animation should only happen once or every time it enters the viewport
   once?: boolean;
 }
 
 export default function ScrollReveal({
   children,
   delay = 0,
-  duration = 0.8,
-  yOffset = 30,
+  duration = 0.55,
+  yOffset = 18,
   xOffset = 0,
   className = "",
-  once = false, // Set to false so the animation "gets back" (re-animates) on scrolling
+  once = true,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  
+  const reduceMotion = useReducedMotion();
+
+  // Never start a whole section at opacity: 0. Image-heavy sections used to be
+  // invisible during hydration/lazy loading, which looked like broken images
+  // before Framer Motion revealed them. Keep content painted immediately and
+  // retain only a small movement reveal for visual polish.
+  const initialState = reduceMotion
+    ? { opacity: 1, y: 0, x: 0 }
+    : {
+        opacity: 1,
+        y: Math.sign(yOffset) * Math.min(Math.abs(yOffset), 18),
+        x: Math.sign(xOffset) * Math.min(Math.abs(xOffset), 18),
+      };
+
   return (
     <motion.div
       ref={ref}
-      initial={{ 
-        opacity: 0, 
-        y: yOffset,
-        x: xOffset
+      initial={initialState}
+      whileInView={{ opacity: 1, y: 0, x: 0 }}
+      viewport={{
+        once,
+        amount: 0.08,
+        margin: "80px 0px 80px 0px",
       }}
-      whileInView={{ 
-        opacity: 1, 
-        y: 0,
-        x: 0
-      }}
-      exit={{
-        opacity: 0,
-        y: yOffset,
-        x: xOffset
-      }}
-      viewport={{ 
-        once: once, 
-        amount: 0.15,
-        margin: "-50px 0px -50px 0px"
-      }}
-      transition={{ 
-        duration: duration, 
-        ease: [0.25, 1, 0.5, 1], // Premium easeOutExpo ease curve
-        delay: delay 
+      transition={{
+        duration: reduceMotion ? 0 : duration,
+        ease: [0.25, 1, 0.5, 1],
+        delay: reduceMotion ? 0 : delay,
       }}
       className={className}
     >
