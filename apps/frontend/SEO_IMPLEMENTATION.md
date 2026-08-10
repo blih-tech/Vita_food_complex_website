@@ -19,7 +19,9 @@ Production SEO uses `https://www.vitafoodcomplex.com` as the canonical site orig
 
 Raster images use Next.js image optimization with responsive `sizes`, configured quality levels, WebP output, and caching. SVG assets stay as vectors.
 
-The original Framer Motion section entrance animations remain. For smoother scrolling, section reveals run once per page visit while continuous decorative work is paused when it is off-screen and briefly while the user is actively scrolling. This applies to the hero marquee, product carousel, biscuit-brand carousel, sister-company marquee, certification marquee, and social-wall columns.
+The Framer Motion section entrance animations remain: each section still fades/translates into place as it first enters the viewport. To reduce scroll jank, that entrance reveal runs once per page visit instead of repeatedly restarting when a section crosses the viewport boundary again.
+
+Continuous decorative work is paused when it is off-screen and briefly while the user is actively scrolling. This applies to the hero marquee, product carousel, biscuit-brand carousel, sister-company marquee, certification marquee, and social-wall columns. The continuous animations resume after scrolling settles.
 
 ## Production environment
 
