@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import {
-  SITE_URL,
   STATIC_PAGE_DEFINITIONS,
   SUPPORTED_LOCALES,
   languageAlternates,
@@ -86,8 +85,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .filter((article) => article.slug && article.isPublished !== false)
     .flatMap((article) => {
       const path = `/news/${encodeURIComponent(article.slug!)}`;
-      const lastModified =
-        safeDate(article.updatedAt) ?? safeDate(article.publishedAt);
+      const lastModified = safeDate(article.updatedAt) ?? safeDate(article.publishedAt);
 
       return SUPPORTED_LOCALES.map((locale) => ({
         url: localizedUrl(locale, path),
@@ -102,7 +100,3 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [...staticEntries, ...productEntries, ...newsEntries];
 }
-
-export const dynamic = "force-dynamic";
-export const preferredRegion = "auto";
-export const siteHost = SITE_URL;
