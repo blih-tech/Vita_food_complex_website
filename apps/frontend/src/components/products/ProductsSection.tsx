@@ -15,7 +15,7 @@ export default function ProductsSection() {
   const autoplayPlugin = useRef(
     Autoplay({
       delay: 4000,
-      playOnInit: false,
+      playOnInit: true,
       stopOnInteraction: false,
       stopOnMouseEnter: true,
       stopOnFocusIn: true,
@@ -51,11 +51,23 @@ export default function ProductsSection() {
     if (!emblaApi) return;
 
     const autoplay = emblaApi.plugins().autoplay;
-    if (sectionIsActive) {
-      autoplay?.play();
-    } else {
-      autoplay?.stop();
+    if (!autoplay) return;
+
+    if (!sectionIsActive) {
+      autoplay.stop();
+      return;
     }
+
+    const frame = window.requestAnimationFrame(() => {
+      // Embla can expose the API before the autoplay plugin has a usable snap
+      // list during the first React effect. Only resume after layout/init has
+      // produced at least one snap, and never restart an already-running timer.
+      if (emblaApi.scrollSnapList().length > 0 && !autoplay.isPlaying()) {
+        autoplay.play();
+      }
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, [emblaApi, sectionIsActive]);
 
   return (
