@@ -12,6 +12,14 @@ Production SEO uses `https://www.vitafoodcomplex.com` as the canonical site orig
 - `robots.txt` metadata route
 - Open Graph and Twitter social sharing images
 - Search Console verification environment-variable support
+- Next.js responsive raster image optimization and asset caching
+- Viewport-aware animation scheduling for smoother scrolling
+
+## Image and scrolling performance
+
+Raster images use Next.js image optimization with responsive `sizes`, configured quality levels, WebP output, and caching. SVG assets stay as vectors.
+
+The original Framer Motion section entrance animations remain. For smoother scrolling, section reveals run once per page visit while continuous decorative work is paused when it is off-screen and briefly while the user is actively scrolling. This applies to the hero marquee, product carousel, biscuit-brand carousel, sister-company marquee, certification marquee, and social-wall columns.
 
 ## Production environment
 
