@@ -72,6 +72,16 @@ export default function ProductsSection() {
 
       <div className="flex flex-row cursor-grab active:cursor-grabbing">
         {products.map((product, index) => {
+          const translationKey = `items.${product.id}.name`;
+          const burgerFlourWeight = product.id.match(
+            /^burger-flour-(\d+kg)$/,
+          )?.[1];
+          const productName = t.has(translationKey)
+            ? t(translationKey)
+            : burgerFlourWeight && t.has("items.burger-flour.name")
+              ? `${t("items.burger-flour.name")} ${burgerFlourWeight}`
+              : product.name;
+
           const shouldAnimateSlide = sectionIsActive && selectedIndex === index;
           const animationStyle = {
             animationPlayState: shouldAnimateSlide ? "running" : "paused",
@@ -90,7 +100,7 @@ export default function ProductsSection() {
 
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 mix-blend-overlay opacity-70 px-4">
                 <h2 className="font-['Funnel_Display'] font-black text-[26vw] sm:text-[24vw] md:text-[22vw] text-white leading-none uppercase tracking-tight whitespace-nowrap drop-shadow-sm select-none">
-                  {t(`items.${product.id}.name`)}
+                  {productName}
                 </h2>
               </div>
 
@@ -101,7 +111,7 @@ export default function ProductsSection() {
                 >
                   <Image
                     src={product.media.image}
-                    alt={`Vita ${t(`items.${product.id}.name`)}`}
+                    alt={`Vita ${productName}`}
                     fill
                     loading={index < 2 ? "eager" : "lazy"}
                     fetchPriority={index === 0 ? "high" : "auto"}
@@ -172,7 +182,7 @@ export default function ProductsSection() {
                     className="font-['Funnel_Display'] font-semibold text-[28px] lg:text-[48px] leading-none flex items-center gap-2 transition-transform duration-300 group-hover:translate-x-2"
                     style={{ color: product.ui.textColor }}
                   >
-                    Vita {t(`items.${product.id}.name`)}
+                    Vita {productName}
                     <span
                       className="text-[20px] lg:text-[48px] font-light"
                       style={{ color: product.ui.textColor }}
