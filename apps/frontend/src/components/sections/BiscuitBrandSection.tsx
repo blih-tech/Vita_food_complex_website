@@ -53,7 +53,7 @@ export default function BiscuitBrandSection({
   const autoplayPlugin = useRef(
     Autoplay({
       delay: 3000,
-      playOnInit: false,
+      playOnInit: true,
       stopOnInteraction: false,
       stopOnMouseEnter: true,
       stopOnFocusIn: false,
@@ -96,11 +96,20 @@ export default function BiscuitBrandSection({
     if (!emblaApi) return;
 
     const autoplay = emblaApi.plugins().autoplay;
-    if (sectionIsActive) {
-      autoplay?.play();
-    } else {
-      autoplay?.stop();
+    if (!autoplay) return;
+
+    if (!sectionIsActive) {
+      autoplay.stop();
+      return;
     }
+
+    const frame = window.requestAnimationFrame(() => {
+      if (emblaApi.scrollSnapList().length > 0 && !autoplay.isPlaying()) {
+        autoplay.play();
+      }
+    });
+
+    return () => window.cancelAnimationFrame(frame);
   }, [emblaApi, sectionIsActive]);
 
   return (
