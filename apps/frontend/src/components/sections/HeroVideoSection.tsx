@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Play } from "lucide-react";
+import { useViewportActivity } from "@/hooks/useViewportActivity";
 
 const clients = [1, 2, 3];
 const marqueeItems = Array.from({ length: 8 });
@@ -36,11 +37,23 @@ function ClientAvatars() {
   );
 }
 
-function MarqueeBanner({ t }: { t: ReturnType<typeof useTranslations> }) {
+function MarqueeBanner({
+  t,
+  isActive,
+}: {
+  t: ReturnType<typeof useTranslations>;
+  isActive: boolean;
+}) {
   return (
     <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-12 w-[220vw] -translate-x-1/2 -translate-y-1/2 rotate-[-5deg] bg-[#FFEC19] border-b-[5px] border-[#404040] shadow-2xl sm:h-14 sm:border-b-[6px] md:h-20 md:border-b-[8px] lg:h-28 lg:border-b-[12px]">
       <div className="relative flex h-full items-center overflow-hidden whitespace-nowrap">
-        <div className="animate-marquee flex whitespace-nowrap">
+        <div
+          className="animate-marquee flex whitespace-nowrap"
+          style={{
+            animationPlayState: isActive ? "running" : "paused",
+            willChange: isActive ? "transform" : "auto",
+          }}
+        >
           {marqueeItems.map((_, index) => (
             <span
               key={index}
@@ -67,9 +80,12 @@ export default function HeroVideoSection({
   const secondaryQuote = c?.secondaryQuote || t("secondaryQuote");
   const ourClients = c?.ourClients || t("ourClients");
   const videoThumbnail = c?.videoThumbnail || "/assets/hero/video-family.png";
+  const { ref: sectionRef, isActive } =
+    useViewportActivity<HTMLElement>("200px 0px");
 
   return (
     <section
+      ref={sectionRef}
       id="hero-video"
       className="relative max-sm:pt-16 z-20"
       aria-label="Hero section"
@@ -121,7 +137,7 @@ export default function HeroVideoSection({
         </div>
 
         <div className="relative mt-14 sm:mt-20 md:mt-24 lg:mt-32 w-full overflow-hidden">
-          <MarqueeBanner t={t} />
+          <MarqueeBanner t={t} isActive={isActive} />
 
           <div className="relative z-10 mx-auto max-w-[1380px] px-1 sm:px-0">
             <div className="group relative aspect-video overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-[32px] border-4 border-white bg-[#404040] shadow-[0_20px_50px_rgba(0,0,0,0.35)] md:shadow-[0_30px_80px_rgba(0,0,0,0.35)] md:rounded-[48px] lg:rounded-[52px]">
