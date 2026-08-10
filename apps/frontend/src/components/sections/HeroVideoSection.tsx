@@ -74,7 +74,7 @@ export default function HeroVideoSection({
       className="relative max-sm:pt-16 z-20"
       aria-label="Hero section"
     >
-      <div className="absolute inset-0 z-0 bg-[#0f4b1f]">
+      <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[url('/landing-hero.svg')] bg-cover bg-top bg-no-repeat" />
       </div>
 
