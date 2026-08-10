@@ -95,10 +95,11 @@ export default function BiscuitBrandSection({
   useEffect(() => {
     if (!emblaApi) return;
 
+    const autoplay = emblaApi.plugins().autoplay;
     if (sectionIsActive) {
-      autoplayPlugin.current.play();
+      autoplay?.play();
     } else {
-      autoplayPlugin.current.stop();
+      autoplay?.stop();
     }
   }, [emblaApi, sectionIsActive]);
 
