@@ -7,14 +7,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 const AUTO_MS = 5000;
 const LG_PX = 1024;
 
-const DESCRIPTIVE_IMAGES = [
+const TESTIMONIAL_AVATARS = [
   {
-    src: "/assets/products/product-display.png",
-    alt: "Vita biscuit product range",
+    src: "/assets/about/testimonial-abebe-avatar.svg",
+    alt: "Portrait avatar of Abebe Kebede",
   },
   {
-    src: "/assets/products/items/zoo-1.png",
-    alt: "Vita Zoo biscuits",
+    src: "/assets/about/testimonial-sara-avatar.svg",
+    alt: "Portrait avatar of Sara Tekle",
   },
 ] as const;
 
@@ -25,16 +25,10 @@ type TestimonialItem = {
   image?: string;
 };
 
-function getDescriptiveImage(index: number) {
-  return DESCRIPTIVE_IMAGES[index % DESCRIPTIVE_IMAGES.length];
+function getTestimonialAvatar(index: number) {
+  return TESTIMONIAL_AVATARS[index % TESTIMONIAL_AVATARS.length];
 }
 
-/**
- * Testimonial carousel.
- *
- * The testimonial data may still contain legacy portrait image URLs from the CMS/messages,
- * but the UI intentionally uses Vita product imagery that describes each testimonial instead.
- */
 export default function TestimonialSection({
   content,
   locale,
@@ -59,6 +53,7 @@ export default function TestimonialSection({
   const desktopScrollerRef = useRef<HTMLDivElement>(null);
   const count = items.length;
   const current = items[active] ?? items[0];
+  const activeAvatar = getTestimonialAvatar(active);
 
   const scrollDesktopToIndex = useCallback((index: number) => {
     const scroller = desktopScrollerRef.current;
@@ -84,7 +79,6 @@ export default function TestimonialSection({
   const move = useCallback(
     (direction: -1 | 1) => {
       if (count < 2) return;
-
       setActive((previous) => (previous + direction + count) % count);
     },
     [count],
@@ -167,7 +161,7 @@ export default function TestimonialSection({
           aria-live="polite"
         >
           {items.map((item, idx) => {
-            const image = getDescriptiveImage(idx);
+            const avatar = getTestimonialAvatar(idx);
 
             return (
               <article
@@ -177,10 +171,10 @@ export default function TestimonialSection({
               >
                 <div className="relative mx-auto h-[280px] w-[260px] shrink-0 overflow-hidden rounded-[48px] bg-white/10 sm:h-[320px] sm:w-[300px] lg:mx-0 lg:h-[339.72px] lg:w-[314.56px]">
                   <Image
-                    src={image.src}
-                    alt={image.alt}
+                    src={avatar.src}
+                    alt={avatar.alt}
                     fill
-                    className="object-contain p-5"
+                    className="object-cover"
                     sizes="315px"
                   />
                 </div>
@@ -208,10 +202,10 @@ export default function TestimonialSection({
             <article className="flex flex-col gap-8 rounded-[48px] border border-white/15 bg-white/5 p-6">
               <div className="relative mx-auto aspect-[315/340] w-full max-w-[315px] overflow-hidden rounded-[48px] bg-white/10">
                 <Image
-                  src={getDescriptiveImage(active).src}
-                  alt={getDescriptiveImage(active).alt}
+                  src={activeAvatar.src}
+                  alt={activeAvatar.alt}
                   fill
-                  className="object-contain p-5"
+                  className="object-cover"
                   sizes="315px"
                 />
               </div>
