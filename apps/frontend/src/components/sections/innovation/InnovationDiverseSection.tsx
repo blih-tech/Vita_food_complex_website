@@ -48,11 +48,12 @@ export default function InnovationDiverseSection({ content, locale }: { content?
     },
   ];
 
-  // Map gradients if they are missing in CMS content
+  // Keep CMS text/content, but make the section imagery intentionally controlled
+  // by the frontend so stale CMS image URLs cannot override the new visuals.
   const cardsWithGradients = cards.map((card: any, idx: number) => ({
     ...card,
     gradient: card.gradient || staticGradients[idx % staticGradients.length],
-    image: card.image || staticImages[idx % staticImages.length]
+    image: staticImages[idx % staticImages.length],
   }));
 
   return (
