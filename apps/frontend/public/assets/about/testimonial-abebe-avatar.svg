@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 720" role="img" aria-labelledby="title desc">
+  <title id="title">Portrait avatar of Abebe Kebede</title>
+  <desc id="desc">Friendly illustrated portrait of a Black man on a soft green background.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A8E4AD"/>
+      <stop offset="1" stop-color="#43BE6B"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="720" rx="72" fill="url(#bg)"/>
+  <circle cx="320" cy="326" r="242" fill="#FFFFFF" fill-opacity=".10"/>
+  <path d="M108 720c18-146 100-226 212-226s194 80 212 226H108Z" fill="#17382A"/>
+  <ellipse cx="320" cy="331" rx="139" ry="166" fill="#70412F"/>
+  <path d="M180 304c0-135 67-219 140-219 82 0 149 76 149 206-39-38-80-63-124-75-60 10-111 40-165 88Z" fill="#151411"/>
+  <path d="M187 285c8-85 51-158 133-178 68 3 121 45 142 113-39-23-84-35-130-35-57 0-105 30-145 100Z" fill="#211E1A"/>
+  <ellipse cx="267" cy="339" rx="12" ry="10" fill="#171512"/>
+  <ellipse cx="373" cy="339" rx="12" ry="10" fill="#171512"/>
+  <path d="M275 412c28 24 63 24 91 0" fill="none" stroke="#F4D2C3" stroke-width="14" stroke-linecap="round"/>
+  <path d="M248 378c15 7 29 10 44 9M348 387c15 1 30-2 44-9" fill="none" stroke="#582D20" stroke-width="8" stroke-linecap="round" opacity=".55"/>
+  <path d="M231 458c22 36 53 56 89 56 37 0 68-20 90-56-24 20-54 30-90 30-35 0-65-10-89-30Z" fill="#271B16" opacity=".75"/>
+  <circle cx="320" cy="326" r="242" fill="none" stroke="#FFFFFF" stroke-opacity=".28" stroke-width="3"/>
+</svg>
