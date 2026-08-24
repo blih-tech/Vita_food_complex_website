@@ -6,7 +6,6 @@ import Image from "next/image";
 
 const STEPS = ["01", "02", "03"] as const;
 
-/** Figma 2080:3663: Page width 1664, row gap 24px; image 726.44×570.07 r24; overlay fill_EGQIFS; caption fill_PO08N8 + blur(90px) r16; numbers style_V1HZTM rgba(114,99,0,0.14) */
 const PROCESS_IMAGE_OVERLAY =
   "linear-gradient(180deg, rgba(255, 246, 177, 1) 0%, rgba(255, 222, 86, 1) 100%)";
 
@@ -16,9 +15,16 @@ const DEFAULT_IMAGES = [
   "/assets/quality/quality-1.png",
 ];
 
-const CRAFTSMANSHIP_IMAGE = "/assets/about/baking-biscuits.png";
+const CRAFTSMANSHIP_IMAGE =
+  "https://images.pexels.com/photos/8433242/pexels-photo-8433242.jpeg?auto=compress&cs=tinysrgb&w=1400";
 
-export default function ProcessSections({ content, locale }: { content?: any; locale?: string }) {
+export default function ProcessSections({
+  content,
+  locale,
+}: {
+  content?: any;
+  locale?: string;
+}) {
   const t = useTranslations("About.process");
   const c = content?.[locale as string] || content?.en;
   const [isVisible, setIsVisible] = useState(false);
@@ -46,10 +52,7 @@ export default function ProcessSections({ content, locale }: { content?: any; lo
       <div className="mx-auto flex max-w-[1664px] flex-col gap-[clamp(48px,8vw,96px)]">
         {STEPS.map((id, i) => {
           const step = c?.steps?.[i];
-          const imageSrc =
-            id === "02"
-              ? CRAFTSMANSHIP_IMAGE
-              : step?.image || DEFAULT_IMAGES[i];
+          const imageSrc = step?.image || DEFAULT_IMAGES[i];
 
           return (
             <div
@@ -102,13 +105,25 @@ export default function ProcessSections({ content, locale }: { content?: any; lo
                   className="relative w-full overflow-hidden rounded-[24px]"
                   style={{ aspectRatio: "726.44 / 570.07" }}
                 >
-                  <Image
-                    src={imageSrc}
-                    alt={id === "02" ? "Vita biscuit baking and craftsmanship process" : ""}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 726px"
-                  />
+                  {id === "02" ? (
+                    <img
+                      src={CRAFTSMANSHIP_IMAGE}
+                      alt="Black baker holding a baking tray"
+                      className="absolute inset-0 h-full w-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <Image
+                      src={imageSrc}
+                      alt=""
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 726px"
+                    />
+                  )}
+
                   <div
                     className="pointer-events-none absolute inset-0 rounded-[24px] mix-blend-multiply"
                     style={{
@@ -116,6 +131,7 @@ export default function ProcessSections({ content, locale }: { content?: any; lo
                       opacity: 0.35,
                     }}
                   />
+
                   <div
                     className="absolute bottom-5 left-5 right-5 max-h-[140px] rounded-[16px] p-4 md:bottom-6 md:left-6 md:right-6 lg:p-6"
                     style={{
