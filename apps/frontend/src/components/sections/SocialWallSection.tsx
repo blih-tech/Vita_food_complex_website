@@ -73,15 +73,17 @@ function ScrollingColumn({
   );
 }
 
+// Curated local Vita/community imagery keeps the social wall rooted in the
+// people and communities the brand actually serves instead of generic stock.
 const DEFAULT_IMAGES = [
-  '/assets/social/social-1.png',
-  '/assets/social/social-2.png',
-  '/assets/social/social-3.png',
-  '/assets/social/social-4.png',
-  '/assets/social/social-5.png',
-  '/assets/social/social-6.png',
-  '/assets/social/social-7.png',
-  '/assets/social/social-8.png',
+  '/assets/community/charity-1.png',
+  '/assets/community/charity-2.png',
+  '/assets/community/charity-3.png',
+  '/assets/community/charity-4.png',
+  '/assets/community/charity-5.png',
+  '/assets/community/community-main.png',
+  '/assets/community/community-support.png',
+  '/assets/images/sustainability/process-farmers.jpg',
 ];
 
 export default function SocialWallSection({
@@ -93,8 +95,7 @@ export default function SocialWallSection({
 }) {
   const t = useTranslations('SocialWall');
   const c = content?.[locale as string] || content?.en;
-  const images: string[] =
-    c?.images && c.images.length > 0 ? c.images : DEFAULT_IMAGES;
+  const images = DEFAULT_IMAGES;
   const { ref: sectionRef, isActive } =
     useViewportActivity<HTMLElement>('250px 0px');
 

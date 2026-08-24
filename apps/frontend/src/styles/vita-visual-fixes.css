@@ -1,0 +1,40 @@
+/* Shared visual corrections requested for the branded Vita experience. */
+
+/* Give the sustainability quick-fact panel the sculpted/wave edge language
+   used by the home hero instead of leaving it as a plain rounded rectangle. */
+[data-name="Quick fact"] {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 96.5%,
+    92% 97.5%,
+    84% 99.3%,
+    75% 100%,
+    66% 99.2%,
+    57% 97.4%,
+    48% 96.3%,
+    39% 96.7%,
+    30% 98.2%,
+    20% 99.7%,
+    10% 99.2%,
+    0 97.3%
+  );
+}
+
+/* The Experiences / Community Initiatives tile previously came from a
+   random remote image seed. Replace it deterministically with Ethiopia. */
+div:has(> img[src*="people-planet-vita"]) {
+  background: #078930;
+}
+
+div:has(> img[src*="people-planet-vita"])::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: url("/assets/community/ethiopian-flag.svg") center / cover no-repeat;
+}
+
+div:has(> img[src*="people-planet-vita"]) > img[src*="people-planet-vita"] {
+  opacity: 0 !important;
+}

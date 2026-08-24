@@ -21,6 +21,7 @@ import {
   organizationWebsiteJsonLd,
 } from "@/lib/seo";
 import "../globals.css";
+import "../../styles/vita-visual-fixes.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

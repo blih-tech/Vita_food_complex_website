@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">Flag of Ethiopia</title>
+  <desc id="desc">Green, yellow and red Ethiopian flag with a blue central disc and yellow star.</desc>
+  <rect width="1200" height="200" y="0" fill="#078930"/>
+  <rect width="1200" height="200" y="200" fill="#FCDD09"/>
+  <rect width="1200" height="200" y="400" fill="#DA121A"/>
+  <circle cx="600" cy="300" r="126" fill="#0F47AF"/>
+  <g fill="none" stroke="#FCDD09" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M600 205 622 272 692 272 635 313 657 380 600 339 543 380 565 313 508 272 578 272Z"/>
+    <path d="M600 205 600 339M508 272 635 313M692 272 565 313M543 380 622 272M657 380 578 272" opacity=".95"/>
+  </g>
+</svg>

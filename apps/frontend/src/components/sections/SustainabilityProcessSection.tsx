@@ -5,6 +5,13 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { cn } from "@frontend/lib/utils";
 
+const PROCESS_IMAGES: Record<string, string> = {
+  farmers: "/assets/images/sustainability/process-farmers.jpg",
+  processing: "/assets/process/section-image.png",
+  distribution: "/assets/process/section-image-1.png",
+  reuse: "/assets/process/section-image-2.png",
+};
+
 export default function SustainabilityProcessSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Sustainability");
   const lang = (locale || "en") as "en" | "am";
@@ -29,36 +36,41 @@ export default function SustainabilityProcessSection({ content, locale }: { cont
   const sublabel = c?.sublabel || t("process.sublabel");
   const title = c?.title || t("process.title");
 
-  const steps = c?.steps || [
+  const fallbackSteps = [
     {
       key: "farmers",
       heading: t("process.farmers.heading"),
       desc: t("process.farmers.desc"),
-      image: "/assets/images/sustainability/process-farmers.jpg",
+      image: PROCESS_IMAGES.farmers,
       imageHeight: 324,
     },
     {
       key: "processing",
       heading: t("process.processing.heading"),
       desc: t("process.processing.desc"),
-      image: "/assets/images/sustainability/process-processing.jpg",
+      image: PROCESS_IMAGES.processing,
       imageHeight: 300,
     },
     {
       key: "distribution",
       heading: t("process.distribution.heading"),
       desc: t("process.distribution.desc"),
-      image: "/assets/images/sustainability/process-distribution.jpg",
+      image: PROCESS_IMAGES.distribution,
       imageHeight: 276,
     },
     {
       key: "reuse",
       heading: t("process.reuse.heading"),
       desc: t("process.reuse.desc"),
-      image: "/assets/images/sustainability/process-reuse.jpg",
+      image: PROCESS_IMAGES.reuse,
       imageHeight: 246,
     },
   ];
+
+  const steps = (c?.steps || fallbackSteps).map((step: any) => ({
+    ...step,
+    image: PROCESS_IMAGES[step.key] || step.image,
+  }));
 
   return (
     <section
@@ -107,7 +119,6 @@ export default function SustainabilityProcessSection({ content, locale }: { cont
                 transition: `all 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.15}s`,
               }}
             >
-              {/* Heading — Outfit Bold 64px, lh 61.44px, ls -1.28px, #333733 */}
               <h3
                 className="mb-8 font-bold leading-[0.96] text-[#333733]"
                 style={{
@@ -120,7 +131,6 @@ export default function SustainabilityProcessSection({ content, locale }: { cont
                 {step.heading}
               </h3>
 
-              {/* Image Area */}
               <div
                 className="relative w-full rounded-[24px] overflow-hidden mb-6 shadow-sm group-hover:shadow-md transition-shadow duration-500"
                 style={{ height: "clamp(200px, 30vw, 324px)", background: "#F5F5F5" }}
@@ -135,7 +145,6 @@ export default function SustainabilityProcessSection({ content, locale }: { cont
                 <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-500" />
               </div>
 
-              {/* Description — Funnel Display Medium 20px, lh 25px, ls -0.08px */}
               <p className="font-[family-name:var(--font-funnel-display)] font-medium leading-[1.25] text-[#333733]"
                 style={{
                   fontSize: "clamp(16px, 1.8vw, 20px)",

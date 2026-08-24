@@ -5,6 +5,12 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { cn } from "@frontend/lib/utils";
 
+const GIVE_BACK_IMAGES: Record<string, string> = {
+  farmers: "/assets/images/sustainability/giveback-1.jpg",
+  employment: "/assets/process/section-image-2.png",
+  accessibility: "/assets/images/sustainability/giveback-3.jpg",
+};
+
 export default function SustainabilityGiveBackSection({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("Sustainability");
   const lang = (locale || "en") as "en" | "am";
@@ -29,26 +35,31 @@ export default function SustainabilityGiveBackSection({ content, locale }: { con
   const title = c?.title || t("giveBack.title");
   const description = c?.description || t("giveBack.description");
 
-  const cards = c?.cards || [
+  const fallbackCards = [
     {
       key: "farmers",
       heading: t("giveBack.farmers.heading"),
       desc: t("giveBack.farmers.desc"),
-      image: "/assets/images/sustainability/giveback-1.jpg",
+      image: GIVE_BACK_IMAGES.farmers,
     },
     {
       key: "employment",
       heading: t("giveBack.employment.heading"),
       desc: t("giveBack.employment.desc"),
-      image: "/assets/images/sustainability/giveback-2.jpg",
+      image: GIVE_BACK_IMAGES.employment,
     },
     {
       key: "accessibility",
       heading: t("giveBack.accessibility.heading"),
       desc: t("giveBack.accessibility.desc"),
-      image: "/assets/images/sustainability/giveback-3.jpg",
+      image: GIVE_BACK_IMAGES.accessibility,
     },
   ];
+
+  const cards = (c?.cards || fallbackCards).map((card: any) => ({
+    ...card,
+    image: GIVE_BACK_IMAGES[card.key] || card.image,
+  }));
 
   return (
     <section
@@ -96,7 +107,6 @@ export default function SustainabilityGiveBackSection({ content, locale }: { con
                 transition: `all 0.8s cubic-bezier(0.22, 1, 0.36, 1) ${i * 0.15}s`,
               }}
             >
-              {/* Image area — rounded 24px, 544x575px in Figma */}
               <div
                 className="relative w-full aspect-[544/575] rounded-[24px] overflow-hidden mb-8 shadow-sm group-hover:shadow-md transition-shadow duration-500"
                 style={{ background: "#F5F5F5" }}
