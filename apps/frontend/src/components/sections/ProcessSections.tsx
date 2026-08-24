@@ -18,6 +18,9 @@ const DEFAULT_IMAGES = [
   "/assets/quality/quality-1.png",
 ];
 
+const CRAFTSMANSHIP_IMAGE =
+  "/assets/about/expert-craftsmanship-black-baker.svg";
+
 export default function ProcessSections({ content, locale }: { content?: any; locale?: string }) {
   const t = useTranslations("About.process");
   const c = content?.[locale as string] || content?.en;
@@ -46,6 +49,11 @@ export default function ProcessSections({ content, locale }: { content?: any; lo
       <div className="mx-auto flex max-w-[1664px] flex-col gap-[clamp(48px,8vw,96px)]">
         {STEPS.map((id, i) => {
           const step = c?.steps?.[i];
+          const imageSrc =
+            id === "02"
+              ? CRAFTSMANSHIP_IMAGE
+              : step?.image || DEFAULT_IMAGES[i];
+
           return (
           <div
             key={id}
@@ -97,11 +105,16 @@ export default function ProcessSections({ content, locale }: { content?: any; lo
                 style={{ aspectRatio: "726.44 / 570.07" }}
               >
                 <Image
-                  src={step?.image || DEFAULT_IMAGES[i]}
-                  alt=""
+                  src={imageSrc}
+                  alt={
+                    id === "02"
+                      ? "Black baker holding a tray of freshly baked cookies"
+                      : ""
+                  }
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 726px"
+                  unoptimized={id === "02"}
                 />
                 <div
                   className="pointer-events-none absolute inset-0 rounded-[24px] mix-blend-multiply"
@@ -115,7 +128,7 @@ export default function ProcessSections({ content, locale }: { content?: any; lo
                   style={{
                     background: "rgba(35, 179, 73, 0.5)",
                     backdropFilter: "blur(90px)",
-                    WebkitBackdropFilter: "blur(9dpx)",
+                    WebkitBackdropFilter: "blur(90px)",
                   }}
                 >
                   <p className="mb-1 font-[family-name:var(--font-funnel-display)] font-bold leading-none tracking-[-0.01em] text-white"
