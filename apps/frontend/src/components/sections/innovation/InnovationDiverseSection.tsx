@@ -16,9 +16,9 @@ export default function InnovationDiverseSection({ content, locale }: { content?
   ];
 
   const staticImages = [
-    "/assets/about/wheat-farming.png",
-    "/assets/images/why-choose-vita/card-image-1.jpg",
-    "/assets/images/why-choose-vita/card-image-2.jpg",
+    "/assets/about/baking-biscuits.png",
+    "/assets/products/product-display.png",
+    "/assets/hero/family-true.png",
   ];
 
   const cards = c?.cards || [
