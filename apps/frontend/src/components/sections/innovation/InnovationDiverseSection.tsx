@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 
 const STATIC_IMAGES = [
   "/assets/about/baking-biscuits.png",
@@ -8,6 +9,12 @@ const STATIC_IMAGES = [
 ];
 
 const ACCENTS = ["#23B349", "#2F2F2F", "#FFEC19"];
+
+const ACTION_PATHS: Record<string, string> = {
+  products: "products",
+  packaging: "about",
+  experience: "gallery",
+};
 
 export default function InnovationDiverseSection({
   content,
@@ -49,6 +56,7 @@ export default function InnovationDiverseSection({
     image: STATIC_IMAGES[index % STATIC_IMAGES.length],
     accent: ACCENTS[index % ACCENTS.length],
     number: String(index + 1).padStart(2, "0"),
+    href: `/${lang}/${ACTION_PATHS[card.id] || "contact"}`,
   }));
 
   return (
@@ -108,13 +116,17 @@ export default function InnovationDiverseSection({
               </p>
 
               <div className="mt-auto pt-7">
-                <div className="flex items-center justify-between border-t border-black/[0.08] pt-5">
-                  <span className="font-funnel text-[18px] font-bold text-[#111111]">
+                <Link
+                  href={card.href}
+                  aria-label={`${card.cta}: ${card.title}`}
+                  className="group/cta flex items-center justify-between rounded-[16px] border-t border-black/[0.08] px-1 pt-5 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#23B349] focus-visible:ring-offset-4"
+                >
+                  <span className="font-funnel text-[18px] font-bold text-[#111111] transition-colors group-hover/cta:text-[#23B349]">
                     {card.cta}
                   </span>
 
                   <span
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[20px] font-medium transition-all duration-300 group-hover:translate-x-1"
+                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[20px] font-medium transition-all duration-300 group-hover/cta:translate-x-1 group-hover/cta:scale-105"
                     style={{
                       backgroundColor: card.accent,
                       color: card.accent === "#2F2F2F" ? "#FFFFFF" : "#111111",
@@ -123,7 +135,7 @@ export default function InnovationDiverseSection({
                   >
                     →
                   </span>
-                </div>
+                </Link>
               </div>
             </div>
           </article>
