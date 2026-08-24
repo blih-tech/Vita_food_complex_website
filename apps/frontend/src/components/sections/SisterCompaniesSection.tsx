@@ -6,18 +6,47 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useViewportActivity } from "@/hooks/useViewportActivity";
 
-const PLACEHOLDER_LOGO_OVERRIDES: Record<string, string> = {
+const LOGO_FILE_OVERRIDES: Record<string, string> = {
   "motors.svg": "/assets/sister/motors.png",
   "cables.svg": "/assets/sister/cables.png",
   "limestone.svg": "/assets/sister/limestone.png",
+  "golden-tulip.svg": "/assets/sister/golden-tulip-official.svg",
+  "golden-tulip.png": "/assets/sister/golden-tulip-official.svg",
+  "long-tea-logo.png": "/assets/sister/long-tea-official.svg",
+  "lewis.svg": "/assets/sister/lewis-logo.png",
+  "lewis.png": "/assets/sister/lewis-logo.png",
+  "foods.svg": "/assets/sister/foods.png",
 };
 
-function resolveLogoSrc(src: string) {
+const LOGO_NAME_OVERRIDES: Record<string, string> = {
+  "golden tulip": "/assets/sister/golden-tulip-official.svg",
+  "long tea": "/assets/sister/long-tea-official.svg",
+  "lewis": "/assets/sister/lewis-logo.png",
+  "lewis retails": "/assets/sister/lewis-logo.png",
+  "belayab foods": "/assets/sister/foods.png",
+  "belayab food": "/assets/sister/foods.png",
+};
+
+function normalizeBrandName(value?: string) {
+  return (value || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function resolveLogoSrc(src: string, alt?: string) {
   const trimmedSrc = src.trim();
+  const brandName = normalizeBrandName(alt);
+
+  if (brandName && LOGO_NAME_OVERRIDES[brandName]) {
+    return LOGO_NAME_OVERRIDES[brandName];
+  }
+
   const fileName = trimmedSrc.split("?")[0]?.split("/").pop()?.toLowerCase();
 
-  if (fileName && PLACEHOLDER_LOGO_OVERRIDES[fileName]) {
-    return PLACEHOLDER_LOGO_OVERRIDES[fileName];
+  if (fileName && LOGO_FILE_OVERRIDES[fileName]) {
+    return LOGO_FILE_OVERRIDES[fileName];
   }
 
   return trimmedSrc;
@@ -41,31 +70,31 @@ export default function SisterCompaniesSection({
         logo && typeof logo.src === "string" && logo.src.trim() !== "",
     )
     .map((logo: any) => ({
-      src: resolveLogoSrc(logo.src),
+      src: resolveLogoSrc(logo.src, logo.alt),
       alt: logo.alt,
     }));
 
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-white overflow-hidden py-16 sm:py-24"
+      className="relative w-full overflow-hidden bg-white py-16 sm:py-24"
     >
-      <div className="max-w-[1024px] mx-auto px-5 flex flex-col items-center text-center mb-16">
-        <p className="font-['Funnel_Display'] font-medium text-[16px] sm:text-[18px] text-[#404040] mb-3">
+      <div className="mx-auto mb-16 flex max-w-[1024px] flex-col items-center px-5 text-center">
+        <p className="mb-3 font-['Funnel_Display'] text-[16px] font-medium text-[#404040] sm:text-[18px]">
           {c?.subtitle || "Sister Companies"}
         </p>
-        <h2 className="font-['Outfit'] font-bold text-[36px] sm:text-[48px] lg:text-[60px] text-[#23B349] leading-tight tracking-tight">
+        <h2 className="font-['Outfit'] text-[36px] font-bold leading-tight tracking-tight text-[#23B349] sm:text-[48px] lg:text-[60px]">
           {c?.heading || "Different Experiences"}
         </h2>
       </div>
 
       {cmsLogos.length > 0 && (
-        <div className="relative w-full overflow-hidden py-8 mb-12">
-          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 z-10 pointer-events-none bg-gradient-to-r from-white to-transparent" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 z-10 pointer-events-none bg-gradient-to-l from-white to-transparent" />
+        <div className="relative mb-12 w-full overflow-hidden py-8">
+          <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-16 bg-gradient-to-r from-white to-transparent sm:w-32" />
+          <div className="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-16 bg-gradient-to-l from-white to-transparent sm:w-32" />
 
           <div
-            className="flex items-center animate-marquee whitespace-nowrap"
+            className="flex animate-marquee items-center whitespace-nowrap"
             style={{
               gap: "200px",
               animationPlayState: isActive ? "running" : "paused",
@@ -75,21 +104,21 @@ export default function SisterCompaniesSection({
             {cmsLogos.map((logo, idx) => (
               <div
                 key={`logo-a-${idx}`}
-                className="flex-shrink-0 flex flex-col items-center justify-center gap-4"
+                className="flex flex-shrink-0 flex-col items-center justify-center gap-4"
               >
                 <Image
                   src={logo.src}
                   alt={logo.alt || `Sister Company ${idx + 1}`}
-                  width={240}
-                  height={240}
+                  width={300}
+                  height={180}
                   loading="lazy"
                   decoding="async"
-                  quality={85}
-                  sizes="(max-width: 640px) 128px, (max-width: 1024px) 180px, 240px"
-                  className="object-contain h-[80px] sm:h-[120px] lg:h-[150px] w-auto hover:scale-105 transition-transform duration-500"
+                  quality={90}
+                  sizes="(max-width: 640px) 160px, (max-width: 1024px) 220px, 300px"
+                  className="h-[90px] w-[180px] object-contain transition-transform duration-500 hover:scale-105 sm:h-[120px] sm:w-[240px] lg:h-[150px] lg:w-[300px]"
                 />
                 {logo.alt && (
-                  <p className="font-['Outfit'] font-semibold text-[16px] text-[#404040] tracking-wide">
+                  <p className="font-['Outfit'] text-[16px] font-semibold tracking-wide text-[#404040]">
                     {logo.alt}
                   </p>
                 )}
@@ -99,21 +128,21 @@ export default function SisterCompaniesSection({
             {cmsLogos.map((logo, idx) => (
               <div
                 key={`logo-b-${idx}`}
-                className="flex-shrink-0 flex flex-col items-center justify-center gap-4"
+                className="flex flex-shrink-0 flex-col items-center justify-center gap-4"
               >
                 <Image
                   src={logo.src}
                   alt={logo.alt || `Sister Company ${idx + 1}`}
-                  width={240}
-                  height={240}
+                  width={300}
+                  height={180}
                   loading="lazy"
                   decoding="async"
-                  quality={85}
-                  sizes="(max-width: 640px) 128px, (max-width: 1024px) 180px, 240px"
-                  className="object-contain h-[80px] sm:h-[120px] lg:h-[150px] w-auto hover:scale-105 transition-transform duration-500"
+                  quality={90}
+                  sizes="(max-width: 640px) 160px, (max-width: 1024px) 220px, 300px"
+                  className="h-[90px] w-[180px] object-contain transition-transform duration-500 hover:scale-105 sm:h-[120px] sm:w-[240px] lg:h-[150px] lg:w-[300px]"
                 />
                 {logo.alt && (
-                  <p className="font-['Outfit'] font-semibold text-[16px] text-[#404040] tracking-wide">
+                  <p className="font-['Outfit'] text-[16px] font-semibold tracking-wide text-[#404040]">
                     {logo.alt}
                   </p>
                 )}
@@ -123,17 +152,17 @@ export default function SisterCompaniesSection({
         </div>
       )}
 
-      <div className="max-w-[800px] mx-auto px-5 flex flex-col items-center text-center gap-8">
-        <p className="font-['Funnel_Display'] text-[14px] sm:text-[16px] text-[#404040] leading-relaxed max-w-[450px]">
+      <div className="mx-auto flex max-w-[800px] flex-col items-center gap-8 px-5 text-center">
+        <p className="max-w-[450px] font-['Funnel_Display'] text-[14px] leading-relaxed text-[#404040] sm:text-[16px]">
           {c?.description ||
             "Through our diverse sister companies, we deliver value across every touchpoint of everyday life."}
         </p>
         <Link
           href={c?.link || "/about#sister-companies"}
-          className="inline-flex items-center justify-center gap-2 bg-[#23B349] hover:bg-[#1d963c] text-white font-['Funnel_Display'] text-[14px] px-6 py-2 rounded-full transition-colors duration-300"
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-[#23B349] px-6 py-2 font-['Funnel_Display'] text-[14px] text-white transition-colors duration-300 hover:bg-[#1d963c]"
         >
           {c?.cta || "See more"}
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
     </section>
