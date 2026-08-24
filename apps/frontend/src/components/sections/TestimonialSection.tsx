@@ -1,65 +1,124 @@
 "use client";
 
-import { useTranslations, useMessages } from "next-intl";
+import { useMessages, useTranslations } from "next-intl";
 import Image from "next/image";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const AUTO_MS = 5000;
 const LG_PX = 1024;
+
+const DESCRIPTIVE_IMAGES = [
+  {
+    src: "/assets/products/product-display.png",
+    alt: "Vita biscuit product range",
+  },
+  {
+    src: "/assets/products/items/zoo-1.png",
+    alt: "Vita Zoo biscuits",
+  },
+] as const;
 
 type TestimonialItem = {
   quote: string;
   author: string;
   role: string;
-  image: string;
+  image?: string;
 };
 
-/** Figma 2120:1668: background fill_LMQ1JB + blur; title style_DLD472; pill Subtitle 2; cards layout_95L917 1039.75×339.72, gap 256px; image 314.56×339.72 r48; quote style_K7H3IO */
-export default function TestimonialSection({ content, locale }: { content?: any; locale?: string }) {
+function getDescriptiveImage(index: number) {
+  return DESCRIPTIVE_IMAGES[index % DESCRIPTIVE_IMAGES.length];
+}
+
+/**
+ * Testimonial carousel.
+ *
+ * The testimonial data may still contain legacy portrait image URLs from the CMS/messages,
+ * but the UI intentionally uses Vita product imagery that describes each testimonial instead.
+ */
+export default function TestimonialSection({
+  content,
+  locale,
+}: {
+  content?: any;
+  locale?: string;
+}) {
   const t = useTranslations("About.testimonials");
   const messages = useMessages() as {
     About?: { testimonials?: { items?: TestimonialItem[] } };
   };
+
   const c = content?.[locale as string] || content?.en;
   const items: TestimonialItem[] =
     (c?.items && c.items.length > 0 ? c.items : null) ??
-    messages.About?.testimonials?.items ?? [];
+    messages.About?.testimonials?.items ??
+    [];
   const titleAccent = c?.titleAccent || t("titleAccent");
 
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const desktopScrollerRef = useRef<HTMLDivElement>(null);
-  const count = items.length || 1;
-
-  const prev = useCallback(() => setActive((i) => (i === 0 ? count - 1 : i - 1)), [count]);
-  const next = useCallback(() => setActive((i) => (i + 1) % count), [count]);
-
+  const count = items.length;
   const current = items[active] ?? items[0];
+
+  const scrollDesktopToIndex = useCallback((index: number) => {
+    const scroller = desktopScrollerRef.current;
+    if (!scroller || window.innerWidth < LG_PX) return;
+
+    const target = scroller.children.item(index) as HTMLElement | null;
+    if (!target) return;
+
+    const scrollerRect = scroller.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+    const targetLeft =
+      targetRect.left -
+      scrollerRect.left +
+      scroller.scrollLeft -
+      (scroller.clientWidth - target.clientWidth) / 2;
+
+    scroller.scrollTo({
+      left: Math.max(0, targetLeft),
+      behavior: "smooth",
+    });
+  }, []);
+
+  const move = useCallback(
+    (direction: -1 | 1) => {
+      if (count < 2) return;
+
+      setActive((previous) => (previous + direction + count) % count);
+    },
+    [count],
+  );
+
+  const prev = useCallback(() => move(-1), [move]);
+  const next = useCallback(() => move(1), [move]);
+
+  useEffect(() => {
+    if (count === 0) {
+      setActive(0);
+      return;
+    }
+
+    setActive((index) => Math.min(index, count - 1));
+  }, [count]);
+
+  useEffect(() => {
+    if (count === 0) return;
+
+    const frame = window.requestAnimationFrame(() => {
+      scrollDesktopToIndex(active);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [active, count, scrollDesktopToIndex]);
 
   useEffect(() => {
     if (count < 2 || paused) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const tick = () => {
-      if (window.innerWidth >= LG_PX) {
-        const el = desktopScrollerRef.current;
-        if (!el) return;
-        const max = el.scrollWidth - el.clientWidth;
-        if (max <= 1) return;
-        const step = Math.min(el.clientWidth * 0.65, 520);
-        if (el.scrollLeft >= max - 2) {
-          el.scrollTo({ left: 0, behavior: "smooth" });
-        } else {
-          el.scrollTo({ left: el.scrollLeft + step, behavior: "smooth" });
-        }
-      } else {
-        next();
-      }
-    };
-
-    const id = window.setInterval(tick, AUTO_MS);
+    const id = window.setInterval(next, AUTO_MS);
     return () => window.clearInterval(id);
-  }, [count, paused, next]);
+  }, [count, next, paused]);
 
   return (
     <section
@@ -104,57 +163,65 @@ export default function TestimonialSection({ content, locale }: { content?: any;
 
         <div
           ref={desktopScrollerRef}
-          className="hidden w-full max-w-[1664px] flex-row flex-nowrap justify-start gap-8 overflow-x-auto scroll-smooth pb-4 pt-2 lg:flex lg:gap-16 xl:gap-[clamp(4rem,12vw,16rem)]"
+          className="hidden w-full max-w-[1664px] snap-x snap-mandatory flex-row flex-nowrap justify-start gap-8 overflow-x-auto scroll-smooth pb-4 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:flex lg:gap-16"
+          aria-live="polite"
         >
-          {items.map((item, idx) => (
-            <article
-              key={`${item.author}-${idx}`}
-              className="relative flex w-[min(1040px,calc(100vw-8rem))] max-w-[1040px] shrink-0 flex-col gap-6 rounded-[48px] border border-white/15 bg-white/5 p-6 lg:flex-row lg:items-stretch lg:gap-10 lg:p-8"
-            >
-              <div className="relative mx-auto h-[280px] w-[260px] shrink-0 overflow-hidden rounded-[48px] sm:h-[320px] sm:w-[300px] lg:mx-0 lg:h-[339.72px] lg:w-[314.56px]">
+          {items.map((item, idx) => {
+            const image = getDescriptiveImage(idx);
+
+            return (
+              <article
+                key={`${item.author}-${idx}`}
+                className="relative flex w-[min(1040px,calc(100vw-8rem))] max-w-[1040px] shrink-0 snap-center flex-col gap-6 rounded-[48px] border border-white/15 bg-white/5 p-6 lg:flex-row lg:items-stretch lg:gap-10 lg:p-8"
+                aria-current={active === idx ? "true" : undefined}
+              >
+                <div className="relative mx-auto h-[280px] w-[260px] shrink-0 overflow-hidden rounded-[48px] bg-white/10 sm:h-[320px] sm:w-[300px] lg:mx-0 lg:h-[339.72px] lg:w-[314.56px]">
                   <Image
-                    src={typeof item.image === "string" && item.image.trim() !== "" ? item.image : "/assets/about/story.png"}
-                    alt={item.author || "Testimonial"}
+                    src={image.src}
+                    alt={image.alt}
                     fill
-                    className="object-cover"
+                    className="object-contain p-5"
                     sizes="315px"
                   />
-              </div>
-              <div className="flex min-w-0 flex-1 flex-col justify-center gap-4 text-left">
-                <p className="font-[family-name:var(--font-funnel-display)] text-[22px] font-normal leading-none tracking-[-0.004em] text-white md:text-[28px] lg:text-[32px]">
-                  {item.quote}
-                </p>
-                <div className="h-px w-full max-w-[671px] bg-[#777777]/80" />
-                <div>
-                  <p className="font-[family-name:var(--font-outfit)] text-[16px] font-normal leading-snug tracking-[-0.004em] text-[#EAEAEA] md:text-[18px]">
-                    <span className="font-semibold text-white">{item.author}</span>
-                    <br />
-                    {item.role}
-                  </p>
                 </div>
-              </div>
-            </article>
-          ))}
+
+                <div className="flex min-w-0 flex-1 flex-col justify-center gap-4 text-left">
+                  <p className="font-[family-name:var(--font-funnel-display)] text-[22px] font-normal leading-none tracking-[-0.004em] text-white md:text-[28px] lg:text-[32px]">
+                    {item.quote}
+                  </p>
+                  <div className="h-px w-full max-w-[671px] bg-[#777777]/80" />
+                  <div>
+                    <p className="font-[family-name:var(--font-outfit)] text-[16px] font-normal leading-snug tracking-[-0.004em] text-[#EAEAEA] md:text-[18px]">
+                      <span className="font-semibold text-white">{item.author}</span>
+                      <br />
+                      {item.role}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         <div className="w-full max-w-[720px] lg:hidden">
           {current ? (
             <article className="flex flex-col gap-8 rounded-[48px] border border-white/15 bg-white/5 p-6">
-              <div className="relative mx-auto aspect-[315/340] w-full max-w-[315px] overflow-hidden rounded-[48px]">
-                  <Image
-                    src={typeof current.image === "string" && current.image.trim() !== "" ? current.image : "/assets/about/story.png"}
-                    alt={current.author || "Testimonial"}
-                    fill
-                    className="object-cover"
-                    sizes="315px"
-                  />
+              <div className="relative mx-auto aspect-[315/340] w-full max-w-[315px] overflow-hidden rounded-[48px] bg-white/10">
+                <Image
+                  src={getDescriptiveImage(active).src}
+                  alt={getDescriptiveImage(active).alt}
+                  fill
+                  className="object-contain p-5"
+                  sizes="315px"
+                />
               </div>
+
               <div className="text-left">
                 <p className="mb-4 font-[family-name:var(--font-funnel-display)] text-[24px] font-normal leading-tight tracking-[-0.004em] text-white">
-                  {t("quote")}
+                  {current.quote}
                 </p>
                 <div className="mb-4 h-px w-full bg-[#777777]/80" />
-                <p className="font-['Outfit'] text-[16px] text-[#EAEAEA]">
+                <p className="font-[family-name:var(--font-outfit)] text-[16px] text-[#EAEAEA]">
                   <span className="font-semibold text-white">{current.author}</span>
                   <br />
                   {current.role}
@@ -164,22 +231,24 @@ export default function TestimonialSection({ content, locale }: { content?: any;
           ) : null}
         </div>
 
-        <div className="mt-10 flex justify-center gap-4 lg:mt-14">
+        <div className="relative z-20 mt-10 flex justify-center gap-4 lg:mt-14">
           <button
             type="button"
             onClick={prev}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/40 text-white transition-colors hover:bg-white hover:text-[#23B349]"
+            disabled={count < 2}
+            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-white/40 text-white transition-all hover:bg-white hover:text-[#23B349] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white disabled:cursor-not-allowed disabled:opacity-40"
             aria-label={t("prev")}
           >
-            ←
+            <span aria-hidden="true">←</span>
           </button>
           <button
             type="button"
             onClick={next}
-            className="flex h-12 w-12 items-center justify-center rounded-full border border-white/40 text-white transition-colors hover:bg-white hover:text-[#23B349]"
+            disabled={count < 2}
+            className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border border-white/40 text-white transition-all hover:bg-white hover:text-[#23B349] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white disabled:cursor-not-allowed disabled:opacity-40"
             aria-label={t("next")}
           >
-            →
+            <span aria-hidden="true">→</span>
           </button>
         </div>
       </div>
