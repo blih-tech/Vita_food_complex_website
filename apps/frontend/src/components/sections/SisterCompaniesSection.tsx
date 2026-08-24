@@ -10,9 +10,10 @@ const LOGO_FILE_OVERRIDES: Record<string, string> = {
   "motors.svg": "/assets/sister/motors.png",
   "cables.svg": "/assets/sister/cables.png",
   "limestone.svg": "/assets/sister/limestone.png",
-  "golden-tulip.svg": "/assets/sister/golden-tulip-official.svg",
-  "golden-tulip.png": "/assets/sister/golden-tulip-official.svg",
-  "golden-tulip-official.webp": "/assets/sister/golden-tulip-official.svg",
+  "golden-tulip.svg": "/assets/sister/golden-tulip-official.png",
+  "golden-tulip.png": "/assets/sister/golden-tulip-official.png",
+  "golden-tulip-official.svg": "/assets/sister/golden-tulip-official.png",
+  "golden-tulip-official.webp": "/assets/sister/golden-tulip-official.png",
   "long-tea-logo.png": "/assets/sister/long-tea-official.webp",
   "lewis.svg": "/assets/sister/lewis-logo.png",
   "lewis.png": "/assets/sister/lewis-logo.png",
@@ -20,7 +21,7 @@ const LOGO_FILE_OVERRIDES: Record<string, string> = {
 };
 
 const LOGO_NAME_OVERRIDES: Record<string, string> = {
-  "golden tulip": "/assets/sister/golden-tulip-official.svg",
+  "golden tulip": "/assets/sister/golden-tulip-official.png",
   "long tea": "/assets/sister/long-tea-official.webp",
   "lewis": "/assets/sister/lewis-logo.png",
   "lewis retails": "/assets/sister/lewis-logo.png",
@@ -51,6 +52,52 @@ function resolveLogoSrc(src: string, alt?: string) {
   }
 
   return trimmedSrc;
+}
+
+function isGoldenTulipLogo(src: string, alt?: string) {
+  return (
+    normalizeBrandName(alt) === "golden tulip" ||
+    src.toLowerCase().includes("golden-tulip")
+  );
+}
+
+function SisterLogo({
+  logo,
+  index,
+}: {
+  logo: { src: string; alt?: string };
+  index: number;
+}) {
+  const isGoldenTulip = isGoldenTulipLogo(logo.src, logo.alt);
+
+  return (
+    <div className="flex flex-shrink-0 flex-col items-center justify-center gap-4">
+      <div
+        className={`relative flex h-[90px] w-[220px] items-center justify-center overflow-hidden rounded-[24px] sm:h-[120px] sm:w-[280px] lg:h-[150px] lg:w-[340px] ${
+          isGoldenTulip ? "bg-[#151515] px-4 sm:px-6" : "bg-transparent"
+        }`}
+      >
+        <Image
+          src={logo.src}
+          alt={logo.alt || `Sister Company ${index + 1}`}
+          fill
+          loading="lazy"
+          decoding="async"
+          quality={90}
+          sizes="(max-width: 640px) 220px, (max-width: 1024px) 280px, 340px"
+          className={`object-contain transition-transform duration-500 hover:scale-105 ${
+            isGoldenTulip ? "p-4 sm:p-5" : "p-2"
+          }`}
+        />
+      </div>
+
+      {logo.alt && (
+        <p className="font-['Outfit'] text-[16px] font-semibold tracking-wide text-[#404040]">
+          {logo.alt}
+        </p>
+      )}
+    </div>
+  );
 }
 
 export default function SisterCompaniesSection({
@@ -103,51 +150,11 @@ export default function SisterCompaniesSection({
             }}
           >
             {cmsLogos.map((logo, idx) => (
-              <div
-                key={`logo-a-${idx}`}
-                className="flex flex-shrink-0 flex-col items-center justify-center gap-4"
-              >
-                <Image
-                  src={logo.src}
-                  alt={logo.alt || `Sister Company ${idx + 1}`}
-                  width={300}
-                  height={180}
-                  loading="lazy"
-                  decoding="async"
-                  quality={90}
-                  sizes="(max-width: 640px) 160px, (max-width: 1024px) 220px, 300px"
-                  className="h-[90px] w-[180px] object-contain transition-transform duration-500 hover:scale-105 sm:h-[120px] sm:w-[240px] lg:h-[150px] lg:w-[300px]"
-                />
-                {logo.alt && (
-                  <p className="font-['Outfit'] text-[16px] font-semibold tracking-wide text-[#404040]">
-                    {logo.alt}
-                  </p>
-                )}
-              </div>
+              <SisterLogo key={`logo-a-${idx}`} logo={logo} index={idx} />
             ))}
 
             {cmsLogos.map((logo, idx) => (
-              <div
-                key={`logo-b-${idx}`}
-                className="flex flex-shrink-0 flex-col items-center justify-center gap-4"
-              >
-                <Image
-                  src={logo.src}
-                  alt={logo.alt || `Sister Company ${idx + 1}`}
-                  width={300}
-                  height={180}
-                  loading="lazy"
-                  decoding="async"
-                  quality={90}
-                  sizes="(max-width: 640px) 160px, (max-width: 1024px) 220px, 300px"
-                  className="h-[90px] w-[180px] object-contain transition-transform duration-500 hover:scale-105 sm:h-[120px] sm:w-[240px] lg:h-[150px] lg:w-[300px]"
-                />
-                {logo.alt && (
-                  <p className="font-['Outfit'] text-[16px] font-semibold tracking-wide text-[#404040]">
-                    {logo.alt}
-                  </p>
-                )}
-              </div>
+              <SisterLogo key={`logo-b-${idx}`} logo={logo} index={idx} />
             ))}
           </div>
         </div>
