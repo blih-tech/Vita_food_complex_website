@@ -10,17 +10,17 @@ const LOGO_FILE_OVERRIDES: Record<string, string> = {
   "motors.svg": "/assets/sister/motors.png",
   "cables.svg": "/assets/sister/cables.png",
   "limestone.svg": "/assets/sister/limestone.png",
-  "golden-tulip.svg": "/assets/sister/golden-tulip-official.svg",
-  "golden-tulip.png": "/assets/sister/golden-tulip-official.svg",
-  "long-tea-logo.png": "/assets/sister/long-tea-official.svg",
+  "golden-tulip.svg": "/assets/sister/golden-tulip-official.webp",
+  "golden-tulip.png": "/assets/sister/golden-tulip-official.webp",
+  "long-tea-logo.png": "/assets/sister/long-tea-official.webp",
   "lewis.svg": "/assets/sister/lewis-logo.png",
   "lewis.png": "/assets/sister/lewis-logo.png",
   "foods.svg": "/assets/sister/foods.png",
 };
 
 const LOGO_NAME_OVERRIDES: Record<string, string> = {
-  "golden tulip": "/assets/sister/golden-tulip-official.svg",
-  "long tea": "/assets/sister/long-tea-official.svg",
+  "golden tulip": "/assets/sister/golden-tulip-official.webp",
+  "long tea": "/assets/sister/long-tea-official.webp",
   "lewis": "/assets/sister/lewis-logo.png",
   "lewis retails": "/assets/sister/lewis-logo.png",
   "belayab foods": "/assets/sister/foods.png",
