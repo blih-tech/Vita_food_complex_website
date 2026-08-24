@@ -6,6 +6,23 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useViewportActivity } from "@/hooks/useViewportActivity";
 
+const PLACEHOLDER_LOGO_OVERRIDES: Record<string, string> = {
+  "motors.svg": "/assets/sister/motors.png",
+  "cables.svg": "/assets/sister/cables.png",
+  "limestone.svg": "/assets/sister/limestone.png",
+};
+
+function resolveLogoSrc(src: string) {
+  const trimmedSrc = src.trim();
+  const fileName = trimmedSrc.split("?")[0]?.split("/").pop()?.toLowerCase();
+
+  if (fileName && PLACEHOLDER_LOGO_OVERRIDES[fileName]) {
+    return PLACEHOLDER_LOGO_OVERRIDES[fileName];
+  }
+
+  return trimmedSrc;
+}
+
 export default function SisterCompaniesSection({
   content,
   locale,
@@ -18,9 +35,15 @@ export default function SisterCompaniesSection({
   const { ref: sectionRef, isActive } =
     useViewportActivity<HTMLElement>("200px 0px");
 
-  const cmsLogos: Array<{ src?: string; alt?: string }> = (c?.logos || []).filter(
-    (l: any) => l && typeof l.src === "string" && l.src.trim() !== "",
-  );
+  const cmsLogos: Array<{ src: string; alt?: string }> = (c?.logos || [])
+    .filter(
+      (logo: any) =>
+        logo && typeof logo.src === "string" && logo.src.trim() !== "",
+    )
+    .map((logo: any) => ({
+      src: resolveLogoSrc(logo.src),
+      alt: logo.alt,
+    }));
 
   return (
     <section
@@ -55,7 +78,7 @@ export default function SisterCompaniesSection({
                 className="flex-shrink-0 flex flex-col items-center justify-center gap-4"
               >
                 <Image
-                  src={logo.src as string}
+                  src={logo.src}
                   alt={logo.alt || `Sister Company ${idx + 1}`}
                   width={240}
                   height={240}
@@ -79,7 +102,7 @@ export default function SisterCompaniesSection({
                 className="flex-shrink-0 flex flex-col items-center justify-center gap-4"
               >
                 <Image
-                  src={logo.src as string}
+                  src={logo.src}
                   alt={logo.alt || `Sister Company ${idx + 1}`}
                   width={240}
                   height={240}
