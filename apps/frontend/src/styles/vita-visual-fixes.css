@@ -1,33 +1,75 @@
 /* Shared visual corrections requested for the branded Vita experience. */
 
-/* Give the sustainability quick-fact panel the sculpted/wave edge language
-   used by the home hero instead of leaving it as a plain rounded rectangle. */
-[data-name="Quick fact"] {
+/* Match the sustainability hero to the same organic/wave edge language used
+   on the home hero instead of ending in a plain rounded rectangle. */
+[data-vita-sustainability-hero] {
+  -webkit-clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 92.5%,
+    92% 94.5%,
+    84% 97.8%,
+    75% 99.5%,
+    66% 98.4%,
+    57% 95.2%,
+    48% 92.8%,
+    39% 93.6%,
+    30% 96.5%,
+    20% 99.2%,
+    10% 98.2%,
+    0 95.5%
+  );
   clip-path: polygon(
     0 0,
     100% 0,
-    100% 96.5%,
-    92% 97.5%,
-    84% 99.3%,
-    75% 100%,
-    66% 99.2%,
-    57% 97.4%,
-    48% 96.3%,
-    39% 96.7%,
-    30% 98.2%,
-    20% 99.7%,
-    10% 99.2%,
-    0 97.3%
+    100% 92.5%,
+    92% 94.5%,
+    84% 97.8%,
+    75% 99.5%,
+    66% 98.4%,
+    57% 95.2%,
+    48% 92.8%,
+    39% 93.6%,
+    30% 96.5%,
+    20% 99.2%,
+    10% 98.2%,
+    0 95.5%
   );
 }
 
-/* The Experiences / Community Initiatives tile previously came from a
-   random remote image seed. Replace it deterministically with Ethiopia. */
-div:has(> img[src*="people-planet-vita"]) {
+@media (max-width: 640px) {
+  [data-vita-sustainability-hero] {
+    -webkit-clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 95%,
+      80% 98.5%,
+      62% 99.6%,
+      44% 96%,
+      25% 98.8%,
+      0 96%
+    );
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 95%,
+      80% 98.5%,
+      62% 99.6%,
+      44% 96%,
+      25% 98.8%,
+      0 96%
+    );
+  }
+}
+
+/* The People & Planet Experiences tile used a random remote image. Replace
+   that visual deterministically with the Ethiopian flag while keeping the
+   existing card layout and text overlays intact. */
+div:has(> img[src*="picsum.photos"]) {
   background: #078930;
 }
 
-div:has(> img[src*="people-planet-vita"])::before {
+div:has(> img[src*="picsum.photos"])::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -35,6 +77,6 @@ div:has(> img[src*="people-planet-vita"])::before {
   background: url("/assets/community/ethiopian-flag.svg") center / cover no-repeat;
 }
 
-div:has(> img[src*="people-planet-vita"]) > img[src*="people-planet-vita"] {
+div:has(> img[src*="picsum.photos"]) > img[src*="picsum.photos"] {
   opacity: 0 !important;
 }

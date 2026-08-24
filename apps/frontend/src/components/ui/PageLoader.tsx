@@ -47,9 +47,9 @@ export default function PageLoader() {
             opacity: 0,
             transition: { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] },
           }}
-          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[#07391b] text-white select-none"
+          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[#00843D] text-white select-none"
         >
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(35,179,73,0.25)_0%,rgba(7,57,27,0)_68%)]" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.10)_0%,rgba(0,132,61,0)_68%)]" />
 
           <div className="relative z-10 flex flex-col items-center text-center">
             <motion.div
@@ -60,26 +60,24 @@ export default function PageLoader() {
                 y: 0,
                 transition: { duration: 0.55, ease: "easeOut" },
               }}
-              className="relative mb-8"
+              className="relative mb-7 h-[120px] w-[120px] sm:h-[136px] sm:w-[136px]"
             >
               <motion.div
                 aria-hidden="true"
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 7, ease: "linear" }}
-                className="absolute -inset-5 rounded-[36px] border border-[#D4AF37]/45 border-x-transparent"
+                className="absolute -inset-4 rounded-full border border-[#D4AF37]/45 border-x-transparent"
               />
 
-              <div className="relative h-[116px] w-[220px] overflow-hidden rounded-[28px] bg-white px-7 py-5 shadow-[0_24px_70px_rgba(0,0,0,0.28)] sm:h-[128px] sm:w-[244px]">
-                <Image
-                  src="/assets/brand/vita_food_complex_logo.svg"
-                  alt="Vita Food Complex"
-                  fill
-                  priority
-                  unoptimized
-                  sizes="244px"
-                  className="object-contain p-5"
-                />
-              </div>
+              <Image
+                src="/assets/brand/vita-logo.svg"
+                alt="Vita Food Complex"
+                fill
+                priority
+                unoptimized
+                sizes="136px"
+                className="object-contain drop-shadow-[0_14px_32px_rgba(0,0,0,0.22)]"
+              />
             </motion.div>
 
             <motion.p
