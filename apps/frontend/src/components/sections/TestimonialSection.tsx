@@ -1,20 +1,19 @@
 "use client";
 
 import { useMessages, useTranslations } from "next-intl";
-import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const AUTO_MS = 5000;
 const LG_PX = 1024;
 
-const TESTIMONIAL_AVATARS = [
+const TESTIMONIAL_PORTRAITS = [
   {
-    src: "/assets/about/testimonial-abebe-avatar.svg",
-    alt: "Portrait avatar of Abebe Kebede",
+    src: "https://images.pexels.com/photos/5981194/pexels-photo-5981194.jpeg?auto=compress&cs=tinysrgb&w=900&h=1000&fit=crop",
+    alt: "Black man portrait",
   },
   {
-    src: "/assets/about/testimonial-sara-avatar.svg",
-    alt: "Portrait avatar of Sara Tekle",
+    src: "https://images.pexels.com/photos/8583619/pexels-photo-8583619.jpeg?auto=compress&cs=tinysrgb&w=900&h=1000&fit=crop",
+    alt: "Black woman portrait",
   },
 ] as const;
 
@@ -25,8 +24,8 @@ type TestimonialItem = {
   image?: string;
 };
 
-function getTestimonialAvatar(index: number) {
-  return TESTIMONIAL_AVATARS[index % TESTIMONIAL_AVATARS.length];
+function getTestimonialPortrait(index: number) {
+  return TESTIMONIAL_PORTRAITS[index % TESTIMONIAL_PORTRAITS.length];
 }
 
 export default function TestimonialSection({
@@ -53,7 +52,7 @@ export default function TestimonialSection({
   const desktopScrollerRef = useRef<HTMLDivElement>(null);
   const count = items.length;
   const current = items[active] ?? items[0];
-  const activeAvatar = getTestimonialAvatar(active);
+  const activePortrait = getTestimonialPortrait(active);
 
   const scrollDesktopToIndex = useCallback((index: number) => {
     const scroller = desktopScrollerRef.current;
@@ -161,7 +160,7 @@ export default function TestimonialSection({
           aria-live="polite"
         >
           {items.map((item, idx) => {
-            const avatar = getTestimonialAvatar(idx);
+            const portrait = getTestimonialPortrait(idx);
 
             return (
               <article
@@ -170,12 +169,13 @@ export default function TestimonialSection({
                 aria-current={active === idx ? "true" : undefined}
               >
                 <div className="relative mx-auto h-[280px] w-[260px] shrink-0 overflow-hidden rounded-[48px] bg-white/10 sm:h-[320px] sm:w-[300px] lg:mx-0 lg:h-[339.72px] lg:w-[314.56px]">
-                  <Image
-                    src={avatar.src}
-                    alt={avatar.alt}
-                    fill
-                    className="object-cover"
-                    sizes="315px"
+                  <img
+                    src={portrait.src}
+                    alt={portrait.alt}
+                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    referrerPolicy="no-referrer"
                   />
                 </div>
 
@@ -201,12 +201,13 @@ export default function TestimonialSection({
           {current ? (
             <article className="flex flex-col gap-8 rounded-[48px] border border-white/15 bg-white/5 p-6">
               <div className="relative mx-auto aspect-[315/340] w-full max-w-[315px] overflow-hidden rounded-[48px] bg-white/10">
-                <Image
-                  src={activeAvatar.src}
-                  alt={activeAvatar.alt}
-                  fill
-                  className="object-cover"
-                  sizes="315px"
+                <img
+                  src={activePortrait.src}
+                  alt={activePortrait.alt}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  referrerPolicy="no-referrer"
                 />
               </div>
 
