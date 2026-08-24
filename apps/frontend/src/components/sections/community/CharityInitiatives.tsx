@@ -10,21 +10,24 @@ export default function CharityInitiatives({ content, locale }: { content?: any;
   const heading = c?.heading || t("heading");
   const description = c?.description || t("description");
 
+  // Keep each initiative paired with a visual that matches its actual theme.
+  // These are local Vita/community assets, so the grid stays deterministic
+  // instead of reusing unrelated factory, recycling, van, and farmer images.
   const staticImages = [
-    "/assets/community/charity-1.png",
-    "/assets/community/charity-2.png",
-    "/assets/community/charity-3.png",
-    "/assets/community/charity-4.png",
-    "/assets/community/charity-5.png",
-    "/assets/community/community-support.png",
-    "/assets/community/community-main.png",
+    "/assets/donation/Image.png",
+    "/assets/donation/Image-1.png",
+    "/assets/donation/Image-2.png",
+    "/assets/donation/Image-3.png",
+    "/assets/donation/Image-4.png",
+    "/assets/community/community-hero-left.png",
+    "/assets/images/sustainability/process-farmers.jpg",
     "/assets/community/community-hero-right.png",
   ];
 
   const rawInitiatives = c?.initiatives || t.raw("initiatives");
   const initiatives = (Array.isArray(rawInitiatives) ? rawInitiatives : []).map((item, idx) => ({
     ...item,
-    image: typeof item.image === "string" && item.image.trim() !== "" ? item.image : (staticImages[idx] || staticImages[0]),
+    image: staticImages[idx] || staticImages[0],
     isFeatured: item.isFeatured ?? idx === 0
   }));
 

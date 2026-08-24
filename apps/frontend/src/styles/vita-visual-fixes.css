@@ -62,14 +62,14 @@
   }
 }
 
-/* The People & Planet Experiences tile used a random remote image. Replace
-   that visual deterministically with the Ethiopian flag while keeping the
-   existing card layout and text overlays intact. */
-div:has(> img[src*="picsum.photos"]) {
+/* Only the People & Planet Experiences tile should receive the Ethiopian
+   flag. The previous generic picsum selector also hid every Latest News cover
+   image, causing unrelated articles to display the same flag. */
+div:has(> img[alt="Experiences"][src*="picsum.photos"]) {
   background: #078930;
 }
 
-div:has(> img[src*="picsum.photos"])::before {
+div:has(> img[alt="Experiences"][src*="picsum.photos"])::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -77,6 +77,6 @@ div:has(> img[src*="picsum.photos"])::before {
   background: url("/assets/community/ethiopian-flag.svg") center / cover no-repeat;
 }
 
-div:has(> img[src*="picsum.photos"]) > img[src*="picsum.photos"] {
+div:has(> img[alt="Experiences"][src*="picsum.photos"]) > img[alt="Experiences"][src*="picsum.photos"] {
   opacity: 0 !important;
 }

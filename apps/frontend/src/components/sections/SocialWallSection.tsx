@@ -73,16 +73,16 @@ function ScrollingColumn({
   );
 }
 
-// Curated local Vita/community imagery keeps the social wall rooted in the
-// people and communities the brand actually serves instead of generic stock.
+// Curated local Ethiopian/community imagery keeps the social wall rooted in
+// the people and communities Vita serves instead of generic foreign stock.
 const DEFAULT_IMAGES = [
-  '/assets/community/charity-1.png',
-  '/assets/community/charity-2.png',
-  '/assets/community/charity-3.png',
-  '/assets/community/charity-4.png',
-  '/assets/community/charity-5.png',
-  '/assets/community/community-main.png',
-  '/assets/community/community-support.png',
+  '/assets/donation/Image.png',
+  '/assets/donation/Image-1.png',
+  '/assets/donation/Image-2.png',
+  '/assets/donation/Image-3.png',
+  '/assets/donation/Image-4.png',
+  '/assets/community/community-hero-left.png',
+  '/assets/community/community-hero-right.png',
   '/assets/images/sustainability/process-farmers.jpg',
 ];
 

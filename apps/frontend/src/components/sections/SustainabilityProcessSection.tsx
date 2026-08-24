@@ -7,9 +7,9 @@ import { cn } from "@frontend/lib/utils";
 
 const PROCESS_IMAGES: Record<string, string> = {
   farmers: "/assets/images/sustainability/process-farmers.jpg",
-  processing: "/assets/process/section-image.png",
-  distribution: "/assets/process/section-image-1.png",
-  reuse: "/assets/process/section-image-2.png",
+  processing: "/assets/images/sustainability/process-processing.jpg",
+  distribution: "/assets/images/sustainability/process-distribution.jpg",
+  reuse: "/assets/images/sustainability/process-reuse.jpg",
 };
 
 export default function SustainabilityProcessSection({ content, locale }: { content?: any; locale?: string }) {

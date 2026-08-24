@@ -7,7 +7,7 @@ import { cn } from "@frontend/lib/utils";
 
 const GIVE_BACK_IMAGES: Record<string, string> = {
   farmers: "/assets/images/sustainability/giveback-1.jpg",
-  employment: "/assets/process/section-image-2.png",
+  employment: "/assets/images/sustainability/giveback-2.jpg",
   accessibility: "/assets/images/sustainability/giveback-3.jpg",
 };
 
