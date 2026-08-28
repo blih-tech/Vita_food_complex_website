@@ -225,7 +225,7 @@ export const products: Product[] = [
     name: "High Enegry",
     category: "Biscuit",
     media: {
-      image: "/assets/products/items/galeta-1-1.png",
+      image: "/assets/products/items/galeta-1.png",
       tagIcon: "/assets/products/tag_icons/color_icon_13 1.png",
     },
     ui: {
@@ -273,7 +273,7 @@ export const products: Product[] = [
     name: "Chewata",
     category: "Biscuit",
     media: {
-      image: "/assets/products/items/galeta-1.png",
+      image: "/assets/products/items/galeta-1-1.png",
       tagIcon: "/assets/products/tag_icons/chewata.png",
     },
     ui: {
