@@ -59,13 +59,23 @@ function resolveApiBase(): string {
     : urls[0];
 }
 
+function resolveProductImage(slug: string, apiImage?: string): string {
+  if (slug === "high-energy") {
+    return "/assets/products/items/galeta-1.png";
+  }
+  if (slug === "chewata") {
+    return "/assets/products/items/galeta-1-1.png";
+  }
+  return apiImage || "/assets/products/items/zoo-1.png";
+}
+
 function mapApiProducts(apiItems: ApiProduct[], locale: string): Product[] {
   return apiItems.map((item) => ({
     id: item.slug,
     name: locale === "am" ? item.name.am || item.name.en : item.name.en,
     category: item.category,
     media: {
-      image: item.media?.image || "/assets/products/items/zoo-1.png",
+      image: resolveProductImage(item.slug, item.media?.image),
       ...(item.media?.tagIcon ? { tagIcon: item.media.tagIcon } : {}),
     },
     ui: item.ui ?? {
