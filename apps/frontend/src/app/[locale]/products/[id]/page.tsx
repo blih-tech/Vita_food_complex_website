@@ -63,6 +63,16 @@ function resolveProductApiBase(): string {
     : urls[0];
 }
 
+function resolveProductImage(slug: string, apiImage?: string): string {
+  if (slug === "high-energy") {
+    return "/assets/products/items/galeta-1.png";
+  }
+  if (slug === "chewata") {
+    return "/assets/products/items/galeta-1-1.png";
+  }
+  return apiImage || "/assets/products/items/zoo-1.png";
+}
+
 function mapApiProduct(item: ApiProduct, locale: string): FrontendProduct {
   return {
     _id: item._id,
@@ -70,7 +80,7 @@ function mapApiProduct(item: ApiProduct, locale: string): FrontendProduct {
     name: locale === "am" ? item.name.am || item.name.en : item.name.en,
     category: item.category,
     media: {
-      image: item.media?.image || "/assets/products/items/zoo-1.png",
+      image: resolveProductImage(item.slug, item.media?.image),
       ...(item.media?.tagIcon ? { tagIcon: item.media.tagIcon } : {}),
     },
     ui: item.ui ?? {
@@ -146,7 +156,7 @@ export async function generateMetadata({
     title: `${name} | ${SITE_NAME}`,
     description,
     index: product.available !== false,
-    image: product.media?.image,
+    image: resolveProductImage(product.slug, product.media?.image),
     keywords: [
       name,
       `${name} Ethiopia`,
