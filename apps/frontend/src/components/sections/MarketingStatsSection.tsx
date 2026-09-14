@@ -56,7 +56,8 @@ const FALLBACKS = {
   am: {
     eyebrow: "ቪታ በቁጥር",
     heading: "ለማምረት የተገነባ። ለማደግ የተዘጋጀ።",
-    description: "የቪታ ፉድ ኮምፕሌክስን የሚያንቀሳቅሱ የኢንቨስትመንትና የማምረት አቅም በአጭሩ።",
+    description:
+      "የቪታ ፉድ ኮምፕሌክስን የሚያንቀሳቅሱ የኢንቨስትመንትና የማምረት አቅም በአጭሩ።",
     metrics: {
       investment: {
         value: "423,566,605 ብር",
@@ -83,13 +84,11 @@ function parseCounter(value: string): ParsedCounter | null {
   const target = Number(normalized);
   if (!Number.isFinite(target)) return null;
 
-  const decimalPart = normalized.split(".")[1] ?? "";
-
   return {
     prefix: value.slice(0, match.index),
     target,
-    suffix: value.slice(match.index + numericText.length),
-    decimals: decimalPart.length,
+    suffix: value.slice(match.index + numericText.length).trim(),
+    decimals: (normalized.split(".")[1] ?? "").length,
   };
 }
 
@@ -97,10 +96,16 @@ function AnimatedCounter({
   value,
   active,
   locale,
+  delay,
+  duration,
+  numberClassName,
 }: {
   value: string;
   active: boolean;
   locale: string;
+  delay: number;
+  duration: number;
+  numberClassName: string;
 }) {
   const parsed = useMemo(() => parseCounter(value), [value]);
   const [current, setCurrent] = useState(0);
@@ -118,28 +123,36 @@ function AnimatedCounter({
       return;
     }
 
-    const duration = parsed.target >= 1_000_000 ? 2200 : 1600;
-    let frame = 0;
-    let startedAt: number | null = null;
+    setCurrent(0);
 
-    const tick = (timestamp: number) => {
-      if (startedAt === null) startedAt = timestamp;
-      const elapsed = timestamp - startedAt;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
+    let animationFrame = 0;
+    let delayTimer = 0;
 
-      setCurrent(parsed.target * eased);
+    delayTimer = window.setTimeout(() => {
+      const startedAt = performance.now();
 
-      if (progress < 1) {
-        frame = window.requestAnimationFrame(tick);
-      }
+      const tick = (timestamp: number) => {
+        const progress = Math.min((timestamp - startedAt) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 4);
+        setCurrent(parsed.target * eased);
+
+        if (progress < 1) {
+          animationFrame = window.requestAnimationFrame(tick);
+        }
+      };
+
+      animationFrame = window.requestAnimationFrame(tick);
+    }, delay);
+
+    return () => {
+      window.clearTimeout(delayTimer);
+      window.cancelAnimationFrame(animationFrame);
     };
+  }, [active, delay, duration, parsed]);
 
-    frame = window.requestAnimationFrame(tick);
-    return () => window.cancelAnimationFrame(frame);
-  }, [active, parsed]);
-
-  if (!parsed) return <>{value}</>;
+  if (!parsed) {
+    return <span className={numberClassName}>{value}</span>;
+  }
 
   const formatted = new Intl.NumberFormat(locale === "am" ? "am-ET" : "en-US", {
     minimumFractionDigits: parsed.decimals,
@@ -147,15 +160,17 @@ function AnimatedCounter({
   }).format(current);
 
   return (
-    <>
-      {parsed.prefix}
-      {formatted}
-      {parsed.suffix.trim() ? (
-        <span className="ml-2 inline-block align-middle text-[0.32em] font-semibold tracking-normal opacity-75 sm:ml-3">
-          {parsed.suffix.trim()}
+    <div className="min-w-0">
+      <span className={`${numberClassName} block whitespace-nowrap tabular-nums`}>
+        {parsed.prefix}
+        {formatted}
+      </span>
+      {parsed.suffix ? (
+        <span className="mt-3 block font-['Funnel_Display'] text-sm font-semibold tracking-[0.08em] text-white/60 sm:text-base">
+          {parsed.suffix}
         </span>
       ) : null}
-    </>
+    </div>
   );
 }
 
@@ -172,16 +187,23 @@ export default function MarketingStatsSection({
     | Record<string, LocalizedQuickFactContent>
     | undefined;
   const localizedContent =
-    contentRecord?.[language] ?? contentRecord?.en ?? ({} as LocalizedQuickFactContent);
-  const facts = Array.isArray(localizedContent.facts) ? localizedContent.facts : [];
+    contentRecord?.[language] ??
+    contentRecord?.en ??
+    ({} as LocalizedQuickFactContent);
+  const facts = Array.isArray(localizedContent.facts)
+    ? localizedContent.facts
+    : [];
 
-  const findFact = (id: Metric["id"]) => facts.find((fact) => fact.id === id);
+  const findFact = (id: Metric["id"]) =>
+    facts.find((fact) => fact.id === id);
 
   const metrics: Metric[] = [
     {
       id: "investment",
-      value: findFact("investment")?.value ?? fallback.metrics.investment.value,
-      label: findFact("investment")?.label ?? fallback.metrics.investment.label,
+      value:
+        findFact("investment")?.value ?? fallback.metrics.investment.value,
+      label:
+        findFact("investment")?.label ?? fallback.metrics.investment.label,
       featured: true,
     },
     {
@@ -200,19 +222,14 @@ export default function MarketingStatsSection({
     const node = sectionRef.current;
     if (!node) return;
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setActive(true);
-      return;
-    }
-
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setActive(true);
-          observer.disconnect();
-        }
+        setActive(entry.isIntersecting);
       },
-      { threshold: 0.28 },
+      {
+        threshold: 0.22,
+        rootMargin: "0px 0px -8% 0px",
+      },
     );
 
     observer.observe(node);
@@ -246,30 +263,42 @@ export default function MarketingStatsSection({
           </p>
         </div>
 
-        <div className="grid gap-4 lg:grid-cols-12 lg:gap-5">
-          {metrics.map((metric) => (
-            <article
-              key={metric.id}
-              className={`group relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.07] p-6 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 sm:p-8 ${
-                metric.featured ? "lg:col-span-6" : "lg:col-span-3"
-              }`}
-            >
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
-              <p className="mb-8 font-['Funnel_Display'] text-xs font-semibold uppercase tracking-[0.15em] text-white/55 sm:mb-10">
-                {metric.label}
-              </p>
-              <div
-                className={`font-['Outfit'] font-extrabold leading-none tracking-[-0.055em] text-white ${
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)_minmax(0,1fr)]">
+          {metrics.map((metric, index) => {
+            const numberClassName = metric.featured
+              ? "font-['Outfit'] text-[clamp(2.35rem,4.5vw,4.65rem)] font-extrabold leading-[0.9] tracking-[-0.05em] text-white"
+              : "font-['Outfit'] text-[clamp(3rem,5vw,5.1rem)] font-extrabold leading-[0.88] tracking-[-0.055em] text-white";
+
+            return (
+              <article
+                key={metric.id}
+                className={`group relative min-w-0 overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.07] p-6 backdrop-blur-sm transition-transform duration-300 hover:-translate-y-1 sm:p-8 ${
                   metric.featured
-                    ? "text-[clamp(2.5rem,6.2vw,5.4rem)]"
-                    : "text-[clamp(2.6rem,4.5vw,4.6rem)]"
+                    ? "md:col-span-2 xl:col-span-1"
+                    : "md:col-span-1"
                 }`}
               >
-                <AnimatedCounter value={metric.value} active={active} locale={language} />
-              </div>
-              <div className="mt-7 h-1 w-12 rounded-full bg-[#23B349] transition-all duration-300 group-hover:w-20" />
-            </article>
-          ))}
+                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                <div className="flex min-h-[220px] flex-col justify-between sm:min-h-[245px]">
+                  <p className="max-w-[18rem] font-['Funnel_Display'] text-xs font-semibold uppercase leading-5 tracking-[0.15em] text-white/55">
+                    {metric.label}
+                  </p>
+
+                  <div className="min-w-0 pt-8">
+                    <AnimatedCounter
+                      value={metric.value}
+                      active={active}
+                      locale={language}
+                      delay={180 + index * 180}
+                      duration={metric.featured ? 2600 : 2000}
+                      numberClassName={numberClassName}
+                    />
+                    <div className="mt-7 h-1 w-12 rounded-full bg-[#23B349] transition-all duration-300 group-hover:w-20" />
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
       </div>
     </section>

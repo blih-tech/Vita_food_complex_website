@@ -1,4 +1,5 @@
 import DashboardLayout from "@/components/layout/DashboardLayout";
+import MarketingNumbersControl from "@/components/content/MarketingNumbersControl";
 import { NotificationProvider } from "@/context/NotificationContext";
 
 export default function ProtectedLayout({
@@ -8,7 +9,10 @@ export default function ProtectedLayout({
 }>) {
   return (
     <NotificationProvider>
-      <DashboardLayout>{children}</DashboardLayout>
+      <DashboardLayout>
+        {children}
+        <MarketingNumbersControl />
+      </DashboardLayout>
     </NotificationProvider>
   );
 }
