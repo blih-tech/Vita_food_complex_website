@@ -88,6 +88,27 @@ function isVisible(element: HTMLElement) {
   return element.offsetParent !== null && element.clientWidth > 0;
 }
 
+function getAvailableWidth(element: HTMLElement) {
+  const parent = element.parentElement;
+  if (!parent) return element.clientWidth;
+
+  const parentStyle = window.getComputedStyle(parent);
+  const elementStyle = window.getComputedStyle(element);
+  const paddingLeft = Number.parseFloat(parentStyle.paddingLeft) || 0;
+  const paddingRight = Number.parseFloat(parentStyle.paddingRight) || 0;
+  const marginLeft = Number.parseFloat(elementStyle.marginLeft) || 0;
+  const marginRight = Number.parseFloat(elementStyle.marginRight) || 0;
+
+  return Math.max(
+    0,
+    parent.clientWidth -
+      paddingLeft -
+      paddingRight -
+      marginLeft -
+      marginRight,
+  );
+}
+
 function getAvailableHeight(element: HTMLElement) {
   const parent = element.parentElement;
   if (!parent) return Number.POSITIVE_INFINITY;
@@ -102,7 +123,9 @@ function getAvailableHeight(element: HTMLElement) {
 
 function fitsCurrentSize(node: FittableNode) {
   const { element, kind } = node;
-  const widthFits = element.scrollWidth <= element.clientWidth + 1;
+  const availableWidth = getAvailableWidth(element);
+  const intrinsicWidth = Math.max(element.scrollWidth, element.getBoundingClientRect().width);
+  const widthFits = intrinsicWidth <= availableWidth + 1;
 
   if (kind === "number") return widthFits;
 
@@ -173,7 +196,7 @@ function captureNode(
     minFontSize:
       kind === "number"
         ? Math.max(12, maxFontSize * 0.32)
-        : Math.max(9, maxFontSize * 0.58),
+        : Math.max(8, maxFontSize * 0.48),
     originalInlineFontSize: element.style.fontSize,
     originalInlineWhiteSpace: element.style.whiteSpace,
   };
