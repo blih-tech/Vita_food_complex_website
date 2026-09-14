@@ -173,8 +173,8 @@ export class ProductsService {
   }
 
   async delete(param: string): Promise<{ deletedCount?: number }> {
-    const idFilter = resolveObjectIdFilter(param);
-    const existing = await this.productModel.findOne(idFilter).exec();
+    const filter = resolveFilter(param);
+    const existing = await this.productModel.findOne(filter).exec();
     if (!existing) {
       throw new NotFoundException(`Product not found`);
     }
