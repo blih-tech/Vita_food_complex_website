@@ -48,6 +48,11 @@ type LabelNode = {
   originalStyle: string | null;
 };
 
+type RestorableStyle = {
+  element: HTMLElement;
+  originalStyle: string | null;
+};
+
 const FALLBACKS: CounterTarget[] = [
   { id: "skus", value: "+11" },
   { id: "flour", value: "60tn" },
@@ -205,6 +210,44 @@ function createAnimatedNumberNode(
   };
 }
 
+function styleVerticalBiscuitLabel(host: HTMLElement): RestorableStyle | null {
+  const parent = host.parentElement;
+  if (!parent) return null;
+
+  const className = typeof parent.className === "string" ? parent.className : "";
+  const isDesktopBiscuitSlot =
+    className.includes("absolute") &&
+    className.includes("bottom-0") &&
+    className.includes("h-[90px]") &&
+    className.includes("w-[162px]");
+
+  if (!isDesktopBiscuitSlot) return null;
+
+  const label = Array.from(parent.children).find(
+    (child): child is HTMLElement => child instanceof HTMLElement && child.tagName === "P",
+  );
+  if (!label) return null;
+
+  const originalStyle = label.getAttribute("style");
+  label.dataset.quickFactVerticalLabel = "true";
+  label.style.position = "absolute";
+  label.style.left = "-27px";
+  label.style.top = "34px";
+  label.style.width = "90px";
+  label.style.margin = "0";
+  label.style.transform = "rotate(-90deg)";
+  label.style.transformOrigin = "center";
+  label.style.whiteSpace = "normal";
+  label.style.textAlign = "center";
+  label.style.fontSize = "10px";
+  label.style.fontWeight = "600";
+  label.style.lineHeight = "1.05";
+  label.style.letterSpacing = "-0.01em";
+  label.style.overflowWrap = "normal";
+
+  return { element: label, originalStyle };
+}
+
 function createLabelNode(element: HTMLElement): LabelNode | null {
   const computed = window.getComputedStyle(element);
   const maxFontSize = Number.parseFloat(computed.fontSize);
@@ -323,6 +366,7 @@ export default function AnimatedQuickFactSection({
     timersRef.current = [];
 
     const animatedNodes: AnimatedNumberNode[] = [];
+    const verticalLabelNodes: RestorableStyle[] = [];
 
     for (const target of targets) {
       const parsed = parseValue(target.value);
@@ -332,10 +376,16 @@ export default function AnimatedQuickFactSection({
         const node = createAnimatedNumberNode(host, parsed, target.value);
         if (!node) continue;
         animatedNodes.push(node);
+
+        if (target.id === "biscuits") {
+          const verticalLabel = styleVerticalBiscuitLabel(host);
+          if (verticalLabel) verticalLabelNodes.push(verticalLabel);
+        }
       }
     }
 
     const labelNodes = Array.from(root.querySelectorAll<HTMLElement>("p"))
+      .filter((element) => element.dataset.quickFactVerticalLabel !== "true")
       .map((element) => createLabelNode(element))
       .filter((node): node is LabelNode => Boolean(node));
 
@@ -447,6 +497,10 @@ export default function AnimatedQuickFactSection({
         restoreStyle(node.host, node.originalStyle);
       }
       for (const node of labelNodes) {
+        restoreStyle(node.element, node.originalStyle);
+      }
+      for (const node of verticalLabelNodes) {
+        delete node.element.dataset.quickFactVerticalLabel;
         restoreStyle(node.element, node.originalStyle);
       }
 
