@@ -30,20 +30,22 @@ type ParsedValue = {
   decimals: number;
 };
 
-type FitKind = "number" | "label";
-
-type FittableNode = {
-  element: HTMLElement;
+type AnimatedNumberNode = {
+  host: HTMLElement;
+  numberElement: HTMLSpanElement;
+  unitElement: HTMLSpanElement | null;
+  parsed: ParsedValue;
   targetText: string;
-  kind: FitKind;
   maxFontSize: number;
   minFontSize: number;
-  originalInlineFontSize: string;
-  originalInlineWhiteSpace: string;
+  originalStyle: string | null;
 };
 
-type AnimatedNode = FittableNode & {
-  parsed: ParsedValue;
+type LabelNode = {
+  element: HTMLElement;
+  maxFontSize: number;
+  minFontSize: number;
+  originalStyle: string | null;
 };
 
 const FALLBACKS: CounterTarget[] = [
@@ -70,106 +72,30 @@ function parseValue(value: string): ParsedValue | null {
       ? `${value.slice(0, match.index)}+`
       : value.slice(0, match.index),
     target,
-    suffix: value.slice(match.index + numericText.length),
+    suffix: value.slice(match.index + numericText.length).trim(),
     decimals: (normalized.split(".")[1] ?? "").length,
   };
 }
 
-function formatValue(parsed: ParsedValue, current: number, locale: string) {
+function formatNumber(parsed: ParsedValue, current: number, locale: string) {
   const formatted = new Intl.NumberFormat(locale === "am" ? "am-ET" : "en-US", {
     minimumFractionDigits: parsed.decimals,
     maximumFractionDigits: parsed.decimals,
   }).format(current);
 
-  return `${parsed.prefix}${formatted}${parsed.suffix}`;
+  return `${parsed.prefix}${formatted}`;
 }
 
 function isVisible(element: HTMLElement) {
   return element.offsetParent !== null && element.clientWidth > 0;
 }
 
-function getAvailableWidth(element: HTMLElement) {
-  const parent = element.parentElement;
-  if (!parent) return element.clientWidth;
-
-  const parentStyle = window.getComputedStyle(parent);
-  const elementStyle = window.getComputedStyle(element);
-  const paddingLeft = Number.parseFloat(parentStyle.paddingLeft) || 0;
-  const paddingRight = Number.parseFloat(parentStyle.paddingRight) || 0;
-  const marginLeft = Number.parseFloat(elementStyle.marginLeft) || 0;
-  const marginRight = Number.parseFloat(elementStyle.marginRight) || 0;
-
-  return Math.max(
-    0,
-    parent.clientWidth -
-      paddingLeft -
-      paddingRight -
-      marginLeft -
-      marginRight,
-  );
-}
-
-function getAvailableHeight(element: HTMLElement) {
-  const parent = element.parentElement;
-  if (!parent) return Number.POSITIVE_INFINITY;
-
-  const parentRect = parent.getBoundingClientRect();
-  const elementRect = element.getBoundingClientRect();
-  const parentStyle = window.getComputedStyle(parent);
-  const paddingBottom = Number.parseFloat(parentStyle.paddingBottom) || 0;
-
-  return Math.max(0, parentRect.bottom - paddingBottom - elementRect.top);
-}
-
-function fitsCurrentSize(node: FittableNode) {
-  const { element, kind } = node;
-  const availableWidth = getAvailableWidth(element);
-  const intrinsicWidth = Math.max(element.scrollWidth, element.getBoundingClientRect().width);
-  const widthFits = intrinsicWidth <= availableWidth + 1;
-
-  if (kind === "number") return widthFits;
-
-  const availableHeight = getAvailableHeight(element);
-  const heightFits = element.scrollHeight <= availableHeight + 1;
-  return widthFits && heightFits;
-}
-
-function fitNode(node: FittableNode) {
-  const { element, targetText, kind, maxFontSize, minFontSize } = node;
-  if (!isVisible(element)) return;
-
-  const previousText = element.textContent;
-  element.textContent = targetText;
-
-  if (kind === "number") {
-    element.style.whiteSpace = "nowrap";
+function restoreStyle(element: HTMLElement, originalStyle: string | null) {
+  if (originalStyle === null) {
+    element.removeAttribute("style");
+  } else {
+    element.setAttribute("style", originalStyle);
   }
-
-  element.style.fontSize = `${maxFontSize}px`;
-
-  if (fitsCurrentSize(node)) {
-    element.textContent = previousText;
-    return;
-  }
-
-  let low = minFontSize;
-  let high = maxFontSize;
-  let best = minFontSize;
-
-  for (let i = 0; i < 12; i += 1) {
-    const candidate = (low + high) / 2;
-    element.style.fontSize = `${candidate}px`;
-
-    if (fitsCurrentSize(node)) {
-      best = candidate;
-      low = candidate;
-    } else {
-      high = candidate;
-    }
-  }
-
-  element.style.fontSize = `${Math.floor(best * 10) / 10}px`;
-  element.textContent = previousText;
 }
 
 function findLeafElements(root: HTMLElement, text: string) {
@@ -179,27 +105,171 @@ function findLeafElements(root: HTMLElement, text: string) {
   );
 }
 
-function captureNode(
-  element: HTMLElement,
+function getInnerWidth(element: HTMLElement) {
+  const style = window.getComputedStyle(element);
+  const paddingLeft = Number.parseFloat(style.paddingLeft) || 0;
+  const paddingRight = Number.parseFloat(style.paddingRight) || 0;
+  return Math.max(0, element.clientWidth - paddingLeft - paddingRight);
+}
+
+function fitNumber(node: AnimatedNumberNode) {
+  const { host, numberElement, maxFontSize, minFontSize } = node;
+  if (!isVisible(host)) return;
+
+  const availableWidth = getInnerWidth(host);
+  if (availableWidth <= 0) return;
+
+  numberElement.style.fontSize = `${maxFontSize}px`;
+
+  if (numberElement.scrollWidth <= availableWidth + 1) return;
+
+  let low = minFontSize;
+  let high = maxFontSize;
+  let best = minFontSize;
+
+  for (let index = 0; index < 12; index += 1) {
+    const candidate = (low + high) / 2;
+    numberElement.style.fontSize = `${candidate}px`;
+
+    if (numberElement.scrollWidth <= availableWidth + 1) {
+      best = candidate;
+      low = candidate;
+    } else {
+      high = candidate;
+    }
+  }
+
+  numberElement.style.fontSize = `${Math.floor(best * 10) / 10}px`;
+}
+
+function createAnimatedNumberNode(
+  host: HTMLElement,
+  parsed: ParsedValue,
   targetText: string,
-  kind: FitKind,
-): FittableNode | null {
+): AnimatedNumberNode | null {
+  const computed = window.getComputedStyle(host);
+  const maxFontSize = Number.parseFloat(computed.fontSize);
+  if (!Number.isFinite(maxFontSize) || maxFontSize <= 0) return null;
+
+  const originalStyle = host.getAttribute("style");
+  const textAlign = computed.textAlign;
+  const alignItems = textAlign === "center" ? "center" : "flex-start";
+
+  host.textContent = "";
+  host.style.display = "flex";
+  host.style.flexDirection = "column";
+  host.style.alignItems = alignItems;
+  host.style.justifyContent = "center";
+  host.style.maxWidth = "100%";
+  host.style.whiteSpace = "normal";
+  host.style.lineHeight = "1";
+
+  const numberElement = document.createElement("span");
+  numberElement.dataset.quickFactNumber = "true";
+  numberElement.style.display = "block";
+  numberElement.style.maxWidth = "100%";
+  numberElement.style.whiteSpace = "nowrap";
+  numberElement.style.fontFamily = computed.fontFamily;
+  numberElement.style.fontWeight = computed.fontWeight;
+  numberElement.style.letterSpacing = computed.letterSpacing;
+  numberElement.style.lineHeight = "0.92";
+  numberElement.style.fontSize = `${maxFontSize}px`;
+  numberElement.textContent = formatNumber(parsed, parsed.target, "en");
+  host.appendChild(numberElement);
+
+  let unitElement: HTMLSpanElement | null = null;
+  if (parsed.suffix) {
+    unitElement = document.createElement("span");
+    unitElement.dataset.quickFactUnit = "true";
+    unitElement.style.display = "block";
+    unitElement.style.marginTop = `${Math.max(2, Math.round(maxFontSize * 0.06))}px`;
+    unitElement.style.fontFamily = computed.fontFamily;
+    unitElement.style.fontSize = `${Math.max(10, Math.min(18, maxFontSize * 0.3))}px`;
+    unitElement.style.fontWeight = "700";
+    unitElement.style.letterSpacing = "-0.01em";
+    unitElement.style.lineHeight = "1";
+    unitElement.style.whiteSpace = "nowrap";
+    unitElement.textContent = parsed.suffix;
+    host.appendChild(unitElement);
+  }
+
+  return {
+    host,
+    numberElement,
+    unitElement,
+    parsed,
+    targetText,
+    maxFontSize,
+    minFontSize: Math.max(16, maxFontSize * 0.48),
+    originalStyle,
+  };
+}
+
+function createLabelNode(element: HTMLElement): LabelNode | null {
   const computed = window.getComputedStyle(element);
   const maxFontSize = Number.parseFloat(computed.fontSize);
   if (!Number.isFinite(maxFontSize) || maxFontSize <= 0) return null;
 
+  const originalStyle = element.getAttribute("style");
+  element.style.fontWeight = "600";
+  element.style.whiteSpace = "normal";
+  element.style.lineHeight = "1.15";
+  element.style.maxWidth = "100%";
+  element.style.overflowWrap = "break-word";
+
   return {
     element,
-    targetText,
-    kind,
     maxFontSize,
-    minFontSize:
-      kind === "number"
-        ? Math.max(12, maxFontSize * 0.32)
-        : Math.max(8, maxFontSize * 0.48),
-    originalInlineFontSize: element.style.fontSize,
-    originalInlineWhiteSpace: element.style.whiteSpace,
+    minFontSize: Math.max(9, maxFontSize * 0.72),
+    originalStyle,
   };
+}
+
+function fitLabel(node: LabelNode) {
+  const { element, maxFontSize, minFontSize } = node;
+  if (!isVisible(element)) return;
+
+  const parent = element.parentElement;
+  if (!parent) return;
+
+  const parentStyle = window.getComputedStyle(parent);
+  const paddingLeft = Number.parseFloat(parentStyle.paddingLeft) || 0;
+  const paddingRight = Number.parseFloat(parentStyle.paddingRight) || 0;
+  const paddingBottom = Number.parseFloat(parentStyle.paddingBottom) || 0;
+  const availableWidth = Math.max(
+    0,
+    parent.clientWidth - paddingLeft - paddingRight,
+  );
+
+  element.style.width = `${availableWidth}px`;
+  element.style.fontSize = `${maxFontSize}px`;
+
+  const parentRect = parent.getBoundingClientRect();
+  const elementRect = element.getBoundingClientRect();
+  const availableHeight = Math.max(
+    0,
+    parentRect.bottom - paddingBottom - elementRect.top,
+  );
+
+  if (element.scrollHeight <= availableHeight + 1) return;
+
+  let low = minFontSize;
+  let high = maxFontSize;
+  let best = minFontSize;
+
+  for (let index = 0; index < 10; index += 1) {
+    const candidate = (low + high) / 2;
+    element.style.fontSize = `${candidate}px`;
+
+    if (element.scrollHeight <= availableHeight + 1) {
+      best = candidate;
+      low = candidate;
+    } else {
+      high = candidate;
+    }
+  }
+
+  element.style.fontSize = `${Math.floor(best * 10) / 10}px`;
 }
 
 export default function AnimatedQuickFactSection({
@@ -252,33 +322,26 @@ export default function AnimatedQuickFactSection({
     animationFramesRef.current = [];
     timersRef.current = [];
 
-    const animatedNodes: AnimatedNode[] = [];
+    const animatedNodes: AnimatedNumberNode[] = [];
 
     for (const target of targets) {
       const parsed = parseValue(target.value);
       if (!parsed) continue;
 
-      for (const element of findLeafElements(root, target.value)) {
-        const node = captureNode(element, target.value, "number");
+      for (const host of findLeafElements(root, target.value)) {
+        const node = createAnimatedNumberNode(host, parsed, target.value);
         if (!node) continue;
-        animatedNodes.push({ ...node, parsed });
+        animatedNodes.push(node);
       }
     }
 
-    const labelNodes = Array.from(
-      root.querySelectorAll<HTMLElement>("p"),
-    )
-      .map((element) =>
-        captureNode(element, element.textContent?.trim() ?? "", "label"),
-      )
-      .filter((node): node is FittableNode => Boolean(node?.targetText));
-
-    const allNodes: FittableNode[] = [...animatedNodes, ...labelNodes];
+    const labelNodes = Array.from(root.querySelectorAll<HTMLElement>("p"))
+      .map((element) => createLabelNode(element))
+      .filter((node): node is LabelNode => Boolean(node));
 
     const fitAll = () => {
-      for (const node of allNodes) {
-        fitNode(node);
-      }
+      animatedNodes.forEach(fitNumber);
+      labelNodes.forEach(fitLabel);
     };
 
     fitAll();
@@ -292,16 +355,17 @@ export default function AnimatedQuickFactSection({
         : null;
 
     const observedElements = new Set<Element>([root]);
-    for (const node of allNodes) {
-      if (node.element.parentElement) {
-        observedElements.add(node.element.parentElement);
-      }
+    for (const node of animatedNodes) {
+      observedElements.add(node.host);
+      if (node.host.parentElement) observedElements.add(node.host.parentElement);
+    }
+    for (const node of labelNodes) {
+      if (node.element.parentElement) observedElements.add(node.element.parentElement);
     }
     observedElements.forEach((element) => resizeObserver?.observe(element));
 
     const handleWindowResize = () => fitAll();
     window.addEventListener("resize", handleWindowResize);
-
     document.fonts?.ready.then(() => fitAll()).catch(() => undefined);
 
     const startAnimations = () => {
@@ -310,16 +374,20 @@ export default function AnimatedQuickFactSection({
       ).matches;
 
       animatedNodes.forEach((node, index) => {
-        if (!isVisible(node.element)) return;
+        if (!isVisible(node.host)) return;
 
-        fitNode(node);
+        fitNumber(node);
 
         if (reducedMotion) {
-          node.element.textContent = node.targetText;
+          node.numberElement.textContent = formatNumber(
+            node.parsed,
+            node.parsed.target,
+            locale,
+          );
           return;
         }
 
-        node.element.textContent = formatValue(node.parsed, 0, locale);
+        node.numberElement.textContent = formatNumber(node.parsed, 0, locale);
         const duration = node.parsed.target >= 1_000_000 ? 2400 : 1650;
         const delay = Math.min(index * 45, 240);
 
@@ -330,7 +398,7 @@ export default function AnimatedQuickFactSection({
             if (startedAt === null) startedAt = timestamp;
             const progress = Math.min((timestamp - startedAt) / duration, 1);
             const eased = 1 - Math.pow(1 - progress, 4);
-            node.element.textContent = formatValue(
+            node.numberElement.textContent = formatNumber(
               node.parsed,
               node.parsed.target * eased,
               locale,
@@ -340,8 +408,12 @@ export default function AnimatedQuickFactSection({
               const frame = window.requestAnimationFrame(tick);
               animationFramesRef.current.push(frame);
             } else {
-              node.element.textContent = node.targetText;
-              fitNode(node);
+              node.numberElement.textContent = formatNumber(
+                node.parsed,
+                node.parsed.target,
+                locale,
+              );
+              fitNumber(node);
             }
           };
 
@@ -370,9 +442,12 @@ export default function AnimatedQuickFactSection({
       resizeObserver?.disconnect();
       window.removeEventListener("resize", handleWindowResize);
 
-      for (const node of allNodes) {
-        node.element.style.fontSize = node.originalInlineFontSize;
-        node.element.style.whiteSpace = node.originalInlineWhiteSpace;
+      for (const node of animatedNodes) {
+        node.host.textContent = node.targetText;
+        restoreStyle(node.host, node.originalStyle);
+      }
+      for (const node of labelNodes) {
+        restoreStyle(node.element, node.originalStyle);
       }
 
       animationFramesRef.current.forEach((frame) =>
