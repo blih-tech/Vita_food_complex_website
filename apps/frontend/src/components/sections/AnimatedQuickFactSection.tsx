@@ -30,11 +30,20 @@ type ParsedValue = {
   decimals: number;
 };
 
-type AnimatedNode = {
+type FitKind = "number" | "label";
+
+type FittableNode = {
   element: HTMLElement;
-  parsed: ParsedValue;
   targetText: string;
+  kind: FitKind;
+  maxFontSize: number;
+  minFontSize: number;
   originalInlineFontSize: string;
+  originalInlineWhiteSpace: string;
+};
+
+type AnimatedNode = FittableNode & {
+  parsed: ParsedValue;
 };
 
 const FALLBACKS: CounterTarget[] = [
@@ -75,45 +84,69 @@ function formatValue(parsed: ParsedValue, current: number, locale: string) {
   return `${parsed.prefix}${formatted}${parsed.suffix}`;
 }
 
-function getAvailableWidth(element: HTMLElement) {
-  const parent = element.parentElement;
-  if (!parent) return 0;
-
-  const parentStyle = window.getComputedStyle(parent);
-  const elementStyle = window.getComputedStyle(element);
-  const paddingLeft = Number.parseFloat(parentStyle.paddingLeft) || 0;
-  const paddingRight = Number.parseFloat(parentStyle.paddingRight) || 0;
-  const marginLeft = Number.parseFloat(elementStyle.marginLeft) || 0;
-  const marginRight = Number.parseFloat(elementStyle.marginRight) || 0;
-
-  return Math.max(
-    0,
-    parent.clientWidth - paddingLeft - paddingRight - marginLeft - marginRight,
-  );
+function isVisible(element: HTMLElement) {
+  return element.offsetParent !== null && element.clientWidth > 0;
 }
 
-function fitNumber(element: HTMLElement, targetText: string) {
-  if (element.offsetParent === null) return;
+function getAvailableHeight(element: HTMLElement) {
+  const parent = element.parentElement;
+  if (!parent) return Number.POSITIVE_INFINITY;
 
-  const computed = window.getComputedStyle(element);
-  const baseFontSize = Number.parseFloat(computed.fontSize);
-  if (!Number.isFinite(baseFontSize) || baseFontSize <= 0) return;
+  const parentRect = parent.getBoundingClientRect();
+  const elementRect = element.getBoundingClientRect();
+  const parentStyle = window.getComputedStyle(parent);
+  const paddingBottom = Number.parseFloat(parentStyle.paddingBottom) || 0;
 
-  const availableWidth = getAvailableWidth(element);
-  if (availableWidth <= 0) return;
+  return Math.max(0, parentRect.bottom - paddingBottom - elementRect.top);
+}
 
-  const currentText = element.textContent;
+function fitsCurrentSize(node: FittableNode) {
+  const { element, kind } = node;
+  const widthFits = element.scrollWidth <= element.clientWidth + 1;
+
+  if (kind === "number") return widthFits;
+
+  const availableHeight = getAvailableHeight(element);
+  const heightFits = element.scrollHeight <= availableHeight + 1;
+  return widthFits && heightFits;
+}
+
+function fitNode(node: FittableNode) {
+  const { element, targetText, kind, maxFontSize, minFontSize } = node;
+  if (!isVisible(element)) return;
+
+  const previousText = element.textContent;
   element.textContent = targetText;
-  element.style.fontSize = `${baseFontSize}px`;
-  element.style.whiteSpace = "nowrap";
 
-  const measuredWidth = element.getBoundingClientRect().width;
-  if (measuredWidth > availableWidth) {
-    const ratio = Math.max(0.48, (availableWidth / measuredWidth) * 0.96);
-    element.style.fontSize = `${Math.floor(baseFontSize * ratio * 10) / 10}px`;
+  if (kind === "number") {
+    element.style.whiteSpace = "nowrap";
   }
 
-  element.textContent = currentText;
+  element.style.fontSize = `${maxFontSize}px`;
+
+  if (fitsCurrentSize(node)) {
+    element.textContent = previousText;
+    return;
+  }
+
+  let low = minFontSize;
+  let high = maxFontSize;
+  let best = minFontSize;
+
+  for (let i = 0; i < 12; i += 1) {
+    const candidate = (low + high) / 2;
+    element.style.fontSize = `${candidate}px`;
+
+    if (fitsCurrentSize(node)) {
+      best = candidate;
+      low = candidate;
+    } else {
+      high = candidate;
+    }
+  }
+
+  element.style.fontSize = `${Math.floor(best * 10) / 10}px`;
+  element.textContent = previousText;
 }
 
 function findLeafElements(root: HTMLElement, text: string) {
@@ -121,6 +154,29 @@ function findLeafElements(root: HTMLElement, text: string) {
     (element) =>
       element.children.length === 0 && element.textContent?.trim() === text.trim(),
   );
+}
+
+function captureNode(
+  element: HTMLElement,
+  targetText: string,
+  kind: FitKind,
+): FittableNode | null {
+  const computed = window.getComputedStyle(element);
+  const maxFontSize = Number.parseFloat(computed.fontSize);
+  if (!Number.isFinite(maxFontSize) || maxFontSize <= 0) return null;
+
+  return {
+    element,
+    targetText,
+    kind,
+    maxFontSize,
+    minFontSize:
+      kind === "number"
+        ? Math.max(12, maxFontSize * 0.32)
+        : Math.max(9, maxFontSize * 0.58),
+    originalInlineFontSize: element.style.fontSize,
+    originalInlineWhiteSpace: element.style.whiteSpace,
+  };
 }
 
 export default function AnimatedQuickFactSection({
@@ -180,24 +236,50 @@ export default function AnimatedQuickFactSection({
       if (!parsed) continue;
 
       for (const element of findLeafElements(root, target.value)) {
-        animatedNodes.push({
-          element,
-          parsed,
-          targetText: target.value,
-          originalInlineFontSize: element.style.fontSize,
-        });
+        const node = captureNode(element, target.value, "number");
+        if (!node) continue;
+        animatedNodes.push({ ...node, parsed });
       }
     }
 
-    const resize = () => {
-      for (const node of animatedNodes) {
-        node.element.style.fontSize = node.originalInlineFontSize;
-        fitNumber(node.element, node.targetText);
+    const labelNodes = Array.from(
+      root.querySelectorAll<HTMLElement>("p"),
+    )
+      .map((element) =>
+        captureNode(element, element.textContent?.trim() ?? "", "label"),
+      )
+      .filter((node): node is FittableNode => Boolean(node?.targetText));
+
+    const allNodes: FittableNode[] = [...animatedNodes, ...labelNodes];
+
+    const fitAll = () => {
+      for (const node of allNodes) {
+        fitNode(node);
       }
     };
 
-    resize();
-    window.addEventListener("resize", resize);
+    fitAll();
+
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(() => {
+            const frame = window.requestAnimationFrame(fitAll);
+            animationFramesRef.current.push(frame);
+          })
+        : null;
+
+    const observedElements = new Set<Element>([root]);
+    for (const node of allNodes) {
+      if (node.element.parentElement) {
+        observedElements.add(node.element.parentElement);
+      }
+    }
+    observedElements.forEach((element) => resizeObserver?.observe(element));
+
+    const handleWindowResize = () => fitAll();
+    window.addEventListener("resize", handleWindowResize);
+
+    document.fonts?.ready.then(() => fitAll()).catch(() => undefined);
 
     const startAnimations = () => {
       const reducedMotion = window.matchMedia(
@@ -205,7 +287,9 @@ export default function AnimatedQuickFactSection({
       ).matches;
 
       animatedNodes.forEach((node, index) => {
-        fitNumber(node.element, node.targetText);
+        if (!isVisible(node.element)) return;
+
+        fitNode(node);
 
         if (reducedMotion) {
           node.element.textContent = node.targetText;
@@ -234,7 +318,7 @@ export default function AnimatedQuickFactSection({
               animationFramesRef.current.push(frame);
             } else {
               node.element.textContent = node.targetText;
-              fitNumber(node.element, node.targetText);
+              fitNode(node);
             }
           };
 
@@ -260,7 +344,14 @@ export default function AnimatedQuickFactSection({
 
     return () => {
       observer.disconnect();
-      window.removeEventListener("resize", resize);
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", handleWindowResize);
+
+      for (const node of allNodes) {
+        node.element.style.fontSize = node.originalInlineFontSize;
+        node.element.style.whiteSpace = node.originalInlineWhiteSpace;
+      }
+
       animationFramesRef.current.forEach((frame) =>
         window.cancelAnimationFrame(frame),
       );
