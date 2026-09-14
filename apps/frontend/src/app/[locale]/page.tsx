@@ -9,7 +9,7 @@ import BiscuitBrandSection from "@frontend/components/sections/BiscuitBrandSecti
 import SocialProofSection from "@frontend/components/sections/SocialProofSection";
 import RecipesSection from "@frontend/components/sections/RecipesSection";
 import MerchandiseSection from "@frontend/components/sections/MerchandiseSection";
-import MarketingStatsSection from "@frontend/components/sections/MarketingStatsSection";
+import AnimatedQuickFactSection from "@frontend/components/sections/AnimatedQuickFactSection";
 import SocialWallSection from "@frontend/components/sections/SocialWallSection";
 import PartnerSection from "@frontend/components/sections/PartnerSection";
 import SisterCompaniesSection from "@frontend/components/sections/SisterCompaniesSection";
@@ -23,7 +23,7 @@ const SECTION_COMPONENTS: Record<string, any> = {
   products: ProductsSection,
   "biscuit-brand": BiscuitBrandSection,
   "social-proof": SocialProofSection,
-  "quick-facts": MarketingStatsSection,
+  "quick-facts": AnimatedQuickFactSection,
   merchandise: MerchandiseSection,
   "social-wall": SocialWallSection,
   partners: PartnerSection,
