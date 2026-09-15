@@ -459,7 +459,7 @@ export default function Footer() {
             />
 
             <div className="font-['Outfit'] text-[13px] font-light leading-[1.8] text-white">
-              <p>+01166866069</p>
+              <p>+0116686069</p>
               <p>+251959144444</p>
               <p>+251944771718</p>
               <p>info@vitafoodcomplex.com</p>
