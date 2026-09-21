@@ -27,7 +27,7 @@ export default function FooterPage() {
     }).finally(() => setLoading(false));
   }, []);
 
-  const update = (key: keyof typeof initial, value: string | string[]) =>
+  const update = <K extends keyof typeof initial>(key: K, value: (typeof initial)[K]) =>
     setForm((old) => ({ ...old, [key]: value }));
 
   const save = async () => {
