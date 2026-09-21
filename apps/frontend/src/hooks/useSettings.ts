@@ -14,6 +14,22 @@ interface SiteSettings {
     youtube?: string;
     tiktok?: string;
   };
+  footer?: {
+    ctaTitle?: string;
+    ctaDescription?: string;
+    ctaButtonLabel?: string;
+    newsletterTitle?: string;
+    phones?: string[];
+    email?: string;
+    addressLines?: string[];
+    copyrightText?: string;
+    termsLabel?: string;
+    termsHref?: string;
+    privacyLabel?: string;
+    privacyHref?: string;
+    legalLabel?: string;
+    legalHref?: string;
+  };
 }
 
 export function useSettings() {
