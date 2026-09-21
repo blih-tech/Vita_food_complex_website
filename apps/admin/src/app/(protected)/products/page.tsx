@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { LayoutGrid, Package, Plus, Pencil, Trash2, X } from "lucide-react";
+import { LayoutGrid, Package, Plus, Pencil, Trash2, X, Shirt } from "lucide-react";
 import ProductsPageCmsPanel from "./ProductsPageCmsPanel";
 import {
   Ingredient,
@@ -39,7 +39,7 @@ type TabId =
   | "variations"
   | "related";
 
-type ProductsAdminTab = "page" | "cards";
+type ProductsAdminTab = "page" | "cards" | "style";
 
 function emptyForm(): ProductPayload {
   return {
@@ -1009,6 +1009,7 @@ export default function ProductsPage() {
           <div className="flex flex-wrap gap-2">
             {tabBtn("page", "Page content", LayoutGrid)}
             {tabBtn("cards", "Product cards", Package)}
+            {tabBtn("style", "Vita Style", Shirt)}
           </div>
         </div>
         {adminTab === "cards" && (
@@ -1031,6 +1032,22 @@ export default function ProductsPage() {
           </div>
         )}
       </header>
+      {adminTab === "style" && (
+        <div className="p-4 sm:p-6 lg:p-8">
+          <div className="rounded-2xl border border-gray-100 bg-white p-5 sm:p-6">
+            <div className="mb-5">
+              <h2 className="font-['Funnel_Display'] text-lg font-bold text-[#333733]">Vita Style</h2>
+              <p className="mt-1 text-sm text-gray-400">Update the merchandise section shown on the public home page.</p>
+            </div>
+            <a
+              href="/home?section=merchandise"
+              className="inline-flex items-center gap-2 rounded-xl bg-[#23B349] px-4 py-2.5 text-sm font-semibold text-white"
+            >
+              <Pencil size={15} /> Update Vita Style
+            </a>
+          </div>
+        </div>
+      )}
       {adminTab === "page" && (
         <div className="p-4 sm:p-6 lg:p-8">
           <ProductsPageCmsPanel />
