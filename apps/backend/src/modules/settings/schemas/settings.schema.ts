@@ -26,6 +26,24 @@ export class SiteSettings {
 
   @Prop({ type: Object })
   socialLinks: { facebook?: string; instagram?: string; linkedin?: string; twitter?: string; youtube?: string; tiktok?: string };
+
+  @Prop({ type: Object, default: {} })
+  footer: {
+    ctaTitle?: string;
+    ctaDescription?: string;
+    ctaButtonLabel?: string;
+    newsletterTitle?: string;
+    phones?: string[];
+    email?: string;
+    addressLines?: string[];
+    copyrightText?: string;
+    termsLabel?: string;
+    termsHref?: string;
+    privacyLabel?: string;
+    privacyHref?: string;
+    legalLabel?: string;
+    legalHref?: string;
+  };
 }
 
 export const SiteSettingsSchema = SchemaFactory.createForClass(SiteSettings);
