@@ -123,6 +123,14 @@ function formatDate(value?: string): string {
   return date.toLocaleDateString();
 }
 
+function resolveAdminProductImage(slug: string, image?: string): string {
+  // The public products page intentionally uses bundled assets for these two
+  // products. Mirror that behavior in admin so previews match the live site.
+  if (slug === "high-energy") return "/assets/products/items/galeta-1.png";
+  if (slug === "chewata") return "/assets/products/items/galeta-1-1.png";
+  return image || "/assets/products/items/zoo-1.png";
+}
+
 function ProductModal({
   title,
   value,
@@ -1103,7 +1111,7 @@ export default function ProductsPage() {
                     <td className="px-5 py-4">
                       <div className="flex items-center gap-2">
                         <img
-                          src={item.media?.image || ""}
+                          src={resolveAdminProductImage(item.slug, item.media?.image)}
                           alt={`${item.name.en} visual`}
                           className="w-12 h-12 rounded-lg object-cover border border-gray-100"
                         />
