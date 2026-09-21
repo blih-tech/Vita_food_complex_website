@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import {
   Home, Info, Image as ImageIcon,
   FileText, Edit3, ExternalLink, RefreshCw, UtensilsCrossed, Truck, Star,
-  CheckCircle, Clock, Leaf, Globe, Lightbulb, Heart, BarChart3, Headphones,
+  CheckCircle, Clock, Leaf, Globe, Lightbulb, Heart, BarChart3, Headphones, PanelBottom,
 } from "lucide-react";
 import Link from "next/link";
 import api from "@/lib/api";
@@ -107,6 +107,14 @@ const ALL_PAGES = [
     icon: Headphones,
     editorHref: "/contact-customer-care",
     liveHref: "https://vitafoodcomplex.vercel.app/en/contact-customer-care",
+  },
+  {
+    slug: "footer",
+    name: "Footer",
+    description: "CTA, newsletter, contact details, address, and copyright",
+    icon: PanelBottom,
+    editorHref: "/footer",
+    liveHref: "https://vitafoodcomplex.vercel.app/en",
   },
 ];
 
