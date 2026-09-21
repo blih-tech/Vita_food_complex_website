@@ -171,6 +171,9 @@ export default function Footer() {
   const t = useTranslations("Footer");
   const { settings } = useSettings();
   const locale = useLocale();
+  const footerSettings = settings?.footer;
+  const phones = footerSettings?.phones?.length ? footerSettings.phones : ["+0116686069", "+251959144444", "+251944771718"];
+  const addressLines = footerSettings?.addressLines?.length ? footerSettings.addressLines : ["Lideta SC, Woreda 02", "Addis Ababa, AA, Ethiopia"];
 
   const [products, setProducts] = useState<
     Array<{
@@ -342,20 +345,18 @@ export default function Footer() {
             {/* Left Content */}
             <div className="relative z-30 flex max-w-full flex-col items-start text-left md:max-w-[55%]">
               <h2 className="mb-4 font-['Outfit'] text-[32px] font-black leading-none tracking-tight text-[#2D2D2D] sm:text-[40px] md:text-[48px] lg:text-[58px]">
-                Let&apos;s Work Together
+                {footerSettings?.ctaTitle || "Let's Work Together"}
               </h2>
 
               <p className="mb-8 max-w-[480px] font-['Outfit'] text-[14px] font-normal leading-snug text-[#3A3A3A] md:text-[16px] lg:text-[18px]">
-                Question, business inquiry, or partnership idea?
-                <br />
-                Our team is ready to connect and support you
+                {footerSettings?.ctaDescription || "Question, business inquiry, or partnership idea? Our team is ready to connect and support you"}
               </p>
 
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-['Outfit'] text-[14px] font-bold text-[#23B349] shadow-[0px_8px_20px_rgba(0,0,0,0.05)] transition-all duration-300 hover:scale-105 md:text-[16px]"
               >
-                Connect with us &rarr;
+                {footerSettings?.ctaButtonLabel || "Connect with us"} &rarr;
               </Link>
             </div>
 
@@ -411,7 +412,7 @@ export default function Footer() {
         <div className="pointer-events-auto absolute left-0 right-0 top-[-79px] z-[100] -translate-y-[40%] px-4 sm:px-8 lg:px-[120px]">
           <div className="mx-auto flex w-full max-w-[1260px] flex-col items-center justify-between gap-6 rounded-[24px] bg-white p-6 shadow-[0px_20px_40px_rgba(0,0,0,0.06)] md:p-8 lg:flex-row">
             <h3 className="font-['Outfit'] text-[28px] font-black tracking-tight text-[#23B349] lg:text-[46px] xl:text-[54px]">
-              Get the Latest News &amp; Updates...
+              {footerSettings?.newsletterTitle || "Get the Latest News & Updates..."}
             </h3>
 
             <div className="flex w-full items-center gap-3 md:w-auto">
@@ -459,15 +460,12 @@ export default function Footer() {
             />
 
             <div className="font-['Outfit'] text-[13px] font-light leading-[1.8] text-white">
-              <p>+0116686069</p>
-              <p>+251959144444</p>
-              <p>+251944771718</p>
-              <p>info@vitafoodcomplex.com</p>
+              {phones.map((phone) => <p key={phone}>{phone}</p>)}
+              <p>{footerSettings?.email || "info@vitafoodcomplex.com"}</p>
 
               <br />
 
-              <p>Lideta SC, Woreda 02</p>
-              <p>Addis Ababa, AA, Ethiopia</p>
+              {addressLines.map((line) => <p key={line}>{line}</p>)}
             </div>
 
             <div className="mt-2 flex items-center gap-3">
@@ -561,29 +559,29 @@ export default function Footer() {
               <div className="flex flex-col items-center justify-between font-['Outfit'] text-[11px] font-light text-[#404040] md:flex-row lg:text-[12px]">
                 <div className="mb-4 flex flex-wrap justify-center gap-6 md:mb-0 md:justify-start lg:gap-10">
                   <Link
-                    href="#"
+                    href={footerSettings?.termsHref || "#"}
                     className="transition-colors hover:text-[#23B349]"
                   >
-                    Terms and Conditions
+                    {footerSettings?.termsLabel || "Terms and Conditions"}
                   </Link>
 
                   <Link
-                    href="#"
+                    href={footerSettings?.privacyHref || "#"}
                     className="transition-colors hover:text-[#23B349]"
                   >
-                    Privacy Policy
+                    {footerSettings?.privacyLabel || "Privacy Policy"}
                   </Link>
 
                   <Link
-                    href="#"
+                    href={footerSettings?.legalHref || "#"}
                     className="transition-colors hover:text-[#23B349]"
                   >
-                    Legal Notice
+                    {footerSettings?.legalLabel || "Legal Notice"}
                   </Link>
                 </div>
 
                 <p>
-                  © {new Date().getFullYear()} Vita Food Complex. All rights reserved.
+                  © {new Date().getFullYear()} {footerSettings?.copyrightText || "Vita Food Complex. All rights reserved."}
                 </p>
               </div>
             </div>
