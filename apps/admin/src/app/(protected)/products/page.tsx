@@ -123,12 +123,24 @@ function formatDate(value?: string): string {
   return date.toLocaleDateString();
 }
 
+const PUBLIC_SITE_ORIGIN =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, "") ||
+  "https://vitafoodcomplex.vercel.app";
+
+function adminAssetUrl(image?: string): string {
+  const value = image || "/assets/products/items/zoo-1.png";
+  if (/^https?:\/\//i.test(value) || value.startsWith("data:") || value.startsWith("blob:")) {
+    return value;
+  }
+  // Product seed images live in the public frontend app, not the admin app.
+  // Relative /assets URLs therefore need the public-site origin in admin.
+  return `${PUBLIC_SITE_ORIGIN}${value.startsWith("/") ? value : `/${value}`}`;
+}
+
 function resolveAdminProductImage(slug: string, image?: string): string {
-  // The public products page intentionally uses bundled assets for these two
-  // products. Mirror that behavior in admin so previews match the live site.
-  if (slug === "high-energy") return "/assets/products/items/galeta-1.png";
-  if (slug === "chewata") return "/assets/products/items/galeta-1-1.png";
-  return image || "/assets/products/items/zoo-1.png";
+  if (slug === "high-energy") return adminAssetUrl("/assets/products/items/galeta-1.png");
+  if (slug === "chewata") return adminAssetUrl("/assets/products/items/galeta-1-1.png");
+  return adminAssetUrl(image);
 }
 
 function ProductModal({
