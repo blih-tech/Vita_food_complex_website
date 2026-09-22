@@ -35,6 +35,21 @@ const INITIAL_FORM: DistributorFormData = {
   productInterests: [],
 };
 
+const BUSINESS_TYPES = [
+  "Sole Proprietorship",
+  "Private Limited Company (PLC)",
+  "Share Company",
+  "Partnership",
+  "Cooperative",
+  "Wholesaler",
+  "Retailer",
+  "Supermarket / Mini Market",
+  "Distributor",
+  "Importer / Exporter",
+  "Hotel / Restaurant / Cafe",
+  "Other",
+];
+
 const ETHIOPIAN_CITIES = [
   'Addis Ababa', 'Dire Dawa', 'Adama (Nazret)', 'Mekelle', 'Gondar',
   'Hawassa', 'Bahir Dar', 'Jimma', 'Dessie', 'Jijiga',
@@ -108,7 +123,6 @@ export default function ContactDistributionSection() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   
-  const [businessTypes, setBusinessTypes] = useState<string[]>([]);
   const [productCategories, setProductCategories] = useState<string[]>([]);
 
   const mapRef = useRef<any>(null);
@@ -117,14 +131,7 @@ export default function ContactDistributionSection() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [settingsRes, productsRes] = await Promise.all([
-          api.get('/settings'),
-          api.get('/products')
-        ]);
-        
-        if (settingsRes.data && Array.isArray(settingsRes.data) && settingsRes.data.length > 0) {
-          setBusinessTypes(settingsRes.data[0].businessTypes || []);
-        }
+        const productsRes = await api.get('/products');
 
         if (productsRes.data && Array.isArray(productsRes.data)) {
           const categories = productsRes.data.map((p: any) => p.category).filter(Boolean);
@@ -472,7 +479,7 @@ export default function ContactDistributionSection() {
                     style={fontOutfit}
                   >
                     <option value="" disabled>Select business type</option>
-                    {businessTypes.map(t => <option key={t} value={t} className="text-[#404040]">{t}</option>)}
+                    {BUSINESS_TYPES.map(t => <option key={t} value={t} className="text-[#404040]">{t}</option>)}
                   </select>
                   <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
                     <ChevronDown className="w-5 h-5 text-[#8A8C8A]" />

@@ -6,9 +6,9 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "nest start --watch",
+    "dev": "node api.js && nest start --watch",
     "build": "nest build",
-    "start": "node dist/main",
+    "start": "node api.js && node dist/main",
     "seed": "ts-node src/scripts/seed.ts",
     "seed:admin": "ts-node src/scripts/seed-admin.ts",
     "seed:products": "ts-node -r tsconfig-paths/register src/scripts/seed-products.ts",
